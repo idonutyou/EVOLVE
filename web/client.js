@@ -19,7 +19,8 @@
     localStorage.setItem('EVOLVE_WEB_UPDATE_BACKUP_V1',JSON.stringify({at:new Date().toISOString(),version:config.version,entries}));
   }
   addEventListener('DOMContentLoaded',()=>{
-    $('webRetry').onclick=()=>location.reload();
+    // Deferred game scripts can finish and remove the loader before this event.
+    $('webRetry')?.addEventListener('click',()=>location.reload());
     $('webApply').onclick=()=>{if(!latest||!home())return;try{backup();}catch(_){$('webUpdateText').textContent='저장 백업 공간이 부족해. 설정에서 저장을 백업해 줘.';return;}location.reload();};
     setInterval(paint,1500);setInterval(check,300000);check();
     if('serviceWorker' in navigator&&(location.protocol==='https:'||['localhost','127.0.0.1'].includes(location.hostname)))navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'}).catch(()=>{});

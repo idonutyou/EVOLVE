@@ -8,8 +8,11 @@ on:
       - "dist/**"
       - ".github/workflows/deploy-pages.yml"
       - "tools/install_manual_upload.py"
+      - "tools/patch_web_lifecycle.py"
       - "tools/verify_site.py"
       - "tests/browser_smoke.cjs"
+      - "tests/web_client.test.cjs"
+      - "web/client.js"
   workflow_dispatch:
 
 permissions:
@@ -60,6 +63,8 @@ jobs:
             python3 tools/install_manual_upload.py --root . --dist dist
             echo "restored=true" >> "$GITHUB_OUTPUT"
           fi
+      - name: Repair online-shell startup order without changing gameplay or art
+        run: python3 tools/patch_web_lifecycle.py --dist dist --client web/client.js
       - name: Refuse to publish an empty or incomplete game
         shell: bash
         run: |
@@ -69,6 +74,7 @@ jobs:
           test -d dist/assets || { echo "ERROR: extracted game images are missing"; exit 1; }
           python3 tools/verify_site.py --dist dist
           python3 -m unittest discover -s tests -v
+          node --test tests/web_client.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
