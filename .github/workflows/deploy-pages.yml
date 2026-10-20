@@ -1,0 +1,57 @@
+name: Publish EVOLVE Web (after asset migration)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dist/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: evolve-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Refuse to publish an empty or incomplete game
+        shell: bash
+        run: |
+          test -s dist/index.html || { echo "ERROR: playable game index.html is missing"; exit 1; }
+          test -s dist/version.json || { echo "ERROR: game version manifest is missing"; exit 1; }
+          test -s dist/asset-manifest.json || { echo "ERROR: original asset manifest is missing"; exit 1; }
+          test -d dist/assets || { echo "ERROR: extracted game images are missing"; exit 1; }
+          python3 - <<'PY'
+          import json, pathlib
+          d = pathlib.Path("dist")
+          manifest = json.loads((d / "asset-manifest.json").read_text())
+          if not manifest:
+              raise SystemExit("ERROR: no extracted image assets")
+          missing = [x["path"] for x in manifest if not (d / x["path"]).is_file()]
+          if missing:
+              raise SystemExit("ERROR: missing image assets, e.g.: " + ", ".join(missing[:3]))
+          print(f"Verified {len(manifest)} image assets")
+          PY
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - name: Upload verified website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - name: Deploy GitHub Pages
+        id: pages
+        uses: actions/deploy-pages@v4
