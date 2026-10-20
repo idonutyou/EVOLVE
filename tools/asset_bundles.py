@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Lossless immutable archive parts for MCP/GitHub transfer, never image re-encoding."""
-import argparse,gzip,hashlib,json,re,tarfile,tempfile
+import argparse,base64,gzip,hashlib,json,re,tarfile,tempfile
 from pathlib import Path
 CHUNK=4*1024*1024
+FRAGMENT=512*1024
 
 def digest(p):
     h=hashlib.sha256()
@@ -36,7 +37,7 @@ def pack(site,bundles):
     index.write_text(json.dumps(doc,separators=(',',':'))+'\n')
     return {'archives':len(doc['archives']),'new_assets':len(fresh),'parts':sum(len(a['parts']) for a in doc['archives']),'bytes':sum(a['bytes'] for a in doc['archives'])}
 
-def unpack(site,bundles):
+def unpack(site,bundles,fragments_only=False):
     doc=json.loads((bundles/'index.json').read_text());expected={x['path']:x for x in json.loads((site/'asset-manifest.json').read_text())};restored=set()
     if doc.get('format')!=1 or not expected:raise ValueError('Empty or unsupported bundles')
     for a in doc['archives']:
@@ -46,9 +47,19 @@ def unpack(site,bundles):
                 for part in a['parts']:
                     if not re.fullmatch('[a-f0-9]{64}',part['sha256']) or part['path']!=part['sha256']+'.bin':raise ValueError('Invalid bundle path')
                     p=bundles/part['path']
-                    if p.stat().st_size!=part['bytes'] or digest(p)!=part['sha256']:raise ValueError('Bundle checksum mismatch: '+part['path'])
-                    with p.open('rb') as f:
-                        for b in iter(lambda:f.read(1048576),b''):out.write(b)
+                    if p.exists() and not fragments_only:
+                        if p.stat().st_size!=part['bytes'] or digest(p)!=part['sha256']:raise ValueError('Bundle checksum mismatch: '+part['path'])
+                        with p.open('rb') as f:
+                            for b in iter(lambda:f.read(1048576),b''):out.write(b)
+                    else:
+                        h=hashlib.sha256();size=0
+                        for i,offset in enumerate(range(0,part['bytes'],FRAGMENT)):
+                            fragment=bundles/part['sha256']/f'{i:03d}.b64'
+                            if not fragment.is_file():raise ValueError('Missing saved fragment: '+str(fragment))
+                            data=base64.b64decode(fragment.read_bytes(),validate=True)
+                            if len(data)!=min(FRAGMENT,part['bytes']-offset):raise ValueError('Fragment size mismatch')
+                            h.update(data);size+=len(data);out.write(data)
+                        if size!=part['bytes'] or h.hexdigest()!=part['sha256']:raise ValueError('Reassembled original bundle differs')
             if arc.stat().st_size!=a['bytes'] or digest(arc)!=a['sha256']:raise ValueError('Archive checksum mismatch')
             allowed={e['path']:e for e in a['files']};seen=set()
             with tarfile.open(arc,'r|gz') as tar:
@@ -66,4 +77,4 @@ def unpack(site,bundles):
     return {'restored_assets':len(restored)}
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['pack','unpack']);p.add_argument('--dist',type=Path,default=Path('dist'));p.add_argument('--bundles',type=Path,default=Path('asset-bundles'));a=p.parse_args();print(json.dumps((pack if a.command=='pack' else unpack)(a.dist,a.bundles),indent=2))
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['pack','unpack']);p.add_argument('--dist',type=Path,default=Path('dist'));p.add_argument('--bundles',type=Path,default=Path('asset-bundles'));p.add_argument('--fragments-only',action='store_true');a=p.parse_args();result=pack(a.dist,a.bundles) if a.command=='pack' else unpack(a.dist,a.bundles,a.fragments_only);print(json.dumps(result,indent=2))

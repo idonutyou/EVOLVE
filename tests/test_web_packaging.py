@@ -4,6 +4,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 from build_web import build,GUARD
 from asset_bundles import pack,unpack
 from verify_site import verify
+from prepare_fragments import prepare
 
 class WebTests(unittest.TestCase):
  def create(self,root):
@@ -24,3 +25,12 @@ class WebTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as t:
    out=self.create(Path(t));e=next(x for x in json.loads((out/'asset-manifest.json').read_text()) if x['kind']=='image');(out/e['path']).write_bytes(b'bad')
    with self.assertRaises(ValueError):verify(out)
+ def test_fragment_restore_and_missing_or_corrupt_fragment(self):
+  with tempfile.TemporaryDirectory() as t:
+   root=Path(t);out=self.create(root);bundles=root/'asset-bundles';pack(out,bundles);prepare(root)
+   rest=root/'rest';rest.mkdir();(rest/'asset-manifest.json').write_bytes((out/'asset-manifest.json').read_bytes());unpack(rest,bundles,True)
+   for e in json.loads((out/'asset-manifest.json').read_text()):self.assertEqual((out/e['path']).read_bytes(),(rest/e['path']).read_bytes())
+   p=next(bundles.glob('*/*.b64'));original=p.read_bytes();p.write_bytes(base64.b64encode(b'corrupt'))
+   with self.assertRaises(ValueError):unpack(rest,bundles,True)
+   p.write_bytes(original);p.unlink()
+   with self.assertRaises(ValueError):unpack(rest,bundles,True)
