@@ -1,8 +1,10 @@
 # EVOLVE — V575 Web Version
 
-The full V575-WEB-2 website is now installed in `main` under `dist/`. All 68 manual upload files were received and restored successfully. All 1001 asset checksums and automated browser checks passed. GitHub Pages deployment is waiting for the owner to enable Pages; the game is not online yet.
+Play EVOLVE: **https://idonutyou.github.io/EVOLVE/**
 
-Next: open <https://github.com/idonutyou/EVOLVE/settings/pages> and select **Build and deployment → Source: GitHub Actions**. Then run `Publish EVOLVE Web` from the latest `main` using **Run workflow**. The connected code app cannot enable this repository administration setting.
+The full V575-WEB-2 website is deployed on GitHub Pages and installed in `main` under `dist/`. All 68 manual upload files were restored successfully. All 1001 asset checksums and automated browser checks passed. The public game URL was opened in a browser; the home screen, original character image and enabled battle-start button were verified.
+
+Pages is configured to use GitHub Actions. Future verified changes to the website deploy through `Publish EVOLVE Web`; players continue using the same HTTPS address.
 
 The initial upload is complete. No game files need to be uploaded again. The original first-upload package remains in the repository as a verified recovery source.
 
