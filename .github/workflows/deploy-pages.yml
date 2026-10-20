@@ -1,4 +1,5 @@
 name: Publish EVOLVE Web
+# Deploy the installed game from current main; archive restore is first-upload only.
 
 on:
   push:
