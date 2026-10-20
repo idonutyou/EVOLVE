@@ -1,14 +1,14 @@
 # EVOLVE — V575 Web Version
 
-The complete V575 game is packaged for the owner's first manual upload. It has not been deployed yet.
+The full V575-WEB-2 website is now installed in `main` under `dist/`. All 68 manual upload files were received and restored successfully. All 1001 asset checksums and automated browser checks passed. GitHub Pages deployment is waiting for the owner to enable Pages; the game is not online yet.
 
-First set **Settings → Pages → Build and deployment → Source: GitHub Actions** (leave it if already selected).
+Next: open <https://github.com/idonutyou/EVOLVE/settings/pages> and select **Build and deployment → Source: GitHub Actions**. Then run `Publish EVOLVE Web` from the latest `main` using **Run workflow**. The connected code app cannot enable this repository administration setting.
 
-Download the provided `EVOLVE_V575_GITHUB_FULL_UPLOAD.zip`, extract it, and upload all **68 files inside `UPLOAD_FILES`** to the root of `main` using <https://github.com/idonutyou/EVOLVE/upload/main>. Do not upload the ZIP itself or create a nested `UPLOAD_FILES` directory in the repository.
+The initial upload is complete. No game files need to be uploaded again. The original first-upload package remains in the repository as a verified recovery source.
 
-For smaller batches, upload the 67 numbered BIN files first and **`EVOLVE_V575_INSTALL.json` last**. Previously committed parts can be reused. See [the Korean upload guide](docs/MANUAL_UPLOAD_KO.txt).
+The browser verification covered prior-version save migration, mobile movement, pause/resume, all five maps, save persistence across reload, landscape layout, and updates waiting for home. Browser JavaScript exceptions and HTTP failures were both empty. Physical Galaxy S23+ play testing remains necessary.
 
-`Publish EVOLVE Web` waits for the upload, verifies every part and the complete archive, restores the full `dist/` website, verifies all 1001 content files, and runs browser checks. Only after those checks pass does it commit the restored website to `main` and deploy GitHub Pages. The workflow keeps the empty-site and image-integrity guards. Existing websites are never replaced with this first-upload package on subsequent runs.
+`Publish EVOLVE Web` restores the first-upload archive only if the website is absent, verifies all 1001 content files, and runs browser checks. The online-shell startup-order bug was repaired without changing the original gameplay scripts or images. Once Pages is enabled, the workflow deploys the verified `dist/` site. The workflow keeps the empty-site and image-integrity guards. Existing websites are never replaced with this first-upload package on subsequent runs.
 
 Original baseline: `EVOLVE_V575_FLOOR_VISIBILITY_TEST.html`, 409,975,333 bytes, SHA-256 `d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea`.
 
