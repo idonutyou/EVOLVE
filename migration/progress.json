@@ -1,11 +1,11 @@
 {
   "phase": "uploading_fragments",
-  "fragments_complete": 16,
+  "fragments_complete": 24,
   "fragments_total": 533,
-  "parts_complete": 2,
+  "parts_complete": 3,
   "parts_total": 67,
-  "bytes_complete": 8388608,
+  "bytes_complete": 12582912,
   "bytes_total": 279244532,
-  "last_verified_commit": "cad423581a322d098be346b358e67464c8298aca",
+  "last_verified_commit": "94aab6a2c3071fe7a6636d203def556f729ddd3c",
   "resume_rule": "Skip exact Git blob SHA matches; retry only missing fragments."
 }
