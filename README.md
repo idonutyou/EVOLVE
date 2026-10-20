@@ -2,6 +2,8 @@
 
 The complete V575 game is packaged for the owner's first manual upload. It has not been deployed yet.
 
+First set **Settings → Pages → Build and deployment → Source: GitHub Actions** (leave it if already selected).
+
 Download the provided `EVOLVE_V575_GITHUB_FULL_UPLOAD.zip`, extract it, and upload all **68 files inside `UPLOAD_FILES`** to the root of `main` using <https://github.com/idonutyou/EVOLVE/upload/main>. Do not upload the ZIP itself or create a nested `UPLOAD_FILES` directory in the repository.
 
 For smaller batches, upload the 67 numbered BIN files first and **`EVOLVE_V575_INSTALL.json` last**. Previously committed parts can be reused. See [the Korean upload guide](docs/MANUAL_UPLOAD_KO.txt).

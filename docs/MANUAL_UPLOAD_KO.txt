@@ -8,6 +8,11 @@ EVOLVE V575 — 전체 게임 수동 업로드 안내
 BIN 67개 + EVOLVE_V575_INSTALL.json 1개이며 모두 필요합니다.
 파일 이름을 바꾸거나 ZIP 안에서 직접 파일을 선택하지 마세요.
 
+최초 1회: GitHub Pages 설정
+- Chrome에서 https://github.com/idonutyou/EVOLVE/settings/pages 를 엽니다.
+- Build and deployment의 Source를 GitHub Actions로 선택합니다. 이미 선택되어 있으면 그대로 둡니다.
+- 이 설정은 GitHub 앱 재연결/권한 설정과 별개인 웹사이트 게시 방식 선택입니다.
+
 휴대폰 업로드 (삼성/안드로이드 Chrome)
 1. ZIP을 다운로드한 후 '내 파일' 앱에서 압축을 풉니다.
 2. Chrome에서 아래 주소를 엽니다. GitHub 앱으로 열렸다면 주소를 Chrome 주소창에 직접 붙여넣으세요.

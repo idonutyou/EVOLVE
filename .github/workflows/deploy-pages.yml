@@ -99,8 +99,6 @@ jobs:
           git push origin HEAD:main
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Upload verified website
         uses: actions/upload-pages-artifact@v3
         with:
