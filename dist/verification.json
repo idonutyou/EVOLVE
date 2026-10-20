@@ -1,0 +1,39 @@
+{
+  "version": "V575-WEB-2",
+  "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
+  "source_bytes": 409975333,
+  "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+  "replaced_data_uris": 1009,
+  "unique_assets": 977,
+  "assets_bytes": 249072372,
+  "index_bytes": 272185,
+  "build": "bc9aac08463463f5f554efc89c4306c11e6f1f63bc9dce1c8294b4b2083c7f4d",
+  "image_assets": 977,
+  "cached_files": 1001,
+  "cached_bytes": 326335946,
+  "data_extraction": [
+    {
+      "name": "ENV_OPT_V518",
+      "json_sha256": "f389f3601f5b3444a1d7d2653e070c9c70fcf24201d624ef0c0d2365c7234cb8",
+      "equivalent": true
+    },
+    {
+      "name": "CAMPAIGN_MAPS_V567",
+      "json_sha256": "7099d2a6e8bd1fcb01a5a1dbf077ca3ec3b8135fb0960a13729e9170fa2679f3",
+      "equivalent": true
+    }
+  ],
+  "game_scripts_before_web_guard": [
+    "c6a449b08c868c0ab8941609e5544ba622681a7ee69d2e98bbd91081330b8709",
+    "ab8b54699b4e28d743a7658e5f69844d0f1c6b1e29deaeb48dff7968aaa32e1f"
+  ],
+  "save_keys_unchanged": true,
+  "automatic_reload": false,
+  "image_recompression": false,
+  "source_unchanged": true,
+  "web_lifecycle_fix": {
+    "loader_removed_before_dom_ready": true,
+    "game_code_changed": false,
+    "images_changed": false
+  }
+}
