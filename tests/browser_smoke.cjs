@@ -7,13 +7,15 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
  const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:1,isMobile:true,hasTouch:true}),page=await context.newPage();
- const report={checks:[],maps:[],errors:[],failed:[]};page.on('pageerror',e=>report.errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('/favicon.ico'))report.failed.push({url:r.url(),status:r.status()});});
+ const report={checks:[],maps:[],errors:[],failed:[]};page.on('pageerror',e=>report.errors.push(e.stack||e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('/favicon.ico'))report.failed.push({url:r.url(),status:r.status()});});
  try{
   await page.addInitScript(()=>{if(!localStorage.getItem('EVOLVE_V574_TEST_META_V1'))localStorage.setItem('EVOLVE_V574_TEST_META_V1',JSON.stringify({dna:1234,stage:26,unlockedStageV522:31,homeStageV522:26,clears:30,origin:'acid',feedback:{graphics:'eco',sound:false,haptic:false}}));});
   await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1`,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
   assert.equal(await page.evaluate(()=>window.__EVOLVE_ASSET_ERROR__||null),null);
-  const initial=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_META_V1')));assert.equal(initial.dna,1234);assert.equal(initial.unlockedStageV522,31);assert.equal(initial.origin,'acid');report.checks.push('boot and prior-version save migration');
+  // The V575 floor-visibility source intentionally grants access to all 99 stages.
+  const initial=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_META_V1')));assert.equal(initial.dna,1234);assert.equal(initial.unlockedStageV522,99);assert.equal(initial.origin,'acid');report.checks.push('boot and prior-version save migration');
+  assert.deepEqual(report.errors,[],'Game startup raised a JavaScript exception');
   await page.screenshot({path:path.join(out,'mobile-home.png')});
   await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running,null,{timeout:30000});
