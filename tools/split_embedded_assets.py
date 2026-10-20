@@ -19,7 +19,7 @@ import tempfile
 from pathlib import Path
 
 IMAGE = re.compile(
-    rb"data:image/(png|jpe?g|webp|gif|avif|bmp|svg\\+xml);base64,([A-Za-z0-9+/]+={0,2})",
+    rb"data:image/(png|jpe?g|webp|gif|avif|bmp|svg\+xml);base64,([A-Za-z0-9+/]+={0,2})",
     re.IGNORECASE,
 )
 EXT = {b"jpeg": "jpg", b"jpg": "jpg", b"png": "png", b"webp": "webp",
@@ -72,7 +72,7 @@ def convert(source: Path, output: Path, version: str) -> dict:
                 html.write(raw[end:])
         # Strictly flag unconverted embedded image payloads; do not silently publish them.
         remaining = (stage / "index.html").read_bytes()
-        if re.search(rb"data:image/[^\\s'\"<>)]*;base64,", remaining, re.IGNORECASE):
+        if re.search(rb"data:image/[^\s'\"<>)]*;base64,", remaining, re.IGNORECASE):
             raise ValueError("Unconverted embedded image data URI remains in index.html")
         if (stage / "index.html").stat().st_size > MAX_GIT_BLOB:
             raise ValueError("HTML still exceeds GitHub file limit; additional extraction required")
