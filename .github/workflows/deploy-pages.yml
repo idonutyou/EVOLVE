@@ -1,31 +1,65 @@
-name: Publish EVOLVE Web (after asset migration)
+name: Publish EVOLVE Web
 
 on:
   push:
     branches: [main]
     paths:
+      - "EVOLVE_V575_INSTALL.json"
       - "dist/**"
       - ".github/workflows/deploy-pages.yml"
+      - "tools/install_manual_upload.py"
+      - "tools/verify_site.py"
+      - "tests/browser_smoke.cjs"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: evolve-pages
   cancel-in-progress: false
 
 jobs:
-  publish:
+  readiness:
     runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.input.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for the complete first upload
+        id: input
+        shell: bash
+        run: |
+          if [ -s dist/index.html ] || [ -s EVOLVE_V575_INSTALL.json ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Waiting for the user's full V575 package. Nothing will be published." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  publish:
+    needs: readiness
+    if: needs.readiness.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.pages.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Restore first manual upload without replacing an existing game
+        id: restore
+        shell: bash
+        run: |
+          if [ ! -s dist/index.html ]; then
+            python3 tools/install_manual_upload.py --root . --dist dist
+            echo "restored=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Refuse to publish an empty or incomplete game
         shell: bash
         run: |
@@ -33,17 +67,36 @@ jobs:
           test -s dist/version.json || { echo "ERROR: game version manifest is missing"; exit 1; }
           test -s dist/asset-manifest.json || { echo "ERROR: original asset manifest is missing"; exit 1; }
           test -d dist/assets || { echo "ERROR: extracted game images are missing"; exit 1; }
-          python3 - <<'PY'
-          import json, pathlib
-          d = pathlib.Path("dist")
-          manifest = json.loads((d / "asset-manifest.json").read_text())
-          if not manifest:
-              raise SystemExit("ERROR: no extracted image assets")
-          missing = [x["path"] for x in manifest if not (d / x["path"]).is_file()]
-          if missing:
-              raise SystemExit("ERROR: missing image assets, e.g.: " + ", ".join(missing[:3]))
-          print(f"Verified {len(manifest)} image assets")
-          PY
+          python3 tools/verify_site.py --dist dist
+          python3 -m unittest discover -s tests -v
+      - name: Prepare browser verification
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Verify mobile boot, maps, controls, saves and safe updates
+        timeout-minutes: 10
+        run: node tests/browser_smoke.cjs
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-browser-verification
+          path: test-results
+          if-no-files-found: ignore
+      - name: Keep the restored game in GitHub for future updates
+        if: steps.restore.outputs.restored == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --force -- dist
+          git commit -m "Install verified full EVOLVE V575 website from manual upload"
+          git push origin HEAD:main
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
