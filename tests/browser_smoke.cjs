@@ -42,7 +42,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
     await page.locator('#homeMapEditV562').click();
     await page.waitForFunction(()=>!window.__EVOLVE_MAP_TEST_V562__.test.editor.read().busy,null,{timeout:60000});
     assert.equal(await page.evaluate(()=>window.__EVOLVE_MAP_TEST_V562__.test.editor.read().work.operations.length),approvedCount,'Old empty draft hid the approved default');
-    await page.locator('#meFilesV562 > summary').click();
+    if(!await page.locator('#meFilesV562').evaluate(el=>el.open))await page.locator('#meFilesV562 > summary').click();
     await page.locator('#meResetV562').click();
     await page.waitForFunction(()=>!window.__EVOLVE_MAP_TEST_V562__.test.editor.read().busy,null,{timeout:60000});
     const resetDoc=await page.evaluate(()=>window.__EVOLVE_MAP_TEST_V562__.test.editor.read().work);
