@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-2",
+  "version": "V575-WEB-3",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272185,
-  "build": "bc9aac08463463f5f554efc89c4306c11e6f1f63bc9dce1c8294b4b2083c7f4d",
+  "index_bytes": 271900,
+  "build": "515c30dfe0554ff924844b4e930c5496c6157a862a4b4af67e8e4e020d01cbe0",
   "image_assets": 977,
-  "cached_files": 1001,
-  "cached_bytes": 326335946,
+  "cached_files": 1002,
+  "cached_bytes": 326475316,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -35,5 +35,22 @@
     "loader_removed_before_dom_ready": true,
     "game_code_changed": false,
     "images_changed": false
+  },
+  "map_edit_update": {
+    "map": "facility1",
+    "mapId": "EVOLVE_CAMPAIGN_FACILITY1_V567",
+    "baseFieldSha256": "96f9f1d38c883aa8fd30ddfa37e528804b99fa4bb5ccad514fbfbe492e150626",
+    "operations": 341,
+    "points": 7844,
+    "entrances": {
+      "north": true,
+      "east": true,
+      "south": true,
+      "west": true
+    },
+    "asset_sha256": "aea77aa02260cc7d129252b2e48a780409ffb77fef4ce1c5c0b8a9bc38c1a850",
+    "game_code_changed": false,
+    "image_assets_changed": false,
+    "user_saves_preserved": true
   }
 }
