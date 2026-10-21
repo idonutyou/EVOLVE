@@ -27,7 +27,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().home('battle'));await page.waitForFunction(()=>!document.getElementById('webUpdate').hidden,null,{timeout:10000});await page.unroute('**/version.json?check=*');report.checks.push('update waits for home without interrupting combat');
   const maps=await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.definitions().map(m=>({id:m.id,stages:m.stages})));
   for(const m of maps){
-   const approvedCount={facility1:345,hub:63}[m.id];
+   const approvedCount={facility1:345,hub:63,biolab:72}[m.id];
    if(approvedCount)await page.evaluate(id=>{localStorage.removeItem('EVOLVE_V575_TEST_'+id+'_COLLISION_EDITS_V1');localStorage.removeItem('EVOLVE_V575_TEST_'+id+'_COLLISION_DRAFT_V1');},m.id);
    await page.evaluate(async m=>window.__EVOLVE_TEST_MODULE_V575__.go(m.stages[0],m.id,false),m);
    await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().ready,null,{timeout:60000});

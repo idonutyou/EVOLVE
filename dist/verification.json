@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-6",
+  "version": "V575-WEB-7",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272547,
-  "build": "d69c8de8937085cc89f6d583e417a6625f4bc837df17cfadd4cb541723d85c42",
+  "index_bytes": 272730,
+  "build": "06ec5e29eb0e7933a74f0dcc5bf0bd4e9d27baf181827258878b6774b028c301",
   "image_assets": 977,
-  "cached_files": 1003,
-  "cached_bytes": 326495084,
+  "cached_files": 1004,
+  "cached_bytes": 326520379,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -37,30 +37,28 @@
     "images_changed": false
   },
   "map_edit_update": {
-    "map": "hub",
-    "mapId": "EVOLVE_CAMPAIGN_HUB_V567",
-    "baseFieldSha256": "97186f5802079fc4adf85d445327ca5f43bda29894e8b8a1289a5429a36f9e71",
-    "operations": 63,
-    "points": 753,
+    "map": "biolab",
+    "mapId": "EVOLVE_BIOLAB_USER_864x1536_V569",
+    "baseFieldSha256": "49921f335aee37735ad8a6b48d9b8710018d47116db4f6b0a9360262ccc39d54",
+    "operations": 72,
+    "points": 1347,
     "entrances": {
-      "northwest": true,
       "north": true,
-      "northeast": true,
-      "west": true,
-      "east": true,
-      "southwest": true,
-      "south": true,
-      "southeast": true
+      "west_upper": true,
+      "east_upper": true,
+      "west_lower": true,
+      "east_lower": true,
+      "south": true
     },
-    "asset_sha256": "b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687",
-    "source_file": "EVOLVE_hub_COLLISION_EDIT.json",
-    "source_sha256": "758e682bec9a115473410bcdf4dd631679a6322b65937d1a598a7e26a30956f8",
-    "game_code_changed": true,
+    "asset_sha256": "4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8",
+    "source_file": "EVOLVE_biolab_COLLISION_EDIT.json",
+    "source_sha256": "6102c08a1cc3841bd1ff9b43c099ae71e771461fc7190e48c614c7c7278a297d",
+    "game_code_changed": false,
     "image_assets_changed": false,
     "user_saves_preserved": true,
-    "physical_Galaxy_S23_plus_tested": false,
     "approved_default_without_storage": true,
-    "reset_uses_approved_document": true
+    "reset_uses_approved_document": true,
+    "physical_Galaxy_S23_plus_tested": false
   },
   "map_edit_updates": {
     "facility1": {
@@ -119,13 +117,38 @@
       "physical_Galaxy_S23_plus_tested": false,
       "approved_default_without_storage": true,
       "reset_uses_approved_document": true
+    },
+    "biolab": {
+      "map": "biolab",
+      "mapId": "EVOLVE_BIOLAB_USER_864x1536_V569",
+      "baseFieldSha256": "49921f335aee37735ad8a6b48d9b8710018d47116db4f6b0a9360262ccc39d54",
+      "operations": 72,
+      "points": 1347,
+      "entrances": {
+        "north": true,
+        "west_upper": true,
+        "east_upper": true,
+        "west_lower": true,
+        "east_lower": true,
+        "south": true
+      },
+      "asset_sha256": "4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8",
+      "source_file": "EVOLVE_biolab_COLLISION_EDIT.json",
+      "source_sha256": "6102c08a1cc3841bd1ff9b43c099ae71e771461fc7190e48c614c7c7278a297d",
+      "game_code_changed": false,
+      "image_assets_changed": false,
+      "user_saves_preserved": true,
+      "approved_default_without_storage": true,
+      "reset_uses_approved_document": true,
+      "physical_Galaxy_S23_plus_tested": false
     }
   },
   "map_default_binding_fix": {
     "cause": "Browser seed documents were not connected to the editor default or empty saved/draft fallback",
     "maps": {
       "facility1": 345,
-      "hub": 63
+      "hub": 63,
+      "biolab": 72
     },
     "engine_asset": "64f81cb63c0dcac02bc650730f40b71affd983d46a65329ed74e2b855b9adf32",
     "combat_boss_ai_balance_changed": false,
