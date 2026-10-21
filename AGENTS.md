@@ -11,3 +11,5 @@
 - Retain deployment guards, image hashes, and browser verification. Confirm the actual Pages deployment.
 - Commit intermediate migration results on online-v575 so interrupted work remains recoverable.
 - Distinguish automated mobile viewport checks from physical Galaxy S23+ testing.
+
+- User-approved map rules and the saved-JSON fast update procedure are in docs/MAP_UPDATE_RULES_KO.md. Read that file before map work. When a supplied save is already deployed byte-for-byte/equivalent, verify the live build and report completion without redoing the patch.
