@@ -1,5 +1,5 @@
 {
-  "version": "V575-WEB-5",
+  "version": "V575-WEB-6",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249072372,
   "index_bytes": 272547,
-  "build": "56cfa67028bd6646d0d3e287136d66af80c52e283cbd935d43be3d669d7402e4",
+  "build": "d69c8de8937085cc89f6d583e417a6625f4bc837df17cfadd4cb541723d85c42",
   "image_assets": 977,
   "cached_files": 1003,
-  "cached_bytes": 326493869,
+  "cached_bytes": 326495084,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -52,13 +52,15 @@
       "south": true,
       "southeast": true
     },
-    "asset_sha256": "0b04f6a9f2e0fb75031e82cfb896d45b6f33799f1c06ae99b5ba88badd60d858",
+    "asset_sha256": "b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687",
     "source_file": "EVOLVE_hub_COLLISION_EDIT.json",
     "source_sha256": "758e682bec9a115473410bcdf4dd631679a6322b65937d1a598a7e26a30956f8",
-    "game_code_changed": false,
+    "game_code_changed": true,
     "image_assets_changed": false,
     "user_saves_preserved": true,
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "approved_default_without_storage": true,
+    "reset_uses_approved_document": true
   },
   "map_edit_updates": {
     "facility1": {
@@ -73,8 +75,8 @@
         "south": true,
         "west": true
       },
-      "asset_sha256": "93d9e779ffa29821da9ccda3b203e1cf21c254dd3a67350017d84b0315491878",
-      "game_code_changed": false,
+      "asset_sha256": "a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037",
+      "game_code_changed": true,
       "image_assets_changed": false,
       "user_saves_preserved": true,
       "source_file": "EVOLVE_facility1_COLLISION_EDIT (1).json",
@@ -88,7 +90,9 @@
         "new default and previous-default migration",
         "custom, legacy, draft and progress preservation"
       ],
-      "physical_Galaxy_S23_plus_tested": false
+      "physical_Galaxy_S23_plus_tested": false,
+      "approved_default_without_storage": true,
+      "reset_uses_approved_document": true
     },
     "hub": {
       "map": "hub",
@@ -106,13 +110,29 @@
         "south": true,
         "southeast": true
       },
-      "asset_sha256": "0b04f6a9f2e0fb75031e82cfb896d45b6f33799f1c06ae99b5ba88badd60d858",
+      "asset_sha256": "b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687",
       "source_file": "EVOLVE_hub_COLLISION_EDIT.json",
       "source_sha256": "758e682bec9a115473410bcdf4dd631679a6322b65937d1a598a7e26a30956f8",
-      "game_code_changed": false,
+      "game_code_changed": true,
       "image_assets_changed": false,
       "user_saves_preserved": true,
-      "physical_Galaxy_S23_plus_tested": false
+      "physical_Galaxy_S23_plus_tested": false,
+      "approved_default_without_storage": true,
+      "reset_uses_approved_document": true
     }
+  },
+  "map_default_binding_fix": {
+    "cause": "Browser seed documents were not connected to the editor default or empty saved/draft fallback",
+    "maps": {
+      "facility1": 345,
+      "hub": 63
+    },
+    "engine_asset": "64f81cb63c0dcac02bc650730f40b71affd983d46a65329ed74e2b855b9adf32",
+    "combat_boss_ai_balance_changed": false,
+    "images_changed": false,
+    "save_keys_unchanged": true,
+    "custom_nonempty_edits_preserved": true,
+    "old_empty_saves_and_drafts_use_current_default": true,
+    "regression": "Browser tests click the default-map and apply buttons and compare full collision-field SHA-256 before and after"
   }
 }
