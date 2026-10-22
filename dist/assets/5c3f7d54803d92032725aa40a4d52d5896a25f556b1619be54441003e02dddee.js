@@ -1370,16 +1370,7 @@ function syncArtHUDV417(){
   const hp=clamp(threat.hp/Math.max(1,threat.maxHp),0,1);
   syncBioOriginalHUDV484(threat,name,hp);
   syncBossCollectionHUDV487(threat,name,hp);
-  if(threat.finalBoss){
-    if(threat.bossSecondsV417===undefined)threat.bossSecondsV417=FINAL_BOSS_LIMIT_V417;
-    const words=name.split(/\s+/),cut=Math.max(1,Math.ceil(words.length/2));
-    fitArtTextV417($('finalNameLeftV417'),words.slice(0,cut).join(' '),68,470);
-    fitArtTextV417($('finalNameRightV417'),words.slice(cut).join(' '),68,470);
-    $('finalHPWidthV417').setAttribute('width',String(1136*hp));
-    $('finalTimeV417').textContent=fmt(bossClockSecondsV526(threat));
-    $('finalArtV417').classList.toggle('urgent',!threat.encounterPhaseV526&&threat.bossSecondsV417<=15);
-    $('finalArtV417').setAttribute('aria-label',name+' · HP '+Math.round(hp*100)+'%'+(threat.encounterPhaseV526?' · BOSS TIME ':' · TIME LEFT ')+bossClockSecondsV526(threat)+'s');
-  }else{
+  if(!threat.finalBoss){
     fitArtTextV417($('midNameV417'),name,66,1070);
     $('midHPWidthV417').setAttribute('width',String(1180*hp));
     $('midTimeV417').textContent=fmt(t);
@@ -1393,7 +1384,7 @@ function syncArtHUDV417(){
 // passed into this preload; im.src=null caused the global asset Promise to reject at startup.
 const BOSS_ART_READY_V487=Promise.all([...document.querySelectorAll('.bossArtV487 image')].map(el=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=()=>reject(new Error('Boss HUD image decode failed'));im.src=el.getAttribute('href');})));
 const BIO_ART_READY_V484=Promise.all([...document.querySelectorAll('#bioArtV484 image')].map(el=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=()=>reject(new Error('BIO HUD image decode failed'));im.src=el.getAttribute('href');})));
-const HUD_ART_READY_V417=Promise.all([...document.querySelectorAll('#artHudV417 #midArtV417 image, #artHudV417 #finalArtV417 image')]
+const HUD_ART_READY_V417=Promise.all([...document.querySelectorAll('#artHudV417 #midArtV417 image')]
  .filter(el=>{const src=el.getAttribute('href');return !!src && (src.startsWith('data:image/')||src.startsWith('assets/'));})
  .map(el=>new Promise((resolve,reject)=>{
   const src=el.getAttribute('href'),im=new Image();
@@ -2249,7 +2240,7 @@ function spawnEnemy(type=enemyType(),boss=false,venomOwnerV553=null){
     $('bossbar').style.display='block';$('bossname').textContent=bossName;
   }
   const spawnZone=worldZoneAt(x,y);e.zoneId=spawnZone.id;if(!(type==='boss'||boss)){e.hp*=spawnZone.enemyHp;e.dmg*=spawnZone.enemyDmg;e.spd*=spawnZone.enemySpd;e.xp*=spawnZone.enemyXp;}
-  let rk=riskTier(),hpTempo=hpTempoAt(t),stage=Math.max(1,meta.stage||1),stageProfile=campaignStageProfile(stage);e.hp*=hpTempo*threatMods.hp*routeMods.enemyHp*stageScale*rk.hp;if(e.finalBoss)e.hp*=stageProfile.bossHp;e.maxHp=e.hp;e.spd*=(1+Math.min(.32,t*.00105))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage)*rk.spd;e.dmg*=damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage)*rk.dmg;if(e.finalBoss)e.dmg*=stageProfile.bossDmg;applyBioTitanBalanceV520(e);resolveTerrainBody(e,e.r);if(TEST_MANUAL_MODE_V458&&!testManualSpawnPermissionV458&&!venomAddV553){e.dead=true;return e;}assignEnemyAppearanceV516(e,stage);if(!TEST_MANUAL_MODE_V458&&(stageFlowV526.result||stageFlowV526.closing||bossArena?.v526)&&!e.finalBoss&&!venomAddV553){e.dead=true;return e;}if(venomAddV553){e.venomAddV553=true;e.venomAddOwnerV553=venomOwnerV553;}enemies.push(e);discover('enemy:'+e.type);if(e.finalBoss)discover('boss:'+e.bossName);return e;
+  let rk=riskTier(),hpTempo=hpTempoAt(t),stage=Math.max(1,meta.stage||1),stageProfile=campaignStageProfile(stage);e.hp*=hpTempo*threatMods.hp*routeMods.enemyHp*stageScale*rk.hp;if(e.finalBoss)e.hp*=stageProfile.bossHp;e.maxHp=e.hp;e.spd*=(1+Math.min(.32,t*.00105))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage)*rk.spd;e.dmg*=damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage)*rk.dmg;if(e.finalBoss)e.dmg*=stageProfile.bossDmg;applyBioTitanBalanceV520(e);resolveTerrainBody(e,e.r);if(TEST_MANUAL_MODE_V458&&!testManualSpawnPermissionV458&&!venomAddV553){e.dead=true;return e;}assignEnemyAppearanceV516(e,stage);if(!TEST_MANUAL_MODE_V458&&(stageFlowV526.result||stageFlowV526.closing||bossArena?.v526)&&!e.finalBoss&&!venomAddV553){e.dead=true;return e;}if(venomAddV553){e.venomAddV553=true;e.venomAddOwnerV553=venomOwnerV553;}enemies.push(e);discover('enemy:'+e.type);if(e.finalBoss){discover('boss:'+e.bossName);syncArtHUDV417();}return e;
 }
 const ELITE_AFFIXES=[
   {id:'ravager',name:'RAVAGER',sub:'SPEED +12% · DAMAGE +10%',apply(e){e.spd*=1.12;e.dmg*=1.10;e.elitePatternCd*=.88;}},
@@ -10485,8 +10476,10 @@ const VENOM_RENDER_V539=(()=>{
  }
  function clean(){lastInfectionStep='';carryFrame='';carryAt=-99;lastCycle='';motes.length=0;bursts.length=0;deaths.length=0;lastAttack=null;lastStage='';lastShots=0;lastPhase=1;phaseAt=-99;lastS=null;clockKey='';lastHp=null;hitAt=-99;turnAt=-99;face=1;emitAt=0;wantedClip='';queue.length=0;queued.clear();}
  function syncHUD(){
-  const s=getState(),root=$('artHudV417'),on=!!s.alive&&hudThreatV411()===s.boss&&running&&!ended;
+  const observed=getState(),boss=hudThreatV411(),root=$('artHudV417'),on=!!boss?.venomV537&&running&&!ended;
   root.dataset.venomV538=on?'true':'false';if(!on)return;
+  // The visible boss owns the HUD during arrival, before its combat AI starts.
+  const s=observed.alive&&observed.boss===boss?observed:{boss,phase:boss.venomPhaseV554||boss.encounterPhaseV526||1,toxin:0,poison:{count:0},corrosion:0,cycle:{mode:'arrival',remaining:0}};
   const q=clamp(s.boss.hp/Math.max(1,s.boss.maxHp)),svg=$('venomArtV538');
   $('venomHPWidthV538').setAttribute('width',String(q<=0?0:205+1125*q));
   const sec=bossClockSecondsV526(s.boss),str=fmt(sec);svg.setAttribute('aria-label','VENOM TITAN · HP '+Math.round(q*100)+'% · '+str);
@@ -10629,7 +10622,7 @@ function enterBossTestV550(){
  }
  bossArrivalCue={side:p.side,until:t+1.25,label:s.name,color:'#ff755d'};
  stageFlowV526.spawnTime=t;s.boss=e;
- $('bossname').textContent=s.name;updateBossPhaseStrip(e);
+ $('bossname').textContent=s.name;updateBossPhaseStrip(e);syncArtHUDV417();
 }
 const spawnVenomTestBaseV550=VENOM_V537.debugSpawn,spawnPresetTestBaseV550=stressBossPresetV424;
 VENOM_V537.debugSpawn=()=>startBossTestV550('venom');
@@ -10826,7 +10819,7 @@ installEvolveHomeV522();
 installMinimapAssetUI();
 installRenderedUI();
 homeReadyV522=false;refreshEvolveHomeV522();
-Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>Promise.all([monsterReadyV577,redPulseImageReadyV579,cinematicReadyV580])).then(()=>{releaseNormalEnemySourcesV425();monsterPrepareV577();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
+Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>Promise.all([monsterReadyV577,redPulseImageReadyV579,cinematicReadyV580,warningBrandReadyV581])).then(()=>{releaseNormalEnemySourcesV425();monsterPrepareV577();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
   // V522: loading must preserve the saved stage and selected origin.
   const restoreRandom=Math.random;Math.random=calibrationRngV453(VISUAL_CALIBRATION_V453.layoutSeed+101);
   try{startStressTestV424();}finally{Math.random=restoreRandom;}
@@ -12437,7 +12430,37 @@ const arenaUpdateBaseV579=update;update=function(...args){const out=arenaUpdateB
 window.__EVOLVE_CENTERED_ARENA_V579__={read:()=>({mapCenter:{x:WORLD_W/2,y:WORLD_H/2},arena:bossArena?.v526?{x:bossArena.x,y:bossArena.y,l:bossArena.l,r:bossArena.r,t:bossArena.t,b:bossArena.b,half:bossArena.half}:null})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_CENTERED_ARENA_V579__.test={prepare:()=>prepareBossArena(),edges:r=>centeredArenaEdgesV579(bossArena,r),spawn:()=>spawnEnemy('crawler'),clamp:(e,r)=>constrainArenaV526(e,r),restore:()=>restoreBossArena(),layout:centeredArenaLayoutV579};
 
-// WEB-13: dedicated front-facing boss poses, used only during the existing warning.
+// WEB-14: painted lettering, threat crest and countdown; cache each cutout once.
+const warningBrandArtV581={"atlases":{"lettering":{"path":"assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png","sha256":"e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c","bytes":2357319,"width":1536,"height":1024,"alpha":true,"draft":false},"crest_digits":{"path":"assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png","sha256":"0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8","bytes":1586575,"width":1254,"height":1254,"alpha":true,"draft":false}},"sprites":{"bio":{"atlas":"lettering","crop":[15,104,735,288],"cache_height":210},"venom":{"atlas":"lettering","crop":[774,112,746,278],"cache_height":210},"warning":{"atlas":"lettering","crop":[16,429,723,256],"cache_height":96},"breach":{"atlas":"lettering","crop":[780,463,736,188],"cache_height":64},"phase":{"atlas":"lettering","crop":[28,720,726,230],"cache_height":48},"subtitle":{"atlas":"lettering","crop":[784,747,732,190],"cache_height":48},"crest":{"atlas":"crest_digits","crop":[66,0,532,627],"cache_height":220},"digit1":{"atlas":"crest_digits","crop":[785,9,348,618],"cache_height":112},"digit2":{"atlas":"crest_digits","crop":[98,627,449,617],"cache_height":112},"digit3":{"atlas":"crest_digits","crop":[744,631,442,611],"cache_height":112}}},warningBrandSpritesV581=new Map();
+let warningBrandErrorV581=null,warningBrandCanvasV581=null,warningBrandContextV581=null;
+const warningBrandReadyV581=Promise.all(Object.entries(warningBrandArtV581.atlases).map(async([key,a])=>{
+ const im=new Image();im.decoding='async';await new Promise((resolve,reject)=>{im.onload=resolve;im.onerror=()=>reject(Error('Warning artwork unavailable: '+key));im.src=a.path;});
+ for(const [name,s]of Object.entries(warningBrandArtV581.sprites)){
+  if(s.atlas!==key)continue;const [x,y,w,h]=s.crop,c=document.createElement('canvas'),scale=Math.min(1,s.cache_height/h);c.width=Math.round(w*scale);c.height=Math.round(h*scale);const g=c.getContext('2d');g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(im,x,y,w,h,0,0,c.width,c.height);warningBrandSpritesV581.set(name,c);
+ }im.src='';
+})).catch(error=>{warningBrandErrorV581=String(error);throw error;});
+function paintWarningBrandV581(elapsed,reduced,kind,phase){
+ const c=warningBrandCanvasV581,g=warningBrandContextV581;if(!c||!g||warningBrandSpritesV581.size!==10)return;
+ const w=c.parentElement.clientWidth||W,h=c.parentElement.clientHeight||H,dpr=Math.min(window.devicePixelRatio||1,1.5),cw=Math.round(w*dpr),ch=Math.round(h*dpr),landscape=w>h;
+ if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);
+ const draw=(name,x,y,maxW,maxH,align=.5)=>{const s=warningBrandSpritesV581.get(name),scale=Math.min(maxW/s.width,maxH/s.height),dw=s.width*scale,dh=s.height*scale;g.drawImage(s,x-dw*align,y-dh*.5,dw,dh);return dw;};
+ const headerY=h*(landscape?.105:.085),headerH=landscape?30:Math.min(48,h*.06);
+ draw('breach',w*.07,headerY,w*(landscape?.32:.59),headerH,0);
+ const phaseY=headerY+headerH*.5+15,phaseW=draw('phase',w*.07,phaseY,70,16,0);
+ draw('digit'+Math.max(1,Math.min(3,phase||1)),w*.07+phaseW+9,phaseY,16,19,0);
+ draw('digit'+cinematicPoseV580(elapsed,reduced).count,w*.9,headerY+5,52,landscape?48:62);
+ const bandY=h*(landscape?.61:.65)+(landscape?35:43)/2+7,warningH=landscape?26:30,s=warningBrandSpritesV581.get('warning'),stride=s.width/s.height*warningH+27,drift=reduced?0:elapsed*27;
+ g.save();g.translate(w*.5,bandY);g.rotate(-2*Math.PI/180);
+ for(let x=-w-stride-drift%stride;x<w+stride;x+=stride)draw('warning',x,0,stride-27,warningH);
+ g.restore();
+ draw('crest',w*.5,bandY,landscape?88:w*.29,landscape?88:Math.min(124,h*.15));
+ draw(kind,w*.5,h*(landscape?.855:.83),w*(landscape?.7:.88),h*(landscape?.15:.16));
+ draw('subtitle',w*.5,h*(landscape?.935:.928),w*.52,landscape?14:Math.min(21,h*.026));
+}
+window.__EVOLVE_PAINTED_WARNING_V581__={ready:warningBrandReadyV581,read:()=>({ready:warningBrandSpritesV581.size===10,error:warningBrandErrorV581,sprites:warningBrandSpritesV581.size,cachedBytes:[...warningBrandSpritesV581.values()].reduce((n,c)=>n+c.width*c.height*4,0),visibleFontText:false,legacyFinalHUD:!!document.getElementById('finalArtV417')})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_PAINTED_WARNING_V581__.test={surface:name=>warningBrandSpritesV581.get(name)};
+
+// WEB-13 poses with WEB-14 painted warning branding.
 function cinematicPoseV580(elapsed,reduced=false){
  const time=Math.max(0,Math.min(3,elapsed)),segment=.72,frame=reduced?0:Math.min(3,Math.floor(time/segment));
  const blend=reduced||frame===3?0:Math.max(0,Math.min(1,(time-frame*segment-.56)/.16));
@@ -12453,7 +12476,7 @@ const cinematicReadyV580=Promise.all(Object.entries(cinematicArtV580).map(async(
  cinematicFramesV580.set(kind,frames);im.src='';
 })).catch(error=>{cinematicErrorV580=String(error);throw error});
 const cinematicStyleV580=document.createElement('style');cinematicStyleV580.textContent=`
-#bossWarningV526[data-cinematic-v580]{position:fixed;inset:0;z-index:100000;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;font-family:Impact,'Arial Narrow',sans-serif;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
+#bossWarningV526[data-cinematic-v580]{position:fixed;inset:0;z-index:100000;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
 #bossWarningV526[data-cinematic-v580][hidden]{display:none!important}
 #bossWarningV526[data-cinematic-v580][data-kind=venom]{--cine-color:#d6f36b;--cine-light:#76b644}
 .cineBackdropV580{position:absolute;inset:-8%;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--cine-color) 18%,#131c20),transparent 55%),radial-gradient(ellipse at 50% 78%,#26070c,#070b10 70%)}
@@ -12461,25 +12484,18 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineArtV580{position:absolute;inset:0;width:100%;height:100%;display:block}
 .cineShadeV580{position:absolute;inset:0;background:linear-gradient(#03050caa,transparent 20% 48%,#07070b66 64%,#07070bf2 100%),radial-gradient(ellipse at 50% 40%,transparent 22%,#0005 70%,#000a 100%);box-shadow:inset 0 0 70px #0008}
 .cineFlareV580{position:absolute;inset:0;background:#ffb28a;opacity:var(--cine-flare);pointer-events:none}
-.cineTopV580{position:absolute;left:7%;right:7%;top:max(5%,env(safe-area-inset-top));display:flex;align-items:flex-start;justify-content:space-between;gap:12px;letter-spacing:.22em;font:700 9px/1.7 monospace;color:#c9c7c8;text-shadow:0 2px 6px #000}
-.cineTopV580 b{display:block;color:#ff604b;font-size:11px;letter-spacing:.24em}.cineCountV580{font:900 38px/.9 Impact,sans-serif;color:#ff705a;min-width:1ch;text-align:right}
-.cineCaptionV580{position:absolute;left:8%;bottom:38%;font:700 10px/1.5 monospace;letter-spacing:.2em;text-shadow:0 2px 7px #000;color:#e9d4cf}
 .cineTapeV580{position:absolute;left:-2%;right:-2%;top:65%;height:43px;transform:rotate(-2deg);border-top:7px solid transparent;border-bottom:7px solid transparent;border-image:repeating-linear-gradient(125deg,#ff5c42 0 9px,#230c0c 9px 17px) 7;background:linear-gradient(#b41c20b8,#dc3d28d9);box-shadow:0 0 25px #e42b2670,inset 0 0 12px #ff8c3f66;display:flex;align-items:center;justify-content:center}
-.cineTapeTextV580{white-space:nowrap;word-spacing:30px;font:900 21px/1 Impact,sans-serif;letter-spacing:.06em;color:#ff8b64;text-shadow:1px 1px #65151b;transform:translateX(var(--cine-tape,0px))}
-.cineSealV580{position:absolute;left:50%;top:50%;height:66px;width:66px;transform:translate(-50%,-50%) rotate(45deg);background:#51151de8;border:2px solid #ff654f;box-shadow:0 0 19px #ff3b3266,inset 0 0 19px #ff3b3244;display:grid;place-items:center}
-.cineSealV580 svg{height:49px;width:49px;transform:rotate(-45deg);fill:#ff654f;filter:drop-shadow(0 0 5px #ff603b66)}
-.cineNameV580{position:absolute;left:4%;right:4%;top:76%;text-align:center;white-space:nowrap;transform:skew(-8deg);font:900 clamp(38px,11vw,76px)/.95 Impact,'Arial Narrow',sans-serif;letter-spacing:.015em;color:#eee7e3;text-shadow:3px 3px #8b211f,0 0 26px #ff482e66}
-.cineNameV580 small{display:block;transform:skew(8deg);margin:14px 0 0;font:700 10px/1.4 monospace;letter-spacing:.3em;color:#df9c8e;text-shadow:0 1px 3px #000}
+.cineOverlayV581{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.cineNameV580[hidden]{display:none!important}
 .cineBottomV580{position:absolute;left:9%;right:9%;bottom:max(5%,env(safe-area-inset-bottom));height:2px;background:#ffffff1c}.cineBottomV580 i{height:100%;display:block;background:#ff614a;width:var(--cine-remaining,100%);box-shadow:0 0 9px #fb5537}
-.cineTopV580,.cineCaptionV580,.cineNameV580 small{font-family:monospace,'EVOLVE Hangul',sans-serif}
-@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineCaptionV580{bottom:39%;font-size:10px}.cineTopV580{top:5%}.cineNameV580{top:77%;font-size:clamp(32px,5.6vw,60px)}.cineNameV580 small{margin-top:8px}.cineBottomV580{bottom:3%}.cineSealV580{height:61px;width:61px}}
+@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineBottomV580{bottom:3%}}
 `;document.head.appendChild(cinematicStyleV580);
 const cinematicLegacyEnsureV580=ensureBossWarningV526,cinematicLegacyWarningV580=warningTestV550;
 ensureBossWarningV526=function(){
  if(bossWarningNodeV526?.dataset.cinematicV580)return bossWarningNodeV526;
  bossWarningNodeV526?.remove();const el=document.createElement('div');el.id='bossWarningV526';el.hidden=true;el.dataset.cinematicV580='1';el.dataset.i18nIgnore='';el.setAttribute('role','status');el.setAttribute('aria-label','Boss incoming');
- el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTopV580"><div><b>CONTAINMENT BREACH</b><span class="cinePhaseV580"></span></div><span class="cineCountV580" aria-hidden="true">3</span></div><div class="cineCaptionV580"></div><div class="cineTapeV580"><div class="cineTapeTextV580" aria-hidden="true">WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING</div><div class="cineSealV580" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 8 23 17 32 14 41 17 52 8 48 28Q56 35 49 47L41 51 38 59H26L23 51 15 47Q8 35 16 28ZM21 32 18 39 27 42 28 35ZM43 32 36 35 37 42 46 39ZM32 42 28 48H36ZM27 51V56H30V51ZM34 51V56H37V51Z" fill-rule="evenodd"/></svg></div></div><div class="cineNameV580"><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
- document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('canvas');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});return el;
+ el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTapeV580" aria-hidden="true"></div><canvas class="cineOverlayV581" aria-hidden="true"></canvas><div class="cineNameV580" hidden><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
+ document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('.cineArtV580');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});warningBrandCanvasV581=el.querySelector('.cineOverlayV581');warningBrandContextV581=warningBrandCanvasV581.getContext('2d',{alpha:true});return el;
 };
 function paintCinematicV580(elapsed,reduced){
  const c=cinematicCanvasV580,g=cinematicContextV580,frames=cinematicFramesV580.get(cinematicStateV580.kind);if(!c||!g||!frames)return;
@@ -12497,9 +12513,9 @@ setBossWarningV526=function(on){
  const spec=stageSpecV526(),kind=spec.bossKind==='venom'?'venom':'bio',elapsed=clamp(t-297,0,3),cfg=feedbackCfg(),reduced=!!cfg.reducedMotion,ko=homeLanguageV522()==='ko';
  if(!cinematicStateV580.active||cinematicStateV580.kind!==kind){cinematicStateV580.serial++;cinematicClearInputV580();}
  Object.assign(cinematicStateV580,{active:true,kind,elapsed,reduced});el.dataset.kind=kind;el.setAttribute('aria-label',(kind==='venom'?'VENOM TITAN':'BIO TITAN')+(ko?' 보스 출현':' incoming'));
- el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';el.querySelector('.cinePhaseV580').textContent='PHASE '+spec.phase+' / '+(ko?'봉쇄 경보':'LOCKDOWN ALERT');el.querySelector('.cineCaptionV580').textContent=ko?'중앙 구역 · 생체 반응 급증':'CENTRAL SECTOR · MASSIVE BIO-SIGNATURE';
- const pose=cinematicPoseV580(elapsed,reduced);el.querySelector('.cineCountV580').textContent=String(pose.count);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-tape',String(reduced?0:-elapsed*27)+'px');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
- player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);
+ el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';
+ const pose=cinematicPoseV580(elapsed,reduced);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
+ player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);paintWarningBrandV581(elapsed,reduced,kind,spec.phase);
 };
 // Legacy boss shortcuts have their own warning clock; route BIO/VENOM into the same film.
 warningTestV550=function(){

@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-13-BOSS-CINEMATIC",
+  "version": "V575-WEB-14-PAINTED-WARNING",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272759,
-  "build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",
+  "index_bytes": 270841,
+  "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
   "image_assets": 984,
   "cached_files": 1011,
-  "cached_bytes": 343835361,
+  "cached_bytes": 347520943,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -404,6 +404,151 @@
     "original_image_bytes_unchanged": true,
     "red_device_and_centered_arena_preserved": true,
     "combat_stats_and_save_keys_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "painted_warning": {
+    "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
+    "engine": "assets/5c3f7d54803d92032725aa40a4d52d5896a25f556b1619be54441003e02dddee.js",
+    "art": {
+      "atlases": {
+        "lettering": {
+          "path": "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png",
+          "sha256": "e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c",
+          "bytes": 2357319,
+          "width": 1536,
+          "height": 1024,
+          "alpha": true,
+          "draft": false
+        },
+        "crest_digits": {
+          "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+          "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+          "bytes": 1586575,
+          "width": 1254,
+          "height": 1254,
+          "alpha": true,
+          "draft": false
+        }
+      },
+      "sprites": {
+        "bio": {
+          "atlas": "lettering",
+          "crop": [
+            15,
+            104,
+            735,
+            288
+          ],
+          "cache_height": 210
+        },
+        "venom": {
+          "atlas": "lettering",
+          "crop": [
+            774,
+            112,
+            746,
+            278
+          ],
+          "cache_height": 210
+        },
+        "warning": {
+          "atlas": "lettering",
+          "crop": [
+            16,
+            429,
+            723,
+            256
+          ],
+          "cache_height": 96
+        },
+        "breach": {
+          "atlas": "lettering",
+          "crop": [
+            780,
+            463,
+            736,
+            188
+          ],
+          "cache_height": 64
+        },
+        "phase": {
+          "atlas": "lettering",
+          "crop": [
+            28,
+            720,
+            726,
+            230
+          ],
+          "cache_height": 48
+        },
+        "subtitle": {
+          "atlas": "lettering",
+          "crop": [
+            784,
+            747,
+            732,
+            190
+          ],
+          "cache_height": 48
+        },
+        "crest": {
+          "atlas": "crest_digits",
+          "crop": [
+            66,
+            0,
+            532,
+            627
+          ],
+          "cache_height": 220
+        },
+        "digit1": {
+          "atlas": "crest_digits",
+          "crop": [
+            785,
+            9,
+            348,
+            618
+          ],
+          "cache_height": 112
+        },
+        "digit2": {
+          "atlas": "crest_digits",
+          "crop": [
+            98,
+            627,
+            449,
+            617
+          ],
+          "cache_height": 112
+        },
+        "digit3": {
+          "atlas": "crest_digits",
+          "crop": [
+            744,
+            631,
+            442,
+            611
+          ],
+          "cache_height": 112
+        }
+      }
+    },
+    "sprite_cache_once": true,
+    "per_frame_image_processing": false,
+    "visible_font_rendering": false,
+    "cleanup": {
+      "removed_assets": [
+        "assets/080eff25c63f7a7cf59845f5077ea5793f48f266cd1ee1eb59c8350aae2f99e4.jpg",
+        "assets/aed5400c9d32d768d8ab73e00a3165ef007a4584c48e11c41d0689e53ef2d50d.jpg"
+      ],
+      "removed_asset_bytes": 259829,
+      "removed_svg_bytes": 1566,
+      "removed_legacy_update_code_bytes": 780,
+      "final_hud_preprocessing_removed": true,
+      "remaining_original_images": 982,
+      "remaining_original_image_bytes_unchanged": true,
+      "venom_hud_owner": "visible threat from first arrival, independently of AI activation"
+    },
     "physical_Galaxy_S23_plus_tested": false
   }
 }

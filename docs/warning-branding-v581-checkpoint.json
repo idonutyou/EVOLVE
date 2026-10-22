@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-13-BOSS-CINEMATIC",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
   "baseline_backup": "backup/web13-before-painted-warning-20261022",
-  "progress": 30,
-  "status": "Final transparent painted lettering and crest integrated into cinematic source; legacy HUD cleanup ready for guarded packaging",
+  "progress": 40,
+  "status": "WEB-14 packaged; obsolete final HUD and two dedicated images removed",
   "references": [
     "1000027470.jpg",
     "1000027468.jpg"
@@ -16,7 +16,7 @@
     "boss_HUD": "current BIO/VENOM interface from the first visible arrival frame"
   },
   "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "next": "Package the HUD ownership fix and remove the obsolete final HUD/resources, then verify first arrival frames",
+  "next": "Verify raster branding and the first native VENOM arrival frame, then run existing regressions",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "atlases": {
@@ -141,5 +141,20 @@
         "cache_height": 112
       }
     }
+  },
+  "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+  "engine": "dist/assets/5c3f7d54803d92032725aa40a4d52d5896a25f556b1619be54441003e02dddee.js",
+  "cleanup": {
+    "removed_assets": [
+      "assets/080eff25c63f7a7cf59845f5077ea5793f48f266cd1ee1eb59c8350aae2f99e4.jpg",
+      "assets/aed5400c9d32d768d8ab73e00a3165ef007a4584c48e11c41d0689e53ef2d50d.jpg"
+    ],
+    "removed_asset_bytes": 259829,
+    "removed_svg_bytes": 1566,
+    "removed_legacy_update_code_bytes": 780,
+    "final_hud_preprocessing_removed": true,
+    "remaining_original_images": 982,
+    "remaining_original_image_bytes_unchanged": true,
+    "venom_hud_owner": "visible threat from first arrival, independently of AI activation"
   }
 }
