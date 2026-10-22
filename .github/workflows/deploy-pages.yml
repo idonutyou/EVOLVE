@@ -76,6 +76,7 @@ jobs:
           python3 tools/verify_site.py --dist dist
           python3 -m unittest discover -s tests -v
           node --test tests/web_client.test.cjs
+          node tests/campaign_lightning.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1

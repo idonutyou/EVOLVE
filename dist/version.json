@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-8",
-  "build": "3314376697c0a361040238443c996ed7d617dd260e3f8f9183d24837d4affaa7",
-  "scriptBytes": 77296385,
-  "assets": 1004,
+  "version": "V575-WEB-9-LIGHTNING06",
+  "build": "7e408c947c2918a6245bfc6e63b0cbe8e75421a4810b5d9e92a6684675271f5e",
+  "scriptBytes": 77312314,
+  "assets": 1005,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

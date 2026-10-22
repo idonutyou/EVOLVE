@@ -1,0 +1,10 @@
+{
+  "phase": "campaign lightning integration saved; browser and deploy pending",
+  "baseline": "af0d1cc368432ddd4bc860d33ec8d79c8dc2b360",
+  "version": "V575-WEB-9-LIGHTNING06",
+  "atlasGit": "9cf673c39a55ebc184f021fe49d51e2bb4137a91",
+  "localLogic": "passed",
+  "deployment": "pending",
+  "recovery": "The current dist/index.html points to the complete patched engine. web/lightning-v576.js is the source attachment. Run the guarded Publish EVOLVE Web workflow; inspect browser-smoke.json before reporting completion.",
+  "userPreferences": "Report actual progress in 10% steps, heartbeat within 5 minutes, keep checkpoint commits, show sizes with file downloads."
+}

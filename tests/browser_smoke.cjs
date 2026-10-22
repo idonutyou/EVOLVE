@@ -23,6 +23,24 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.mouse.move(180,660);await page.mouse.down();await page.mouse.move(250,620,{steps:8});await page.waitForTimeout(650);await page.mouse.up();
   const after=await page.evaluate(()=>{const p=window.__EVOLVE_TEST_MODULE_V575__.test.context().player;return{x:p.x,y:p.y};});assert.ok(Math.hypot(after.x-before.x,after.y-before.y)>1,'Joystick movement failed');
   await page.locator('#pauseBtn').click();assert.equal(await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.read().paused),true);await page.locator('#resume').click();report.checks.push('mobile movement, pause and resume');
+  await page.waitForFunction(()=>window.__EVOLVE_LIGHTNING_V576__?.read().atlasReady,null,{timeout:30000});
+  await page.evaluate(async()=>{await window.__EVOLVE_TEST_MODULE_V575__.add(3);});
+  await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().enemies.filter(e=>!e.dead&&!e.finalBoss).length>=3,null,{timeout:30000});
+  const lightning=await page.evaluate(()=>{
+   const api=window.__EVOLVE_LIGHTNING_V576__,c=window.__EVOLVE_TEST_MODULE_V575__.test.context(),targets=c.enemies.filter(e=>!e.dead&&!e.finalBoss).slice(0,3);api.test.reset();c.player.inv=10;
+   const spots=[];for(let radius=40;radius<=110&&spots.length<3;radius+=20)for(let i=0;i<16&&spots.length<3;i++){const angle=i*Math.PI/8,x=c.player.x+Math.cos(angle)*radius,y=c.player.y+Math.sin(angle)*radius;if(c.clear({x,y},14))spots.push({x,y});}if(spots.length<3)throw Error('No walkable lightning fixture positions');
+   targets.forEach((e,i)=>Object.assign(e,{...spots[i],hp:10000,maxHp:10000,arrivalInvuln:false,spawnFx:0,stunned:2}));
+   if(!api.test.cast(false))throw Error('Campaign lightning could not reach nearby targets');
+   api.test.step(.08);const early=targets.every(e=>e.hp===10000);api.test.step(.006);const target=targets.find(e=>e.hp<10000);if(!target)throw Error('Lightning contact did not reach campaign hurtEnemy');
+   const hold=api.test.hold(target),pose=api.test.pose(target),hp=target.hp;api.test.damage(target,999,'tail');const blocked=target.hp===hp;
+   c.keys.d=true;c.joy.active=false;const x=c.player.x,y=c.player.y;c.step(.016);delete c.keys.d;const moved=Math.hypot(c.player.x-x,c.player.y-y)>.05;
+   const result={early,hold,pose:!!pose,blocked,moved,stop:api.read().globalHitStop,contacts:api.read().contacts,atlas:api.read().atlasReady,weapon:api.read().weapon};
+   api.test.reset();return result;
+  });
+  assert.ok(lightning.early&&lightning.hold&&lightning.pose&&lightning.blocked&&lightning.moved&&lightning.atlas);assert.equal(lightning.stop,0);assert.equal(lightning.weapon,'lightning');assert.ok(lightning.contacts>0);report.lightning=lightning;report.checks.push('campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks');
+  assert.equal(await page.locator('#abilityName').textContent(),'강화전격');
+  await page.screenshot({path:path.join(out,'lightning-campaign.png')});
+
   await page.route('**/version.json?check=*',r=>r.fulfill({status:200,contentType:'application/json',body:'{"build":"synthetic-next-version"}'}));await page.evaluate(()=>window.dispatchEvent(new Event('online')));await page.waitForTimeout(250);assert.equal(await page.locator('#webUpdate').isVisible(),false);assert.equal(await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running),true);
   await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().home('battle'));await page.waitForFunction(()=>!document.getElementById('webUpdate').hidden,null,{timeout:10000});await page.unroute('**/version.json?check=*');report.checks.push('update waits for home without interrupting combat');
   const maps=await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.definitions().map(m=>({id:m.id,stages:m.stages})));
@@ -71,3 +89,4 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  }catch(e){report.success=false;report.failure=e.stack;await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});throw e;}
  finally{fs.writeFileSync(path.join(out,'browser-smoke.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));await browser.close();server.close();}
 })().catch(e=>{console.error(e.stack);server.close();process.exitCode=1;});
+
