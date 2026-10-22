@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 90,
-  "status": "Cinematics and legacy boss shortcuts verified; publishing final compatibility build",
+  "progress": 100,
+  "status": "WEB-13 successfully deployed; cinematic warning and legacy shortcuts verified, public engine and both atlas hashes match",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,7 +24,7 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Confirm final complete regression workflow and public engine/artwork hashes",
+  "next": "Review user feedback on WEB-13. Older open clients apply updates only at home via the explicit 업데이트 적용 button. BIO/VENOM cinematics can be viewed through the TEST boss controls. Physical Galaxy S23+ play remains untested.",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "bio": {
@@ -152,7 +152,22 @@
     "legacy_VENOM_shortcut": "passed",
     "other_legacy_boss_warning": "passed",
     "local_regression_build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
-    "final_cinematic_browser_build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624"
+    "final_cinematic_browser_build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",
+    "pages_deploy": "success",
+    "github_regression_workflow": "passed",
+    "remote_complete_regression": "passed",
+    "remote_regression_build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",
+    "live_report": "docs/BOSS_CINEMATIC_LIVE_REPORT.json",
+    "live_build_matches": true,
+    "live_index_build_matches": true,
+    "live_index_engine_matches": true,
+    "live_engine_sha256_matches": true,
+    "live_BIO_atlas_sha256_matches": true,
+    "live_VENOM_atlas_sha256_matches": true,
+    "new_atlas_responses": [
+      200,
+      200
+    ]
   },
   "image_generation": {
     "mode": "built-in image_gen",
@@ -162,5 +177,21 @@
       "assets/0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7.png"
     ],
     "selected_poses": 8
+  },
+  "deployed_source_commit": "68c71ea31ea43adbe3e4e4f39750ec5af1abbd1e",
+  "deployment_run": 39780550927,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39780550927",
+  "game_url": "https://idonutyou.github.io/EVOLVE/",
+  "release_backup": "backup/web13-boss-cinematic-20261022",
+  "stage_backups": {
+    "10": "313d92f29875d571194a70a97a7fbff1d64f9442",
+    "20": "0001bff65418fc75d9db6ac223ea4e295de234ab",
+    "30": "1b573fd733dfc0a16a59ca79374c748b801d3f4e",
+    "40": "b03bf68890e0af13837c1bbd7e45e1bb826d8755",
+    "50": "42f876b7316f47e5d2b907b5fb729c4a66e67f19",
+    "60": "b42fe08001acf93df9c327595cf0b28abd849e32",
+    "70": "fdd5f0097a63dc3b369dda9aa614a0ad474187f1",
+    "80": "946f93de065c0db27e2555792968d74a93420699",
+    "90": "68c71ea31ea43adbe3e4e4f39750ec5af1abbd1e"
   }
 }
