@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-10-MONSTER-MOTION",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "baseline_backup": "backup/web10-before-legacy-motion-20261022",
-  "progress": 50,
-  "status": "WEB-11 packaged; all original images verified byte for byte",
+  "progress": 60,
+  "status": "All six original appearances verified on actual GPU and Canvas render paths",
   "types": [
     "warden",
     "symbiote",
@@ -16,7 +16,7 @@
   ],
   "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
   "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
-  "next": "Run state, packaging and full mobile browser regressions, including all six original appearances",
+  "next": "Inspect captured poses and campaign; preserve full regression results; publish WEB-11",
   "physical_Galaxy_S23_plus_tested": false,
   "atlases": [
     {
@@ -42,5 +42,16 @@
   "atlas_metadata": "web/monster-atlas-v578.json",
   "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
   "engine": "dist/assets/ad9e5570775ca0ff30c21a612fe37008c6b22fc39cd8962b79d57182be13ffc6.js",
-  "original_image_entries_preserved": 979
+  "original_image_entries_preserved": 979,
+  "verification": {
+    "browser_report": "docs/LEGACY_MONSTER_BROWSER_REPORT.json",
+    "automated_mobile_viewport": true,
+    "all_ten_painted_frame_sets_distinct": true,
+    "all_six_gpu_and_canvas_frames_differ": true,
+    "no_per_frame_texture_rebuild": true,
+    "cached_frames": 40,
+    "browser_errors": [],
+    "failed_requests": [],
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
