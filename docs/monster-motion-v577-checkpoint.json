@@ -1,7 +1,7 @@
 {
   "task": "Painted cinematic lettering and emblem; remove obsolete boss HUD fallback",
-  "status": "Remote browser and unit checks passed; GitHub Pages deployment in progress",
-  "progress": 90,
+  "status": "WEB-14 deployed successfully; live build, engine and both painted UI atlases match; obsolete final HUD images return 404",
+  "progress": 100,
   "version": "V575-WEB-14-PAINTED-WARNING",
   "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
@@ -22,7 +22,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Verify the live WEB-14 build, engine and artwork hashes and obsolete-image removal; finalize backup",
+  "next": "Review user feedback on WEB-14. Existing open clients apply the update only at home via 업데이트 적용. Read this checkpoint and current main before new work; do not regenerate completed artwork.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -128,19 +128,43 @@
     "physical_Galaxy_S23_plus_tested": false,
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
-    "remote_regression_build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d"
+    "remote_regression_build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
+    "live_lettering_sha256_matches": true,
+    "live_crest_digits_sha256_matches": true,
+    "legacy_final_HUD_absent": true,
+    "obsolete_asset_responses": [
+      404,
+      404
+    ]
   },
   "baseline_backup": "backup/web13-before-painted-warning-20261022",
   "art_metadata": "web/warning-branding-art-v581.json",
   "image_generation": {
     "mode": "built-in image_gen",
     "prompts": "docs/warning-branding-v581-image-prompts.json",
-    "new_atlases": [
-      "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png",
-      "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png"
-    ],
-    "painted_UI_sprites": 10,
-    "existing_boss_poses_preserved": 8
+    "selected_assets": {
+      "lettering": {
+        "path": "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png",
+        "sha256": "e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c",
+        "bytes": 2357319,
+        "width": 1536,
+        "height": 1024,
+        "alpha": true,
+        "draft": false
+      },
+      "crest_digits": {
+        "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+        "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+        "bytes": 1586575,
+        "width": 1254,
+        "height": 1254,
+        "alpha": true,
+        "draft": false
+      }
+    }
   },
   "deployed_source_commit": "cf24db99640206778962d5ca139b821db9988a4d",
   "deployment_run": 39805024585,
@@ -154,6 +178,8 @@
     "50": "1d8b8ae0574662008e685357b76ed97b1166d568",
     "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7",
     "70": "4d3c809fd8ab90bfeee4114e87eaaf2fc3a7d58c",
-    "80": "cf24db99640206778962d5ca139b821db9988a4d"
-  }
+    "80": "cf24db99640206778962d5ca139b821db9988a4d",
+    "90": "2ac7e4f59f375d036149a74a9ee94cfca2b14bff"
+  },
+  "live_report": "docs/PAINTED_WARNING_LIVE_REPORT.json"
 }

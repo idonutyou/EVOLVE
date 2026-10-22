@@ -1,0 +1,42 @@
+{
+  "game_url": "https://idonutyou.github.io/EVOLVE/",
+  "verified_at": "2026-10-22T15:30:29.256617+00:00",
+  "version": "V575-WEB-14-PAINTED-WARNING",
+  "expected_build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+  "live_build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+  "live_build_matches": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "engine": {
+    "status": 200,
+    "bytes": 1299066,
+    "sha256": "5c3f7d54803d92032725aa40a4d52d5896a25f556b1619be54441003e02dddee",
+    "matches": true
+  },
+  "lettering": {
+    "status": 200,
+    "bytes": 2357319,
+    "sha256": "e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c",
+    "matches": true
+  },
+  "crest_digits": {
+    "status": 200,
+    "bytes": 1586575,
+    "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+    "matches": true
+  },
+  "live_index_engine_matches": true,
+  "live_index_build_matches": true,
+  "legacy_final_HUD_absent": true,
+  "obsolete_assets_absent_from_manifest": true,
+  "obsolete_asset_statuses": [
+    404,
+    404
+  ],
+  "obsolete_assets_removed_from_server": true,
+  "success": true,
+  "deployed_source_commit": "cf24db99640206778962d5ca139b821db9988a4d",
+  "deployment_run": 39805024585,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39805024585",
+  "github_pages_deployment": "success",
+  "remote_browser_checks": "passed"
+}
