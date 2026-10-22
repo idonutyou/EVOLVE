@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
   "baseline_backup": "backup/web11-before-red-pulse-20261022",
-  "progress": 50,
-  "status": "Actual campaign pulse damage and preserved health/shield checks passed; centered arena verification in progress",
+  "progress": 60,
+  "status": "All five maps pass centered boss/player placement and enemy fence containment; packaged assets and original browser suite pass",
   "source": "web/red-pulse-v579.js",
   "reference": "1000026947.png",
   "allowed_field_sites": [
@@ -19,8 +19,8 @@
     "respawn_seconds": 20,
     "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"
   },
-  "preservation": "Retain original images, all approved map and collision data, monster motions, stage exits, boss rules, XP progression and save keys. The new field device is an explicitly authorized additional damage source.",
-  "next": "Finish all five map arena checks and inspect captured device visuals",
+  "preservation": "Retain original images, approved map and collision data, monster motions, stage exits, XP progression and save keys. Only requested field devices and boss arena placement/containment change.",
+  "next": "Verify scheduled BIO/VENOM arrivals and native reinforcement edge births, then publish",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
@@ -51,6 +51,10 @@
     "device_browser_damage": "passed",
     "health_and_shield": "passed",
     "original_browser_suite": "passed",
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "all_five_maps": "passed",
+    "packaged_asset_files": 1009,
+    "original_images_unchanged": 981,
+    "browser_errors": []
   }
 }
