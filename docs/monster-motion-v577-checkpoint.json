@@ -1,7 +1,7 @@
 {
   "task": "EVOLVE WEB-12 red pulse device and centered boss arenas",
-  "status": "WEB-12 locally verified and ready to publish; WEB-11 original monster motions retained",
-  "progress": 70,
+  "status": "All local checks passed; publishing WEB-12 to GitHub Pages",
+  "progress": 80,
   "version": "V575-WEB-12-RED-PULSE",
   "build": "f736e4612d92855b1fbf4a50a2584062132cc90f1eb7c7f7722c9cba06ecc491",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
@@ -22,7 +22,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Publish verified WEB-12, then confirm GitHub Pages and live version/assets. Physical Galaxy S23+ play remains untested.",
+  "next": "Confirm remote regression workflow, Pages deployment, and live version/engine/art hashes",
   "legacy_atlases": [
     {
       "name": "A",

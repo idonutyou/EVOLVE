@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
   "baseline_backup": "backup/web11-before-red-pulse-20261022",
-  "progress": 70,
-  "status": "All local checks pass, including scheduled BIO/VENOM arrivals and native edge reinforcements",
+  "progress": 80,
+  "status": "All local checks passed; publishing WEB-12 to GitHub Pages",
   "source": "web/red-pulse-v579.js",
   "reference": "1000026947.png",
   "allowed_field_sites": [
@@ -20,7 +20,7 @@
     "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"
   },
   "preservation": "Retain original images, approved map and collision data, monster motions, stage exits, XP progression and save keys. Only requested field devices and boss arena placement/containment change.",
-  "next": "Publish verified WEB-12 to main and confirm GitHub Pages plus live asset hashes",
+  "next": "Confirm remote regression workflow, Pages deployment, and live version/engine/art hashes",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
