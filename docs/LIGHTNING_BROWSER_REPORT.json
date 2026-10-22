@@ -1,0 +1,36 @@
+{
+  "checks": [
+    "boot and prior-version save migration",
+    "mobile movement, pause and resume",
+    "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
+    "update waits for home without interrupting combat",
+    "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+    "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "all five maps load",
+    "reload preserves save",
+    "landscape layout"
+  ],
+  "maps": [
+    "facility1",
+    "facility2",
+    "hub",
+    "biolab",
+    "red_biolab"
+  ],
+  "errors": [],
+  "failed": [],
+  "lightning": {
+    "early": true,
+    "hold": true,
+    "pose": true,
+    "blocked": true,
+    "moved": true,
+    "stop": 0,
+    "contacts": 1,
+    "atlas": true,
+    "weapon": "lightning"
+  },
+  "success": true
+}
