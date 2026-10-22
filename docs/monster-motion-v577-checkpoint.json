@@ -1,19 +1,42 @@
 {
-  "task": "Apply LIGHTNING06 reference monster animation to current online EVOLVE",
-  "status": "40% source integration complete; awaiting guarded browser verification and Pages deployment",
-  "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
+  "task": "EVOLVE main game monster animation integration",
+  "status": "Deployed successfully; user requested transition to a new chat",
+  "progress": 100,
   "version": "V575-WEB-10-MONSTER-MOTION",
   "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
-  "engine": "assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
-  "atlas": "assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
-  "reference_html_sha256": "0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "local_verification": "Seven motion-state checks passed. JavaScript source and compiled engine syntax passed. All 978 existing image entries unchanged; one exact reference atlas added.",
-  "pending": [
-    "CI existing preservation checks",
-    "GPU and Canvas real frame render check",
-    "campaign controls, lightning, map, save, update browser regression suite",
-    "GitHub Pages publication"
+  "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
+  "deployed_source_commit": "a07d6aaf6b611651163910482805773a0216bada",
+  "deployment_run": 39719592942,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39719592942",
+  "game_url": "https://idonutyou.github.io/EVOLVE/",
+  "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
+  "engine": "dist/assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
+  "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
+  "source": "web/monster-motion-v577.js",
+  "scope": "Crawler, runner, brute and spitter use exact reference atlas frames. Walk phase follows distance moved, idle stops gait, windup/attack/hurt choose explicit poses. Other normal types retain anatomy with cached articulated poses. Existing TITAN/boss motion retained.",
+  "preservation": "978 existing image entries unchanged; exact reference PNG added. No map, balance, audio or save-key changes. Lightning-only combat remains.",
+  "verification": {
+    "state_checks": 7,
+    "gpu_frames_differ": true,
+    "canvas_frames_differ": true,
+    "windup_frame": 3,
+    "hurt_frame": 3,
+    "cached_frames": 40,
+    "no_per_frame_texture_rebuild": true,
+    "existing_full_browser_suite": "passed",
+    "pages_deploy": "success",
+    "extraction_tests": "passed",
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "resume": "Read AGENTS.md and this checkpoint from current main. Review user feedback on the deployed motion; do not restore the old upload or redo integration. Canonical module is embedded in hashed engine with atlas path substituted. All source and checkpoint changes are backed up on online-v575.",
+  "preferences": [
+    "Respond in Korean",
+    "Show real progress in 10% increments",
+    "Keep stages about five minutes; send frequent still-working updates",
+    "Checkpoint and backup at each stage",
+    "Show file sizes for downloads",
+    "Ignore audio",
+    "No subagents unless explicitly requested"
   ],
-  "resume": "Use web/monster-motion-v577.js as canonical source. The hashed engine embeds the same module with the atlas path substituted. Do not restore historical uploaded game over current dist.",
-  "scope": "Reference frames: crawler, runner, brute, spitter. Other normal enemy types retain their anatomy with cached articulated poses. Existing Titan/boss motion preserved. Lightning-only combat remains."
+  "next": "Continue from deployed WEB-10 and evaluate any new user feedback. Update may need home-screen '업데이트 적용' for an already-open older client."
 }
