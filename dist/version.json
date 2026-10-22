@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-9-LIGHTNING06",
-  "build": "7e408c947c2918a6245bfc6e63b0cbe8e75421a4810b5d9e92a6684675271f5e",
-  "scriptBytes": 77312314,
-  "assets": 1005,
+  "version": "V575-WEB-10-MONSTER-MOTION",
+  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
+  "scriptBytes": 77322966,
+  "assets": 1006,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-9-LIGHTNING06",
+  "version": "V575-WEB-10-MONSTER-MOTION",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272757,
-  "build": "7e408c947c2918a6245bfc6e63b0cbe8e75421a4810b5d9e92a6684675271f5e",
-  "image_assets": 978,
-  "cached_files": 1005,
-  "cached_bytes": 329162725,
+  "index_bytes": 272759,
+  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
+  "image_assets": 979,
+  "cached_files": 1006,
+  "cached_bytes": 331109027,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -193,6 +193,32 @@
     "boss_death_cinematic_preserved": true,
     "gpu_and_canvas_reaction": true,
     "terrain_line_of_sight": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "monster_motion": {
+    "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
+    "baseline_engine": "assets/7882517579ab9a19d6483cf0317cc2cd13b774717e99ddd7a58f619764522c63.js",
+    "engine": "assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
+    "reference_html_sha256": "0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
+    "atlas": "assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
+    "reference_frames": [
+      "crawler",
+      "runner",
+      "brute",
+      "spitter"
+    ],
+    "reference_image_bytes_exact": true,
+    "walk_frames": 3,
+    "impact_attack_frame": 3,
+    "special_type_anatomy_preserved": true,
+    "distance_driven_gait": true,
+    "gpu_cached_frames": true,
+    "per_frame_texture_uploads": false,
+    "maps_changed": false,
+    "combat_balance_changed": false,
+    "save_keys_unchanged": true,
+    "titan_motion_preserved": true,
+    "audio_changed": false,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

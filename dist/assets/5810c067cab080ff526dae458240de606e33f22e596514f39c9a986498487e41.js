@@ -6332,7 +6332,7 @@ function gpuWriteInstanceV426(n,x,y,size,rot,sx,sy,alpha,uv){let o=n*11;gpuEnemy
 function gpuDrawInstancesV426(texture,n){if(!n)return;const gl=gpuEnemyBatchGLV426;gl.bindBuffer(gl.ARRAY_BUFFER,gpuEnemyBatchBufferV426);gl.bufferSubData(gl.ARRAY_BUFFER,0,gpuEnemyInstanceV426.subarray(0,n*11));gl.bindTexture(gl.TEXTURE_2D,texture);gl.drawArraysInstanced(gl.TRIANGLE_STRIP,0,4,n);}
 function renderEnemyBatchV426(mode){
  if(!gpuEnemyBatchEnabledV426||!gpuEnemyBatchReadyV426)return false;const gl=gpuEnemyBatchGLV426,c=gpuEnemyBatchCanvasV426,pw=Math.max(1,Math.round(W*DPR)),ph=Math.max(1,Math.round(H*DPR));if(c.width!==pw||c.height!==ph){c.width=pw;c.height=ph;}gl.viewport(0,0,pw,ph);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
- const view=cameraRect(150),camX=cameraLeft(),camY=cameraTop(),uvs=mode==='shadow'?gpuEnemyShadowUVV426:gpuEnemyAtlasUVV426;let n=0;for(let i=0;i<enemies.length&&n<GPU_INSTANCE_CAP_V426;i++){const e=enemies[i];if(!gpuNormalEnemyV426(e)||e.x<view.l||e.x>view.r||e.y<view.t||e.y>view.b)continue;const uv=uvs[enemyAppearanceKeyV516(e)];if(!uv)continue;const v=gpuEnemyVisualV426(e),img=renderedEnemy(e);let size=v.size,y=e.y+v.bob,alpha=v.alpha,sx=v.sx,sy=v.sy,rot=v.rot;if(mode==='shadow'){const sh=enemyShadowSpriteV425(img);if(!sh)continue;size=v.size*(sh.side/sh.D);y=e.y;alpha=v.material;}n=gpuWriteInstanceV426(n,e.x-camX,y-camY,size,rot,sx,sy,alpha,uv);}
+ const view=cameraRect(150),camX=cameraLeft(),camY=cameraTop(),uvs=mode==='shadow'?gpuEnemyShadowUVV426:gpuEnemyAtlasUVV426;let n=0;for(let i=0;i<enemies.length&&n<GPU_INSTANCE_CAP_V426;i++){const e=enemies[i];if(!gpuNormalEnemyV426(e)||e.x<view.l||e.x>view.r||e.y<view.t||e.y>view.b)continue;const uv=uvs[mode==='shadow'?enemyAppearanceKeyV516(e):monsterGpuKeyV577(e)];if(!uv)continue;const v=gpuEnemyVisualV426(e),img=renderedEnemy(e);let size=v.size,y=e.y+v.bob,alpha=v.alpha,sx=v.sx,sy=v.sy,rot=v.rot;if(mode==='shadow'){const sh=enemyShadowSpriteV425(img);if(!sh)continue;size=v.size*(sh.side/sh.D);y=e.y;alpha=v.material;}n=gpuWriteInstanceV426(n,e.x-camX,y-camY,size,rot,sx,sy,alpha,uv);}
  gl.useProgram(gpuEnemyBatchProgramV426);gl.bindVertexArray(gpuEnemyBatchVAOV426);gl.uniform2f(gpuEnemyBatchUResV426,W,H);gl.activeTexture(gl.TEXTURE0);gl.uniform1i(gpuEnemyBatchUTexV426,0);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gpuDrawInstancesV426(mode==='shadow'?gpuEnemyShadowTextureV426:gpuEnemyBodyTextureV426,n);
  if(mode==='body'){
   n=0;const clarity=combatClarityLevel();
@@ -6420,7 +6420,7 @@ function renderWorldSceneV428(){
   gl.disable(gl.DEPTH_TEST);gl.depthMask(false);let n=buildFxInstancesV428('under',camX,camY);gpuDrawWorldV428(gpuEnemyFXTextureV426,n);
   // Exact Y-depth for static structures + normal enemies in one depth buffer.
   gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.depthMask(true);n=0;for(let i=0;i<visibleStructuresV428.length;i++){const p=visibleStructuresV428[i],uv=gpuStructureUVV428[p.asset];if(!uv)continue;const b=structureBoxV419(p),depth=clamp((p.y-camY)/Math.max(1,H),0,1);n=gpuWriteWorldV428(n,p.x-camX,p.y-b.h*.5-camY,p.size,0,b.w/p.size,b.h/p.size,1,uv,depth);}gpuDrawWorldV428(gpuStructureTextureV428,n);
-  n=0;for(let i=0;i<visibleNormalsV428.length;i++){const e=visibleNormalsV428[i],uv=gpuEnemyAtlasUVV426[enemyAppearanceKeyV516(e)];if(!uv)continue;const v=gpuEnemyVisualV426(e),depth=clamp((e.y+e.r-camY)/Math.max(1,H),0,1);n=gpuWriteWorldV428(n,e.x-camX,e.y+v.bob-camY,v.size,v.rot,v.sx,v.sy,v.alpha,uv,depth);}gpuDrawWorldV428(gpuEnemyBodyTextureV426,n);
+  n=0;for(let i=0;i<visibleNormalsV428.length;i++){const e=visibleNormalsV428[i],uv=gpuEnemyAtlasUVV426[monsterGpuKeyV577(e)];if(!uv)continue;const v=gpuEnemyVisualV426(e),depth=clamp((e.y+e.r-camY)/Math.max(1,H),0,1);n=gpuWriteWorldV428(n,e.x-camX,e.y+v.bob-camY,v.size,v.rot,v.sx,v.sy,v.alpha,uv,depth);}gpuDrawWorldV428(gpuEnemyBodyTextureV426,n);
   // Barrier/priority overlays sit over their own body but stay behind a nearer structure.
   gl.depthMask(false);n=buildFxInstancesV428('over',camX,camY);gpuDrawWorldV428(gpuEnemyFXTextureV426,n);gl.depthMask(true);gl.disable(gl.DEPTH_TEST);gl.bindVertexArray(null);gl.flush();});return true;
 }
@@ -10824,7 +10824,7 @@ installEvolveHomeV522();
 installMinimapAssetUI();
 installRenderedUI();
 homeReadyV522=false;refreshEvolveHomeV522();
-Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>{releaseNormalEnemySourcesV425();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
+Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>monsterReadyV577).then(()=>{releaseNormalEnemySourcesV425();monsterPrepareV577();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
   // V522: loading must preserve the saved stage and selected origin.
   const restoreRandom=Math.random;Math.random=calibrationRngV453(VISUAL_CALIBRATION_V453.layoutSeed+101);
   try{startStressTestV424();}finally{Math.random=restoreRandom;}
@@ -12239,6 +12239,97 @@ const lightningStartUIV576=document.createElement('style');lightningStartUIV576.
 const lightningWeaponButtonV576=document.querySelector('[data-weapon="arm"]');if(lightningWeaponButtonV576){const name=lightningWeaponButtonV576.querySelector('h3,strong,.weaponName');if(name)name.textContent='연쇄전격';const desc=lightningWeaponButtonV576.querySelector('p,.weaponDesc');if(desc)desc.textContent='자동 연쇄전격 · 강화전격 E · 회피 SPACE'}
 window.__EVOLVE_LIGHTNING_V576__={read:()=>({...lightningV576.read(),atlasReady:lightningImageV576.complete&&lightningImageV576.naturalWidth>0,atlasError:lightningImageErrorV576,globalHitStop:hitStop}),ready:lightningImageReadyV576};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_LIGHTNING_V576__.test={cast:strong=>lightningV576.castChain(strong),context:()=>lightningV576.context(),pose:e=>lightningV576.pose(e),hold:e=>lightningV576.holdEnemy(e),reset:()=>lightningV576.reset(),step:dt=>lightningV576.step(dt),damage:(e,n,kind)=>hurtEnemy(e,n,kind),active:()=>originActive()};
+
+// V577: real LIGHTNING06 monster frames, with distance-driven gait and stateful actions.
+function createMonsterMotionV577(host){
+ const states=new WeakMap(),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));let ticks=0;
+ function eligible(e){return !!e&&!e.finalBoss&&e.type!=='boss'}
+ function state(e){let s=states.get(e);if(!s){s={x:e.x,y:e.y,phase:((e.animPhase||0)*.37)%3,moving:false,attack:0,warning:false,shot:e.shot||0,shotCount:e.shotCount||0,contact:e.contactCd||0,shield:e.shieldPulseCd||0,frame:0,mode:'idle'};states.set(e,s)}return s}
+ function step(dt){if(!host.active()||!(dt>0))return;ticks++;
+  for(const e of host.enemies()){if(!eligible(e)||e.dead)continue;const s=state(e),dx=e.x-s.x,dy=e.y-s.y,distance=Math.hypot(dx,dy),warning=!!e.telegraphing||e.dashPrep>0||e.chargePrep>0;
+   const forced=e.arrivalInvuln||e.arrivalTime>0||(e.stunned||0)>0||e.arcShockV576&&e.arcShockV576.age<e.arcShockV576.life;
+   s.moving=!forced&&!warning&&distance>.025&&distance<Math.max(32,(e.spd||60)*dt*6);
+   if(s.moving)s.phase+=distance/Math.max(7,host.size(e)*.25);
+   s.attack=Math.max(0,s.attack-dt);
+   if(s.warning&&!warning||(e.shotCount||0)>s.shotCount||(e.shot||0)>s.shot+.25||(e.contactCd||0)>s.contact+.12||(e.shieldPulseCd||0)>s.shield+.3)s.attack=.28;
+   s.warning=warning;s.x=e.x;s.y=e.y;s.shot=e.shot||0;s.shotCount=e.shotCount||0;s.contact=e.contactCd||0;s.shield=e.shieldPulseCd||0;
+   select(e,s);
+  }
+ }
+ function select(e,s=state(e)){
+  const shock=e.arcShockV576;
+  if(e.dead){s.mode='death';s.frame=3}
+  else if(shock&&shock.age<shock.life*.8||(e.hit||0)>.02){s.mode='hurt';s.frame=3}
+  else if(s.warning||e.telegraphing||e.dashPrep>0||e.chargePrep>0){s.mode='windup';s.frame=3}
+  else if(s.attack>0||(e.burst||0)>0){s.mode=s.attack<.08?'recover':'attack';s.frame=s.mode==='recover'?1:3}
+  else if(s.moving){s.mode='walk';s.frame=Math.floor(s.phase)%3}
+  else{s.mode='idle';s.frame=0}
+  return s;
+ }
+ return {eligible,init:e=>eligible(e)?state(e):null,step,state:e=>select(e),frame:e=>select(e).frame,key:e=>host.appearance(e)+'@'+select(e).frame,reset:()=>{ticks=0},read:()=>{const modes={};for(const e of host.enemies())if(eligible(e)&&!e.dead){const s=select(e);modes[s.mode]=(modes[s.mode]||0)+1}return {version:'V575-WEB-10-MONSTER-MOTION',ticks,modes}}};
+}
+
+const monsterImageV577=new Image();let monsterImageErrorV577=null,monsterPreparedV577=false,monsterAtlasBuildsV577=0;
+const monsterFramesV577=new Map(),monsterBaseRenderV577=renderedEnemy;
+const monsterSourceV577={crawler:{row:0,b:[24,91,307,381]},runner:{row:0,b:[24,91,307,381]},brute:{row:1,b:[4,0,314,375]},spitter:{row:2,b:[0,0,309,364]}};
+const monsterReadyV577=new Promise(resolve=>{monsterImageV577.onload=()=>resolve(true);monsterImageV577.onerror=()=>{monsterImageErrorV577='Monster motion atlas failed to load';resolve(false)}});
+monsterImageV577.src='assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png';
+const monsterMotionV577=createMonsterMotionV577({active:()=>running&&!paused&&!choosing&&!rewardChoosing&&!ended,enemies:()=>enemies,size:e=>e.elite?68:gpuEnemyBaseSizeV426(e),appearance:e=>enemyAppearanceKeyV516(e)});
+
+function monsterCanvasV577(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function monsterSurfaceV577(type,frame){
+ const key=type+'@'+frame,known=monsterFramesV577.get(key);if(known)return known;
+ const info=monsterSourceV577[type];let c,g;
+ if(info&&monsterImageV577.complete&&monsterImageV577.naturalWidth){
+  const sw=monsterImageV577.naturalWidth/4,sh=monsterImageV577.naturalHeight/3,b=info.b,w=b[2]-b[0],h=b[3]-b[1];c=monsterCanvasV577(w,h);g=c.getContext('2d');g.drawImage(monsterImageV577,frame*sw+b[0],info.row*sh+b[1],w,h,0,0,w,h);
+ }else{
+  const im=ART[enemyAppearanceAssetV516(type)],per=actorMipCacheV424.get(im);let mip=per?.get(256);if(!mip&&per)for(const q of per.values())if(!mip||Math.abs(q.bucket-256)<Math.abs(mip.bucket-256))mip=q;
+  if(!mip?.source)return null;
+  const w=mip.w,h=mip.h;c=monsterCanvasV577(w,h);g=c.getContext('2d');
+  // Retain each special type's anatomy. Alternate lower limbs independently of the torso.
+  const side=frame===1?1:frame===2?-1:0,attack=frame===3,split=Math.floor(h*.55);
+  g.save();g.translate(w*.5,h*.55);g.rotate(attack?-.075:side*.012);g.drawImage(mip.source,0,0,w,split,-w*.5,-h*.55,w,split);g.restore();
+  for(const leg of [-1,1]){const x=leg<0?0:w*.5,width=leg<0?Math.ceil(w*.5):Math.floor(w*.5),shift=side*leg*h*.035,stretch=attack?.93:1+side*leg*.035;g.drawImage(mip.source,x,split,width,h-split,x+(attack?leg*w*.018:0),split+shift,width,(h-split)*stretch)}
+ }
+ c.complete=true;c.naturalWidth=c.width;c.naturalHeight=c.height;c._actor=true;c._spriteCrop=[0,0,c.width,c.height];c._sourceReleasedV425=true;c._motionV577={type,frame};c._clarityV574={kind:'enemy',base:gpuEnemyBaseSizeV426({type:type.replace('legacy_','')})};
+ actorMipCacheV424.set(c,new Map([[384,{source:c,w:c.width,h:c.height,bucket:384}]]));monsterFramesV577.set(key,c);return c;
+}
+function monsterPrepareV577(){if(monsterPreparedV577||!monsterImageV577.naturalWidth)return;for(const type of GPU_TYPES_V426)for(let frame=0;frame<4;frame++)monsterSurfaceV577(type,frame);monsterPreparedV577=true}
+
+const monsterMakeAtlasBaseV577=makeEnemyAtlasV426;
+makeEnemyAtlasV426=function(shadow=false){
+ const base=monsterMakeAtlasBaseV577(shadow);if(shadow||!monsterImageV577.naturalWidth)return base;monsterPrepareV577();
+ const cell=256,cols=4,entries=[...monsterFramesV577.keys()],count=GPU_TYPES_V426.length+entries.length,rows=Math.ceil(count/cols),c=monsterCanvasV577(cols*cell,rows*cell),g=c.getContext('2d'),uv={...base.uv};
+ g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(base.canvas,0,0);
+ // The old UV rows must also be normalized to the enlarged texture.
+ for(const key of Object.keys(uv)){const q=uv[key];uv[key]=[q[0],q[1]*base.canvas.height/c.height,q[2],q[3]*base.canvas.height/c.height]}
+ for(let i=0;i<entries.length;i++){
+  const key=entries[i],source=monsterFramesV577.get(key),index=GPU_TYPES_V426.length+i,x=index%cols*cell,y=Math.floor(index/cols)*cell,scale=(cell-12)/Math.max(source.width,source.height),w=source.width*scale,h=source.height*scale,outlined=claritySpriteV574(source,gpuEnemyBaseSizeV426({type:key.split('@')[0].replace('legacy_','')}));
+  if(outlined){const pad=outlined.pad*scale;g.drawImage(outlined.source,x+(cell-w)/2-pad,y+(cell-h)/2-pad,outlined.source.width*scale,outlined.source.height*scale)}else g.drawImage(source,x+(cell-w)/2,y+(cell-h)/2,w,h);
+  uv[key]=[x/c.width,y/c.height,(x+cell)/c.width,(y+cell)/c.height];
+ }
+ monsterAtlasBuildsV577++;return {canvas:c,uv};
+};
+
+const monsterSpawnBaseV577=spawnEnemy;spawnEnemy=function(...args){const e=monsterSpawnBaseV577(...args);if(e)monsterMotionV577.init(e);return e};
+const monsterUpdateBaseV577=update;update=function(dt){const before=t,out=monsterUpdateBaseV577(dt);if(t>before)monsterMotionV577.step(t-before);return out};
+const monsterResetBaseV577=reset;reset=function(...args){monsterMotionV577.reset();return monsterResetBaseV577(...args)};
+renderedEnemy=function(e){if(monsterMotionV577.eligible(e)&&monsterImageV577.naturalWidth){const frame=monsterMotionV577.frame(e),type=enemyAppearanceKeyV516(e),surface=monsterSurfaceV577(type,frame);if(surface)return surface}return monsterBaseRenderV577(e)};
+
+// Grounded feet and an explicit preparation/release posture in both render paths.
+const monsterGpuPoseBaseV577=gpuEnemyVisualV426;gpuEnemyVisualV426=function(e){const v=monsterGpuPoseBaseV577(e);if(!monsterMotionV577.eligible(e))return v;const s=monsterMotionV577.state(e),p=monsterSourceV577[enemyAppearanceKeyV516(e)],action=s.mode==='windup'?-1:s.mode==='attack'?1:0;
+ return {...v,bob:p?-v.size*.20:v.bob,rot:v.rot+action*.055,sx:v.sx*(1+(action<0?-.045:action>0?.06:0)),sy:v.sy*(1+(action<0?-.055:action>0?.035:0))};
+};
+const monsterEnemyDrawBaseV577=drawEnemy;drawEnemy=function(e,shadowOnly=false){if(!monsterMotionV577.eligible(e))return monsterEnemyDrawBaseV577(e,shadowOnly);monsterMotionV577.state(e);const size=e.elite?68:gpuEnemyBaseSizeV426(e),direct=monsterSourceV577[enemyAppearanceKeyV516(e)];ctx.save();if(direct&&!shadowOnly)ctx.translate(0,-size*.20);try{return monsterEnemyDrawBaseV577(e,shadowOnly)}finally{ctx.restore()}};
+
+// Ordinary deaths keep the attack/impact pose while the body falls in the hit direction.
+const monsterEchoBaseV577=spawnDeathEcho;spawnDeathEcho=function(e){const previous=deathEchoes.at(-1),out=monsterEchoBaseV577(e),d=deathEchoes.at(-1);if(d&&d!==previous&&monsterMotionV577.eligible(e)){d.motionTypeV577=enemyAppearanceKeyV516(e);d.motionFrameV577=3;const s=e.arcShockV576;if(s){d.vx=Math.cos(s.a)*(s.strong?165:95);d.vy=Math.sin(s.a)*(s.strong?165:95)-12;d.life=d.max=s.strong?.62:.48;d.spin=Math.cos(s.a)*1.4}}return out};
+const monsterKillBaseV577=killEnemy;killEnemy=function(e){const wasDead=e?.dead,previous=deathEchoes.at(-1),out=monsterKillBaseV577(e);if(e&&!wasDead&&e.dead&&monsterMotionV577.eligible(e)&&deathEchoes.at(-1)===previous)spawnDeathEcho(e);return out};
+const monsterEchoRenderV577=renderedEnemy;renderedEnemy=function(e){if(e.motionTypeV577){const surface=monsterSurfaceV577(e.motionTypeV577,e.motionFrameV577??3);if(surface)return surface}return monsterEchoRenderV577(e)};
+
+window.__EVOLVE_MONSTER_MOTION_V577__={ready:monsterReadyV577,read:()=>({...monsterMotionV577.read(),atlasReady:!!monsterImageV577.naturalWidth,error:monsterImageErrorV577,cachedFrames:monsterFramesV577.size,gpuAtlasBuilds:monsterAtlasBuildsV577,referenceTypes:Object.keys(monsterSourceV577),gpuEnabled:gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_MONSTER_MOTION_V577__.test={frame:e=>monsterMotionV577.frame(e),state:e=>({...monsterMotionV577.state(e)}),advance:dt=>monsterMotionV577.step(dt),surface:(type,frame)=>monsterSurfaceV577(type,frame),gpuPose:e=>gpuEnemyVisualV426(e),gpuKey:e=>monsterMotionV577.key(e),rendered:e=>renderedEnemy(e),prepare:monsterPrepareV577,forceWalk(e,phase){const s=monsterMotionV577.init(e);s.phase=phase;s.moving=true;s.attack=0;s.warning=false;delete e.arcShockV576;e.hit=0;e.telegraphing=null;e.dashPrep=e.chargePrep=e.burst=0;frozenFrameDrawnV438=false},gpu(value){const old=gpuEnemyBatchEnabledV426;gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428;frozenFrameDrawnV438=false;return old}};
+function monsterGpuKeyV577(e){const key=monsterMotionV577.key(e);return monsterFramesV577.has(key)?key:enemyAppearanceKeyV516(e)}
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

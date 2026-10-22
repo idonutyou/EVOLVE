@@ -1,0 +1,19 @@
+{
+  "task": "Apply LIGHTNING06 reference monster animation to current online EVOLVE",
+  "status": "40% source integration complete; awaiting guarded browser verification and Pages deployment",
+  "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
+  "version": "V575-WEB-10-MONSTER-MOTION",
+  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
+  "engine": "assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
+  "atlas": "assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
+  "reference_html_sha256": "0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
+  "local_verification": "Seven motion-state checks passed. JavaScript source and compiled engine syntax passed. All 978 existing image entries unchanged; one exact reference atlas added.",
+  "pending": [
+    "CI existing preservation checks",
+    "GPU and Canvas real frame render check",
+    "campaign controls, lightning, map, save, update browser regression suite",
+    "GitHub Pages publication"
+  ],
+  "resume": "Use web/monster-motion-v577.js as canonical source. The hashed engine embeds the same module with the atlas path substituted. Do not restore historical uploaded game over current dist.",
+  "scope": "Reference frames: crawler, runner, brute, spitter. Other normal enemy types retain their anatomy with cached articulated poses. Existing Titan/boss motion preserved. Lightning-only combat remains."
+}

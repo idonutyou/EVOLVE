@@ -41,6 +41,21 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.equal(await page.locator('#abilityName').textContent(),'강화전격');
   await page.screenshot({path:path.join(out,'lightning-campaign.png')});
 
+  await page.waitForFunction(()=>window.__EVOLVE_MONSTER_MOTION_V577__?.read().atlasReady&&window.__EVOLVE_MONSTER_MOTION_V577__.read().cachedFrames===40,null,{timeout:30000});
+  const monsterMotion=await page.evaluate(()=>{
+   const api=window.__EVOLVE_MONSTER_MOTION_V577__,c=window.__EVOLVE_TEST_MODULE_V575__.test.context(),e=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!e)throw Error('Motion fixture enemy missing');
+   const surfaces={};for(const type of ['crawler','runner','brute','spitter']){const a=api.test.surface(type,0),b=api.test.surface(type,1);surfaces[type]=a!==b&&a.toDataURL()!==b.toDataURL()}
+   const builds=api.read().gpuAtlasBuilds,originalType=e.type;e.type='brute';e.visualSetV516='base';
+   api.test.forceWalk(e,0);const key0=api.test.gpuKey(e);c.draw();const gpu0=document.getElementById('game').toDataURL();
+   api.test.forceWalk(e,1);const key1=api.test.gpuKey(e);c.draw();const gpu1=document.getElementById('game').toDataURL();
+   const gpuEnabled=api.read().gpuEnabled,gpuWas=api.test.gpu(false);
+   api.test.forceWalk(e,0);c.draw();const cpu0=document.getElementById('game').toDataURL();api.test.forceWalk(e,1);c.draw();const cpu1=document.getElementById('game').toDataURL();api.test.gpu(gpuWas);
+   e.telegraphing='bruteSlam';const windup=api.test.frame(e);e.telegraphing=null;e.arcShockV576={age:0,life:.32};const hurt=api.test.frame(e);delete e.arcShockV576;e.type=originalType;
+   const result={surfaces,gpuEnabled,gpuFramesDiffer:gpu0!==gpu1,canvasFramesDiffer:cpu0!==cpu1,key0,key1,windup,hurt,cachedFrames:api.read().cachedFrames,noTextureRebuildDuringDraw:api.read().gpuAtlasBuilds===builds};c.draw();return result;
+  });
+  assert.ok(Object.values(monsterMotion.surfaces).every(Boolean));assert.ok(monsterMotion.gpuEnabled&&monsterMotion.gpuFramesDiffer&&monsterMotion.canvasFramesDiffer&&monsterMotion.noTextureRebuildDuringDraw);assert.notEqual(monsterMotion.key0,monsterMotion.key1);assert.equal(monsterMotion.windup,3);assert.equal(monsterMotion.hurt,3);assert.equal(monsterMotion.cachedFrames,40);report.monsterMotion=monsterMotion;report.checks.push('reference monster frames differ; live GPU and canvas walking frames render; windup and hurt pose; no per-frame texture rebuild');
+  await page.screenshot({path:path.join(out,'monster-motion-campaign.png')});
+
   await page.route('**/version.json?check=*',r=>r.fulfill({status:200,contentType:'application/json',body:'{"build":"synthetic-next-version"}'}));await page.evaluate(()=>window.dispatchEvent(new Event('online')));await page.waitForTimeout(250);assert.equal(await page.locator('#webUpdate').isVisible(),false);assert.equal(await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running),true);
   await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().home('battle'));await page.waitForFunction(()=>!document.getElementById('webUpdate').hidden,null,{timeout:10000});await page.unroute('**/version.json?check=*');report.checks.push('update waits for home without interrupting combat');
   const maps=await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.definitions().map(m=>({id:m.id,stages:m.stages})));
@@ -89,4 +104,5 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  }catch(e){report.success=false;report.failure=e.stack;await page.screenshot({path:path.join(out,'failure.png')}).catch(()=>{});throw e;}
  finally{fs.writeFileSync(path.join(out,'browser-smoke.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));await browser.close();server.close();}
 })().catch(e=>{console.error(e.stack);server.close();process.exitCode=1;});
+
 
