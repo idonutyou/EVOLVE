@@ -1,0 +1,27 @@
+{
+  "task": "Resume EVOLVE from deployed WEB-10",
+  "session_date_kst": "2026-10-22",
+  "progress": 50,
+  "status": "Source state checks passed; deployment verification in progress",
+  "baseline_commit": "a3484f8b6b82a9f30f2ae869496eca9a0c8d8719",
+  "version": "V575-WEB-10-MONSTER-MOTION",
+  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
+  "baseline_backup_branch": "backup/web-10-resume-20261022-a3484f8",
+  "source_checkpoint": "docs/monster-motion-v577-checkpoint.json",
+  "source": "web/monster-motion-v577.js",
+  "local_state_tests": {
+    "ok": true,
+    "checks": [
+      "three actual walk frame states",
+      "stationary feet return to idle",
+      "windup and release follow enemy attack state",
+      "impact freezes gait",
+      "pause freezes animation clock",
+      "contact attack and death pose",
+      "special types animate and TITAN stays native"
+    ]
+  },
+  "game_changes": [],
+  "next": "Verify version and deployment; retain WEB-10 and wait for new user play feedback.",
+  "physical_Galaxy_S23_plus_tested": false
+}
