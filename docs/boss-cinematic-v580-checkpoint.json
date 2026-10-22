@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 10,
-  "status": "Current WEB-12 and supplied cinematic reference inspected; dedicated BIO/VENOM animation artwork planned",
+  "progress": 20,
+  "status": "Initial cinematic poses preserved; refining all frames to a centered frontal camera",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,6 +24,38 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Generate and preserve two transparent cinematic atlases, then implement warning playback",
-  "physical_Galaxy_S23_plus_tested": false
+  "next": "Finish frontal camera correction, then package and test cinematic playback",
+  "physical_Galaxy_S23_plus_tested": false,
+  "art": {
+    "bio": {
+      "path": "assets/e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688.png",
+      "sha256": "e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688",
+      "bytes": 3050780,
+      "width": 1254,
+      "height": 1254,
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "alpha": true,
+      "draft": true
+    },
+    "venom": {
+      "path": "assets/cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862.png",
+      "sha256": "cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862",
+      "bytes": 3431658,
+      "width": 1254,
+      "height": 1254,
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "alpha": true,
+      "draft": true
+    }
+  }
 }

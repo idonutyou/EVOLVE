@@ -1,0 +1,32 @@
+{
+  "bio": {
+    "path": "assets/e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688.png",
+    "sha256": "e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688",
+    "bytes": 3050780,
+    "width": 1254,
+    "height": 1254,
+    "crop": [
+      0,
+      0,
+      627,
+      627
+    ],
+    "alpha": true,
+    "draft": true
+  },
+  "venom": {
+    "path": "assets/cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862.png",
+    "sha256": "cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862",
+    "bytes": 3431658,
+    "width": 1254,
+    "height": 1254,
+    "crop": [
+      0,
+      0,
+      627,
+      627
+    ],
+    "alpha": true,
+    "draft": true
+  }
+}
