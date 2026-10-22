@@ -1,0 +1,29 @@
+{
+  "task": "Full-screen intimidating front-facing boss warning cinematics",
+  "version": "V575-WEB-13-BOSS-CINEMATIC",
+  "baseline_version": "V575-WEB-12-RED-PULSE",
+  "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
+  "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
+  "progress": 10,
+  "status": "Current WEB-12 and supplied cinematic reference inspected; dedicated BIO/VENOM animation artwork planned",
+  "reference": "1000027465.jpg",
+  "design": {
+    "duration_seconds": 3,
+    "bosses": [
+      "bio",
+      "venom"
+    ],
+    "frames_per_boss": 4,
+    "shots": [
+      "front-facing looming",
+      "chest rise and head lift",
+      "threat display",
+      "forward roar"
+    ],
+    "warning_tape": "animated red hazard stripe across the lower third",
+    "portrait_and_landscape": true
+  },
+  "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
+  "next": "Generate and preserve two transparent cinematic atlases, then implement warning playback",
+  "physical_Galaxy_S23_plus_tested": false
+}
