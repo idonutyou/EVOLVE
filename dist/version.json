@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
-  "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
-  "scriptBytes": 77324879,
-  "assets": 1008,
+  "version": "V575-WEB-12-RED-PULSE",
+  "build": "bf3b4125a37e4bcfd21e0793492abad672307dd65ad58a0bee31e3cea84474bd",
+  "scriptBytes": 77338513,
+  "assets": 1009,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

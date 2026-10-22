@@ -4907,6 +4907,7 @@ function draw(){
   for(const b of eBullets)if(b._bio489){drawBioProjectileV489(b);}else if(b.x>=projectileViewV424.l&&b.x<=projectileViewV424.r&&b.y>=projectileViewV424.t&&b.y<=projectileViewV424.b)stamp(b.kind==='cryo'?'vfx/cryo_impact':b.kind==='void'?'vfx/void_zone':b.kind==='magma'||b.kind==='ravager'?'vfx/arm_orb':'vfx/acid_projectile',b.x,b.y,Math.max(13,b.r*3.7),Math.atan2(b.vy,b.vx),1);
   // enemies and player
   if(window.__EVOLVE_LIGHTNING_V576__)lightningV576.drawGround(ctx);
+  if(window.__EVOLVE_RED_PULSE_V579__)drawRedPulseGroundV579(ctx);
   drawDeathEchoes();
   drawEvolutionPulse();drawDangerSense();
   const propView=cameraRect(140),scene=sceneV425;scene.length=0;
@@ -4923,6 +4924,7 @@ function draw(){
     for(const node of scene){if(node===player)drawPlayer();else if(node.kind==='structure')drawStructureV418(node);else drawEnemy(node);}
   }
   if(window.__EVOLVE_LIGHTNING_V576__)lightningV576.draw(ctx);
+  if(window.__EVOLVE_RED_PULSE_V579__)drawRedPulseTopV579(ctx);
   drawBossDeathCinematic();
   BIO_STEP13_V519.drawEffects();
   // particles
@@ -9935,7 +9937,7 @@ function createStageArenaV526(){
  directorLock=0;directorRelief=0;waveBreather=1.25;spawnAcc=0;
  // Two screen widths in world units, fixed for this encounter even after a resize.
  const side=Math.min(W*2,WORLD_W-32,WORLD_H-32),half=12;
- const l=clamp(player.x-side/2,16,WORLD_W-side-16),top=clamp(player.y-side/2,16,WORLD_H-side-16);
+ const l=WORLD_W/2-side/2,top=WORLD_H/2-side/2;
  bossArena={v526:true,active:true,l,t:top,r:l+side,b:top+side,x:l+side/2,y:top+side/2,radius:side/2,
   side,screenWidth:W,half,color:'#ed4b3f',graceUntil:t+1.25,nextDamageAt:0,contactTicks:0};
  // The scheduled encounter replaces the old field encounter; no kills/XP are fabricated.
@@ -10710,7 +10712,7 @@ function createVenomReinforcementsV554(host){
   return host.valid(p.x,p.y,r);
  }
  function sites(){
-  const a=host.arena(),points=[];if(!a)return points;const side=Math.min(a.r-a.l,a.b-a.t),offset=Math.random(),insets=[36,Math.min(86,side*.12),Math.min(138,side*.20)];
+  const a=host.arena(),points=[];if(!a)return points;const side=Math.min(a.r-a.l,a.b-a.t),offset=Math.random(),insets=[24];
   for(const inset of insets){const pad=(a.half||12)+inset,sx=a.r-a.l-pad*2,sy=a.b-a.t-pad*2;
    for(let edge=0;edge<4;edge++)for(let n=0;n<20;n++){const u=.025+.95*((n+.35+offset*.3)/20);points.push({x:edge===1?a.r-pad:edge===3?a.l+pad:a.l+pad+u*sx,y:edge===0?a.t+pad:edge===2?a.b-pad:a.t+pad+u*sy});}
   }
@@ -10824,7 +10826,7 @@ installEvolveHomeV522();
 installMinimapAssetUI();
 installRenderedUI();
 homeReadyV522=false;refreshEvolveHomeV522();
-Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>monsterReadyV577).then(()=>{releaseNormalEnemySourcesV425();monsterPrepareV577();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
+Promise.all([VENOM_RENDER_V539.ready,BIO_STEP13_V519.artReady,ASSET_READY,HUD_ART_READY_V417,BIO_ART_READY_V484,BOSS_ART_READY_V487,BIO_READY_V489,BIO_MOTION_READY_V501,ENV_READY_V502]).then(()=>Promise.all([monsterReadyV577,redPulseImageReadyV579])).then(()=>{releaseNormalEnemySourcesV425();monsterPrepareV577();const gpuOk=initEnemyWebGLV426();if(gpuOk){const up=initEnemyWebGLV428();if(!up)gpuEnemyBatchEnabledV426=false;}else gpuEnemyBatchEnabledV426=false;homeReadyV522=true;refreshEvolveHomeV522();setTimeout(()=>{
   // V522: loading must preserve the saved stage and selected origin.
   const restoreRandom=Math.random;Math.random=calibrationRngV453(VISUAL_CALIBRATION_V453.layoutSeed+101);
   try{startStressTestV424();}finally{Math.random=restoreRandom;}
@@ -11281,7 +11283,7 @@ mapPlaceNewBodyV562=function(o,r=o.r||8){const p=mapChooseDoorV562(o,r);if(!p)re
  buildTerrain=function(...args){mapGateCacheV562.clear();return build(...args);};
  resolveTerrainBody=function(o,r=10){if(o._mapBirthLockedV562){if(!mapCircleClearV562(o.x,o.y,r))mapPlaceNewBodyV562(o,r);return;}return resolve(o,r);};
  spawnEnemy=function(...args){
-  const e=spawn(...args);if(!e||e.dead||e.finalBoss||e.venomAddV553)return e;const p=mapChooseDoorV562(e,e.r);
+  const e=spawn(...args);if(!e||e.dead||e.finalBoss||e.venomAddV553||bossArena?.active)return e;const p=mapChooseDoorV562(e,e.r);
   if(!p){e.dead=true;e.mapGateSuppressedV562=true;mapBirthAuditV562.suppressed++;return e;}
   mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;
   const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();
@@ -11342,7 +11344,7 @@ function mapRoadOverviewV562(){
 }
 {
  const tick=update;let admitted=0;
- function admitUnregistered(){for(const e of enemies){if(e.dead||e.finalBoss||e.venomAddV553||e.mapDoorSpawnV562)continue;const p=mapChooseDoorV562(e,e.r);if(!p){e.dead=true;mapBirthAuditV562.suppressed++;continue;}mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type,source:'legacy-admission'};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();admitted++;}}
+ function admitUnregistered(){if(bossArena?.active)return;for(const e of enemies){if(e.dead||e.finalBoss||e.venomAddV553||e.mapDoorSpawnV562)continue;const p=mapChooseDoorV562(e,e.r);if(!p){e.dead=true;mapBirthAuditV562.suppressed++;continue;}mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type,source:'legacy-admission'};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();admitted++;}}
  update=function(dt){admitUnregistered();const out=tick(dt);admitUnregistered();return out;};
  if(window.__EVOLVE_MAP_TEST_V562__.test)window.__EVOLVE_MAP_TEST_V562__.test.admissionCount=()=>admitted;
 }
@@ -12338,6 +12340,102 @@ const monsterEchoRenderV577=renderedEnemy;renderedEnemy=function(e){if(e.motionT
 window.__EVOLVE_MONSTER_MOTION_V578__=window.__EVOLVE_MONSTER_MOTION_V577__={ready:monsterReadyV577,read:()=>({...monsterMotionV577.read(),atlasReady:monsterAllReadyV578(),error:monsterImageErrorV577,cachedFrames:monsterFramesV577.size,gpuAtlasBuilds:monsterAtlasBuildsV577,referenceTypes:Object.keys(monsterSourceV577),paintedOriginalTypes:Object.keys(monsterLegacyDataV578.types),atlasCount:1+monsterLegacyImagesV578.length,gpuEnabled:gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_MONSTER_MOTION_V577__.test={frame:e=>monsterMotionV577.frame(e),state:e=>({...monsterMotionV577.state(e)}),advance:dt=>monsterMotionV577.step(dt),surface:(type,frame)=>monsterSurfaceV577(type,frame),gpuPose:e=>gpuEnemyVisualV426(e),gpuKey:e=>monsterMotionV577.key(e),rendered:e=>renderedEnemy(e),prepare:monsterPrepareV577,forceWalk(e,phase){const s=monsterMotionV577.init(e);s.phase=phase;s.moving=true;s.attack=0;s.warning=false;delete e.arcShockV576;e.hit=0;e.telegraphing=null;e.dashPrep=e.chargePrep=e.burst=0;frozenFrameDrawnV438=false},gpu(value){const old=gpuEnemyBatchEnabledV426;gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428;frozenFrameDrawnV438=false;return old}};
 function monsterGpuKeyV577(e){const key=monsterMotionV577.key(e);return monsterFramesV577.has(key)?key:enemyAppearanceKeyV516(e)}
+
+// WEB-12: a single stand-to-charge field device. Damage follows the visible wave front.
+function createRedPulseDeviceV579(host){
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));let clock=0,cooldown=0,wave=null;
+ let metrics={detonations:0,contacts:0,spawned:0};
+ function reset(){clock=0;cooldown=0;wave=null;metrics={detonations:0,contacts:0,spawned:0}}
+ function ensure(){if(cooldown>0||host.blocked()||host.device())return null;const s=host.spawn();if(s)metrics.spawned++;else cooldown=2;return s}
+ function detonate(s){
+  if(!s||s.claimed||wave||host.blocked())return false;
+  const v=host.view(),x=s.x,y=s.y;
+  const targets=host.enemies().filter(e=>e&&!e.dead&&!e.arrivalInvuln&&e.hp>0&&e.x+(e.r||0)>=v.l&&e.x-(e.r||0)<=v.r&&e.y+(e.r||0)>=v.t&&e.y-(e.r||0)<=v.b).map(e=>({e,distance:Math.max(0,Math.hypot(e.x-x,e.y-y)-(e.r||0)),hit:false}));
+  const maxRadius=Math.max(1,...[[v.l,v.t],[v.r,v.t],[v.r,v.b],[v.l,v.b]].map(p=>Math.hypot(p[0]-x,p[1]-y)));
+  wave={x,y,age:0,life:.86,spread:.52,radius:0,maxRadius,targets,seed:metrics.detonations+1};
+  s.claimed=true;s.hold=0;cooldown=20;metrics.detonations++;host.kick(x,y);return true;
+ }
+ function step(dt){
+  if(!host.active()||!(dt>0))return;clock+=dt;cooldown=Math.max(0,cooldown-dt);
+  if(wave){wave.age+=dt;const p=clamp(wave.age/wave.spread,0,1);wave.radius=wave.maxRadius*(1-(1-p)**3);
+   for(const q of wave.targets)if(!q.hit&&q.distance<=wave.radius){q.hit=true;const e=q.e;if(!e.dead&&!e.arrivalInvuln&&e.hp>0){host.damage(e,wave.x,wave.y);metrics.contacts++}}
+   if(wave.age>=wave.life)wave=null;
+  }
+  const s=host.device();if(s){if(host.blocked()||s.arenaHidden)s.hold=0;else{const p=host.player();s.hold=Math.hypot(p.x-s.x,p.y-s.y)<=s.r?Math.min(3,(s.hold||0)+dt):0;if(s.hold>=3-1e-8)detonate(s)}}
+  ensure();
+ }
+ return {reset,ensure,step,detonate,wave:()=>wave,clock:()=>clock,read:()=>({...metrics,cooldown,clock,charging:host.device()?.hold||0,wave:wave?{age:wave.age,radius:wave.radius,maxRadius:wave.maxRadius,targets:wave.targets.length}:null})};
+}
+
+const redPulseImageV579=new Image(),redPulseArtV579={"path":"assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png","sha256":"4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62","bytes":1947100,"width":1254,"height":1254,"bounds":[143,38,1099,1219],"display_height":54,"alpha":true};let redPulseArtErrorV579=null,redPulseSurfaceV579=null;
+const redPulseImageReadyV579=new Promise(resolve=>{redPulseImageV579.onload=()=>{const b=redPulseArtV579.bounds,w=b[2]-b[0],h=b[3]-b[1],c=document.createElement('canvas');c.width=Math.ceil(w*256/h);c.height=256;c.getContext('2d').drawImage(redPulseImageV579,b[0],b[1],w,h,0,0,c.width,c.height);redPulseSurfaceV579=c;resolve(true)};redPulseImageV579.onerror=()=>{redPulseArtErrorV579='Red pulse device image failed to load';resolve(false)};redPulseImageV579.src=redPulseArtV579.path});
+function redPulseBlockedV579(){return !!bossArena?.active||!!stageFlowV526.result||!!stageFlowV526.closing}
+function redPulseSpawnV579(){
+ if(redPulseBlockedV579())return null;
+ const existing=worldSites.find(s=>s.type==='redPulse'&&!s.claimed);if(existing)return existing;
+ const p=player,v=cameraRect(32),phase=(worldSiteSerial%12)*Math.PI/6;
+ for(const radius of [115,150,190,230])for(let i=0;i<24;i++){
+  const a=phase+i*Math.PI/12,q={x:p.x+Math.cos(a)*radius,y:p.y+Math.sin(a)*radius};
+  if(q.x<v.l+30||q.x>v.r-30||q.y<v.t+45||q.y>v.b-45||!siteClearV422(q,24,null,90))continue;
+  if(terrainHitV418(p.x,p.y,q.x,q.y,player.r+2))continue;
+  worldSites=worldSites.filter(s=>s.type!=='redPulse');
+  const s={id:++worldSiteSerial,type:'redPulse',...q,r:24,need:3,hold:0,pulse:0,claimed:false,active:false,arenaHidden:false};worldSites.push(s);return s;
+ }return null;
+}
+const redPulseV579=createRedPulseDeviceV579({active:()=>running&&!paused&&!choosing&&!rewardChoosing&&!ended,blocked:redPulseBlockedV579,device:()=>worldSites.find(s=>s.type==='redPulse'&&!s.claimed)||null,spawn:redPulseSpawnV579,player:()=>player,view:()=>cameraRect(0),enemies:()=>enemies,
+ damage(e,x,y){const a=Math.atan2(e.y-y,e.x-x),mass=e.finalBoss?.08:e.elite?.35:1,amount=Math.max(e.finalBoss?50:110,e.maxHp*(e.finalBoss?.05:.85));e.deathA=a;e.kx=(e.kx||0)+Math.cos(a)*210*mass;e.ky=(e.ky||0)+Math.sin(a)*210*mass;delete e.arcShockV576;e.redPulseUntilV579=redPulseV579.clock()+.24;const stop=hitStop;lightningDamageBaseV576(e,amount,'fieldPulse');if(!e.finalBoss||!e.dead)hitStop=stop;e.hit=Math.max(e.hit||0,.13);e.stunned=Math.max(e.stunned||0,e.finalBoss?0:.18)},
+ kick(){if(!feedbackCfg().reducedMotion)cameraShake=Math.max(cameraShake,8);impactPulse=Math.max(impactPulse,.9);frozenFrameDrawnV438=false}
+});
+const redPulseAddSiteBaseV579=addWorldSite;addWorldSite=function(type,...args){if(!['regen','shield','redPulse'].includes(type))return null;return redPulseAddSiteBaseV579(type,...args)};
+buildWorldSites=function(){worldSites=[];worldSiteSerial=0;redPulseV579.reset();addWorldSite('regen');addWorldSite('shield');redPulseV579.ensure()};
+const redPulseCompleteBaseV579=completeWorldSite;completeWorldSite=function(s){if(s?.type==='redPulse')return redPulseV579.detonate(s);return redPulseCompleteBaseV579(s)};
+updateWorldSites=function(dt){
+ worldSiteHintCd=Math.max(0,worldSiteHintCd-dt);
+ for(const s of worldSites){if(s.type==='redPulse')continue;if(s.claimed||s.arenaHidden)continue;s.pulse+=dt*3;const full=s.type==='regen'&&player.hp>=player.maxHp,inside=Math.hypot(player.x-s.x,player.y-s.y)<=s.r;if(inside&&!full)s.hold=Math.min(s.need,s.hold+dt);else s.hold=Math.max(0,s.hold-dt*.8);if(s.hold>=s.need&&!full)completeWorldSite(s)}
+ redPulseV579.step(dt);
+};
+// Optional gene-rift field devices are disabled; stage exits and contract progression remain native.
+spawnGeneRift=function(){return false};
+const redPulseLabelBaseV579=worldSiteLabel;worldSiteLabel=function(s){return s.type==='redPulse'?'방전 장치':redPulseLabelBaseV579(s)};
+const redPulseColorBaseV579=worldSiteColor;worldSiteColor=function(s){return s.type==='redPulse'?'#ff3d32':redPulseColorBaseV579(s)};
+const redPulseSiteDrawBaseV579=drawSiteArtV422;drawSiteArtV422=function(s){
+ if(s.type!=='redPulse')return redPulseSiteDrawBaseV579(s);const q=clamp((s.hold||0)/3,0,1),near=Math.hypot(player.x-s.x,player.y-s.y)<85;
+ ctx.save();ctx.translate(s.x,s.y);ctx.fillStyle='#1e0306';ctx.globalAlpha=.5;ctx.beginPath();ctx.ellipse(0,0,26,17,0,0,TAU);ctx.fill();ctx.globalAlpha=.65+q*.3;ctx.strokeStyle='#ff483a';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(0,0,24,0,TAU);ctx.stroke();if(q){ctx.strokeStyle='#fff0bd';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,24,-Math.PI/2,-Math.PI/2+TAU*q);ctx.stroke()}
+ if(redPulseSurfaceV579){const h=54*(1+Math.sin(t*(8+q*22))*.012*q),w=h*redPulseSurfaceV579.width/redPulseSurfaceV579.height;ctx.globalAlpha=1;ctx.drawImage(redPulseSurfaceV579,-w/2,-h+6,w,h)}
+ if(near||q){ctx.globalAlpha=1;ctx.font='bold 8px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#160409';ctx.fillStyle='#ffd4bf';const label=q?'방전 충전 '+Math.ceil((3-(s.hold||0))*10)/10+'초':'3초 밟기 · 광역 방전';ctx.strokeText(label,0,39);ctx.fillText(label,0,39)}ctx.restore();
+};
+function drawRedPulseGroundV579(g){
+ const w=redPulseV579.wave();if(!w)return;const q=clamp(w.age/w.life,0,1),fade=(1-q)**.65,r=w.radius,band=32+q*70;
+ g.save();g.globalCompositeOperation='lighter';const glow=g.createRadialGradient(w.x,w.y,Math.max(0,r-band),w.x,w.y,Math.max(1,r+band));glow.addColorStop(0,'rgba(255,10,28,0)');glow.addColorStop(.42,'rgba(240,8,25,'+(.12*fade)+')');glow.addColorStop(.56,'rgba(255,36,32,'+(.4*fade)+')');glow.addColorStop(1,'rgba(255,15,20,0)');g.fillStyle=glow;g.beginPath();g.arc(w.x,w.y,r+band,0,TAU);g.fill();
+ for(const [offset,width,color,alpha] of [[0,4,'#ff332e',.85],[-11,1.5,'#ffae7a',.7],[-26,1,'#ff233a',.45]]){g.strokeStyle=color;g.globalAlpha=fade*alpha;g.lineWidth=width;g.beginPath();g.arc(w.x,w.y,Math.max(0,r+offset),0,TAU);g.stroke()}
+ g.globalAlpha=fade*.9;g.strokeStyle='#ffb18b';g.lineWidth=1.2;g.beginPath();for(let i=0;i<=112;i++){const a=i/112*TAU,rr=r+Math.sin(i*17.7+w.seed*3)*9*Math.sin(q*Math.PI),x=w.x+Math.cos(a)*rr,y=w.y+Math.sin(a)*rr;i?g.lineTo(x,y):g.moveTo(x,y)}g.stroke();g.restore();
+}
+function drawRedPulseTopV579(g){const w=redPulseV579.wave();if(!w)return;g.save();g.globalCompositeOperation='lighter';if(w.age<.2){const p=w.age/.2,rr=25+p*70;g.globalAlpha=(1-p)*.85;const glow=g.createRadialGradient(w.x,w.y,0,w.x,w.y,rr);glow.addColorStop(0,'#fff4bd');glow.addColorStop(.2,'#ff7849');glow.addColorStop(1,'rgba(255,8,27,0)');g.fillStyle=glow;g.fillRect(w.x-rr,w.y-rr,rr*2,rr*2)}g.restore()}
+const redPulseHomeBaseV579=returnToHome;returnToHome=function(...args){redPulseV579.reset();return redPulseHomeBaseV579(...args)};
+window.__EVOLVE_RED_PULSE_V579__={ready:redPulseImageReadyV579,read:()=>({...redPulseV579.read(),artReady:!!redPulseSurfaceV579,artError:redPulseArtErrorV579,sites:worldSites.filter(s=>!s.claimed).map(s=>({type:s.type,x:s.x,y:s.y,hold:s.hold,hidden:!!s.arenaHidden})),holdSeconds:3,respawnSeconds:20})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_RED_PULSE_V579__.test={step:dt=>updateWorldSites(dt),reset:()=>buildWorldSites(),device:()=>worldSites.find(s=>s.type==='redPulse'&&!s.claimed),wave:()=>redPulseV579.wave(),ensure:()=>redPulseV579.ensure(),view:()=>cameraRect(0),drawGround:drawRedPulseGroundV579,drawTop:drawRedPulseTopV579};
+
+// WEB-12: a map-centered boss encounter, with all combat bodies confined to its fence.
+function centeredArenaLayoutV579(width,worldWidth,worldHeight){const side=Math.min(width*2,worldWidth-32,worldHeight-32),x=worldWidth/2,y=worldHeight/2;return {l:x-side/2,r:x+side/2,t:y-side/2,b:y+side/2,x,y,side}}
+function centeredArenaEdgesV579(a,r=10){const p=(a.half||12)+r+18,points=[];for(let edge=0;edge<4;edge++)for(let i=0;i<24;i++){const u=(i+.5)/24;points.push({x:edge===1?a.r-p:edge===3?a.l+p:a.l+p+u*(a.r-a.l-p*2),y:edge===0?a.t+p:edge===2?a.b-p:a.t+p+u*(a.b-a.t-p*2)})}return points}
+function placePlayerNearArenaCenterV579(){
+ const a=bossArena;if(!a?.v526)return;const d=Math.min(115,a.side*.22),candidates=[];
+ for(const radius of [d,d*.7,d*1.25,40,0])for(let i=0;i<16;i++){const angle=Math.PI/2+i*TAU/16;candidates.push({x:a.x+Math.cos(angle)*radius,y:a.y+Math.sin(angle)*radius})}
+ const q=candidates.find(p=>terrainBodyClearV505(p,player.r+2))||{x:a.x,y:a.y+d};player.x=q.x;player.y=q.y;player.vx=player.vy=player.kx=player.ky=0;player.inv=Math.max(player.inv,2);joy.active=false;joy.dx=joy.dy=0;for(const k of Object.keys(keys))keys[k]=false;constrainArenaV526(player,player.r);
+}
+const arenaPrepareBaseV579=prepareBossArena;prepareBossArena=function(...args){const out=arenaPrepareBaseV579(...args);placePlayerNearArenaCenterV579();return out};
+const arenaEntryBaseV579=bossEntryPlan;bossEntryPlan=function(...args){const a=bossArena;if(a?.v526&&a.active)return {side:'CENTER',x:a.x,y:a.y,tx:a.x,ty:a.y};return arenaEntryBaseV579(...args)};
+const arenaArrivalBaseV579=stageMajorArrival;stageMajorArrival=function(e,...args){const out=arenaArrivalBaseV579(e,...args);if(e?.finalBoss&&bossArena?.active){e.x=e.arrivalStartX=e.arrivalTargetX=WORLD_W/2;e.y=e.arrivalStartY=e.arrivalTargetY=WORLD_H/2;e.vx=e.vy=e.kx=e.ky=0;}return out};
+let arenaEdgeSerialV579=0;
+function placeArenaAddV579(e){const a=bossArena;if(!a?.v526||!a.active||!e||e.dead||e.finalBoss)return false;const points=centeredArenaEdgesV579(a,e.r),offset=arenaEdgeSerialV579++%points.length;
+ for(let i=0;i<points.length;i++){const p=points[(offset+i*29)%points.length];if(!terrainBodyClearV505(p,e.r+1)||enemies.some(q=>q!==e&&!q.dead&&Math.hypot(q.x-p.x,q.y-p.y)<e.r+(q.r||8)+5))continue;e.x=p.x;e.y=p.y;e.vx=e.vy=e.kx=e.ky=0;e.bossArenaBornV579=true;e.mapDoorSpawnV562=true;e.farLife=0;constrainArenaV526(e,e.r);return true;}e.dead=true;e.despawnedV579=true;return false;
+}
+const arenaSpawnBaseV579=spawnEnemy;spawnEnemy=function(...args){const e=arenaSpawnBaseV579(...args);if(e&&!e.dead&&bossArena?.active){if(e.finalBoss){e.x=WORLD_W/2;e.y=WORLD_H/2;}else if(!e.venomAddV553)placeArenaAddV579(e);else e.bossArenaBornV579=true;}return e};
+const arenaMoveBaseV579=moveTerrainBodyV418;moveTerrainBodyV418=function(o,...args){const out=arenaMoveBaseV579(o,...args);if(o===player||o?.type&&Number.isFinite(o.hp))constrainArenaV526(o,o.r||args[2]||10);return out};
+const arenaResolveBaseV579=resolveTerrainBody;resolveTerrainBody=function(o,...args){const out=arenaResolveBaseV579(o,...args);if(o===player||o?.type&&Number.isFinite(o.hp))constrainArenaV526(o,o.r||args[0]||10);return out};
+const arenaUpdateBaseV579=update;update=function(...args){const out=arenaUpdateBaseV579(...args);if(bossArena?.v526&&bossArena.active){for(const e of enemies)if(!e.dead){if(e.finalBoss&&e.arrivalInvuln){e.x=e.arrivalStartX=e.arrivalTargetX=WORLD_W/2;e.y=e.arrivalStartY=e.arrivalTargetY=WORLD_H/2;}constrainArenaV526(e,e.r)}constrainArenaV526(player,player.r)}return out};
+window.__EVOLVE_CENTERED_ARENA_V579__={read:()=>({mapCenter:{x:WORLD_W/2,y:WORLD_H/2},arena:bossArena?.v526?{x:bossArena.x,y:bossArena.y,l:bossArena.l,r:bossArena.r,t:bossArena.t,b:bossArena.b,half:bossArena.half}:null})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_CENTERED_ARENA_V579__.test={prepare:()=>prepareBossArena(),edges:r=>centeredArenaEdgesV579(bossArena,r),spawn:()=>spawnEnemy('crawler'),clamp:(e,r)=>constrainArenaV526(e,r),restore:()=>restoreBossArena(),layout:centeredArenaLayoutV579};
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

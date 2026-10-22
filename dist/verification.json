@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
+  "version": "V575-WEB-12-RED-PULSE",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272766,
-  "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
-  "image_assets": 981,
-  "cached_files": 1008,
-  "cached_bytes": 335776620,
+  "index_bytes": 272754,
+  "build": "bf3b4125a37e4bcfd21e0793492abad672307dd65ad58a0bee31e3cea84474bd",
+  "image_assets": 982,
+  "cached_files": 1009,
+  "cached_bytes": 337737354,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -267,6 +267,43 @@
     "combat_balance_changed": false,
     "save_keys_unchanged": true,
     "audio_changed": false,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "red_pulse_device": {
+    "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
+    "engine": "assets/2709383d8e7663fe72d868e9ae837c46a21e81416a3210c8902717e7ce6d1c98.js",
+    "art": {
+      "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
+      "sha256": "4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62",
+      "bytes": 1947100,
+      "width": 1254,
+      "height": 1254,
+      "bounds": [
+        143,
+        38,
+        1099,
+        1219
+      ],
+      "display_height": 54,
+      "alpha": true
+    },
+    "hold_seconds": 3,
+    "respawn_seconds": 20,
+    "allowed_sites": [
+      "regen",
+      "shield",
+      "redPulse"
+    ],
+    "one_active_device": true,
+    "screen_snapshot_damage": true,
+    "wavefront_damage_once": true,
+    "original_images_preserved": 981,
+    "original_image_bytes_unchanged": true,
+    "boss_map_center": true,
+    "player_teleport_near_center": true,
+    "boss_reinforcements_inner_edge": true,
+    "all_combat_bodies_confined": true,
+    "maps_and_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }
