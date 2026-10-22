@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-10-MONSTER-MOTION",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "baseline_backup": "backup/web10-before-legacy-motion-20261022",
-  "progress": 30,
-  "status": "Two transparent atlases generated and inspected; all 24 painted poses located",
+  "progress": 40,
+  "status": "Six original appearance frame sets connected with stable per-type canvas and foot anchors",
   "types": [
     "warden",
     "symbiote",
@@ -16,7 +16,7 @@
   ],
   "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
   "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
-  "next": "Normalize sprite anchors without modifying atlas bytes; integrate all 10 appearance frame sets",
+  "next": "Package WEB-11 and verify every appearance on GPU and Canvas",
   "physical_Galaxy_S23_plus_tested": false,
   "atlases": [
     {
@@ -37,5 +37,7 @@
       "height": 1086,
       "alpha": true
     }
-  ]
+  ],
+  "source": "web/monster-motion-v578.js",
+  "atlas_metadata": "web/monster-atlas-v578.json"
 }
