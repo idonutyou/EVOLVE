@@ -1,11 +1,11 @@
 {
   "task": "EVOLVE main game monster animation integration",
-  "status": "WEB-11 passed automated and visual checks on online-v575; WEB-10 remains live until deployment succeeds",
-  "progress": 70,
+  "status": "WEB-11 source published to main; waiting for GitHub Pages validation and deployment",
+  "progress": 80,
   "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
-  "deployed_source_commit": "a07d6aaf6b611651163910482805773a0216bada",
+  "deployed_source_commit": "89f7df0c0a16ba5d3f9ed4b42b2b52edeb7d85cd",
   "deployment_run": 39719592942,
   "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39719592942",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
@@ -63,7 +63,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Advance main only after reviewing the exact file changes, then confirm GitHub Pages deployment and live build",
+  "next": "Confirm the deployment run succeeds and the live version matches WEB-11",
   "legacy_atlases": [
     {
       "name": "A",

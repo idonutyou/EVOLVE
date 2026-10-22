@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-10-MONSTER-MOTION",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "baseline_backup": "backup/web10-before-legacy-motion-20261022",
-  "progress": 70,
-  "status": "Full browser suite and visual pose review passed; ready to publish WEB-11",
+  "progress": 80,
+  "status": "WEB-11 source published to main; waiting for GitHub Pages validation and deployment",
   "types": [
     "warden",
     "symbiote",
@@ -16,7 +16,7 @@
   ],
   "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
   "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
-  "next": "Advance main only after reviewing the exact file changes, then confirm GitHub Pages deployment and live build",
+  "next": "Confirm the deployment run succeeds and the live version matches WEB-11",
   "physical_Galaxy_S23_plus_tested": false,
   "atlases": [
     {
@@ -80,5 +80,6 @@
     "state_tests": 7,
     "lightning_tests": 7,
     "web_update_tests": 1
-  }
+  },
+  "deployed_source_commit": "89f7df0c0a16ba5d3f9ed4b42b2b52edeb7d85cd"
 }
