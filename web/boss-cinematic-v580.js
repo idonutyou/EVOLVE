@@ -1,4 +1,4 @@
-// WEB-13: dedicated front-facing boss poses, used only during the existing warning.
+// WEB-13 poses with WEB-14 painted warning branding.
 function cinematicPoseV580(elapsed,reduced=false){
  const time=Math.max(0,Math.min(3,elapsed)),segment=.72,frame=reduced?0:Math.min(3,Math.floor(time/segment));
  const blend=reduced||frame===3?0:Math.max(0,Math.min(1,(time-frame*segment-.56)/.16));
@@ -14,7 +14,7 @@ const cinematicReadyV580=Promise.all(Object.entries(cinematicArtV580).map(async(
  cinematicFramesV580.set(kind,frames);im.src='';
 })).catch(error=>{cinematicErrorV580=String(error);throw error});
 const cinematicStyleV580=document.createElement('style');cinematicStyleV580.textContent=`
-#bossWarningV526[data-cinematic-v580]{position:fixed;inset:0;z-index:100000;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;font-family:Impact,'Arial Narrow',sans-serif;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
+#bossWarningV526[data-cinematic-v580]{position:fixed;inset:0;z-index:100000;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
 #bossWarningV526[data-cinematic-v580][hidden]{display:none!important}
 #bossWarningV526[data-cinematic-v580][data-kind=venom]{--cine-color:#d6f36b;--cine-light:#76b644}
 .cineBackdropV580{position:absolute;inset:-8%;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--cine-color) 18%,#131c20),transparent 55%),radial-gradient(ellipse at 50% 78%,#26070c,#070b10 70%)}
@@ -22,25 +22,18 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineArtV580{position:absolute;inset:0;width:100%;height:100%;display:block}
 .cineShadeV580{position:absolute;inset:0;background:linear-gradient(#03050caa,transparent 20% 48%,#07070b66 64%,#07070bf2 100%),radial-gradient(ellipse at 50% 40%,transparent 22%,#0005 70%,#000a 100%);box-shadow:inset 0 0 70px #0008}
 .cineFlareV580{position:absolute;inset:0;background:#ffb28a;opacity:var(--cine-flare);pointer-events:none}
-.cineTopV580{position:absolute;left:7%;right:7%;top:max(5%,env(safe-area-inset-top));display:flex;align-items:flex-start;justify-content:space-between;gap:12px;letter-spacing:.22em;font:700 9px/1.7 monospace;color:#c9c7c8;text-shadow:0 2px 6px #000}
-.cineTopV580 b{display:block;color:#ff604b;font-size:11px;letter-spacing:.24em}.cineCountV580{font:900 38px/.9 Impact,sans-serif;color:#ff705a;min-width:1ch;text-align:right}
-.cineCaptionV580{position:absolute;left:8%;bottom:38%;font:700 10px/1.5 monospace;letter-spacing:.2em;text-shadow:0 2px 7px #000;color:#e9d4cf}
 .cineTapeV580{position:absolute;left:-2%;right:-2%;top:65%;height:43px;transform:rotate(-2deg);border-top:7px solid transparent;border-bottom:7px solid transparent;border-image:repeating-linear-gradient(125deg,#ff5c42 0 9px,#230c0c 9px 17px) 7;background:linear-gradient(#b41c20b8,#dc3d28d9);box-shadow:0 0 25px #e42b2670,inset 0 0 12px #ff8c3f66;display:flex;align-items:center;justify-content:center}
-.cineTapeTextV580{white-space:nowrap;word-spacing:30px;font:900 21px/1 Impact,sans-serif;letter-spacing:.06em;color:#ff8b64;text-shadow:1px 1px #65151b;transform:translateX(var(--cine-tape,0px))}
-.cineSealV580{position:absolute;left:50%;top:50%;height:66px;width:66px;transform:translate(-50%,-50%) rotate(45deg);background:#51151de8;border:2px solid #ff654f;box-shadow:0 0 19px #ff3b3266,inset 0 0 19px #ff3b3244;display:grid;place-items:center}
-.cineSealV580 svg{height:49px;width:49px;transform:rotate(-45deg);fill:#ff654f;filter:drop-shadow(0 0 5px #ff603b66)}
-.cineNameV580{position:absolute;left:4%;right:4%;top:76%;text-align:center;white-space:nowrap;transform:skew(-8deg);font:900 clamp(38px,11vw,76px)/.95 Impact,'Arial Narrow',sans-serif;letter-spacing:.015em;color:#eee7e3;text-shadow:3px 3px #8b211f,0 0 26px #ff482e66}
-.cineNameV580 small{display:block;transform:skew(8deg);margin:14px 0 0;font:700 10px/1.4 monospace;letter-spacing:.3em;color:#df9c8e;text-shadow:0 1px 3px #000}
+.cineOverlayV581{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.cineNameV580[hidden]{display:none!important}
 .cineBottomV580{position:absolute;left:9%;right:9%;bottom:max(5%,env(safe-area-inset-bottom));height:2px;background:#ffffff1c}.cineBottomV580 i{height:100%;display:block;background:#ff614a;width:var(--cine-remaining,100%);box-shadow:0 0 9px #fb5537}
-.cineTopV580,.cineCaptionV580,.cineNameV580 small{font-family:monospace,'EVOLVE Hangul',sans-serif}
-@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineCaptionV580{bottom:39%;font-size:10px}.cineTopV580{top:5%}.cineNameV580{top:77%;font-size:clamp(32px,5.6vw,60px)}.cineNameV580 small{margin-top:8px}.cineBottomV580{bottom:3%}.cineSealV580{height:61px;width:61px}}
+@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineBottomV580{bottom:3%}}
 `;document.head.appendChild(cinematicStyleV580);
 const cinematicLegacyEnsureV580=ensureBossWarningV526,cinematicLegacyWarningV580=warningTestV550;
 ensureBossWarningV526=function(){
  if(bossWarningNodeV526?.dataset.cinematicV580)return bossWarningNodeV526;
  bossWarningNodeV526?.remove();const el=document.createElement('div');el.id='bossWarningV526';el.hidden=true;el.dataset.cinematicV580='1';el.dataset.i18nIgnore='';el.setAttribute('role','status');el.setAttribute('aria-label','Boss incoming');
- el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTopV580"><div><b>CONTAINMENT BREACH</b><span class="cinePhaseV580"></span></div><span class="cineCountV580" aria-hidden="true">3</span></div><div class="cineCaptionV580"></div><div class="cineTapeV580"><div class="cineTapeTextV580" aria-hidden="true">WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING</div><div class="cineSealV580" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 8 23 17 32 14 41 17 52 8 48 28Q56 35 49 47L41 51 38 59H26L23 51 15 47Q8 35 16 28ZM21 32 18 39 27 42 28 35ZM43 32 36 35 37 42 46 39ZM32 42 28 48H36ZM27 51V56H30V51ZM34 51V56H37V51Z" fill-rule="evenodd"/></svg></div></div><div class="cineNameV580"><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
- document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('canvas');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});return el;
+ el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTapeV580" aria-hidden="true"></div><canvas class="cineOverlayV581" aria-hidden="true"></canvas><div class="cineNameV580" hidden><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
+ document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('.cineArtV580');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});warningBrandCanvasV581=el.querySelector('.cineOverlayV581');warningBrandContextV581=warningBrandCanvasV581.getContext('2d',{alpha:true});return el;
 };
 function paintCinematicV580(elapsed,reduced){
  const c=cinematicCanvasV580,g=cinematicContextV580,frames=cinematicFramesV580.get(cinematicStateV580.kind);if(!c||!g||!frames)return;
@@ -58,9 +51,9 @@ setBossWarningV526=function(on){
  const spec=stageSpecV526(),kind=spec.bossKind==='venom'?'venom':'bio',elapsed=clamp(t-297,0,3),cfg=feedbackCfg(),reduced=!!cfg.reducedMotion,ko=homeLanguageV522()==='ko';
  if(!cinematicStateV580.active||cinematicStateV580.kind!==kind){cinematicStateV580.serial++;cinematicClearInputV580();}
  Object.assign(cinematicStateV580,{active:true,kind,elapsed,reduced});el.dataset.kind=kind;el.setAttribute('aria-label',(kind==='venom'?'VENOM TITAN':'BIO TITAN')+(ko?' 보스 출현':' incoming'));
- el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';el.querySelector('.cinePhaseV580').textContent='PHASE '+spec.phase+' / '+(ko?'봉쇄 경보':'LOCKDOWN ALERT');el.querySelector('.cineCaptionV580').textContent=ko?'중앙 구역 · 생체 반응 급증':'CENTRAL SECTOR · MASSIVE BIO-SIGNATURE';
- const pose=cinematicPoseV580(elapsed,reduced);el.querySelector('.cineCountV580').textContent=String(pose.count);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-tape',String(reduced?0:-elapsed*27)+'px');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
- player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);
+ el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';
+ const pose=cinematicPoseV580(elapsed,reduced);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
+ player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);paintWarningBrandV581(elapsed,reduced,kind,spec.phase);
 };
 // Legacy boss shortcuts have their own warning clock; route BIO/VENOM into the same film.
 warningTestV550=function(){
