@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-13-BOSS-CINEMATIC",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
   "baseline_backup": "backup/web13-before-painted-warning-20261022",
-  "progress": 70,
-  "status": "Final source and asset review passed; ready to publish",
+  "progress": 80,
+  "status": "Publishing verified WEB-14 source; awaiting GitHub checks and Pages deployment",
   "references": [
     "1000027470.jpg",
     "1000027468.jpg"
@@ -183,7 +183,8 @@
     "30": "72e746447d9aad34c06cc0302b77cb2b7d44ec7b",
     "40": "5b9800c419406dae040286160d1f29748fed6e27",
     "50": "1d8b8ae0574662008e685357b76ed97b1166d568",
-    "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7"
+    "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7",
+    "70": "4d3c809fd8ab90bfeee4114e87eaaf2fc3a7d58c"
   },
   "release_backup": "backup/web14-painted-warning-20261023"
 }

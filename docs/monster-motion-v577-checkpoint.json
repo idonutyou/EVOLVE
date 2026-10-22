@@ -1,7 +1,7 @@
 {
   "task": "Painted cinematic lettering and emblem; remove obsolete boss HUD fallback",
-  "status": "Final source and asset review passed; ready to publish",
-  "progress": 70,
+  "status": "Publishing verified WEB-14 source; awaiting GitHub checks and Pages deployment",
+  "progress": 80,
   "version": "V575-WEB-14-PAINTED-WARNING",
   "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
@@ -149,6 +149,7 @@
     "30": "72e746447d9aad34c06cc0302b77cb2b7d44ec7b",
     "40": "5b9800c419406dae040286160d1f29748fed6e27",
     "50": "1d8b8ae0574662008e685357b76ed97b1166d568",
-    "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7"
+    "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7",
+    "70": "4d3c809fd8ab90bfeee4114e87eaaf2fc3a7d58c"
   }
 }
