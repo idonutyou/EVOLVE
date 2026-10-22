@@ -4,13 +4,37 @@
   "baseline_version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
   "baseline_backup": "backup/web11-before-red-pulse-20261022",
-  "progress": 10,
-  "status": "Existing field-site and combat paths inspected; device art and runtime implementation starting",
+  "progress": 20,
+  "status": "Transparent red discharge device generated from supplied reference",
   "source": "web/red-pulse-v579.js",
   "reference": "1000026947.png",
-  "allowed_field_sites": ["regen", "shield", "redPulse"],
-  "design": {"continuous_hold_seconds": 3, "maximum_active_devices": 1, "respawn_seconds": 20, "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"},
+  "allowed_field_sites": [
+    "regen",
+    "shield",
+    "redPulse"
+  ],
+  "design": {
+    "continuous_hold_seconds": 3,
+    "maximum_active_devices": 1,
+    "respawn_seconds": 20,
+    "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"
+  },
   "preservation": "Retain original images, all approved map and collision data, monster motions, stage exits, boss rules, XP progression and save keys. The new field device is an explicitly authorized additional damage source.",
-  "next": "Generate transparent device art, implement charge and expanding wave, then verify damage and safe spawning in the actual campaign",
-  "physical_Galaxy_S23_plus_tested": false
+  "next": "Implement continuous charging, visible-enemy wave damage, single-device respawn and allowed site filter",
+  "physical_Galaxy_S23_plus_tested": false,
+  "art": {
+    "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
+    "sha256": "4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62",
+    "bytes": 1947100,
+    "width": 1254,
+    "height": 1254,
+    "bounds": [
+      143,
+      38,
+      1099,
+      1219
+    ],
+    "display_height": 54,
+    "alpha": true
+  }
 }
