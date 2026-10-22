@@ -78,6 +78,7 @@ jobs:
           node --test tests/web_client.test.cjs
           node tests/campaign_lightning.test.cjs
           node tests/monster_motion.test.cjs
+          node tests/red_pulse.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
@@ -90,7 +91,9 @@ jobs:
           echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
       - name: Verify mobile boot, maps, controls, saves and safe updates
         timeout-minutes: 10
-        run: node tests/browser_smoke.cjs
+        run: |
+          node tests/browser_smoke.cjs
+          node tests/red_pulse_browser.cjs
       - name: Retain browser evidence
         if: always()
         uses: actions/upload-artifact@v4
