@@ -1,8 +1,8 @@
 {
   "bio": {
-    "path": "assets/e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688.png",
-    "sha256": "e3dc2ad5408eb1c928f91c1f1311911303bc8c3c668d9c0cb6a114434a672688",
-    "bytes": 3050780,
+    "path": "assets/455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe.png",
+    "sha256": "455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe",
+    "bytes": 2659766,
     "width": 1254,
     "height": 1254,
     "crop": [
@@ -11,13 +11,40 @@
       627,
       627
     ],
+    "frames": 4,
+    "frame_bounds": [
+      [
+        0,
+        0,
+        627,
+        627
+      ],
+      [
+        0,
+        39,
+        613,
+        627
+      ],
+      [
+        0,
+        0,
+        627,
+        627
+      ],
+      [
+        0,
+        0,
+        614,
+        627
+      ]
+    ],
     "alpha": true,
-    "draft": true
+    "draft": false
   },
   "venom": {
-    "path": "assets/cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862.png",
-    "sha256": "cafd108a1909733b15a2a7ae9e167e4ad3282724ce34e3b13acf5be0ad0ac862",
-    "bytes": 3431658,
+    "path": "assets/0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7.png",
+    "sha256": "0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7",
+    "bytes": 3425959,
     "width": 1254,
     "height": 1254,
     "crop": [
@@ -26,7 +53,34 @@
       627,
       627
     ],
+    "frames": 4,
+    "frame_bounds": [
+      [
+        0,
+        16,
+        627,
+        627
+      ],
+      [
+        0,
+        13,
+        627,
+        627
+      ],
+      [
+        0,
+        0,
+        627,
+        627
+      ],
+      [
+        0,
+        0,
+        627,
+        627
+      ]
+    ],
     "alpha": true,
-    "draft": true
+    "draft": false
   }
 }
