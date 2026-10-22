@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-12-RED-PULSE",
+  "version": "V575-WEB-13-BOSS-CINEMATIC",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272754,
-  "build": "f736e4612d92855b1fbf4a50a2584062132cc90f1eb7c7f7722c9cba06ecc491",
-  "image_assets": 982,
-  "cached_files": 1009,
-  "cached_bytes": 337737305,
+  "index_bytes": 272759,
+  "build": "b68655bc49917db792cbdfbd5e67c125e4198ac7d96f4c426e6c16b6f0851c94",
+  "image_assets": 984,
+  "cached_files": 1011,
+  "cached_bytes": 343834350,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -159,7 +159,7 @@
     "regression": "Browser tests click the default-map and apply buttons and compare full collision-field SHA-256 before and after"
   },
   "underpass_editor": {
-    "button": "\uc544\ub798 \ud1b5\uacfc",
+    "button": "아래 통과",
     "stroke_mode": "under",
     "collision": "open",
     "foreground": "cached original map crop, masked by painted region; visible-area culling",
@@ -304,6 +304,106 @@
     "boss_reinforcements_inner_edge": true,
     "all_combat_bodies_confined": true,
     "maps_and_save_keys_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "boss_cinematic": {
+    "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
+    "engine": "assets/bae53774321b9edb9302ae40fd776f5f0e8cf977e5b0c1ef74ef34fe6eb76889.js",
+    "art": {
+      "bio": {
+        "path": "assets/455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe.png",
+        "sha256": "455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe",
+        "bytes": 2659766,
+        "width": 1254,
+        "height": 1254,
+        "crop": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "frames": 4,
+        "frame_bounds": [
+          [
+            0,
+            0,
+            627,
+            627
+          ],
+          [
+            0,
+            39,
+            613,
+            627
+          ],
+          [
+            0,
+            0,
+            627,
+            627
+          ],
+          [
+            0,
+            0,
+            614,
+            627
+          ]
+        ],
+        "alpha": true,
+        "draft": false
+      },
+      "venom": {
+        "path": "assets/0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7.png",
+        "sha256": "0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7",
+        "bytes": 3425959,
+        "width": 1254,
+        "height": 1254,
+        "crop": [
+          0,
+          0,
+          627,
+          627
+        ],
+        "frames": 4,
+        "frame_bounds": [
+          [
+            0,
+            16,
+            627,
+            627
+          ],
+          [
+            0,
+            13,
+            627,
+            627
+          ],
+          [
+            0,
+            0,
+            627,
+            627
+          ],
+          [
+            0,
+            0,
+            627,
+            627
+          ]
+        ],
+        "alpha": true,
+        "draft": false
+      }
+    },
+    "warning_seconds": 3,
+    "new_painted_poses": 8,
+    "frontal_camera": true,
+    "predecoded_frame_canvases": true,
+    "per_frame_image_processing": false,
+    "preserved_original_images": 982,
+    "original_image_bytes_unchanged": true,
+    "red_device_and_centered_arena_preserved": true,
+    "combat_stats_and_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

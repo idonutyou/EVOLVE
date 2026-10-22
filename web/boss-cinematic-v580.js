@@ -49,16 +49,17 @@ function paintCinematicV580(elapsed,reduced){
  g.globalAlpha=1;g.drawImage(source,x,y,dw,dh);if(pose.blend>0){g.globalAlpha=pose.blend;g.drawImage(frames[pose.next],x,y,dw,dh);}g.globalAlpha=1;
  cinematicStateV580.frame=pose.frame;cinematicStateV580.draws++;
 }
+function cinematicClearInputV580(){joy.active=false;joy.dx=joy.dy=0;for(const key of Object.keys(keys))keys[key]=false;}
 setBossWarningV526=function(on){
  const el=on?ensureBossWarningV526():bossWarningNodeV526;if(!el)return;el.hidden=!on;stageFlowV526.warningActive=!!on;
  if(!on){cinematicStateV580.active=false;return;}
  const spec=stageSpecV526(),kind=spec.bossKind==='venom'?'venom':'bio',elapsed=clamp(t-297,0,3),cfg=feedbackCfg(),reduced=!!cfg.reducedMotion,ko=homeLanguageV522()==='ko';
- if(!cinematicStateV580.active||cinematicStateV580.kind!==kind){cinematicStateV580.serial++;clearInput();}
+ if(!cinematicStateV580.active||cinematicStateV580.kind!==kind){cinematicStateV580.serial++;cinematicClearInputV580();}
  Object.assign(cinematicStateV580,{active:true,kind,elapsed,reduced});el.dataset.kind=kind;el.setAttribute('aria-label',(kind==='venom'?'VENOM TITAN':'BIO TITAN')+(ko?' 보스 출현':' incoming'));
  el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';el.querySelector('.cinePhaseV580').textContent='PHASE '+spec.phase+' / '+(ko?'봉쇄 경보':'LOCKDOWN ALERT');el.querySelector('.cineCaptionV580').textContent=ko?'중앙 구역 · 생체 반응 급증':'CENTRAL SECTOR · MASSIVE BIO-SIGNATURE';
  const pose=cinematicPoseV580(elapsed,reduced);el.querySelector('.cineCountV580').textContent=String(pose.count);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-tape',String(reduced?0:-elapsed*27)+'px');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
  player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);
 };
-const cinematicUpdateBaseV580=update;update=function(dt,...args){if(cinematicStateV580.active&&running&&!paused&&!ended&&!choosing&&!rewardChoosing){clearInput();player.inv=Math.max(player.inv,Math.max(0,dt)+.18);}return cinematicUpdateBaseV580(dt,...args)};
+const cinematicUpdateBaseV580=update;update=function(dt,...args){if(cinematicStateV580.active&&running&&!paused&&!ended&&!choosing&&!rewardChoosing){cinematicClearInputV580();player.inv=Math.max(player.inv,Math.max(0,dt)+.18);}return cinematicUpdateBaseV580(dt,...args)};
 window.__EVOLVE_CINEMATIC_V580__={ready:cinematicReadyV580,read:()=>({...cinematicStateV580,ready:cinematicFramesV580.size===2,error:cinematicErrorV580,frameCounts:Object.fromEntries([...cinematicFramesV580].map(([k,v])=>[k,v.length])),visible:!!bossWarningNodeV526&&!bossWarningNodeV526.hidden})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_CINEMATIC_V580__.test={pose:cinematicPoseV580,surface:(kind,frame)=>cinematicFramesV580.get(kind)?.[frame],paint:(elapsed,reduced=false)=>paintCinematicV580(elapsed,reduced),show:(kind,elapsed)=>{const clock=t,old=stageSpecV526;try{t=297+elapsed;stageSpecV526=()=>({...old(),bossKind:kind});setBossWarningV526(true);}finally{t=clock;stageSpecV526=old;}},hide:()=>setBossWarningV526(false)};

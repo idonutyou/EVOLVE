@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 30,
-  "status": "Eight cinematic poses finalized with frontal camera; warning playback and bounded timeline implemented",
+  "progress": 40,
+  "status": "WEB-13 packaged for cinematic integration tests",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,7 +24,7 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Package only the new cinematic presentation over WEB-12 and run integration checks",
+  "next": "Verify cinematic playback, controls, pause/resume, scheduled boss entry and WEB-12 regression",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "bio": {
@@ -113,5 +113,7 @@
     }
   },
   "source": "web/boss-cinematic-v580.js",
-  "prompts": "docs/boss-cinematic-v580-image-prompts.json"
+  "prompts": "docs/boss-cinematic-v580-image-prompts.json",
+  "build": "b68655bc49917db792cbdfbd5e67c125e4198ac7d96f4c426e6c16b6f0851c94",
+  "engine": "dist/assets/bae53774321b9edb9302ae40fd776f5f0e8cf977e5b0c1ef74ef34fe6eb76889.js"
 }
