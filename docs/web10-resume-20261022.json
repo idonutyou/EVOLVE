@@ -1,8 +1,8 @@
 {
   "task": "Resume EVOLVE from deployed WEB-10",
   "session_date_kst": "2026-10-22",
-  "progress": 50,
-  "status": "Source state checks passed; deployment verification in progress",
+  "progress": 80,
+  "status": "WEB-10 source, automated state tests, live version and prior deployment verified",
   "baseline_commit": "a3484f8b6b82a9f30f2ae869496eca9a0c8d8719",
   "version": "V575-WEB-10-MONSTER-MOTION",
   "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
@@ -22,6 +22,20 @@
     ]
   },
   "game_changes": [],
-  "next": "Verify version and deployment; retain WEB-10 and wait for new user play feedback.",
-  "physical_Galaxy_S23_plus_tested": false
+  "next": "Collect user's new feedback on deployed WEB-10 before deciding any gameplay or animation changes.",
+  "physical_Galaxy_S23_plus_tested": false,
+  "live_version": {
+    "url": "https://idonutyou.github.io/EVOLVE/version.json",
+    "http_status": 200,
+    "version": "V575-WEB-10-MONSTER-MOTION",
+    "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0"
+  },
+  "deployment": {
+    "run": 39719592942,
+    "source_commit": "a07d6aaf6b611651163910482805773a0216bada",
+    "conclusion": "success",
+    "prior_mobile_browser_verification": "success",
+    "rerun_in_this_session": false
+  },
+  "preservation": "No game, images, maps, balance, audio or save-key edits in this resume session."
 }
