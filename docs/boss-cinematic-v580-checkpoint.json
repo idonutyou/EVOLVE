@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 40,
-  "status": "WEB-13 packaged for cinematic integration tests",
+  "progress": 50,
+  "status": "BIO/VENOM cinematic playback passes in portrait and landscape, including pause/resume and centered boss entry",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,7 +24,7 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Verify cinematic playback, controls, pause/resume, scheduled boss entry and WEB-12 regression",
+  "next": "Verify WEB-12 gameplay, maps, red pulse, monster motion, saves and update flow",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "bio": {
@@ -114,6 +114,20 @@
   },
   "source": "web/boss-cinematic-v580.js",
   "prompts": "docs/boss-cinematic-v580-image-prompts.json",
-  "build": "b68655bc49917db792cbdfbd5e67c125e4198ac7d96f4c426e6c16b6f0851c94",
-  "engine": "dist/assets/bae53774321b9edb9302ae40fd776f5f0e8cf977e5b0c1ef74ef34fe6eb76889.js"
+  "build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
+  "engine": "dist/assets/f39066dd396f9942feb3906774df85e10ce27b244aaeb7c29802866d44eed5fd.js",
+  "verification": {
+    "cinematic_state_checks": 5,
+    "painted_poses_distinct": 8,
+    "portrait_and_landscape": "passed",
+    "pause_resume": "passed",
+    "warning_input_locked": "passed",
+    "warning_player_protected": "passed",
+    "scheduled_BIO_entry": "passed",
+    "scheduled_VENOM_entry": "passed",
+    "boss_center_and_player_teleport": "passed",
+    "browser_errors": [],
+    "failed_requests": [],
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }

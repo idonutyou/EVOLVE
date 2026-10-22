@@ -12453,7 +12453,7 @@ const cinematicReadyV580=Promise.all(Object.entries(cinematicArtV580).map(async(
  cinematicFramesV580.set(kind,frames);im.src='';
 })).catch(error=>{cinematicErrorV580=String(error);throw error});
 const cinematicStyleV580=document.createElement('style');cinematicStyleV580.textContent=`
-#bossWarningV526[data-cinematic-v580]{position:absolute;inset:0;z-index:1100;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;font-family:Impact,'Arial Narrow',sans-serif;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
+#bossWarningV526[data-cinematic-v580]{position:fixed;inset:0;z-index:100000;overflow:hidden;isolation:isolate;display:block;pointer-events:auto;touch-action:none;background:#080b10;color:#fff;font-family:Impact,'Arial Narrow',sans-serif;--cine-color:#ef4835;--cine-light:#fa9460;--cine-flare:0}
 #bossWarningV526[data-cinematic-v580][hidden]{display:none!important}
 #bossWarningV526[data-cinematic-v580][data-kind=venom]{--cine-color:#d6f36b;--cine-light:#76b644}
 .cineBackdropV580{position:absolute;inset:-8%;background:radial-gradient(ellipse at 50% 30%,color-mix(in srgb,var(--cine-color) 18%,#131c20),transparent 55%),radial-gradient(ellipse at 50% 78%,#26070c,#070b10 70%)}
@@ -12468,20 +12468,21 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineTapeTextV580{white-space:nowrap;word-spacing:30px;font:900 21px/1 Impact,sans-serif;letter-spacing:.06em;color:#ff8b64;text-shadow:1px 1px #65151b;transform:translateX(var(--cine-tape,0px))}
 .cineSealV580{position:absolute;left:50%;top:50%;height:66px;width:66px;transform:translate(-50%,-50%) rotate(45deg);background:#51151de8;border:2px solid #ff654f;box-shadow:0 0 19px #ff3b3266,inset 0 0 19px #ff3b3244;display:grid;place-items:center}
 .cineSealV580 svg{height:49px;width:49px;transform:rotate(-45deg);fill:#ff654f;filter:drop-shadow(0 0 5px #ff603b66)}
-.cineNameV580{position:absolute;left:4%;right:4%;top:76%;text-align:center;transform:skew(-8deg);font:900 clamp(38px,11vw,76px)/.95 Impact,'Arial Narrow',sans-serif;letter-spacing:.015em;color:#eee7e3;text-shadow:3px 3px #8b211f,0 0 26px #ff482e66}
+.cineNameV580{position:absolute;left:4%;right:4%;top:76%;text-align:center;white-space:nowrap;transform:skew(-8deg);font:900 clamp(38px,11vw,76px)/.95 Impact,'Arial Narrow',sans-serif;letter-spacing:.015em;color:#eee7e3;text-shadow:3px 3px #8b211f,0 0 26px #ff482e66}
 .cineNameV580 small{display:block;transform:skew(8deg);margin:14px 0 0;font:700 10px/1.4 monospace;letter-spacing:.3em;color:#df9c8e;text-shadow:0 1px 3px #000}
 .cineBottomV580{position:absolute;left:9%;right:9%;bottom:max(5%,env(safe-area-inset-bottom));height:2px;background:#ffffff1c}.cineBottomV580 i{height:100%;display:block;background:#ff614a;width:var(--cine-remaining,100%);box-shadow:0 0 9px #fb5537}
-@media(min-aspect-ratio:1/1){.cineTapeV580{top:65%;height:39px}.cineCaptionV580{bottom:39%;font-size:10px}.cineTopV580{top:5%}.cineNameV580{top:79%;font-size:clamp(36px,7vw,72px)}.cineNameV580 small{margin-top:8px}.cineBottomV580{bottom:3%}.cineSealV580{height:61px;width:61px}}
+.cineTopV580,.cineCaptionV580,.cineNameV580 small{font-family:monospace,'EVOLVE Hangul',sans-serif}
+@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineCaptionV580{bottom:39%;font-size:10px}.cineTopV580{top:5%}.cineNameV580{top:77%;font-size:clamp(32px,5.6vw,60px)}.cineNameV580 small{margin-top:8px}.cineBottomV580{bottom:3%}.cineSealV580{height:61px;width:61px}}
 `;document.head.appendChild(cinematicStyleV580);
 ensureBossWarningV526=function(){
  if(bossWarningNodeV526?.dataset.cinematicV580)return bossWarningNodeV526;
  bossWarningNodeV526?.remove();const el=document.createElement('div');el.id='bossWarningV526';el.hidden=true;el.dataset.cinematicV580='1';el.dataset.i18nIgnore='';el.setAttribute('role','status');el.setAttribute('aria-label','Boss incoming');
  el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTopV580"><div><b>CONTAINMENT BREACH</b><span class="cinePhaseV580"></span></div><span class="cineCountV580" aria-hidden="true">3</span></div><div class="cineCaptionV580"></div><div class="cineTapeV580"><div class="cineTapeTextV580" aria-hidden="true">WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING</div><div class="cineSealV580" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M12 8 23 17 32 14 41 17 52 8 48 28Q56 35 49 47L41 51 38 59H26L23 51 15 47Q8 35 16 28ZM21 32 18 39 27 42 28 35ZM43 32 36 35 37 42 46 39ZM32 42 28 48H36ZM27 51V56H30V51ZM34 51V56H37V51Z" fill-rule="evenodd"/></svg></div></div><div class="cineNameV580"><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
- app.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('canvas');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});return el;
+ document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('canvas');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});return el;
 };
 function paintCinematicV580(elapsed,reduced){
  const c=cinematicCanvasV580,g=cinematicContextV580,frames=cinematicFramesV580.get(cinematicStateV580.kind);if(!c||!g||!frames)return;
- const w=app.clientWidth||W,h=app.clientHeight||H,dpr=Math.min(window.devicePixelRatio||1,1.5),cw=Math.round(w*dpr),ch=Math.round(h*dpr);
+ const w=c.parentElement.clientWidth||W,h=c.parentElement.clientHeight||H,dpr=Math.min(window.devicePixelRatio||1,1.5),cw=Math.round(w*dpr),ch=Math.round(h*dpr);
  if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);
  const pose=cinematicPoseV580(elapsed,reduced),source=frames[pose.frame],landscape=w>h,size=Math.max(w*(landscape?.8:1.24),h*(landscape?1.25:.86))*pose.zoom,dh=size,dw=dh*source.width/source.height;
  const drift=reduced?0:Math.sin(elapsed*1.5)*w*.008,x=(w-dw)/2+drift,y=h*(landscape?.43:.43)-dh*.47;

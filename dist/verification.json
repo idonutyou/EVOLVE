@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249072372,
   "index_bytes": 272759,
-  "build": "b68655bc49917db792cbdfbd5e67c125e4198ac7d96f4c426e6c16b6f0851c94",
+  "build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
   "image_assets": 984,
   "cached_files": 1011,
-  "cached_bytes": 343834350,
+  "cached_bytes": 343834504,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -308,7 +308,7 @@
   },
   "boss_cinematic": {
     "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
-    "engine": "assets/bae53774321b9edb9302ae40fd776f5f0e8cf977e5b0c1ef74ef34fe6eb76889.js",
+    "engine": "assets/f39066dd396f9942feb3906774df85e10ce27b244aaeb7c29802866d44eed5fd.js",
     "art": {
       "bio": {
         "path": "assets/455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe.png",
