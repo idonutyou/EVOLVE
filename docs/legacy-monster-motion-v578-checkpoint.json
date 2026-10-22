@@ -1,0 +1,14 @@
+{
+  "task": "Give the six remaining original monster appearances real sprite animation matching WEB-10 reference monsters",
+  "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
+  "baseline_version": "V575-WEB-10-MONSTER-MOTION",
+  "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
+  "baseline_backup": "backup/web10-before-legacy-motion-20261022",
+  "progress": 20,
+  "status": "Original six silhouettes inspected; new atlas production starting",
+  "types": ["warden", "symbiote", "embermaw", "froststalker", "legacy_crawler", "legacy_warden"],
+  "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
+  "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
+  "next": "Generate a transparent 4-column by 6-row atlas from inspected originals and WEB-10 style reference, then integrate cached frames in both GPU and Canvas paths",
+  "physical_Galaxy_S23_plus_tested": false
+}
