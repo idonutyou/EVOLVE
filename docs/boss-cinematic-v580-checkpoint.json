@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 70,
-  "status": "Verified exact deployment diff and prepared canonical WEB-13 handoff",
+  "progress": 80,
+  "status": "All local checks passed; publishing WEB-13 boss cinematics to GitHub Pages",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,7 +24,7 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Publish verified WEB-13 to main and confirm GitHub Pages plus live artwork hashes",
+  "next": "Confirm remote browser regression and Pages deployment, then verify live engine and both new atlases",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "bio": {

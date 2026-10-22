@@ -1,7 +1,7 @@
 {
   "task": "Full-screen intimidating front-facing boss warning cinematics",
-  "status": "Verified exact deployment diff and prepared canonical WEB-13 handoff",
-  "progress": 70,
+  "status": "All local checks passed; publishing WEB-13 boss cinematics to GitHub Pages",
+  "progress": 80,
   "version": "V575-WEB-13-BOSS-CINEMATIC",
   "build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
@@ -22,7 +22,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Publish verified WEB-13 to main and confirm GitHub Pages plus live artwork hashes",
+  "next": "Confirm remote browser regression and Pages deployment, then verify live engine and both new atlases",
   "legacy_atlases": [
     {
       "name": "A",
