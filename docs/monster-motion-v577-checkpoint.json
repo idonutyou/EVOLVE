@@ -1,13 +1,13 @@
 {
   "task": "EVOLVE main game monster animation integration",
-  "status": "WEB-11 source published to main; waiting for GitHub Pages validation and deployment",
-  "progress": 80,
+  "status": "GitHub validation and Pages deployment succeeded; confirming live assets",
+  "progress": 90,
   "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "deployed_source_commit": "89f7df0c0a16ba5d3f9ed4b42b2b52edeb7d85cd",
-  "deployment_run": 39719592942,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39719592942",
+  "deployment_run": 39736546792,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39736546792",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
   "engine": "dist/assets/ad9e5570775ca0ff30c21a612fe37008c6b22fc39cd8962b79d57182be13ffc6.js",
@@ -51,7 +51,17 @@
     "packaging_tests": 6,
     "state_tests": 7,
     "lightning_tests": 7,
-    "web_update_tests": 1
+    "web_update_tests": 1,
+    "pages_deploy": "success",
+    "github_regression_workflow": "passed",
+    "image_generation": {
+      "mode": "built-in image_gen",
+      "prompts": "docs/legacy-monster-v578-image-prompts.json",
+      "saved_atlases": [
+        "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
+        "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png"
+      ]
+    }
   },
   "resume": "Read AGENTS.md and docs/legacy-monster-motion-v578-checkpoint.json from current main. Canonical source is web/monster-motion-v578.js with web/monster-atlas-v578.json. WEB-11 adds the six original appearances; never regenerate already completed atlases or restore old uploads.",
   "preferences": [
@@ -63,7 +73,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Confirm the deployment run succeeds and the live version matches WEB-11",
+  "next": "Check live WEB-11 version, engine checksum and new atlas responses, then record completion",
   "legacy_atlases": [
     {
       "name": "A",

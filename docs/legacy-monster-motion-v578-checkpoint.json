@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-10-MONSTER-MOTION",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "baseline_backup": "backup/web10-before-legacy-motion-20261022",
-  "progress": 80,
-  "status": "WEB-11 source published to main; waiting for GitHub Pages validation and deployment",
+  "progress": 90,
+  "status": "GitHub validation and Pages deployment succeeded; confirming live assets",
   "types": [
     "warden",
     "symbiote",
@@ -16,7 +16,7 @@
   ],
   "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
   "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
-  "next": "Confirm the deployment run succeeds and the live version matches WEB-11",
+  "next": "Check live WEB-11 version, engine checksum and new atlas responses, then record completion",
   "physical_Galaxy_S23_plus_tested": false,
   "atlases": [
     {
@@ -79,7 +79,20 @@
     "packaging_tests": 6,
     "state_tests": 7,
     "lightning_tests": 7,
-    "web_update_tests": 1
+    "web_update_tests": 1,
+    "pages_deploy": "success",
+    "github_regression_workflow": "passed",
+    "image_generation": {
+      "mode": "built-in image_gen",
+      "prompts": "docs/legacy-monster-v578-image-prompts.json",
+      "saved_atlases": [
+        "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
+        "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png"
+      ]
+    }
   },
-  "deployed_source_commit": "89f7df0c0a16ba5d3f9ed4b42b2b52edeb7d85cd"
+  "deployed_source_commit": "89f7df0c0a16ba5d3f9ed4b42b2b52edeb7d85cd",
+  "deployment_run": 39736546792,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39736546792",
+  "game_url": "https://idonutyou.github.io/EVOLVE/"
 }
