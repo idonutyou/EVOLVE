@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-12-RED-PULSE",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
-  "progress": 50,
-  "status": "BIO/VENOM cinematic playback passes in portrait and landscape, including pause/resume and centered boss entry",
+  "progress": 60,
+  "status": "All cinematic and WEB-12 gameplay regression checks passed",
   "reference": "1000027465.jpg",
   "design": {
     "duration_seconds": 3,
@@ -24,7 +24,7 @@
     "portrait_and_landscape": true
   },
   "preservation": "Keep all WEB-12 image bytes, approved map and collision data, monster motion, red device, centered arena rules, combat stats, stage timing and save keys. Add cinematic-only art and presentation.",
-  "next": "Verify WEB-12 gameplay, maps, red pulse, monster motion, saves and update flow",
+  "next": "Review exact deployment diff and update the canonical handoff, then publish WEB-13",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "bio": {
@@ -128,6 +128,34 @@
     "boss_center_and_player_teleport": "passed",
     "browser_errors": [],
     "failed_requests": [],
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "original_browser_suite": "passed",
+    "all_five_maps": "passed",
+    "red_device_damage_and_pickups": "passed",
+    "native_reinforcement_inner_edge_births": 6,
+    "all_monsters_confined": "passed",
+    "all_ten_monster_motion_sets": "passed",
+    "save_and_update_flow": "passed",
+    "packaging_tests": 6,
+    "web_update_tests": 1,
+    "lightning_state_tests": 7,
+    "monster_state_tests": 7,
+    "device_state_tests": 7,
+    "arena_layout_tests": 2,
+    "packaged_asset_files": 1011,
+    "original_image_bytes_unchanged": 982,
+    "visual_review": "frontal poses, full viewport, legible Korean, warning tape, name and countdown inspected",
+    "cinematic_browser_report": "docs/BOSS_CINEMATIC_BROWSER_REPORT.json",
+    "regression_browser_report": "docs/WEB13_REGRESSION_BROWSER_REPORT.json",
+    "device_browser_report": "docs/WEB13_DEVICE_BROWSER_REPORT.json"
+  },
+  "image_generation": {
+    "mode": "built-in image_gen",
+    "prompts": "docs/boss-cinematic-v580-image-prompts.json",
+    "new_atlases": [
+      "assets/455ed4b33f15ebe1b0411c3220e1dfe4e7441ad4b5fcad98cdbad2b928bb3abe.png",
+      "assets/0c882f4214dff9340949dd98109e10bad37bffad2a3d30c4adb67a4f8f0629d7.png"
+    ],
+    "selected_poses": 8
   }
 }
