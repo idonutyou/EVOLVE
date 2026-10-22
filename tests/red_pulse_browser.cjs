@@ -17,6 +17,25 @@ try{
    let moveClamped=true;for(const [dx,dy]of [[10000,0],[-10000,0],[0,10000],[0,-10000]]){c.move(add,dx,dy,add.r);moveClamped&&=inside(add)}add.x=a.l-500;add.y=a.t-500;c.step(.016);const updateClamped=inside(add);const sites=window.__EVOLVE_RED_PULSE_V579__.read().sites;return {centered,exactBoss,playerDistance,edge,addRadius:add.r,insideAfterMove:moveClamped,insideAfterUpdate:updateClamped,fieldDevicesHidden:sites.every(s=>s.hidden),playerClear:m.clear(c.player,c.player.r)};
   });assert.ok(result.centered&&result.exactBoss&&result.playerDistance<=180&&result.insideAfterMove&&result.insideAfterUpdate&&result.fieldDevicesHidden&&result.playerClear,JSON.stringify({id,...result}));assert.ok(result.edge<=45);report.maps.push({id,...result});console.log(JSON.stringify({checkpoint:'centered-arena',map:id,...result}));
  }
+ report.encounters=[];
+ for(const kind of ['venom','bio']){
+  const result=await page.evaluate(async kind=>{
+   const api=window.__EVOLVE_TEST_MODULE_V575__,c=api.test.context();c.player.inv=999;
+   if(!await api.boss(kind,kind==='venom'?3:1))throw Error('Boss request failed');
+   for(let i=0;i<29;i++)c.step(.1);const warnedFirst=!c.enemies.some(e=>!e.dead&&e.finalBoss);
+   let boss;for(let i=0;i<8&&!boss;i++){c.step(.05);boss=c.enemies.find(e=>!e.dead&&e.finalBoss);}
+   if(!boss)throw Error('Scheduled boss did not arrive');const a=window.__EVOLVE_CENTERED_ARENA_V579__.read(),entryCentered=boss.x===a.mapCenter.x&&boss.y===a.mapCenter.y,playerNearCenter=Math.hypot(c.player.x-a.mapCenter.x,c.player.y-a.mapCenter.y)<=180;
+   boss.hp=boss.maxHp;for(let i=0;i<100&&boss.arrivalInvuln;i++)c.step(.05);const combatStarted=!boss.arrivalInvuln;c.step(.016);
+   const result={kind,warnedFirst,entryCentered,playerNearCenter,combatStarted};
+   if(kind==='venom'){
+    const reinforcements=window.__EVOLVE_REINFORCEMENTS_V554__,r=reinforcements.context();r.clear();r.tick(.01);r.tick(2.11);const planned=reinforcements.info(),arena=r.arena;
+    result.planned=planned.pending.length;result.reinforcementDebug={...planned,bossPhase:boss.venomPhaseV554,bossKind:!!boss.venomV537,game:api.read()};result.innerEdgePlans=planned.pending.length===6&&planned.pending.every(p=>Math.abs(Math.min(p.x-arena.l,arena.r-p.x,p.y-arena.t,arena.b-p.y)-36)<.01);r.tick(.91);const born=r.enemies.filter(e=>!e.dead&&e.venomAddV553);
+    result.born=born.length;result.innerEdgeBirths=born.length===6&&born.every(e=>Math.abs(Math.min(e.x-arena.l,arena.r-e.x,e.y-arena.t,arena.b-e.y)-36)<.01);
+   }
+   return result;
+  },kind);
+  assert.ok(result.warnedFirst&&result.entryCentered&&result.playerNearCenter&&result.combatStarted,JSON.stringify(result));if(kind==='venom')assert.ok(result.innerEdgePlans&&result.innerEdgeBirths,JSON.stringify(result));report.encounters.push(result);console.log(JSON.stringify({checkpoint:'scheduled-boss',...result}));
+ }
  assert.deepEqual(report.errors,[]);report.success=true;fs.writeFileSync(path.join(out,'red-pulse-browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
 }catch(error){report.success=false;report.failure=error.stack||String(error);fs.writeFileSync(path.join(out,'red-pulse-browser.json'),JSON.stringify(report,null,2)+'\n');await page.screenshot({path:path.join(out,'red-pulse-failure.png')}).catch(()=>{});throw error}finally{await context.close();await browser.close();server.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;server.close()});

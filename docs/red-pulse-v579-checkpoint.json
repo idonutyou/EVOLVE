@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
   "baseline_backup": "backup/web11-before-red-pulse-20261022",
-  "progress": 60,
-  "status": "All five maps pass centered boss/player placement and enemy fence containment; packaged assets and original browser suite pass",
+  "progress": 70,
+  "status": "All local checks pass, including scheduled BIO/VENOM arrivals and native edge reinforcements",
   "source": "web/red-pulse-v579.js",
   "reference": "1000026947.png",
   "allowed_field_sites": [
@@ -20,7 +20,7 @@
     "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"
   },
   "preservation": "Retain original images, approved map and collision data, monster motions, stage exits, XP progression and save keys. Only requested field devices and boss arena placement/containment change.",
-  "next": "Verify scheduled BIO/VENOM arrivals and native reinforcement edge births, then publish",
+  "next": "Publish verified WEB-12 to main and confirm GitHub Pages plus live asset hashes",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
@@ -55,6 +55,12 @@
     "all_five_maps": "passed",
     "packaged_asset_files": 1009,
     "original_images_unchanged": 981,
-    "browser_errors": []
+    "browser_errors": [],
+    "scheduled_BIO_arrival": "passed",
+    "scheduled_VENOM_arrival": "passed",
+    "native_reinforcement_edge_births": 6,
+    "device_browser_report": "docs/RED_PULSE_BROWSER_REPORT.json",
+    "original_browser_report": "docs/WEB12_REGRESSION_BROWSER_REPORT.json",
+    "failed_requests": []
   }
 }
