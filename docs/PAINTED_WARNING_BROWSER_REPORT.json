@@ -1,0 +1,270 @@
+{
+  "errors": [],
+  "failedRequests": [],
+  "encounters": [
+    {
+      "kind": "venom",
+      "orientation": "portrait",
+      "frames": [
+        {
+          "elapsed": 0.1500000000000341,
+          "frame": 0,
+          "name": "VENOM TITAN"
+        },
+        {
+          "elapsed": 0.9000000000000341,
+          "frame": 1,
+          "name": "VENOM TITAN"
+        },
+        {
+          "elapsed": 1.650000000000034,
+          "frame": 2,
+          "name": "VENOM TITAN"
+        },
+        {
+          "elapsed": 2.400000000000034,
+          "frame": 3,
+          "name": "VENOM TITAN"
+        }
+      ],
+      "pausedSafely": true,
+      "currentHUDImmediately": true,
+      "currentHUDThroughoutArrival": true,
+      "arrivalSamples": 22,
+      "arrivalProtected": true,
+      "legacyAbsent": true,
+      "venomSelected": true,
+      "warningHidden": true,
+      "bossArrived": true,
+      "centered": true,
+      "playerNearCenter": true,
+      "hp": 112
+    },
+    {
+      "kind": "bio",
+      "orientation": "portrait",
+      "frames": [
+        {
+          "elapsed": 0.1500000000000341,
+          "frame": 0,
+          "name": "BIO TITAN"
+        },
+        {
+          "elapsed": 0.9000000000000341,
+          "frame": 1,
+          "name": "BIO TITAN"
+        },
+        {
+          "elapsed": 1.650000000000034,
+          "frame": 2,
+          "name": "BIO TITAN"
+        },
+        {
+          "elapsed": 2.400000000000034,
+          "frame": 3,
+          "name": "BIO TITAN"
+        }
+      ],
+      "pausedSafely": true,
+      "currentHUDImmediately": true,
+      "currentHUDThroughoutArrival": true,
+      "arrivalSamples": 22,
+      "arrivalProtected": true,
+      "legacyAbsent": true,
+      "venomSelected": true,
+      "warningHidden": true,
+      "bossArrived": true,
+      "centered": true,
+      "playerNearCenter": true,
+      "hp": 112
+    },
+    {
+      "kind": "venom",
+      "orientation": "landscape",
+      "frames": [
+        {
+          "elapsed": 1.650000000000034,
+          "frame": 2,
+          "name": "VENOM TITAN"
+        }
+      ],
+      "pausedSafely": true,
+      "currentHUDImmediately": true,
+      "currentHUDThroughoutArrival": true,
+      "arrivalSamples": 22,
+      "arrivalProtected": true,
+      "legacyAbsent": true,
+      "venomSelected": true,
+      "warningHidden": true,
+      "bossArrived": true,
+      "centered": true,
+      "playerNearCenter": true,
+      "hp": 112
+    },
+    {
+      "kind": "bio",
+      "orientation": "landscape",
+      "frames": [
+        {
+          "elapsed": 1.650000000000034,
+          "frame": 2,
+          "name": "BIO TITAN"
+        }
+      ],
+      "pausedSafely": true,
+      "currentHUDImmediately": true,
+      "currentHUDThroughoutArrival": true,
+      "arrivalSamples": 22,
+      "arrivalProtected": true,
+      "legacyAbsent": true,
+      "venomSelected": true,
+      "warningHidden": true,
+      "bossArrived": true,
+      "centered": true,
+      "playerNearCenter": true,
+      "hp": 112
+    }
+  ],
+  "obsoleteRequests": [],
+  "branding": {
+    "ready": true,
+    "error": null,
+    "sprites": {
+      "bio": {
+        "clear": 39747,
+        "painted": 46760,
+        "width": 536,
+        "height": 210
+      },
+      "venom": {
+        "clear": 36282,
+        "painted": 49261,
+        "width": 564,
+        "height": 210
+      },
+      "warning": {
+        "clear": 6840,
+        "painted": 11680,
+        "width": 271,
+        "height": 96
+      },
+      "breach": {
+        "clear": 2817,
+        "painted": 7291,
+        "width": 251,
+        "height": 64
+      },
+      "phase": {
+        "clear": 2743,
+        "painted": 2706,
+        "width": 152,
+        "height": 48
+      },
+      "subtitle": {
+        "clear": 2041,
+        "painted": 3886,
+        "width": 185,
+        "height": 48
+      },
+      "crest": {
+        "clear": 18852,
+        "painted": 18439,
+        "width": 187,
+        "height": 220
+      },
+      "digit1": {
+        "clear": 3791,
+        "painted": 2764,
+        "width": 63,
+        "height": 112
+      },
+      "digit2": {
+        "clear": 4453,
+        "painted": 4026,
+        "width": 82,
+        "height": 112
+      },
+      "digit3": {
+        "clear": 4376,
+        "painted": 3939,
+        "width": 81,
+        "height": 112
+      }
+    },
+    "cachedBytes": 1422832,
+    "visibleFontText": false,
+    "legacyFinalHUD": false
+  },
+  "art": {
+    "bio": {
+      "hashes": [
+        3650314480,
+        553968885,
+        1315204920,
+        3966696173
+      ],
+      "sizes": [
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ]
+      ]
+    },
+    "venom": {
+      "hashes": [
+        1137349505,
+        1461783737,
+        547250890,
+        1447482149
+      ],
+      "sizes": [
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ],
+        [
+          627,
+          627
+        ]
+      ]
+    }
+  },
+  "legacyShortcuts": [
+    {
+      "kind": "venom",
+      "visible": true,
+      "centered": true
+    },
+    {
+      "kind": "bio",
+      "visible": true,
+      "centered": true
+    },
+    {
+      "kind": "frost",
+      "visible": true,
+      "originalWarningPreserved": true
+    }
+  ],
+  "success": true
+}
