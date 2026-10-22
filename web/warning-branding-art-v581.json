@@ -1,0 +1,22 @@
+{
+  "atlases": {
+    "lettering": {
+      "path": "assets/435c54b5c835392d14a36bda9fa4b8b10ec3102d623fdb1840cf34dbeb4006ee.png",
+      "sha256": "435c54b5c835392d14a36bda9fa4b8b10ec3102d623fdb1840cf34dbeb4006ee",
+      "bytes": 2400510,
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "draft": true
+    },
+    "crest_digits": {
+      "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+      "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+      "bytes": 1586575,
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "draft": false
+    }
+  }
+}

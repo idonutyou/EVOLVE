@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-13-BOSS-CINEMATIC",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
   "baseline_backup": "backup/web13-before-painted-warning-20261022",
-  "progress": 10,
-  "status": "Supplied screenshots inspected; tracing arrival HUD ownership and preparing raster lettering/emblem artwork",
+  "progress": 20,
+  "status": "Custom lettering and crest/countdown atlas preserved; finishing lettering alpha cutout and obsolete HUD audit",
   "references": [
     "1000027470.jpg",
     "1000027468.jpg"
@@ -16,6 +16,26 @@
     "boss_HUD": "current BIO/VENOM interface from the first visible arrival frame"
   },
   "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "next": "Create two transparent branding atlases and audit obsolete HUD references",
-  "physical_Galaxy_S23_plus_tested": false
+  "next": "Finalize transparent lettering, remove legacy final HUD markup/code/resources, and wire the new painted UI",
+  "physical_Galaxy_S23_plus_tested": false,
+  "art": {
+    "lettering": {
+      "path": "assets/435c54b5c835392d14a36bda9fa4b8b10ec3102d623fdb1840cf34dbeb4006ee.png",
+      "sha256": "435c54b5c835392d14a36bda9fa4b8b10ec3102d623fdb1840cf34dbeb4006ee",
+      "bytes": 2400510,
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "draft": true
+    },
+    "crest_digits": {
+      "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+      "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+      "bytes": 1586575,
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "draft": false
+    }
+  }
 }
