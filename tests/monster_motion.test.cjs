@@ -1,5 +1,5 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync(__dirname+'/../web/monster-motion-v577.js','utf8').split('const monsterImageV577=')[0],env={};vm.createContext(env);vm.runInContext(source,env);
+const source=fs.readFileSync(__dirname+'/../web/monster-motion-v578.js','utf8').split('const monsterImageV577=')[0],env={};vm.createContext(env);vm.runInContext(source,env);
 let active=true;const e={type:'crawler',x:0,y:0,animPhase:0,spd:40,contactCd:0,shot:1},special={type:'warden',x:100,y:100,animPhase:1,spd:30},boss={type:'boss',finalBoss:true,x:150,y:150};
 const a=env.createMonsterMotionV577({active:()=>active,enemies:()=>[e,special,boss],size:()=>40,appearance:e=>e.type});a.init(e);a.init(special);assert.equal(a.frame(e),0);
 const frames=new Set();for(let i=0;i<12;i++){e.x+=3;a.step(.05);frames.add(a.frame(e))}assert.equal(frames.size,3);assert.equal(a.state(e).mode,'walk');

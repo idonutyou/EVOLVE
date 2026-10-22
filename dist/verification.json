@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-10-MONSTER-MOTION",
+  "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 272759,
-  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
-  "image_assets": 979,
-  "cached_files": 1006,
-  "cached_bytes": 331109027,
+  "index_bytes": 272766,
+  "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
+  "image_assets": 981,
+  "cached_files": 1008,
+  "cached_bytes": 335776620,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -198,7 +198,7 @@
   "monster_motion": {
     "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
     "baseline_engine": "assets/7882517579ab9a19d6483cf0317cc2cd13b774717e99ddd7a58f619764522c63.js",
-    "engine": "assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
+    "engine": "assets/ad9e5570775ca0ff30c21a612fe37008c6b22fc39cd8962b79d57182be13ffc6.js",
     "reference_html_sha256": "0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
     "atlas": "assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
     "reference_frames": [
@@ -218,6 +218,54 @@
     "combat_balance_changed": false,
     "save_keys_unchanged": true,
     "titan_motion_preserved": true,
+    "audio_changed": false,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "legacy_monster_motion": {
+    "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
+    "baseline_version": "V575-WEB-10-MONSTER-MOTION",
+    "engine": "assets/ad9e5570775ca0ff30c21a612fe37008c6b22fc39cd8962b79d57182be13ffc6.js",
+    "source": "web/monster-motion-v578.js",
+    "atlases": [
+      {
+        "name": "A",
+        "path": "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
+        "sha256": "4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f",
+        "bytes": 2306775,
+        "width": 1448,
+        "height": 1086,
+        "alpha": true
+      },
+      {
+        "name": "B",
+        "path": "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png",
+        "sha256": "f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c",
+        "bytes": 2358905,
+        "width": 1448,
+        "height": 1086,
+        "alpha": true
+      }
+    ],
+    "types": [
+      "warden",
+      "symbiote",
+      "embermaw",
+      "froststalker",
+      "legacy_crawler",
+      "legacy_warden"
+    ],
+    "painted_poses": 24,
+    "total_cached_frames": 40,
+    "old_split_limb_deformation_removed": true,
+    "foot_anchors_normalized": true,
+    "original_image_entries_preserved": 979,
+    "original_image_bytes_unchanged": true,
+    "atlas_bytes_not_reencoded": true,
+    "per_frame_texture_uploads": false,
+    "titan_motion_preserved": true,
+    "maps_changed": false,
+    "combat_balance_changed": false,
+    "save_keys_unchanged": true,
     "audio_changed": false,
     "physical_Galaxy_S23_plus_tested": false
   }

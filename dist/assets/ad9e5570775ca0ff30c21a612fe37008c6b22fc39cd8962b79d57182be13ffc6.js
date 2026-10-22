@@ -12240,7 +12240,7 @@ const lightningWeaponButtonV576=document.querySelector('[data-weapon="arm"]');if
 window.__EVOLVE_LIGHTNING_V576__={read:()=>({...lightningV576.read(),atlasReady:lightningImageV576.complete&&lightningImageV576.naturalWidth>0,atlasError:lightningImageErrorV576,globalHitStop:hitStop}),ready:lightningImageReadyV576};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_LIGHTNING_V576__.test={cast:strong=>lightningV576.castChain(strong),context:()=>lightningV576.context(),pose:e=>lightningV576.pose(e),hold:e=>lightningV576.holdEnemy(e),reset:()=>lightningV576.reset(),step:dt=>lightningV576.step(dt),damage:(e,n,kind)=>hurtEnemy(e,n,kind),active:()=>originActive()};
 
-// V577: real LIGHTNING06 monster frames, with distance-driven gait and stateful actions.
+// V578: painted frames for all ten normal appearances, including six original monsters.
 function createMonsterMotionV577(host){
  const states=new WeakMap(),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));let ticks=0;
  function eligible(e){return !!e&&!e.finalBoss&&e.type!=='boss'}
@@ -12266,39 +12266,47 @@ function createMonsterMotionV577(host){
   else{s.mode='idle';s.frame=0}
   return s;
  }
- return {eligible,init:e=>eligible(e)?state(e):null,step,state:e=>select(e),frame:e=>select(e).frame,key:e=>host.appearance(e)+'@'+select(e).frame,reset:()=>{ticks=0},read:()=>{const modes={};for(const e of host.enemies())if(eligible(e)&&!e.dead){const s=select(e);modes[s.mode]=(modes[s.mode]||0)+1}return {version:'V575-WEB-10-MONSTER-MOTION',ticks,modes}}};
+ return {eligible,init:e=>eligible(e)?state(e):null,step,state:e=>select(e),frame:e=>select(e).frame,key:e=>host.appearance(e)+'@'+select(e).frame,reset:()=>{ticks=0},read:()=>{const modes={};for(const e of host.enemies())if(eligible(e)&&!e.dead){const s=select(e);modes[s.mode]=(modes[s.mode]||0)+1}return {version:'V575-WEB-11-LEGACY-MONSTER-MOTION',ticks,modes}}};
 }
 
 const monsterImageV577=new Image();let monsterImageErrorV577=null,monsterPreparedV577=false,monsterAtlasBuildsV577=0;
 const monsterFramesV577=new Map(),monsterBaseRenderV577=renderedEnemy;
 const monsterSourceV577={crawler:{row:0,b:[24,91,307,381]},runner:{row:0,b:[24,91,307,381]},brute:{row:1,b:[4,0,314,375]},spitter:{row:2,b:[0,0,309,364]}};
-const monsterReadyV577=new Promise(resolve=>{monsterImageV577.onload=()=>resolve(true);monsterImageV577.onerror=()=>{monsterImageErrorV577='Monster motion atlas failed to load';resolve(false)}});
-monsterImageV577.src='assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png';
+const monsterLegacyDataV578={"sheets":[{"name":"A","path":"assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png","sha256":"4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f","bytes":2306775,"width":1448,"height":1086,"alpha":true},{"name":"B","path":"assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png","sha256":"f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c","bytes":2358905,"width":1448,"height":1086,"alpha":true}],"types":{"warden":{"sheet":0,"frames":[[15,48,370,340],[395,47,732,355],[754,49,1098,353],[1110,45,1434,352]],"width":355,"height":308},"symbiote":{"sheet":0,"frames":[[41,356,380,710],[405,355,757,714],[772,363,1112,709],[1132,351,1444,703]],"width":352,"height":359},"embermaw":{"sheet":0,"frames":[[15,729,380,1058],[386,723,730,1058],[745,727,1092,1058],[1097,720,1437,1057]],"width":365,"height":337},"froststalker":{"sheet":1,"frames":[[31,64,361,362],[385,59,724,382],[748,61,1084,385],[1094,57,1440,394]],"width":346,"height":337},"legacy_crawler":{"sheet":1,"frames":[[16,425,371,705],[392,414,727,705],[753,417,1087,693],[1111,402,1438,736]],"width":355,"height":334},"legacy_warden":{"sheet":1,"frames":[[24,716,375,1015],[390,719,727,1035],[741,719,1096,1044],[1110,734,1440,1054]],"width":355,"height":325}}};
+const monsterLegacyImagesV578=monsterLegacyDataV578.sheets.map(()=>new Image());
+Object.assign(monsterSourceV577,monsterLegacyDataV578.types);
+function monsterLoadV578(image,path){return new Promise(resolve=>{image.onload=()=>resolve(true);image.onerror=()=>{monsterImageErrorV577='Monster motion atlas failed to load: '+path;resolve(false)};image.src=path})}
+const monsterReadyV577=Promise.all([monsterLoadV578(monsterImageV577,'assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png'),...monsterLegacyImagesV578.map((im,i)=>monsterLoadV578(im,monsterLegacyDataV578.sheets[i].path))]);
+function monsterAllReadyV578(){return !!monsterImageV577.naturalWidth&&monsterLegacyImagesV578.every(im=>im.naturalWidth>0)}
 const monsterMotionV577=createMonsterMotionV577({active:()=>running&&!paused&&!choosing&&!rewardChoosing&&!ended,enemies:()=>enemies,size:e=>e.elite?68:gpuEnemyBaseSizeV426(e),appearance:e=>enemyAppearanceKeyV516(e)});
 
 function monsterCanvasV577(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
 function monsterSurfaceV577(type,frame){
  const key=type+'@'+frame,known=monsterFramesV577.get(key);if(known)return known;
  const info=monsterSourceV577[type];let c,g;
- if(info&&monsterImageV577.complete&&monsterImageV577.naturalWidth){
+ if(info?.frames&&monsterLegacyImagesV578[info.sheet]?.naturalWidth){
+  const im=monsterLegacyImagesV578[info.sheet],b=info.frames[frame],w=b[2]-b[0],h=b[3]-b[1];
+  // Individual painted poses have different bounds. A common surface and foot anchor
+  // keep their body scale and ground position steady without altering source PNGs.
+  c=monsterCanvasV577(info.width+8,info.height+8);g=c.getContext('2d');
+  g.drawImage(im,b[0],b[1],w,h,(c.width-w)/2,c.height-h-4,w,h);
+ }else if(info?.b&&monsterImageV577.complete&&monsterImageV577.naturalWidth){
   const sw=monsterImageV577.naturalWidth/4,sh=monsterImageV577.naturalHeight/3,b=info.b,w=b[2]-b[0],h=b[3]-b[1];c=monsterCanvasV577(w,h);g=c.getContext('2d');g.drawImage(monsterImageV577,frame*sw+b[0],info.row*sh+b[1],w,h,0,0,w,h);
  }else{
   const im=ART[enemyAppearanceAssetV516(type)],per=actorMipCacheV424.get(im);let mip=per?.get(256);if(!mip&&per)for(const q of per.values())if(!mip||Math.abs(q.bucket-256)<Math.abs(mip.bucket-256))mip=q;
   if(!mip?.source)return null;
   const w=mip.w,h=mip.h;c=monsterCanvasV577(w,h);g=c.getContext('2d');
-  // Retain each special type's anatomy. Alternate lower limbs independently of the torso.
-  const side=frame===1?1:frame===2?-1:0,attack=frame===3,split=Math.floor(h*.55);
-  g.save();g.translate(w*.5,h*.55);g.rotate(attack?-.075:side*.012);g.drawImage(mip.source,0,0,w,split,-w*.5,-h*.55,w,split);g.restore();
-  for(const leg of [-1,1]){const x=leg<0?0:w*.5,width=leg<0?Math.ceil(w*.5):Math.floor(w*.5),shift=side*leg*h*.035,stretch=attack?.93:1+side*leg*.035;g.drawImage(mip.source,x,split,width,h-split,x+(attack?leg*w*.018:0),split+shift,width,(h-split)*stretch)}
+  // Exact original surface is the load-error fallback; never split or stretch anatomy.
+  g.drawImage(mip.source,0,0);
  }
  c.complete=true;c.naturalWidth=c.width;c.naturalHeight=c.height;c._actor=true;c._spriteCrop=[0,0,c.width,c.height];c._sourceReleasedV425=true;c._motionV577={type,frame};c._clarityV574={kind:'enemy',base:gpuEnemyBaseSizeV426({type:type.replace('legacy_','')})};
  actorMipCacheV424.set(c,new Map([[384,{source:c,w:c.width,h:c.height,bucket:384}]]));monsterFramesV577.set(key,c);return c;
 }
-function monsterPrepareV577(){if(monsterPreparedV577||!monsterImageV577.naturalWidth)return;for(const type of GPU_TYPES_V426)for(let frame=0;frame<4;frame++)monsterSurfaceV577(type,frame);monsterPreparedV577=true}
+function monsterPrepareV577(){if(monsterPreparedV577||!monsterAllReadyV578())return;for(const type of GPU_TYPES_V426)for(let frame=0;frame<4;frame++)monsterSurfaceV577(type,frame);monsterPreparedV577=true}
 
 const monsterMakeAtlasBaseV577=makeEnemyAtlasV426;
 makeEnemyAtlasV426=function(shadow=false){
- const base=monsterMakeAtlasBaseV577(shadow);if(shadow||!monsterImageV577.naturalWidth)return base;monsterPrepareV577();
+ const base=monsterMakeAtlasBaseV577(shadow);if(shadow||!monsterAllReadyV578())return base;monsterPrepareV577();
  const cell=256,cols=4,entries=[...monsterFramesV577.keys()],count=GPU_TYPES_V426.length+entries.length,rows=Math.ceil(count/cols),c=monsterCanvasV577(cols*cell,rows*cell),g=c.getContext('2d'),uv={...base.uv};
  g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(base.canvas,0,0);
  // The old UV rows must also be normalized to the enlarged texture.
@@ -12327,7 +12335,7 @@ const monsterEchoBaseV577=spawnDeathEcho;spawnDeathEcho=function(e){const previo
 const monsterKillBaseV577=killEnemy;killEnemy=function(e){const wasDead=e?.dead,previous=deathEchoes.at(-1),out=monsterKillBaseV577(e);if(e&&!wasDead&&e.dead&&monsterMotionV577.eligible(e)&&deathEchoes.at(-1)===previous)spawnDeathEcho(e);return out};
 const monsterEchoRenderV577=renderedEnemy;renderedEnemy=function(e){if(e.motionTypeV577){const surface=monsterSurfaceV577(e.motionTypeV577,e.motionFrameV577??3);if(surface)return surface}return monsterEchoRenderV577(e)};
 
-window.__EVOLVE_MONSTER_MOTION_V577__={ready:monsterReadyV577,read:()=>({...monsterMotionV577.read(),atlasReady:!!monsterImageV577.naturalWidth,error:monsterImageErrorV577,cachedFrames:monsterFramesV577.size,gpuAtlasBuilds:monsterAtlasBuildsV577,referenceTypes:Object.keys(monsterSourceV577),gpuEnabled:gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428})};
+window.__EVOLVE_MONSTER_MOTION_V578__=window.__EVOLVE_MONSTER_MOTION_V577__={ready:monsterReadyV577,read:()=>({...monsterMotionV577.read(),atlasReady:monsterAllReadyV578(),error:monsterImageErrorV577,cachedFrames:monsterFramesV577.size,gpuAtlasBuilds:monsterAtlasBuildsV577,referenceTypes:Object.keys(monsterSourceV577),paintedOriginalTypes:Object.keys(monsterLegacyDataV578.types),atlasCount:1+monsterLegacyImagesV578.length,gpuEnabled:gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_MONSTER_MOTION_V577__.test={frame:e=>monsterMotionV577.frame(e),state:e=>({...monsterMotionV577.state(e)}),advance:dt=>monsterMotionV577.step(dt),surface:(type,frame)=>monsterSurfaceV577(type,frame),gpuPose:e=>gpuEnemyVisualV426(e),gpuKey:e=>monsterMotionV577.key(e),rendered:e=>renderedEnemy(e),prepare:monsterPrepareV577,forceWalk(e,phase){const s=monsterMotionV577.init(e);s.phase=phase;s.moving=true;s.attack=0;s.warning=false;delete e.arcShockV576;e.hit=0;e.telegraphing=null;e.dashPrep=e.chargePrep=e.burst=0;frozenFrameDrawnV438=false},gpu(value){const old=gpuEnemyBatchEnabledV426;gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428;frozenFrameDrawnV438=false;return old}};
 function monsterGpuKeyV577(e){const key=monsterMotionV577.key(e);return monsterFramesV577.has(key)?key:enemyAppearanceKeyV516(e)}
 
