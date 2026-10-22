@@ -1,34 +1,59 @@
 {
   "task": "EVOLVE main game monster animation integration",
-  "status": "Deployed successfully; user requested transition to a new chat",
-  "progress": 100,
-  "version": "V575-WEB-10-MONSTER-MOTION",
-  "build": "b52dd9987b020bb6613af4f3e14f398552f119978e5da9e4877a2d71d6903ac0",
-  "baseline_commit": "1bc2bcd8655e8fd1109a741a81091ce21b34ff99",
+  "status": "WEB-11 passed automated and visual checks on online-v575; WEB-10 remains live until deployment succeeds",
+  "progress": 70,
+  "version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
+  "build": "6c1bd14a943e8333a1e1856ea9a00b69eac0e6d9317d2719423081673c3ab506",
+  "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "deployed_source_commit": "a07d6aaf6b611651163910482805773a0216bada",
   "deployment_run": 39719592942,
   "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39719592942",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/5810c067cab080ff526dae458240de606e33f22e596514f39c9a986498487e41.js",
+  "engine": "dist/assets/ad9e5570775ca0ff30c21a612fe37008c6b22fc39cd8962b79d57182be13ffc6.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
-  "source": "web/monster-motion-v577.js",
-  "scope": "Crawler, runner, brute and spitter use exact reference atlas frames. Walk phase follows distance moved, idle stops gait, windup/attack/hurt choose explicit poses. Other normal types retain anatomy with cached articulated poses. Existing TITAN/boss motion retained.",
-  "preservation": "978 existing image entries unchanged; exact reference PNG added. No map, balance, audio or save-key changes. Lightning-only combat remains.",
+  "source": "web/monster-motion-v578.js",
+  "scope": "All ten normal appearances now use painted pose frames. The six original appearances have 24 new poses with stable foot anchors. Existing TITAN motion retained.",
+  "preservation": "All 979 WEB-10 image entries unchanged. Two new PNG atlases added verbatim. No map, balance, audio, combat or save-key changes.",
   "verification": {
-    "state_checks": 7,
-    "gpu_frames_differ": true,
-    "canvas_frames_differ": true,
-    "windup_frame": 3,
-    "hurt_frame": 3,
-    "cached_frames": 40,
+    "browser_report": "docs/LEGACY_MONSTER_BROWSER_REPORT.json",
+    "automated_mobile_viewport": true,
+    "all_ten_painted_frame_sets_distinct": true,
+    "all_six_gpu_and_canvas_frames_differ": true,
     "no_per_frame_texture_rebuild": true,
-    "existing_full_browser_suite": "passed",
-    "pages_deploy": "success",
-    "extraction_tests": "passed",
-    "physical_Galaxy_S23_plus_tested": false
+    "cached_frames": 40,
+    "browser_errors": [],
+    "failed_requests": [],
+    "physical_Galaxy_S23_plus_tested": false,
+    "full_browser_suite": "passed",
+    "maps": [
+      "facility1",
+      "facility2",
+      "hub",
+      "biolab",
+      "red_biolab"
+    ],
+    "checks": [
+      "boot and prior-version save migration",
+      "mobile movement, pause and resume",
+      "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
+      "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+      "update waits for home without interrupting combat",
+      "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+      "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "all five maps load",
+      "reload preserves save",
+      "landscape layout"
+    ],
+    "visual_pose_review": "All six identities, alternating limbs and action poses inspected in the rendered gallery",
+    "packaging_tests": 6,
+    "state_tests": 7,
+    "lightning_tests": 7,
+    "web_update_tests": 1
   },
-  "resume": "Read AGENTS.md and this checkpoint from current main. Review user feedback on the deployed motion; do not restore the old upload or redo integration. Canonical module is embedded in hashed engine with atlas path substituted. All source and checkpoint changes are backed up on online-v575.",
+  "resume": "Read AGENTS.md and docs/legacy-monster-motion-v578-checkpoint.json from current main. Canonical source is web/monster-motion-v578.js with web/monster-atlas-v578.json. WEB-11 adds the six original appearances; never regenerate already completed atlases or restore old uploads.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -38,5 +63,25 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Continue from deployed WEB-10 and evaluate any new user feedback. Update may need home-screen '업데이트 적용' for an already-open older client."
+  "next": "Advance main only after reviewing the exact file changes, then confirm GitHub Pages deployment and live build",
+  "legacy_atlases": [
+    {
+      "name": "A",
+      "path": "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
+      "sha256": "4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f",
+      "bytes": 2306775,
+      "width": 1448,
+      "height": 1086,
+      "alpha": true
+    },
+    {
+      "name": "B",
+      "path": "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png",
+      "sha256": "f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c",
+      "bytes": 2358905,
+      "width": 1448,
+      "height": 1086,
+      "alpha": true
+    }
+  ]
 }

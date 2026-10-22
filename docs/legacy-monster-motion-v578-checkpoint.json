@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-10-MONSTER-MOTION",
   "baseline_commit": "25b88a698d225b1bcb5aaacef4125596206b9ff5",
   "baseline_backup": "backup/web10-before-legacy-motion-20261022",
-  "progress": 60,
-  "status": "All six original appearances verified on actual GPU and Canvas render paths",
+  "progress": 70,
+  "status": "Full browser suite and visual pose review passed; ready to publish WEB-11",
   "types": [
     "warden",
     "symbiote",
@@ -16,7 +16,7 @@
   ],
   "scope": "Add separately painted walk and action poses for all six original appearances; retain anatomy and the four WEB-10 reference appearances",
   "preservation": "Retain all original image bytes, gameplay, TITAN motion, maps, balance, audio and save keys",
-  "next": "Inspect captured poses and campaign; preserve full regression results; publish WEB-11",
+  "next": "Advance main only after reviewing the exact file changes, then confirm GitHub Pages deployment and live build",
   "physical_Galaxy_S23_plus_tested": false,
   "atlases": [
     {
@@ -52,6 +52,33 @@
     "cached_frames": 40,
     "browser_errors": [],
     "failed_requests": [],
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "full_browser_suite": "passed",
+    "maps": [
+      "facility1",
+      "facility2",
+      "hub",
+      "biolab",
+      "red_biolab"
+    ],
+    "checks": [
+      "boot and prior-version save migration",
+      "mobile movement, pause and resume",
+      "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
+      "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+      "update waits for home without interrupting combat",
+      "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+      "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+      "all five maps load",
+      "reload preserves save",
+      "landscape layout"
+    ],
+    "visual_pose_review": "All six identities, alternating limbs and action poses inspected in the rendered gallery",
+    "packaging_tests": 6,
+    "state_tests": 7,
+    "lightning_tests": 7,
+    "web_update_tests": 1
   }
 }
