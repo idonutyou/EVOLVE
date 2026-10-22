@@ -1,0 +1,24 @@
+{
+  "task": "Red filled attack warnings above map foreground",
+  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "baseline_version": "V575-WEB-14-PAINTED-WARNING",
+  "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
+  "baseline_backup": "backup/web14-before-red-warnings-20261023",
+  "progress": 10,
+  "status": "Baseline restored and warning visibility root causes identified",
+  "reference": "1792707289049.jpeg",
+  "request": {
+    "color": "red for all enemy attack warning shapes",
+    "interior": "fill the whole danger shape with readable translucent red",
+    "layer": "draw after map structures and underpass foreground",
+    "geometry": "retain attack hitboxes, safe gaps, timings and terrain clipping"
+  },
+  "preservation": "Keep existing image bytes, monster/boss art and motion, maps and collision edits, combat stats, phase logic, red devices and save keys. No audio changes.",
+  "findings": [
+    "VENOM windup interior opacity only 0.045 to 0.07 and green outlines blend into the map",
+    "VENOM warning and legacy telegraphs render before mapUnderDrawV575 foreground",
+    "BIO and legacy patterns use inconsistent colors and partial outline-only warnings"
+  ],
+  "next": "Implement one late red warning pass using existing attack geometry",
+  "physical_Galaxy_S23_plus_tested": false
+}
