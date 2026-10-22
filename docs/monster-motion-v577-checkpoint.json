@@ -1,7 +1,7 @@
 {
   "task": "EVOLVE WEB-12 red pulse device and centered boss arenas",
-  "status": "All local checks passed; publishing WEB-12 to GitHub Pages",
-  "progress": 80,
+  "status": "GitHub regression and Pages deployment succeeded; confirming public assets",
+  "progress": 90,
   "version": "V575-WEB-12-RED-PULSE",
   "build": "f736e4612d92855b1fbf4a50a2584062132cc90f1eb7c7f7722c9cba06ecc491",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
@@ -22,7 +22,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Confirm remote regression workflow, Pages deployment, and live version/engine/art hashes",
+  "next": "Verify live version and engine/device SHA-256, save final checkpoint and immutable release backup",
   "legacy_atlases": [
     {
       "name": "A",
@@ -127,6 +127,11 @@
     "native_reinforcement_edge_births": 6,
     "device_browser_report": "docs/RED_PULSE_BROWSER_REPORT.json",
     "original_browser_report": "docs/WEB12_REGRESSION_BROWSER_REPORT.json",
-    "failed_requests": []
-  }
+    "failed_requests": [],
+    "pages_deploy": "success",
+    "github_regression_workflow": "passed"
+  },
+  "deployed_source_commit": "421b14f392c3114753f38b52f474f969512fb68a",
+  "deployment_run": 39760297355,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39760297355"
 }

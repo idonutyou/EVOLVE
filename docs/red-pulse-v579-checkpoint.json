@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-11-LEGACY-MONSTER-MOTION",
   "baseline_commit": "d7ac76f207e5dc0e42c602b9a7831b9c27bbbd1c",
   "baseline_backup": "backup/web11-before-red-pulse-20261022",
-  "progress": 80,
-  "status": "All local checks passed; publishing WEB-12 to GitHub Pages",
+  "progress": 90,
+  "status": "GitHub regression and Pages deployment succeeded; confirming public assets",
   "source": "web/red-pulse-v579.js",
   "reference": "1000026947.png",
   "allowed_field_sites": [
@@ -20,7 +20,7 @@
     "damage_scope": "Enemies visible when the expanding wave detonates; one hit per enemy"
   },
   "preservation": "Retain original images, approved map and collision data, monster motions, stage exits, XP progression and save keys. Only requested field devices and boss arena placement/containment change.",
-  "next": "Confirm remote regression workflow, Pages deployment, and live version/engine/art hashes",
+  "next": "Verify live version and engine/device SHA-256, save final checkpoint and immutable release backup",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "path": "assets/4776fefed2a8a56438f8e795f43a6bab0331198717364649468f913c203d0a62.png",
@@ -61,6 +61,12 @@
     "native_reinforcement_edge_births": 6,
     "device_browser_report": "docs/RED_PULSE_BROWSER_REPORT.json",
     "original_browser_report": "docs/WEB12_REGRESSION_BROWSER_REPORT.json",
-    "failed_requests": []
-  }
+    "failed_requests": [],
+    "pages_deploy": "success",
+    "github_regression_workflow": "passed"
+  },
+  "deployed_source_commit": "421b14f392c3114753f38b52f474f969512fb68a",
+  "deployment_run": 39760297355,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39760297355",
+  "game_url": "https://idonutyou.github.io/EVOLVE/"
 }
