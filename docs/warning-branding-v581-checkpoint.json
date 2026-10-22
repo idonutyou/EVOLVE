@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-13-BOSS-CINEMATIC",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
   "baseline_backup": "backup/web13-before-painted-warning-20261022",
-  "progress": 50,
-  "status": "Painted warning and immediate current boss HUD passed portrait/landscape browser verification",
+  "progress": 60,
+  "status": "All local browser and unit regressions passed for WEB-14",
   "references": [
     "1000027470.jpg",
     "1000027468.jpg"
@@ -16,7 +16,7 @@
     "boss_HUD": "current BIO/VENOM interface from the first visible arrival frame"
   },
   "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "next": "Run existing mobile, map, save, red-device and centered-arena regressions",
+  "next": "Review the final source and asset diff, update canonical handoff, and publish",
   "physical_Galaxy_S23_plus_tested": false,
   "art": {
     "atlases": {
@@ -161,5 +161,19 @@
   "visual_proofs": [
     "docs/painted-warning-bio-v581.png",
     "docs/painted-warning-venom-v581.png"
-  ]
+  ],
+  "validation": {
+    "painted_warning": "docs/PAINTED_WARNING_BROWSER_REPORT.json",
+    "regressions": "docs/WEB14_REGRESSION_BROWSER_REPORT.json",
+    "device_and_arena": "docs/WEB14_DEVICE_BROWSER_REPORT.json",
+    "python_tests": 6,
+    "web_client_tests": 1,
+    "lightning_checks": 7,
+    "monster_motion_checks": 7,
+    "red_device_checks": 7,
+    "centered_arena_checks": 2,
+    "cinematic_checks": 5,
+    "errors": [],
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
