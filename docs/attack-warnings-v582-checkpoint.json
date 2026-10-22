@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-14-PAINTED-WARNING",
   "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
   "baseline_backup": "backup/web14-before-red-warnings-20261023",
-  "progress": 10,
-  "status": "Baseline restored and warning visibility root causes identified",
+  "progress": 20,
+  "status": "Shared red filled geometry renderer implemented; safe ring holes and open sectors preserved",
   "reference": "1792707289049.jpeg",
   "request": {
     "color": "red for all enemy attack warning shapes",
@@ -19,6 +19,10 @@
     "VENOM warning and legacy telegraphs render before mapUnderDrawV575 foreground",
     "BIO and legacy patterns use inconsistent colors and partial outline-only warnings"
   ],
-  "next": "Implement one late red warning pass using existing attack geometry",
-  "physical_Galaxy_S23_plus_tested": false
+  "next": "Connect legacy, BIO and VENOM warnings to the foreground pass",
+  "physical_Galaxy_S23_plus_tested": false,
+  "source": "web/attack-warning-v582.js",
+  "stage_backups": {
+    "10": "4ad734f33a16ef7043d8c7476fb1286bea694a06"
+  }
 }
