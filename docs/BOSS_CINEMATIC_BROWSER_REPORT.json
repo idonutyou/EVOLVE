@@ -155,6 +155,23 @@
       ]
     }
   },
+  "legacyShortcuts": [
+    {
+      "kind": "venom",
+      "visible": true,
+      "centered": true
+    },
+    {
+      "kind": "bio",
+      "visible": true,
+      "centered": true
+    },
+    {
+      "kind": "frost",
+      "visible": true,
+      "originalWarningPreserved": true
+    }
+  ],
   "success": true,
-  "tested_build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301"
+  "tested_build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624"
 }

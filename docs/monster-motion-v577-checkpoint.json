@@ -1,13 +1,13 @@
 {
   "task": "Full-screen intimidating front-facing boss warning cinematics",
-  "status": "All local checks passed; publishing WEB-13 boss cinematics to GitHub Pages",
-  "progress": 80,
+  "status": "Cinematics and legacy boss shortcuts verified; publishing final compatibility build",
+  "progress": 90,
   "version": "V575-WEB-13-BOSS-CINEMATIC",
-  "build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
+  "build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",
   "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/f39066dd396f9942feb3906774df85e10ce27b244aaeb7c29802866d44eed5fd.js",
+  "engine": "dist/assets/929efe5ea18e03f6f8eb28f7491e5b03db8b47e40b3cf00f4c39387130087afb.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": "web/boss-cinematic-v580.js",
   "scope": "Full-screen warning cinematics with four new intimidating front-facing poses for each BIO/VENOM boss, red moving warning tape, localized phase/countdown and three-second transition into the existing centered boss arena.",
@@ -22,7 +22,7 @@
     "Ignore audio",
     "No subagents unless explicitly requested"
   ],
-  "next": "Confirm remote browser regression and Pages deployment, then verify live engine and both new atlases",
+  "next": "Confirm final complete regression workflow and public engine/artwork hashes",
   "legacy_atlases": [
     {
       "name": "A",
@@ -143,7 +143,12 @@
     "visual_review": "frontal poses, full viewport, legible Korean, warning tape, name and countdown inspected",
     "cinematic_browser_report": "docs/BOSS_CINEMATIC_BROWSER_REPORT.json",
     "regression_browser_report": "docs/WEB13_REGRESSION_BROWSER_REPORT.json",
-    "device_browser_report": "docs/WEB13_DEVICE_BROWSER_REPORT.json"
+    "device_browser_report": "docs/WEB13_DEVICE_BROWSER_REPORT.json",
+    "legacy_BIO_shortcut": "passed",
+    "legacy_VENOM_shortcut": "passed",
+    "other_legacy_boss_warning": "passed",
+    "local_regression_build": "41cc73a8d046946c565b0f7070e4ede89113e01aafed5e99048b9c5074842301",
+    "final_cinematic_browser_build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624"
   },
   "baseline_backup": "backup/web12-before-boss-cinematic-20261022",
   "art_metadata": "web/boss-cinematic-art-v580.json",

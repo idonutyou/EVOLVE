@@ -35,6 +35,7 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineTopV580,.cineCaptionV580,.cineNameV580 small{font-family:monospace,'EVOLVE Hangul',sans-serif}
 @media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineCaptionV580{bottom:39%;font-size:10px}.cineTopV580{top:5%}.cineNameV580{top:77%;font-size:clamp(32px,5.6vw,60px)}.cineNameV580 small{margin-top:8px}.cineBottomV580{bottom:3%}.cineSealV580{height:61px;width:61px}}
 `;document.head.appendChild(cinematicStyleV580);
+const cinematicLegacyEnsureV580=ensureBossWarningV526,cinematicLegacyWarningV580=warningTestV550;
 ensureBossWarningV526=function(){
  if(bossWarningNodeV526?.dataset.cinematicV580)return bossWarningNodeV526;
  bossWarningNodeV526?.remove();const el=document.createElement('div');el.id='bossWarningV526';el.hidden=true;el.dataset.cinematicV580='1';el.dataset.i18nIgnore='';el.setAttribute('role','status');el.setAttribute('aria-label','Boss incoming');
@@ -60,6 +61,12 @@ setBossWarningV526=function(on){
  el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';el.querySelector('.cinePhaseV580').textContent='PHASE '+spec.phase+' / '+(ko?'봉쇄 경보':'LOCKDOWN ALERT');el.querySelector('.cineCaptionV580').textContent=ko?'중앙 구역 · 생체 반응 급증':'CENTRAL SECTOR · MASSIVE BIO-SIGNATURE';
  const pose=cinematicPoseV580(elapsed,reduced);el.querySelector('.cineCountV580').textContent=String(pose.count);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-tape',String(reduced?0:-elapsed*27)+'px');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
  player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);
+};
+// Legacy boss shortcuts have their own warning clock; route BIO/VENOM into the same film.
+warningTestV550=function(){
+ const s=bossTestV550;if(!s||s.state!=='warning')return;
+ if(!['bio','venom'].includes(s.kind)){if(bossWarningNodeV526?.dataset.cinematicV580){bossWarningNodeV526.remove();bossWarningNodeV526=null;cinematicStateV580.active=false;}const factory=ensureBossWarningV526;try{ensureBossWarningV526=cinematicLegacyEnsureV580;return cinematicLegacyWarningV580();}finally{ensureBossWarningV526=factory;}}
+ const clock=t,spec=stageSpecV526;try{t=297+s.elapsed;stageSpecV526=(...args)=>({...spec(...args),bossKind:s.kind,phase:s.phase});setBossWarningV526(running&&!paused&&!choosing&&!rewardChoosing&&!ended);}finally{t=clock;stageSpecV526=spec;}
 };
 const cinematicUpdateBaseV580=update;update=function(dt,...args){if(cinematicStateV580.active&&running&&!paused&&!ended&&!choosing&&!rewardChoosing){cinematicClearInputV580();player.inv=Math.max(player.inv,Math.max(0,dt)+.18);}return cinematicUpdateBaseV580(dt,...args)};
 window.__EVOLVE_CINEMATIC_V580__={ready:cinematicReadyV580,read:()=>({...cinematicStateV580,ready:cinematicFramesV580.size===2,error:cinematicErrorV580,frameCounts:Object.fromEntries([...cinematicFramesV580].map(([k,v])=>[k,v.length])),visible:!!bossWarningNodeV526&&!bossWarningNodeV526.hidden})};
