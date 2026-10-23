@@ -4,7 +4,7 @@
   "baseline_version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
   "progress": 70,
-  "status": "User correction received before deployment: match VENOM reference proportions exactly and remove all poison from BIO; preparing dry-metal BIO replacement",
+  "status": "Execution environment failed; exact generated assets located and latest English-name/Korean-label source saved; recovering artwork and browser verification in existing GitHub compute",
   "request": "글씨 이걸로 바꿔",
   "reference": "docs/reference-lettering-v584.png",
   "reference_file_id": "file_000000001ae082069fe8b97c81961b3d",
@@ -14,7 +14,7 @@
     "web/warning-branding-v581.js",
     "web/warning-branding-art-v581.json"
   ],
-  "next": "Finish corrected BIO asset, apply measured VENOM height scale and verify both before automatic deployment",
+  "next": "Recover exact originals, run browser checks and deploy automatically",
   "physical_Galaxy_S23_plus_tested": false,
   "image_generation": {
     "mode": "built-in image_gen",
@@ -190,8 +190,10 @@
   "visual_proof": "docs/reference-lettering-venom-v584.png",
   "latest_user_correction": "venom titan 내가 준 비율 맞춰 더 길지 않게 해 그리고 바이오는 독이 아니니까 베놈처럼 글씨에 독이 있으면 안 되지",
   "corrections_pending": {
-    "venom": "Use measured visible lettering aspect from original reference; do not lengthen vertically",
-    "bio": "Neutral dry silver metal only; remove every green poison effect and liquid drip"
+    "venom": "Native Canvas height_scale 0.631868131868132 for reference 4.3333333333:1",
+    "bio": "Use generated silver BIO with subtle crimson regenerative seams; no poison",
+    "locale": "Keep English boss names in both locales; translate warning, breach, phase and subtitle only"
   },
-  "proportions": "docs/reference-lettering-v584-proportions.json"
+  "proportions": "docs/reference-lettering-v584-proportions.json",
+  "latest_user_request": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자"
 }

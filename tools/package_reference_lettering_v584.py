@@ -35,7 +35,10 @@ def package():
     old_engine = report['attack_warnings']['engine']
     old_art = json.loads(base('web/warning-branding-art-v581.json'))
     art = json.loads((ROOT / 'web/warning-branding-art-v581.json').read_text())
-    assert len(art['sprites']) == 10
+    assert len(art['sprites']) == 14
+    assert {k for k in art['sprites'] if k.endswith('_ko')} == {'warning_ko', 'breach_ko', 'phase_ko', 'subtitle_ko'}
+    assert art['sprites']['venom']['height_scale'] == 0.631868131868132
+    assert art['sprites']['bio']['atlas'] == 'bio_regeneration'
     assert art['sprites']['crest'] == old_art['sprites']['crest']
     assert art['atlases']['crest_digits'] == old_art['atlases']['crest_digits']
     for a in art['atlases'].values():
@@ -58,7 +61,9 @@ def package():
     raw = code.encode()
     sha = hashlib.sha256(raw).hexdigest()
     engine = 'assets/' + sha + '.js'
-    prior_engine = json.loads((d / 'verification.json').read_text())['attack_warnings']['engine']
+    prior_report = json.loads((d / 'verification.json').read_text())
+    prior_engine = prior_report['attack_warnings']['engine']
+    stale_art = {a['path'] for a in prior_report['painted_warning']['art']['atlases'].values()} - {a['path'] for a in art['atlases'].values()}
     (d / engine).write_bytes(raw)
     removed = {a['path'] for a in old_art['atlases'].values()} - {a['path'] for a in art['atlases'].values()}
     for p in removed:
@@ -85,7 +90,7 @@ def package():
     report['painted_warning'].update(baseline_commit=BASE, engine=engine, art=art, reference='1000027488.png', typography_only=True, crest_unchanged=True, remaining_original_images=len(kept_images), remaining_original_image_bytes_unchanged=True)
     report['attack_warnings']['engine'] = engine
     write(d / 'verification.json', report)
-    for p in removed | {old_engine, prior_engine} - {engine}:
+    for p in (removed | stale_art | {old_engine, prior_engine}) - {engine}:
         assert re.fullmatch(r'assets/[a-f0-9]{64}\.(js|png)', p)
         (d / p).unlink(missing_ok=True)
     p = ROOT / 'docs/reference-lettering-v584-checkpoint.json'

@@ -1,6 +1,6 @@
 {
   "task": "Apply user-supplied cinematic lettering design",
-  "status": "Final reference lettering inspected and verified in portrait and landscape; automatic upload and guarded deployment ready",
+  "status": "Execution environment failed; exact generated assets located and latest English-name/Korean-label source saved; recovering artwork and browser verification in existing GitHub compute",
   "progress": 70,
   "version": "V575-WEB-17-REFERENCE-LETTERING",
   "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
@@ -13,9 +13,9 @@
     "web/warning-branding-v581.js",
     "web/warning-branding-art-v581.json"
   ],
-  "scope": "글씨 이걸로 바꿔",
+  "scope": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자",
   "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Apply the attached lettering design on current WEB-16; preserve existing warning visibility/timing and all non-lettering art. Automatically upload and deploy.",
+  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Keep BIO TITAN and VENOM TITAN English in both locales. Use four Korean label crops, subtle crimson BIO regeneration and exact native VENOM aspect. Preserve WEB-16 windup-only warnings and all gameplay/art. Automatic upload and deployment authorized.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -26,7 +26,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Upload verified source/assets and run the full GitHub Pages deployment checks",
+  "next": "Recover exact originals, run browser checks and deploy automatically",
   "legacy_atlases": [
     {
       "name": "A",

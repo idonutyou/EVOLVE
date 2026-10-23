@@ -7,7 +7,38 @@ try{
  // Manual simulation steps own this timeline; screenshot speed must not advance it.
  await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>callback.name==='loop'?0:raf(callback)});
  await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1`,{waitUntil:'domcontentloaded',timeout:180000});await page.waitForFunction(()=>window.__EVOLVE_CINEMATIC_V580__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
- report.branding=await page.evaluate(async()=>{const api=window.__EVOLVE_PAINTED_WARNING_V581__;await api.ready;const sprites={};for(const name of ['bio','venom','warning','breach','phase','subtitle','crest','digit1','digit2','digit3']){const c=api.test.surface(name),pixels=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let clear=0,painted=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]===0)clear++;if(pixels[i]>200)painted++;}sprites[name]={clear,painted,width:c.width,height:c.height};}return{...api.read(),sprites};});assert.ok(report.branding.ready&&!report.branding.legacyFinalHUD);assert.equal(Object.keys(report.branding.sprites).length,10);assert.ok(Object.values(report.branding.sprites).every(s=>s.clear>0&&s.painted>0));
+ report.branding=await page.evaluate(async()=>{const api=window.__EVOLVE_PAINTED_WARNING_V581__;await api.ready;const sprites={};for(const name of ['bio','venom','warning','breach','phase','subtitle','crest','digit1','digit2','digit3','warning_ko','breach_ko','phase_ko','subtitle_ko']){const c=api.test.surface(name),pixels=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let clear=0,painted=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]===0)clear++;if(pixels[i]>200)painted++;}sprites[name]={clear,painted,width:c.width,height:c.height};}return{...api.read(),sprites};});assert.ok(report.branding.ready&&!report.branding.legacyFinalHUD);assert.equal(Object.keys(report.branding.sprites).length,14);assert.ok(Object.values(report.branding.sprites).every(s=>s.clear>0&&s.painted>0));
+
+ report.locales=await page.evaluate(()=>{
+  const brand=window.__EVOLVE_PAINTED_WARNING_V581__,film=window.__EVOLVE_CINEMATIC_V580__,i18n=window.EVOLVE_I18N,previous=i18n.getLanguage(),results=[];
+  const names=['bio','venom','warning','breach','phase','subtitle','crest','digit1','digit2','digit3','warning_ko','breach_ko','phase_ko','subtitle_ko'];
+  try{for(const language of ['en','ko'])for(const kind of ['bio','venom']){
+   i18n.setLanguage(language);film.test.show(kind,1.65);const ctx=document.querySelector('.cineOverlayV581').getContext('2d'),original=ctx.drawImage,drawn=[];
+   ctx.drawImage=function(surface,...args){const name=names.find(n=>brand.test.surface(n)===surface);if(name)drawn.push(name);return original.call(this,surface,...args)};
+   try{film.test.show(kind,1.65)}finally{ctx.drawImage=original}
+   results.push({language,kind,selected:brand.read().language,name:document.querySelector('.cineNameV580 span').textContent,aria:document.getElementById('bossWarningV526').getAttribute('aria-label'),drawn:[...new Set(drawn)]});
+  }}finally{i18n.setLanguage(previous);film.test.hide()}return results;
+ });
+ for(const item of report.locales){
+  assert.equal(item.selected,item.language);assert.equal(item.name,item.kind==='bio'?'BIO TITAN':'VENOM TITAN');assert.ok(item.aria.startsWith(item.name));assert.ok(item.drawn.includes(item.kind));
+  for(const label of ['warning','breach','phase','subtitle'])assert.ok(item.drawn.includes(label+(item.language==='ko'?'_ko':'')),JSON.stringify(item));
+  assert.ok(!item.drawn.some(n=>n==='bio_ko'||n==='venom_ko'));
+ }
+ report.wordmarks={};
+ for(const orientation of ['portrait','landscape']){
+  await page.setViewportSize(orientation==='portrait'?{width:393,height:852}:{width:852,height:393});
+  const audit=await page.evaluate(()=>{
+   const brand=window.__EVOLVE_PAINTED_WARNING_V581__,film=window.__EVOLVE_CINEMATIC_V580__,results={};
+   for(const kind of ['venom','bio']){
+    film.test.show(kind,1.65);const ctx=document.querySelector('.cineOverlayV581').getContext('2d'),original=ctx.drawImage,s=brand.test.surface(kind),pixels=s.getContext('2d').getImageData(0,0,s.width,s.height).data;let bounds=[s.width,s.height,-1,-1],green=0,opaque=0,draw=null;
+    for(let y=0;y<s.height;y++)for(let x=0;x<s.width;x++){const i=(y*s.width+x)*4,r=pixels[i],g=pixels[i+1],b=pixels[i+2],a=pixels[i+3];if(a>20&&Math.max(r,g,b)>100){bounds=[Math.min(bounds[0],x),Math.min(bounds[1],y),Math.max(bounds[2],x),Math.max(bounds[3],y)]}if(a>200){opaque++;if(g>100&&g>r*1.25&&g>b*1.15)green++;}}
+    ctx.drawImage=function(surface,...args){if(surface===s)draw=args;return original.call(this,surface,...args)};
+    try{film.test.show(kind,1.65)}finally{ctx.drawImage=original}
+    const inkWidth=bounds[2]-bounds[0]+1,inkHeight=bounds[3]-bounds[1]+1;results[kind]={inkBounds:bounds,source:[s.width,s.height],destination:draw,visibleAspect:(inkWidth/s.width*draw[2])/(inkHeight/s.height*draw[3]),strongGreenPixels:green,opaquePixels:opaque};
+   }film.test.hide();return results;
+  });report.wordmarks[orientation]=audit;assert.ok(Math.abs(audit.venom.visibleAspect-13/3)<.015,JSON.stringify(audit.venom));assert.equal(audit.bio.strongGreenPixels,0);
+ }
+ await page.setViewportSize({width:393,height:852});
  report.art=await page.evaluate(()=>{const api=window.__EVOLVE_CINEMATIC_V580__,hash=c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=2166136261;for(let i=0;i<d.length;i+=13)n=Math.imul(n^d[i],16777619);return n>>>0};return Object.fromEntries(['bio','venom'].map(kind=>[kind,{hashes:[0,1,2,3].map(i=>hash(api.test.surface(kind,i))),sizes:[0,1,2,3].map(i=>{const c=api.test.surface(kind,i);return[c.width,c.height]})}]))});for(const v of Object.values(report.art))assert.equal(new Set(v.hashes).size,4);
  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
  for(const orientation of ['portrait','landscape']){
