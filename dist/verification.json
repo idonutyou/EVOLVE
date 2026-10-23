@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-17-REFERENCE-LETTERING",
+  "version": "V575-WEB-18-HIDDEN-ADMIN",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 270845,
-  "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
+  "index_bytes": 271721,
+  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
   "image_assets": 986,
   "cached_files": 1013,
-  "cached_bytes": 349558480,
+  "cached_bytes": 349562367,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
+    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -619,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
+    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -637,5 +637,18 @@
       "web/attack-warning-v582.js",
       "web/active-hazards-v583.js"
     ]
+  },
+  "admin_mode": {
+    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+    "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
+    "unlock": "five consecutive footer codex button clicks",
+    "default_enabled": false,
+    "session_only": true,
+    "normal_start_stage": 1,
+    "normal_start_level": 1,
+    "normal_progress_key": "EVOLVE_V575_TEST_NORMAL_PROGRESS_V585",
+    "saved_test_preferences_ignored_in_normal_play": true,
+    "all_image_bytes_unchanged": true,
+    "existing_maps_and_collision_data_unchanged": true
   }
 }

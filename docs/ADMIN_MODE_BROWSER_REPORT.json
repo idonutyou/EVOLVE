@@ -1,0 +1,117 @@
+{
+  "errors": [],
+  "failedRequests": [],
+  "checks": [
+    "normal defaults ignore old test stage, map and disabled natural-spawn preference without erasing them",
+    "real normal battle starts at stage 1 and character level 1 with natural enemies and no administrator controls",
+    "actual stage-one timer completion unlocks stage two in normal progress",
+    "ordinary codex still opens; four presses stay normal; another tab resets the count; fifth consecutive real press enables admin",
+    "admin test stage/map and collision editor work; exiting restores normal campaign without advancing its progress",
+    "reload hides admin again, earned progress persists, and landscape stays clean"
+  ],
+  "initial": {
+    "admin": {
+      "enabled": false,
+      "taps": 0,
+      "required": 5,
+      "normal": {
+        "unlocked": 1,
+        "stage": 1
+      },
+      "stage": 1,
+      "selected": 1,
+      "level": 1
+    },
+    "test": {
+      "version": 575,
+      "stage": 1,
+      "selected": 1,
+      "map": null,
+      "mapLabel": "기존 본편 지형",
+      "override": "auto",
+      "natural": true,
+      "busy": false,
+      "preparing": false,
+      "running": false,
+      "paused": false,
+      "ended": false,
+      "seconds": 0,
+      "ordinary": 0,
+      "testAlive": 0,
+      "queued": 0,
+      "batch": null,
+      "encounter": null,
+      "boss": null,
+      "warning": false,
+      "arena": false,
+      "fps": null,
+      "status": "스테이지와 맵을 선택해 주세요.",
+      "ready": true,
+      "panelOpen": false
+    },
+    "meta": {
+      "dna": 1234,
+      "hp": 0,
+      "dmg": 0,
+      "pickup": 0,
+      "speed": 0,
+      "armor": 0,
+      "reroll": 0,
+      "route": "none",
+      "stage": 99,
+      "unlockedStageV522": 99,
+      "homeStageV522": 1,
+      "clears": 0,
+      "cryoMastery": 0,
+      "geneMastery": 0,
+      "infernoMastery": 0,
+      "origin": "prime",
+      "seen": [],
+      "claimedStages": [],
+      "stageVitality": 0,
+      "relicLuck": 0,
+      "organLuck": 0,
+      "apexGenes": 0,
+      "contractStreak": 0,
+      "bestContractStreak": 0,
+      "nemesis": null,
+      "nemesisDefeats": 0,
+      "memoryTraits": {
+        "arm": 0,
+        "mouth": 0,
+        "tail": 0,
+        "core": 0,
+        "speed": 0
+      },
+      "activeMemory": "none",
+      "feedback": {
+        "sound": false,
+        "haptic": false,
+        "shake": 2,
+        "flash": 2,
+        "reducedMotion": false,
+        "damageNumbers": true,
+        "highContrast": false,
+        "graphics": "quality",
+        "perfInfo": false
+      }
+    },
+    "panel": "{\"map\":\"biolab\",\"natural\":false}"
+  },
+  "earned": {
+    "admin": {
+      "enabled": false,
+      "taps": 0,
+      "required": 5,
+      "normal": {
+        "unlocked": 2,
+        "stage": 1
+      },
+      "stage": 1,
+      "selected": 1,
+      "level": 1
+    },
+    "ended": true
+  },
+  "success": true
+}
