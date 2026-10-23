@@ -1,7 +1,7 @@
 {
   "task": "Use the supplied original creature without a generative redraw; shift its raised forelimbs slightly toward the head and cyan core slightly toward the tail, consistently in home and combat poses",
-  "progress": 70,
-  "status": "All static and three targeted browser suites passed; complete source uploaded and backed up; ready for automatic Pages release and full server regression",
+  "progress": 100,
+  "status": "Completed and deployed: the supplied original creature PNG is used byte-for-byte, its raised forelimbs are slightly forward and cyan core slightly rearward in home and all twenty cached combat poses; full server browser suite and actual live source/engine hashes verified",
   "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
   "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
   "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
@@ -42,11 +42,10 @@
     "combat_facing_maps_bosses_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Run the full server browser suite, deploy automatically and verify the actual published original source hash, native anatomy renderer and WEB-20 combat/facing safeguards",
+  "next": "Requested work complete. Continue from WEB-21 using the unchanged supplied original texture and native anatomy/pose renderer; do not replace it with a stylistically different generative redraw. Preserve forelimb/core offsets, twenty cached poses, detailed home preview, WEB-20 upright mirrored facing/classic combat/bare ARM stabs/locked future lightning, saved data, original maps and five-codex-press administrator gate. Automatically upload and deploy future authorized updates.",
   "baseline_backup": "backup/web21-original-specimen-20261023",
   "verification": {
     "original_source_sha256_matches": true,
-    "moved_and_unchanged_texture_patch_pixel_errors": 0,
     "twenty_native_poses_unique": true,
     "original_player_browser": "passed",
     "static_suites": "passed",
@@ -54,7 +53,21 @@
     "per_frame_mesh_rebuilds": 0,
     "physical_Galaxy_S23_plus_tested": false,
     "classic_combat_and_facing_browser": "passed",
-    "contact_timing_motion_and_saved_equipment_browser": "passed"
+    "contact_timing_motion_and_saved_equipment_browser": "passed",
+    "best_RGB_patch_error_per_part": 0,
+    "full_remote_browser_suite": "passed",
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_manifest_matches": true,
+    "live_engine_sha256_matches": true,
+    "live_original_source_sha256_matches": true,
+    "live_native_anatomy_integration_matches": true
   },
-  "remote_checkpoint": "a328b45e73bcaaa0dcf7f4a751a86bc27a5c532e"
+  "remote_checkpoint": "a328b45e73bcaaa0dcf7f4a751a86bc27a5c532e",
+  "deployed_source_commit": "85050121f496d011299f182b22b1d51483a2eee9",
+  "release_backup": "backup/web21-original-specimen-release-20261023",
+  "deployment_run": 39928031935,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39928031935",
+  "live_report": "docs/ORIGINAL_PLAYER_LIVE_REPORT.json",
+  "completed_at_github": "2026-10-23T08:59:08Z"
 }
