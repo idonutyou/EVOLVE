@@ -17,19 +17,37 @@
       "height": 1254,
       "alpha": true,
       "draft": false
+    },
+    "bio_regeneration": {
+      "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+      "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+      "bytes": 1677374,
+      "width": 2033,
+      "height": 773,
+      "alpha": true,
+      "draft": false
+    },
+    "korean_labels": {
+      "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+      "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+      "bytes": 1663416,
+      "width": 1774,
+      "height": 887,
+      "alpha": true,
+      "draft": false
     }
   },
   "sprites": {
     "bio": {
-      "atlas": "lettering",
+      "atlas": "bio_regeneration",
       "crop": [
-        2,
-        162,
-        442,
-        186
+        31,
+        107,
+        1971,
+        563
       ],
       "cache_height": 210,
-      "height_scale": 0.74
+      "height_scale": 1
     },
     "venom": {
       "atlas": "lettering",
@@ -40,7 +58,7 @@
         191
       ],
       "cache_height": 210,
-      "height_scale": 0.74
+      "height_scale": 0.631868131868132
     },
     "warning": {
       "atlas": "lettering",
@@ -122,6 +140,46 @@
         292
       ],
       "cache_height": 112
+    },
+    "warning_ko": {
+      "atlas": "korean_labels",
+      "crop": [
+        228,
+        361,
+        447,
+        230
+      ],
+      "cache_height": 96
+    },
+    "breach_ko": {
+      "atlas": "korean_labels",
+      "crop": [
+        986,
+        295,
+        715,
+        296
+      ],
+      "cache_height": 64
+    },
+    "phase_ko": {
+      "atlas": "korean_labels",
+      "crop": [
+        171,
+        591,
+        503,
+        258
+      ],
+      "cache_height": 48
+    },
+    "subtitle_ko": {
+      "atlas": "korean_labels",
+      "crop": [
+        893,
+        591,
+        834,
+        259
+      ],
+      "cache_height": 48
     }
   }
 }

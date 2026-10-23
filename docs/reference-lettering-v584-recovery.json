@@ -1,0 +1,45 @@
+{
+  "original_bytes_recovered": true,
+  "bio_sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+  "korean_sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+  "bio_bytes": 1677374,
+  "korean_bytes": 1663416,
+  "korean_crops": {
+    "warning_ko": [
+      228,
+      361,
+      447,
+      230
+    ],
+    "breach_ko": [
+      986,
+      295,
+      715,
+      296
+    ],
+    "phase_ko": [
+      171,
+      591,
+      503,
+      258
+    ],
+    "subtitle_ko": [
+      893,
+      591,
+      834,
+      259
+    ]
+  },
+  "unused_korean_boss_names": true,
+  "boss_names": {
+    "en": [
+      "BIO TITAN",
+      "VENOM TITAN"
+    ],
+    "ko": [
+      "BIO TITAN",
+      "VENOM TITAN"
+    ]
+  },
+  "physical_Galaxy_S23_plus_tested": false
+}

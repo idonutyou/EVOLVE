@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249072372,
   "index_bytes": 270845,
-  "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
-  "image_assets": 984,
-  "cached_files": 1011,
-  "cached_bytes": 346216333,
+  "build": "9718961a80a212ac8b44605e9c43d52a77639d9decec1d82ae864e1594b890d0",
+  "image_assets": 986,
+  "cached_files": 1013,
+  "cached_bytes": 349558480,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/6bc4d9bded53337765f298b21be6ec486d02d9b75e64717aa2952d055f9e17eb.js",
+    "engine": "assets/89a4555734f252668aafbfdb3429e53c09a12242fd8300a13976faa990da580e.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -428,19 +428,37 @@
           "height": 1254,
           "alpha": true,
           "draft": false
+        },
+        "bio_regeneration": {
+          "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+          "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+          "bytes": 1677374,
+          "width": 2033,
+          "height": 773,
+          "alpha": true,
+          "draft": false
+        },
+        "korean_labels": {
+          "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+          "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+          "bytes": 1663416,
+          "width": 1774,
+          "height": 887,
+          "alpha": true,
+          "draft": false
         }
       },
       "sprites": {
         "bio": {
-          "atlas": "lettering",
+          "atlas": "bio_regeneration",
           "crop": [
-            2,
-            162,
-            442,
-            186
+            31,
+            107,
+            1971,
+            563
           ],
           "cache_height": 210,
-          "height_scale": 0.74
+          "height_scale": 1
         },
         "venom": {
           "atlas": "lettering",
@@ -451,7 +469,7 @@
             191
           ],
           "cache_height": 210,
-          "height_scale": 0.74
+          "height_scale": 0.631868131868132
         },
         "warning": {
           "atlas": "lettering",
@@ -533,6 +551,46 @@
             292
           ],
           "cache_height": 112
+        },
+        "warning_ko": {
+          "atlas": "korean_labels",
+          "crop": [
+            228,
+            361,
+            447,
+            230
+          ],
+          "cache_height": 96
+        },
+        "breach_ko": {
+          "atlas": "korean_labels",
+          "crop": [
+            986,
+            295,
+            715,
+            296
+          ],
+          "cache_height": 64
+        },
+        "phase_ko": {
+          "atlas": "korean_labels",
+          "crop": [
+            171,
+            591,
+            503,
+            258
+          ],
+          "cache_height": 48
+        },
+        "subtitle_ko": {
+          "atlas": "korean_labels",
+          "crop": [
+            893,
+            591,
+            834,
+            259
+          ],
+          "cache_height": 48
         }
       }
     },
@@ -561,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/6bc4d9bded53337765f298b21be6ec486d02d9b75e64717aa2952d055f9e17eb.js",
+    "engine": "assets/89a4555734f252668aafbfdb3429e53c09a12242fd8300a13976faa990da580e.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
