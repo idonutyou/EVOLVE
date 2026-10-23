@@ -349,5 +349,11 @@
     "drawn": 1
   },
   "success": true,
-  "tested_build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a"
+  "tested_build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+  "remote_verification": {
+    "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+    "source_commit": "3c9295acc817a60820c780a5f8c970033296e12f",
+    "deployment_run": 39880682546,
+    "browser_checks": "passed"
+  }
 }

@@ -1,10 +1,10 @@
 {
   "task": "Red filled attack warnings above map foreground",
-  "status": "WEB-15 local checks passed; user-authorized automatic upload and deployment in progress",
-  "progress": 80,
+  "status": "WEB-15 automatically uploaded and deployed; remote browser checks passed and live engine, index and manifest match",
+  "progress": 100,
   "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
   "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
-  "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
+  "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
   "engine": "dist/assets/7a76392f1f5405b71d76cf83246f3a63332d44512bf1b38ce4e5660e4159d754.js",
@@ -23,7 +23,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Verify deployment success and actual live build and engine hashes before marking 100%",
+  "next": "Review WEB-15 user feedback. Continue routine requested EVOLVE changes with automatic upload and deployment through the existing workflow; preserve approved images, map collisions and save keys.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -46,13 +46,12 @@
   ],
   "active_checkpoint": "docs/attack-warnings-v582-checkpoint.json",
   "previous_deployment": {
-    "version": "V575-WEB-13-BOSS-CINEMATIC",
-    "build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",
-    "main_checkpoint_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
-    "deployed_source_commit": "68c71ea31ea43adbe3e4e4f39750ec5af1abbd1e",
-    "deployment_run": 39780550927,
-    "checkpoint": "docs/boss-cinematic-v580-checkpoint.json",
-    "backup": "backup/web13-boss-cinematic-20261022"
+    "version": "V575-WEB-14-PAINTED-WARNING",
+    "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+    "deployed_source_commit": "cf24db99640206778962d5ca139b821db9988a4d",
+    "deployment_run": 39805024585,
+    "checkpoint": "docs/warning-branding-v581-checkpoint.json",
+    "backup": "backup/web14-painted-warning-20261023"
   },
   "web12_sources": [
     "web/red-pulse-v579.js",
@@ -129,7 +128,7 @@
     "physical_Galaxy_S23_plus_tested": false,
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
-    "remote_regression_build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+    "remote_regression_build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
     "pages_deployment": "success",
     "live_build_matches": true,
     "live_engine_sha256_matches": true,
@@ -139,9 +138,14 @@
     "obsolete_asset_responses": [
       404,
       404
-    ]
+    ],
+    "attack_warnings": "docs/ATTACK_WARNINGS_BROWSER_REPORT.json",
+    "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
+    "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
+    "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
+    "live_manifest_matches": true
   },
-  "baseline_backup": "backup/web13-before-painted-warning-20261022",
+  "baseline_backup": "backup/web14-before-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
   "image_generation": {
     "mode": "built-in image_gen",
@@ -167,20 +171,15 @@
       }
     }
   },
-  "deployed_source_commit": "cf24db99640206778962d5ca139b821db9988a4d",
-  "deployment_run": 39805024585,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39805024585",
-  "release_backup": "backup/web14-painted-warning-20261023",
+  "deployed_source_commit": "3c9295acc817a60820c780a5f8c970033296e12f",
+  "deployment_run": 39880682546,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39880682546",
+  "release_backup": "backup/web15-red-warnings-20261023",
   "stage_backups": {
-    "10": "c59c632e23a4bfd0531473626d0b9d8b2493fd48",
-    "20": "9a45f023ee683e05c732c908e1e72267eff4fddc",
-    "30": "72e746447d9aad34c06cc0302b77cb2b7d44ec7b",
-    "40": "5b9800c419406dae040286160d1f29748fed6e27",
-    "50": "1d8b8ae0574662008e685357b76ed97b1166d568",
-    "60": "87ec79f173b0a0e22b5256f3c61ef50489a12cf7",
-    "70": "4d3c809fd8ab90bfeee4114e87eaaf2fc3a7d58c",
-    "80": "cf24db99640206778962d5ca139b821db9988a4d",
-    "90": "2ac7e4f59f375d036149a74a9ee94cfca2b14bff"
+    "10": "4ad734f33a16ef7043d8c7476fb1286bea694a06",
+    "20": "82dd5a5a5020402a825f6653bf7139fc24852ac5",
+    "80": "3c9295acc817a60820c780a5f8c970033296e12f",
+    "90": "3c9295acc817a60820c780a5f8c970033296e12f"
   },
-  "live_report": "docs/PAINTED_WARNING_LIVE_REPORT.json"
+  "live_report": "docs/RED_ATTACK_WARNINGS_LIVE_REPORT.json"
 }
