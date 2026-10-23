@@ -4206,8 +4206,8 @@ function update(dt){
       if((b.x-e.x)**2+(b.y-e.y)**2<rr*rr){
         // V520: one piercing projectile can damage each BIO TITAN only once.
         if(isBioTitanV435(e)){if(e.arrivalInvuln)return;const hits=b.bioHitsV520||(b.bioHitsV520=new WeakSet());if(hits.has(e))return;hits.add(e);}
-        upgradeBulletHitV593(b,e);hurtEnemy(e,b.dmg,b.kind==='artillery'?'arm':b.kind);
-        if(b.blast){const bm=Number.isFinite(b.blastMul)?b.blastMul:.38,blast2=b.blast*b.blast;enemyEachCandidateCircleV425(e.x,e.y,b.blast+132,x=>{if(x!==e&&!x.dead&&basicShotCanHitV552(b,x)&&dist2(e,x)<blast2)hurtEnemy(x,b.dmg*bm,b.kind==='acid'?'acid':'arm')});particles.push({kind:'deathRing',x:b.x,y:b.y,r:3,max:b.blast,life:.18,maxLife:.18})}
+        upgradeBulletHitV593(b,e);upgradeProjectileDamageV593(e,b.dmg,b.kind==='artillery'?'arm':b.kind,b);
+        if(b.blast){const bm=Number.isFinite(b.blastMul)?b.blastMul:.38,blast2=b.blast*b.blast;enemyEachCandidateCircleV425(e.x,e.y,b.blast+132,x=>{if(x!==e&&!x.dead&&basicShotCanHitV552(b,x)&&dist2(e,x)<blast2)upgradeProjectileDamageV593(x,b.dmg*bm,b.kind==='acid'?'acid':'arm',b)});particles.push({kind:'deathRing',x:b.x,y:b.y,r:3,max:b.blast,life:.18,maxLife:.18})}
         b.pierce--;if(b.kind==='acid'){e.slow=Math.max(e.slow||0,b.slowDur||.90);for(let i=0;i<3;i++)particles.push({kind:'acid',x:b.x,y:b.y,vx:rand(-30,30),vy:rand(-30,30),r:rand(2,5),life:rand(.2,.45)})}if(b.pierce<=0){if(upgradeBounceV593(b,e))return false;b.life=0;return false;}
       }
     });
@@ -13199,9 +13199,11 @@ function upgradeBounceV593(b,source){
  if(!target)return false;const a=Math.atan2(target.y-b.y,target.x-b.x),speed=Math.hypot(b.vx,b.vy)||344;
  b.vx=Math.cos(a)*speed;b.vy=Math.sin(a)*speed;b.pierce=1;b.upgradeBouncesV593--;b.rangeOriginXV552=b.x;b.rangeOriginYV552=b.y;b.rangeLeftV552=range;b.basicRangeV552=range;b.life=range/speed+.05;b.upgradeBouncedThisStepV593=true;return true;
 }
+let upgradeDamageSourceV593=null;
+function upgradeProjectileDamageV593(e,damage,kind,bullet){const before=upgradeDamageSourceV593;upgradeDamageSourceV593=bullet.upgradeHitsV593?'gun':null;try{return hurtEnemy(e,damage,kind);}finally{upgradeDamageSourceV593=before;}}
 const upgradeHurtBaseV593=hurtEnemy;
 hurtEnemy=function(e,damage,kind){
- const blade=kind==='arm'&&armItemModeV589()!=='cannon',gun=kind==='arm'&&armItemModeV589()==='cannon';
+ const firedGun=upgradeDamageSourceV593==='gun',blade=kind==='arm'&&!firedGun&&armItemModeV589()!=='cannon',gun=kind==='arm'&&(firedGun||armItemModeV589()==='cannon');
  if(blade){damage*=1+upgradeRunV593.bladeDamage;if(upgradeRunV593.bladeCrit>0&&Math.random()<upgradeRunV593.bladeCrit)damage*=2;}
  else if(gun)damage*=1+upgradeRunV593.gunDamage;
  const hp=e.hp;const result=upgradeHurtBaseV593(e,damage,kind);

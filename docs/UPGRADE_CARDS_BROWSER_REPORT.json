@@ -3,6 +3,7 @@
     "19 simple cards have 1–2 effect lines; rarity increments, five independent rarity boundaries, and +1/+2/+3/+4/+5 counts agree with actual stats",
     "real cannon volleys gain two projectiles, three pierces, a bounce and 30% range; damage rises by exactly 20%; body radius and visible size follow size cards; every level needs 12 XP",
     "an actual projectile pierces two different enemies, then ricochets to a third without repeatedly hitting the same enemy",
+    "a projectile already in flight keeps gun damage after changing to blades and cannot gain blade crit or bleeding",
     "blade crit caps at 100% and stops being offered; a real hit applies 15 bleed over 3 seconds; faster swings advance the real attack; regeneration heals once each five gameplay seconds",
     "real card clicks advance levels 2/10/100/1000 and preserve all three upgrades earned from 36 XP",
     "every ordinary appearance, elite and all seven boss images can be selected; exact selected ordinary/elite monsters spawn on clear terrain even in stage one with natural spawning disabled; admin guard works",
@@ -13,8 +14,8 @@
   "physical_Galaxy_S23_plus_tested": false,
   "build": {
     "version": "V575-WEB-26-UPGRADE-CARDS",
-    "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a",
-    "scriptBytes": 77559317
+    "build": "1f4aeeb5cf772cff438799fd448f5e8dde444250b282aa63ff4a1e3be016df8c",
+    "scriptBytes": 77559688
   },
   "cards": {
     "base": [
@@ -666,6 +667,12 @@
     "distinct": 3,
     "bouncesLeft": 0,
     "points": 29
+  },
+  "weaponSwitch": {
+    "expected": 15.84,
+    "actual": 15.839999999967404,
+    "bleeding": 0,
+    "mode": "blades"
   },
   "blade": {
     "critical": 220,

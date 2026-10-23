@@ -31,7 +31,7 @@
   },
   {
     "before": "hurtEnemy(e,b.dmg,b.kind==='artillery'?'arm':b.kind);",
-    "after": "upgradeBulletHitV593(b,e);hurtEnemy(e,b.dmg,b.kind==='artillery'?'arm':b.kind);",
+    "after": "upgradeBulletHitV593(b,e);upgradeProjectileDamageV593(e,b.dmg,b.kind==='artillery'?'arm':b.kind,b);",
     "count": 1
   },
   {
@@ -47,6 +47,11 @@
   {
     "before": "&&!B.spawning&&evolveAdminEnabledV585&&!B.natural)",
     "after": "&&!B.spawning&&!upgradeSpawnPermissionV593&&evolveAdminEnabledV585&&!B.natural)",
+    "count": 1
+  },
+  {
+    "before": "hurtEnemy(x,b.dmg*bm,b.kind==='acid'?'acid':'arm')",
+    "after": "upgradeProjectileDamageV593(x,b.dmg*bm,b.kind==='acid'?'acid':'arm',b)",
     "count": 1
   }
 ]

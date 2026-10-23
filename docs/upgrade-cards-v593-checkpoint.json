@@ -1,11 +1,11 @@
 {
-  "progress": 80,
+  "progress": 90,
   "version": "V575-WEB-26-UPGRADE-CARDS",
-  "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a",
-  "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
-  "status": "Local functional and visual verification passed; uploading for automatic publication",
+  "build": "1f4aeeb5cf772cff438799fd448f5e8dde444250b282aa63ff4a1e3be016df8c",
+  "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+  "status": "All original server checks passed; weapon-switch projectile regression fixed and locally verified",
   "rules": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
     "stylesheet": "assets/49aa091d7a8f17565c68a3c4808ac267e2e172ab27f1d3c7be8170476fe22181.css",
     "independent_stat_cards": 19,
@@ -129,13 +129,6 @@
     "new_image_assets": 1,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Automatically upload to main and online-v575, pass all server browser checks, deploy Pages and verify the published changed assets.",
-  "local_checks": [
-    "19 functional stat cards and real combat",
-    "23 monster catalog entries",
-    "12 XP through level 1000 and multiple overflow selections",
-    "ordinary quantity +30%",
-    "ARM persistence and home-only safe update smoke",
-    "994 original images byte exact"
-  ]
+  "next": "Upload corrected projectile source handling, await publication and verify actual Pages.",
+  "previous_publish_run": 39991307087
 }

@@ -124,9 +124,11 @@ function upgradeBounceV593(b,source){
  if(!target)return false;const a=Math.atan2(target.y-b.y,target.x-b.x),speed=Math.hypot(b.vx,b.vy)||344;
  b.vx=Math.cos(a)*speed;b.vy=Math.sin(a)*speed;b.pierce=1;b.upgradeBouncesV593--;b.rangeOriginXV552=b.x;b.rangeOriginYV552=b.y;b.rangeLeftV552=range;b.basicRangeV552=range;b.life=range/speed+.05;b.upgradeBouncedThisStepV593=true;return true;
 }
+let upgradeDamageSourceV593=null;
+function upgradeProjectileDamageV593(e,damage,kind,bullet){const before=upgradeDamageSourceV593;upgradeDamageSourceV593=bullet.upgradeHitsV593?'gun':null;try{return hurtEnemy(e,damage,kind);}finally{upgradeDamageSourceV593=before;}}
 const upgradeHurtBaseV593=hurtEnemy;
 hurtEnemy=function(e,damage,kind){
- const blade=kind==='arm'&&armItemModeV589()!=='cannon',gun=kind==='arm'&&armItemModeV589()==='cannon';
+ const firedGun=upgradeDamageSourceV593==='gun',blade=kind==='arm'&&!firedGun&&armItemModeV589()!=='cannon',gun=kind==='arm'&&(firedGun||armItemModeV589()==='cannon');
  if(blade){damage*=1+upgradeRunV593.bladeDamage;if(upgradeRunV593.bladeCrit>0&&Math.random()<upgradeRunV593.bladeCrit)damage*=2;}
  else if(gun)damage*=1+upgradeRunV593.gunDamage;
  const hp=e.hp;const result=upgradeHurtBaseV593(e,damage,kind);

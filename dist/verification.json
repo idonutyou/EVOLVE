@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249072372,
   "index_bytes": 271824,
-  "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a",
+  "build": "1f4aeeb5cf772cff438799fd448f5e8dde444250b282aa63ff4a1e3be016df8c",
   "image_assets": 994,
   "cached_files": 1024,
-  "cached_bytes": 356827482,
+  "cached_bytes": 356827853,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -412,7 +412,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -623,7 +623,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -643,7 +643,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -656,7 +656,7 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -677,7 +677,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -702,7 +702,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "original_player": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -738,7 +738,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "arm_items": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
     "source": "web/arm-items-v589.js",
     "implemented_ids": [
@@ -760,7 +760,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "movement_field": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
     "source": "web/movement-field-v590.js",
     "body_follows_actual_movement_only": true,
@@ -782,7 +782,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "horde_roles": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
     "ordinary_movement_multiplier": 0.5,
     "ordinary_spawn_multiplier": 1.95,
@@ -821,7 +821,7 @@
     "additional_web26_population_multiplier": 1.3
   },
   "visual_clarity": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
     "wave_and_spawn_decoration_rings_removed": true,
     "cpu_and_gpu_paths_updated": true,
@@ -844,7 +844,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "upgrade_cards": {
-    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
     "stylesheet": "assets/49aa091d7a8f17565c68a3c4808ac267e2e172ab27f1d3c7be8170476fe22181.css",
     "independent_stat_cards": 19,
