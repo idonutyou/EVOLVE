@@ -1,0 +1,35 @@
+name: Inspect WEB-17 lettering pixels
+on:
+  push:
+    branches: [online-v575]
+    paths: [".github/workflows/inspect-web17-lettering.yml"]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: online-v575
+          fetch-depth: 1
+      - name: Retain exact atlas pixels for visual inspection
+        run: |
+          python3 - <<'PY'
+          import base64,json
+          from pathlib import Path
+          p=Path('dist/assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png')
+          s=base64.b64encode(p.read_bytes()).decode()
+          d=Path('docs/web17-review');d.mkdir(exist_ok=True)
+          parts=[]
+          for i,start in enumerate(range(0,len(s),600000)):
+              q=d/f'korean-{i}.txt';q.write_text(s[start:start+600000]);parts.append(str(q))
+          (d/'index.json').write_text(json.dumps({'parts':parts,'bytes':p.stat().st_size})+'\n')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/web17-review
+          git commit -m "[skip ci] WEB-17: retain exact atlas pixels for final visual review"
+          git pull --rebase origin online-v575
+          git push origin HEAD:online-v575
