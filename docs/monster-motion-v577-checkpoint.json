@@ -1,7 +1,7 @@
 {
   "task": "Use the supplied original creature without a generative redraw; shift its raised forelimbs slightly toward the head and cyan core slightly toward the tail, consistently in home and combat poses",
-  "progress": 50,
-  "status": "Original image hash, actual pixel-preserving anatomy offsets, high-resolution home/parts previews, all twenty cached poses and normal play verified; original combat code unchanged; final contact/equipment regression and publication pending",
+  "progress": 70,
+  "status": "All static and three targeted browser suites passed; complete source uploaded and backed up; ready for automatic Pages release and full server regression",
   "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
   "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
   "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
@@ -42,7 +42,7 @@
     "combat_facing_maps_bosses_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Inspect original detail and both requested offsets, verify home and all twenty native combat poses, preserve WEB-20 facing/combat/lightning lock, automatically upload and publish",
+  "next": "Run the full server browser suite, deploy automatically and verify the actual published original source hash, native anatomy renderer and WEB-20 combat/facing safeguards",
   "baseline_backup": "backup/web21-original-specimen-20261023",
   "verification": {
     "original_source_sha256_matches": true,
@@ -52,6 +52,9 @@
     "static_suites": "passed",
     "all_987_existing_image_bytes_unchanged": true,
     "per_frame_mesh_rebuilds": 0,
-    "physical_Galaxy_S23_plus_tested": false
-  }
+    "physical_Galaxy_S23_plus_tested": false,
+    "classic_combat_and_facing_browser": "passed",
+    "contact_timing_motion_and_saved_equipment_browser": "passed"
+  },
+  "remote_checkpoint": "a328b45e73bcaaa0dcf7f4a751a86bc27a5c532e"
 }

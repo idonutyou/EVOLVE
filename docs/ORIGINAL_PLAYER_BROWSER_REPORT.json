@@ -6,212 +6,643 @@
     "assets": 1015,
     "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
   },
-  "original_player": {
-    "checks": [
-      "the actual supplied 1536px original PNG is used byte-for-byte; no generative redraw; detailed 1536px home preview and the existing 20-frame game cache allocation",
-      "actual pixel patches of both forelimbs translate forward 60/40 source pixels and the core moves back 24/18; unchanged body texture matches the supplied image; all twenty native poses are distinct",
-      "normal level-one play uses the same original creature, movement poses remain cached during real rendering, administrator UI stays hidden and future lightning stays disabled"
-    ],
-    "errors": [],
-    "failedRequests": [],
-    "physical_Galaxy_S23_plus_tested": false,
-    "art": {
-      "source": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
-      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
-      "sourceWidth": 1536,
-      "sourceHeight": 1536,
-      "previewSize": 1536,
-      "anatomyOffsets": {
-        "near_arm": [
-          60,
-          40
-        ],
-        "far_arm": [
-          60,
-          40
-        ],
-        "core": [
-          -24,
-          -18
-        ]
-      },
-      "frameBuilds": 20,
-      "redrawn": false,
-      "frameCacheBytes": 11796480,
-      "minimumTriangleAreaRatio": 0.120715,
-      "downloadedBytes": 343244,
-      "downloadedHash": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
-      "previewWidth": 1536
-    },
-    "identity": {
-      "parts": {
-        "near_arm": {
-          "offset": [
+  "static_suites": "passed",
+  "engine_scope_guard": "reverting only the replaced player module restores the complete WEB-20 engine byte-for-byte",
+  "browser_suites": {
+    "original-player-browser": {
+      "checks": [
+        "the actual supplied 1536px original PNG is used byte-for-byte; no generative redraw; detailed 1536px home preview and the existing 20-frame game cache allocation",
+        "actual pixel patches of both forelimbs translate forward 60/40 source pixels and the core moves back 24/18; unchanged body texture matches the supplied image; all twenty native poses are distinct",
+        "normal level-one play uses the same original creature, movement poses remain cached during real rendering, administrator UI stays hidden and future lightning stays disabled"
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "art": {
+        "source": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+        "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+        "sourceWidth": 1536,
+        "sourceHeight": 1536,
+        "previewSize": 1536,
+        "anatomyOffsets": {
+          "near_arm": [
             60,
             40
           ],
-          "samples": [
-            {
-              "x": 717,
-              "y": 205,
-              "error": 0
-            },
-            {
-              "x": 475,
-              "y": 467,
-              "error": 0
-            },
-            {
-              "x": 538,
-              "y": 467,
-              "error": 0.006802721088435374
-            },
-            {
-              "x": 553,
-              "y": 413,
-              "error": 0
-            },
-            {
-              "x": 581,
-              "y": 500,
-              "error": 0
-            },
-            {
-              "x": 462,
-              "y": 498,
-              "error": 0
-            }
-          ],
-          "bestError": 0
-        },
-        "far_arm": {
-          "offset": [
+          "far_arm": [
             60,
             40
           ],
-          "samples": [
-            {
-              "x": 1426,
-              "y": 577,
-              "error": 0
-            },
-            {
-              "x": 1319,
-              "y": 350,
-              "error": 0.021739130434782608
-            },
-            {
-              "x": 1315,
-              "y": 377,
-              "error": 0
-            },
-            {
-              "x": 1281,
-              "y": 349,
-              "error": 0
-            },
-            {
-              "x": 1238,
-              "y": 312,
-              "error": 0
-            },
-            {
-              "x": 1244,
-              "y": 343,
-              "error": 0
-            }
-          ],
-          "bestError": 0
-        },
-        "core": {
-          "offset": [
+          "core": [
             -24,
             -18
-          ],
-          "samples": [
-            {
-              "x": 825,
-              "y": 576,
-              "error": 0
-            },
-            {
-              "x": 795,
-              "y": 564,
-              "error": 0
-            },
-            {
-              "x": 905,
-              "y": 659,
-              "error": 0
-            },
-            {
-              "x": 908,
-              "y": 692,
-              "error": 0
-            },
-            {
-              "x": 838,
-              "y": 598,
-              "error": 0
-            },
-            {
-              "x": 824,
-              "y": 623,
-              "error": 0
-            }
-          ],
-          "bestError": 0
+          ]
         },
-        "fixed": {
-          "offset": [
-            0,
-            0
+        "frameBuilds": 20,
+        "redrawn": false,
+        "frameCacheBytes": 11796480,
+        "minimumTriangleAreaRatio": 0.120715,
+        "downloadedBytes": 343244,
+        "downloadedHash": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+        "previewWidth": 1536
+      },
+      "identity": {
+        "parts": {
+          "near_arm": {
+            "offset": [
+              60,
+              40
+            ],
+            "samples": [
+              {
+                "x": 717,
+                "y": 205,
+                "error": 0
+              },
+              {
+                "x": 475,
+                "y": 467,
+                "error": 0
+              },
+              {
+                "x": 538,
+                "y": 467,
+                "error": 0.006802721088435374
+              },
+              {
+                "x": 553,
+                "y": 413,
+                "error": 0
+              },
+              {
+                "x": 581,
+                "y": 500,
+                "error": 0
+              },
+              {
+                "x": 462,
+                "y": 498,
+                "error": 0
+              }
+            ],
+            "bestError": 0
+          },
+          "far_arm": {
+            "offset": [
+              60,
+              40
+            ],
+            "samples": [
+              {
+                "x": 1426,
+                "y": 577,
+                "error": 0
+              },
+              {
+                "x": 1319,
+                "y": 350,
+                "error": 0.021739130434782608
+              },
+              {
+                "x": 1315,
+                "y": 377,
+                "error": 0
+              },
+              {
+                "x": 1281,
+                "y": 349,
+                "error": 0
+              },
+              {
+                "x": 1238,
+                "y": 312,
+                "error": 0
+              },
+              {
+                "x": 1244,
+                "y": 343,
+                "error": 0
+              }
+            ],
+            "bestError": 0
+          },
+          "core": {
+            "offset": [
+              -24,
+              -18
+            ],
+            "samples": [
+              {
+                "x": 825,
+                "y": 576,
+                "error": 0
+              },
+              {
+                "x": 795,
+                "y": 564,
+                "error": 0
+              },
+              {
+                "x": 905,
+                "y": 659,
+                "error": 0
+              },
+              {
+                "x": 908,
+                "y": 692,
+                "error": 0
+              },
+              {
+                "x": 838,
+                "y": 598,
+                "error": 0
+              },
+              {
+                "x": 824,
+                "y": 623,
+                "error": 0
+              }
+            ],
+            "bestError": 0
+          },
+          "fixed": {
+            "offset": [
+              0,
+              0
+            ],
+            "samples": [
+              {
+                "x": 1003,
+                "y": 1080,
+                "error": 0
+              },
+              {
+                "x": 1000,
+                "y": 1147,
+                "error": 0
+              },
+              {
+                "x": 167,
+                "y": 348,
+                "error": 0
+              },
+              {
+                "x": 190,
+                "y": 282,
+                "error": 0
+              },
+              {
+                "x": 147,
+                "y": 507,
+                "error": 0
+              },
+              {
+                "x": 192,
+                "y": 427,
+                "error": 0
+              }
+            ],
+            "bestError": 0
+          }
+        },
+        "unique": 20
+      },
+      "play": {
+        "level": 1,
+        "moving": true,
+        "before": 20,
+        "after": 20,
+        "lightning": 0,
+        "admin": false
+      },
+      "success": true
+    },
+    "player-combat-browser": {
+      "checks": [
+        "all five original starting choices are visible and actually select their own level-one weapon; ARM uses delayed contact only, tail sweeps, mouth projectiles, wing hits and leg shockwaves damage real campaign enemies",
+        "actual level-up choice generator restores all five attacks and offers no lightning",
+        "lightning button is dimmed and disabled; keyboard activation and future lightning cast are locked",
+        "eight actual renderer directions and 721 aim samples stay upright and away from vertical; left and right poses are pixel mirrors with broad tilt and no frame rebuilding"
+      ],
+      "weapons": [
+        {
+          "kind": "arm",
+          "initial": {
+            "arm": 1,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 22,
+          "anticipated": true,
+          "bullets": [],
+          "effects": [],
+          "casts": 1,
+          "lightning": 0
+        },
+        {
+          "kind": "tail",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 1,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 25.5,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "slash",
+            "impact",
+            "weaponHit",
+            "ember",
+            "ember",
+            "ember",
+            "ember",
+            "ember"
           ],
-          "samples": [
-            {
-              "x": 1003,
-              "y": 1080,
-              "error": 0
-            },
-            {
-              "x": 1000,
-              "y": 1147,
-              "error": 0
-            },
-            {
-              "x": 167,
-              "y": 348,
-              "error": 0
-            },
-            {
-              "x": 190,
-              "y": 282,
-              "error": 0
-            },
-            {
-              "x": 147,
-              "y": 507,
-              "error": 0
-            },
-            {
-              "x": 192,
-              "y": 427,
-              "error": 0
-            }
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "mouth",
+          "initial": {
+            "arm": 0,
+            "mouth": 1,
+            "tail": 0,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 15.200000000000728,
+          "anticipated": true,
+          "bullets": [
+            "acid"
           ],
-          "bestError": 0
+          "effects": [
+            "muzzle",
+            "muzzle",
+            "muzzle"
+          ],
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "wing",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 1,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 22.59399999999914,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "weaponHit",
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "fusionRing"
+          ],
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "leg",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 0,
+            "leg": 1
+          },
+          "level": 1,
+          "damage": 25.5,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "deathRing"
+          ],
+          "casts": 0,
+          "lightning": 0
+        }
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "choices": {
+        "kinds": [
+          "arm",
+          "gene_bastion",
+          "gene_core",
+          "gene_haste",
+          "gene_hydra",
+          "gene_phase",
+          "gene_predator",
+          "gene_reactor",
+          "gene_virulent",
+          "leg",
+          "mouth",
+          "tail",
+          "wing"
+        ],
+        "titles": [
+          "찌르기 · 관통력 강화",
+          "RAZOR WING",
+          "ACID MOUTH",
+          "CORE GENE",
+          "HASTE GENE",
+          "CRUSH LEG",
+          "VIRULENT GENE",
+          "BASTION GENE",
+          "PHASE GENE",
+          "SPIKE TAIL",
+          "HYDRA GENE",
+          "PREDATOR GENE",
+          "REACTOR GENE"
+        ]
+      },
+      "lock": {
+        "disabled": true,
+        "opacity": 0.32,
+        "casts": 0,
+        "manualCast": false,
+        "active": false
+      },
+      "poses": {
+        "directions": [
+          {
+            "aim": 0,
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          {
+            "aim": 0.7853981633974483,
+            "facing": 1,
+            "localRotation": 0,
+            "rotation": 0,
+            "headAngle": 0.7853981633974483
+          },
+          {
+            "aim": 1.5707963267948966,
+            "facing": 1,
+            "localRotation": 0.5759586531581287,
+            "rotation": 0.5759586531581287,
+            "headAngle": 1.361356816555577
+          },
+          {
+            "aim": 2.356194490192345,
+            "facing": -1,
+            "localRotation": 1.1102230246251565e-16,
+            "rotation": -1.1102230246251565e-16,
+            "headAngle": 0.7853981633974484
+          },
+          {
+            "aim": 3.141592653589793,
+            "facing": -1,
+            "localRotation": -0.7853981633974482,
+            "rotation": 0.7853981633974482,
+            "headAngle": 1.1102230246251565e-16
+          },
+          {
+            "aim": 3.9269908169872414,
+            "facing": -1,
+            "localRotation": -1.3962634015954636,
+            "rotation": 1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          },
+          {
+            "aim": 4.71238898038469,
+            "facing": -1,
+            "localRotation": -1.3962634015954636,
+            "rotation": 1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          },
+          {
+            "aim": 5.497787143782138,
+            "facing": 1,
+            "localRotation": -1.3962634015954636,
+            "rotation": -1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          }
+        ],
+        "maximumRotation": 1.3962634015954636,
+        "mirrorDifference": 0,
+        "frameBuilds": 20
+      },
+      "success": true
+    },
+    "player-scorpion-browser": {
+      "checks": [
+        "fresh equipment is empty, default scorpion replaces home preview, normal stage one and prior DNA/origin are preserved",
+        "all twenty cached poses are distinct and prepared once from the unchanged original artwork",
+        "normal level-one battle spawns enemies and the new organism walks through actual movement updates",
+        "left upper-limb anticipation causes no early damage; impact damages only its close target; nearby and distant enemies receive no chain or area damage",
+        "the next actual automatic stab uses the other upper limb and its separately painted impact frame",
+        "a target escaping range or crossing behind during the windup is missed; distant enemies do not trigger ranged attacks",
+        "painted walk frames visibly change in the actual renderer, damage uses a recoil pose, and drawing never rebuilds the frame cache",
+        "saved catalog arm selection keeps the painted player and bare ARM stabbing without unlocking future lightning combat",
+        "equipped and removed catalog selections survive reload; ARM stays bare stabbing and administrator tools remain hidden"
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "initial": {
+        "player": {
+          "character": "ivory-bio-scorpion",
+          "unarmed": true,
+          "weapon": "arm",
+          "lightningLocked": true,
+          "facing": {
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          "frame": 0,
+          "cachedFrames": 20,
+          "frameBuilds": 20,
+          "range": 44,
+          "casts": 0,
+          "hits": 0,
+          "misses": 0,
+          "left": 0,
+          "right": 0,
+          "moving": false,
+          "attack": null
+        },
+        "parts": {
+          "mode": "UI_ONLY",
+          "worn": {
+            "arm": null,
+            "head": null,
+            "skin": null,
+            "legs": null,
+            "back": null,
+            "tail": null
+          },
+          "filter": "all",
+          "sort": "slot",
+          "selected": null,
+          "total": 20
+        },
+        "admin": {
+          "enabled": false,
+          "taps": 0,
+          "required": 5,
+          "normal": {
+            "unlocked": 1,
+            "stage": 1
+          },
+          "stage": 1,
+          "selected": 1,
+          "level": 1
+        },
+        "heroIsNewFrame": true,
+        "meta": {
+          "dna": 1234,
+          "hp": 0,
+          "dmg": 0,
+          "pickup": 0,
+          "speed": 0,
+          "armor": 0,
+          "reroll": 0,
+          "route": "none",
+          "stage": 99,
+          "unlockedStageV522": 99,
+          "homeStageV522": 1,
+          "clears": 30,
+          "cryoMastery": 0,
+          "geneMastery": 0,
+          "infernoMastery": 0,
+          "origin": "acid",
+          "seen": [],
+          "claimedStages": [],
+          "stageVitality": 0,
+          "relicLuck": 0,
+          "organLuck": 0,
+          "apexGenes": 0,
+          "contractStreak": 0,
+          "bestContractStreak": 0,
+          "nemesis": null,
+          "nemesisDefeats": 0,
+          "memoryTraits": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "core": 0,
+            "speed": 0
+          },
+          "activeMemory": "none",
+          "feedback": {
+            "sound": false,
+            "haptic": false,
+            "shake": 2,
+            "flash": 2,
+            "reducedMotion": false,
+            "damageNumbers": true,
+            "highContrast": false,
+            "graphics": "quality",
+            "perfInfo": false
+          }
         }
       },
-      "unique": 20
-    },
-    "play": {
-      "level": 1,
-      "moving": true,
-      "before": 20,
-      "after": 20,
-      "lightning": 0,
-      "admin": false
-    },
-    "success": true
+      "contact": {
+        "cast": true,
+        "side": 0,
+        "early": true,
+        "damage": 22,
+        "secondaryHP": 10000,
+        "farHP": 10000,
+        "read": {
+          "character": "ivory-bio-scorpion",
+          "unarmed": true,
+          "weapon": "upper-limb-stab",
+          "lightningLocked": true,
+          "facing": {
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          "frame": 10,
+          "cachedFrames": 20,
+          "frameBuilds": 20,
+          "range": 44,
+          "casts": 1,
+          "hits": 1,
+          "misses": 0,
+          "left": 1,
+          "right": 0,
+          "moving": false,
+          "attack": {
+            "age": 0.121,
+            "side": 0,
+            "a": 0,
+            "hit": true
+          }
+        },
+        "lightning": {
+          "version": "V575-WEB-9-LIGHTNING06",
+          "weapon": "lightning",
+          "casts": 0,
+          "contacts": 0,
+          "strongContacts": 0,
+          "blockedDamage": 0,
+          "queued": 0,
+          "arcs": 0,
+          "fields": 0,
+          "cast": null,
+          "reacting": 0,
+          "atlasReady": true,
+          "atlasError": null,
+          "globalHitStop": 0
+        }
+      },
+      "frames": {
+        "walkChanges": true,
+        "hurt": 16,
+        "changedHP": true,
+        "frameBuilds": 20
+      },
+      "armed": {
+        "version": "V575-WEB-9-LIGHTNING06",
+        "weapon": "lightning",
+        "casts": 0,
+        "contacts": 0,
+        "strongContacts": 0,
+        "blockedDamage": 0,
+        "queued": 0,
+        "arcs": 0,
+        "fields": 0,
+        "cast": null,
+        "reacting": 0,
+        "atlasReady": true,
+        "atlasError": null,
+        "globalHitStop": 0
+      },
+      "success": true
+    }
   }
 }
