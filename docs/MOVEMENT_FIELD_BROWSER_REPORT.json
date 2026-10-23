@@ -1,0 +1,1199 @@
+{
+  "checks": [
+    "real cannon fire to the right does not turn a body walking left; turning upward preserves aim for two gameplay seconds; pause freezes the hold and expiry returns guns to actual movement",
+    "blade attacks keep their attack direction while the body walks away; resting blades hold the last slash direction and return to movement after two seconds",
+    "48 real spawns per campaign map stay on reachable floor with full device clearance, cover distant offscreen map areas, never duplicate an active device, and advertise a 60-second respawn",
+    "the actual effect expands over 0.78 seconds, draws a thick electrical band and bright filaments, and rendering never rebuilds the reachability grid"
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "maps": [
+    {
+      "id": "facility1",
+      "valid": true,
+      "reachable": true,
+      "far": 28,
+      "outside": 25,
+      "oneDevice": true,
+      "points": [
+        [
+          371,
+          669
+        ],
+        [
+          525,
+          1215
+        ],
+        [
+          817,
+          854
+        ],
+        [
+          711,
+          1206
+        ],
+        [
+          472,
+          516
+        ],
+        [
+          622,
+          1537
+        ],
+        [
+          453,
+          1828
+        ],
+        [
+          314,
+          1175
+        ],
+        [
+          511,
+          1346
+        ],
+        [
+          179,
+          638
+        ],
+        [
+          709,
+          1186
+        ],
+        [
+          471,
+          1537
+        ],
+        [
+          487,
+          601
+        ],
+        [
+          395,
+          432
+        ],
+        [
+          454,
+          1255
+        ],
+        [
+          439,
+          1177
+        ],
+        [
+          480,
+          1339
+        ],
+        [
+          428,
+          1036
+        ],
+        [
+          583,
+          121
+        ],
+        [
+          579,
+          682
+        ],
+        [
+          312,
+          933
+        ],
+        [
+          580,
+          1119
+        ],
+        [
+          423,
+          351
+        ],
+        [
+          679,
+          1486
+        ],
+        [
+          409,
+          1300
+        ],
+        [
+          693,
+          1612
+        ],
+        [
+          344,
+          374
+        ],
+        [
+          507,
+          702
+        ],
+        [
+          507,
+          923
+        ],
+        [
+          480,
+          906
+        ],
+        [
+          190,
+          375
+        ],
+        [
+          536,
+          1061
+        ],
+        [
+          565,
+          1706
+        ],
+        [
+          848,
+          506
+        ],
+        [
+          527,
+          1499
+        ],
+        [
+          570,
+          1764
+        ],
+        [
+          468,
+          407
+        ],
+        [
+          402,
+          1073
+        ],
+        [
+          612,
+          934
+        ],
+        [
+          528,
+          364
+        ],
+        [
+          403,
+          1032
+        ],
+        [
+          411,
+          856
+        ],
+        [
+          445,
+          799
+        ],
+        [
+          480,
+          1062
+        ],
+        [
+          690,
+          1397
+        ],
+        [
+          441,
+          1748
+        ],
+        [
+          552,
+          1793
+        ],
+        [
+          285,
+          923
+        ]
+      ],
+      "respawn": 60,
+      "sampler": {
+        "builds": 3,
+        "samples": 51,
+        "reachableCells": 3885
+      }
+    },
+    {
+      "id": "facility2",
+      "valid": true,
+      "reachable": true,
+      "far": 23,
+      "outside": 22,
+      "oneDevice": true,
+      "points": [
+        [
+          626,
+          1160
+        ],
+        [
+          595,
+          669
+        ],
+        [
+          566,
+          1102
+        ],
+        [
+          781,
+          912
+        ],
+        [
+          528,
+          1398
+        ],
+        [
+          455,
+          1399
+        ],
+        [
+          552,
+          1537
+        ],
+        [
+          440,
+          741
+        ],
+        [
+          458,
+          862
+        ],
+        [
+          499,
+          1551
+        ],
+        [
+          627,
+          1366
+        ],
+        [
+          765,
+          864
+        ],
+        [
+          429,
+          1537
+        ],
+        [
+          358,
+          1297
+        ],
+        [
+          347,
+          1329
+        ],
+        [
+          605,
+          1482
+        ],
+        [
+          565,
+          757
+        ],
+        [
+          515,
+          806
+        ],
+        [
+          470,
+          1064
+        ],
+        [
+          331,
+          205
+        ],
+        [
+          579,
+          682
+        ],
+        [
+          458,
+          727
+        ],
+        [
+          498,
+          478
+        ],
+        [
+          482,
+          811
+        ],
+        [
+          661,
+          351
+        ],
+        [
+          539,
+          1486
+        ],
+        [
+          577,
+          614
+        ],
+        [
+          680,
+          1536
+        ],
+        [
+          633,
+          1220
+        ],
+        [
+          304,
+          1286
+        ],
+        [
+          521,
+          993
+        ],
+        [
+          578,
+          990
+        ],
+        [
+          551,
+          1119
+        ],
+        [
+          593,
+          1845
+        ],
+        [
+          536,
+          865
+        ],
+        [
+          635,
+          166
+        ],
+        [
+          551,
+          1479
+        ],
+        [
+          636,
+          1513
+        ],
+        [
+          668,
+          989
+        ],
+        [
+          821,
+          866
+        ],
+        [
+          514,
+          892
+        ],
+        [
+          640,
+          364
+        ],
+        [
+          692,
+          289
+        ],
+        [
+          669,
+          920
+        ],
+        [
+          579,
+          856
+        ],
+        [
+          389,
+          995
+        ],
+        [
+          549,
+          1423
+        ],
+        [
+          522,
+          866
+        ]
+      ],
+      "respawn": 60,
+      "sampler": {
+        "builds": 4,
+        "samples": 100,
+        "reachableCells": 3267
+      }
+    },
+    {
+      "id": "hub",
+      "valid": true,
+      "reachable": true,
+      "far": 27,
+      "outside": 27,
+      "oneDevice": true,
+      "points": [
+        [
+          612,
+          1174
+        ],
+        [
+          259,
+          837
+        ],
+        [
+          287,
+          1089
+        ],
+        [
+          803,
+          1064
+        ],
+        [
+          178,
+          642
+        ],
+        [
+          847,
+          1287
+        ],
+        [
+          132,
+          1383
+        ],
+        [
+          861,
+          1080
+        ],
+        [
+          472,
+          848
+        ],
+        [
+          611,
+          501
+        ],
+        [
+          459,
+          1296
+        ],
+        [
+          303,
+          780
+        ],
+        [
+          260,
+          653
+        ],
+        [
+          277,
+          643
+        ],
+        [
+          941,
+          866
+        ],
+        [
+          313,
+          869
+        ],
+        [
+          711,
+          1016
+        ],
+        [
+          652,
+          1078
+        ],
+        [
+          759,
+          1287
+        ],
+        [
+          161,
+          868
+        ],
+        [
+          256,
+          613
+        ],
+        [
+          706,
+          979
+        ],
+        [
+          101,
+          1415
+        ],
+        [
+          605,
+          656
+        ],
+        [
+          787,
+          1122
+        ],
+        [
+          146,
+          1369
+        ],
+        [
+          493,
+          951
+        ],
+        [
+          249,
+          794
+        ],
+        [
+          480,
+          948
+        ],
+        [
+          568,
+          375
+        ],
+        [
+          355,
+          1049
+        ],
+        [
+          424,
+          1005
+        ],
+        [
+          512,
+          562
+        ],
+        [
+          429,
+          547
+        ],
+        [
+          104,
+          883
+        ],
+        [
+          388,
+          891
+        ],
+        [
+          807,
+          1104
+        ],
+        [
+          570,
+          1032
+        ],
+        [
+          934,
+          1400
+        ],
+        [
+          445,
+          808
+        ],
+        [
+          663,
+          996
+        ],
+        [
+          311,
+          583
+        ],
+        [
+          424,
+          978
+        ],
+        [
+          578,
+          1313
+        ],
+        [
+          774,
+          377
+        ],
+        [
+          567,
+          1650
+        ],
+        [
+          513,
+          751
+        ],
+        [
+          384,
+          852
+        ]
+      ],
+      "respawn": 60,
+      "sampler": {
+        "builds": 5,
+        "samples": 149,
+        "reachableCells": 4434
+      }
+    },
+    {
+      "id": "biolab",
+      "valid": true,
+      "reachable": true,
+      "far": 32,
+      "outside": 26,
+      "oneDevice": true,
+      "points": [
+        [
+          510,
+          542
+        ],
+        [
+          248,
+          600
+        ],
+        [
+          860,
+          1327
+        ],
+        [
+          565,
+          1772
+        ],
+        [
+          431,
+          1156
+        ],
+        [
+          695,
+          990
+        ],
+        [
+          913,
+          726
+        ],
+        [
+          256,
+          527
+        ],
+        [
+          389,
+          848
+        ],
+        [
+          633,
+          1161
+        ],
+        [
+          747,
+          1046
+        ],
+        [
+          346,
+          979
+        ],
+        [
+          540,
+          170
+        ],
+        [
+          861,
+          730
+        ],
+        [
+          637,
+          1416
+        ],
+        [
+          241,
+          1380
+        ],
+        [
+          526,
+          80
+        ],
+        [
+          584,
+          1132
+        ],
+        [
+          507,
+          727
+        ],
+        [
+          333,
+          486
+        ],
+        [
+          564,
+          668
+        ],
+        [
+          719,
+          825
+        ],
+        [
+          452,
+          795
+        ],
+        [
+          537,
+          1608
+        ],
+        [
+          873,
+          723
+        ],
+        [
+          514,
+          1708
+        ],
+        [
+          402,
+          709
+        ],
+        [
+          486,
+          766
+        ],
+        [
+          655,
+          836
+        ],
+        [
+          711,
+          785
+        ],
+        [
+          620,
+          768
+        ],
+        [
+          231,
+          1272
+        ],
+        [
+          146,
+          1219
+        ],
+        [
+          664,
+          838
+        ],
+        [
+          524,
+          220
+        ],
+        [
+          857,
+          680
+        ],
+        [
+          413,
+          457
+        ],
+        [
+          538,
+          681
+        ],
+        [
+          256,
+          488
+        ],
+        [
+          507,
+          1088
+        ],
+        [
+          494,
+          1370
+        ],
+        [
+          397,
+          751
+        ],
+        [
+          581,
+          715
+        ],
+        [
+          510,
+          1466
+        ],
+        [
+          563,
+          1118
+        ],
+        [
+          846,
+          1270
+        ],
+        [
+          594,
+          1131
+        ],
+        [
+          164,
+          714
+        ]
+      ],
+      "respawn": 60,
+      "sampler": {
+        "builds": 6,
+        "samples": 197,
+        "reachableCells": 2741
+      }
+    },
+    {
+      "id": "red_biolab",
+      "valid": true,
+      "reachable": true,
+      "far": 30,
+      "outside": 25,
+      "oneDevice": true,
+      "points": [
+        [
+          570,
+          740
+        ],
+        [
+          623,
+          1243
+        ],
+        [
+          580,
+          822
+        ],
+        [
+          817,
+          784
+        ],
+        [
+          571,
+          1234
+        ],
+        [
+          416,
+          1482
+        ],
+        [
+          609,
+          447
+        ],
+        [
+          468,
+          1635
+        ],
+        [
+          622,
+          1203
+        ],
+        [
+          413,
+          1416
+        ],
+        [
+          751,
+          766
+        ],
+        [
+          428,
+          1353
+        ],
+        [
+          669,
+          1385
+        ],
+        [
+          594,
+          611
+        ],
+        [
+          821,
+          1815
+        ],
+        [
+          479,
+          503
+        ],
+        [
+          651,
+          1512
+        ],
+        [
+          424,
+          1453
+        ],
+        [
+          537,
+          640
+        ],
+        [
+          584,
+          699
+        ],
+        [
+          484,
+          394
+        ],
+        [
+          606,
+          723
+        ],
+        [
+          591,
+          558
+        ],
+        [
+          651,
+          1710
+        ],
+        [
+          675,
+          1828
+        ],
+        [
+          568,
+          1634
+        ],
+        [
+          787,
+          814
+        ],
+        [
+          598,
+          1384
+        ],
+        [
+          563,
+          951
+        ],
+        [
+          431,
+          1326
+        ],
+        [
+          536,
+          920
+        ],
+        [
+          540,
+          1789
+        ],
+        [
+          621,
+          1119
+        ],
+        [
+          550,
+          879
+        ],
+        [
+          635,
+          1818
+        ],
+        [
+          540,
+          1570
+        ],
+        [
+          654,
+          1862
+        ],
+        [
+          496,
+          1611
+        ],
+        [
+          821,
+          810
+        ],
+        [
+          598,
+          906
+        ],
+        [
+          607,
+          870
+        ],
+        [
+          627,
+          1107
+        ],
+        [
+          507,
+          1507
+        ],
+        [
+          550,
+          445
+        ],
+        [
+          564,
+          1791
+        ],
+        [
+          777,
+          1846
+        ],
+        [
+          650,
+          1048
+        ],
+        [
+          579,
+          685
+        ]
+      ],
+      "respawn": 60,
+      "sampler": {
+        "builds": 7,
+        "samples": 246,
+        "reachableCells": 2401
+      }
+    }
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "cannon": {
+    "firingLeft": {
+      "bodyAngle": 3.141592653589793,
+      "weaponAngle": 0.15197375815783276,
+      "lastAttackAngle": 0.15197375815783276,
+      "holdRemaining": 1.9,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 1,
+        "samples": 1,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "movingUp": {
+      "bodyAngle": -1.5707963267948966,
+      "weaponAngle": 0.15197375815783276,
+      "lastAttackAngle": 0.15197375815783276,
+      "holdRemaining": 1.5999999999999996,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 1,
+        "samples": 1,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "last": 0.15197375815783276,
+    "pauseSafe": true,
+    "beforeExpiry": {
+      "bodyAngle": -1.5707963267948966,
+      "weaponAngle": 0.15197375815783276,
+      "lastAttackAngle": 0.15197375815783276,
+      "holdRemaining": 0.010000000000000009,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 1,
+        "samples": 1,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "expired": {
+      "bodyAngle": -1.5707963267948966,
+      "weaponAngle": -1.5707963267948966,
+      "lastAttackAngle": 0.15197375815783276,
+      "holdRemaining": 0,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 1,
+        "samples": 1,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "weapon": -1.5707963267948966,
+    "shots": 1
+  },
+  "blades": {
+    "swinging": {
+      "bodyAngle": 3.141592653589793,
+      "weaponAngle": 0,
+      "lastAttackAngle": 0,
+      "holdRemaining": 1.9,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 2,
+        "samples": 2,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "attack": {
+      "age": 0.1,
+      "side": 0,
+      "a": 0,
+      "hit": false
+    },
+    "held": {
+      "bodyAngle": 3.141592653589793,
+      "weaponAngle": 0,
+      "lastAttackAngle": 0,
+      "holdRemaining": 1.45,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 2,
+        "samples": 2,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "restAngle": -0.2,
+    "expired": {
+      "bodyAngle": 3.141592653589793,
+      "weaponAngle": 3.141592653589793,
+      "lastAttackAngle": 0,
+      "holdRemaining": 0,
+      "holdSeconds": 2,
+      "attacks": 1,
+      "fieldSpawns": {
+        "builds": 2,
+        "samples": 2,
+        "reachableCells": 4434
+      },
+      "fieldRespawnSeconds": 60,
+      "fieldSpreadSeconds": 0.78,
+      "fieldStrokeWidth": 12
+    },
+    "expiredRest": 2.941592653589793
+  },
+  "wave": {
+    "spread": 0.78,
+    "life": 1.18,
+    "radius": 313.46887643398406,
+    "max": 469.1356413661192,
+    "slowerThanOld": true,
+    "widths": [
+      12,
+      5,
+      3,
+      3.8,
+      3,
+      2.1
+    ],
+    "builds": 7,
+    "buildsAfter": 7
+  },
+  "success": true
+}

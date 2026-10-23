@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-22-ARM-ITEMS",
+  "version": "V575-WEB-23-MOVEMENT-FIELD",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 271718,
-  "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
+  "index_bytes": 271723,
+  "build": "93bae7f94cb58a7ff6fa578581b1b145c7841d6adbcec93d22a8dad110d3ce17",
   "image_assets": 994,
   "cached_files": 1021,
-  "cached_bytes": 354473991,
+  "cached_bytes": 354480059,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -288,7 +288,7 @@
       "alpha": true
     },
     "hold_seconds": 3,
-    "respawn_seconds": 20,
+    "respawn_seconds": 60,
     "allowed_sites": [
       "regen",
       "shield",
@@ -304,7 +304,11 @@
     "boss_reinforcements_inner_edge": true,
     "all_combat_bodies_confined": true,
     "maps_and_save_keys_unchanged": true,
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "wave_spread_seconds": 0.78,
+    "wave_life_seconds": 1.18,
+    "spawn_policy": "uniform random reachable player-foot component across the complete map; no camera, radial-distance or line-of-sight bias",
+    "electrical_field_stroke_width": 12
   },
   "boss_cinematic": {
     "baseline_commit": "a3d1fb7c7bed975a2c4b7703923960ba309bc289",
@@ -408,7 +412,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -619,7 +623,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -639,7 +643,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -652,7 +656,7 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -673,7 +677,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -698,7 +702,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "original_player": {
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -734,7 +738,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "arm_items": {
-    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
     "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
     "source": "web/arm-items-v589.js",
     "implemented_ids": [
@@ -753,6 +757,27 @@
     "per_frame_mesh_rebuilds": 0,
     "existing_image_bytes_unchanged": 988,
     "maps_bosses_save_keys_and_other_weapon_code_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "movement_field": {
+    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
+    "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
+    "source": "web/movement-field-v590.js",
+    "body_follows_actual_movement_only": true,
+    "weapon_aim_hold_seconds": 2,
+    "weapon_returns_to_movement_after_hold": true,
+    "pause_freezes_hold": true,
+    "existing_upright_mirror_limits_preserved": true,
+    "field_respawn_seconds": 60,
+    "field_spread_seconds": 0.78,
+    "field_stroke_width": 12,
+    "field_uses_reachable_player_foot_component": true,
+    "field_uses_entire_map": true,
+    "no_invalid_spawn_fallback": true,
+    "one_active_device": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_bosses_save_keys_and_other_attacks_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

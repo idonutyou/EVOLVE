@@ -24,7 +24,7 @@ function playerStabV586(manual=false){
  const m=playerMotionV586;if(!running||paused||choosing||rewardChoosing||ended||!(state.arm>0)||m.attack||m.cooldown>0)return false;
  const target=playerNearestV586();if(!target&&!manual)return false;
  const a=target?Math.atan2(target.y-player.y,target.x-player.x):(player.look||0),side=m.side;
- m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1));m.casts++;m[side?'right':'left']++;
+ m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1));m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);
  player.look=a;player.armKick=.18;return true;
 }
 function playerStabContactV586(attack){
@@ -37,7 +37,7 @@ function playerStabContactV586(attack){
 }
 function playerStepV586(dt){
  const m=playerMotionV586;m.clock+=dt;const distance=Math.hypot(player.x-m.x,player.y-m.y);m.moving=distance>.015&&distance<Math.max(32,(player.speed||132)*dt*5);
- if(m.moving)m.gait+=distance/9;m.x=player.x;m.y=player.y;m.cooldown=Math.max(0,m.cooldown-dt);
+ playerMovementStepV590(dt,player.x-m.x,player.y-m.y,m.moving);if(m.moving)m.gait+=distance/9;m.x=player.x;m.y=player.y;m.cooldown=Math.max(0,m.cooldown-dt);
  if(m.attack){const a=m.attack;a.age+=dt;if(!a.hit&&a.age>=.12){a.hit=true;if(playerStabContactV586(a))m.hits++;else m.misses++;}if(a.age>=a.life)m.attack=null;}
 }
 function playerFrameV586(){
@@ -118,7 +118,7 @@ const playerLegacyPartEquipV586=equipPartV523;equipPartV523=function(...args){co
 const playerLegacyHomeRefreshV586=refreshEvolveHomeV522;refreshEvolveHomeV522=function(...args){const result=playerLegacyHomeRefreshV586(...args);playerWeaponLabelsV586();return result;};
 const playerLegacyDrawV586=drawPlayer;drawPlayer=function(shadowOnly=false){
  const frame=playerFramesV586[playerFrameV586()];if(!frame)return playerLegacyDrawV586(shadowOnly);
- const size=playerArtV586.displaySize,a=playerMotionV586.attack?.a??player.look??0,pose=playerFacingV587(a,playerMotionV586.facing);playerMotionV586.facing=pose.facing;
+ const size=playerArtV586.displaySize,a=playerBodyAngleV590(),pose=playerFacingV587(a,playerMotionV586.facing);playerMotionV586.facing=pose.facing;
  if(shadowOnly){castSpriteShadowV421(frame,player.x,player.y+14,size,pose.rotation,pose.facing,1,.48);return;}
  drawPlayerGroundV165(46,a);drawEvoDominanceAura(46);
  const blink=(player.hurtBlink||0)>0&&Math.floor((.5-player.hurtBlink)/.0625)%2===0?.38:1;

@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-22-ARM-ITEMS",
-  "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
-  "scriptBytes": 77518838,
+  "version": "V575-WEB-23-MOVEMENT-FIELD",
+  "build": "93bae7f94cb58a7ff6fa578581b1b145c7841d6adbcec93d22a8dad110d3ce17",
+  "scriptBytes": 77524906,
   "assets": 1021,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }
