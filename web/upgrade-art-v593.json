@@ -1,0 +1,49 @@
+{
+  "path": "assets/24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542.png",
+  "sha256": "24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542",
+  "bytes": 1953475,
+  "width": 1254,
+  "height": 1254,
+  "columns": 5,
+  "rows": 5,
+  "generated": true,
+  "rare_reference": "1000027564.png",
+  "row_order": [
+    "gun",
+    "blade",
+    "legs",
+    "shell",
+    "core"
+  ],
+  "column_order": [
+    "common",
+    "rare",
+    "epic",
+    "legendary",
+    "mythic"
+  ],
+  "original_generated_bytes_preserved": true,
+  "design_progression": [
+    "simple rugged",
+    "tidy functional",
+    "refined premium",
+    "noble masterwork",
+    "sacred regal"
+  ],
+  "glow_progression": [
+    0,
+    0.1,
+    0.3,
+    0.6,
+    1
+  ],
+  "rarity_glow_colors": [
+    "neutral",
+    "blue",
+    "purple",
+    "golden yellow",
+    "bright orange"
+  ],
+  "decorative_spike_escalation": false,
+  "mythic_animated_radiance": true
+}

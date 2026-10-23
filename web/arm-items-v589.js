@@ -28,7 +28,7 @@ function armSlashAngleV589(attack,age=attack.age){
  const p=clamp((age-.09)/.21,0,1),ease=p*p*(3-2*p),direction=attack.side?1:-1;
  return attack.a+direction*(-1.08+2.16*ease);
 }
-function armSlashReachV589(){return 60+Math.max(0,(state.arm||1)-1)*2;}
+function armSlashReachV589(){return upgradeBladeReachV593(60+Math.max(0,(state.arm||1)-1)*2);}
 function armSlashTargetV589(){
  const range=armSlashReachV589(),valid=e=>playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=range+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);
  if(valid(focusEnemy))return focusEnemy;
@@ -39,7 +39,7 @@ function armSlashV589(manual=false){
  const target=armSlashTargetV589();if(!target&&!manual)return false;
  const a=target?Math.atan2(target.y-player.y,target.x-player.x):(player.look||0),side=m.side;
  m.side=1-side;m.attack={kind:'blades',age:0,life:.44,a,side,hit:false,targets:new Set()};
- m.cooldown=Math.max(.34,(.71-Math.max(0,state.arm-1)*.045)*attackTempoMul()*(frenzy>0?.82:1));
+ m.cooldown=Math.max(.34,(.71-Math.max(0,state.arm-1)*.045)*attackTempoMul()*(frenzy>0?.82:1))/upgradeBladeRateV593();
  m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);armItemsV589.swings++;player.look=a;player.armKick=.20;return true;
 }
 function armSlashStepV589(attack,dt){
@@ -66,7 +66,7 @@ playerStepV586=function(dt){
  const attack=playerMotionV586.attack;
  // Keep the exact bare contact timing. A blade swing tests its swept arc instead.
  if(attack?.kind==='blades'){
-  playerMotionV586.attack=null;armBareStepV589(dt);playerMotionV586.attack=attack;attack.age+=dt;armSlashStepV589(attack,dt);
+  playerMotionV586.attack=null;armBareStepV589(dt);playerMotionV586.attack=attack;const swingDT=dt*upgradeBladeRateV593();attack.age+=swingDT;armSlashStepV589(attack,swingDT);
   if(attack.age>=attack.life){if(!attack.targets.size)playerMotionV586.misses++;playerMotionV586.attack=null;}
  }else armBareStepV589(dt);
 };
@@ -91,7 +91,7 @@ function drawArmItemsV589(a,alpha){
  for(const side of [1,0]){
   const p=armItemWorldPointV589(side,a),angle=armItemAngleV589(side,a);
   if(mode==='cannon'&&armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
-  armItemSpriteV589(ctx,mode,side,p,angle,1,alpha);
+  armItemSpriteV589(ctx,mode,side,p,angle,mode==='blades'?1+upgradeRunV593.bladeRange:1,alpha);
  }
 }
 const armBareDrawV589=drawPlayer;

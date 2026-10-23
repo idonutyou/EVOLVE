@@ -1,0 +1,106 @@
+{
+  "progress": 50,
+  "version": "V575-WEB-26-UPGRADE-CARDS",
+  "build": "5d68513ac47a5e65f806670e1461feaf71b0bcf7f76e4406a170d3f0e7460573",
+  "engine": "assets/5746934c9fe82106736b2b596c20a1c5bdeefd8b3f3c51450c0f933a3e685622.js",
+  "status": "Packaged; functional and visual verification pending",
+  "rules": {
+    "engine": "assets/5746934c9fe82106736b2b596c20a1c5bdeefd8b3f3c51450c0f933a3e685622.js",
+    "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
+    "stylesheet": "assets/95e380a238f048e832f97c71ec0042a2007cfb22a2ec613f869b1d6a4473f96e.css",
+    "independent_stat_cards": 19,
+    "choices_per_level": 3,
+    "max_effects_per_card": 2,
+    "rarity_probabilities": [
+      0.6,
+      0.27,
+      0.1,
+      0.027,
+      0.003
+    ],
+    "rarity_increment_multipliers": [
+      1,
+      1.5,
+      2,
+      3,
+      5
+    ],
+    "count_increments": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "experience_per_level": 12,
+    "level_cap": null,
+    "additional_ordinary_quantity_multiplier": 1.3,
+    "old_movement_and_attack_roles_preserved": true,
+    "rarity_art": {
+      "path": "assets/24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542.png",
+      "sha256": "24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542",
+      "bytes": 1953475,
+      "width": 1254,
+      "height": 1254,
+      "columns": 5,
+      "rows": 5,
+      "generated": true,
+      "rare_reference": "1000027564.png",
+      "row_order": [
+        "gun",
+        "blade",
+        "legs",
+        "shell",
+        "core"
+      ],
+      "column_order": [
+        "common",
+        "rare",
+        "epic",
+        "legendary",
+        "mythic"
+      ],
+      "original_generated_bytes_preserved": true,
+      "design_progression": [
+        "simple rugged",
+        "tidy functional",
+        "refined premium",
+        "noble masterwork",
+        "sacred regal"
+      ],
+      "glow_progression": [
+        0,
+        0.1,
+        0.3,
+        0.6,
+        1
+      ],
+      "rarity_glow_colors": [
+        "neutral",
+        "blue",
+        "purple",
+        "golden yellow",
+        "bright orange"
+      ],
+      "decorative_spike_escalation": false,
+      "mythic_animated_radiance": true
+    },
+    "font": {
+      "path": "assets/58c2c993bd12554261f78f79ee08bea9cbbb0c7cfdf624e32cd14fad3204e2a7.woff",
+      "sha256": "58c2c993bd12554261f78f79ee08bea9cbbb0c7cfdf624e32cd14fad3204e2a7",
+      "bytes": 83924,
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+      "license": "SIL Open Font License 1.1",
+      "subset": "UI characters in upgrade cards and monster catalog; Latin ASCII",
+      "family": "EVOLVE Upgrade Sans"
+    },
+    "art_reference_tier": "rare",
+    "monster_catalog": true,
+    "upgrades_reset_each_run": true,
+    "home_equipment_and_save_keys_preserved": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 1,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "next": "Verify every card, real projectiles, melee, body size, regeneration, constant XP at high levels and guarded monster summons; automatically upload, deploy and verify Pages."
+}

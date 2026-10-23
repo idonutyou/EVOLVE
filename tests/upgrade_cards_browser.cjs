@@ -1,0 +1,78 @@
+const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const dist=path.resolve(__dirname,'../dist'),out=path.resolve(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
+const mime={'.html':'text/html','.js':'application/javascript','.json':'application/json','.png':'image/png','.css':'text/css','.webp':'image/webp','.jpg':'image/jpeg'};
+const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),p=path.resolve(dist,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!p.startsWith(dist+path.sep)||!fs.existsSync(p)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',mime[path.extname(p)]||'application/octet-stream');fs.createReadStream(p).pipe(res);});
+(async()=>{
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']}),context=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true}),page=await context.newPage(),report={checks:[],errors:[],failedRequests:[],physical_Galaxy_S23_plus_tested:false};
+ page.on('pageerror',e=>{report.errors.push(e.message);console.error('PAGE',e.message)});page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push({url:r.url(),error:r.failure()?.errorText})});
+ const ready=()=>page.waitForFunction(()=>window.__EVOLVE_UPGRADE_CARDS_V593__&&window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+ const start=async()=>{await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
+ try{
+  await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
+  await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});await ready();
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_MONSTER_CATALOG_V593__.summon('crawler',1)),false);
+  await page.locator('#homeLabTab').click();await page.locator('[data-part-id="arm_cannon"]').click();await page.locator('#partsDetailEquipV523').click();await page.locator('#homeBattleTabV522').click();await start();
+  report.cards=await page.evaluate(()=>{
+   const a=window.__EVOLVE_UPGRADE_CARDS_V593__,q=a.test,c=q.context();c.player.inv=999;for(let i=0;i<40;i++)c.step(.05);const seed=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!seed)throw Error('No natural enemy seed');
+   const o={x:c.player.x,y:c.player.y},f=(d,angle=0)=>({...seed,x:o.x+Math.cos(angle)*d,y:o.y+Math.sin(angle)*d,hp:1e6,maxHp:1e6,type:'crawler',r:8,spd:0,burst:0,dashCd:999,shot:999,contactCd:999,dead:false,arrivalInvuln:false,arrivalTime:0,barrier:0,elite:false,finalBoss:false,prism:0,purify:0,contractArmor:0,eliteArmor:0});
+   let angle=null;for(let i=0;i<64;i++){const v=i*Math.PI/32;if(!window.__EVOLVE_MAPS_V567__.test.context().hit(o.x,o.y,o.x+Math.cos(v)*150,o.y+Math.sin(v)*150,1)){angle=v;break;}}if(angle===null)throw Error('No clear firing lane');
+   const target=f(110,angle);c.enemies.splice(0,c.enemies.length,target);c.grid();for(const k of ['mouth','tail','wing','leg'])c.state[k]=0;c.state.arm=1;
+   window.__UPGRADE_FIXTURE__={seed,o,f,angle};
+   const shot=()=>{c.bullets.length=0;c.player.shoot=0;c.fire(.001);return c.bullets.map(b=>({dmg:b.dmg,pierce:b.pierce,range:b.basicRangeV552,bounce:b.upgradeBouncesV593}));};
+   const base=shot();q.apply('gun_count',1);q.apply('gun_pierce',2);q.apply('gun_bounce',0);q.apply('gun_range',3);q.apply('gun_haste',2);const enhanced=shot(),cooldown=c.player.shoot;
+   q.reset();const hp0=target.hp;q.damage(target,100,'arm');const baseDamage=hp0-target.hp;target.hp=1e6;q.apply('gun_damage',2);q.damage(target,100,'arm');const boostedDamage=1e6-target.hp;
+   const hp=c.player.maxHp;q.apply('health',0);q.apply('giant',3);const health=c.player.maxHp-hp,large=a.read().bodyScale,largeRadius=c.player.r;
+   q.apply('light',2);const light=a.read().bodyScale,lightRadius=c.player.r,speed=a.read().run.moveSpeed;
+   const defs=q.cards.map(card=>({id:card.id,lines:[0,1,2,3,4].map(t=>q.lines(card,t)),values:[0,1,2,3,4].map(t=>q.value(card,t))}));
+   const rolls=[0,.599999,.60,.869999,.87,.969999,.97,.996999,.997,.999999].map(n=>q.roll(()=>n));
+   return {base,enhanced,cooldown,baseDamage,boostedDamage,health,large,largeRadius,light,lightRadius,speed,defs,rolls,rarities:a.read().rarities,needs:[1,2,10,100,1000,1000000].map(q.need)};
+  });
+  const r=report.cards;assert.equal(r.base.length,1);assert.equal(r.enhanced.length,3);assert.equal(r.enhanced[0].pierce-r.base[0].pierce,3);assert.equal(r.enhanced[0].bounce,1);assert.ok(Math.abs(r.enhanced[0].range/r.base[0].range-1.3)<1e-8);assert.ok(Math.abs(r.boostedDamage/r.baseDamage-1.2)<1e-8);assert.equal(r.health,85);assert.ok(Math.abs(r.large-1.05)<1e-8&&Math.abs(r.light-.95)<1e-8);assert.ok(r.largeRadius>r.lightRadius);assert.equal(r.speed,.10);assert.ok(r.defs.every(c=>c.lines.every(l=>l.length>=1&&l.length<=2)));assert.deepEqual(r.needs,[12,12,12,12,12,12]);assert.deepEqual(r.rolls,[0,0,1,1,2,2,3,3,4,4]);
+  report.checks.push('19 simple cards have 1–2 effect lines; rarity increments, five independent rarity boundaries, and +1/+2/+3/+4/+5 counts agree with actual stats','real cannon volleys gain two projectiles, three pierces, a bounce and 30% range; damage rises by exactly 20%; body radius and visible size follow size cards; every level needs 12 XP');
+  report.pierceBounce=await page.evaluate(()=>{
+   const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context(),f=window.__UPGRADE_FIXTURE__;q.reset();Object.assign(c.player,f.o);q.apply('gun_pierce',0);q.apply('gun_bounce',0);
+   const p=f.f(45,f.angle),p2=f.f(80,f.angle),p3=f.f(110,f.angle+.22);c.enemies.splice(0,c.enemies.length,p,p2,p3);c.grid();c.bullets.length=0;c.player.shoot=0;c.fire(.001);const bullet=c.bullets[0];Object.assign(bullet,{x:f.o.x,y:f.o.y,vx:Math.cos(f.angle)*344,vy:Math.sin(f.angle)*344,rangeOriginXV552:f.o.x,rangeOriginYV552:f.o.y});
+   c.player.shoot=999;const points=[];for(let i=0;i<100;i++){c.step(.01);if(c.bullets.includes(bullet))points.push([bullet.x,bullet.y]);if(!c.bullets.includes(bullet))break;}
+   return {damage:[p,p2,p3].map(e=>1e6-e.hp),distinct:bullet.upgradeHitsV593.size,bouncesLeft:bullet.upgradeBouncesV593,points:points.length};
+  });assert.equal(report.pierceBounce.distinct,3);assert.equal(report.pierceBounce.bouncesLeft,0);assert.ok(report.pierceBounce.damage.every(d=>d>0),JSON.stringify(report.pierceBounce));report.checks.push('an actual projectile pierces two different enemies, then ricochets to a third without repeatedly hitting the same enemy');
+  report.blade=await page.evaluate(()=>{
+   const a=window.__EVOLVE_UPGRADE_CARDS_V593__,q=a.test,c=q.context(),f=window.__UPGRADE_FIXTURE__;q.reset();q.apply('blade_equip',0);q.apply('blade_range',2);q.apply('blade_haste',2);q.apply('blade_crit',4);q.apply('blade_crit',4);q.apply('blade_bleed',0);
+   const e=f.f(62,f.angle);c.enemies.splice(0,c.enemies.length,e);c.grid();c.player.hp=c.player.maxHp;c.bullets.length=0;c.player.inv=999;const before=e.hp;q.damage(e,100,'arm');const critical=before-e.hp,afterHit=e.hp;
+   c.state.arm=0;for(let i=0;i<61;i++)c.step(.05);const bleed=afterHit-e.hp;c.state.arm=1;
+   const p=window.__EVOLVE_PLAYER_COMBAT_V587__;p.test.reset();p.test.motion().cooldown=0;const cast=p.test.stab();p.test.step(.20);const damage=1e6-e.hp,frame=p.read().attack?.age;
+   c.player.hp=c.player.maxHp-10;c.state.arm=0;for(let i=0;i<100;i++)c.step(.05);const baselineRegen=c.player.hp-(c.player.maxHp-10);q.apply('regen',0);c.player.hp=c.player.maxHp-10;for(let i=0;i<100;i++)c.step(.05);const regen=c.player.hp-(c.player.maxHp-10)-baselineRegen;c.state.arm=1;
+   return {critical,bleed,cast,damage,age:frame,bullets:c.bullets.length,regen,crit:a.read().run.bladeCrit,critStillOffered:q.pool().some(c=>c.id==='blade_crit')};
+  });assert.ok(report.blade.critical>190);assert.ok(Math.abs(report.blade.bleed-15)<.1,JSON.stringify(report.blade));assert.ok(report.blade.cast&&report.blade.age>.20);assert.equal(report.blade.crit,1);assert.equal(report.blade.critStillOffered,false);assert.ok(Math.abs(report.blade.regen-1)<.05,JSON.stringify(report.blade));report.checks.push('blade crit caps at 100% and stops being offered; a real hit applies 15 bleed over 3 seconds; faster swings advance the real attack; regeneration heals once each five gameplay seconds');
+  report.levels=[];
+  await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();c.enemies.length=0;c.bullets.length=0;c.player.inv=999;q.reset();});
+  for(const level of [1,9,99,999]){
+   await page.evaluate(level=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();c.player.level=level;c.player.xp=0;c.player.xpNeed=q.need(level);c.xp(12);},level);
+   await page.locator('#levelOverlay').waitFor({state:'visible'});assert.equal(await page.locator('#cards .card').count(),3);assert.equal(await page.locator('.upgradeRarityV593').count(),3);await page.waitForTimeout(300);await page.locator('#cards .card').first().click();
+   const result=await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();return {level:c.player.level,need:c.player.xpNeed,xp:c.player.xp,choosing:c.choosing()};});assert.equal(result.level,level+1);assert.equal(result.need,12);assert.equal(result.choosing,false);report.levels.push(result);
+  }
+  await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();c.player.xp=0;c.xp(36);});
+  for(let i=0;i<3;i++){await page.locator('#levelOverlay').waitFor({state:'visible'});await page.waitForTimeout(280);await page.locator('#cards .card').first().click();}
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.test.context().choosing()),false);assert.equal(await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.test.context().player.xp),0);report.checks.push('real card clicks advance levels 2/10/100/1000 and preserve all three upgrades earned from 36 XP');
+  const preview=async(specs,name)=>{await page.evaluate(specs=>window.__EVOLVE_UPGRADE_CARDS_V593__.test.offer(specs),specs);await page.waitForTimeout(180);await page.screenshot({path:path.join(out,name)});return page.evaluate(()=>[...document.querySelectorAll('#cards .card')].map(b=>{const r=b.getBoundingClientRect(),stats=b.querySelector('.upgradeStatsV593').getBoundingClientRect(),part=b.querySelector('.upgradePartV593').getBoundingClientRect();return {rarity:b.dataset.rarity,x:r.x,y:r.y,w:r.width,h:r.height,statsWithin:stats.bottom<=r.bottom,partWithin:part.bottom<=r.bottom,buttonText:/선택|SELECT/.test(b.textContent),font:getComputedStyle(b).fontFamily};}));};
+  report.portrait=await preview([['gun_count',1],['light',2],['giant',3]],'upgrade-cards-portrait.png');assert.ok(report.portrait.every(c=>c.x>=0&&c.x+c.w<=393.1&&c.statsWithin&&c.partWithin&&!c.buttonText),JSON.stringify(report.portrait));
+  await page.setViewportSize({width:852,height:393});report.landscape=await preview([['gun_damage',0],['blade_damage',4],['health',3]],'upgrade-cards-landscape.png');assert.ok(report.landscape.every(c=>c.y>=0&&c.y+c.h<=393.1&&c.statsWithin&&c.partWithin),JSON.stringify(report.landscape));
+  await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.test.context().home('battle'));await ready();await page.setViewportSize({width:393,height:852});
+  for(let i=0;i<5;i++)await page.locator('#codexBtn').click();await page.locator('#homeBattleTabV522').click();await start();
+  await page.locator('#tmOpenV573').click();await page.locator('#tmNaturalV573').uncheck();
+  report.catalog=[];const roster=await page.evaluate(()=>window.__EVOLVE_MONSTER_CATALOG_V593__.list());assert.equal(await page.locator('#monsterSelectV593 option').count(),roster.length);
+  for(const c of roster){
+   await page.locator('#monsterSelectV593').selectOption(c.id);await page.waitForFunction(()=>document.getElementById('monsterImageV593').complete&&document.getElementById('monsterImageV593').naturalWidth>0);
+   const image=await page.locator('#monsterImageV593').getAttribute('src');assert.ok(image,JSON.stringify(c));
+   if(c.boss){report.catalog.push({id:c.id,preview:true});continue;}
+   await page.evaluate(()=>{const c=window.__EVOLVE_UPGRADE_CARDS_V593__.test.context();c.enemies.length=0;c.player.inv=999;});
+   await page.locator('[data-monster-count-v593="1"]').click();
+   const result=await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();for(let i=0;i<20&&window.__EVOLVE_MONSTER_CATALOG_V593__.read().queued;i++)c.step(.05);const e=c.enemies.find(e=>!e.dead&&e.catalogSpawnV593);return e?{id:e.catalogSpawnV593,type:e.type,legacy:e.visualSetV516==='legacy',elite:!!e.elite,clear:window.__EVOLVE_TEST_MODULE_V575__.test.context().clear(e,e.r)}:null;});
+   assert.ok(result,JSON.stringify(c));assert.equal(result.id,c.id);assert.equal(result.type,c.type);assert.equal(result.legacy,!!c.legacy);assert.equal(result.elite,!!c.elite);assert.equal(result.clear,true);report.catalog.push(result);await page.locator('#tmOpenV573').click();
+  }
+  await page.locator('#monsterSelectV593').selectOption('froststalker');await page.screenshot({path:path.join(out,'monster-catalog-portrait.png')});
+  await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.close(true));await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.test.context().home('battle'));await ready();
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_PARTS_V523__.snapshot().worn.arm),'arm_cannon');await start();assert.equal(await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.read().run.selected),0);assert.equal(await page.evaluate(()=>window.__EVOLVE_UPGRADE_CARDS_V593__.read().bodyScale),1);report.checks.push('every ordinary appearance, elite and all seven boss images can be selected; exact selected ordinary/elite monsters spawn on clear terrain even in stage one with natural spawning disabled; admin guard works','run bonuses and temporary weapon choices reset, while saved ARM equipment remains intact');
+  assert.deepEqual(report.errors,[]);assert.deepEqual(report.failedRequests,[]);report.success=true;
+ }catch(error){report.success=false;report.failure=error.stack||String(error);await page.screenshot({path:path.join(out,'upgrade-cards-failure.png')}).catch(()=>{});throw error;}
+ finally{fs.writeFileSync(path.join(out,'upgrade-cards-browser.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));await context.close();await browser.close();server.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;server.close();});

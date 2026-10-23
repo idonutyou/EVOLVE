@@ -15,7 +15,7 @@ function playerFacingV587(a,previous=1){
  return {facing,localRotation,rotation:facing*localRotation,headAngle:playerArtV586.nativeFacing+localRotation};
 }
 function playerTargetV586(e){return !!e&&!e.dead&&e.hp>0&&!e.arrivalInvuln&&!(e.arrivalTime>0);}
-function playerInReachV586(e){return playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=playerReachV586+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);}
+function playerInReachV586(e){return playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=upgradeBladeReachV593(playerReachV586)+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);}
 function playerNearestV586(){
  if(playerInReachV586(focusEnemy))return focusEnemy;
  let best=null,distance=Infinity;for(const e of enemies){if(!playerInReachV586(e))continue;const d=Math.hypot(e.x-player.x,e.y-player.y)-(e.r||12);if(d<distance){distance=d;best=e;}}return best;
@@ -24,21 +24,21 @@ function playerStabV586(manual=false){
  const m=playerMotionV586;if(!running||paused||choosing||rewardChoosing||ended||!(state.arm>0)||m.attack||m.cooldown>0)return false;
  const target=playerNearestV586();if(!target&&!manual)return false;
  const a=target?Math.atan2(target.y-player.y,target.x-player.x):(player.look||0),side=m.side;
- m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1));m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);
+ m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1))/upgradeBladeRateV593();m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);
  player.look=a;player.armKick=.18;return true;
 }
 function playerStabContactV586(attack){
  const e=attack.target;if(!playerInReachV586(e))return false;
  const dx=e.x-player.x,dy=e.y-player.y,along=dx*Math.cos(attack.a)+dy*Math.sin(attack.a),across=Math.abs(-dx*Math.sin(attack.a)+dy*Math.cos(attack.a));
  // A narrow forward capsule, tested again at impact. No ranged fallback or area hit.
- if(along<-(e.r||12)||along>playerReachV586+(e.r||12)||across>10+(e.r||12))return false;
+ if(along<-(e.r||12)||along>upgradeBladeReachV593(playerReachV586)+(e.r||12)||across>10+(e.r||12))return false;
  const damage=(22+Math.max(0,(state.arm||1)-1)*4.5)*coreDamageBoost();
  hurtEnemy(e,damage,'arm');return true;
 }
 function playerStepV586(dt){
  const m=playerMotionV586;m.clock+=dt;const distance=Math.hypot(player.x-m.x,player.y-m.y);m.moving=distance>.015&&distance<Math.max(32,(player.speed||132)*dt*5);
  playerMovementStepV590(dt,player.x-m.x,player.y-m.y,m.moving);if(m.moving)m.gait+=distance/9;m.x=player.x;m.y=player.y;m.cooldown=Math.max(0,m.cooldown-dt);
- if(m.attack){const a=m.attack;a.age+=dt;if(!a.hit&&a.age>=.12){a.hit=true;if(playerStabContactV586(a))m.hits++;else m.misses++;}if(a.age>=a.life)m.attack=null;}
+ if(m.attack){const a=m.attack;a.age+=dt*upgradeBladeRateV593();if(!a.hit&&a.age>=.12){a.hit=true;if(playerStabContactV586(a))m.hits++;else m.misses++;}if(a.age>=a.life)m.attack=null;}
 }
 function playerFrameV586(){
  const m=playerMotionV586;if(player.hp<=0){if(!m.deathAt)m.deathAt=performance.now();return performance.now()-m.deathAt<180?18:19;}

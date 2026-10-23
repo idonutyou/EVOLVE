@@ -49,11 +49,19 @@ def main():
     assert b'window.__EVOLVE_VISUAL_CLARITY_V592__' in code
     assert b'markEnemyHitV592(e,dmg);' in code
     assert b'drawAttackWarningsV582();drawEnemyHealthBarsV592();' in code
+    assert b'window.__EVOLVE_UPGRADE_CARDS_V593__' in code
+    assert b'function xpNeedForLevel(lv){return 12;}' in code
+    assert b'window.__EVOLVE_MONSTER_CATALOG_V593__' in code
+    upgrade = verification.get('upgrade_cards')
+    if upgrade:
+        for path in [upgrade['stylesheet'], upgrade['rarity_art']['path']]:
+            data = fetch(path)
+            assert hashlib.sha256(data).hexdigest() == Path(path).stem, 'Live upgrade asset differs: '+path
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],
               'version_matches': True, 'manifest_matches': True, 'engine_matches': True,
               'entry_matches': True, 'engine': engine, 'engine_sha256': digest,
               'movement_field': verification['movement_field'], 'horde_roles': verification['horde_roles'],
-              'visual_clarity': verification['visual_clarity'],
+              'visual_clarity': verification['visual_clarity'], 'upgrade_cards': upgrade,
               'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
