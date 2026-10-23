@@ -1,7 +1,7 @@
 {
   "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
-  "progress": 80,
-  "status": "Player and normal/admin browser checks passed locally; GitHub checkpoint saved; guarded deployment ready",
+  "progress": 100,
+  "status": "Completed and deployed: supplied scorpion is the default body; twenty painted frames and alternating upper-limb contact stabs when no arm weapon is equipped; actual live hashes verified",
   "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
   "baseline_version": "V575-WEB-18-HIDDEN-ADMIN",
   "art": {
@@ -12,7 +12,7 @@
     "height": 1402
   },
   "source_reference_sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
-  "next": "Publish through the existing guarded GitHub Pages workflow, confirm full Chrome regression success and actual live version/atlas hashes",
+  "next": "Requested work complete. Continue from WEB-19; preserve painted default scorpion, unarmed contact-only stabs, existing equipped attack behavior, original maps/boss artwork, saved data, level-one normal play and five-codex-press admin gate. Automatically upload and deploy future authorized updates.",
   "physical_Galaxy_S23_plus_tested": false,
   "version": "V575-WEB-19-DEFAULT-SCORPION",
   "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
@@ -36,8 +36,21 @@
     "static_checks": "6 Python packaging tests and existing web/lightning/monster/red-pulse/cinematic tests passed",
     "physical_Galaxy_S23_plus_tested": false,
     "normal_admin_browser": "passed",
-    "full_remote_browser_suite": "pending"
+    "full_remote_browser_suite": "passed",
+    "github_migration_workflow": "passed",
+    "full_browser_suite": "passed",
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
+    "live_manifest_matches": true,
+    "live_player_atlas_sha256_matches": true
   },
   "remote_checkpoint": "26ecb89d298adc4eb6445867e6d18f512f05ae88",
-  "release_backup": "backup/web19-default-scorpion-20261023"
+  "release_backup": "backup/web19-default-scorpion-release-20261023",
+  "deployed_source_commit": "56dfcca2dd91493e1a1b1f0c48ec34f587f3816c",
+  "deployment_run": 39907571466,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39907571466",
+  "live_report": "docs/PLAYER_SCORPION_LIVE_REPORT.json",
+  "baseline_backup": "backup/web19-default-scorpion-20261023",
+  "completed_at": "2026-10-23T14:52:37.980321+09:00"
 }

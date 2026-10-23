@@ -1,7 +1,7 @@
 {
   "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
-  "status": "Player and normal/admin browser checks passed locally; GitHub checkpoint saved; guarded deployment ready",
-  "progress": 80,
+  "status": "Completed and deployed: supplied scorpion is the default body; twenty painted frames and alternating upper-limb contact stabs when no arm weapon is equipped; actual live hashes verified",
+  "progress": 100,
   "version": "V575-WEB-19-DEFAULT-SCORPION",
   "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
   "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
@@ -16,7 +16,7 @@
   ],
   "scope": "Set supplied scorpion as default character; render painted animation; bare upper limbs stab without an arm weapon",
   "preservation": "Preserve all 986 preexisting image bytes, maps/collisions, boss rules/art, saved data, WEB-17 lettering and WEB-18 normal progression/five-press administrator gate; replace only the default player and no-arm-weapon attack path.",
-  "resume": "Read AGENTS.md and docs/player-scorpion-v586-checkpoint.json; continue WEB-19 on the WEB-18 hidden-admin baseline; preserve prior art, equipment saves, level-one normal play and administrator gate; verify and automatically deploy using existing GitHub Pages workflow",
+  "resume": "Read AGENTS.md and docs/player-scorpion-v586-checkpoint.json. WEB-19 is deployed and fully checked through actual Chrome and live hashes. The ivory/cyan supplied scorpion is the default body. With no arm-slot weapon, its upper limbs alternate short forward stabs, with damage only at impact and no lightning/projectile/poison/tail attack. Existing equipped selections persist. New equipment profiles are empty. Normal play still starts at level 1, and five footer codex clicks enable session-only administrator tools. Keep all existing image bytes, maps, collision saves, bosses and save keys. Automatically upload and deploy authorized changes.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -27,7 +27,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Publish through the existing guarded GitHub Pages workflow, confirm full Chrome regression success and actual live version/atlas hashes",
+  "next": "Requested work complete. Continue from WEB-19; preserve painted default scorpion, unarmed contact-only stabs, existing equipped attack behavior, original maps/boss artwork, saved data, level-one normal play and five-codex-press admin gate. Automatically upload and deploy future authorized updates.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -131,9 +131,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "pending WEB-19",
-    "live_build_matches": false,
-    "live_engine_sha256_matches": false,
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -145,7 +145,7 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": false,
+    "live_manifest_matches": true,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
@@ -158,12 +158,15 @@
     "live_Korean_sha256_matches": true,
     "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
     "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json",
-    "full_browser_suite": "pending WEB-19",
+    "full_browser_suite": "passed",
     "live_administrator_gate_matches": true,
     "player_scorpion": "docs/PLAYER_SCORPION_BROWSER_REPORT.json",
-    "web19_admin": "docs/WEB19_ADMIN_BROWSER_REPORT.json"
+    "web19_admin": "docs/WEB19_ADMIN_BROWSER_REPORT.json",
+    "full_remote_browser_suite": "passed",
+    "live_player_atlas_sha256_matches": true,
+    "normal_admin_browser": "passed"
   },
-  "baseline_backup": "backup/web15-red-warnings-20261023",
+  "baseline_backup": "backup/web19-default-scorpion-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
   "image_generation": {
     "mode": "built-in image_gen",
@@ -207,10 +210,10 @@
       }
     }
   },
-  "deployed_source_commit": null,
-  "deployment_run": null,
-  "deployment_url": null,
-  "release_backup": "backup/web19-default-scorpion-20261023",
+  "deployed_source_commit": "56dfcca2dd91493e1a1b1f0c48ec34f587f3816c",
+  "deployment_run": 39907571466,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39907571466",
+  "release_backup": "backup/web19-default-scorpion-release-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
     "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",
@@ -218,6 +221,7 @@
     "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": null,
-  "physical_Galaxy_S23_plus_tested": false
+  "live_report": "docs/PLAYER_SCORPION_LIVE_REPORT.json",
+  "physical_Galaxy_S23_plus_tested": false,
+  "completed_at": "2026-10-23T14:52:37.980321+09:00"
 }
