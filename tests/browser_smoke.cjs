@@ -24,6 +24,8 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.mouse.move(180,660);await page.mouse.down();await page.mouse.move(250,620,{steps:8});await page.waitForTimeout(650);await page.mouse.up();
   const after=await page.evaluate(()=>{const p=window.__EVOLVE_TEST_MODULE_V575__.test.context().player;return{x:p.x,y:p.y};});assert.ok(Math.hypot(after.x-before.x,after.y-before.y)>1,'Joystick movement failed');
   await page.locator('#pauseBtn').click();assert.equal(await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.read().paused),true);await page.locator('#resume').click();report.checks.push('mobile movement, pause and resume');
+  // Lightning remains the existing equipped-weapon path; an empty arm slot now stabs.
+  await page.evaluate(()=>window.__EVOLVE_PARTS_V523__.equip('arm_cannon'));
   await page.waitForFunction(()=>window.__EVOLVE_LIGHTNING_V576__?.read().atlasReady,null,{timeout:30000});
   await page.evaluate(async()=>{await window.__EVOLVE_TEST_MODULE_V575__.add(50);});
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().enemies.filter(e=>!e.dead&&!e.finalBoss).length>=3,null,{timeout:30000});

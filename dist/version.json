@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-18-HIDDEN-ADMIN",
-  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
-  "scriptBytes": 77350072,
-  "assets": 1013,
+  "version": "V575-WEB-19-DEFAULT-SCORPION",
+  "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
+  "scriptBytes": 77508678,
+  "assets": 1014,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

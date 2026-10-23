@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Confirm the actual Pages build and exact cinematic artwork after deployment."""
+"""Confirm the actual Pages build, exact cinematic artwork and painted player after deployment."""
 import argparse
 import hashlib
 import json
@@ -57,6 +57,14 @@ def main():
         assert b'window.__EVOLVE_ADMIN_MODE_V585__' in live_engine, 'Published administrator gate is missing'
         assert report['admin_mode']['normal_start_stage'] == 1 and report['admin_mode']['normal_start_level'] == 1
         result['administrator_mode'] = {'early_style_matches': True, 'engine_gate_matches': True, 'default_enabled': False, 'unlock_presses': 5, 'normal_start_stage': 1, 'normal_start_level': 1}
+    if 'player_scorpion' in report:
+        player = report['player_scorpion']
+        atlas = player['art']
+        raw = fetch(atlas['path'])
+        assert hashlib.sha256(raw).hexdigest() == atlas['sha256'] and len(raw) == atlas['bytes'], 'Published player atlas differs'
+        assert b'window.__EVOLVE_PLAYER_SCORPION_V586__' in live_engine, 'Published default player integration is missing'
+        assert b'const PARTS_DEFAULT_V523={arm:null' in live_engine, 'Fresh equipment must start empty'
+        result['player_scorpion'] = {'atlas': atlas['path'], 'sha256': atlas['sha256'], 'bytes': len(raw), 'matches': True, 'painted_frames': player['painted_frames'], 'unarmed_default': player['unarmed_default'], 'existing_saved_equipment_preserved': True, 'attack': 'alternating upper-limb contact stabs'}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False))

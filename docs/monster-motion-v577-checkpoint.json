@@ -1,23 +1,22 @@
 {
-  "task": "Default normal game with hidden administrator controls",
-  "status": "Completed and deployed: normal stage-one/level-one play, administrator controls hidden until five consecutive codex presses; live engine, early hiding style, manifest and artwork verified",
-  "progress": 100,
-  "version": "V575-WEB-18-HIDDEN-ADMIN",
-  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
-  "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
+  "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
+  "status": "Painted player, real timed melee, equip/remove persistence and mobile layout verified; preparing guarded publication",
+  "progress": 70,
+  "version": "V575-WEB-19-DEFAULT-SCORPION",
+  "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
+  "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+  "engine": "dist/assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": [
-    "web/admin-state-v585.js",
-    "web/admin-mode-v585.js",
-    "web/admin-mode-v585.css",
-    "web/admin-mode-patches-v585.json"
+    "web/player-scorpion-v586.js",
+    "web/player-scorpion-art-v586.json",
+    "tools/package_player_scorpion_v586.py"
   ],
-  "scope": "테스트랑 맵충돌 같은 관리자 모드는 따로 숨기자. 기본으로는 일반 버전 플레이, 1레벨부터 시작. 하단 도감 버튼 5번으로 관리자 활성화.",
-  "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/admin-mode-v585-checkpoint.json. WEB-18 is deployed and actual live hashes match. Default is normal play starting at stage 1 and character level 1. Five consecutive footer codex presses enable admin for that page session; another footer tab resets the count, exiting/reloading hides admin again. Earned normal stage access uses EVOLVE_V575_TEST_NORMAL_PROGRESS_V585 and is separate from test shortcuts. Preserve all existing maps, collisions, images, combat, WEB-17 lettering and save keys. Automatically upload and deploy future authorized updates.",
+  "scope": "Set supplied scorpion as default character; render painted animation; bare upper limbs stab without an arm weapon",
+  "preservation": "Preserve all 986 preexisting image bytes, maps/collisions, boss rules/art, saved data, WEB-17 lettering and WEB-18 normal progression/five-press administrator gate; replace only the default player and no-arm-weapon attack path.",
+  "resume": "Read AGENTS.md and docs/player-scorpion-v586-checkpoint.json; continue WEB-19 on the WEB-18 hidden-admin baseline; preserve prior art, equipment saves, level-one normal play and administrator gate; verify and automatically deploy using existing GitHub Pages workflow",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -28,7 +27,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Requested work complete. Keep WEB-18 as the current baseline; preserve default normal play, five-press admin access, separate normal progression and all saved data.",
+  "next": "Upload current release through connected GitHub, run guarded Chrome regression workflow, deploy and verify actual Pages hashes",
   "legacy_atlases": [
     {
       "name": "A",
@@ -49,13 +48,12 @@
       "alpha": true
     }
   ],
-  "active_checkpoint": "docs/admin-mode-v585-checkpoint.json",
+  "active_checkpoint": "docs/player-scorpion-v586-checkpoint.json",
   "previous_deployment": {
-    "version": "V575-WEB-17-REFERENCE-LETTERING",
-    "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
-    "deployed_source_commit": "c481320dc51d5ef192301b4cdd1f5bf1bd4388ed",
-    "deployment_run": 39897579104,
-    "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39897579104"
+    "version": "V575-WEB-18-HIDDEN-ADMIN",
+    "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
+    "commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
+    "deployment_run": 39900254572
   },
   "web12_sources": [
     "web/red-pulse-v579.js",
@@ -161,7 +159,8 @@
     "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
     "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json",
     "full_browser_suite": "passed",
-    "live_administrator_gate_matches": true
+    "live_administrator_gate_matches": true,
+    "player_scorpion": "docs/PLAYER_SCORPION_BROWSER_REPORT.json"
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
@@ -207,9 +206,9 @@
       }
     }
   },
-  "deployed_source_commit": "fc34bacbaf7c86cf492a70cfbdaad114fc8b9ff7",
-  "deployment_run": 39900254572,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39900254572",
+  "deployed_source_commit": null,
+  "deployment_run": null,
+  "deployment_url": null,
   "release_backup": "backup/web18-hidden-admin-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
@@ -218,7 +217,7 @@
     "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": "docs/ADMIN_MODE_LIVE_REPORT.json",
+  "live_report": null,
   "physical_Galaxy_S23_plus_tested": false,
   "completed_at": "2026-10-23T04:29:49.760Z"
 }

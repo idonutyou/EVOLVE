@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-18-HIDDEN-ADMIN",
+  "version": "V575-WEB-19-DEFAULT-SCORPION",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 271721,
-  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
-  "image_assets": 986,
-  "cached_files": 1013,
-  "cached_bytes": 349562367,
+  "index_bytes": 271725,
+  "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
+  "image_assets": 987,
+  "cached_files": 1014,
+  "cached_bytes": 352635580,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+    "engine": "assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -619,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+    "engine": "assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -639,7 +639,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+    "engine": "assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -650,5 +650,28 @@
     "saved_test_preferences_ignored_in_normal_play": true,
     "all_image_bytes_unchanged": true,
     "existing_maps_and_collision_data_unchanged": true
+  },
+  "player_scorpion": {
+    "engine": "assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
+    "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
+    "art": {
+      "path": "assets/973b82ac6bde0325e2134a9f9a2924f3ab50efad9e7e50c946f26a064cc37660.png",
+      "sha256": "973b82ac6bde0325e2134a9f9a2924f3ab50efad9e7e50c946f26a064cc37660",
+      "bytes": 2914607,
+      "width": 1122,
+      "height": 1402,
+      "alpha": true,
+      "columns": 4,
+      "rows": 5
+    },
+    "painted_frames": 20,
+    "cached_frames": 20,
+    "unarmed_default": true,
+    "existing_saved_equipment_preserved": true,
+    "unarmed_attack": "alternating upper-limb forward contact stabs; impact at 0.12 seconds; 44-unit reach; no projectile/chain/poison/tail attack",
+    "existing_image_bytes_unchanged": 986,
+    "maps_and_bosses_unchanged": true,
+    "save_keys_preserved": true,
+    "physical_Galaxy_S23_plus_tested": false
   }
 }
