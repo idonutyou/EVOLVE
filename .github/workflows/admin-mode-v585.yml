@@ -28,11 +28,12 @@ jobs:
               for match in list(re.finditer(re.escape(term),clean))[:20]:
                   chunks.append({'term':term,'offset':match.start(),'source':clean[max(0,match.start()-2200):match.start()+3800]})
           Path('docs/admin-mode-v585-source.json').write_text(json.dumps({'engine':report['attack_warnings']['engine'],'bytes':len(code.encode()),'clean_bytes':len(clean.encode()),'chunks':chunks},ensure_ascii=False,indent=2)+'\n')
+          Path('docs/admin-mode-v585-head.txt').write_text(clean[:500000])
           tail=clean[-850000:]
           Path('docs/admin-mode-v585-tail.txt').write_text(tail)
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- docs/admin-mode-v585-source.json docs/admin-mode-v585-tail.txt
+          git add -- docs/admin-mode-v585-source.json docs/admin-mode-v585-tail.txt docs/admin-mode-v585-head.txt
           git commit -m "[skip ci] WEB-18 20%: inspect current normal-play and administrator controls"
           git push origin HEAD:online-v575
