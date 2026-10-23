@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
-  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-  "scriptBytes": 77344649,
+  "version": "V575-WEB-17-REFERENCE-LETTERING",
+  "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
+  "scriptBytes": 77344828,
   "assets": 1011,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

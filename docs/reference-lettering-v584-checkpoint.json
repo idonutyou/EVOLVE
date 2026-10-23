@@ -1,0 +1,197 @@
+{
+  "task": "Apply user-supplied cinematic lettering design",
+  "version": "V575-WEB-17-REFERENCE-LETTERING",
+  "baseline_version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+  "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
+  "progress": 70,
+  "status": "User correction received before deployment: match VENOM reference proportions exactly and remove all poison from BIO; preparing dry-metal BIO replacement",
+  "request": "글씨 이걸로 바꿔",
+  "reference": "docs/reference-lettering-v584.png",
+  "reference_file_id": "file_000000001ae082069fe8b97c81961b3d",
+  "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
+  "publication_authorization": "Automatically upload and deploy requested EVOLVE updates through the existing GitHub Pages workflow",
+  "source": [
+    "web/warning-branding-v581.js",
+    "web/warning-branding-art-v581.json"
+  ],
+  "next": "Finish corrected BIO asset, apply measured VENOM height scale and verify both before automatic deployment",
+  "physical_Galaxy_S23_plus_tested": false,
+  "image_generation": {
+    "mode": "built-in image_gen",
+    "prompts": "docs/reference-lettering-v584-image-prompts.json",
+    "asset": {
+      "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+      "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+      "bytes": 1060193,
+      "width": 941,
+      "height": 1672,
+      "alpha": true,
+      "draft": false
+    }
+  },
+  "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
+  "engine": "dist/assets/6bc4d9bded53337765f298b21be6ec486d02d9b75e64717aa2952d055f9e17eb.js",
+  "art": {
+    "atlases": {
+      "lettering": {
+        "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+        "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+        "bytes": 1060193,
+        "width": 941,
+        "height": 1672,
+        "alpha": true,
+        "draft": false
+      },
+      "crest_digits": {
+        "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+        "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+        "bytes": 1586575,
+        "width": 1254,
+        "height": 1254,
+        "alpha": true,
+        "draft": false
+      }
+    },
+    "sprites": {
+      "bio": {
+        "atlas": "lettering",
+        "crop": [
+          2,
+          162,
+          442,
+          186
+        ],
+        "cache_height": 210,
+        "height_scale": 0.74
+      },
+      "venom": {
+        "atlas": "lettering",
+        "crop": [
+          463,
+          166,
+          478,
+          191
+        ],
+        "cache_height": 210,
+        "height_scale": 0.74
+      },
+      "warning": {
+        "atlas": "lettering",
+        "crop": [
+          14,
+          503,
+          431,
+          143
+        ],
+        "cache_height": 96
+      },
+      "breach": {
+        "atlas": "lettering",
+        "crop": [
+          484,
+          497,
+          450,
+          155
+        ],
+        "cache_height": 64,
+        "height_scale": 0.7
+      },
+      "phase": {
+        "atlas": "lettering",
+        "crop": [
+          50,
+          835,
+          370,
+          54
+        ],
+        "cache_height": 48
+      },
+      "subtitle": {
+        "atlas": "lettering",
+        "crop": [
+          481,
+          835,
+          443,
+          40
+        ],
+        "cache_height": 48
+      },
+      "crest": {
+        "atlas": "crest_digits",
+        "crop": [
+          66,
+          0,
+          532,
+          627
+        ],
+        "cache_height": 220
+      },
+      "digit1": {
+        "atlas": "lettering",
+        "crop": [
+          141,
+          989,
+          184,
+          307
+        ],
+        "cache_height": 112
+      },
+      "digit2": {
+        "atlas": "lettering",
+        "crop": [
+          588,
+          989,
+          217,
+          309
+        ],
+        "cache_height": 112
+      },
+      "digit3": {
+        "atlas": "lettering",
+        "crop": [
+          116,
+          1308,
+          234,
+          292
+        ],
+        "cache_height": 112
+      }
+    }
+  },
+  "original_images_unchanged": 983,
+  "removed_assets": [
+    "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png"
+  ],
+  "validation": {
+    "lettering_glyphs": 9,
+    "existing_crest_preserved": true,
+    "original_images_unchanged": 983,
+    "image_assets": 984,
+    "cached_glyph_bytes": 1256968,
+    "alpha_transparency": true,
+    "visible_font_rendering": false,
+    "cinematic_browser": "passed; final tape contrast also verified in both orientations",
+    "unit_and_packaging_tests": "passed",
+    "WEB16_warning_style_and_lifecycle": "byte-for-byte unchanged",
+    "physical_Galaxy_S23_plus_tested": false,
+    "final_capture": "passed",
+    "errors": [],
+    "failed_requests": [],
+    "retired_lettering_bytes": 2357319,
+    "new_lettering_bytes": 1060193,
+    "asset_bytes_saved": 1297126
+  },
+  "stage_backups": {
+    "20": "f2e3f59",
+    "50": "5e3d690",
+    "60": "57c207a155e186ed724e9cdfef8cdf15c63f108c"
+  },
+  "browser_report": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json",
+  "visual_proof": "docs/reference-lettering-venom-v584.png",
+  "latest_user_correction": "venom titan 내가 준 비율 맞춰 더 길지 않게 해 그리고 바이오는 독이 아니니까 베놈처럼 글씨에 독이 있으면 안 되지",
+  "corrections_pending": {
+    "venom": "Use measured visible lettering aspect from original reference; do not lengthen vertically",
+    "bio": "Neutral dry silver metal only; remove every green poison effect and liquid drip"
+  },
+  "proportions": "docs/reference-lettering-v584-proportions.json"
+}

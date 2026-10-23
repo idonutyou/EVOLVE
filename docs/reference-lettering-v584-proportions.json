@@ -1,0 +1,18 @@
+{
+  "reference_ink_bounds": [
+    45,
+    1190,
+    767,
+    177
+  ],
+  "reference_ink_aspect": 4.333333333333333,
+  "current_venom_ink_bounds_in_crop": [
+    9,
+    9,
+    460,
+    167
+  ],
+  "required_height_scale": 0.6356517733763243,
+  "rendered_ink_aspect": 4.333333333333333,
+  "method": "Connected visible reference pixels (RGB max >100), components >=8 pixels; generated glyph alpha >20 and RGB max >100"
+}

@@ -1,21 +1,21 @@
 {
-  "task": "Subtle pre-cast warnings; clear overlays when attacks activate",
-  "status": "WEB-16 automatically uploaded and deployed; complete GitHub browser regression passed; live version, engine and manifest match",
-  "progress": 100,
-  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
-  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-  "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
+  "task": "Apply user-supplied cinematic lettering design",
+  "status": "Final reference lettering inspected and verified in portrait and landscape; automatic upload and guarded deployment ready",
+  "progress": 70,
+  "version": "V575-WEB-17-REFERENCE-LETTERING",
+  "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
+  "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
+  "engine": "dist/assets/6bc4d9bded53337765f298b21be6ec486d02d9b75e64717aa2952d055f9e17eb.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": [
-    "web/attack-warning-v582.js",
-    "web/active-hazards-v583.js"
+    "web/warning-branding-v581.js",
+    "web/warning-branding-art-v581.json"
   ],
-  "scope": "User screenshots show excessive red coverage; show attack range before casting only",
-  "preservation": "Preserve image bytes, maps, collision and combat timing/damage, boss motion, progression and save keys",
-  "resume": "Read AGENTS.md and docs/soft-warnings-v583-checkpoint.json. WEB-16 is deployed and live-verified. Keep pre-cast warnings subtle; preserve original active artwork, collision and combat timing. Continue requested changes with automatic upload and deployment.",
+  "scope": "글씨 이걸로 바꿔",
+  "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
+  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Apply the attached lettering design on current WEB-16; preserve existing warning visibility/timing and all non-lettering art. Automatically upload and deploy.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -26,7 +26,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Continue from WEB-16. Await user visual feedback; preserve subtle pre-cast warnings, native active effects, artwork, maps and saves. Automatically deploy requested updates through the existing workflow.",
+  "next": "Upload verified source/assets and run the full GitHub Pages deployment checks",
   "legacy_atlases": [
     {
       "name": "A",
@@ -47,14 +47,14 @@
       "alpha": true
     }
   ],
-  "active_checkpoint": "docs/soft-warnings-v583-checkpoint.json",
+  "active_checkpoint": "docs/reference-lettering-v584-checkpoint.json",
   "previous_deployment": {
-    "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
-    "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
-    "deployed_source_commit": "3c9295acc817a60820c780a5f8c970033296e12f",
-    "deployment_run": 39880682546,
-    "checkpoint": "docs/attack-warnings-v582-checkpoint.json",
-    "backup": "backup/web15-red-warnings-20261023"
+    "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+    "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
+    "deployed_source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262",
+    "deployment_run": 39883233250,
+    "checkpoint": "docs/soft-warnings-v583-checkpoint.json",
+    "backup": "backup/web16-soft-windup-20261023"
   },
   "web12_sources": [
     "web/red-pulse-v579.js",
@@ -150,7 +150,8 @@
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
-    "web16_cinematic": "docs/WEB16_CINEMATIC_BROWSER_REPORT.json"
+    "web16_cinematic": "docs/WEB16_CINEMATIC_BROWSER_REPORT.json",
+    "reference_lettering": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json"
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",

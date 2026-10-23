@@ -1,4 +1,4 @@
-// WEB-14: painted lettering, threat crest and countdown; cache each cutout once.
+// WEB-17: approved reference lettering and countdown; cache cutouts once, retain the crest.
 const warningBrandArtV581=JSON.parse('__WARNING_BRANDING_ART__'),warningBrandSpritesV581=new Map();
 let warningBrandErrorV581=null,warningBrandCanvasV581=null,warningBrandContextV581=null;
 const warningBrandReadyV581=Promise.all(Object.entries(warningBrandArtV581.atlases).map(async([key,a])=>{
@@ -11,7 +11,7 @@ function paintWarningBrandV581(elapsed,reduced,kind,phase){
  const c=warningBrandCanvasV581,g=warningBrandContextV581;if(!c||!g||warningBrandSpritesV581.size!==10)return;
  const w=c.parentElement.clientWidth||W,h=c.parentElement.clientHeight||H,dpr=Math.min(window.devicePixelRatio||1,1.5),cw=Math.round(w*dpr),ch=Math.round(h*dpr),landscape=w>h;
  if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);
- const draw=(name,x,y,maxW,maxH,align=.5)=>{const s=warningBrandSpritesV581.get(name),scale=Math.min(maxW/s.width,maxH/s.height),dw=s.width*scale,dh=s.height*scale;g.drawImage(s,x-dw*align,y-dh*.5,dw,dh);return dw;};
+ const draw=(name,x,y,maxW,maxH,align=.5)=>{const s=warningBrandSpritesV581.get(name),heightScale=warningBrandArtV581.sprites[name].height_scale||1,scale=Math.min(maxW/s.width,maxH/(s.height*heightScale)),dw=s.width*scale,dh=s.height*heightScale*scale;g.drawImage(s,x-dw*align,y-dh*.5,dw,dh);return dw;};
  const headerY=h*(landscape?.105:.085),headerH=landscape?30:Math.min(48,h*.06);
  draw('breach',w*.07,headerY,w*(landscape?.32:.59),headerH,0);
  const phaseY=headerY+headerH*.5+15,phaseW=draw('phase',w*.07,phaseY,70,16,0);
@@ -25,5 +25,5 @@ function paintWarningBrandV581(elapsed,reduced,kind,phase){
  draw(kind,w*.5,h*(landscape?.855:.83),w*(landscape?.7:.88),h*(landscape?.15:.16));
  draw('subtitle',w*.5,h*(landscape?.935:.928),w*.52,landscape?14:Math.min(21,h*.026));
 }
-window.__EVOLVE_PAINTED_WARNING_V581__={ready:warningBrandReadyV581,read:()=>({ready:warningBrandSpritesV581.size===10,error:warningBrandErrorV581,sprites:warningBrandSpritesV581.size,cachedBytes:[...warningBrandSpritesV581.values()].reduce((n,c)=>n+c.width*c.height*4,0),visibleFontText:false,legacyFinalHUD:!!document.getElementById('finalArtV417')})};
+window.__EVOLVE_PAINTED_WARNING_V581__={ready:warningBrandReadyV581,read:()=>({ready:warningBrandSpritesV581.size===10,error:warningBrandErrorV581,sprites:warningBrandSpritesV581.size,cachedBytes:[...warningBrandSpritesV581.values()].reduce((n,c)=>n+c.width*c.height*4,0),design:'reference-1000027488',visibleFontText:false,legacyFinalHUD:!!document.getElementById('finalArtV417')})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_PAINTED_WARNING_V581__.test={surface:name=>warningBrandSpritesV581.get(name)};

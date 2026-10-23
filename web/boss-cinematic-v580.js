@@ -22,7 +22,7 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineArtV580{position:absolute;inset:0;width:100%;height:100%;display:block}
 .cineShadeV580{position:absolute;inset:0;background:linear-gradient(#03050caa,transparent 20% 48%,#07070b66 64%,#07070bf2 100%),radial-gradient(ellipse at 50% 40%,transparent 22%,#0005 70%,#000a 100%);box-shadow:inset 0 0 70px #0008}
 .cineFlareV580{position:absolute;inset:0;background:#ffb28a;opacity:var(--cine-flare);pointer-events:none}
-.cineTapeV580{position:absolute;left:-2%;right:-2%;top:65%;height:43px;transform:rotate(-2deg);border-top:7px solid transparent;border-bottom:7px solid transparent;border-image:repeating-linear-gradient(125deg,#ff5c42 0 9px,#230c0c 9px 17px) 7;background:linear-gradient(#b41c20b8,#dc3d28d9);box-shadow:0 0 25px #e42b2670,inset 0 0 12px #ff8c3f66;display:flex;align-items:center;justify-content:center}
+.cineTapeV580{position:absolute;left:-2%;right:-2%;top:65%;height:43px;transform:rotate(-2deg);border-top:7px solid transparent;border-bottom:7px solid transparent;border-image:repeating-linear-gradient(125deg,#ff5c42 0 9px,#230c0c 9px 17px) 7;background:linear-gradient(#23090cf2,#430e10f2);box-shadow:0 0 25px #e42b2670,inset 0 0 12px #ff8c3f66;display:flex;align-items:center;justify-content:center}
 .cineOverlayV581{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .cineNameV580[hidden]{display:none!important}
 .cineBottomV580{position:absolute;left:9%;right:9%;bottom:max(5%,env(safe-area-inset-bottom));height:2px;background:#ffffff1c}.cineBottomV580 i{height:100%;display:block;background:#ff614a;width:var(--cine-remaining,100%);box-shadow:0 0 9px #fb5537}
