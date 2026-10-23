@@ -1,0 +1,301 @@
+{
+  "errors": [],
+  "maps": [
+    {
+      "id": "facility1",
+      "centered": true,
+      "exactBoss": true,
+      "playerDistance": 115,
+      "edge": 36.799999999999955,
+      "addRadius": 6.8,
+      "insideAfterMove": true,
+      "insideAfterUpdate": true,
+      "fieldDevicesHidden": true,
+      "playerClear": true
+    },
+    {
+      "id": "facility2",
+      "centered": true,
+      "exactBoss": true,
+      "playerDistance": 115,
+      "edge": 36.799999999999955,
+      "addRadius": 6.8,
+      "insideAfterMove": true,
+      "insideAfterUpdate": true,
+      "fieldDevicesHidden": true,
+      "playerClear": true
+    },
+    {
+      "id": "hub",
+      "centered": true,
+      "exactBoss": true,
+      "playerDistance": 115,
+      "edge": 36.799999999999955,
+      "addRadius": 6.8,
+      "insideAfterMove": true,
+      "insideAfterUpdate": true,
+      "fieldDevicesHidden": true,
+      "playerClear": true
+    },
+    {
+      "id": "biolab",
+      "centered": true,
+      "exactBoss": true,
+      "playerDistance": 115.00000000000006,
+      "edge": 36.799999999999955,
+      "addRadius": 6.8,
+      "insideAfterMove": true,
+      "insideAfterUpdate": true,
+      "fieldDevicesHidden": true,
+      "playerClear": true
+    },
+    {
+      "id": "red_biolab",
+      "centered": true,
+      "exactBoss": true,
+      "playerDistance": 115,
+      "edge": 36.799999999999955,
+      "addRadius": 6.8,
+      "insideAfterMove": true,
+      "insideAfterUpdate": true,
+      "fieldDevicesHidden": true,
+      "playerClear": true
+    }
+  ],
+  "device": {
+    "allowed": true,
+    "beforeLeave": 2,
+    "resetOnLeave": true,
+    "notEarly": true,
+    "visibleDamaged": true,
+    "offscreenSafe": true,
+    "playerSafe": true,
+    "oneDetonation": true,
+    "wave": true,
+    "pauseSafe": true,
+    "debug": {
+      "metrics": {
+        "detonations": 1,
+        "contacts": 1,
+        "spawned": 1,
+        "cooldown": 19.86,
+        "clock": 5.325566666666665,
+        "charging": 0,
+        "wave": {
+          "age": 0.14,
+          "radius": 286.0563648452834,
+          "maxRadius": 469.1356413661192,
+          "targets": 1
+        },
+        "artReady": true,
+        "artError": null,
+        "sites": [
+          {
+            "type": "regen",
+            "x": 236.90057178167328,
+            "y": 882.7070203702586,
+            "hold": 0,
+            "hidden": false
+          },
+          {
+            "type": "shield",
+            "x": 306.8009265980885,
+            "y": 1095.7056842493814,
+            "hold": 0,
+            "hidden": false
+          }
+        ],
+        "holdSeconds": 3,
+        "respawnSeconds": 20
+      },
+      "visibleHP": 15000,
+      "offscreenHP": 100000,
+      "enemyPresent": true,
+      "view": {
+        "l": 401,
+        "t": 633.5929214352104,
+        "r": 794,
+        "b": 1485.5929214352104
+      },
+      "target": {
+        "x": 597.5,
+        "y": 1059.5929214352104
+      },
+      "origin": {
+        "x": 597.5,
+        "y": 1059.5929214352104
+      },
+      "wave": {
+        "radius": 286.0563648452834,
+        "targets": [
+          {
+            "distance": 0,
+            "hit": true,
+            "same": true,
+            "hp": 15000
+          }
+        ]
+      }
+    }
+  },
+  "pickups": {
+    "healed": true,
+    "shielded": true
+  },
+  "encounters": [
+    {
+      "kind": "venom",
+      "warnedFirst": true,
+      "entryCentered": true,
+      "playerNearCenter": true,
+      "combatStarted": true,
+      "planned": 6,
+      "reinforcementDebug": {
+        "version": 554,
+        "phase": 3,
+        "tier": 0,
+        "multiplier": 1,
+        "hpPercent": 100,
+        "clock": 2.1199999999999997,
+        "nextWave": 5.119999999999999,
+        "waves": 1,
+        "spawned": 0,
+        "cancelled": 0,
+        "deferred": 0,
+        "alive": 0,
+        "melee": 0,
+        "ranged": 0,
+        "wave": {
+          "melee": 3,
+          "ranged": 3
+        },
+        "pending": [
+          {
+            "x": 560.9321302045755,
+            "y": 603,
+            "kind": "crawler",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          },
+          {
+            "x": 594.8471302045756,
+            "y": 1317,
+            "kind": "spitter",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          },
+          {
+            "x": 594.8471302045756,
+            "y": 603,
+            "kind": "crawler",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          },
+          {
+            "x": 459.1871302045756,
+            "y": 1317,
+            "kind": "spitter",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          },
+          {
+            "x": 425.27213020457566,
+            "y": 1317,
+            "kind": "crawler",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          },
+          {
+            "x": 628.7621302045756,
+            "y": 1317,
+            "kind": "spitter",
+            "at": 3.0199999999999996,
+            "waveId": 1
+          }
+        ],
+        "history": [
+          {
+            "id": 1,
+            "at": 2.1199999999999997,
+            "releasesAt": 3.0199999999999996,
+            "tier": 0,
+            "multiplier": 1,
+            "melee": 3,
+            "ranged": 3,
+            "planned": 6,
+            "born": 0,
+            "cancelled": 0
+          }
+        ],
+        "profiles": {
+          "2": {
+            "interval": 3,
+            "melee": 96,
+            "ranged": 0,
+            "baseMelee": 6,
+            "baseRanged": 0
+          },
+          "3": {
+            "interval": 3,
+            "melee": 48,
+            "ranged": 48,
+            "baseMelee": 3,
+            "baseRanged": 3
+          }
+        },
+        "bossPhase": 3,
+        "bossKind": true,
+        "game": {
+          "version": 575,
+          "stage": 20,
+          "selected": 20,
+          "map": "red_biolab",
+          "mapLabel": "적색 배양공장",
+          "override": "red_biolab",
+          "natural": true,
+          "busy": false,
+          "preparing": false,
+          "running": true,
+          "paused": false,
+          "ended": false,
+          "seconds": 301.06600000000094,
+          "ordinary": 0,
+          "testAlive": 0,
+          "queued": 0,
+          "batch": null,
+          "encounter": {
+            "kind": "venom",
+            "phase": 3,
+            "state": "combat",
+            "elapsed": 3.000000000000001
+          },
+          "boss": {
+            "kind": "venom",
+            "phase": 3,
+            "hp": 14961.989952000024,
+            "maxHp": 14961.989952000024,
+            "arrival": 0,
+            "invulnerable": false
+          },
+          "warning": false,
+          "arena": true,
+          "fps": 58,
+          "status": "VENOM TITAN 3페이즈 전투 중",
+          "ready": true,
+          "panelOpen": false
+        }
+      },
+      "innerEdgePlans": true,
+      "born": 6,
+      "innerEdgeBirths": true
+    },
+    {
+      "kind": "bio",
+      "warnedFirst": true,
+      "entryCentered": true,
+      "playerNearCenter": true,
+      "combatStarted": true
+    }
+  ],
+  "success": true
+}

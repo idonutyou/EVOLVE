@@ -3,8 +3,8 @@
   "version": "V575-WEB-17-REFERENCE-LETTERING",
   "baseline_version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-  "progress": 80,
-  "status": "Exact original images recovered and final lettering packaged; English boss names in both locales, four Korean labels; browser validation pending",
+  "progress": 90,
+  "status": "Final English boss names, Korean labels and exact reference ratio verified in both browser orientations; ready for automatic Pages deployment",
   "request": "글씨 이걸로 바꿔",
   "reference": "docs/reference-lettering-v584.png",
   "reference_file_id": "file_000000001ae082069fe8b97c81961b3d",
@@ -14,7 +14,7 @@
     "web/warning-branding-v581.js",
     "web/warning-branding-art-v581.json"
   ],
-  "next": "Run guarded browser and regression checks, then deploy automatically",
+  "next": "Promote the verified WEB-17 checkpoint and confirm actual Pages publication",
   "physical_Galaxy_S23_plus_tested": false,
   "image_generation": {
     "mode": "built-in image_gen",
@@ -221,23 +221,17 @@
     "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png"
   ],
   "validation": {
-    "lettering_glyphs": 9,
-    "existing_crest_preserved": true,
-    "original_images_unchanged": 983,
-    "image_assets": 984,
-    "cached_glyph_bytes": 1256968,
-    "alpha_transparency": true,
-    "visible_font_rendering": false,
-    "cinematic_browser": "passed; final tape contrast also verified in both orientations",
     "unit_and_packaging_tests": "passed",
+    "full_browser_suite": "passed",
+    "locales": [
+      "en",
+      "ko"
+    ],
+    "boss_names_English_in_both_locales": true,
+    "native_venom_reference_aspect": 4.333333333333333,
+    "BIO_poison_pixels": 0,
     "WEB16_warning_style_and_lifecycle": "byte-for-byte unchanged",
-    "physical_Galaxy_S23_plus_tested": false,
-    "final_capture": "passed",
-    "errors": [],
-    "failed_requests": [],
-    "retired_lettering_bytes": 2357319,
-    "new_lettering_bytes": 1060193,
-    "asset_bytes_saved": 1297126
+    "physical_Galaxy_S23_plus_tested": false
   },
   "stage_backups": {
     "20": "f2e3f59",
