@@ -72,6 +72,14 @@ def main():
         assert b'pose.rotation,blink,0,pose.facing,1' in live_engine
         assert b'b.disabled=true;b.classList.remove' in live_engine
         result['player_combat'] = {'integration_matches': True, 'classic_weapons_restored': True, 'lightning_locked': True, 'facing_mirrored_and_upright': True, 'existing_image_bytes_unchanged': report['player_combat']['existing_image_bytes_unchanged']}
+    if 'original_player' in report:
+        original = report['original_player']
+        assert b'window.__EVOLVE_ORIGINAL_PLAYER_V588__' in live_engine
+        assert original['art']['sha256'] == '40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9'
+        assert original['original_source_bytes_unchanged'] and not original['generative_redraw']
+        assert original['minimum_triangle_area_ratio'] > .1
+        assert result['player_scorpion']['sha256'] == original['art']['sha256']
+        result['original_player'] = {'source_matches': True, 'source_bytes_unchanged': True, 'generative_redraw': False, 'anatomy_offsets': original['anatomy_offsets'], 'cached_poses': original['cached_poses'], 'home_preview_surface': original['home_preview_surface']}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False))

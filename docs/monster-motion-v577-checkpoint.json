@@ -1,63 +1,57 @@
 {
-  "task": "Upright mirrored player facing, locked future lightning, restored original weapon choices and bare ARM stabbing",
-  "progress": 100,
-  "status": "Completed and deployed: broad upright mirrored facing; five original weapon choices and level-up progression restored; ARM uses contact-only upper-limb stabs; future lightning dimmed, disabled and absent from skill choices; actual published hashes verified",
-  "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
-  "version": "V575-WEB-20-CLASSIC-COMBAT",
-  "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
-  "engine": "dist/assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+  "task": "Use the supplied original creature without a generative redraw; shift its raised forelimbs slightly toward the head and cyan core slightly toward the tail, consistently in home and combat poses",
+  "progress": 50,
+  "status": "Original image hash, actual pixel-preserving anatomy offsets, high-resolution home/parts previews, all twenty cached poses and normal play verified; original combat code unchanged; final contact/equipment regression and publication pending",
+  "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
+  "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
+  "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
+  "engine": "dist/assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
   "constraints": {
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
-    "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
-    "source": "web/player-combat-v587.js",
-    "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
-    "body_rotation_limit_degrees": 80,
-    "head_vertical_margin_degrees": 12,
-    "lightning_locked": true,
-    "lightning_button_disabled_and_dimmed": true,
-    "lightning_in_skill_choices": false,
-    "saved_catalog_equipment_enables_lightning": false,
-    "restored_start_weapons": [
-      "arm",
-      "mouth",
-      "tail",
-      "wing",
-      "leg"
-    ],
-    "original_non_arm_damage_and_progression_restored": true,
-    "arm_attack": "alternating upper-limb contact stabs; no projectile",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
+    "art": {
+      "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "bytes": 343244,
+      "width": 1536,
+      "height": 1536
+    },
+    "original_source_bytes_unchanged": true,
+    "generative_redraw": false,
+    "anatomy_offsets": {
+      "near_arm": [
+        60,
+        40
+      ],
+      "far_arm": [
+        60,
+        40
+      ],
+      "core": [
+        -24,
+        -18
+      ]
+    },
+    "cached_poses": 20,
+    "pose_surface": 384,
+    "home_preview_surface": 1536,
+    "mesh_vertices": 164,
+    "mesh_triangles": 322,
+    "minimum_triangle_area_ratio": 0.120715,
     "existing_image_bytes_unchanged": 987,
-    "maps_and_bosses_unchanged": true,
-    "save_keys_preserved": true,
+    "combat_facing_maps_bosses_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Requested work complete. Continue from WEB-20; preserve broad upright mirrored facing, original five weapon choices and progression, bare ARM contact stabs, locked future lightning, exact image bytes, stable saved data, normal level-one starts and five-codex-press administrator gate. Automatically upload and deploy future authorized updates.",
+  "next": "Inspect original detail and both requested offsets, verify home and all twenty native combat poses, preserve WEB-20 facing/combat/lightning lock, automatically upload and publish",
+  "baseline_backup": "backup/web21-original-specimen-20261023",
   "verification": {
-    "original_image_bytes_unchanged": 987,
+    "original_source_sha256_matches": true,
+    "moved_and_unchanged_texture_patch_pixel_errors": 0,
+    "twenty_native_poses_unique": true,
+    "original_player_browser": "passed",
     "static_suites": "passed",
-    "player_combat_browser": "passed",
-    "painted_player_contact_and_saved_equipment_browser": "passed",
-    "normal_and_admin_browser": "passed",
-    "facing_samples": 721,
-    "pixel_mirror_difference": 0,
-    "physical_Galaxy_S23_plus_tested": false,
-    "full_local_browser_suite": "passed",
-    "regression_report": "docs/WEB20_REGRESSION_REPORT.json",
-    "full_remote_browser_suite": "passed",
-    "migration_workflow": "passed",
-    "pages_deployment": "success",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
-    "live_manifest_matches": true,
-    "live_player_atlas_sha256_matches": true,
-    "live_classic_combat_and_facing_integration_matches": true
-  },
-  "remote_checkpoint": "2c1d000fbc30b8fd3aca0ce74405c5c965a3d452",
-  "baseline_backup": "backup/web20-classic-combat-20261023",
-  "deployed_source_commit": "3aeef72fb79fda2824da817ce7f5a36b51857a6f",
-  "release_backup": "backup/web20-classic-combat-release-20261023",
-  "deployment_run": 39912322036,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39912322036",
-  "live_report": "docs/PLAYER_COMBAT_LIVE_REPORT.json",
-  "completed_at_github": "2026-10-23T06:37:46Z"
+    "all_987_existing_image_bytes_unchanged": true,
+    "per_frame_mesh_rebuilds": 0,
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }

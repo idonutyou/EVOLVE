@@ -1,0 +1,57 @@
+{
+  "task": "Use the supplied original creature without a generative redraw; shift its raised forelimbs slightly toward the head and cyan core slightly toward the tail, consistently in home and combat poses",
+  "progress": 50,
+  "status": "Original image hash, actual pixel-preserving anatomy offsets, high-resolution home/parts previews, all twenty cached poses and normal play verified; original combat code unchanged; final contact/equipment regression and publication pending",
+  "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
+  "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
+  "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
+  "engine": "dist/assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+  "constraints": {
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
+    "art": {
+      "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "bytes": 343244,
+      "width": 1536,
+      "height": 1536
+    },
+    "original_source_bytes_unchanged": true,
+    "generative_redraw": false,
+    "anatomy_offsets": {
+      "near_arm": [
+        60,
+        40
+      ],
+      "far_arm": [
+        60,
+        40
+      ],
+      "core": [
+        -24,
+        -18
+      ]
+    },
+    "cached_poses": 20,
+    "pose_surface": 384,
+    "home_preview_surface": 1536,
+    "mesh_vertices": 164,
+    "mesh_triangles": 322,
+    "minimum_triangle_area_ratio": 0.120715,
+    "existing_image_bytes_unchanged": 987,
+    "combat_facing_maps_bosses_save_keys_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "next": "Inspect original detail and both requested offsets, verify home and all twenty native combat poses, preserve WEB-20 facing/combat/lightning lock, automatically upload and publish",
+  "baseline_backup": "backup/web21-original-specimen-20261023",
+  "verification": {
+    "original_source_sha256_matches": true,
+    "moved_and_unchanged_texture_patch_pixel_errors": 0,
+    "twenty_native_poses_unique": true,
+    "original_player_browser": "passed",
+    "static_suites": "passed",
+    "all_987_existing_image_bytes_unchanged": true,
+    "per_frame_mesh_rebuilds": 0,
+    "physical_Galaxy_S23_plus_tested": false
+  }
+}

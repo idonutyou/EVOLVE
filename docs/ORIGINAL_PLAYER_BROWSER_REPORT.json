@@ -1,0 +1,217 @@
+{
+  "version": {
+    "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
+    "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
+    "scriptBytes": 77502162,
+    "assets": 1015,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
+  },
+  "original_player": {
+    "checks": [
+      "the actual supplied 1536px original PNG is used byte-for-byte; no generative redraw; detailed 1536px home preview and the existing 20-frame game cache allocation",
+      "actual pixel patches of both forelimbs translate forward 60/40 source pixels and the core moves back 24/18; unchanged body texture matches the supplied image; all twenty native poses are distinct",
+      "normal level-one play uses the same original creature, movement poses remain cached during real rendering, administrator UI stays hidden and future lightning stays disabled"
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "physical_Galaxy_S23_plus_tested": false,
+    "art": {
+      "source": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "sourceWidth": 1536,
+      "sourceHeight": 1536,
+      "previewSize": 1536,
+      "anatomyOffsets": {
+        "near_arm": [
+          60,
+          40
+        ],
+        "far_arm": [
+          60,
+          40
+        ],
+        "core": [
+          -24,
+          -18
+        ]
+      },
+      "frameBuilds": 20,
+      "redrawn": false,
+      "frameCacheBytes": 11796480,
+      "minimumTriangleAreaRatio": 0.120715,
+      "downloadedBytes": 343244,
+      "downloadedHash": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "previewWidth": 1536
+    },
+    "identity": {
+      "parts": {
+        "near_arm": {
+          "offset": [
+            60,
+            40
+          ],
+          "samples": [
+            {
+              "x": 717,
+              "y": 205,
+              "error": 0
+            },
+            {
+              "x": 475,
+              "y": 467,
+              "error": 0
+            },
+            {
+              "x": 538,
+              "y": 467,
+              "error": 0.006802721088435374
+            },
+            {
+              "x": 553,
+              "y": 413,
+              "error": 0
+            },
+            {
+              "x": 581,
+              "y": 500,
+              "error": 0
+            },
+            {
+              "x": 462,
+              "y": 498,
+              "error": 0
+            }
+          ],
+          "bestError": 0
+        },
+        "far_arm": {
+          "offset": [
+            60,
+            40
+          ],
+          "samples": [
+            {
+              "x": 1426,
+              "y": 577,
+              "error": 0
+            },
+            {
+              "x": 1319,
+              "y": 350,
+              "error": 0.021739130434782608
+            },
+            {
+              "x": 1315,
+              "y": 377,
+              "error": 0
+            },
+            {
+              "x": 1281,
+              "y": 349,
+              "error": 0
+            },
+            {
+              "x": 1238,
+              "y": 312,
+              "error": 0
+            },
+            {
+              "x": 1244,
+              "y": 343,
+              "error": 0
+            }
+          ],
+          "bestError": 0
+        },
+        "core": {
+          "offset": [
+            -24,
+            -18
+          ],
+          "samples": [
+            {
+              "x": 825,
+              "y": 576,
+              "error": 0
+            },
+            {
+              "x": 795,
+              "y": 564,
+              "error": 0
+            },
+            {
+              "x": 905,
+              "y": 659,
+              "error": 0
+            },
+            {
+              "x": 908,
+              "y": 692,
+              "error": 0
+            },
+            {
+              "x": 838,
+              "y": 598,
+              "error": 0
+            },
+            {
+              "x": 824,
+              "y": 623,
+              "error": 0
+            }
+          ],
+          "bestError": 0
+        },
+        "fixed": {
+          "offset": [
+            0,
+            0
+          ],
+          "samples": [
+            {
+              "x": 1003,
+              "y": 1080,
+              "error": 0
+            },
+            {
+              "x": 1000,
+              "y": 1147,
+              "error": 0
+            },
+            {
+              "x": 167,
+              "y": 348,
+              "error": 0
+            },
+            {
+              "x": 190,
+              "y": 282,
+              "error": 0
+            },
+            {
+              "x": 147,
+              "y": 507,
+              "error": 0
+            },
+            {
+              "x": 192,
+              "y": 427,
+              "error": 0
+            }
+          ],
+          "bestError": 0
+        }
+      },
+      "unique": 20
+    },
+    "play": {
+      "level": 1,
+      "moving": true,
+      "before": 20,
+      "after": 20,
+      "lightning": 0,
+      "admin": false
+    },
+    "success": true
+  }
+}

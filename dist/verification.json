@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-20-CLASSIC-COMBAT",
+  "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 271723,
-  "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
-  "image_assets": 987,
-  "cached_files": 1014,
-  "cached_bytes": 352636445,
+  "index_bytes": 271726,
+  "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
+  "image_assets": 988,
+  "cached_files": 1015,
+  "cached_bytes": 352972308,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -619,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -639,7 +639,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -652,19 +652,17 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
-      "path": "assets/973b82ac6bde0325e2134a9f9a2924f3ab50efad9e7e50c946f26a064cc37660.png",
-      "sha256": "973b82ac6bde0325e2134a9f9a2924f3ab50efad9e7e50c946f26a064cc37660",
-      "bytes": 2914607,
-      "width": 1122,
-      "height": 1402,
-      "alpha": true,
-      "columns": 4,
-      "rows": 5
+      "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "bytes": 343244,
+      "width": 1536,
+      "height": 1536,
+      "alpha": false
     },
-    "painted_frames": 20,
+    "painted_frames": 1,
     "cached_frames": 20,
     "unarmed_default": true,
     "existing_saved_equipment_preserved": true,
@@ -675,7 +673,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -697,6 +695,42 @@
     "existing_image_bytes_unchanged": 987,
     "maps_and_bosses_unchanged": true,
     "save_keys_preserved": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "original_player": {
+    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
+    "art": {
+      "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "bytes": 343244,
+      "width": 1536,
+      "height": 1536
+    },
+    "original_source_bytes_unchanged": true,
+    "generative_redraw": false,
+    "anatomy_offsets": {
+      "near_arm": [
+        60,
+        40
+      ],
+      "far_arm": [
+        60,
+        40
+      ],
+      "core": [
+        -24,
+        -18
+      ]
+    },
+    "cached_poses": 20,
+    "pose_surface": 384,
+    "home_preview_surface": 1536,
+    "mesh_vertices": 164,
+    "mesh_triangles": 322,
+    "minimum_triangle_area_ratio": 0.120715,
+    "existing_image_bytes_unchanged": 987,
+    "combat_facing_maps_bosses_save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }
