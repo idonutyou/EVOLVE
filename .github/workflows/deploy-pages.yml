@@ -81,6 +81,7 @@ jobs:
           node tests/monster_motion.test.cjs
           node tests/red_pulse.test.cjs
           node tests/movement_field.test.cjs
+          node tests/horde_roles.test.cjs
           node tests/boss_cinematic.test.cjs
       - name: Prepare browser verification
         run: |
@@ -95,6 +96,7 @@ jobs:
       - name: Verify mobile boot, maps, controls, saves and safe updates
         timeout-minutes: 10
         run: |
+          node tests/horde_roles_browser.cjs
           node tests/movement_field_browser.cjs
           node tests/arm_items_browser.cjs
           node tests/original_player_browser.cjs
@@ -133,7 +135,7 @@ jobs:
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
-          python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
+          python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web24-live.json
       - name: Retain publication evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -141,5 +143,5 @@ jobs:
           name: evolve-publication-verification
           path: |
             test-results/web17-live.json
-            test-results/web23-live.json
+            test-results/web24-live.json
           if-no-files-found: ignore

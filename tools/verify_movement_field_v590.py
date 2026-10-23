@@ -42,11 +42,14 @@ def main():
     assert b'playerMovementStepV590(dt,player.x-m.x,player.y-m.y,m.moving)' in code
     assert b'playerFacingStateV590.move(player.x-x,player.y-y)' in code
     assert b'cooldown=60;metrics.detonations++' in code
-    assert b'life:1.18,spread:.78' in code
+    assert b'life:2.36,spread:1.56' in code
+    assert b'window.__EVOLVE_HORDE_ROLES_V591__' in code
+    assert b'const STAGE_LEVEL_CAP_V521=Infinity;' in code
+    assert b'enemyContactAllowedV591(e)&&(e.contactCd' in code
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],
               'version_matches': True, 'manifest_matches': True, 'engine_matches': True,
               'entry_matches': True, 'engine': engine, 'engine_sha256': digest,
-              'movement_field': verification['movement_field'],
+              'movement_field': verification['movement_field'], 'horde_roles': verification['horde_roles'],
               'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')

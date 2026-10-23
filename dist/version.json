@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-23-MOVEMENT-FIELD",
-  "build": "4cc735e3befa2ab6ede21dda21b2fbecfdc8ee898c7347da81bff5253a44649c",
-  "scriptBytes": 77525131,
+  "version": "V575-WEB-24-HORDE-ROLES",
+  "build": "26f08a28edc0b4a4a62f6fa1e628d482d14ca0d8d851195b4cb3d19b5d9f3c35",
+  "scriptBytes": 77528100,
   "assets": 1021,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

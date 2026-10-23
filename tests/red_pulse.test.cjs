@@ -7,7 +7,7 @@ api.ensure();assert.equal(api.read().spawned,1);for(let i=0;i<100;i++)api.ensure
 api.step(2);assert.equal(site.hold,2);p.x=25;api.step(.01);assert.equal(site.hold,0);p.x=0;
 const inside={x:75,y:0,r:5,hp:100},outside={x:150,y:0,r:5,hp:100},arriving={x:20,y:0,r:5,hp:100,arrivalInvuln:true};list=[inside,outside,arriving];
 api.step(2.99);assert.equal(api.read().detonations,0);active=false;const before=JSON.stringify(api.read());api.step(5);assert.equal(JSON.stringify(api.read()),before);active=true;api.step(.01);assert.equal(api.read().detonations,1);assert.equal(hits.length,0);
-api.step(.23);assert.equal(hits.length,1);assert.equal(hits[0],inside);api.step(.8);assert.equal(hits.length,1);assert.equal(outside.hp,100);assert.equal(arriving.hp,100);
+api.step(.23);assert.equal(hits.length,0);assert.equal(api.wave().spread,1.56);assert.equal(api.wave().life,2.36);api.step(.23);assert.equal(hits.length,1);assert.equal(hits[0],inside);api.step(.8);assert.equal(hits.length,1);assert.equal(outside.hp,100);assert.equal(arriving.hp,100);
 for(let i=0;i<58;i++)api.step(1);assert.equal(api.read().spawned,1);api.step(1.1);assert.equal(api.read().spawned,2);blocked=true;api.step(9);assert.equal(api.read().detonations,1);assert.equal(site.hold,0);
 api.reset();site=null;blocked=true;api.ensure();assert.equal(api.read().spawned,0);
 console.log(JSON.stringify({ok:true,checks:['one active device','three continuous seconds and leave resets','pause freezes charging and cooldown','expanding front applies one hit','offscreen and arrival invulnerability excluded','60-second respawn','boss arena disables field devices']}));

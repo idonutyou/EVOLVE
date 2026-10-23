@@ -46,7 +46,7 @@ function attackWarningRushOutlineV582(points,rx,ry,offsetY){
  const world=new Path2D();world.addPath(p,new DOMMatrix([rx,0,0,ry,0,offsetY]));return world;
 }
 function drawLegacyAttackWarningV582(z){
- if(z.active||z.life<=0||z.owner?.dead||!telegraphVisibleV441(z))return;
+ if(z.active||z.life<=0||z.owner?.dead||!enemyWarningAllowedV591(z)||!telegraphVisibleV441(z))return;
  const paint=p=>attackWarningPaintV582(p),circle=(x=z.x,y=z.y,r=z.r||44)=>paint(attackWarningCircleV582(x,y,r)),a=z.a||0;
  if(z._bio489){
   if(z.done)return;

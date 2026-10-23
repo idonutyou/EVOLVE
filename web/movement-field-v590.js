@@ -79,5 +79,5 @@ const resetFacingBaseV590=playerMotionResetV586;
 playerMotionResetV586=function(...args){const out=resetFacingBaseV590(...args);playerFacingStateV590.reset(0);return out;};
 const facingReadBaseV590=window.__EVOLVE_PLAYER_SCORPION_V586__.read;
 window.__EVOLVE_PLAYER_SCORPION_V586__.read=()=>({...facingReadBaseV590(),...playerFacingStateV590.read(),facing:playerFacingV587(playerBodyAngleV590(),playerMotionV586.facing)});
-window.__EVOLVE_MOVEMENT_FIELD_V590__={read:()=>({...playerFacingStateV590.read(),fieldSpawns:fieldSpawnSamplerV590.read(),fieldRespawnSeconds:60,fieldSpreadSeconds:.78,fieldStrokeWidth:12})};
+window.__EVOLVE_MOVEMENT_FIELD_V590__={read:()=>({...playerFacingStateV590.read(),fieldSpawns:fieldSpawnSamplerV590.read(),fieldRespawnSeconds:60,fieldSpreadSeconds:1.56,fieldStrokeWidth:12})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_MOVEMENT_FIELD_V590__.test={recordAttack:recordWeaponAttackV590,move:playerMovementStepV590,reset:()=>playerFacingStateV590.reset(0),weaponAngle:side=>armItemAngleV589(side,playerBodyAngleV590()),safeFoot:redPulseFootClearV590,safeSite:redPulseSiteClearV590,spawnPoint:redPulseReachablePointV590,resetSampler:()=>fieldSpawnSamplerV590.reset()};

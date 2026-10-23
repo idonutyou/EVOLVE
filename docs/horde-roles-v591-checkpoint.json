@@ -1,0 +1,66 @@
+{
+  "progress": 80,
+  "version": "V575-WEB-24-HORDE-ROLES",
+  "build": "26f08a28edc0b4a4a62f6fa1e628d482d14ca0d8d851195b4cb3d19b5d9f3c35",
+  "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+  "status": "Local role/combat/movement, real 30-second horde and level 10/11/25/100 upgrade checks passed; movement-field and field-device browser regressions passed; automatically publishing",
+  "rules": {
+    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
+    "ordinary_movement_multiplier": 0.5,
+    "ordinary_spawn_multiplier": 1.5,
+    "existing_population_hard_limit_preserved": true,
+    "major_encounter_behavior_preserved": true,
+    "roles": {
+      "crawler": "melee",
+      "brute": "melee",
+      "runner": "charge",
+      "embermaw": "charge",
+      "spitter": "ranged",
+      "froststalker": "ranged",
+      "warden": "support",
+      "symbiote": "support"
+    },
+    "ranged_and_support_contact_damage": false,
+    "charge_damage_requires_burst": true,
+    "ordinary_spitter_ground_pools": false,
+    "ordinary_frost_beam": false,
+    "ordinary_charge_magma_trails": false,
+    "ordinary_attack_warnings": false,
+    "boss_attack_warnings_preserved": true,
+    "stage_level_cap": null,
+    "xp_overflow_preserved": true,
+    "field_speed_multiplier": 0.5,
+    "field_spread_seconds": 1.56,
+    "field_life_seconds": 2.36,
+    "field_charge_and_respawn_seconds_unchanged": [
+      3,
+      60
+    ],
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_save_keys_and_player_attacks_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "next": "Upload the tested tree to online-v575 and main, wait for all server checks and Pages deployment, verify actual files and record completion. Do not ask for permission.",
+  "verification": {
+    "browser_reports": {
+      "horde-roles-browser.json": true,
+      "movement-field-browser.json": true,
+      "red-pulse-browser.json": true
+    },
+    "levels": [
+      10,
+      11,
+      25,
+      100
+    ],
+    "actual_mobs": 18,
+    "previous_density_target": 12,
+    "maps": 5,
+    "field_spawn_samples": 240,
+    "original_images": 994,
+    "packaging_tests": 6,
+    "physical_Galaxy_S23_plus_tested": false
+  }
+}

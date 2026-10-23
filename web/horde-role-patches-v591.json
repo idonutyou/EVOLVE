@@ -1,0 +1,42 @@
+[
+  {
+    "before": "slowMul=((e.slow||0)>0?.65:1);",
+    "after": "slowMul=((e.slow||0)>0?.65:1)*enemyMoveScaleV591(e);"
+  },
+  {
+    "before": "if((e.contactCd<=0||(bioRushBeforeV492&&!e._bioRushHitV492))",
+    "after": "if(enemyContactAllowedV591(e)&&(e.contactCd<=0||(bioRushBeforeV492&&!e._bioRushHitV492))"
+  },
+  {
+    "before": "if(!e.elite&&e.shotCount%4===0)telegraphs.push({kind:'spitPool',owner:e,x:player.x,y:player.y,r:31,life:.62,max:.62,locked:true});",
+    "after": "/* Ordinary spitters use their ranged volley only. */"
+  },
+  {
+    "before": "if(e.frostSpecialCd<=0&&d<300&&!e.telegraphing)",
+    "after": "if(!ordinaryEnemyV591(e)&&e.frostSpecialCd<=0&&d<300&&!e.telegraphing)"
+  },
+  {
+    "before": "if(e.trailCd<=0){biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}",
+    "after": "if(!ordinaryEnemyV591(e)&&e.trailCd<=0){biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}"
+  },
+  {
+    "before": "else if(!e.elite&&e.slamCd<=0&&d<112&&!e.telegraphing)",
+    "after": "else if(!e.elite&&e.slamCd<=0&&d<48+player.r&&!e.telegraphing)"
+  },
+  {
+    "before": "const STAGE_LEVEL_CAP_V521=10;",
+    "after": "const STAGE_LEVEL_CAP_V521=Infinity;"
+  },
+  {
+    "before": "// V521: the cap applies before, during and after the boss within the current run.",
+    "after": "// WEB-24: stage experience and upgrade choices continue without a level cap."
+  },
+  {
+    "before": "// The upgrade earned by reaching level 10 is still offered exactly once.",
+    "after": "// Each earned level offers its upgrade; overflow XP is retained."
+  },
+  {
+    "before": "homeSetTextV522('homeLevelCapV522','Lv.'+STAGE_LEVEL_CAP_V521);",
+    "after": "homeSetTextV522('homeLevelCapV522',homeTextV522('No limit','제한 없음'));"
+  }
+]
