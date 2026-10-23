@@ -1,7 +1,7 @@
 {
   "task": "Reference lettering with English boss names and Korean supporting labels",
-  "status": "Final uncut Korean labels and English boss names reviewed in native portrait and landscape screenshots; browser/regression checks passed; automatic publication pending",
-  "progress": 90,
+  "status": "Completed and published: English boss names with Korean supporting labels, exact VENOM reference ratio and subtle crimson BIO regeneration; actual live bytes verified",
+  "progress": 100,
   "version": "V575-WEB-17-REFERENCE-LETTERING",
   "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
@@ -16,7 +16,7 @@
   ],
   "scope": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자",
   "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Verified final WEB-17 source and native Korean screenshots are ready. BIO TITAN / VENOM TITAN remain English in both modes; only four labels are Korean. Preserve exact 4.3333333333:1 VENOM visible aspect, subtle crimson BIO regeneration and WEB-16 windup-only warnings. Complete automatic Pages deployment and actual live hash verification.",
+  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. WEB-17 is fully deployed and live hashes match. Keep BIO TITAN / VENOM TITAN English in both locales. Supporting labels are Korean in Korean mode; preserve exact VENOM aspect, subtle crimson BIO title regeneration, WEB-16 windup-only warnings, all gameplay and saved data. Automatically upload and deploy subsequent authorized EVOLVE updates.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -27,7 +27,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Publish the verified WEB-17 build and confirm actual live version, engine, manifest and original artwork hashes",
+  "next": "Requested work complete. Start future changes from the deployed WEB-17 baseline; preserve the user's English boss names and all other game state.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -133,9 +133,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "pending WEB-17",
-    "live_build_matches": false,
-    "live_engine_sha256_matches": false,
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -147,7 +147,7 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": false,
+    "live_manifest_matches": true,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
@@ -155,7 +155,9 @@
     "reference_lettering": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json",
     "web17_regressions": "docs/WEB17_REGRESSION_BROWSER_REPORT.json",
     "web17_device_and_arena": "docs/WEB17_DEVICE_BROWSER_REPORT.json",
-    "web17_warnings": "docs/WEB17_WARNINGS_BROWSER_REPORT.json"
+    "web17_warnings": "docs/WEB17_WARNINGS_BROWSER_REPORT.json",
+    "live_BIO_sha256_matches": true,
+    "live_Korean_sha256_matches": true
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
@@ -201,9 +203,9 @@
       }
     }
   },
-  "deployed_source_commit": null,
-  "deployment_run": null,
-  "deployment_url": null,
+  "deployed_source_commit": "c481320dc51d5ef192301b4cdd1f5bf1bd4388ed",
+  "deployment_run": 39897579104,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39897579104",
   "release_backup": "backup/web17-reference-lettering-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
@@ -212,6 +214,7 @@
     "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": "docs/SOFT_WARNINGS_LIVE_REPORT.json",
-  "physical_Galaxy_S23_plus_tested": false
+  "live_report": "docs/REFERENCE_LETTERING_LIVE_REPORT.json",
+  "physical_Galaxy_S23_plus_tested": false,
+  "completed_at": "2026-10-23T03:59:32.814Z"
 }
