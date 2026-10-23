@@ -1,7 +1,7 @@
 {
   "task": "Default normal game with hidden administrator controls",
-  "status": "Verified normal stage-one/level-one game, preserved existing saves, earned stage progression and five consecutive footer codex clicks; guarded deployment pending",
-  "progress": 90,
+  "status": "Completed and deployed: normal stage-one/level-one play, administrator controls hidden until five consecutive codex presses; live engine, early hiding style, manifest and artwork verified",
+  "progress": 100,
   "version": "V575-WEB-18-HIDDEN-ADMIN",
   "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
   "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
@@ -17,7 +17,7 @@
   ],
   "scope": "테스트랑 맵충돌 같은 관리자 모드는 따로 숨기자. 기본으로는 일반 버전 플레이, 1레벨부터 시작. 하단 도감 버튼 5번으로 관리자 활성화.",
   "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/admin-mode-v585-checkpoint.json. Continue WEB-18 from current WEB-17. Default normal play starts at stage 1 and character level 1; only five consecutive footer codex presses enable test and map editor tools. Keep all original images, saved data and maps. Automatically upload and deploy.",
+  "resume": "Read AGENTS.md and docs/admin-mode-v585-checkpoint.json. WEB-18 is deployed and actual live hashes match. Default is normal play starting at stage 1 and character level 1. Five consecutive footer codex presses enable admin for that page session; another footer tab resets the count, exiting/reloading hides admin again. Earned normal stage access uses EVOLVE_V575_TEST_NORMAL_PROGRESS_V585 and is separate from test shortcuts. Preserve all existing maps, collisions, images, combat, WEB-17 lettering and save keys. Automatically upload and deploy future authorized updates.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -28,7 +28,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Automatically publish WEB-18 and confirm actual Pages version, engine, admin gate and unchanged artwork",
+  "next": "Requested work complete. Keep WEB-18 as the current baseline; preserve default normal play, five-press admin access, separate normal progression and all saved data.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -133,9 +133,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "pending WEB-18",
-    "live_build_matches": false,
-    "live_engine_sha256_matches": false,
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -147,7 +147,7 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": false,
+    "live_manifest_matches": true,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
@@ -159,7 +159,9 @@
     "live_BIO_sha256_matches": true,
     "live_Korean_sha256_matches": true,
     "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
-    "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json"
+    "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json",
+    "full_browser_suite": "passed",
+    "live_administrator_gate_matches": true
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
@@ -205,9 +207,9 @@
       }
     }
   },
-  "deployed_source_commit": null,
-  "deployment_run": null,
-  "deployment_url": null,
+  "deployed_source_commit": "fc34bacbaf7c86cf492a70cfbdaad114fc8b9ff7",
+  "deployment_run": 39900254572,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39900254572",
   "release_backup": "backup/web18-hidden-admin-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
@@ -216,7 +218,7 @@
     "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": "docs/REFERENCE_LETTERING_LIVE_REPORT.json",
+  "live_report": "docs/ADMIN_MODE_LIVE_REPORT.json",
   "physical_Galaxy_S23_plus_tested": false,
-  "completed_at": "2026-10-23T03:59:32.814Z"
+  "completed_at": "2026-10-23T04:29:49.760Z"
 }

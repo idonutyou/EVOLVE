@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-18-HIDDEN-ADMIN",
+  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
+  "version_matches": true,
+  "manifest_matches": true,
+  "entry_matches": true,
+  "engine": "assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
+  "engine_sha256": "38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9",
+  "engine_matches": true,
+  "artwork": {
+    "lettering": {
+      "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+      "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+      "bytes": 1060193,
+      "matches": true
+    },
+    "crest_digits": {
+      "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+      "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+      "bytes": 1586575,
+      "matches": true
+    },
+    "bio_regeneration": {
+      "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+      "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+      "bytes": 1677374,
+      "matches": true
+    },
+    "korean_labels": {
+      "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+      "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+      "bytes": 1663416,
+      "matches": true
+    }
+  },
+  "boss_names_English_in_both_locales": true,
+  "Korean_labels": [
+    "warning_ko",
+    "breach_ko",
+    "phase_ko",
+    "subtitle_ko"
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "administrator_mode": {
+    "early_style_matches": true,
+    "engine_gate_matches": true,
+    "default_enabled": false,
+    "unlock_presses": 5,
+    "normal_start_stage": 1,
+    "normal_start_level": 1
+  },
+  "source_commit": "fc34bacbaf7c86cf492a70cfbdaad114fc8b9ff7",
+  "deployment_run": 39900254572,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39900254572",
+  "verified_at": "2026-10-23T04:29:49.760Z",
+  "browser_checks": "normal/admin and complete guarded regression suite passed",
+  "all_986_original_image_bytes_unchanged": true
+}
