@@ -20,6 +20,9 @@ try{
  await page.screenshot({path:path.join(out,'normal-play-v585.png')});report.checks.push('real normal battle starts at stage 1 and character level 1 with natural enemies and no administrator controls');
  const earned=await page.evaluate(()=>{const c=window.__EVOLVE_TEST_MODULE_V575__.test.context();window.__EVOLVE_MAPS_V567__.test.context().setTime(300.1);c.step(.05);return {admin:window.__EVOLVE_ADMIN_MODE_V585__.read(),ended:window.__EVOLVE_TEST_MODULE_V575__.read().ended}});
  assert.ok(earned.ended);assert.equal(earned.admin.normal.unlocked,2);report.earned=earned;report.checks.push('actual stage-one timer completion unlocks stage two in normal progress');
+ // Complete the actual delayed victory/result transition before returning home.
+ // Otherwise its pending result dialog can reopen over the footer during this test.
+ await page.locator('#endOverlay').waitFor({state:'visible'});
  await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().home('battle'));await ready();
  for(let i=0;i<4;i++){await page.locator('#codexBtn').click();assert.equal(await page.evaluate(()=>window.__EVOLVE_ADMIN_MODE_V585__.read().enabled),false);}
  assert.equal(await page.locator('#codexBtn').getAttribute('aria-current'),'page');assert.equal(await page.locator('#tmOpenV573').isVisible(),false);

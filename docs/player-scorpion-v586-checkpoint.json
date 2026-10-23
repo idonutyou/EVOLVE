@@ -1,7 +1,7 @@
 {
   "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
-  "progress": 70,
-  "status": "Painted player, timed melee, equip/remove persistence, clean sprite boundaries and mobile layout verified; preparing guarded publication",
+  "progress": 80,
+  "status": "Player and normal/admin browser checks passed locally; GitHub checkpoint saved; guarded deployment ready",
   "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
   "baseline_version": "V575-WEB-18-HIDDEN-ADMIN",
   "art": {
@@ -12,7 +12,7 @@
     "height": 1402
   },
   "source_reference_sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
-  "next": "Upload current release through connected GitHub, run guarded Chrome regression workflow, deploy and verify actual Pages hashes",
+  "next": "Publish through the existing guarded GitHub Pages workflow, confirm full Chrome regression success and actual live version/atlas hashes",
   "physical_Galaxy_S23_plus_tested": false,
   "version": "V575-WEB-19-DEFAULT-SCORPION",
   "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
@@ -34,6 +34,10 @@
     "failed_requests": [],
     "original_image_bytes_unchanged": 986,
     "static_checks": "6 Python packaging tests and existing web/lightning/monster/red-pulse/cinematic tests passed",
-    "physical_Galaxy_S23_plus_tested": false
-  }
+    "physical_Galaxy_S23_plus_tested": false,
+    "normal_admin_browser": "passed",
+    "full_remote_browser_suite": "pending"
+  },
+  "remote_checkpoint": "26ecb89d298adc4eb6445867e6d18f512f05ae88",
+  "release_backup": "backup/web19-default-scorpion-20261023"
 }

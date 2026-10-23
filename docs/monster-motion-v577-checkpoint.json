@@ -1,7 +1,7 @@
 {
   "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
-  "status": "Painted player, real timed melee, equip/remove persistence and mobile layout verified; preparing guarded publication",
-  "progress": 70,
+  "status": "Player and normal/admin browser checks passed locally; GitHub checkpoint saved; guarded deployment ready",
+  "progress": 80,
   "version": "V575-WEB-19-DEFAULT-SCORPION",
   "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
   "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
@@ -27,7 +27,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Upload current release through connected GitHub, run guarded Chrome regression workflow, deploy and verify actual Pages hashes",
+  "next": "Publish through the existing guarded GitHub Pages workflow, confirm full Chrome regression success and actual live version/atlas hashes",
   "legacy_atlases": [
     {
       "name": "A",
@@ -131,9 +131,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "success",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
+    "pages_deployment": "pending WEB-19",
+    "live_build_matches": false,
+    "live_engine_sha256_matches": false,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -145,7 +145,7 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": true,
+    "live_manifest_matches": false,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
@@ -158,9 +158,10 @@
     "live_Korean_sha256_matches": true,
     "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
     "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json",
-    "full_browser_suite": "passed",
+    "full_browser_suite": "pending WEB-19",
     "live_administrator_gate_matches": true,
-    "player_scorpion": "docs/PLAYER_SCORPION_BROWSER_REPORT.json"
+    "player_scorpion": "docs/PLAYER_SCORPION_BROWSER_REPORT.json",
+    "web19_admin": "docs/WEB19_ADMIN_BROWSER_REPORT.json"
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
@@ -209,7 +210,7 @@
   "deployed_source_commit": null,
   "deployment_run": null,
   "deployment_url": null,
-  "release_backup": "backup/web18-hidden-admin-20261023",
+  "release_backup": "backup/web19-default-scorpion-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
     "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",
@@ -218,6 +219,5 @@
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
   "live_report": null,
-  "physical_Galaxy_S23_plus_tested": false,
-  "completed_at": "2026-10-23T04:29:49.760Z"
+  "physical_Galaxy_S23_plus_tested": false
 }
