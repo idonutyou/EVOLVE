@@ -1,0 +1,38 @@
+name: Inspect WEB-18 admin controls
+on:
+  push:
+    branches: [online-v575]
+    paths: [".github/workflows/admin-mode-v585.yml"]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: online-v575
+          fetch-depth: 1
+      - name: Retain current admin-control source context
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          report=json.loads(Path('dist/verification.json').read_text())
+          code=Path('dist',report['attack_warnings']['engine']).read_text()
+          clean=re.sub(r'data:[a-zA-Z0-9.+/-]+;base64,[A-Za-z0-9+/=]+','<original embedded data omitted>',code)
+          terms=['__EVOLVE_TEST_MODULE_V575__','__EVOLVE_MAP_TEST_V562__','homeCodex','codexBtn','homeNavV522','homeLatestV522','homeStageV522','testPanelV575','mapEditor','testModeV575','moveDebug','충돌 편집','이동불가 표시','맵 전체','EVOLVE_V575_TEST']
+          chunks=[]
+          for term in terms:
+              for match in list(re.finditer(re.escape(term),clean))[:20]:
+                  chunks.append({'term':term,'offset':match.start(),'source':clean[max(0,match.start()-2200):match.start()+3800]})
+          Path('docs/admin-mode-v585-source.json').write_text(json.dumps({'engine':report['attack_warnings']['engine'],'bytes':len(code.encode()),'clean_bytes':len(clean.encode()),'chunks':chunks},ensure_ascii=False,indent=2)+'\n')
+          tail=clean[-850000:]
+          Path('docs/admin-mode-v585-tail.txt').write_text(tail)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- docs/admin-mode-v585-source.json docs/admin-mode-v585-tail.txt
+          git commit -m "[skip ci] WEB-18 20%: inspect current normal-play and administrator controls"
+          git push origin HEAD:online-v575
