@@ -78,7 +78,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
      if(kind==='venom'){
       const s=c.venom(),qa=window.__EVOLVE_V554_QA__,vc=qa.test.context();s.boss.venomDebugV537=true;qa.auto(false);
       for(const phase of [1,2,3]){s.boss.venomPhaseV554=phase;vc.reset(s.boss);
-       for(const key of qa.info().availableSkills){const cast=qa.cast(key);c.draw();const blocked=key==='breath'&&!!c.venom().breath?.blocked,drawn=api.read().drawn;
+       for(const key of qa.info().availableSkills){const cast=qa.cast(key);c.draw();const grouped=window.__EVOLVE_VISUAL_CLARITY_V592__?.read().volley,blocked=key==='breath'&&!!c.venom().breath?.blocked||['dart','acid'].includes(key)&&grouped?.lanes===0,drawn=api.read().drawn;
         qa.test.step(c.venom().specs[key].prepare+.03);const active=c.venom(),before=api.read().drawn;
         api.test.venom({...active,zones:active.zones.filter(z=>!(z.warn>0)),clouds:active.clouds.filter(z=>z.age>=z.warn)},api.test.sector,()=>500);
         const activeDrawn=api.read().drawn-before,stage=active.attack?.stage;c.draw();

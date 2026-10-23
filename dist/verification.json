@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-24-HORDE-ROLES",
+  "version": "V575-WEB-25-VISUAL-CLARITY",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 271723,
-  "build": "26f08a28edc0b4a4a62f6fa1e628d482d14ca0d8d851195b4cb3d19b5d9f3c35",
+  "index_bytes": 271726,
+  "build": "578ff041495361070c7b68b43145a13dfac1f982457b37f050a3886406dcb06a",
   "image_assets": 994,
   "cached_files": 1021,
-  "cached_bytes": 354483253,
+  "cached_bytes": 354487438,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -412,7 +412,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -623,7 +623,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -643,7 +643,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -656,7 +656,7 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -677,7 +677,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -702,7 +702,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "original_player": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -738,7 +738,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "arm_items": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
     "source": "web/arm-items-v589.js",
     "implemented_ids": [
@@ -760,7 +760,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "movement_field": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
     "source": "web/movement-field-v590.js",
     "body_follows_actual_movement_only": true,
@@ -782,7 +782,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "horde_roles": {
-    "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
     "ordinary_movement_multiplier": 0.5,
     "ordinary_spawn_multiplier": 1.5,
@@ -817,6 +817,29 @@
     "existing_image_bytes_unchanged": 994,
     "new_image_assets": 0,
     "maps_save_keys_and_player_attacks_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "visual_clarity": {
+    "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
+    "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
+    "wave_and_spawn_decoration_rings_removed": true,
+    "cpu_and_gpu_paths_updated": true,
+    "all_ordinary_health_bars_on_hit_only": true,
+    "health_display_seconds": 1.2,
+    "health_uses_rendered_sprite_bounds": true,
+    "health_after_foreground": true,
+    "boss_hud_preserved": true,
+    "venom_parallel_volley_one_outer_warning": true,
+    "venom_radial_volley_one_warning": true,
+    "warning_tape_lettering_shared_canvas_transform": true,
+    "warning_tape_speed_px_per_second": 40,
+    "previous_warning_speed_px_per_second": 27,
+    "warning_tape_material": "cached weathered oxide steel",
+    "subtitle_removed": true,
+    "original_painted_lettering_preserved": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_saves_attacks_projectiles_and_damage_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

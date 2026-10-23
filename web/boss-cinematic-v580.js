@@ -22,17 +22,16 @@ const cinematicStyleV580=document.createElement('style');cinematicStyleV580.text
 .cineArtV580{position:absolute;inset:0;width:100%;height:100%;display:block}
 .cineShadeV580{position:absolute;inset:0;background:linear-gradient(#03050caa,transparent 20% 48%,#07070b66 64%,#07070bf2 100%),radial-gradient(ellipse at 50% 40%,transparent 22%,#0005 70%,#000a 100%);box-shadow:inset 0 0 70px #0008}
 .cineFlareV580{position:absolute;inset:0;background:#ffb28a;opacity:var(--cine-flare);pointer-events:none}
-.cineTapeV580{position:absolute;left:-2%;right:-2%;top:65%;height:43px;transform:rotate(-2deg);border-top:7px solid transparent;border-bottom:7px solid transparent;border-image:repeating-linear-gradient(125deg,#ff5c42 0 9px,#230c0c 9px 17px) 7;background:linear-gradient(#23090cf2,#430e10f2);box-shadow:0 0 25px #e42b2670,inset 0 0 12px #ff8c3f66;display:flex;align-items:center;justify-content:center}
 .cineOverlayV581{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
 .cineNameV580[hidden]{display:none!important}
 .cineBottomV580{position:absolute;left:9%;right:9%;bottom:max(5%,env(safe-area-inset-bottom));height:2px;background:#ffffff1c}.cineBottomV580 i{height:100%;display:block;background:#ff614a;width:var(--cine-remaining,100%);box-shadow:0 0 9px #fb5537}
-@media(min-aspect-ratio:1/1){.cineTapeV580{top:61%;height:35px}.cineBottomV580{bottom:3%}}
+@media(min-aspect-ratio:1/1){.cineBottomV580{bottom:3%}}
 `;document.head.appendChild(cinematicStyleV580);
 const cinematicLegacyEnsureV580=ensureBossWarningV526,cinematicLegacyWarningV580=warningTestV550;
 ensureBossWarningV526=function(){
  if(bossWarningNodeV526?.dataset.cinematicV580)return bossWarningNodeV526;
  bossWarningNodeV526?.remove();const el=document.createElement('div');el.id='bossWarningV526';el.hidden=true;el.dataset.cinematicV580='1';el.dataset.i18nIgnore='';el.setAttribute('role','status');el.setAttribute('aria-label','Boss incoming');
- el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><div class="cineTapeV580" aria-hidden="true"></div><canvas class="cineOverlayV581" aria-hidden="true"></canvas><div class="cineNameV580" hidden><span></span><small></small></div><div class="cineBottomV580"><i></i></div>';
+ el.innerHTML='<div class="cineBackdropV580"></div><canvas class="cineArtV580" aria-hidden="true"></canvas><div class="cineShadeV580"></div><div class="cineFlareV580"></div><canvas class="cineOverlayV581" aria-hidden="true"></canvas><div class="cineNameV580" hidden><span></span></div><div class="cineBottomV580"><i></i></div>';
  document.body.appendChild(el);bossWarningNodeV526=el;cinematicCanvasV580=el.querySelector('.cineArtV580');cinematicContextV580=cinematicCanvasV580.getContext('2d',{alpha:true});warningBrandCanvasV581=el.querySelector('.cineOverlayV581');warningBrandContextV581=warningBrandCanvasV581.getContext('2d',{alpha:true});return el;
 };
 function paintCinematicV580(elapsed,reduced){
@@ -51,7 +50,7 @@ setBossWarningV526=function(on){
  const spec=stageSpecV526(),kind=spec.bossKind==='venom'?'venom':'bio',elapsed=clamp(t-297,0,3),cfg=feedbackCfg(),reduced=!!cfg.reducedMotion,ko=homeLanguageV522()==='ko';
  if(!cinematicStateV580.active||cinematicStateV580.kind!==kind){cinematicStateV580.serial++;cinematicClearInputV580();}
  Object.assign(cinematicStateV580,{active:true,kind,elapsed,reduced});el.dataset.kind=kind;el.setAttribute('aria-label',(kind==='venom'?'VENOM TITAN':'BIO TITAN')+(ko?' 보스 출현':' incoming'));
- el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';el.querySelector('.cineNameV580 small').textContent=ko?'초대형 생명체 출현':'COLOSSAL LIFEFORM DETECTED';
+ el.querySelector('.cineNameV580 span').textContent=kind==='venom'?'VENOM TITAN':'BIO TITAN';
  const pose=cinematicPoseV580(elapsed,reduced);el.style.setProperty('--cine-remaining',String((1-elapsed/3)*100)+'%');el.style.setProperty('--cine-flare',String(reduced||cfg.flash===0?0:Math.max(0,1-Math.abs(elapsed-2.19)/.12)*.12));
  player.inv=Math.max(player.inv,.18);paintCinematicV580(elapsed,reduced);paintWarningBrandV581(elapsed,reduced,kind,spec.phase);
 };

@@ -46,10 +46,14 @@ def main():
     assert b'window.__EVOLVE_HORDE_ROLES_V591__' in code
     assert b'const STAGE_LEVEL_CAP_V521=Infinity;' in code
     assert b'enemyContactAllowedV591(e)&&(e.contactCd' in code
+    assert b'window.__EVOLVE_VISUAL_CLARITY_V592__' in code
+    assert b'markEnemyHitV592(e,dmg);' in code
+    assert b'drawAttackWarningsV582();drawEnemyHealthBarsV592();' in code
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],
               'version_matches': True, 'manifest_matches': True, 'engine_matches': True,
               'entry_matches': True, 'engine': engine, 'engine_sha256': digest,
               'movement_field': verification['movement_field'], 'horde_roles': verification['horde_roles'],
+              'visual_clarity': verification['visual_clarity'],
               'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')

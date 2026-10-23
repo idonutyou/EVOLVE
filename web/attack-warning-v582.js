@@ -119,13 +119,11 @@ function drawVenomAttackWarningV582(s,sectorPath,reach){
    if(k==='tentacle')paint(sectorPath(e.x,e.y,e.r+g.tentacle,a.a,42.5*Math.PI/180));
    else if(k==='breath'){const b=s.breath;if(b&&!b.blocked)paint(sectorPath(b.x,b.y,b.len,b.a,b.half));}
    else if(k==='dart'){
-    const p=new Path2D();for(const q of (a.bodyOrigins||VENOM_V537.bodyOrigins(e,a.a)).filter(p=>!p.blocked))attackWarningAppendV582(p,attackWarningLaneV582(q.x,q.y,a.a,reach(q.x,q.y,a.a,g.dart,10),7));paint(p);
+    const lanes=(a.bodyOrigins||VENOM_V537.bodyOrigins(e,a.a)).filter(q=>!q.blocked).map(q=>({x:q.x,y:q.y,a:a.a,len:reach(q.x,q.y,a.a,g.dart,10),half:7}));paint(venomVolleyPathV592(lanes));
    }else if(k==='acid'){
-    const p=new Path2D();for(const q of a.acidRays||[])attackWarningAppendV582(p,attackWarningLaneV582(q.x,q.y,q.a,q.len,q.w/2));paint(p);
+    paint(venomVolleyPathV592((a.acidRays||[]).map(q=>({...q,half:q.w/2}))));
    }else if(k==='gland'){
-    const p=new Path2D(),r=e.r+10+g.gland;for(let wave=0;wave<2;wave++)for(let i=0;i<22;i++){
-     const aa=a.a+.09+(a.glandOffset||0)+(i+wave*.5)*Math.PI*2/22,start=e.r+10,len=reach(e.x,e.y,aa,r,9);if(len>start)attackWarningAppendV582(p,attackWarningLaneV582(e.x,e.y,aa,len-start,7,start));
-    }paint(p);
+    paint(sectorPath(e.x,e.y,e.r+10+g.gland,0,Math.PI));
    }else if(k==='spore'){for(const q of a.sporeTargets||[])paint(attackWarningCircleV582(q.x,q.y,q.r));}
    else if(k==='infection'){const o=repeat?a.recastOrigin:e,p=new Path2D();for(let i=0;i<3;i++)attackWarningAppendV582(p,sectorPath(o.x,o.y,o.r+g.infection,a.a+i*Math.PI*2/3,g.infectionHalf));paint(p);}
   }

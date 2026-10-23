@@ -22,7 +22,7 @@ try{
  });
  for(const item of report.locales){
   assert.equal(item.selected,item.language);assert.equal(item.name,item.kind==='bio'?'BIO TITAN':'VENOM TITAN');assert.ok(item.aria.startsWith(item.name));assert.ok(item.drawn.includes(item.kind));
-  for(const label of ['warning','breach','phase','subtitle'])assert.ok(item.drawn.includes(label+(item.language==='ko'?'_ko':'')),JSON.stringify(item));
+  for(const label of ['warning','breach','phase'])assert.ok(item.drawn.includes(label+(item.language==='ko'?'_ko':'')),JSON.stringify(item));assert.ok(!item.drawn.some(n=>n==='subtitle'||n==='subtitle_ko'));
   assert.ok(!item.drawn.some(n=>n==='bio_ko'||n==='venom_ko'));
  }
  report.wordmarks={};
