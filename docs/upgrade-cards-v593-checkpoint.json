@@ -1,9 +1,9 @@
 {
-  "progress": 90,
+  "progress": 100,
   "version": "V575-WEB-26-UPGRADE-CARDS",
   "build": "1f4aeeb5cf772cff438799fd448f5e8dde444250b282aa63ff4a1e3be016df8c",
   "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
-  "status": "All original server checks passed; weapon-switch projectile regression fixed and locally verified",
+  "status": "Automatically uploaded, all server checks passed, Pages deployed and actual live version/code/art/style/font verified",
   "rules": {
     "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
     "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
@@ -129,6 +129,15 @@
     "new_image_assets": 1,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Upload corrected projectile source handling, await publication and verify actual Pages.",
-  "previous_publish_run": 39991307087
+  "next": "User can apply the update from home; continue future changes from current main.",
+  "previous_publish_run": 39991307087,
+  "source_commit": "c88a282f19f9073002953121b3ea905dae63a5cd",
+  "source_tree": "b8e39209750f1d335791422bcdc44c53886fe720",
+  "publish_run": 39992552859,
+  "migration_run": 39992552784,
+  "publish_conclusion": "success",
+  "migration_conclusion": "success",
+  "live_url": "https://idonutyou.github.io/EVOLVE/",
+  "live_report": "WEB26_LIVE_REPORT.json",
+  "workflow_report": "WEB26_PUBLISH_WORKFLOW.json"
 }

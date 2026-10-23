@@ -1,0 +1,222 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-26-UPGRADE-CARDS",
+  "build": "1f4aeeb5cf772cff438799fd448f5e8dde444250b282aa63ff4a1e3be016df8c",
+  "version_matches": true,
+  "manifest_matches": true,
+  "engine_matches": true,
+  "entry_matches": true,
+  "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+  "engine_sha256": "54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895",
+  "movement_field": {
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+    "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
+    "source": "web/movement-field-v590.js",
+    "body_follows_actual_movement_only": true,
+    "weapon_aim_hold_seconds": 2,
+    "dash_follows_actual_displacement_without_shortening_aim_hold": true,
+    "weapon_returns_to_movement_after_hold": true,
+    "pause_freezes_hold": true,
+    "existing_upright_mirror_limits_preserved": true,
+    "field_respawn_seconds": 60,
+    "field_spread_seconds": 1.56,
+    "field_stroke_width": 12,
+    "field_uses_reachable_player_foot_component": true,
+    "field_uses_entire_map": true,
+    "no_invalid_spawn_fallback": true,
+    "one_active_device": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_bosses_save_keys_and_other_attacks_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "horde_roles": {
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+    "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
+    "ordinary_movement_multiplier": 0.5,
+    "ordinary_spawn_multiplier": 1.95,
+    "existing_population_hard_limit_preserved": true,
+    "major_encounter_behavior_preserved": true,
+    "roles": {
+      "crawler": "melee",
+      "brute": "melee",
+      "runner": "charge",
+      "embermaw": "charge",
+      "spitter": "ranged",
+      "froststalker": "ranged",
+      "warden": "support",
+      "symbiote": "support"
+    },
+    "ranged_and_support_contact_damage": false,
+    "charge_damage_requires_burst": true,
+    "ordinary_spitter_ground_pools": false,
+    "ordinary_frost_beam": false,
+    "ordinary_charge_magma_trails": false,
+    "ordinary_attack_warnings": false,
+    "boss_attack_warnings_preserved": true,
+    "stage_level_cap": null,
+    "xp_overflow_preserved": true,
+    "field_speed_multiplier": 0.5,
+    "field_spread_seconds": 1.56,
+    "field_life_seconds": 2.36,
+    "field_charge_and_respawn_seconds_unchanged": [
+      3,
+      60
+    ],
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_save_keys_and_player_attacks_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false,
+    "additional_web26_population_multiplier": 1.3
+  },
+  "visual_clarity": {
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+    "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
+    "wave_and_spawn_decoration_rings_removed": true,
+    "cpu_and_gpu_paths_updated": true,
+    "all_ordinary_health_bars_on_hit_only": true,
+    "health_display_seconds": 1.2,
+    "health_uses_rendered_sprite_bounds": true,
+    "health_after_foreground": true,
+    "boss_hud_preserved": true,
+    "venom_parallel_volley_one_outer_warning": true,
+    "venom_radial_volley_one_warning": true,
+    "warning_tape_lettering_shared_canvas_transform": true,
+    "warning_tape_speed_px_per_second": 40,
+    "previous_warning_speed_px_per_second": 27,
+    "warning_tape_material": "cached weathered oxide steel",
+    "subtitle_removed": true,
+    "original_painted_lettering_preserved": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 0,
+    "maps_saves_attacks_projectiles_and_damage_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "upgrade_cards": {
+    "engine": "assets/54c31ae9c425b34be5e9a407e106c36aca310d3da0c76cea2094e4605a65f895.js",
+    "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
+    "stylesheet": "assets/49aa091d7a8f17565c68a3c4808ac267e2e172ab27f1d3c7be8170476fe22181.css",
+    "independent_stat_cards": 19,
+    "choices_per_level": 3,
+    "max_effects_per_card": 2,
+    "rarity_probabilities": [
+      0.6,
+      0.27,
+      0.1,
+      0.027,
+      0.003
+    ],
+    "rarity_increment_multipliers": [
+      1,
+      1.5,
+      2,
+      3,
+      5
+    ],
+    "count_increments": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "experience_per_level": 12,
+    "level_cap": null,
+    "additional_ordinary_quantity_multiplier": 1.3,
+    "old_movement_and_attack_roles_preserved": true,
+    "rarity_art": {
+      "path": "assets/a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed.png",
+      "sha256": "a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed",
+      "bytes": 2216425,
+      "width": 1254,
+      "height": 1254,
+      "columns": 5,
+      "rows": 5,
+      "generated": true,
+      "rare_reference": "1000027564.png",
+      "row_order": [
+        "gun",
+        "blade",
+        "legs",
+        "shell",
+        "core"
+      ],
+      "column_order": [
+        "common",
+        "rare",
+        "epic",
+        "legendary",
+        "mythic"
+      ],
+      "original_generated_bytes_preserved": true,
+      "design_progression": [
+        "simple rugged",
+        "tidy functional",
+        "refined premium",
+        "noble masterwork",
+        "sacred regal"
+      ],
+      "glow_progression": [
+        0,
+        0.1,
+        0.3,
+        0.6,
+        1
+      ],
+      "rarity_glow_colors": [
+        "neutral",
+        "blue",
+        "purple",
+        "golden yellow",
+        "bright orange"
+      ],
+      "decorative_spike_escalation": false,
+      "mythic_animated_radiance": true,
+      "approved_shape_reference": "exec-bc1c2f5f-997d-4b60-bc0e-77c1eaa54e70.png",
+      "user_approved_shapes_unchanged": true,
+      "glow_increase_steps": 2,
+      "row_bounds": [
+        [
+          0,
+          240
+        ],
+        [
+          240,
+          445
+        ],
+        [
+          445,
+          718
+        ],
+        [
+          718,
+          960
+        ],
+        [
+          960,
+          1254
+        ]
+      ],
+      "regions_recorded_without_modifying_image_bytes": true
+    },
+    "font": {
+      "path": "assets/58c2c993bd12554261f78f79ee08bea9cbbb0c7cfdf624e32cd14fad3204e2a7.woff",
+      "sha256": "58c2c993bd12554261f78f79ee08bea9cbbb0c7cfdf624e32cd14fad3204e2a7",
+      "bytes": 83924,
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+      "license": "SIL Open Font License 1.1",
+      "subset": "UI characters in upgrade cards and monster catalog; Latin ASCII",
+      "family": "EVOLVE Upgrade Sans"
+    },
+    "art_reference_tier": "rare",
+    "monster_catalog": true,
+    "monster_catalog_entries": 23,
+    "upgrades_reset_each_run": true,
+    "home_equipment_and_save_keys_preserved": true,
+    "existing_image_bytes_unchanged": 994,
+    "new_image_assets": 1,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "physical_Galaxy_S23_plus_tested": false
+}
