@@ -1,13 +1,13 @@
 {
   "task": "Default normal game with hidden administrator controls",
-  "status": "Normal-play defaults, separate earned progress and five consecutive footer codex presses implemented in source; ready to package and verify",
-  "progress": 40,
+  "status": "Verified normal stage-one/level-one game, preserved existing saves, earned stage progression and five consecutive footer codex clicks; guarded deployment pending",
+  "progress": 90,
   "version": "V575-WEB-18-HIDDEN-ADMIN",
-  "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
+  "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
   "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
+  "engine": "dist/assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": [
     "web/admin-state-v585.js",
@@ -28,7 +28,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Package from current WEB-17, run real mobile viewport normal/admin/saved-data tests, then deploy automatically",
+  "next": "Automatically publish WEB-18 and confirm actual Pages version, engine, admin gate and unchanged artwork",
   "legacy_atlases": [
     {
       "name": "A",
@@ -133,9 +133,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "success",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
+    "pages_deployment": "pending WEB-18",
+    "live_build_matches": false,
+    "live_engine_sha256_matches": false,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -147,7 +147,7 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": true,
+    "live_manifest_matches": false,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
@@ -157,7 +157,9 @@
     "web17_device_and_arena": "docs/WEB17_DEVICE_BROWSER_REPORT.json",
     "web17_warnings": "docs/WEB17_WARNINGS_BROWSER_REPORT.json",
     "live_BIO_sha256_matches": true,
-    "live_Korean_sha256_matches": true
+    "live_Korean_sha256_matches": true,
+    "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
+    "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json"
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
@@ -203,10 +205,10 @@
       }
     }
   },
-  "deployed_source_commit": "c481320dc51d5ef192301b4cdd1f5bf1bd4388ed",
-  "deployment_run": 39897579104,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39897579104",
-  "release_backup": "backup/web17-reference-lettering-20261023",
+  "deployed_source_commit": null,
+  "deployment_run": null,
+  "deployment_url": null,
+  "release_backup": "backup/web18-hidden-admin-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
     "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",

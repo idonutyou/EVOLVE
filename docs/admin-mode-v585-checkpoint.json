@@ -4,7 +4,7 @@
   "baseline_version": "V575-WEB-17-REFERENCE-LETTERING",
   "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
   "progress": 90,
-  "status": "Normal stage-one and level-one start, five real codex clicks, administrator tools, collision editor, saves and reload behavior verified; ready for guarded deployment",
+  "status": "Verified normal stage-one/level-one game, preserved existing saves, earned stage progression and five consecutive footer codex clicks; guarded deployment pending",
   "request": "테스트랑 맵충돌 같은 관리자 모드는 따로 숨기자. 기본으로는 일반 버전 플레이, 1레벨부터 시작. 하단 도감 버튼 5번으로 관리자 활성화.",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "publication_authorization": "Automatically upload and deploy requested EVOLVE changes through the existing GitHub Pages workflow",
@@ -15,7 +15,7 @@
     "web/admin-mode-v585.css",
     "web/admin-mode-patches-v585.json"
   ],
-  "next": "Publish automatically and verify actual Pages build and administrator code",
+  "next": "Automatically publish WEB-18 and confirm actual Pages version, engine, admin gate and unchanged artwork",
   "physical_Galaxy_S23_plus_tested": false,
   "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
   "engine": "dist/assets/38495d946526e2041e0070e5b264cc82d1a23980517fbdfa130e8143256945b9.js",
@@ -26,5 +26,11 @@
     "game_and_map_regressions": "passed",
     "image_assets_unchanged": 986,
     "physical_Galaxy_S23_plus_tested": false
+  },
+  "verification_run": 39899947472,
+  "release_backup": "backup/web18-hidden-admin-20261023",
+  "stage_backups": {
+    "40": "2fa7071b0697ea15ff3f7834b660dbf7426188c6",
+    "90": "3e1bb0d85d8af5d108f1d6831380d6c496a48767"
   }
 }
