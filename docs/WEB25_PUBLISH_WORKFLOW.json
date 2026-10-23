@@ -1,0 +1,119 @@
+{
+  "success": true,
+  "source_commit": "3b078b39e5bbe96e2325ad566075cd17feb4a5ac",
+  "source_tree": "a13d78f3411733699e9401a8130cff13062cefd5",
+  "publish": {
+    "id": 39977752541,
+    "name": "Publish EVOLVE Web",
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/39977752541",
+    "created_at": "2026-10-23T15:22:46Z",
+    "updated_at": "2026-10-23T15:26:39Z"
+  },
+  "migration": {
+    "id": 39977752510,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/39977752510"
+  },
+  "jobs": [
+    {
+      "id": 120496708354,
+      "name": "readiness",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Wait for the complete first upload",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 120496834880,
+      "name": "publish",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore first manual upload without replacing an existing game",
+          "conclusion": "success"
+        },
+        {
+          "name": "Repair online-shell startup order without changing gameplay or art",
+          "conclusion": "success"
+        },
+        {
+          "name": "Refuse to publish an empty or incomplete game",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare browser verification",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify mobile boot, maps, controls, saves and safe updates",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain browser evidence",
+          "conclusion": "success"
+        },
+        {
+          "name": "Keep the restored game in GitHub for future updates",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Configure GitHub Pages",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload verified website",
+          "conclusion": "success"
+        },
+        {
+          "name": "Deploy GitHub Pages",
+          "conclusion": "success"
+        },
+        {
+          "name": "Confirm the actual published build, administrator gate and artwork",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain publication evidence",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "physical_Galaxy_S23_plus_tested": false
+}

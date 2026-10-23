@@ -1,9 +1,9 @@
 {
-  "progress": 80,
+  "progress": 100,
   "version": "V575-WEB-25-VISUAL-CLARITY",
   "build": "578ff041495361070c7b68b43145a13dfac1f982457b37f050a3886406dcb06a",
   "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
-  "status": "Functional hit health bars, removed circles, native grouped volleys and aligned weathered tape passed; cinematic and all boss-warning regressions passed; automatically publishing",
+  "status": "WEB-25 automatically uploaded and deployed; full server regression checks and actual Pages version/manifest/engine/entry checks passed",
   "rules": {
     "engine": "assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js",
     "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
@@ -27,7 +27,7 @@
     "maps_saves_attacks_projectiles_and_damage_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Automatically upload the tested tree to online-v575 and main, complete all server checks and Pages deployment, verify actual published files and record completion. Do not ask for permission.",
+  "next": "Complete. Continue future changes from the deployed WEB-25 game. Preserve original image bytes, maps, saves and safe home-only update flow. Automatically upload and deploy without confirmation.",
   "verification": {
     "browser_reports": {
       "visual-clarity-browser.json": {
@@ -74,6 +74,21 @@
     ],
     "original_images": 994,
     "packaging_tests": 6,
-    "physical_Galaxy_S23_plus_tested": false
-  }
+    "physical_Galaxy_S23_plus_tested": false,
+    "full_server_checks_passed": true,
+    "actual_published_files_match": true
+  },
+  "source_commit": "3b078b39e5bbe96e2325ad566075cd17feb4a5ac",
+  "source_tree": "a13d78f3411733699e9401a8130cff13062cefd5",
+  "deployment": {
+    "id": 39977752541,
+    "name": "Publish EVOLVE Web",
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/39977752541",
+    "created_at": "2026-10-23T15:22:46Z",
+    "updated_at": "2026-10-23T15:26:39Z"
+  },
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "live_report": "docs/VISUAL_CLARITY_LIVE_REPORT.json",
+  "workflow_report": "docs/WEB25_PUBLISH_WORKFLOW.json"
 }
