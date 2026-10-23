@@ -1,21 +1,22 @@
 {
-  "task": "Apply user-supplied cinematic lettering design",
-  "status": "Execution environment failed; exact generated assets located and latest English-name/Korean-label source saved; recovering artwork and browser verification in existing GitHub compute",
-  "progress": 70,
+  "task": "Reference lettering with English boss names and Korean supporting labels",
+  "status": "Final uncut Korean labels and English boss names reviewed in native portrait and landscape screenshots; browser/regression checks passed; automatic publication pending",
+  "progress": 90,
   "version": "V575-WEB-17-REFERENCE-LETTERING",
-  "build": "806decd9a88852426d169e17793989c7d0b35721c64d8e46c0b80791e5f0477e",
+  "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/6bc4d9bded53337765f298b21be6ec486d02d9b75e64717aa2952d055f9e17eb.js",
+  "engine": "dist/assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": [
     "web/warning-branding-v581.js",
-    "web/warning-branding-art-v581.json"
+    "web/warning-branding-art-v581.json",
+    "web/boss-cinematic-v580.js"
   ],
   "scope": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자",
   "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Keep BIO TITAN and VENOM TITAN English in both locales. Use four Korean label crops, subtle crimson BIO regeneration and exact native VENOM aspect. Preserve WEB-16 windup-only warnings and all gameplay/art. Automatic upload and deployment authorized.",
+  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. Verified final WEB-17 source and native Korean screenshots are ready. BIO TITAN / VENOM TITAN remain English in both modes; only four labels are Korean. Preserve exact 4.3333333333:1 VENOM visible aspect, subtle crimson BIO regeneration and WEB-16 windup-only warnings. Complete automatic Pages deployment and actual live hash verification.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -26,7 +27,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Recover exact originals, run browser checks and deploy automatically",
+  "next": "Publish the verified WEB-17 build and confirm actual live version, engine, manifest and original artwork hashes",
   "legacy_atlases": [
     {
       "name": "A",
@@ -132,9 +133,9 @@
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
     "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "success",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
+    "pages_deployment": "pending WEB-17",
+    "live_build_matches": false,
+    "live_engine_sha256_matches": false,
     "live_lettering_sha256_matches": true,
     "live_crest_digits_sha256_matches": true,
     "legacy_final_HUD_absent": true,
@@ -146,25 +147,28 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": true,
+    "live_manifest_matches": false,
     "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
     "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
     "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
     "web16_cinematic": "docs/WEB16_CINEMATIC_BROWSER_REPORT.json",
-    "reference_lettering": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json"
+    "reference_lettering": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json",
+    "web17_regressions": "docs/WEB17_REGRESSION_BROWSER_REPORT.json",
+    "web17_device_and_arena": "docs/WEB17_DEVICE_BROWSER_REPORT.json",
+    "web17_warnings": "docs/WEB17_WARNINGS_BROWSER_REPORT.json"
   },
   "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
   "image_generation": {
     "mode": "built-in image_gen",
-    "prompts": "docs/warning-branding-v581-image-prompts.json",
+    "prompts": "docs/reference-lettering-v584-image-prompts.json",
     "selected_assets": {
       "lettering": {
-        "path": "assets/e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c.png",
-        "sha256": "e2724ef7813eeb057ef97e257fcbf8de4b9d1193f91971553c1fa329dca5495c",
-        "bytes": 2357319,
-        "width": 1536,
-        "height": 1024,
+        "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+        "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+        "bytes": 1060193,
+        "width": 941,
+        "height": 1672,
         "alpha": true,
         "draft": false
       },
@@ -176,13 +180,31 @@
         "height": 1254,
         "alpha": true,
         "draft": false
+      },
+      "bio_regeneration": {
+        "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+        "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+        "bytes": 1677374,
+        "width": 2033,
+        "height": 773,
+        "alpha": true,
+        "draft": false
+      },
+      "korean_labels": {
+        "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+        "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+        "bytes": 1663416,
+        "width": 1774,
+        "height": 887,
+        "alpha": true,
+        "draft": false
       }
     }
   },
-  "deployed_source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262",
-  "deployment_run": 39883233250,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39883233250",
-  "release_backup": "backup/web16-soft-windup-20261023",
+  "deployed_source_commit": null,
+  "deployment_run": null,
+  "deployment_url": null,
+  "release_backup": "backup/web17-reference-lettering-20261023",
   "stage_backups": {
     "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
     "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",
@@ -190,5 +212,6 @@
     "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
     "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": "docs/SOFT_WARNINGS_LIVE_REPORT.json"
+  "live_report": "docs/SOFT_WARNINGS_LIVE_REPORT.json",
+  "physical_Galaxy_S23_plus_tested": false
 }

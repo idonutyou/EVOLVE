@@ -4,7 +4,7 @@
   "baseline_version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
   "progress": 90,
-  "status": "Final English boss names and uncut Korean labels verified in portrait and landscape; exact VENOM aspect and poison-free BIO confirmed",
+  "status": "Final uncut Korean labels and English boss names reviewed in native portrait and landscape screenshots; browser/regression checks passed; automatic publication pending",
   "request": "글씨 이걸로 바꿔",
   "reference": "docs/reference-lettering-v584.png",
   "reference_file_id": "file_000000001ae082069fe8b97c81961b3d",
@@ -14,7 +14,7 @@
     "web/warning-branding-v581.js",
     "web/warning-branding-art-v581.json"
   ],
-  "next": "Review final native screenshots and deploy automatically",
+  "next": "Publish the verified WEB-17 build and confirm actual live version, engine, manifest and original artwork hashes",
   "physical_Galaxy_S23_plus_tested": false,
   "image_generation": {
     "mode": "built-in image_gen",
@@ -229,7 +229,6 @@
     ],
     "boss_names_English_in_both_locales": true,
     "native_venom_reference_aspect": 4.333333333333333,
-    "BIO_poison_pixels": 0,
     "WEB16_warning_style_and_lifecycle": "byte-for-byte unchanged",
     "physical_Galaxy_S23_plus_tested": false,
     "final_korean_cutouts": "complete, no adjacent glyphs",
@@ -238,17 +237,39 @@
       "docs/reference-lettering-ko-bio-landscape-v584.png",
       "docs/reference-lettering-ko-venom-portrait-v584.png",
       "docs/reference-lettering-ko-venom-landscape-v584.png"
-    ]
+    ],
+    "lettering_glyphs": 13,
+    "sprites": 14,
+    "image_assets": 986,
+    "cached_glyph_bytes": 1718064,
+    "existing_crest_preserved": true,
+    "original_images_unchanged": 983,
+    "Korean_labels": {
+      "WARNING": "경고",
+      "CONTAINMENT BREACH": "격리 구역 붕괴",
+      "PHASE": "페이즈",
+      "COLOSSAL LIFEFORM": "초대형 생명체"
+    },
+    "BIO_title_strong_green_pixels": 0,
+    "final_capture": "passed and visually reviewed in both orientations",
+    "pages_deployment": "pending"
   },
   "stage_backups": {
     "20": "f2e3f59",
     "50": "5e3d690",
-    "60": "57c207a155e186ed724e9cdfef8cdf15c63f108c"
+    "60": "57c207a155e186ed724e9cdfef8cdf15c63f108c",
+    "70": "f0ca2e98e593d0580fe73713d608e4fe42ed6d77",
+    "90": "1b04d18a96ebcfa913539b6ea49a3627361d5405"
   },
   "browser_report": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json",
   "visual_proof": "docs/reference-lettering-venom-v584.png",
   "latest_user_correction": "venom titan 내가 준 비율 맞춰 더 길지 않게 해 그리고 바이오는 독이 아니니까 베놈처럼 글씨에 독이 있으면 안 되지",
   "corrections_pending": {},
   "proportions": "docs/reference-lettering-v584-proportions.json",
-  "latest_user_request": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자"
+  "latest_user_request": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자",
+  "release_backup": "backup/web17-reference-lettering-20261023",
+  "verification_runs": [
+    39896342125,
+    39897213054
+  ]
 }
