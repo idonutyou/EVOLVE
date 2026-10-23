@@ -1,0 +1,353 @@
+{
+  "errors": [],
+  "failedRequests": [],
+  "geometry": {
+    "circleFilled": true,
+    "laneFilled": true,
+    "sectorSafeGap": true,
+    "ringHole": true,
+    "fullyBlockedLaneDoesNotThrow": true,
+    "legacy": {
+      "acidBurst": 10395,
+      "charge": 8624,
+      "frostLine": 5236,
+      "spitPool": 10395,
+      "runnerDash": 2464,
+      "bruteSlam": 10395,
+      "ravagerStrike": 10395,
+      "alphaSlam": 10395,
+      "omegaPool": 10395,
+      "apexSweep": 9856,
+      "omegaLattice": 10395,
+      "genesisFracture": 24640,
+      "abyssCross": 15620,
+      "apexNova": 10395,
+      "counterPrism": 10395,
+      "counterBrood": 10395,
+      "counterPurify": 10395,
+      "counterExecution": 10395,
+      "counterNull": 10395,
+      "nullZone": 10395,
+      "acidZone": 10395,
+      "emberCharge": 3388,
+      "bioSpikes": 10395,
+      "frostFan": 14210,
+      "frostCross": 9320,
+      "geneLattice": 20730,
+      "magmaCrown": 14147
+    }
+  },
+  "bosses": [
+    {
+      "kind": "venom",
+      "orientation": "portrait",
+      "skills": [
+        {
+          "key": "dart",
+          "phase": 1,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "tentacle",
+          "phase": 1,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 1,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "dart",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "tentacle",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 2,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "acid",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "infection",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 3,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "spore",
+          "phase": 3,
+          "cast": true,
+          "drawn": 5,
+          "blocked": false
+        },
+        {
+          "key": "gland",
+          "phase": 3,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "acid",
+          "phase": 3,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "kind": "bio",
+      "orientation": "portrait",
+      "skills": [
+        {
+          "key": "claw",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "twin",
+          "cast": true,
+          "drawn": 2
+        },
+        {
+          "key": "rear",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "spit",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "mortar",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "charge",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "crush2",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "pulse",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "backfire",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "feast",
+          "cast": true,
+          "drawn": 1
+        }
+      ]
+    },
+    {
+      "kind": "venom",
+      "orientation": "landscape",
+      "skills": [
+        {
+          "key": "dart",
+          "phase": 1,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "tentacle",
+          "phase": 1,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 1,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "dart",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "tentacle",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 2,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "acid",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "infection",
+          "phase": 2,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "breath",
+          "phase": 3,
+          "cast": true,
+          "drawn": 0,
+          "blocked": true
+        },
+        {
+          "key": "spore",
+          "phase": 3,
+          "cast": true,
+          "drawn": 6,
+          "blocked": false
+        },
+        {
+          "key": "gland",
+          "phase": 3,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        },
+        {
+          "key": "acid",
+          "phase": 3,
+          "cast": true,
+          "drawn": 1,
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "kind": "bio",
+      "orientation": "landscape",
+      "skills": [
+        {
+          "key": "claw",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "twin",
+          "cast": true,
+          "drawn": 2
+        },
+        {
+          "key": "rear",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "spit",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "mortar",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "charge",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "crush2",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "pulse",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "backfire",
+          "cast": true,
+          "drawn": 1
+        },
+        {
+          "key": "feast",
+          "cast": true,
+          "drawn": 1
+        }
+      ]
+    }
+  ],
+  "roof": {
+    "before": [
+      44,
+      25,
+      20,
+      255
+    ],
+    "after": [
+      104,
+      24,
+      28,
+      255
+    ],
+    "visible": true,
+    "foregroundPresent": true,
+    "drawn": 1
+  },
+  "success": true,
+  "tested_build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a"
+}

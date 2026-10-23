@@ -4,8 +4,8 @@
   "baseline_version": "V575-WEB-14-PAINTED-WARNING",
   "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
   "baseline_backup": "backup/web14-before-red-warnings-20261023",
-  "progress": 20,
-  "status": "Shared red filled geometry renderer implemented; safe ring holes and open sectors preserved",
+  "progress": 80,
+  "status": "User reaffirmed automatic upload and deployment for requested EVOLVE updates; publishing verified WEB-15",
   "reference": "1792707289049.jpeg",
   "request": {
     "color": "red for all enemy attack warning shapes",
@@ -19,10 +19,58 @@
     "VENOM warning and legacy telegraphs render before mapUnderDrawV575 foreground",
     "BIO and legacy patterns use inconsistent colors and partial outline-only warnings"
   ],
-  "next": "Connect legacy, BIO and VENOM warnings to the foreground pass",
+  "next": "Push verified WEB-15 to online-v575 and main, verify GitHub Pages success and compare live build and engine hashes",
   "physical_Galaxy_S23_plus_tested": false,
   "source": "web/attack-warning-v582.js",
   "stage_backups": {
-    "10": "4ad734f33a16ef7043d8c7476fb1286bea694a06"
+    "10": "4ad734f33a16ef7043d8c7476fb1286bea694a06",
+    "20": "82dd5a5a5020402a825f6653bf7139fc24852ac5"
+  },
+  "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+  "engine": "dist/assets/7a76392f1f5405b71d76cf83246f3a63332d44512bf1b38ce4e5660e4159d754.js",
+  "publication": "Authorized in the current conversation; use the existing GitHub Pages workflow",
+  "live_version": "V575-WEB-14-PAINTED-WARNING",
+  "engine_delta_bytes": -9961,
+  "validation": {
+    "image_assets_unchanged": 984,
+    "asset_checksums": "passed",
+    "legacy_warning_pixel_cases": 27,
+    "circle_and_lane_fill": true,
+    "sector_safe_gap": true,
+    "ring_safe_center": true,
+    "actual_underpass_visibility": true,
+    "fully_blocked_path_guard": true,
+    "native_venom_phases": [
+      1,
+      2,
+      3
+    ],
+    "native_bio_skills": 10,
+    "orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "browser_errors": [],
+    "request_errors": [],
+    "main_campaign_browser": "passed",
+    "device_and_arena_browser": "passed",
+    "cinematic_browser": "passed",
+    "python_tests": 6,
+    "web_client_tests": 1,
+    "lightning_checks": 7,
+    "monster_motion_checks": 7,
+    "red_device_checks": 7,
+    "centered_arena_checks": 2,
+    "cinematic_checks": 5,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "publication_authorization": {
+    "date": "2026-10-23",
+    "user_statement": "항상 자동 업로드, 배포 했잖아",
+    "scope": "Automatically upload and deploy requested EVOLVE updates through the existing GitHub Pages workflow"
+  },
+  "local_stage_backups": {
+    "40": "61873e0",
+    "60": "f83de7f31af748d96705a0546d18dc0dfb2d977b"
   }
 }

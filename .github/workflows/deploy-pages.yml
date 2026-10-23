@@ -12,6 +12,7 @@ on:
       - "tools/patch_web_lifecycle.py"
       - "tools/verify_site.py"
       - "tests/browser_smoke.cjs"
+      - "tests/attack_warnings_browser.cjs"
       - "tests/web_client.test.cjs"
       - "web/client.js"
   workflow_dispatch:
@@ -96,6 +97,7 @@ jobs:
           node tests/browser_smoke.cjs
           node tests/red_pulse_browser.cjs
           node tests/boss_cinematic_browser.cjs
+          node tests/attack_warnings_browser.cjs
       - name: Retain browser evidence
         if: always()
         uses: actions/upload-artifact@v4

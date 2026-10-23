@@ -1,18 +1,18 @@
 {
-  "task": "Painted cinematic lettering and emblem; remove obsolete boss HUD fallback",
-  "status": "WEB-14 deployed successfully; live build, engine and both painted UI atlases match; obsolete final HUD images return 404",
-  "progress": 100,
-  "version": "V575-WEB-14-PAINTED-WARNING",
-  "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
+  "task": "Red filled attack warnings above map foreground",
+  "status": "WEB-15 local checks passed; user-authorized automatic upload and deployment in progress",
+  "progress": 80,
+  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
   "baseline_commit": "f882e4fa847fcfec7eabe842e1c50e145730d312",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/5c3f7d54803d92032725aa40a4d52d5896a25f556b1619be54441003e02dddee.js",
+  "engine": "dist/assets/7a76392f1f5405b71d76cf83246f3a63332d44512bf1b38ce4e5660e4159d754.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
-  "source": "web/warning-branding-v581.js",
+  "source": "web/attack-warning-v582.js",
   "scope": "Painted raster cinematic labels, countdown and threat crest; current VENOM HUD from first arrival; remove obsolete generic final HUD markup, updates, preprocessing and two exclusive images.",
   "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "resume": "Read AGENTS.md and docs/warning-branding-v581-checkpoint.json. Continue from its progress and stage_backups. WEB-14 sources: web/warning-branding-v581.js, web/warning-branding-art-v581.json, web/boss-cinematic-v580.js and tools/package_warning_branding_v581.py. Completed artwork is backed up: never regenerate it while resuming. Preserve boss cinematic poses, WEB-12 red device and centered arenas, existing monster motion, approved map/collision data and save keys.",
+  "resume": "Read AGENTS.md and docs/attack-warnings-v582-checkpoint.json. Reuse verified WEB-15; retain all WEB-14 artwork, motion, maps, collisions and save keys. Upload and deploy routine requested EVOLVE updates automatically through the existing workflow.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -20,9 +20,10 @@
     "Checkpoint and backup at each stage",
     "Show file sizes for downloads",
     "Ignore audio",
-    "No subagents unless explicitly requested"
+    "No subagents unless explicitly requested",
+    "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Review user feedback on WEB-14. Existing open clients apply the update only at home via 업데이트 적용. Read this checkpoint and current main before new work; do not regenerate completed artwork.",
+  "next": "Verify deployment success and actual live build and engine hashes before marking 100%",
   "legacy_atlases": [
     {
       "name": "A",
@@ -43,7 +44,7 @@
       "alpha": true
     }
   ],
-  "active_checkpoint": "docs/warning-branding-v581-checkpoint.json",
+  "active_checkpoint": "docs/attack-warnings-v582-checkpoint.json",
   "previous_deployment": {
     "version": "V575-WEB-13-BOSS-CINEMATIC",
     "build": "e76bcda20b3f5153541c70365dedf849251ed055f27f33212e85f827eb92e624",

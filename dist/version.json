@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-14-PAINTED-WARNING",
-  "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
-  "scriptBytes": 77352312,
+  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+  "scriptBytes": 77342351,
   "assets": 1011,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

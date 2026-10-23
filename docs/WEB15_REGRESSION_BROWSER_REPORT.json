@@ -1,0 +1,88 @@
+{
+  "checks": [
+    "boot and prior-version save migration",
+    "mobile movement, pause and resume",
+    "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
+    "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+    "update waits for home without interrupting combat",
+    "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+    "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "all five maps load",
+    "reload preserves save",
+    "landscape layout"
+  ],
+  "maps": [
+    "facility1",
+    "facility2",
+    "hub",
+    "biolab",
+    "red_biolab"
+  ],
+  "errors": [],
+  "failed": [],
+  "lightning": {
+    "early": true,
+    "hold": true,
+    "pose": true,
+    "blocked": true,
+    "moved": true,
+    "stop": 0,
+    "contacts": 1,
+    "atlas": true,
+    "weapon": "lightning"
+  },
+  "monsterMotion": {
+    "surfaces": {
+      "crawler": true,
+      "runner": true,
+      "brute": true,
+      "spitter": true,
+      "warden": true,
+      "symbiote": true,
+      "embermaw": true,
+      "froststalker": true,
+      "legacy_crawler": true,
+      "legacy_warden": true
+    },
+    "originals": {
+      "warden": {
+        "gpu": true,
+        "canvas": true
+      },
+      "symbiote": {
+        "gpu": true,
+        "canvas": true
+      },
+      "embermaw": {
+        "gpu": true,
+        "canvas": true
+      },
+      "froststalker": {
+        "gpu": true,
+        "canvas": true
+      },
+      "legacy_crawler": {
+        "gpu": true,
+        "canvas": true
+      },
+      "legacy_warden": {
+        "gpu": true,
+        "canvas": true
+      }
+    },
+    "gpuEnabled": true,
+    "gpuFramesDiffer": true,
+    "canvasFramesDiffer": true,
+    "key0": "brute@0",
+    "key1": "brute@1",
+    "windup": 3,
+    "hurt": 3,
+    "cachedFrames": 40,
+    "noTextureRebuildDuringDraw": true
+  },
+  "success": true,
+  "tested_build": "58b758c4bd98277e59e4f359714ed146143d87eeeacf91e0302bb8e1c513b519",
+  "final_delta": "Only rush warning outline changed afterwards; final focused warning browser suite passed"
+}
