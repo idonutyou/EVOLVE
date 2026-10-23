@@ -1,7 +1,7 @@
 {
   "task": "Implement the supplied cannon and blades as real ARM equipment, with marked-end-only icons",
-  "progress": 95,
-  "status": "The user explicitly instructed automatic upload and deployment; publishing the already verified implementation",
+  "progress": 100,
+  "status": "Completed and deployed: all local and remote checks passed; actual live version, entry, engine, manifest, original artwork and all six weapon asset hashes match",
   "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
   "version": "V575-WEB-22-ARM-ITEMS",
   "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
@@ -28,7 +28,7 @@
     "maps_bosses_save_keys_and_other_weapon_code_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Automatically upload to idonutyou/EVOLVE, let the existing Pages workflow verify and publish, and verify actual live build and hashes. Do not ask for confirmation again.",
+  "next": "Continue from deployed WEB-22. Preserve the supplied original character, forelimb/core offsets, upright mirrored facing, implemented cannon/blade ARM equipment, existing saves/maps/bosses and locked lightning. Automatically upload and deploy completed future changes without asking again.",
   "verification": {
     "version": "V575-WEB-22-ARM-ITEMS",
     "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
@@ -127,14 +127,23 @@
     "static_game_suites_passed": true,
     "original_images_preserved": 988,
     "new_images": 6,
-    "pages_deployed": false,
-    "physical_Galaxy_S23_plus_tested": false
+    "pages_deployed": true,
+    "physical_Galaxy_S23_plus_tested": false,
+    "remote_browser_suite_passed": true,
+    "live_engine_and_new_weapon_assets_match": true
   },
   "publication": {
-    "status": "authorized_by_user",
+    "status": "completed",
     "standing_instruction": "물어보지 말고 항상 자동으로 업로드하고 배포해",
     "repository": "idonutyou/EVOLVE",
     "pages_url": "https://idonutyou.github.io/EVOLVE/",
-    "user_confirmation_required": false
-  }
+    "user_confirmation_required": false,
+    "actual_live_version": "V575-WEB-22-ARM-ITEMS",
+    "actual_live_build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660"
+  },
+  "deployed_source_commit": "2c36fee029679023f8484680dc460ad3eacbae00",
+  "deployment_run": 39937539064,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39937539064",
+  "live_report": "docs/ARM_ITEMS_LIVE_REPORT.json",
+  "completed_at_github": "2026-10-23T10:18:06Z"
 }

@@ -1,0 +1,140 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-22-ARM-ITEMS",
+  "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
+  "version_matches": true,
+  "manifest_matches": true,
+  "entry_matches": true,
+  "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+  "engine_sha256": "ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54",
+  "engine_matches": true,
+  "artwork": {
+    "lettering": {
+      "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+      "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+      "bytes": 1060193,
+      "matches": true
+    },
+    "crest_digits": {
+      "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+      "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+      "bytes": 1586575,
+      "matches": true
+    },
+    "bio_regeneration": {
+      "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+      "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+      "bytes": 1677374,
+      "matches": true
+    },
+    "korean_labels": {
+      "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+      "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+      "bytes": 1663416,
+      "matches": true
+    }
+  },
+  "boss_names_English_in_both_locales": true,
+  "Korean_labels": [
+    "warning_ko",
+    "breach_ko",
+    "phase_ko",
+    "subtitle_ko"
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "administrator_mode": {
+    "early_style_matches": true,
+    "engine_gate_matches": true,
+    "default_enabled": false,
+    "unlock_presses": 5,
+    "normal_start_stage": 1,
+    "normal_start_level": 1
+  },
+  "player_scorpion": {
+    "atlas": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+    "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+    "bytes": 343244,
+    "matches": true,
+    "painted_frames": 1,
+    "unarmed_default": true,
+    "existing_saved_equipment_preserved": true,
+    "attack": "alternating upper-limb contact stabs"
+  },
+  "player_combat": {
+    "integration_matches": true,
+    "classic_weapons_restored": true,
+    "lightning_locked": true,
+    "facing_mirrored_and_upright": true,
+    "existing_image_bytes_unchanged": 987
+  },
+  "original_player": {
+    "source_matches": true,
+    "source_bytes_unchanged": true,
+    "generative_redraw": false,
+    "anatomy_offsets": {
+      "near_arm": [
+        60,
+        40
+      ],
+      "far_arm": [
+        60,
+        40
+      ],
+      "core": [
+        -24,
+        -18
+      ]
+    },
+    "cached_poses": 20,
+    "home_preview_surface": 1536
+  },
+  "arm_items": {
+    "integration_matches": true,
+    "cannon_dispatch_matches": true,
+    "original_source_pixels_preserved": true,
+    "equipment_ids_preserved": true,
+    "artwork": {
+      "cannon": {
+        "left": {
+          "path": "assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png",
+          "sha256": "7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d",
+          "bytes": 221378,
+          "matches": true
+        },
+        "right": {
+          "path": "assets/e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59.png",
+          "sha256": "e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59",
+          "bytes": 219908,
+          "matches": true
+        },
+        "icon": {
+          "path": "assets/4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a.png",
+          "sha256": "4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a",
+          "bytes": 448695,
+          "matches": true
+        }
+      },
+      "blades": {
+        "left": {
+          "path": "assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png",
+          "sha256": "73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b",
+          "bytes": 150839,
+          "matches": true
+        },
+        "right": {
+          "path": "assets/942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e.png",
+          "sha256": "942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e",
+          "bytes": 143154,
+          "matches": true
+        },
+        "icon": {
+          "path": "assets/7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef.png",
+          "sha256": "7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef",
+          "bytes": 301033,
+          "matches": true
+        }
+      }
+    }
+  }
+}

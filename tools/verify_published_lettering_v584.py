@@ -80,6 +80,23 @@ def main():
         assert original['minimum_triangle_area_ratio'] > .1
         assert result['player_scorpion']['sha256'] == original['art']['sha256']
         result['original_player'] = {'source_matches': True, 'source_bytes_unchanged': True, 'generative_redraw': False, 'anatomy_offsets': original['anatomy_offsets'], 'cached_poses': original['cached_poses'], 'home_preview_surface': original['home_preview_surface']}
+    if 'arm_items' in report:
+        assert b'window.__EVOLVE_ARM_ITEMS_V589__' in live_engine, 'Published ARM item integration is missing'
+        assert b"armItemModeV589()==='cannon'&&state.arm>0" in live_engine, 'Published cannon dispatch is missing'
+        equipment_art = json.loads(Path('web/arm-items-art-v589.json').read_text())
+        equipment_assets = {}
+        for kind, item in equipment_art['items'].items():
+            equipment_assets[kind] = {}
+            for side in ['left', 'right', 'icon']:
+                part = item[side]
+                raw = fetch(part['path'])
+                digest = hashlib.sha256(raw).hexdigest()
+                assert digest == part['sha256'] and len(raw) == part['bytes'], 'Published weapon artwork differs: ' + kind + '/' + side
+                equipment_assets[kind][side] = {'path': part['path'], 'sha256': digest, 'bytes': len(raw), 'matches': True}
+        result['arm_items'] = {'integration_matches': True, 'cannon_dispatch_matches': True,
+                               'original_source_pixels_preserved': equipment_art['source_pixels_preserved'],
+                               'equipment_ids_preserved': report['arm_items']['saved_equipment_ids_preserved'],
+                               'artwork': equipment_assets}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False))

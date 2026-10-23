@@ -96,6 +96,10 @@
   "static_game_suites_passed": true,
   "original_images_preserved": 988,
   "new_images": 6,
-  "pages_deployed": false,
-  "physical_Galaxy_S23_plus_tested": false
+  "pages_deployed": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "remote_browser_suite_passed": true,
+  "live_build_and_asset_hashes_match": true,
+  "deployed_source_commit": "2c36fee029679023f8484680dc460ad3eacbae00",
+  "deployment_run": 39937539064
 }
