@@ -27,7 +27,7 @@ function upgradeGunRangeV593(){return playerBasicRangeV552()*(1+upgradeRunV593.g
 function upgradeBladeReachV593(base){return base*(1+upgradeRunV593.bladeRange);}
 function upgradeSetBodyV593(){
  const scale=upgradeBodyScaleV593();player.r=upgradeRunV593.baseRadius*scale;playerArtV586.displaySize=upgradeRunV593.baseSize*scale;
- resolveTerrainBody(player,player.r);
+ resolveTerrainBody(player,player.r);fieldSpawnSamplerV590.reset();
 }
 function upgradeMoveV593(amount){upgradeRunV593.moveSpeed+=amount;player.speed+=upgradeRunV593.baseSpeed*amount;}
 function upgradeHealthV593(amount){player.maxHp+=amount;player.hp=Math.min(player.maxHp,player.hp+amount);}
@@ -89,7 +89,7 @@ chooseLevelPicks=function(){
   picks.push({kind:c.id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)});
  }return picks;
 };
-const upgradeArtStyleV593=(row,tier)=>`background-image:url('${upgradeArtV593.path}');background-position:${tier*25}% ${row*25}%;`;
+function upgradeArtStyleV593(row,tier){const [top,bottom]=upgradeArtV593.row_bounds[row],height=bottom-top;return `background-image:url('${upgradeArtV593.path}');background-size:500% ${upgradeArtV593.height/height*100}%;background-position:${tier*25}% ${top/(upgradeArtV593.height-height)*100}%;aspect-ratio:${upgradeArtV593.width/5}/${height};`; }
 renderLevelChoices=function(isReroll=false){
  const picks=chooseLevelPicks(isReroll),cards=$('cards');cards.innerHTML='';levelLastOffer=picks.map(p=>p.kind);
  const head=$('levelPanel').querySelector('.levelHead');head.querySelector('h2').textContent=upgradeTextV593('레벨 업','LEVEL UP');head.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');

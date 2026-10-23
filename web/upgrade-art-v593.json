@@ -1,7 +1,7 @@
 {
-  "path": "assets/24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542.png",
-  "sha256": "24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542",
-  "bytes": 1953475,
+  "path": "assets/a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed.png",
+  "sha256": "a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed",
+  "bytes": 2216425,
   "width": 1254,
   "height": 1254,
   "columns": 5,
@@ -45,5 +45,31 @@
     "bright orange"
   ],
   "decorative_spike_escalation": false,
-  "mythic_animated_radiance": true
+  "mythic_animated_radiance": true,
+  "approved_shape_reference": "exec-bc1c2f5f-997d-4b60-bc0e-77c1eaa54e70.png",
+  "user_approved_shapes_unchanged": true,
+  "glow_increase_steps": 2,
+  "row_bounds": [
+    [
+      0,
+      240
+    ],
+    [
+      240,
+      445
+    ],
+    [
+      445,
+      718
+    ],
+    [
+      718,
+      960
+    ],
+    [
+      960,
+      1254
+    ]
+  ],
+  "regions_recorded_without_modifying_image_bytes": true
 }

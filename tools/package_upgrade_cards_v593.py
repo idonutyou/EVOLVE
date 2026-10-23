@@ -24,7 +24,9 @@ def main():
     previous = json.loads(base('dist/version.json'))
     report = json.loads(base('dist/verification.json'))
     old_engine = report['visual_clarity']['engine']
-    prior_engine = json.loads((dist/'verification.json').read_text()).get('upgrade_cards', {}).get('engine')
+    current_upgrade = json.loads((dist/'verification.json').read_text()).get('upgrade_cards', {})
+    prior_engine = current_upgrade.get('engine')
+    prior_css = current_upgrade.get('stylesheet')
     original = base('dist/'+old_engine).decode()
     code = original
     changes = []
@@ -75,10 +77,14 @@ def main():
     font = json.loads((ROOT/'web/upgrade-font-v593.json').read_text())
     assert hashlib.sha256((dist/font['path']).read_bytes()).hexdigest() == font['sha256']
     manifest.append({k: font[k] for k in ['path', 'sha256', 'bytes']} | {'kind': 'font'})
-    css = (ROOT/'web/upgrade-cards-v593.css').read_text().replace('__UPGRADE_FONT_PATH__', Path(font['path']).name).encode()
+    license_text = '\n'.join(line.rstrip() for line in (ROOT/'docs/NOTO_SANS_KR_OFL.txt').read_text().splitlines())
+    css = ('/*\n'+license_text+'\n*/\n'+(ROOT/'web/upgrade-cards-v593.css').read_text().replace('__UPGRADE_FONT_PATH__', Path(font['path']).name)).encode()
     css_sha = hashlib.sha256(css).hexdigest()
     css_path = 'assets/'+css_sha+'.css'
     (dist/css_path).write_bytes(css)
+    if prior_css and prior_css != css_path:
+        assert re.fullmatch(r'assets/[a-f0-9]{64}\.css', prior_css)
+        (dist/prior_css).unlink(missing_ok=True)
     manifest.append({'path': css_path, 'sha256': css_sha, 'bytes': len(css), 'kind': 'style', 'mime': 'text/css'})
     build = hashlib.sha256(previous['build'].encode()+raw+css+art['sha256'].encode()).hexdigest()
     config = {'version': VERSION, 'build': build, 'scriptBytes': previous['scriptBytes']+len(raw)-len(original.encode())}
@@ -107,7 +113,7 @@ def main():
         'rarity_probabilities': [.60, .27, .10, .027, .003], 'rarity_increment_multipliers': [1, 1.5, 2, 3, 5],
         'count_increments': [1, 2, 3, 4, 5], 'experience_per_level': 12, 'level_cap': None,
         'additional_ordinary_quantity_multiplier': 1.3, 'old_movement_and_attack_roles_preserved': True,
-        'rarity_art': art, 'font': font, 'art_reference_tier': 'rare', 'monster_catalog': True,
+        'rarity_art': art, 'font': font, 'art_reference_tier': 'rare', 'monster_catalog': True, 'monster_catalog_entries': 23,
         'upgrades_reset_each_run': True, 'home_equipment_and_save_keys_preserved': True,
         'existing_image_bytes_unchanged': preserved, 'new_image_assets': 1,
         'physical_Galaxy_S23_plus_tested': False}

@@ -3481,11 +3481,11 @@ function firePlayer(dt){
 
   // ARM: 1★ single → 2★ twin → 3★ precision/pierce → 4★ triple → 5★ overbore.
   if(armItemModeV589()==='cannon'&&state.arm>0&&player.shoot<=0){
-    const lv=state.arm;let target=nearestBasicTargetV552(202+lv*14);
+    const lv=state.arm;let target=upgradeGunTargetV593();
     if(target){let a=Math.atan2(target.y-player.y,target.x-player.x);a=armCannonVolleyV589(a,target);
       let siegeActive=(player.origin==='forge'&&activeDuration>0),forgeBurst=(player.origin==='forge'&&((player.forgeVolley=(player.forgeVolley||0)+1)%6===0));
-      const sun=evoState.arm,split=weaponSync('arm');let shots=sun?(1+((genes.hydra||0)>=4?1:0)):armProjectileCount()+(player.bonusShots||0)+(forgeBurst?1:0)+(siegeActive?(originAscension?2:1):0),spread=shots===1?0:(sun?.022:.098);
-      const pierce=sun?14:1+(lv>=3?1:0)+(lv>=5?1:0)+(split?1:0);
+      const sun=evoState.arm,split=weaponSync('arm');let shots=sun?(1+((genes.hydra||0)>=4?1:0)):armProjectileCount()+(player.bonusShots||0)+(forgeBurst?1:0)+(siegeActive?(originAscension?2:1):0),spread=shots===1?0:(sun?.022:.098);shots+=upgradeRunV593.gunCount;spread=Math.min(spread,1.25/Math.max(1,shots-1));
+      const pierce=(sun?14:1+(lv>=3?1:0)+(lv>=5?1:0)+(split?1:0))+upgradeRunV593.gunPierce;
       for(let i=0;i<shots;i++){
         let aa=a+(i-(shots-1)/2)*spread,origin=armShotOriginV589(aa),px=origin.x,py=origin.y;
         pushBasicShotV552({x:px,y:py,vx:Math.cos(aa)*(sun?720:320+lv*24),vy:Math.sin(aa)*(sun?720:320+lv*24),r:(sun?3.4:4+lv*.72)*PROJECTILE_SCALE,dmg:(sun?(42+lv*7.4):(9.8+lv*3.4))*armBoost*(player.origin==='forge'?1.06:1),life:sun?1.02:1.25,pierce,kind:sun?'artillery':((synergy.artillery||forgeBurst)?'artillery':'arm'),blast:sun?(split?38:28):(synergy.artillery?31:(forgeBurst?24:0)),blastMul:sun?.56:undefined,lance:sun});
@@ -3495,7 +3495,7 @@ function firePlayer(dt){
       if(lv>=5&&((player.overboreCycle=(player.overboreCycle||0)+1)%4===0)){let origin=armShotOriginV589(a),px=origin.x,py=origin.y;pushBasicShotV552({x:px,y:py,vx:Math.cos(a)*470,vy:Math.sin(a)*470,r:5.4*PROJECTILE_SCALE,dmg:(26+lv*5.2)*armBoost,life:1.12,pierce:4+(evoForm.arm==='rail'?3:0),kind:'artillery',blast:26,blastMul:.48,overbore:true});particles.push({kind:'motionRing',x:px,y:py,r:3,max:22,life:.22,maxLife:.22,color:'dash'});cameraShake=Math.max(cameraShake,3);}
       if(fusion.sunLance&&((player.fusionShot=(player.fusionShot||0)+1)%2===0)){let origin=armShotOriginV589(a),px=origin.x,py=origin.y;pushBasicShotV552({x:px,y:py,vx:Math.cos(a)*680,vy:Math.sin(a)*680,r:3.2*PROJECTILE_SCALE,dmg:(88+lv*12)*armBoost,life:1.1,pierce:10,kind:'artillery',blast:48,blastMul:.62,lance:true,overcharge:true});particles.push({kind:'fusion',x:px,y:py,vx:Math.cos(a)*80,vy:Math.sin(a)*80,r:5,life:.25});cameraShake=Math.max(cameraShake,4);}
       if(sun){particles.push({kind:'fusionRing',x:player.x,y:player.y,r:8,max:46,life:.18,maxLife:.18});if((player.sunFx=(player.sunFx||0)+1)%2===0)particles.push({kind:'phaseRing',x:player.x,y:player.y,r:6,max:72,life:.24,maxLife:.24,color:'#ffd66f'});}
-      player.armKick=.18;player.shoot=Math.max(sun?.22:.22,(player.baseCd-lv*.055)*tempo*(sun?.86:1)*(player.origin==='forge'&&activeDuration>0?.52:1)*(frenzy>0?.76:1));audioCue('arm',lv);
+      player.armKick=.18;player.shoot=Math.max(.04,Math.max(.22,(player.baseCd-lv*.055)*tempo*(sun?.86:1)*(player.origin==='forge'&&activeDuration>0?.52:1)*(frenzy>0?.76:1))/upgradeGunRateV593());audioCue('arm',lv);
     }else player.shoot=.12;
   }
 
@@ -3836,7 +3836,7 @@ function discardCappedXPV521(){
  player.xp=0;xpDropFractionV415=0;
  for(const d of drops)if((d.xp||0)>0)d.dead=true;
 }
-function xpNeedForLevel(lv){lv=Math.max(1,lv|0);if(lv===1)return 12;if(lv===2)return 30;return Math.floor(16+lv*7.2+Math.pow(lv,1.55)*3.5+Math.max(0,lv-8)*14)}
+function xpNeedForLevel(lv){return 12;}
 function addXP(v){
  if(ended)return;
  if(stageLevelLimitedV521()){discardCappedXPV521();return;}
@@ -4202,16 +4202,16 @@ function update(dt){
   for(const b of bullets){
     const oldX=b.x,oldY=b.y;let rangeEndV552=false;if(Number.isFinite(b.basicRangeV552))rangeEndV552=stepBasicShotV552(b,dt);else{b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;}if(terrainHitV418(oldX,oldY,b.x,b.y,b.r)){b.life=0;continue;}
     enemyEachCandidateCircleV425(b.x,b.y,132+b.r,e=>{
-      if(e.dead||b.life<=0||!basicShotCanHitV552(b,e))return b.life<=0?false:undefined;let rr=e.r+b.r;
+      if(e.dead||b.life<=0||!upgradeBulletMayHitV593(b,e)||!basicShotCanHitV552(b,e))return b.life<=0?false:undefined;let rr=e.r+b.r;
       if((b.x-e.x)**2+(b.y-e.y)**2<rr*rr){
         // V520: one piercing projectile can damage each BIO TITAN only once.
         if(isBioTitanV435(e)){if(e.arrivalInvuln)return;const hits=b.bioHitsV520||(b.bioHitsV520=new WeakSet());if(hits.has(e))return;hits.add(e);}
-        hurtEnemy(e,b.dmg,b.kind==='artillery'?'arm':b.kind);
+        upgradeBulletHitV593(b,e);hurtEnemy(e,b.dmg,b.kind==='artillery'?'arm':b.kind);
         if(b.blast){const bm=Number.isFinite(b.blastMul)?b.blastMul:.38,blast2=b.blast*b.blast;enemyEachCandidateCircleV425(e.x,e.y,b.blast+132,x=>{if(x!==e&&!x.dead&&basicShotCanHitV552(b,x)&&dist2(e,x)<blast2)hurtEnemy(x,b.dmg*bm,b.kind==='acid'?'acid':'arm')});particles.push({kind:'deathRing',x:b.x,y:b.y,r:3,max:b.blast,life:.18,maxLife:.18})}
-        b.pierce--;if(b.kind==='acid'){e.slow=Math.max(e.slow||0,b.slowDur||.90);for(let i=0;i<3;i++)particles.push({kind:'acid',x:b.x,y:b.y,vx:rand(-30,30),vy:rand(-30,30),r:rand(2,5),life:rand(.2,.45)})}if(b.pierce<=0){b.life=0;return false;}
+        b.pierce--;if(b.kind==='acid'){e.slow=Math.max(e.slow||0,b.slowDur||.90);for(let i=0;i<3;i++)particles.push({kind:'acid',x:b.x,y:b.y,vx:rand(-30,30),vy:rand(-30,30),r:rand(2,5),life:rand(.2,.45)})}if(b.pierce<=0){if(upgradeBounceV593(b,e))return false;b.life=0;return false;}
       }
     });
-    if(rangeEndV552)b.life=0;
+    if(rangeEndV552&&!b.upgradeBouncedThisStepV593)b.life=0;b.upgradeBouncedThisStepV593=false;
   }
   compactArrayV426(bullets,b=>b.life>0&&Math.abs(b.x-player.x)<W*1.7&&Math.abs(b.y-player.y)<H*1.35);
   // V438: dt is shared by every enemy this fixed tick; calculate knockback friction once.
@@ -11945,7 +11945,7 @@ const TestModuleV573=(()=>{
  campaignPrepareStageV567=async function(...args){const ok=await original.prepare(...args);if(ok){const active=campaignActiveV567?.id;for(const key of campaignCacheV567.keys())if(key!==active)campaignCacheV567.delete(key);}return ok;};
  stageSpecV526=function(stage=meta.stage||1){const s=original.spec(stage),e=B.encounter;if(e&&s.stage===(meta.stage||1))return {...s,boss:true,bossKind:e.kind,phase:e.phase,midAt:null};return s;};
  window.__EVOLVE_STAGE_V526__.spec=stageSpecV526;
- spawnEnemy=function(...args){const e=original.spawn(...args);if(e&&!e.dead&&!e.finalBoss&&!e.venomAddV553&&!B.spawning&&evolveAdminEnabledV585&&!B.natural){e.dead=true;e.testModuleSuppressedV573=true;}return e;};
+ spawnEnemy=function(...args){const e=original.spawn(...args);if(e&&!e.dead&&!e.finalBoss&&!e.venomAddV553&&!B.spawning&&!upgradeSpawnPermissionV593&&evolveAdminEnabledV585&&!B.natural){e.dead=true;e.testModuleSuppressedV573=true;}return e;};
  updateTacticalWaves=function(...args){if(evolveAdminEnabledV585&&!B.natural&&!B.encounter)return;return original.waves(...args);};
  updateContract=function(...args){if(B.encounter)return;return original.contract(...args);};
  bossSpawnReady=function(...args){if(B.encounter)return B.encounter.state==='warning'&&B.encounter.elapsed>=3-1e-8&&!nextBoss&&!ended;return original.bossReady(...args);};
@@ -12613,7 +12613,7 @@ function playerFacingV587(a,previous=1){
  return {facing,localRotation,rotation:facing*localRotation,headAngle:playerArtV586.nativeFacing+localRotation};
 }
 function playerTargetV586(e){return !!e&&!e.dead&&e.hp>0&&!e.arrivalInvuln&&!(e.arrivalTime>0);}
-function playerInReachV586(e){return playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=playerReachV586+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);}
+function playerInReachV586(e){return playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=upgradeBladeReachV593(playerReachV586)+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);}
 function playerNearestV586(){
  if(playerInReachV586(focusEnemy))return focusEnemy;
  let best=null,distance=Infinity;for(const e of enemies){if(!playerInReachV586(e))continue;const d=Math.hypot(e.x-player.x,e.y-player.y)-(e.r||12);if(d<distance){distance=d;best=e;}}return best;
@@ -12622,21 +12622,21 @@ function playerStabV586(manual=false){
  const m=playerMotionV586;if(!running||paused||choosing||rewardChoosing||ended||!(state.arm>0)||m.attack||m.cooldown>0)return false;
  const target=playerNearestV586();if(!target&&!manual)return false;
  const a=target?Math.atan2(target.y-player.y,target.x-player.x):(player.look||0),side=m.side;
- m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1));m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);
+ m.side=1-side;m.attack={age:0,life:.34,a,side,target,hit:false};m.cooldown=Math.max(.38,.64*attackTempoMul()*(frenzy>0?.82:1))/upgradeBladeRateV593();m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);
  player.look=a;player.armKick=.18;return true;
 }
 function playerStabContactV586(attack){
  const e=attack.target;if(!playerInReachV586(e))return false;
  const dx=e.x-player.x,dy=e.y-player.y,along=dx*Math.cos(attack.a)+dy*Math.sin(attack.a),across=Math.abs(-dx*Math.sin(attack.a)+dy*Math.cos(attack.a));
  // A narrow forward capsule, tested again at impact. No ranged fallback or area hit.
- if(along<-(e.r||12)||along>playerReachV586+(e.r||12)||across>10+(e.r||12))return false;
+ if(along<-(e.r||12)||along>upgradeBladeReachV593(playerReachV586)+(e.r||12)||across>10+(e.r||12))return false;
  const damage=(22+Math.max(0,(state.arm||1)-1)*4.5)*coreDamageBoost();
  hurtEnemy(e,damage,'arm');return true;
 }
 function playerStepV586(dt){
  const m=playerMotionV586;m.clock+=dt;const distance=Math.hypot(player.x-m.x,player.y-m.y);m.moving=distance>.015&&distance<Math.max(32,(player.speed||132)*dt*5);
  playerMovementStepV590(dt,player.x-m.x,player.y-m.y,m.moving);if(m.moving)m.gait+=distance/9;m.x=player.x;m.y=player.y;m.cooldown=Math.max(0,m.cooldown-dt);
- if(m.attack){const a=m.attack;a.age+=dt;if(!a.hit&&a.age>=.12){a.hit=true;if(playerStabContactV586(a))m.hits++;else m.misses++;}if(a.age>=a.life)m.attack=null;}
+ if(m.attack){const a=m.attack;a.age+=dt*upgradeBladeRateV593();if(!a.hit&&a.age>=.12){a.hit=true;if(playerStabContactV586(a))m.hits++;else m.misses++;}if(a.age>=a.life)m.attack=null;}
 }
 function playerFrameV586(){
  const m=playerMotionV586;if(player.hp<=0){if(!m.deathAt)m.deathAt=performance.now();return performance.now()-m.deathAt<180?18:19;}
@@ -12763,7 +12763,7 @@ function armSlashAngleV589(attack,age=attack.age){
  const p=clamp((age-.09)/.21,0,1),ease=p*p*(3-2*p),direction=attack.side?1:-1;
  return attack.a+direction*(-1.08+2.16*ease);
 }
-function armSlashReachV589(){return 60+Math.max(0,(state.arm||1)-1)*2;}
+function armSlashReachV589(){return upgradeBladeReachV593(60+Math.max(0,(state.arm||1)-1)*2);}
 function armSlashTargetV589(){
  const range=armSlashReachV589(),valid=e=>playerTargetV586(e)&&Math.hypot(e.x-player.x,e.y-player.y)<=range+(e.r||12)&&!terrainHitV418(player.x,player.y,e.x,e.y,1);
  if(valid(focusEnemy))return focusEnemy;
@@ -12774,7 +12774,7 @@ function armSlashV589(manual=false){
  const target=armSlashTargetV589();if(!target&&!manual)return false;
  const a=target?Math.atan2(target.y-player.y,target.x-player.x):(player.look||0),side=m.side;
  m.side=1-side;m.attack={kind:'blades',age:0,life:.44,a,side,hit:false,targets:new Set()};
- m.cooldown=Math.max(.34,(.71-Math.max(0,state.arm-1)*.045)*attackTempoMul()*(frenzy>0?.82:1));
+ m.cooldown=Math.max(.34,(.71-Math.max(0,state.arm-1)*.045)*attackTempoMul()*(frenzy>0?.82:1))/upgradeBladeRateV593();
  m.casts++;m[side?'right':'left']++;recordWeaponAttackV590(a);armItemsV589.swings++;player.look=a;player.armKick=.20;return true;
 }
 function armSlashStepV589(attack,dt){
@@ -12801,7 +12801,7 @@ playerStepV586=function(dt){
  const attack=playerMotionV586.attack;
  // Keep the exact bare contact timing. A blade swing tests its swept arc instead.
  if(attack?.kind==='blades'){
-  playerMotionV586.attack=null;armBareStepV589(dt);playerMotionV586.attack=attack;attack.age+=dt;armSlashStepV589(attack,dt);
+  playerMotionV586.attack=null;armBareStepV589(dt);playerMotionV586.attack=attack;const swingDT=dt*upgradeBladeRateV593();attack.age+=swingDT;armSlashStepV589(attack,swingDT);
   if(attack.age>=attack.life){if(!attack.targets.size)playerMotionV586.misses++;playerMotionV586.attack=null;}
  }else armBareStepV589(dt);
 };
@@ -12826,7 +12826,7 @@ function drawArmItemsV589(a,alpha){
  for(const side of [1,0]){
   const p=armItemWorldPointV589(side,a),angle=armItemAngleV589(side,a);
   if(mode==='cannon'&&armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
-  armItemSpriteV589(ctx,mode,side,p,angle,1,alpha);
+  armItemSpriteV589(ctx,mode,side,p,angle,mode==='blades'?1+upgradeRunV593.bladeRange:1,alpha);
  }
 }
 const armBareDrawV589=drawPlayer;
@@ -12991,7 +12991,7 @@ window.__EVOLVE_MOVEMENT_FIELD_V590__={read:()=>({...playerFacingStateV590.read(
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_MOVEMENT_FIELD_V590__.test={recordAttack:recordWeaponAttackV590,move:playerMovementStepV590,reset:()=>playerFacingStateV590.reset(0),weaponAngle:side=>armItemAngleV589(side,playerBodyAngleV590()),safeFoot:redPulseFootClearV590,safeSite:redPulseSiteClearV590,spawnPoint:redPulseReachablePointV590,resetSampler:()=>fieldSpawnSamplerV590.reset()};
 
 // WEB-24: slower, denser ordinary hordes with one consistent combat role per type.
-const HORDE_RULES_V591=Object.freeze({movementMultiplier:.5,spawnMultiplier:1.5,fieldSpreadSeconds:1.56,fieldLifeSeconds:2.36,stageLevelCap:null});
+const HORDE_RULES_V591=Object.freeze({movementMultiplier:.5,spawnMultiplier:1.95,fieldSpreadSeconds:1.56,fieldLifeSeconds:2.36,stageLevelCap:null});
 function ordinaryEnemyV591(e){return !!e&&!e.boss&&!e.finalBoss&&!e.elite&&!e.midBoss&&!e.nemesis&&!e.worldHotspot;}
 function enemyMoveScaleV591(e){return ordinaryEnemyV591(e)?HORDE_RULES_V591.movementMultiplier:1;}
 function enemyAttackRoleV591(e){
@@ -13004,13 +13004,13 @@ function enemyAttackRoleV591(e){
 function enemyContactAllowedV591(e){const role=enemyAttackRoleV591(e);return role==='major'||role==='melee'||role==='charge'&&e.burst>0;}
 function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner);}
 function hordeSpawnDelayV591(delay,major){return major?delay:delay/HORDE_RULES_V591.spawnMultiplier;}
-function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(density*HORDE_RULES_V591.spawnMultiplier));}
+function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(Math.round(density*1.5)*1.3));}
 
 const hordeSpawnRateBaseV591=spawnRate,hordeDensityBaseV591=combatDensityCap,hordeWaveBaseV591=stageWaveDefV526;
 function hordeMajorActiveV591(){return enemies.some(e=>!e.dead&&(e.finalBoss||e.elite||e.nemesis));}
 spawnRate=function(...args){return hordeSpawnDelayV591(hordeSpawnRateBaseV591(...args),hordeMajorActiveV591());};
 combatDensityCap=function(...args){return hordeDensityV591(hordeDensityBaseV591(...args),runtimeCaps().enemyHard,hordeMajorActiveV591());};
-stageWaveDefV526=function(...args){const def=hordeWaveBaseV591(...args);return {...def,make:()=>def.make().map(([type,count])=>[type,Math.ceil(count*HORDE_RULES_V591.spawnMultiplier)])};};
+stageWaveDefV526=function(...args){const def=hordeWaveBaseV591(...args);return {...def,make:()=>def.make().map(([type,count])=>[type,Math.ceil(Math.ceil(count*1.5)*1.3)])};};
 window.__EVOLVE_HORDE_ROLES_V591__={read:()=>({...HORDE_RULES_V591,ordinaryWarnings:false,roles:{crawler:'melee',brute:'melee',runner:'charge',embermaw:'charge',spitter:'ranged',froststalker:'ranged',warden:'support',symbiote:'support'},majorEncounterUnchanged:true,spawnDelay:spawnRate(),baselineSpawnDelay:hordeSpawnRateBaseV591(),density:combatDensityCap(),baselineDensity:hordeDensityBaseV591(),hardLimit:runtimeCaps().enemyHard,level:player.level,levelLimited:stageLevelLimitedV521(),physical_Galaxy_S23_plus_tested:false})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_HORDE_ROLES_V591__.test={role:enemyAttackRoleV591,contact:enemyContactAllowedV591,speedScale:enemyMoveScaleV591,warning:enemyWarningAllowedV591,wave:index=>({baseline:hordeWaveBaseV591(index).make(),current:stageWaveDefV526(index).make()}),xp:addXP,need:xpNeedForLevel,context:()=>({player,enemies,eBullets,telegraphs,biomeHazards,drops,state,rebuild:rebuildEnemyGridV424,step:dt=>update(dt),draw,paused:()=>paused,choosing:()=>choosing,clock:()=>t})};
 
@@ -13072,6 +13072,254 @@ reset=function(...args){enemyHealthVisibilityV592.clear();return visualResetBase
 returnToHome=function(...args){enemyHealthVisibilityV592.clear();return visualHomeBaseV592(...args);};
 window.__EVOLVE_VISUAL_CLARITY_V592__={read:()=>({...visualClarityStatsV592,health:enemyHealthVisibilityV592.read(),spawnAndWaveRings:false,healthLayer:'after-map-foreground',dedicatedBossHUDPreserved:true,subtitleVisible:false,physical_Galaxy_S23_plus_tested:false})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_VISUAL_CLARITY_V592__.test={mark:markEnemyHitV592,layout:enemyHealthLayoutV592,health:drawEnemyHealthBarsV592,clear:()=>enemyHealthVisibilityV592.clear(),hull:outerWarningHullV592,lane:warningLaneCornersV592,volley:venomVolleyPathV592,tape:warningTapeLayoutV592,context:()=>({ctx,enemies,player,hurt:hurtEnemy,draw,clock:()=>t,setClock:value=>{t=value;}})};
+
+// WEB-26: short, independently rolled stat cards. All bonuses belong to this run.
+const UPGRADE_RARITIES_V593=Object.freeze([
+ {id:'common',ko:'커먼',en:'COMMON',color:'#bec5ce',mult:1,count:1,chance:.60},
+ {id:'rare',ko:'레어',en:'RARE',color:'#46ceff',mult:1.5,count:2,chance:.27},
+ {id:'epic',ko:'에픽',en:'EPIC',color:'#c578ff',mult:2,count:3,chance:.10},
+ {id:'legendary',ko:'전설',en:'LEGENDARY',color:'#ffe16b',mult:3,count:4,chance:.027},
+ {id:'mythic',ko:'신화',en:'MYTHIC',color:'#ff913d',mult:5,count:5,chance:.003}
+]);
+const upgradeArtV593={"path":"assets/a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed.png","sha256":"a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed","bytes":2216425,"width":1254,"height":1254,"columns":5,"rows":5,"generated":true,"rare_reference":"1000027564.png","row_order":["gun","blade","legs","shell","core"],"column_order":["common","rare","epic","legendary","mythic"],"original_generated_bytes_preserved":true,"design_progression":["simple rugged","tidy functional","refined premium","noble masterwork","sacred regal"],"glow_progression":[0,0.1,0.3,0.6,1],"rarity_glow_colors":["neutral","blue","purple","golden yellow","bright orange"],"decorative_spike_escalation":false,"mythic_animated_radiance":true,"approved_shape_reference":"exec-bc1c2f5f-997d-4b60-bc0e-77c1eaa54e70.png","user_approved_shapes_unchanged":true,"glow_increase_steps":2,"row_bounds":[[0,240],[240,445],[445,718],[718,960],[960,1254]],"regions_recorded_without_modifying_image_bytes":true};
+const upgradeRunV593={};
+const upgradeBleedsV593=new Map();
+let upgradeSpawnPermissionV593=false;
+const upgradeTextV593=(ko,en)=>homeTextV522(en,ko);
+const upgradeNumberV593=n=>String(Number(n.toFixed(2)));
+const upgradePercentV593=n=>upgradeNumberV593(n*100)+'%';
+function upgradeResetV593(){
+ Object.assign(upgradeRunV593,{gunDamage:0,gunHaste:0,gunCount:0,gunPierce:0,gunRange:0,gunBounce:0,
+  bladeDamage:0,bladeHaste:0,bladeRange:0,bladeCrit:0,bladeBleed:0,moveSpeed:0,size:0,armor:0,regen:0,regenClock:0,
+  baseSpeed:player.speed||132,baseRadius:player.r||10,baseSize:playerArtV586.displaySize,selected:0,mode:null,highest:{},taken:{}});
+ upgradeBleedsV593.clear();
+}
+upgradeResetV593();
+function upgradeBodyScaleV593(){return clamp(1+upgradeRunV593.size,.35,2);}
+function upgradeBladeRateV593(){return 1+upgradeRunV593.bladeHaste;}
+function upgradeGunRateV593(){return 1+upgradeRunV593.gunHaste;}
+function upgradeGunRangeV593(){return playerBasicRangeV552()*(1+upgradeRunV593.gunRange);}
+function upgradeBladeReachV593(base){return base*(1+upgradeRunV593.bladeRange);}
+function upgradeSetBodyV593(){
+ const scale=upgradeBodyScaleV593();player.r=upgradeRunV593.baseRadius*scale;playerArtV586.displaySize=upgradeRunV593.baseSize*scale;
+ resolveTerrainBody(player,player.r);fieldSpawnSamplerV590.reset();
+}
+function upgradeMoveV593(amount){upgradeRunV593.moveSpeed+=amount;player.speed+=upgradeRunV593.baseSpeed*amount;}
+function upgradeHealthV593(amount){player.maxHp+=amount;player.hp=Math.min(player.maxHp,player.hp+amount);}
+function upgradeEquipV593(mode){
+ // A card equips only for the current run. The saved home ARM equipment is untouched.
+ upgradeRunV593.mode=mode;state.arm=Math.max(1,state.arm||0);playerMotionV586.attack=null;playerMotionV586.cooldown=.12;player.shoot=.12;
+ armItemsRefreshV589();
+}
+const UPGRADE_CARDS_V593=[
+ {id:'gun_equip',group:'gun',row:0,name:['생체 총','BIO CANNONS'],available:()=>armItemModeV589()!=='cannon',base:.10,lines:v=>[upgradeTextV593('총 장착','Equip cannons'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('cannon');upgradeRunV593.gunDamage+=v;}},
+ {id:'blade_equip',group:'blade',row:1,name:['생체 칼','BIO BLADES'],available:()=>armItemModeV589()!=='blades',base:.10,lines:v=>[upgradeTextV593('칼 장착','Equip blades'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('blades');upgradeRunV593.bladeDamage+=v;}},
+ {id:'gun_damage',group:'gun',row:0,name:['강력한 사격','POWER SHOT'],stat:'gunDamage',base:.10,label:['공격력','Damage'],unit:'percent'},
+ {id:'gun_count',group:'gun',row:0,name:['다중 사격','MULTISHOT'],stat:'gunCount',count:true,label:['탄수','Projectiles']},
+ {id:'gun_haste',group:'gun',row:0,name:['고속 사격','RAPID FIRE'],stat:'gunHaste',base:.10,label:['연사 속도','Fire rate'],unit:'percent'},
+ {id:'gun_pierce',group:'gun',row:0,name:['관통탄','PIERCING'],stat:'gunPierce',count:true,label:['관통','Pierce']},
+ {id:'gun_range',group:'gun',row:0,name:['장거리 사격','LONG SHOT'],stat:'gunRange',base:.10,label:['사거리','Range'],unit:'percent'},
+ {id:'gun_bounce',group:'gun',row:0,name:['도탄','RICOCHET'],stat:'gunBounce',count:true,label:['튕김','Bounces']},
+ {id:'blade_damage',group:'blade',row:1,name:['강력한 베기','HEAVY CUT'],stat:'bladeDamage',base:.10,label:['공격력','Damage'],unit:'percent'},
+ {id:'blade_haste',group:'blade',row:1,name:['쾌속 베기','QUICK CUT'],stat:'bladeHaste',base:.10,label:['공격 속도','Attack speed'],unit:'percent'},
+ {id:'blade_range',group:'blade',row:1,name:['넓은 베기','WIDE CUT'],stat:'bladeRange',base:.10,label:['범위','Range'],unit:'percent'},
+ {id:'blade_crit',group:'blade',row:1,name:['급소 공격','CRITICAL'],stat:'bladeCrit',base:.10,label:['치명타 확률','Critical chance'],unit:'points',available:()=>upgradeRunV593.bladeCrit<1-1e-8},
+ {id:'blade_bleed',group:'blade',row:1,name:['출혈','BLEED'],stat:'bladeBleed',base:15,lines:v=>[upgradeTextV593('3초간 출혈 +','Bleed over 3s +')+upgradeNumberV593(v)]},
+ {id:'move',group:'legs',row:2,name:['신속','SWIFTNESS'],base:.05,lines:v=>[upgradeTextV593('이동 속도 +','Move speed +')+upgradePercentV593(v)],apply:upgradeMoveV593},
+ {id:'light',group:'legs',row:2,name:['경량화','LIGHTWEIGHT'],base:.05,available:()=>upgradeRunV593.size>-.65+1e-8,
+  lines:v=>[upgradeTextV593('이동 속도 +','Move speed +')+upgradePercentV593(v),upgradeTextV593('크기 −','Size −')+upgradePercentV593(Math.min(v,.65+upgradeRunV593.size))],
+  apply:v=>{upgradeMoveV593(v);upgradeRunV593.size=Math.max(-.65,upgradeRunV593.size-v);upgradeSetBodyV593();}},
+ {id:'health',group:'shell',row:3,name:['생명력','VITALITY'],base:10,lines:v=>[upgradeTextV593('체력 +','Health +')+upgradeNumberV593(v)],apply:upgradeHealthV593},
+ {id:'giant',group:'shell',row:3,name:['거대화','GIGANTISM'],base:25,available:()=>upgradeRunV593.size<1-1e-8,
+  lines:v=>[upgradeTextV593('체력 +','Health +')+upgradeNumberV593(v),upgradeTextV593('크기 +','Size +')+upgradePercentV593(Math.min(.05,1-upgradeRunV593.size))],
+  apply:v=>{upgradeHealthV593(v);upgradeRunV593.size=Math.min(1,upgradeRunV593.size+.05);upgradeSetBodyV593();}},
+ {id:'armor',group:'shell',row:3,name:['단단한 외피','HARD SHELL'],stat:'armor',base:1,label:['방어력','Armor']},
+ {id:'regen',group:'shell',row:3,name:['재생','REGENERATION'],stat:'regen',base:1,lines:v=>[upgradeTextV593('5초마다 체력 +','Health / 5s +')+upgradeNumberV593(v)]}
+];
+function upgradeValueV593(card,tier){
+ const r=UPGRADE_RARITIES_V593[tier];let n=card.count?r.count:(card.base||0)*r.mult;
+ if(card.stat==='bladeCrit')n=Math.min(n,1-upgradeRunV593.bladeCrit);return n;
+}
+function upgradeLinesV593(card,tier){
+ const n=upgradeValueV593(card,tier);if(card.lines)return card.lines(n);
+ return [upgradeTextV593(...card.label)+' +'+(card.unit==='points'?upgradePercentV593(n)+'p':card.unit==='percent'?upgradePercentV593(n):upgradeNumberV593(n))];
+}
+function upgradePartV593(card){return {gun:upgradeTextV593('총','GUN'),blade:upgradeTextV593('칼','BLADE'),legs:upgradeTextV593('뒷발','HIND LEGS'),shell:upgradeTextV593('외피','SHELL')}[card.group];}
+function upgradeApplyV593(card,tier){
+ const amount=upgradeValueV593(card,tier);if(card.stat)upgradeRunV593[card.stat]+=amount;else card.apply(amount);
+ upgradeRunV593.selected++;upgradeRunV593.taken[card.id]=(upgradeRunV593.taken[card.id]||0)+1;
+ upgradeRunV593.highest[card.group]=Math.max(upgradeRunV593.highest[card.group]||0,tier);
+}
+function upgradeRollV593(random=Math.random){let n=Math.floor(random()*1000000);for(let i=0;i<UPGRADE_RARITIES_V593.length;i++){n-=Math.round(UPGRADE_RARITIES_V593[i].chance*1000000);if(n<0)return i;}return 4;}
+function upgradePoolV593(){
+ const mode=armItemModeV589();return UPGRADE_CARDS_V593.filter(c=>{
+  if(c.available&&!c.available())return false;if(c.id.endsWith('_equip'))return true;
+  if(c.group==='gun')return state.arm>0&&mode==='cannon';
+  if(c.group==='blade')return state.arm>0&&mode!=='cannon';return true;
+ });
+}
+chooseLevelPicks=function(){
+ const pool=upgradePoolV593().slice(),picks=[];
+ while(pool.length&&picks.length<3){const i=Math.floor(Math.random()*pool.length),c=pool.splice(i,1)[0],tier=upgradeRollV593();
+  picks.push({kind:c.id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)});
+ }return picks;
+};
+function upgradeArtStyleV593(row,tier){const [top,bottom]=upgradeArtV593.row_bounds[row],height=bottom-top;return `background-image:url('${upgradeArtV593.path}');background-size:500% ${upgradeArtV593.height/height*100}%;background-position:${tier*25}% ${top/(upgradeArtV593.height-height)*100}%;aspect-ratio:${upgradeArtV593.width/5}/${height};`; }
+renderLevelChoices=function(isReroll=false){
+ const picks=chooseLevelPicks(isReroll),cards=$('cards');cards.innerHTML='';levelLastOffer=picks.map(p=>p.kind);
+ const head=$('levelPanel').querySelector('.levelHead');head.querySelector('h2').textContent=upgradeTextV593('레벨 업','LEVEL UP');head.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');
+ $('levelContext').textContent='Lv. '+player.level;$('levelCoach').textContent='';
+ for(const p of picks){const c=p.card,r=UPGRADE_RARITIES_V593[p.tier],b=document.createElement('button');b.type='button';b.className='card upgradeCardV593';b.dataset.kind=c.id;b.dataset.rarity=r.id;b.style.setProperty('--rarity',r.color);
+  b.innerHTML=`<div class="upgradeRarityV593">${upgradeTextV593(r.ko,r.en)}</div><div class="upgradeArtV593" aria-hidden="true"><div class="upgradeSpriteV593" style="${upgradeArtStyleV593(c.row,p.tier)}"></div></div><div class="upgradeNameV593">${p.title()}</div><div class="upgradeStatsV593">${upgradeLinesV593(c,p.tier).map(line=>'<div>'+line+'</div>').join('')}</div><div class="upgradePartV593">${upgradePartV593(c)}</div>`;
+  b.setAttribute('aria-label',upgradeTextV593(r.ko,r.en)+' · '+p.title()+' · '+upgradeLinesV593(c,p.tier).join(' · '));
+  b.onclick=()=>{if(!choosing||!choiceInputReady())return;p.apply();$('levelOverlay').style.display='none';choosing=false;updateHUD(true);audioCue('evolve');hapticCue('evolve');combatGrace(.20);addXP(0);};cards.appendChild(b);
+ }
+ updateRerollControls();$('rerollBtn').textContent=upgradeTextV593('다시 뽑기 ×','REROLL ×')+rerolls;updateHUD(true);
+};
+levelStatHtml=function(u){return u.card?upgradeLinesV593(u.card,u.tier).join('<br>'):'';};
+const upgradeModeBaseV593=armItemModeV589;
+armItemModeV589=function(){return running&&upgradeRunV593.mode?upgradeRunV593.mode:upgradeModeBaseV593();};
+function upgradeGunTargetV593(){
+ const range=upgradeGunRangeV593();if(playerTargetV586(focusEnemy)&&Math.hypot(focusEnemy.x-player.x,focusEnemy.y-player.y)<=range&&!terrainHitV418(player.x,player.y,focusEnemy.x,focusEnemy.y,1))return focusEnemy;
+ let best=null,score=Infinity;enemyEachCandidateCircleV425(player.x,player.y,range,e=>{if(!playerTargetV586(e))return;const d=Math.hypot(e.x-player.x,e.y-player.y);if(d>range)return;const priority=d*(e.finalBoss?.65:e.elite?.8:1);if(priority<score&&!terrainHitV418(player.x,player.y,e.x,e.y,1)){best=e;score=priority;}});return best;
+}
+function upgradeTagShotV593(b){
+ if(armItemModeV589()!=='cannon'||!['arm','artillery'].includes(b.kind))return b;
+ const range=upgradeGunRangeV593(),dx=b.x-player.x,dy=b.y-player.y,speed=Math.hypot(b.vx,b.vy),ux=speed?b.vx/speed:0,uy=speed?b.vy/speed:0,edge=Math.max(0,range-(b.r||0)),dot=dx*ux+dy*uy;
+ b.basicRangeV552=range;b.rangeLeftV552=speed?Math.max(0,-dot+Math.sqrt(Math.max(0,dot*dot+edge*edge-dx*dx-dy*dy))):0;
+ b.life=Math.max(b.life,speed?b.rangeLeftV552/speed+.05:0);b.upgradeHitsV593=new Set();b.upgradeBouncesV593=upgradeRunV593.gunBounce;return b;
+}
+const upgradePushBaseV593=pushBasicShotV552;
+pushBasicShotV552=function(b){upgradePushBaseV593(b);upgradeTagShotV593(b);};
+function upgradeBulletMayHitV593(b,e){return !b.upgradeHitsV593||!b.upgradeHitsV593.has(e);}
+function upgradeBulletHitV593(b,e){b.upgradeHitsV593?.add(e);}
+function upgradeBounceV593(b,source){
+ if(!(b.upgradeBouncesV593>0))return false;let target=null,best=Infinity;const range=b.basicRangeV552||upgradeGunRangeV593();
+ enemyEachCandidateCircleV425(source.x,source.y,range,e=>{if(e===source||!playerTargetV586(e)||!upgradeBulletMayHitV593(b,e))return;const d=Math.hypot(e.x-source.x,e.y-source.y);if(d<=range&&d<best&&!terrainHitV418(b.x,b.y,e.x,e.y,b.r)){target=e;best=d;}});
+ if(!target)return false;const a=Math.atan2(target.y-b.y,target.x-b.x),speed=Math.hypot(b.vx,b.vy)||344;
+ b.vx=Math.cos(a)*speed;b.vy=Math.sin(a)*speed;b.pierce=1;b.upgradeBouncesV593--;b.rangeOriginXV552=b.x;b.rangeOriginYV552=b.y;b.rangeLeftV552=range;b.basicRangeV552=range;b.life=range/speed+.05;b.upgradeBouncedThisStepV593=true;return true;
+}
+const upgradeHurtBaseV593=hurtEnemy;
+hurtEnemy=function(e,damage,kind){
+ const blade=kind==='arm'&&armItemModeV589()!=='cannon',gun=kind==='arm'&&armItemModeV589()==='cannon';
+ if(blade){damage*=1+upgradeRunV593.bladeDamage;if(upgradeRunV593.bladeCrit>0&&Math.random()<upgradeRunV593.bladeCrit)damage*=2;}
+ else if(gun)damage*=1+upgradeRunV593.gunDamage;
+ const hp=e.hp;const result=upgradeHurtBaseV593(e,damage,kind);
+ if(blade&&e.hp<hp&&!e.dead&&upgradeRunV593.bladeBleed>0)upgradeBleedsV593.set(e,{left:3,dps:upgradeRunV593.bladeBleed/3,clock:0});return result;
+};
+const upgradeDamageBaseV593=playerDamage;
+playerDamage=function(damage){return upgradeDamageBaseV593(damage>0?Math.max(1,damage-upgradeRunV593.armor):damage);};
+const upgradeUpdateBaseV593=update;
+update=function(dt){
+ const active=running&&!paused&&!choosing&&!rewardChoosing&&!ended,before=t,result=upgradeUpdateBaseV593(dt);
+ if(!active||t<=before||ended)return result;const elapsed=t-before;
+ if(upgradeRunV593.regen>0){upgradeRunV593.regenClock+=elapsed;while(upgradeRunV593.regenClock>=5){upgradeRunV593.regenClock-=5;player.hp=Math.min(player.maxHp,player.hp+upgradeRunV593.regen);}}
+ for(const [e,b]of upgradeBleedsV593){if(e.dead){upgradeBleedsV593.delete(e);continue;}const step=Math.min(elapsed,b.left);b.left-=step;b.clock+=step;if(b.clock>=.20||b.left<=1e-8){upgradeHurtBaseV593(e,b.dps*b.clock,'bleedV593');b.clock=0;}if(b.left<=1e-8||e.dead)upgradeBleedsV593.delete(e);}
+ return result;
+};
+const upgradeResetBaseV593=reset;
+reset=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;const result=upgradeResetBaseV593(...args);upgradeResetV593();armItemsRefreshV589();return result;};
+const upgradeHomeBaseV593=returnToHome;
+returnToHome=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;upgradeRunV593.mode=null;upgradeBleedsV593.clear();const result=upgradeHomeBaseV593(...args);armItemsRefreshV589();return result;};
+window.__EVOLVE_UPGRADE_CARDS_V593__={read:()=>({version:593,experiencePerLevel:12,cards:UPGRADE_CARDS_V593.length,rarities:UPGRADE_RARITIES_V593.map(r=>({...r})),run:{...upgradeRunV593,highest:{...upgradeRunV593.highest},taken:{...upgradeRunV593.taken}},bodyScale:upgradeBodyScaleV593(),bleeding:upgradeBleedsV593.size,art:upgradeArtV593.path,physical_Galaxy_S23_plus_tested:false})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test={cards:UPGRADE_CARDS_V593,pool:upgradePoolV593,roll:upgradeRollV593,lines:upgradeLinesV593,value:upgradeValueV593,apply:(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);},reset:upgradeResetV593,show:showLevelUp,render:renderLevelChoices,damage:hurtEnemy,need:xpNeedForLevel,context:()=>({player,enemies,state,bullets,step:dt=>update(dt),fire:dt=>firePlayer(dt),draw,grid:rebuildEnemyGridV424,home:returnToHome,xp:addXP,clock:()=>t,choosing:()=>choosing}),bounce:upgradeBounceV593,tag:upgradeTagShotV593};
+
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test.offer=function(specs){const choose=chooseLevelPicks;try{chooseLevelPicks=()=>specs.map(([id,tier])=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);return {kind:id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)};});choosing=true;$('levelOverlay').style.display='flex';armChoiceInput(260);renderLevelChoices();}finally{chooseLevelPicks=choose;}};
+
+// Explicit administrator specimens bypass stage type restrictions only inside a guarded call.
+const MONSTER_CATALOG_V593=[
+ {id:'crawler',type:'crawler',name:'크롤러',en:'CRAWLER',group:'일반'},
+ {id:'runner',type:'runner',name:'러너',en:'RUNNER',group:'일반'},
+ {id:'brute',type:'brute',name:'브루트',en:'BRUTE',group:'일반'},
+ {id:'spitter',type:'spitter',name:'스피터',en:'SPITTER',group:'일반'},
+ {id:'warden',type:'warden',name:'워든',en:'WARDEN',group:'일반'},
+ {id:'froststalker',type:'froststalker',name:'프로스트 스토커',en:'FROST STALKER',group:'일반'},
+ {id:'symbiote',type:'symbiote',name:'심비오트',en:'SYMBIOTE',group:'일반'},
+ {id:'embermaw',type:'embermaw',name:'엠버모',en:'EMBERMAW',group:'일반'},
+ {id:'legacy_crawler',type:'crawler',legacy:true,name:'크롤러 · 변형',en:'CRAWLER · LEGACY',group:'변형'},
+ {id:'legacy_warden',type:'warden',legacy:true,name:'워든 · 변형',en:'WARDEN · LEGACY',group:'변형'},
+ {id:'alpha',type:'brute',elite:'alpha',name:'알파 브루트',en:'ALPHA BRUTE',group:'정예'},
+ {id:'sentinel',type:'spitter',elite:'sentinel',name:'타이탄 센티넬',en:'TITAN SENTINEL',group:'정예'},
+ {id:'hunter',type:'runner',elite:'hunter',name:'게놈 사냥꾼',en:'GENOME HUNTER',group:'정예'},
+ {id:'omega',type:'brute',elite:'omega',name:'오메가 사냥꾼',en:'OMEGA HUNTER',group:'정예'},
+ {id:'nemesis_brute',type:'brute',elite:'nemesis',name:'네메시스 · 근접',en:'NEMESIS · BRUTE',group:'정예'},
+ {id:'nemesis_spitter',type:'spitter',elite:'nemesis',name:'네메시스 · 원거리',en:'NEMESIS · SPITTER',group:'정예'},
+ {id:'bio',boss:'bio',asset:'boss/bio_titan',name:'바이오 타이탄',en:'BIO TITAN',group:'보스'},
+ {id:'venom',boss:'venom',asset:'boss/aberrant_titan',name:'베놈 타이탄',en:'VENOM TITAN',group:'보스'},
+ {id:'blade',boss:'blade',asset:'boss/boss_blade_variant',name:'칼날 보스',en:'BOSS BLADE VARIANT',group:'보스'},
+ {id:'frost',boss:'frost',asset:'boss/frost_titan',name:'프로스트 타이탄',en:'FROST TITAN',group:'보스'},
+ {id:'pyre',boss:'pyre',asset:'boss/pyre_titan',name:'파이어 타이탄',en:'PYRE TITAN',group:'보스'},
+ {id:'origin',boss:'origin',asset:'boss/origin_colossus',name:'오리진 콜로서스',en:'ORIGIN COLOSSUS',group:'보스'},
+ {id:'abyss',boss:'abyss',asset:'boss/abyss_matriarch',name:'어비스 마트리아크',en:'ABYSS MATRIARCH',group:'보스'}
+];
+function monsterCatalogAssetV593(c){return c.asset||enemyAppearanceAssetV516(c.legacy?'legacy_'+c.type:c.type);}
+const monsterPermittedBaseV593=permittedEnemyV526;
+permittedEnemyV526=function(type,boss=false){return evolveAdminEnabledV585&&upgradeSpawnPermissionV593?type:monsterPermittedBaseV593(type,boss);};
+let monsterCatalogQueueV593=null,monsterCatalogSelectedV593='crawler',monsterCatalogSpawnedV593=0;
+function monsterCatalogStatusV593(message){$('monsterStatusV593').textContent=message;}
+function monsterCatalogPointV593(e,index){
+ const start=(index*2.399963229728653)%TAU;
+ for(const radius of [120,160,210,260,320])for(let j=0;j<24;j++){
+  const a=start+j*TAU/24,x=clamp(player.x+Math.cos(a)*radius,24,WORLD_W-24),y=clamp(player.y+Math.sin(a)*radius,24,WORLD_H-24),p={x,y};
+  if(!terrainBodyClearV505(p,e.r))continue;
+  // Same reachable-foot component used by the environmental field; never use a sealed room.
+  if(terrainHitV418(player.x,player.y,x,y,Math.min(e.r,10)))continue;
+  e.x=x;e.y=y;return true;
+ }return false;
+}
+function monsterCatalogSpawnOneV593(c){
+ let e;upgradeSpawnPermissionV593=true;
+ try{
+  if(c.elite==='alpha')e=spawnElite();else if(c.elite==='sentinel')e=spawnEliteSpitter();else if(c.elite==='hunter'||c.elite==='omega')e=spawnEvoHunter(c.elite==='omega');
+  else if(c.boss)e=stressBossPresetV424(c.boss);else e=spawnEnemy(c.type,false);
+ }finally{upgradeSpawnPermissionV593=false;}
+ if(!e||e.dead)return false;
+ if(c.elite==='nemesis')Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});
+ if(!monsterCatalogPointV593(e,monsterCatalogSpawnedV593)){e.dead=true;return false;}
+ if(c.legacy)e.visualSetV516='legacy';else if(c.type==='crawler'||c.type==='warden')e.visualSetV516='base';
+ Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false});
+ monsterCatalogSpawnedV593++;return e;
+}
+function monsterCatalogRequestV593(id,count=1){
+ if(!evolveAdminEnabledV585)return false;const c=MONSTER_CATALOG_V593.find(c=>c.id===id);if(!c)return false;
+ if(!running||ended){monsterCatalogStatusV593(upgradeTextV593('전투를 시작한 뒤 소환해 주세요.','Start a battle before summoning.'));return false;}
+ if(choosing||rewardChoosing){monsterCatalogStatusV593(upgradeTextV593('강화 선택을 먼저 완료해 주세요.','Finish the current choice first.'));return false;}
+ if(monsterCatalogQueueV593)return false;
+ if(c.boss==='bio'||c.boss==='venom')return window.__EVOLVE_TEST_MODULE_V575__.boss(c.boss,Number($('tmPhaseV573').value)||1);
+ if(enemies.some(e=>!e.dead&&e.finalBoss)||bossArena?.active){monsterCatalogStatusV593(upgradeTextV593('현재 보스전을 마치거나 새 전투로 이동해 주세요.','Finish this boss fight or start a new battle.'));return false;}
+ const n=c.boss||c.elite?1:Math.max(1,Math.min(50,Math.trunc(Number(count)||1)));
+ monsterCatalogQueueV593={id:c.id,total:n,left:n,spawned:0,failures:0};
+ window.__EVOLVE_TEST_MODULE_V575__.close(true);monsterCatalogStatusV593(`${c.name} · ${n}`);return true;
+}
+function monsterCatalogPumpV593(){
+ const q=monsterCatalogQueueV593;if(!q)return;
+ if(!evolveAdminEnabledV585||!running||ended){monsterCatalogQueueV593=null;return;}
+ const c=MONSTER_CATALOG_V593.find(c=>c.id===q.id);let n=0;
+ while(q.left>0&&n++<3){if(enemies.filter(e=>!e.dead).length>=runtimeCaps().enemyHard)break;
+  const e=monsterCatalogSpawnOneV593(c);if(e){q.spawned++;q.left--;}else if(++q.failures>=12){q.left=0;break;}}
+ monsterCatalogStatusV593(`${c.name} · ${q.spawned}/${q.total}`);
+ if(q.left<=0){monsterCatalogQueueV593=null;rebuildEnemyGridV424();}
+}
+{
+ const block=document.createElement('div');block.className='tmBlockV573';block.id='monsterCatalogV593';
+ block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예','보스'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
+ $('tmModalV573').querySelectorAll('.tmBlockV573')[1].before(block);
+ function preview(){
+  const c=MONSTER_CATALOG_V593.find(c=>c.id===$('monsterSelectV593').value);monsterCatalogSelectedV593=c.id;
+  const im=$('monsterImageV593');im.src=ASSET_SRC[monsterCatalogAssetV593(c)];im.alt=c.name;$('monsterNameV593').textContent=c.name+' · '+c.en;
+  const role=c.boss?['bio','venom'].includes(c.boss)?'보스전 · 선택한 페이즈로 시작':'보스 외형 · 기존 시험 패턴':c.elite?'정예 · 1마리씩 소환':({melee:'근접',ranged:'원거리',charge:'돌격',support:'지원'}[enemyAttackRoleV591({type:c.type})]||'');
+  $('monsterRoleV593').textContent=role;for(const b of block.querySelectorAll('[data-monster-count-v593]'))b.disabled=!!(c.boss||c.elite)&&b.dataset.monsterCountV593!=='1';
+ }
+ $('monsterSelectV593').onchange=preview;for(const b of block.querySelectorAll('[data-monster-count-v593]'))b.onclick=()=>{Promise.resolve(monsterCatalogRequestV593(monsterCatalogSelectedV593,Number(b.dataset.monsterCountV593))).catch(e=>monsterCatalogStatusV593(e.message));};preview();
+ const style=document.createElement('style');style.textContent='#monsterPreviewV593{display:flex;align-items:center;gap:14px;min-height:125px;margin:10px 0;background:#070b09;border:1px solid #34443b;border-radius:9px;padding:8px}#monsterImageV593{width:112px;height:112px;object-fit:contain;flex:0 0 112px}#monsterNameV593{font-size:12px;line-height:1.6;color:#f2eee1}#monsterRoleV593,#monsterStatusV593{font-size:11px;line-height:1.6;color:#aebeac;margin:6px 0}#monsterCatalogV593 select{font-size:12px}html:not([data-evolve-admin-v585="true"]) #monsterCatalogV593{display:none!important}';document.head.appendChild(style);
+}
+const monsterUpdateBaseV593=update;
+update=function(dt){const active=running&&!paused&&!choosing&&!rewardChoosing&&!ended,result=monsterUpdateBaseV593(dt);if(active&&!paused&&!choosing&&!rewardChoosing&&!ended)monsterCatalogPumpV593();return result;};
+const monsterResetBaseV593=reset;
+reset=function(...args){monsterCatalogQueueV593=null;return monsterResetBaseV593(...args);};
+const monsterHomeBaseV593=returnToHome;
+returnToHome=function(...args){monsterCatalogQueueV593=null;return monsterHomeBaseV593(...args);};
+window.__EVOLVE_MONSTER_CATALOG_V593__={read:()=>({count:MONSTER_CATALOG_V593.length,selected:monsterCatalogSelectedV593,queued:monsterCatalogQueueV593?{...monsterCatalogQueueV593}:null,spawned:monsterCatalogSpawnedV593,enabled:evolveAdminEnabledV585}),list:()=>MONSTER_CATALOG_V593.map(c=>({...c,asset:monsterCatalogAssetV593(c)})),summon:monsterCatalogRequestV593};
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

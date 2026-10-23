@@ -1670,7 +1670,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(min-width:460px){#poster #homeStatusV525{padding-left:16px;padding-right:16px;gap:9px;min-height:70px}.profileNameV525{font-size:14px}.profileLevelV525{font-size:9px}.profileXpV525{height:6px}.walletV525{gap:5px;min-height:40px}.walletIconV525{flex-basis:26px;width:26px;height:29px}.walletV525 b{font-size:14px}}
 @media(max-height:550px){#poster #homeStatusV525{min-height:58px;padding-top:calc(6px + var(--safeT));padding-bottom:6px}}
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version": "V575-WEB-25-VISUAL-CLARITY", "build": "578ff041495361070c7b68b43145a13dfac1f982457b37f050a3886406dcb06a", "scriptBytes": 77532285};</script>
+<script>window.EVOLVE_WEB_CONFIG={"version": "V575-WEB-26-UPGRADE-CARDS", "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a", "scriptBytes": 77559317};</script>
 <script src="assets/c8c40b6de2a69c5b79c3bfffa87b68860115b974c6c93b468b0c517730e43f81.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
@@ -1679,6 +1679,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 #adminNoticeV585{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20001;max-width:calc(100vw - 32px);padding:11px 16px;border:1px solid #658677;border-radius:9px;background:#101d18f5;color:#eff9f2;font:700 13px/1.5 system-ui,sans-serif;box-shadow:0 4px 20px #0008;pointer-events:none;text-align:center}
 #tmModalV573 #adminExitV585{width:100%;margin:0 0 12px;background:#382c27;border-color:#987c61;color:#ffe8c5}
 </style>
+<link rel="stylesheet" href="assets/49aa091d7a8f17565c68a3c4808ac267e2e172ab27f1d3c7be8170476fe22181.css">
 </head>
 <body>
 <style>
@@ -1824,7 +1825,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
   <div id="joyBase"><div id="joyStick"></div></div>
   <button id="dash"><div id="dashCd"></div><span>➤</span></button>
   <button id="ability" type="button"><div id="abilityCd"></div><div id="abilityCore"><span class="abilityGlyph">BIO</span><span id="abilityName" class="abilityName">ACTIVE</span></div></button>
-  <div id="levelOverlay"><div id="levelPanel"><div class="levelHead"><h2>LEVEL UP</h2><p>CHOOSE 1 · MAX LEVEL 10</p><div id="levelContext"></div><div id="levelCoach"></div></div><div id="cards"></div><div id="rerollRow"><button id="rerollBiasBtn" type="button">BIAS · BUILD</button><button id="rerollBtn" type="button">RECOMBINE ×2</button></div><div id="rerollHint">BUILD bias favors your current organs, synergies, and Blueprint path.</div></div></div>
+  <div id="levelOverlay"><div id="levelPanel"><div class="levelHead"><h2>LEVEL UP</h2><p>CHOOSE 1 UPGRADE</p><div id="levelContext"></div><div id="levelCoach"></div></div><div id="cards"></div><div id="rerollRow"><button id="rerollBiasBtn" type="button">BIAS · BUILD</button><button id="rerollBtn" type="button">RECOMBINE ×2</button></div><div id="rerollHint">BUILD bias favors your current organs, synergies, and Blueprint path.</div></div></div>
   <div id="masteryOverlay"><div id="masteryPanel"><div class="masteryHead"><h2>EVO</h2><p>CHOOSE 1</p></div><div id="masteryCards"></div></div></div>
   <div id="rewardOverlay"><div id="rewardPanel"><div class="rewardHead"><h2 id="rewardTitle">CORE ABSORPTION</h2><p id="rewardSource">ELITE BIO-CORE SECURED</p></div><div id="rewardCards"></div></div></div>
   <div id="endOverlay"><div class="endBox"><h1 id="endTitle" class="endTitle">EVOLVED</h1><div id="endSub" class="endSub">BIO-CONTAINMENT BREACHED.</div><div id="endGradeWrap"><div id="endGrade">A</div><div id="endScoreBox"><b id="endScore">0000</b><span>EVOLUTION SCORE</span></div></div><div id="endEvolution"><b>RUN EVOLUTION</b><div id="endEvolutionPath"></div><div id="endDamageShare"></div><div id="endBuildAnalysis"></div><div id="endAdaptation"></div><div id="endScoreBreakdown"></div></div><div id="endHighlights"></div><div id="bankGain"></div><div class="endStats"><div class="stat"><b id="endKills">0</b><span>KILLS</span></div><div class="stat"><b id="endLevel">1</b><span>LEVEL</span></div><div class="stat"><b id="endDNA">0</b><span>DNA</span></div><div class="stat"><b id="endBuild">-</b><span>DOMINANT MUTATION</span></div></div><div class="endActions"><button id="runBack" class="bigBtn" type="button">RUN IT BACK</button><button id="restart" class="bigBtn">NEW MUTATION</button><button id="labReturn" class="smallBtn labBtn" style="width:100%">GENOME LAB</button></div></div></div>
@@ -1932,7 +1933,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script defer src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js" onload="EVOLVE_WEB_CLIENT.loaded(142065)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
 <script defer src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js" onload="EVOLVE_WEB_CLIENT.loaded(16316)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
 <script defer src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js" onload="EVOLVE_WEB_CLIENT.loaded(25295)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/f1c125ee54ea76b67a3c1cdbdc590c1b28c0091fa1a53b631435027e2b50470d.js" onload="EVOLVE_WEB_CLIENT.loaded(1479039)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
+<script defer src="assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js" onload="EVOLVE_WEB_CLIENT.loaded(1506071)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->

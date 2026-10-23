@@ -15,7 +15,7 @@
 .upgradeArtV593{width:100%;aspect-ratio:1;flex:1 1 auto;min-height:80px;max-height:250px;display:flex;align-items:center;justify-content:center;mix-blend-mode:screen;margin:13px 0 10px;align-self:center}
 .upgradeSpriteV593{width:100%;aspect-ratio:1;background-size:500% 500%;background-repeat:no-repeat}
 .upgradeNameV593{min-height:31px;display:flex;align-items:center;justify-content:center;font-size:clamp(13px,3.45vw,23px);line-height:1.35;font-weight:650;word-break:keep-all;letter-spacing:-.025em;margin-bottom:8px}
-.upgradeStatsV593{flex:0 0 62px;padding:11px 0 0;border-top:1px solid #6d7a843f;font-size:clamp(10px,2.7vw,16px);line-height:1.75;font-weight:450;letter-spacing:-.035em;white-space:nowrap;color:#f0edf0}
+.upgradeStatsV593{flex:0 0 62px;padding:11px 0 0;border-top:1px solid #6d7a843f;font-size:clamp(11px,3vw,18px);line-height:1.75;font-weight:450;letter-spacing:-.035em;white-space:nowrap;color:#f0edf0}
 .upgradePartV593{flex:0 0 30px;display:flex;align-items:end;justify-content:center;font-size:clamp(10px,2.7vw,15px);line-height:1.5;font-weight:500;color:var(--rarity);padding-bottom:3px}
 .upgradeCardV593[data-rarity="common"] .upgradeArtV593{filter:brightness(.78)}
 .upgradeCardV593[data-rarity="epic"] .upgradeArtV593{filter:brightness(1.06)}

@@ -2,7 +2,7 @@
   "checks": [
     "real movement takes half the former distance; ranged/support contact is harmless; ranged enemies emit only projectiles; charge damage requires a burst with no magma or shots; brutes attack only at close range",
     "the actual warning renderer suppresses all eight ordinary types and retains major encounter warnings",
-    "a real 30-second horde grows beyond the previous density, with 1.5x spawn rate and larger tactical waves inside the existing hard limit",
+    "a real 30-second horde grows beyond the previous density, with 1.95x original spawn rate (30% above WEB-25) and larger tactical waves inside the existing hard limit",
     "actual XP processing reaches levels 10, 11, 25 and 100, retains overflow XP and offers working upgrade buttons without MAX"
   ],
   "errors": [],
@@ -111,7 +111,7 @@
     "majorWarningDrawn": 1,
     "horde": {
       "movementMultiplier": 0.5,
-      "spawnMultiplier": 1.5,
+      "spawnMultiplier": 1.95,
       "fieldSpreadSeconds": 1.56,
       "fieldLifeSeconds": 2.36,
       "stageLevelCap": null,
@@ -127,15 +127,15 @@
         "symbiote": "support"
       },
       "majorEncounterUnchanged": true,
-      "spawnDelay": 0.5509264022287479,
+      "spawnDelay": 0.42378954017595993,
       "baselineSpawnDelay": 0.8263896033431218,
-      "density": 18,
+      "density": 23,
       "baselineDensity": 12,
       "hardLimit": 600,
       "level": 1,
       "levelLimited": false,
       "physical_Galaxy_S23_plus_tested": false,
-      "actualLiving": 18
+      "actualLiving": 23
     },
     "waves": [
       {
@@ -152,11 +152,11 @@
         "current": [
           [
             "crawler",
-            9
+            12
           ],
           [
             "runner",
-            3
+            4
           ]
         ]
       },
@@ -178,15 +178,15 @@
         "current": [
           [
             "runner",
-            11
+            15
+          ],
+          [
+            "runner",
+            4
           ],
           [
             "runner",
             3
-          ],
-          [
-            "runner",
-            2
           ]
         ]
       },
@@ -212,19 +212,19 @@
         "current": [
           [
             "crawler",
-            2
+            3
           ],
           [
             "runner",
-            5
+            7
           ],
           [
             "crawler",
-            5
+            7
           ],
           [
             "crawler",
-            6
+            8
           ]
         ]
       }
@@ -233,28 +233,28 @@
   "levels": [
     {
       "level": 10,
-      "xp": 17,
+      "xp": 5,
       "limited": false,
       "label": "EXP",
       "cards": 3
     },
     {
       "level": 11,
-      "xp": 17,
+      "xp": 5,
       "limited": false,
       "label": "EXP",
       "cards": 3
     },
     {
       "level": 25,
-      "xp": 17,
+      "xp": 5,
       "limited": false,
       "label": "EXP",
       "cards": 3
     },
     {
       "level": 100,
-      "xp": 17,
+      "xp": 5,
       "limited": false,
       "label": "EXP",
       "cards": 3

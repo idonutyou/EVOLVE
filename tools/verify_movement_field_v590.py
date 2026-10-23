@@ -54,7 +54,7 @@ def main():
     assert b'window.__EVOLVE_MONSTER_CATALOG_V593__' in code
     upgrade = verification.get('upgrade_cards')
     if upgrade:
-        for path in [upgrade['stylesheet'], upgrade['rarity_art']['path']]:
+        for path in [upgrade['stylesheet'], upgrade['rarity_art']['path'], upgrade['font']['path']]:
             data = fetch(path)
             assert hashlib.sha256(data).hexdigest() == Path(path).stem, 'Live upgrade asset differs: '+path
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],

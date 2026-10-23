@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-25-VISUAL-CLARITY",
-  "build": "578ff041495361070c7b68b43145a13dfac1f982457b37f050a3886406dcb06a",
-  "scriptBytes": 77532285,
-  "assets": 1021,
+  "version": "V575-WEB-26-UPGRADE-CARDS",
+  "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a",
+  "scriptBytes": 77559317,
+  "assets": 1024,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

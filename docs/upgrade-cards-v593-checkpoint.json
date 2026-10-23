@@ -1,13 +1,13 @@
 {
-  "progress": 50,
+  "progress": 80,
   "version": "V575-WEB-26-UPGRADE-CARDS",
-  "build": "5d68513ac47a5e65f806670e1461feaf71b0bcf7f76e4406a170d3f0e7460573",
-  "engine": "assets/5746934c9fe82106736b2b596c20a1c5bdeefd8b3f3c51450c0f933a3e685622.js",
-  "status": "Packaged; functional and visual verification pending",
+  "build": "53474d6aedd3ea916c10a89cb5765ea6cbee32011877fffca5db9a22d946509a",
+  "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
+  "status": "Local functional and visual verification passed; uploading for automatic publication",
   "rules": {
-    "engine": "assets/5746934c9fe82106736b2b596c20a1c5bdeefd8b3f3c51450c0f933a3e685622.js",
+    "engine": "assets/26a78d5a093fb7f517b1171d29ba788d8ea7f0cfa7dfe23daf1e8495c3e96c6b.js",
     "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
-    "stylesheet": "assets/95e380a238f048e832f97c71ec0042a2007cfb22a2ec613f869b1d6a4473f96e.css",
+    "stylesheet": "assets/49aa091d7a8f17565c68a3c4808ac267e2e172ab27f1d3c7be8170476fe22181.css",
     "independent_stat_cards": 19,
     "choices_per_level": 3,
     "max_effects_per_card": 2,
@@ -37,9 +37,9 @@
     "additional_ordinary_quantity_multiplier": 1.3,
     "old_movement_and_attack_roles_preserved": true,
     "rarity_art": {
-      "path": "assets/24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542.png",
-      "sha256": "24e11ff4eaabf7b0198820c251f0bd68fdd40699b3d476861b17bcd84fa63542",
-      "bytes": 1953475,
+      "path": "assets/a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed.png",
+      "sha256": "a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed",
+      "bytes": 2216425,
       "width": 1254,
       "height": 1254,
       "columns": 5,
@@ -83,7 +83,33 @@
         "bright orange"
       ],
       "decorative_spike_escalation": false,
-      "mythic_animated_radiance": true
+      "mythic_animated_radiance": true,
+      "approved_shape_reference": "exec-bc1c2f5f-997d-4b60-bc0e-77c1eaa54e70.png",
+      "user_approved_shapes_unchanged": true,
+      "glow_increase_steps": 2,
+      "row_bounds": [
+        [
+          0,
+          240
+        ],
+        [
+          240,
+          445
+        ],
+        [
+          445,
+          718
+        ],
+        [
+          718,
+          960
+        ],
+        [
+          960,
+          1254
+        ]
+      ],
+      "regions_recorded_without_modifying_image_bytes": true
     },
     "font": {
       "path": "assets/58c2c993bd12554261f78f79ee08bea9cbbb0c7cfdf624e32cd14fad3204e2a7.woff",
@@ -96,11 +122,20 @@
     },
     "art_reference_tier": "rare",
     "monster_catalog": true,
+    "monster_catalog_entries": 23,
     "upgrades_reset_each_run": true,
     "home_equipment_and_save_keys_preserved": true,
     "existing_image_bytes_unchanged": 994,
     "new_image_assets": 1,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Verify every card, real projectiles, melee, body size, regeneration, constant XP at high levels and guarded monster summons; automatically upload, deploy and verify Pages."
+  "next": "Automatically upload to main and online-v575, pass all server browser checks, deploy Pages and verify the published changed assets.",
+  "local_checks": [
+    "19 functional stat cards and real combat",
+    "23 monster catalog entries",
+    "12 XP through level 1000 and multiple overflow selections",
+    "ordinary quantity +30%",
+    "ARM persistence and home-only safe update smoke",
+    "994 original images byte exact"
+  ]
 }
