@@ -1,0 +1,45 @@
+{
+  "task": "Upright mirrored player facing, locked future lightning, restored original weapon choices and bare ARM stabbing",
+  "progress": 60,
+  "status": "All five weapon attacks, restored level-up choices, locked lightning, 721 upright facing samples, exact pixel mirrors and normal/admin browser tests passed; remaining map/boss regression running",
+  "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
+  "version": "V575-WEB-20-CLASSIC-COMBAT",
+  "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
+  "engine": "dist/assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+  "constraints": {
+    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
+    "source": "web/player-combat-v587.js",
+    "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
+    "body_rotation_limit_degrees": 80,
+    "head_vertical_margin_degrees": 12,
+    "lightning_locked": true,
+    "lightning_button_disabled_and_dimmed": true,
+    "lightning_in_skill_choices": false,
+    "saved_catalog_equipment_enables_lightning": false,
+    "restored_start_weapons": [
+      "arm",
+      "mouth",
+      "tail",
+      "wing",
+      "leg"
+    ],
+    "original_non_arm_damage_and_progression_restored": true,
+    "arm_attack": "alternating upper-limb contact stabs; no projectile",
+    "existing_image_bytes_unchanged": 987,
+    "maps_and_bosses_unchanged": true,
+    "save_keys_preserved": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "next": "Verify all facing directions, classic attacks, skill choices, saved catalog items and existing deployment guards; automatically upload and publish",
+  "verification": {
+    "original_image_bytes_unchanged": 987,
+    "static_suites": "passed",
+    "player_combat_browser": "passed",
+    "painted_player_contact_and_saved_equipment_browser": "passed",
+    "normal_and_admin_browser": "passed",
+    "facing_samples": 721,
+    "pixel_mirror_difference": 0,
+    "physical_Galaxy_S23_plus_tested": false
+  }
+}

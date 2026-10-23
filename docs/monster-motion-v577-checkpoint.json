@@ -1,227 +1,45 @@
 {
-  "task": "Use attached ivory biomechanical scorpion as the default character; bare upper limbs perform alternating contact-only stabs when no arm weapon is equipped",
-  "status": "Completed and deployed: supplied scorpion is the default body; twenty painted frames and alternating upper-limb contact stabs when no arm weapon is equipped; actual live hashes verified",
-  "progress": 100,
-  "version": "V575-WEB-19-DEFAULT-SCORPION",
-  "build": "76b4f3b61d5fad9b2dde50172d3d9cb5661656ea91237cc1f468e474ca52816d",
-  "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
-  "game_url": "https://idonutyou.github.io/EVOLVE/",
-  "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
-  "engine": "dist/assets/776c0a9c1d95e1121146efd95b4ce775a59a3cec974da310f1552e0b4c7cd5d7.js",
-  "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
-  "source": [
-    "web/player-scorpion-v586.js",
-    "web/player-scorpion-art-v586.json",
-    "tools/package_player_scorpion_v586.py"
-  ],
-  "scope": "Set supplied scorpion as default character; render painted animation; bare upper limbs stab without an arm weapon",
-  "preservation": "Preserve all 986 preexisting image bytes, maps/collisions, boss rules/art, saved data, WEB-17 lettering and WEB-18 normal progression/five-press administrator gate; replace only the default player and no-arm-weapon attack path.",
-  "resume": "Read AGENTS.md and docs/player-scorpion-v586-checkpoint.json. WEB-19 is deployed and fully checked through actual Chrome and live hashes. The ivory/cyan supplied scorpion is the default body. With no arm-slot weapon, its upper limbs alternate short forward stabs, with damage only at impact and no lightning/projectile/poison/tail attack. Existing equipped selections persist. New equipment profiles are empty. Normal play still starts at level 1, and five footer codex clicks enable session-only administrator tools. Keep all existing image bytes, maps, collision saves, bosses and save keys. Automatically upload and deploy authorized changes.",
-  "preferences": [
-    "Respond in Korean",
-    "Show real progress in 10% increments",
-    "Keep stages about five minutes; send frequent still-working updates",
-    "Checkpoint and backup at each stage",
-    "Show file sizes for downloads",
-    "Ignore audio",
-    "No subagents unless explicitly requested",
-    "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
-  ],
-  "next": "Requested work complete. Continue from WEB-19; preserve painted default scorpion, unarmed contact-only stabs, existing equipped attack behavior, original maps/boss artwork, saved data, level-one normal play and five-codex-press admin gate. Automatically upload and deploy future authorized updates.",
-  "legacy_atlases": [
-    {
-      "name": "A",
-      "path": "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
-      "sha256": "4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f",
-      "bytes": 2306775,
-      "width": 1448,
-      "height": 1086,
-      "alpha": true
-    },
-    {
-      "name": "B",
-      "path": "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png",
-      "sha256": "f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c",
-      "bytes": 2358905,
-      "width": 1448,
-      "height": 1086,
-      "alpha": true
-    }
-  ],
-  "active_checkpoint": "docs/player-scorpion-v586-checkpoint.json",
-  "previous_deployment": {
-    "version": "V575-WEB-18-HIDDEN-ADMIN",
-    "build": "a3bdd29aafe0c1a2d32d63380b20ff74f82477dcb1ea7f3db5eb82b583c7587f",
-    "commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
-    "deployment_run": 39900254572
-  },
-  "web12_sources": [
-    "web/red-pulse-v579.js",
-    "web/centered-arena-v579.js",
-    "web/red-pulse-art-v579.json"
-  ],
-  "legacy_monster_verification": {
-    "browser_report": "docs/LEGACY_MONSTER_BROWSER_REPORT.json",
-    "automated_mobile_viewport": true,
-    "all_ten_painted_frame_sets_distinct": true,
-    "all_six_gpu_and_canvas_frames_differ": true,
-    "no_per_frame_texture_rebuild": true,
-    "cached_frames": 40,
-    "browser_errors": [],
-    "failed_requests": [],
-    "physical_Galaxy_S23_plus_tested": false,
-    "full_browser_suite": "passed",
-    "maps": [
-      "facility1",
-      "facility2",
-      "hub",
-      "biolab",
-      "red_biolab"
+  "task": "Upright mirrored player facing, locked future lightning, restored original weapon choices and bare ARM stabbing",
+  "progress": 60,
+  "status": "All five weapon attacks, restored level-up choices, locked lightning, 721 upright facing samples, exact pixel mirrors and normal/admin browser tests passed; remaining map/boss regression running",
+  "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
+  "version": "V575-WEB-20-CLASSIC-COMBAT",
+  "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
+  "engine": "dist/assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+  "constraints": {
+    "engine": "assets/1b3a1b8c82d80f3ca1540dd0283fcd0d1354b48042875bc7164e763bd7ce8787.js",
+    "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
+    "source": "web/player-combat-v587.js",
+    "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
+    "body_rotation_limit_degrees": 80,
+    "head_vertical_margin_degrees": 12,
+    "lightning_locked": true,
+    "lightning_button_disabled_and_dimmed": true,
+    "lightning_in_skill_choices": false,
+    "saved_catalog_equipment_enables_lightning": false,
+    "restored_start_weapons": [
+      "arm",
+      "mouth",
+      "tail",
+      "wing",
+      "leg"
     ],
-    "checks": [
-      "boot and prior-version save migration",
-      "mobile movement, pause and resume",
-      "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
-      "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
-      "update waits for home without interrupting combat",
-      "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
-      "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
-      "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
-      "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
-      "all five maps load",
-      "reload preserves save",
-      "landscape layout"
-    ],
-    "visual_pose_review": "All six identities, alternating limbs and action poses inspected in the rendered gallery",
-    "packaging_tests": 6,
-    "state_tests": 7,
-    "lightning_tests": 7,
-    "web_update_tests": 1,
-    "pages_deploy": "success",
-    "github_regression_workflow": "passed",
-    "image_generation": {
-      "mode": "built-in image_gen",
-      "prompts": "docs/legacy-monster-v578-image-prompts.json",
-      "saved_atlases": [
-        "assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png",
-        "assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png"
-      ]
-    },
-    "live_report": "docs/LEGACY_MONSTER_LIVE_REPORT.json",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
-    "new_atlas_responses": [
-      200,
-      200
-    ]
+    "original_non_arm_damage_and_progression_restored": true,
+    "arm_attack": "alternating upper-limb contact stabs; no projectile",
+    "existing_image_bytes_unchanged": 987,
+    "maps_and_bosses_unchanged": true,
+    "save_keys_preserved": true,
+    "physical_Galaxy_S23_plus_tested": false
   },
+  "next": "Verify all facing directions, classic attacks, skill choices, saved catalog items and existing deployment guards; automatically upload and publish",
   "verification": {
-    "painted_warning": "docs/PAINTED_WARNING_BROWSER_REPORT.json",
-    "regressions": "docs/WEB14_REGRESSION_BROWSER_REPORT.json",
-    "device_and_arena": "docs/WEB14_DEVICE_BROWSER_REPORT.json",
-    "python_tests": 6,
-    "web_client_tests": 1,
-    "lightning_checks": 7,
-    "monster_motion_checks": 7,
-    "red_device_checks": 7,
-    "centered_arena_checks": 2,
-    "cinematic_checks": 5,
-    "errors": [],
-    "physical_Galaxy_S23_plus_tested": false,
-    "remote_complete_regression": "passed",
-    "github_migration_workflow": "passed",
-    "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "pages_deployment": "success",
-    "live_build_matches": true,
-    "live_engine_sha256_matches": true,
-    "live_lettering_sha256_matches": true,
-    "live_crest_digits_sha256_matches": true,
-    "legacy_final_HUD_absent": true,
-    "obsolete_asset_responses": [
-      404,
-      404
-    ],
-    "attack_warnings": "docs/ATTACK_WARNINGS_BROWSER_REPORT.json",
-    "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
-    "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
-    "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": true,
-    "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
-    "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
-    "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
-    "web16_cinematic": "docs/WEB16_CINEMATIC_BROWSER_REPORT.json",
-    "reference_lettering": "docs/REFERENCE_LETTERING_BROWSER_REPORT.json",
-    "web17_regressions": "docs/WEB17_REGRESSION_BROWSER_REPORT.json",
-    "web17_device_and_arena": "docs/WEB17_DEVICE_BROWSER_REPORT.json",
-    "web17_warnings": "docs/WEB17_WARNINGS_BROWSER_REPORT.json",
-    "live_BIO_sha256_matches": true,
-    "live_Korean_sha256_matches": true,
-    "admin_mode": "docs/ADMIN_MODE_BROWSER_REPORT.json",
-    "web18_regressions": "docs/WEB18_REGRESSION_BROWSER_REPORT.json",
-    "full_browser_suite": "passed",
-    "live_administrator_gate_matches": true,
-    "player_scorpion": "docs/PLAYER_SCORPION_BROWSER_REPORT.json",
-    "web19_admin": "docs/WEB19_ADMIN_BROWSER_REPORT.json",
-    "full_remote_browser_suite": "passed",
-    "live_player_atlas_sha256_matches": true,
-    "normal_admin_browser": "passed"
-  },
-  "baseline_backup": "backup/web19-default-scorpion-20261023",
-  "art_metadata": "web/warning-branding-art-v581.json",
-  "image_generation": {
-    "mode": "built-in image_gen",
-    "prompts": "docs/reference-lettering-v584-image-prompts.json",
-    "selected_assets": {
-      "lettering": {
-        "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
-        "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
-        "bytes": 1060193,
-        "width": 941,
-        "height": 1672,
-        "alpha": true,
-        "draft": false
-      },
-      "crest_digits": {
-        "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
-        "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
-        "bytes": 1586575,
-        "width": 1254,
-        "height": 1254,
-        "alpha": true,
-        "draft": false
-      },
-      "bio_regeneration": {
-        "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
-        "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
-        "bytes": 1677374,
-        "width": 2033,
-        "height": 773,
-        "alpha": true,
-        "draft": false
-      },
-      "korean_labels": {
-        "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
-        "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
-        "bytes": 1663416,
-        "width": 1774,
-        "height": 887,
-        "alpha": true,
-        "draft": false
-      }
-    }
-  },
-  "deployed_source_commit": "56dfcca2dd91493e1a1b1f0c48ec34f587f3816c",
-  "deployment_run": 39907571466,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39907571466",
-  "release_backup": "backup/web19-default-scorpion-release-20261023",
-  "stage_backups": {
-    "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
-    "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",
-    "60": "9ad3a085185fc749b292a0362d7a4131c6821262",
-    "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
-    "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
-  },
-  "live_report": "docs/PLAYER_SCORPION_LIVE_REPORT.json",
-  "physical_Galaxy_S23_plus_tested": false,
-  "completed_at": "2026-10-23T14:52:37.980321+09:00"
+    "original_image_bytes_unchanged": 987,
+    "static_suites": "passed",
+    "player_combat_browser": "passed",
+    "painted_player_contact_and_saved_equipment_browser": "passed",
+    "normal_and_admin_browser": "passed",
+    "facing_samples": 721,
+    "pixel_mirror_difference": 0,
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }

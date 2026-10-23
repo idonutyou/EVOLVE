@@ -65,6 +65,13 @@ def main():
         assert b'window.__EVOLVE_PLAYER_SCORPION_V586__' in live_engine, 'Published default player integration is missing'
         assert b'const PARTS_DEFAULT_V523={arm:null' in live_engine, 'Fresh equipment must start empty'
         result['player_scorpion'] = {'atlas': atlas['path'], 'sha256': atlas['sha256'], 'bytes': len(raw), 'matches': True, 'painted_frames': player['painted_frames'], 'unarmed_default': player['unarmed_default'], 'existing_saved_equipment_preserved': True, 'attack': 'alternating upper-limb contact stabs'}
+    if 'player_combat' in report:
+        assert b'window.__EVOLVE_PLAYER_COMBAT_V587__' in live_engine
+        assert b'const classicCombatV587={firePlayer,hurtEnemy,chooseLevelPicks,levelStatHtml,triggerHordeRupture}' in live_engine
+        assert b'active:()=>false, // WEB-20: lightning item combat is not available yet.' in live_engine
+        assert b'pose.rotation,blink,0,pose.facing,1' in live_engine
+        assert b'b.disabled=true;b.classList.remove' in live_engine
+        result['player_combat'] = {'integration_matches': True, 'classic_weapons_restored': True, 'lightning_locked': True, 'facing_mirrored_and_upright': True, 'existing_image_bytes_unchanged': report['player_combat']['existing_image_bytes_unchanged']}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False))
