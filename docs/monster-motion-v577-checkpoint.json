@@ -1,18 +1,21 @@
 {
   "task": "Subtle pre-cast warnings; clear overlays when attacks activate",
-  "status": "Subtle windup pixels, 27 legacy active exclusions, native active fields and native boss transitions passed",
-  "progress": 60,
+  "status": "WEB-16 automatically uploaded and deployed; complete GitHub browser regression passed; live version, engine and manifest match",
+  "progress": 100,
   "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-  "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
+  "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
   "engine": "dist/assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
-  "source": "web/attack-warning-v582.js",
-  "scope": "Painted raster cinematic labels, countdown and threat crest; current VENOM HUD from first arrival; remove obsolete generic final HUD markup, updates, preprocessing and two exclusive images.",
-  "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "resume": "Read AGENTS.md and docs/soft-warnings-v583-checkpoint.json. Continue WEB-16 from current WEB-15, preserving artwork, combat, maps and saves; upload and deploy automatically.",
+  "source": [
+    "web/attack-warning-v582.js",
+    "web/active-hazards-v583.js"
+  ],
+  "scope": "User screenshots show excessive red coverage; show attack range before casting only",
+  "preservation": "Preserve image bytes, maps, collision and combat timing/damage, boss motion, progression and save keys",
+  "resume": "Read AGENTS.md and docs/soft-warnings-v583-checkpoint.json. WEB-16 is deployed and live-verified. Keep pre-cast warnings subtle; preserve original active artwork, collision and combat timing. Continue requested changes with automatic upload and deployment.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -23,7 +26,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Complete full mobile regressions; upload verified final tree and deploy automatically",
+  "next": "Continue from WEB-16. Await user visual feedback; preserve subtle pre-cast warnings, native active effects, artwork, maps and saves. Automatically deploy requested updates through the existing workflow.",
   "legacy_atlases": [
     {
       "name": "A",
@@ -46,12 +49,12 @@
   ],
   "active_checkpoint": "docs/soft-warnings-v583-checkpoint.json",
   "previous_deployment": {
-    "version": "V575-WEB-14-PAINTED-WARNING",
-    "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
-    "deployed_source_commit": "cf24db99640206778962d5ca139b821db9988a4d",
-    "deployment_run": 39805024585,
-    "checkpoint": "docs/warning-branding-v581-checkpoint.json",
-    "backup": "backup/web14-painted-warning-20261023"
+    "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+    "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+    "deployed_source_commit": "3c9295acc817a60820c780a5f8c970033296e12f",
+    "deployment_run": 39880682546,
+    "checkpoint": "docs/attack-warnings-v582-checkpoint.json",
+    "backup": "backup/web15-red-warnings-20261023"
   },
   "web12_sources": [
     "web/red-pulse-v579.js",
@@ -128,7 +131,7 @@
     "physical_Galaxy_S23_plus_tested": false,
     "remote_complete_regression": "passed",
     "github_migration_workflow": "passed",
-    "remote_regression_build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+    "remote_regression_build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
     "pages_deployment": "success",
     "live_build_matches": true,
     "live_engine_sha256_matches": true,
@@ -143,9 +146,13 @@
     "web15_regressions": "docs/WEB15_REGRESSION_BROWSER_REPORT.json",
     "web15_device_and_arena": "docs/WEB15_DEVICE_BROWSER_REPORT.json",
     "web15_cinematic": "docs/WEB15_CINEMATIC_BROWSER_REPORT.json",
-    "live_manifest_matches": true
+    "live_manifest_matches": true,
+    "soft_warnings": "docs/SOFT_WARNINGS_BROWSER_REPORT.json",
+    "web16_regressions": "docs/WEB16_REGRESSION_BROWSER_REPORT.json",
+    "web16_device_and_arena": "docs/WEB16_DEVICE_BROWSER_REPORT.json",
+    "web16_cinematic": "docs/WEB16_CINEMATIC_BROWSER_REPORT.json"
   },
-  "baseline_backup": "backup/web14-before-red-warnings-20261023",
+  "baseline_backup": "backup/web15-red-warnings-20261023",
   "art_metadata": "web/warning-branding-art-v581.json",
   "image_generation": {
     "mode": "built-in image_gen",
@@ -171,15 +178,16 @@
       }
     }
   },
-  "deployed_source_commit": "3c9295acc817a60820c780a5f8c970033296e12f",
-  "deployment_run": 39880682546,
-  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39880682546",
-  "release_backup": "backup/web15-red-warnings-20261023",
+  "deployed_source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262",
+  "deployment_run": 39883233250,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39883233250",
+  "release_backup": "backup/web16-soft-windup-20261023",
   "stage_backups": {
-    "10": "4ad734f33a16ef7043d8c7476fb1286bea694a06",
-    "20": "82dd5a5a5020402a825f6653bf7139fc24852ac5",
-    "80": "3c9295acc817a60820c780a5f8c970033296e12f",
-    "90": "3c9295acc817a60820c780a5f8c970033296e12f"
+    "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
+    "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b",
+    "60": "9ad3a085185fc749b292a0362d7a4131c6821262",
+    "80": "79fd9b5f482f6ac09892c8f310880aee6bc02817",
+    "90": "9ad3a085185fc749b292a0362d7a4131c6821262"
   },
-  "live_report": "docs/RED_ATTACK_WARNINGS_LIVE_REPORT.json"
+  "live_report": "docs/SOFT_WARNINGS_LIVE_REPORT.json"
 }

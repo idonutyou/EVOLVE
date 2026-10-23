@@ -1,0 +1,42 @@
+{
+  "ready": true,
+  "verified_at": "2026-10-23T01:21:51.792239+00:00",
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
+  "engine": "dist/assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
+  "engine_bytes": 1291403,
+  "image_assets_unchanged": 984,
+  "checks": {
+    "version_matches": true,
+    "build_matches": true,
+    "engine_bytes_match": true,
+    "engine_sha256_matches": true,
+    "index_contains_build": true,
+    "index_contains_engine": true,
+    "manifest_matches": true,
+    "image_entries_unchanged": true
+  },
+  "http": [
+    {
+      "path": "version.json",
+      "status": 200
+    },
+    {
+      "path": "assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
+      "status": 200
+    },
+    {
+      "path": "index.html",
+      "status": 200
+    },
+    {
+      "path": "asset-manifest.json",
+      "status": 200
+    }
+  ],
+  "deployed_source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262",
+  "deployment_run": 39883233250,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39883233250",
+  "physical_Galaxy_S23_plus_tested": false
+}

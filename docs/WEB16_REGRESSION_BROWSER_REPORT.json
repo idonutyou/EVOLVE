@@ -1,0 +1,92 @@
+{
+  "checks": [
+    "boot and prior-version save migration",
+    "mobile movement, pause and resume",
+    "campaign lightning atlas, anticipation, real damage pipeline, local reaction with player movement and disabled other attacks",
+    "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+    "update waits for home without interrupting combat",
+    "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+    "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+    "all five maps load",
+    "reload preserves save",
+    "landscape layout"
+  ],
+  "maps": [
+    "facility1",
+    "facility2",
+    "hub",
+    "biolab",
+    "red_biolab"
+  ],
+  "errors": [],
+  "failed": [],
+  "lightning": {
+    "early": true,
+    "hold": true,
+    "pose": true,
+    "blocked": true,
+    "moved": true,
+    "stop": 0,
+    "contacts": 1,
+    "atlas": true,
+    "weapon": "lightning"
+  },
+  "monsterMotion": {
+    "surfaces": {
+      "crawler": true,
+      "runner": true,
+      "brute": true,
+      "spitter": true,
+      "warden": true,
+      "symbiote": true,
+      "embermaw": true,
+      "froststalker": true,
+      "legacy_crawler": true,
+      "legacy_warden": true
+    },
+    "originals": {
+      "warden": {
+        "gpu": true,
+        "canvas": true
+      },
+      "symbiote": {
+        "gpu": true,
+        "canvas": true
+      },
+      "embermaw": {
+        "gpu": true,
+        "canvas": true
+      },
+      "froststalker": {
+        "gpu": true,
+        "canvas": true
+      },
+      "legacy_crawler": {
+        "gpu": true,
+        "canvas": true
+      },
+      "legacy_warden": {
+        "gpu": true,
+        "canvas": true
+      }
+    },
+    "gpuEnabled": true,
+    "gpuFramesDiffer": true,
+    "canvasFramesDiffer": true,
+    "key0": "brute@0",
+    "key1": "brute@1",
+    "windup": 3,
+    "hurt": 3,
+    "cachedFrames": 40,
+    "noTextureRebuildDuringDraw": true
+  },
+  "success": true,
+  "release": {
+    "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+    "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
+    "engine": "dist/assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
+    "source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262"
+  }
+}

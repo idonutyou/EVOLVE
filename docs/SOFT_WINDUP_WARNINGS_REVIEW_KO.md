@@ -14,3 +14,5 @@
 자동 모바일 브라우저에서 세로/가로 화면, BIO 10종과 VENOM 세 페이즈, 일반 예고 27종, 안전 지대 및 실제 맵 전경을 검증한다. 물리 Galaxy S23+ 시험은 수행하지 않았다.
 
 실행: `python3 tools/package_soft_warnings_v583.py`, `python3 tools/verify_site.py --dist dist`, `node tests/attack_warnings_browser.cjs` 및 기존 회귀 검사. 승인된 기존 GitHub Pages 경로로 자동 업로드 및 배포한다.
+
+배포 완료: GitHub Actions 실행 39883233250 성공. 실제 게임의 WEB-16 버전, 빌드, 엔진 SHA-256 및 자산 목록이 로컬 검증본과 일치한다. 최종 결과는 `SOFT_WARNINGS_LIVE_REPORT.json`과 WEB16 브라우저 보고서에 기록했다.
