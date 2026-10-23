@@ -123,3 +123,12 @@ jobs:
         id: pages
         uses: actions/deploy-pages@v4
 
+      - name: Confirm the actual published build and exact lettering bytes
+        run: python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
+      - name: Retain publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-publication-verification
+          path: test-results/web17-live.json
+          if-no-files-found: ignore

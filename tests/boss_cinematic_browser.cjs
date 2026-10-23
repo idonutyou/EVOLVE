@@ -38,6 +38,15 @@ try{
    }film.test.hide();return results;
   });report.wordmarks[orientation]=audit;assert.ok(Math.abs(audit.venom.visibleAspect-13/3)<.015,JSON.stringify(audit.venom));assert.equal(audit.bio.strongGreenPixels,0);
  }
+ const previousLanguage=await page.evaluate(()=>window.EVOLVE_I18N.getLanguage());
+ await page.evaluate(()=>window.EVOLVE_I18N.setLanguage('ko'));
+ try{for(const orientation of ['portrait','landscape']){
+  await page.setViewportSize(orientation==='portrait'?{width:393,height:852}:{width:852,height:393});
+  for(const kind of ['venom','bio']){
+   await page.evaluate(kind=>window.__EVOLVE_CINEMATIC_V580__.test.show(kind,1.65),kind);
+   await page.screenshot({path:path.join(out,`cinematic-ko-${kind}-${orientation}.png`)});
+  }
+ }}finally{await page.evaluate(language=>{window.EVOLVE_I18N.setLanguage(language);window.__EVOLVE_CINEMATIC_V580__.test.hide()},previousLanguage)}
  await page.setViewportSize({width:393,height:852});
  report.art=await page.evaluate(()=>{const api=window.__EVOLVE_CINEMATIC_V580__,hash=c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=2166136261;for(let i=0;i<d.length;i+=13)n=Math.imul(n^d[i],16777619);return n>>>0};return Object.fromEntries(['bio','venom'].map(kind=>[kind,{hashes:[0,1,2,3].map(i=>hash(api.test.surface(kind,i))),sizes:[0,1,2,3].map(i=>{const c=api.test.surface(kind,i);return[c.width,c.height]})}]))});for(const v of Object.values(report.art))assert.equal(new Set(v.hashes).size,4);
  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
