@@ -1,9 +1,9 @@
 {
-  "progress": 80,
+  "progress": 100,
   "version": "V575-WEB-24-HORDE-ROLES",
   "build": "26f08a28edc0b4a4a62f6fa1e628d482d14ca0d8d851195b4cb3d19b5d9f3c35",
   "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
-  "status": "Local role/combat/movement, real 30-second horde and level 10/11/25/100 upgrade checks passed; movement-field and field-device browser regressions passed; automatically publishing",
+  "status": "WEB-24 automatically uploaded and deployed; full server regression checks and actual Pages version/manifest/engine/entry checks passed",
   "rules": {
     "engine": "assets/9dffed59be970fc39aefe2362cf2831b5794acd34a1e8a6c2c3747ada0224381.js",
     "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
@@ -42,7 +42,7 @@
     "maps_save_keys_and_player_attacks_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Upload the tested tree to online-v575 and main, wait for all server checks and Pages deployment, verify actual files and record completion. Do not ask for permission.",
+  "next": "Complete. Continue future changes from this deployed WEB-24 build. Preserve original images, maps, save keys and safe home-only updates. Automatically upload and deploy without confirmation.",
   "verification": {
     "browser_reports": {
       "horde-roles-browser.json": true,
@@ -61,6 +61,21 @@
     "field_spawn_samples": 240,
     "original_images": 994,
     "packaging_tests": 6,
-    "physical_Galaxy_S23_plus_tested": false
-  }
+    "physical_Galaxy_S23_plus_tested": false,
+    "full_server_checks_passed": true,
+    "actual_published_files_match": true
+  },
+  "source_commit": "2bb291f4741306ae7739b4087852c53b273ab565",
+  "source_tree": "326c5e665085cc12f6aba5bba51d99fc67ef0973",
+  "deployment": {
+    "id": 39969100115,
+    "name": "Publish EVOLVE Web",
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/39969100115",
+    "created_at": "2026-10-23T14:22:42Z",
+    "updated_at": "2026-10-23T14:27:36Z"
+  },
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "live_report": "docs/HORDE_ROLES_LIVE_REPORT.json",
+  "workflow_report": "docs/WEB24_PUBLISH_WORKFLOW.json"
 }
