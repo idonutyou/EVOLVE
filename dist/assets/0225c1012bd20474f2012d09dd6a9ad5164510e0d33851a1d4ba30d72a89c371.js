@@ -12900,9 +12900,11 @@ renderEvolvePartsV523(true);
 // WEB-23: movement-facing body, independent two-second weapon aim and reachable field spawns.
 function createIndependentAimV590(holdSeconds=2){
  let moveAngle=0,attackAngle=0,remaining=0,attacks=0;
+ const move=(dx,dy)=>{if(Math.hypot(dx,dy)>.015)moveAngle=Math.atan2(dy,dx);};
  return {
   reset(a=0){moveAngle=Number.isFinite(a)?a:0;attackAngle=moveAngle;remaining=0;attacks=0;},
-  step(dt,dx,dy,moving){if(!(dt>0))return;remaining=Math.max(0,remaining-dt);if(moving&&Math.hypot(dx,dy)>.015)moveAngle=Math.atan2(dy,dx);},
+  move,
+  step(dt,dx,dy,moving){if(!(dt>0))return;remaining=Math.max(0,remaining-dt);if(moving)move(dx,dy);},
   attack(a){if(!Number.isFinite(a))return;attackAngle=a;remaining=holdSeconds;attacks++;},
   body:()=>moveAngle,
   weapon:()=>remaining>1e-8?attackAngle:moveAngle,
@@ -12954,6 +12956,8 @@ function playerBodyAngleV590(){return playerFacingStateV590.body();}
 function playerWeaponAngleV590(){return playerFacingStateV590.weapon();}
 function recordWeaponAttackV590(a){playerFacingStateV590.attack(a);}
 function playerMovementStepV590(dt,dx,dy,moving){playerFacingStateV590.step(dt,dx,dy,moving);}
+const facingDashBaseV590=dash;
+dash=function(...args){const x=player.x,y=player.y,out=facingDashBaseV590(...args);playerFacingStateV590.move(player.x-x,player.y-y);return out;};
 function redPulseFootClearV590(x,y){
  if(mapNavV562){const f=MAP_PLAYER_FOOT_V562;if(x<f.radius+f.halfX+2||x>WORLD_W-f.radius-f.halfX-2||y+f.offsetY<f.radius+2||y+f.offsetY>WORLD_H-f.radius-2)return false;return mapFootContactV562({x,y},player.r).d>=player.r-.06;}
  const half=terrainHalfV505(player),steps=Math.ceil(half/3);

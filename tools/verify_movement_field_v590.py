@@ -40,6 +40,7 @@ def main():
     assert engine in html and expected['build'] in html, 'Live entry points to an older engine'
     assert b'window.__EVOLVE_MOVEMENT_FIELD_V590__' in code
     assert b'playerMovementStepV590(dt,player.x-m.x,player.y-m.y,m.moving)' in code
+    assert b'playerFacingStateV590.move(player.x-x,player.y-y)' in code
     assert b'cooldown=60;metrics.detonations++' in code
     assert b'life:1.18,spread:.78' in code
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],

@@ -88,6 +88,7 @@ def main():
     report['movement_field'] = {
         'engine': engine, 'baseline_commit': BASE, 'source': 'web/movement-field-v590.js',
         'body_follows_actual_movement_only': True, 'weapon_aim_hold_seconds': 2,
+        'dash_follows_actual_displacement_without_shortening_aim_hold': True,
         'weapon_returns_to_movement_after_hold': True, 'pause_freezes_hold': True,
         'existing_upright_mirror_limits_preserved': True,
         'field_respawn_seconds': 60, 'field_spread_seconds': .78, 'field_stroke_width': 12,

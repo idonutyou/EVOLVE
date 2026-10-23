@@ -1,16 +1,17 @@
 {
   "task": "Independent movement-facing body and two-second weapon aim; slower thick electrical field with infrequent random reachable-map spawns",
-  "progress": 80,
+  "progress": 95,
   "version": "V575-WEB-23-MOVEMENT-FIELD",
-  "build": "93bae7f94cb58a7ff6fa578581b1b145c7841d6adbcec93d22a8dad110d3ce17",
-  "engine": "dist/assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
-  "status": "Independent aim, live cannon/blade movement, all five maps/240 reachable random spawns, electrical rendering and preserved combat checks passed; automatically publishing",
+  "build": "4cc735e3befa2ab6ede21dda21b2fbecfdc8ee898c7347da81bff5253a44649c",
+  "engine": "dist/assets/0225c1012bd20474f2012d09dd6a9ad5164510e0d33851a1d4ba30d72a89c371.js",
+  "status": "Final dash-aware build: unit controller, real cannon/blade/dash input, all five maps/240 spawns and electrical rendering passed; automatic final publication pending",
   "constraints": {
-    "engine": "assets/1be0217aaa631de2237632693fb3aadb9757cf5f0c2ac4cf465f06e86a2cb919.js",
+    "engine": "assets/0225c1012bd20474f2012d09dd6a9ad5164510e0d33851a1d4ba30d72a89c371.js",
     "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
     "source": "web/movement-field-v590.js",
     "body_follows_actual_movement_only": true,
     "weapon_aim_hold_seconds": 2,
+    "dash_follows_actual_displacement_without_shortening_aim_hold": true,
     "weapon_returns_to_movement_after_hold": true,
     "pause_freezes_hold": true,
     "existing_upright_mirror_limits_preserved": true,
@@ -26,60 +27,24 @@
     "maps_bosses_save_keys_and_other_attacks_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Automatically publish this verified build to the existing idonutyou/EVOLVE repository, allow all server checks to finish, verify actual Pages entry/manifest/engine/version, then record completion. Do not ask for permission.",
+  "next": "Automatically publish the exact tested tree, wait for full deployment and post-deployment checks, verify actual Pages files, and record completion without confirmation.",
   "verification": {
     "local_browser_suites": {
       "movement-field-browser.json": {
         "success": true,
         "checks": [
           "real cannon fire to the right does not turn a body walking left; turning upward preserves aim for two gameplay seconds; pause freezes the hold and expiry returns guns to actual movement",
+          "a real instantaneous left dash immediately turns the body left while preserving the last rightward attack and its full hold timer",
           "blade attacks keep their attack direction while the body walks away; resting blades hold the last slash direction and return to movement after two seconds",
           "48 real spawns per campaign map stay on reachable floor with full device clearance, cover distant offscreen map areas, never duplicate an active device, and advertise a 60-second respawn",
           "the actual effect expands over 0.78 seconds, draws a thick electrical band and bright filaments, and rendering never rebuilds the reachability grid"
         ]
-      },
-      "arm-items-browser.json": {
-        "success": true,
-        "checks": [
-          "cannon UI equips the marked-end artwork; an actual original ARM projectile travels and damages a campaign enemy; higher stars add the original projectile count and piercing; no bare stab or lightning is emitted",
-          "swords have a real windup and swept melee arc, hit multiple enemies inside the swing once each, alternate upper limbs and leave rear/distant enemies untouched without emitting bullets",
-          "escaped targets are missed; an actual map obstruction blocks blade damage; aiming and drawing preserve both pose caches without rebuilding meshes",
-          "switching the existing single ARM slot replaces the weapon, both choices persist after reload, removal persists and restores bare stabs, and lightning/admin remain locked"
-        ]
-      },
-      "player-combat-browser.json": {
-        "success": true,
-        "checks": [
-          "all five original starting choices are visible and actually select their own level-one weapon; ARM uses delayed contact only, tail sweeps, mouth projectiles, wing hits and leg shockwaves damage real campaign enemies",
-          "actual level-up choice generator restores all five attacks and offers no lightning",
-          "lightning button is dimmed and disabled; keyboard activation and future lightning cast are locked",
-          "eight actual renderer directions and 721 aim samples stay upright and away from vertical; left and right poses are pixel mirrors with broad tilt and no frame rebuilding"
-        ]
-      },
-      "player-scorpion-browser.json": {
-        "success": true,
-        "checks": [
-          "fresh equipment is empty, default scorpion replaces home preview, normal stage one and prior DNA/origin are preserved",
-          "all twenty cached poses are distinct and prepared once from the unchanged original artwork",
-          "normal level-one battle spawns enemies and the new organism walks through actual movement updates",
-          "left upper-limb anticipation causes no early damage; impact damages only its close target; nearby and distant enemies receive no chain or area damage",
-          "the next actual automatic stab uses the other upper limb and its separately painted impact frame",
-          "a target escaping range or crossing behind during the windup is missed; distant enemies do not trigger ranged attacks",
-          "painted walk frames visibly change in the actual renderer, damage uses a recoil pose, and drawing never rebuilds the frame cache",
-          "saved cannon equipment uses the painted player and original projectiles without unlocking future lightning combat",
-          "equipped and removed selections survive reload; removal restores bare stabs and administrator tools remain hidden"
-        ]
-      },
-      "red-pulse-browser.json": {
-        "success": true,
-        "checks": []
       }
     },
+    "previous_combat_regressions_passed": true,
     "map_samples": 240,
     "maps": 5,
     "preserved_image_files": 994,
-    "python_packaging_tests": 6,
-    "static_suites_passed": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

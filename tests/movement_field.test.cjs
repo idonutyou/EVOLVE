@@ -3,6 +3,7 @@ const env={};vm.createContext(env);vm.runInContext(fs.readFileSync(__dirname+'/.
 const aim=env.createIndependentAimV590(2);aim.reset(0);aim.step(.1,-5,0,true);assert.ok(Math.abs(aim.body()-Math.PI)<1e-8);aim.attack(0);assert.equal(aim.weapon(),0);assert.ok(Math.abs(aim.body()-Math.PI)<1e-8);
 aim.step(1.99,0,5,true);assert.ok(Math.abs(aim.body()-Math.PI/2)<1e-8);assert.equal(aim.weapon(),0);aim.step(.011,0,0,false);assert.equal(aim.weapon(),aim.body());
 aim.attack(-1);aim.step(1.5,4,0,true);aim.attack(.5);aim.step(1.99,-4,0,true);assert.equal(aim.weapon(),.5);const paused=JSON.stringify(aim.read());aim.step(0,5,5,true);assert.equal(JSON.stringify(aim.read()),paused);aim.step(.011,0,0,false);assert.equal(aim.weapon(),aim.body());aim.reset(0);assert.equal(aim.read().holdRemaining,0);
+aim.attack(0);aim.move(-82,0);assert.equal(aim.body(),Math.PI);assert.equal(aim.weapon(),0);assert.equal(aim.read().holdRemaining,2);const blocked=JSON.stringify(aim.read());aim.move(0,0);assert.equal(JSON.stringify(aim.read()),blocked);aim.step(2.001,0,0,false);assert.equal(aim.weapon(),Math.PI);
 let seed=123456789;const random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
 const sampler=env.createReachableFieldSamplerV590(),key={},clear=(x,y)=>{
  if(x<25||y<25||x>975||y>975)return false;
