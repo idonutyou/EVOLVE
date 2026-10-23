@@ -1,7 +1,7 @@
 {
   "task": "Upright mirrored player facing, locked future lightning, restored original weapon choices and bare ARM stabbing",
-  "progress": 80,
-  "status": "All local static and seven full browser suites passed; source uploaded; release ready for automatic GitHub Pages publication",
+  "progress": 100,
+  "status": "Completed and deployed: broad upright mirrored facing; five original weapon choices and level-up progression restored; ARM uses contact-only upper-limb stabs; future lightning dimmed, disabled and absent from skill choices; actual published hashes verified",
   "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
   "version": "V575-WEB-20-CLASSIC-COMBAT",
   "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
@@ -31,7 +31,7 @@
     "save_keys_preserved": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Publish the verified tree and confirm live version, manifest, engine, player atlas, administrator gate and upright/combat integration",
+  "next": "Requested work complete. Continue from WEB-20; preserve broad upright mirrored facing, original five weapon choices and progression, bare ARM contact stabs, locked future lightning, exact image bytes, stable saved data, normal level-one starts and five-codex-press administrator gate. Automatically upload and deploy future authorized updates.",
   "verification": {
     "original_image_bytes_unchanged": 987,
     "static_suites": "passed",
@@ -42,8 +42,22 @@
     "pixel_mirror_difference": 0,
     "physical_Galaxy_S23_plus_tested": false,
     "full_local_browser_suite": "passed",
-    "regression_report": "docs/WEB20_REGRESSION_REPORT.json"
+    "regression_report": "docs/WEB20_REGRESSION_REPORT.json",
+    "full_remote_browser_suite": "passed",
+    "migration_workflow": "passed",
+    "pages_deployment": "success",
+    "live_build_matches": true,
+    "live_engine_sha256_matches": true,
+    "live_manifest_matches": true,
+    "live_player_atlas_sha256_matches": true,
+    "live_classic_combat_and_facing_integration_matches": true
   },
   "remote_checkpoint": "2c1d000fbc30b8fd3aca0ce74405c5c965a3d452",
-  "baseline_backup": "backup/web20-classic-combat-20261023"
+  "baseline_backup": "backup/web20-classic-combat-20261023",
+  "deployed_source_commit": "3aeef72fb79fda2824da817ce7f5a36b51857a6f",
+  "release_backup": "backup/web20-classic-combat-release-20261023",
+  "deployment_run": 39912322036,
+  "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39912322036",
+  "live_report": "docs/PLAYER_COMBAT_LIVE_REPORT.json",
+  "completed_at_github": "2026-10-23T06:37:46Z"
 }
