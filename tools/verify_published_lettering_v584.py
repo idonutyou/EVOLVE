@@ -52,6 +52,11 @@ def main():
         assert digest == atlas['sha256'] and len(raw) == atlas['bytes'], 'Published artwork differs: ' + name
         assets[name] = {'path': atlas['path'], 'sha256': digest, 'bytes': len(raw), 'matches': True}
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'], 'version_matches': True, 'manifest_matches': True, 'entry_matches': True, 'engine': engine, 'engine_sha256': engine_sha, 'engine_matches': True, 'artwork': assets, 'boss_names_English_in_both_locales': 'bio_ko' not in art['sprites'] and 'venom_ko' not in art['sprites'], 'Korean_labels': [key for key in art['sprites'] if key.endswith('_ko')], 'physical_Galaxy_S23_plus_tested': False}
+    if 'admin_mode' in report:
+        assert 'adminModeStyleV585' in html, 'Published early administrator hiding style is missing'
+        assert b'window.__EVOLVE_ADMIN_MODE_V585__' in live_engine, 'Published administrator gate is missing'
+        assert report['admin_mode']['normal_start_stage'] == 1 and report['admin_mode']['normal_start_level'] == 1
+        result['administrator_mode'] = {'early_style_matches': True, 'engine_gate_matches': True, 'default_enabled': False, 'unlock_presses': 5, 'normal_start_stage': 1, 'normal_start_level': 1}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
     print(json.dumps(result, ensure_ascii=False))

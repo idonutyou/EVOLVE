@@ -11,6 +11,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>callback.name==='loop'?0:raf(callback)});
   await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1&evolveBioQA=1`,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_ATTACK_WARNINGS_V582__&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+  await require('./admin_unlock.cjs')(page);
   await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.geometry=await page.evaluate(()=>{

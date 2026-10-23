@@ -1,4 +1,4 @@
-name: Inspect WEB-18 admin controls
+name: Verify WEB-18 normal play and hidden admin
 on:
   push:
     branches: [online-v575]
@@ -6,34 +6,56 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  package-and-verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
           ref: online-v575
           fetch-depth: 1
-      - name: Retain current admin-control source context
+      - name: Package the current normal game and five-press administrator gate
+        run: |
+          git fetch origin c66a8a9ee606d11db22f9ce9949ba19e4a032f06 --depth=1
+          python3 tools/package_admin_mode_v585.py
+          python3 tools/verify_site.py --dist dist
+          python3 -m unittest discover -s tests -v
+          node --test tests/web_client.test.cjs
+          node tests/campaign_lightning.test.cjs
+          node tests/monster_motion.test.cjs
+          node tests/red_pulse.test.cjs
+          node tests/boss_cinematic.test.cjs
+      - name: Prepare native browser verification
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          echo "CHROME_BIN=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Verify normal start, hidden tools, real five-press unlock, collision editor, saves and game regressions
+        timeout-minutes: 12
+        run: |
+          node tests/admin_mode_browser.cjs
+          node tests/browser_smoke.cjs
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-web18-admin-verification
+          path: test-results
+          if-no-files-found: ignore
+      - name: Save verified release checkpoint
         run: |
           python3 - <<'PY'
-          import json,re
+          import json,shutil
           from pathlib import Path
-          report=json.loads(Path('dist/verification.json').read_text())
-          code=Path('dist',report['attack_warnings']['engine']).read_text()
-          clean=re.sub(r'data:[a-zA-Z0-9.+/-]+;base64,[A-Za-z0-9+/=]+','<original embedded data omitted>',code)
-          terms=['__EVOLVE_TEST_MODULE_V575__','__EVOLVE_MAP_TEST_V562__','homeCodex','codexBtn','homeNavV522','homeLatestV522','homeStageV522','testPanelV575','mapEditor','testModeV575','moveDebug','충돌 편집','이동불가 표시','맵 전체','EVOLVE_V575_TEST']
-          chunks=[]
-          for term in terms:
-              for match in list(re.finditer(re.escape(term),clean))[:20]:
-                  chunks.append({'term':term,'offset':match.start(),'source':clean[max(0,match.start()-2200):match.start()+3800]})
-          Path('docs/admin-mode-v585-source.json').write_text(json.dumps({'engine':report['attack_warnings']['engine'],'bytes':len(code.encode()),'clean_bytes':len(clean.encode()),'chunks':chunks},ensure_ascii=False,indent=2)+'\n')
-          Path('docs/admin-mode-v585-head.txt').write_text(clean[:500000])
-          tail=clean[-850000:]
-          Path('docs/admin-mode-v585-tail.txt').write_text(tail)
+          p=Path('docs/admin-mode-v585-checkpoint.json');c=json.loads(p.read_text())
+          c.update(progress=90,status='Normal stage-one and level-one start, five real codex clicks, administrator tools, collision editor, saves and reload behavior verified; ready for guarded deployment',next='Publish automatically and verify actual Pages build and administrator code')
+          c['validation']={'packaging_and_unit_checks':'passed','normal_and_admin_browser':'passed','game_and_map_regressions':'passed','image_assets_unchanged':986,'physical_Galaxy_S23_plus_tested':False}
+          p.write_text(json.dumps(c,ensure_ascii=False,indent=2)+'\n')
+          shutil.copyfile('test-results/admin-mode-browser.json','docs/ADMIN_MODE_BROWSER_REPORT.json')
+          shutil.copyfile('test-results/browser-smoke.json','docs/WEB18_REGRESSION_BROWSER_REPORT.json')
           PY
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- docs/admin-mode-v585-source.json docs/admin-mode-v585-tail.txt docs/admin-mode-v585-head.txt
-          git commit -m "[skip ci] WEB-18 20%: inspect current normal-play and administrator controls"
+          git add --all -- dist docs/admin-mode-v585-checkpoint.json docs/ADMIN_MODE_BROWSER_REPORT.json docs/WEB18_REGRESSION_BROWSER_REPORT.json
+          git commit -m "[skip ci] WEB-18 90%: save verified normal game and hidden administrator build"
           git push origin HEAD:online-v575

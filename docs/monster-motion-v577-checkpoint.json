@@ -1,22 +1,23 @@
 {
-  "task": "Reference lettering with English boss names and Korean supporting labels",
-  "status": "Completed and published: English boss names with Korean supporting labels, exact VENOM reference ratio and subtle crimson BIO regeneration; actual live bytes verified",
-  "progress": 100,
-  "version": "V575-WEB-17-REFERENCE-LETTERING",
+  "task": "Default normal game with hidden administrator controls",
+  "status": "Normal-play defaults, separate earned progress and five consecutive footer codex presses implemented in source; ready to package and verify",
+  "progress": 40,
+  "version": "V575-WEB-18-HIDDEN-ADMIN",
   "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
-  "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
+  "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
   "reference": "EVOLVE_V575_RUPTURE_60_TEST.html (LIGHTNING06); sha256 0c9982e38253a3821b10859d685b957772451112d5ae5083a870dab67512cf2d",
   "engine": "dist/assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
   "atlas": "dist/assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png",
   "source": [
-    "web/warning-branding-v581.js",
-    "web/warning-branding-art-v581.json",
-    "web/boss-cinematic-v580.js"
+    "web/admin-state-v585.js",
+    "web/admin-mode-v585.js",
+    "web/admin-mode-v585.css",
+    "web/admin-mode-patches-v585.json"
   ],
-  "scope": "보스들 이름은 그대로 영어 쓰고 나머지만 한글화 해서 이어서 가자",
+  "scope": "테스트랑 맵충돌 같은 관리자 모드는 따로 숨기자. 기본으로는 일반 버전 플레이, 1레벨부터 시작. 하단 도감 버튼 5번으로 관리자 활성화.",
   "preservation": "Preserve existing crest, all boss/monster/map artwork, animation, gameplay, save keys and WEB-16 subtle windup-only warnings. Replace cinematic lettering and countdown digits only.",
-  "resume": "Read AGENTS.md and docs/reference-lettering-v584-checkpoint.json. WEB-17 is fully deployed and live hashes match. Keep BIO TITAN / VENOM TITAN English in both locales. Supporting labels are Korean in Korean mode; preserve exact VENOM aspect, subtle crimson BIO title regeneration, WEB-16 windup-only warnings, all gameplay and saved data. Automatically upload and deploy subsequent authorized EVOLVE updates.",
+  "resume": "Read AGENTS.md and docs/admin-mode-v585-checkpoint.json. Continue WEB-18 from current WEB-17. Default normal play starts at stage 1 and character level 1; only five consecutive footer codex presses enable test and map editor tools. Keep all original images, saved data and maps. Automatically upload and deploy.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -27,7 +28,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Requested work complete. Start future changes from the deployed WEB-17 baseline; preserve the user's English boss names and all other game state.",
+  "next": "Package from current WEB-17, run real mobile viewport normal/admin/saved-data tests, then deploy automatically",
   "legacy_atlases": [
     {
       "name": "A",
@@ -48,14 +49,13 @@
       "alpha": true
     }
   ],
-  "active_checkpoint": "docs/reference-lettering-v584-checkpoint.json",
+  "active_checkpoint": "docs/admin-mode-v585-checkpoint.json",
   "previous_deployment": {
-    "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
-    "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
-    "deployed_source_commit": "9ad3a085185fc749b292a0362d7a4131c6821262",
-    "deployment_run": 39883233250,
-    "checkpoint": "docs/soft-warnings-v583-checkpoint.json",
-    "backup": "backup/web16-soft-windup-20261023"
+    "version": "V575-WEB-17-REFERENCE-LETTERING",
+    "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
+    "deployed_source_commit": "c481320dc51d5ef192301b4cdd1f5bf1bd4388ed",
+    "deployment_run": 39897579104,
+    "deployment_url": "https://github.com/idonutyou/EVOLVE/actions/runs/39897579104"
   },
   "web12_sources": [
     "web/red-pulse-v579.js",

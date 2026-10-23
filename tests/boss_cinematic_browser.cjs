@@ -7,6 +7,7 @@ try{
  // Manual simulation steps own this timeline; screenshot speed must not advance it.
  await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>callback.name==='loop'?0:raf(callback)});
  await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1`,{waitUntil:'domcontentloaded',timeout:180000});await page.waitForFunction(()=>window.__EVOLVE_CINEMATIC_V580__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+ await require('./admin_unlock.cjs')(page);
  report.branding=await page.evaluate(async()=>{const api=window.__EVOLVE_PAINTED_WARNING_V581__;await api.ready;const sprites={};for(const name of ['bio','venom','warning','breach','phase','subtitle','crest','digit1','digit2','digit3','warning_ko','breach_ko','phase_ko','subtitle_ko']){const c=api.test.surface(name),pixels=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let clear=0,painted=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]===0)clear++;if(pixels[i]>200)painted++;}sprites[name]={clear,painted,width:c.width,height:c.height};}return{...api.read(),sprites};});assert.ok(report.branding.ready&&!report.branding.legacyFinalHUD);assert.equal(Object.keys(report.branding.sprites).length,14);assert.ok(Object.values(report.branding.sprites).every(s=>s.clear>0&&s.painted>0));
 
  report.locales=await page.evaluate(()=>{

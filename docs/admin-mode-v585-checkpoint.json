@@ -1,0 +1,20 @@
+{
+  "task": "Default normal game with hidden administrator controls",
+  "version": "V575-WEB-18-HIDDEN-ADMIN",
+  "baseline_version": "V575-WEB-17-REFERENCE-LETTERING",
+  "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
+  "progress": 40,
+  "status": "Normal-play defaults, separate earned progress and five consecutive footer codex presses implemented in source; ready to package and verify",
+  "request": "테스트랑 맵충돌 같은 관리자 모드는 따로 숨기자. 기본으로는 일반 버전 플레이, 1레벨부터 시작. 하단 도감 버튼 5번으로 관리자 활성화.",
+  "game_url": "https://idonutyou.github.io/EVOLVE/",
+  "publication_authorization": "Automatically upload and deploy requested EVOLVE changes through the existing GitHub Pages workflow",
+  "preservation": "Preserve all existing image bytes, combat, maps, approved collision edits, DNA, equipment, original save keys and WEB-17 lettering. Normal progress is saved separately from developer shortcuts.",
+  "source": [
+    "web/admin-state-v585.js",
+    "web/admin-mode-v585.js",
+    "web/admin-mode-v585.css",
+    "web/admin-mode-patches-v585.json"
+  ],
+  "next": "Package from current WEB-17, run real mobile viewport normal/admin/saved-data tests, then deploy automatically",
+  "physical_Galaxy_S23_plus_tested": false
+}

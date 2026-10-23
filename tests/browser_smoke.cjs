@@ -13,10 +13,11 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1`,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
   assert.equal(await page.evaluate(()=>window.__EVOLVE_ASSET_ERROR__||null),null);
-  // The V575 floor-visibility source intentionally grants access to all 99 stages.
-  const initial=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_META_V1')));assert.equal(initial.dna,1234);assert.equal(initial.unlockedStageV522,99);assert.equal(initial.origin,'acid');report.checks.push('boot and prior-version save migration');
+  // Existing migrated progress is preserved; normal play has separate earned stage access.
+  const initial=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_META_V1')));assert.equal(initial.dna,1234);assert.equal(initial.unlockedStageV522,31);assert.equal(initial.origin,'acid');report.checks.push('boot and prior-version save migration');
   assert.deepEqual(report.errors,[],'Game startup raised a JavaScript exception');
   await page.screenshot({path:path.join(out,'mobile-home.png')});
+  await require('./admin_unlock.cjs')(page);
   await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running,null,{timeout:30000});
   const before=await page.evaluate(()=>{const p=window.__EVOLVE_TEST_MODULE_V575__.test.context().player;return{x:p.x,y:p.y};});
