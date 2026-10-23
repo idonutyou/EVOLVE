@@ -191,31 +191,31 @@
         "height": 112
       },
       "warning_ko": {
-        "clear": 2914,
-        "painted": 12775,
-        "width": 187,
+        "clear": 3027,
+        "painted": 11448,
+        "width": 175,
         "height": 96
       },
       "breach_ko": {
-        "clear": 4335,
-        "painted": 4350,
-        "width": 155,
+        "clear": 2520,
+        "painted": 4061,
+        "width": 119,
         "height": 64
       },
       "phase_ko": {
-        "clear": 1849,
-        "painted": 1917,
-        "width": 94,
+        "clear": 1184,
+        "painted": 4748,
+        "width": 146,
         "height": 48
       },
       "subtitle_ko": {
-        "clear": 2684,
-        "painted": 3823,
-        "width": 155,
+        "clear": 1843,
+        "painted": 8396,
+        "width": 244,
         "height": 48
       }
     },
-    "cachedBytes": 1704816,
+    "cachedBytes": 1718064,
     "design": "reference-1000027488",
     "language": "ko",
     "locales": [

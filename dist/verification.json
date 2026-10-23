@@ -7,7 +7,7 @@
   "unique_assets": 977,
   "assets_bytes": 249072372,
   "index_bytes": 270845,
-  "build": "9718961a80a212ac8b44605e9c43d52a77639d9decec1d82ae864e1594b890d0",
+  "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
   "image_assets": 986,
   "cached_files": 1013,
   "cached_bytes": 349558480,
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/89a4555734f252668aafbfdb3429e53c09a12242fd8300a13976faa990da580e.js",
+    "engine": "assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -558,7 +558,7 @@
             228,
             361,
             447,
-            230
+            245
           ],
           "cache_height": 96
         },
@@ -566,9 +566,9 @@
           "atlas": "korean_labels",
           "crop": [
             986,
-            295,
-            715,
-            296
+            330,
+            613,
+            329
           ],
           "cache_height": 64
         },
@@ -576,9 +576,9 @@
           "atlas": "korean_labels",
           "crop": [
             171,
-            591,
-            503,
-            258
+            685,
+            500,
+            164
           ],
           "cache_height": 48
         },
@@ -586,9 +586,9 @@
           "atlas": "korean_labels",
           "crop": [
             893,
-            591,
+            686,
             834,
-            259
+            164
           ],
           "cache_height": 48
         }
@@ -619,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/89a4555734f252668aafbfdb3429e53c09a12242fd8300a13976faa990da580e.js",
+    "engine": "assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,

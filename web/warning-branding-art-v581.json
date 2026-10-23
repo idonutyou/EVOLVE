@@ -147,7 +147,7 @@
         228,
         361,
         447,
-        230
+        245
       ],
       "cache_height": 96
     },
@@ -155,9 +155,9 @@
       "atlas": "korean_labels",
       "crop": [
         986,
-        295,
-        715,
-        296
+        330,
+        613,
+        329
       ],
       "cache_height": 64
     },
@@ -165,9 +165,9 @@
       "atlas": "korean_labels",
       "crop": [
         171,
-        591,
-        503,
-        258
+        685,
+        500,
+        164
       ],
       "cache_height": 48
     },
@@ -175,9 +175,9 @@
       "atlas": "korean_labels",
       "crop": [
         893,
-        591,
+        686,
         834,
-        259
+        164
       ],
       "cache_height": 48
     }

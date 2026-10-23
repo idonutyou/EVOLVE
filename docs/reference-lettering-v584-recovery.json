@@ -9,25 +9,25 @@
       228,
       361,
       447,
-      230
+      245
     ],
     "breach_ko": [
       986,
-      295,
-      715,
-      296
+      330,
+      613,
+      329
     ],
     "phase_ko": [
       171,
-      591,
-      503,
-      258
+      685,
+      500,
+      164
     ],
     "subtitle_ko": [
       893,
-      591,
+      686,
       834,
-      259
+      164
     ]
   },
   "unused_korean_boss_names": true,
@@ -41,5 +41,7 @@
       "VENOM TITAN"
     ]
   },
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "korean_crop_gutters_verified": true,
+  "atlas_bytes_unchanged": true
 }

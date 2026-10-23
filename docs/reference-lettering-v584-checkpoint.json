@@ -4,7 +4,7 @@
   "baseline_version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
   "progress": 90,
-  "status": "Final English boss names, Korean labels and exact reference ratio verified in both browser orientations; ready for automatic Pages deployment",
+  "status": "Final English boss names and uncut Korean labels verified in portrait and landscape; exact VENOM aspect and poison-free BIO confirmed",
   "request": "글씨 이걸로 바꿔",
   "reference": "docs/reference-lettering-v584.png",
   "reference_file_id": "file_000000001ae082069fe8b97c81961b3d",
@@ -14,7 +14,7 @@
     "web/warning-branding-v581.js",
     "web/warning-branding-art-v581.json"
   ],
-  "next": "Promote the verified WEB-17 checkpoint and confirm actual Pages publication",
+  "next": "Review final native screenshots and deploy automatically",
   "physical_Galaxy_S23_plus_tested": false,
   "image_generation": {
     "mode": "built-in image_gen",
@@ -29,8 +29,8 @@
       "draft": false
     }
   },
-  "build": "9718961a80a212ac8b44605e9c43d52a77639d9decec1d82ae864e1594b890d0",
-  "engine": "dist/assets/89a4555734f252668aafbfdb3429e53c09a12242fd8300a13976faa990da580e.js",
+  "build": "d685440b65900e24f98527c059a3a6743f6f48479de7eea8e71f2d71af74713b",
+  "engine": "dist/assets/fbf644375c3b4345a21ba254c4d47299177a49a2faa2066273dcc993b2486e56.js",
   "art": {
     "atlases": {
       "lettering": {
@@ -180,7 +180,7 @@
           228,
           361,
           447,
-          230
+          245
         ],
         "cache_height": 96
       },
@@ -188,9 +188,9 @@
         "atlas": "korean_labels",
         "crop": [
           986,
-          295,
-          715,
-          296
+          330,
+          613,
+          329
         ],
         "cache_height": 64
       },
@@ -198,9 +198,9 @@
         "atlas": "korean_labels",
         "crop": [
           171,
-          591,
-          503,
-          258
+          685,
+          500,
+          164
         ],
         "cache_height": 48
       },
@@ -208,9 +208,9 @@
         "atlas": "korean_labels",
         "crop": [
           893,
-          591,
+          686,
           834,
-          259
+          164
         ],
         "cache_height": 48
       }
@@ -231,7 +231,14 @@
     "native_venom_reference_aspect": 4.333333333333333,
     "BIO_poison_pixels": 0,
     "WEB16_warning_style_and_lifecycle": "byte-for-byte unchanged",
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "final_korean_cutouts": "complete, no adjacent glyphs",
+    "native_screenshots": [
+      "docs/reference-lettering-ko-bio-portrait-v584.png",
+      "docs/reference-lettering-ko-bio-landscape-v584.png",
+      "docs/reference-lettering-ko-venom-portrait-v584.png",
+      "docs/reference-lettering-ko-venom-landscape-v584.png"
+    ]
   },
   "stage_backups": {
     "20": "f2e3f59",
