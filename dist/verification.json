@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-21-ORIGINAL-SPECIMEN",
+  "version": "V575-WEB-22-ARM-ITEMS",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 271726,
-  "build": "a3af20045799de86d407dcdd27458d57a63240d2bdf2599047e737f7d0025367",
-  "image_assets": 988,
-  "cached_files": 1015,
-  "cached_bytes": 352972308,
+  "index_bytes": 271718,
+  "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
+  "image_assets": 994,
+  "cached_files": 1021,
+  "cached_bytes": 354473991,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -408,7 +408,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -619,7 +619,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -639,7 +639,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -652,7 +652,7 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -673,7 +673,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -698,7 +698,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "original_player": {
-    "engine": "assets/71f7f9a839129e5e8060e7e2567e2bc35336533304474dadd3956058e6919517.js",
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
     "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -731,6 +731,28 @@
     "minimum_triangle_area_ratio": 0.120715,
     "existing_image_bytes_unchanged": 987,
     "combat_facing_maps_bosses_save_keys_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "arm_items": {
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
+    "source": "web/arm-items-v589.js",
+    "implemented_ids": [
+      "arm_cannon",
+      "arm_blades"
+    ],
+    "saved_equipment_ids_preserved": true,
+    "icons_and_attachments": "only the marked distal ends, extracted from supplied originals with RGB pixels unchanged",
+    "cannon": "the original ARM projectile fire, damage, collision, pierce and star progression; emitted from the equipped barrel",
+    "blades": "alternating timed swings; swept arc contact, one hit per enemy per swing, terrain occlusion, no ranged fallback",
+    "bare_arm": "unchanged alternating contact stabs",
+    "lightning_locked": true,
+    "home_and_combat_equipment": true,
+    "original_character_source_and_anatomy_preserved": true,
+    "armed_pose_cache": 20,
+    "per_frame_mesh_rebuilds": 0,
+    "existing_image_bytes_unchanged": 988,
+    "maps_bosses_save_keys_and_other_weapon_code_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

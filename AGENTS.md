@@ -9,6 +9,7 @@
 - Keep EVOLVE_V575_TEST_* persistence stable. Never erase browser storage during updates.
 - Updates never reload automatically. Apply only at home after an explicit click.
 - Retain deployment guards, image hashes, and browser verification. Confirm the actual Pages deployment.
+- The user explicitly requires automatic upload and deployment of completed EVOLVE changes to the existing idonutyou/EVOLVE repository. Do not ask for confirmation again. Preserve safe in-game update timing.
 - Commit intermediate migration results on online-v575 so interrupted work remains recoverable.
 - Distinguish automated mobile viewport checks from physical Galaxy S23+ testing.
 

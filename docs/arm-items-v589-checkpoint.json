@@ -1,0 +1,140 @@
+{
+  "task": "Implement the supplied cannon and blades as real ARM equipment, with marked-end-only icons",
+  "progress": 95,
+  "status": "The user explicitly instructed automatic upload and deployment; publishing the already verified implementation",
+  "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
+  "version": "V575-WEB-22-ARM-ITEMS",
+  "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
+  "engine": "dist/assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+  "constraints": {
+    "engine": "assets/ca48963bbb480b1646cb6d885b8386cf4f2dbf99a956a481c9ee60dc3c753d54.js",
+    "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
+    "source": "web/arm-items-v589.js",
+    "implemented_ids": [
+      "arm_cannon",
+      "arm_blades"
+    ],
+    "saved_equipment_ids_preserved": true,
+    "icons_and_attachments": "only the marked distal ends, extracted from supplied originals with RGB pixels unchanged",
+    "cannon": "the original ARM projectile fire, damage, collision, pierce and star progression; emitted from the equipped barrel",
+    "blades": "alternating timed swings; swept arc contact, one hit per enemy per swing, terrain occlusion, no ranged fallback",
+    "bare_arm": "unchanged alternating contact stabs",
+    "lightning_locked": true,
+    "home_and_combat_equipment": true,
+    "original_character_source_and_anatomy_preserved": true,
+    "armed_pose_cache": 20,
+    "per_frame_mesh_rebuilds": 0,
+    "existing_image_bytes_unchanged": 988,
+    "maps_bosses_save_keys_and_other_weapon_code_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "next": "Automatically upload to idonutyou/EVOLVE, let the existing Pages workflow verify and publish, and verify actual live build and hashes. Do not ask for confirmation again.",
+  "verification": {
+    "version": "V575-WEB-22-ARM-ITEMS",
+    "build": "ccbd0f3f69e526134296d18dd5b48f6ca9d0ef23a8e4102b6a228ea8c81ce660",
+    "browser_suites": {
+      "arm-items-browser.json": {
+        "success": true,
+        "checks": [
+          "cannon UI equips the marked-end artwork; an actual original ARM projectile travels and damages a campaign enemy; higher stars add the original projectile count and piercing; no bare stab or lightning is emitted",
+          "swords have a real windup and swept melee arc, hit multiple enemies inside the swing once each, alternate upper limbs and leave rear/distant enemies untouched without emitting bullets",
+          "escaped targets are missed; an actual map obstruction blocks blade damage; aiming and drawing preserve both pose caches without rebuilding meshes",
+          "switching the existing single ARM slot replaces the weapon, both choices persist after reload, removal persists and restores bare stabs, and lightning/admin remain locked"
+        ],
+        "errors": []
+      },
+      "original-player-browser.json": {
+        "success": true,
+        "checks": [
+          "the actual supplied 1536px original PNG is used byte-for-byte; no generative redraw; detailed 1536px home preview and the existing 20-frame game cache allocation",
+          "actual pixel patches of both forelimbs translate forward 60/40 source pixels and the core moves back 24/18; unchanged body texture matches the supplied image; all twenty native poses are distinct",
+          "normal level-one play uses the same original creature, movement poses remain cached during real rendering, administrator UI stays hidden and future lightning stays disabled"
+        ],
+        "errors": []
+      },
+      "player-combat-browser.json": {
+        "success": true,
+        "checks": [
+          "all five original starting choices are visible and actually select their own level-one weapon; ARM uses delayed contact only, tail sweeps, mouth projectiles, wing hits and leg shockwaves damage real campaign enemies",
+          "actual level-up choice generator restores all five attacks and offers no lightning",
+          "lightning button is dimmed and disabled; keyboard activation and future lightning cast are locked",
+          "eight actual renderer directions and 721 aim samples stay upright and away from vertical; left and right poses are pixel mirrors with broad tilt and no frame rebuilding"
+        ],
+        "errors": []
+      },
+      "player-scorpion-browser.json": {
+        "success": true,
+        "checks": [
+          "fresh equipment is empty, default scorpion replaces home preview, normal stage one and prior DNA/origin are preserved",
+          "all twenty cached poses are distinct and prepared once from the unchanged original artwork",
+          "normal level-one battle spawns enemies and the new organism walks through actual movement updates",
+          "left upper-limb anticipation causes no early damage; impact damages only its close target; nearby and distant enemies receive no chain or area damage",
+          "the next actual automatic stab uses the other upper limb and its separately painted impact frame",
+          "a target escaping range or crossing behind during the windup is missed; distant enemies do not trigger ranged attacks",
+          "painted walk frames visibly change in the actual renderer, damage uses a recoil pose, and drawing never rebuilds the frame cache",
+          "saved cannon equipment uses the painted player and original projectiles without unlocking future lightning combat",
+          "equipped and removed selections survive reload; removal restores bare stabs and administrator tools remain hidden"
+        ],
+        "errors": []
+      },
+      "admin-mode-browser.json": {
+        "success": true,
+        "checks": [
+          "normal defaults ignore old test stage, map and disabled natural-spawn preference without erasing them",
+          "real normal battle starts at stage 1 and character level 1 with natural enemies and no administrator controls",
+          "actual stage-one timer completion unlocks stage two in normal progress",
+          "ordinary codex still opens; four presses stay normal; another tab resets the count; fifth consecutive real press enables admin",
+          "admin test stage/map and collision editor work; exiting restores normal campaign without advancing its progress",
+          "reload hides admin again, earned progress persists, and landscape stays clean"
+        ],
+        "errors": []
+      },
+      "browser-smoke.json": {
+        "success": true,
+        "checks": [
+          "boot and prior-version save migration",
+          "mobile movement, pause and resume",
+          "ordinary damage restored and saved catalog equipment cannot unlock future lightning",
+          "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+          "update waits for home without interrupting combat",
+          "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+          "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "all five maps load",
+          "reload preserves save",
+          "landscape layout"
+        ],
+        "errors": []
+      },
+      "red-pulse-browser.json": {
+        "success": true,
+        "checks": [],
+        "errors": []
+      },
+      "boss-cinematic-browser.json": {
+        "success": true,
+        "checks": [],
+        "errors": []
+      },
+      "attack-warnings-browser.json": {
+        "success": true,
+        "checks": [],
+        "errors": []
+      }
+    },
+    "python_packaging_tests": 6,
+    "static_game_suites_passed": true,
+    "original_images_preserved": 988,
+    "new_images": 6,
+    "pages_deployed": false,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "publication": {
+    "status": "authorized_by_user",
+    "standing_instruction": "물어보지 말고 항상 자동으로 업로드하고 배포해",
+    "repository": "idonutyou/EVOLVE",
+    "pages_url": "https://idonutyou.github.io/EVOLVE/",
+    "user_confirmation_required": false
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "source_pixels_preserved": true,
+  "generative_redraw": false,
+  "items": {
+    "cannon": {
+      "source_sha256": "87a1281df5e3fc685b075cc89ef81762baef9060080ea22635a68172607de889",
+      "world_scale": 0.058,
+      "left": {
+        "path": "assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png",
+        "sha256": "7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d",
+        "bytes": 221378,
+        "width": 369,
+        "height": 337,
+        "source_box": [
+          30,
+          355,
+          399,
+          692
+        ],
+        "pivot": [
+          275,
+          81
+        ],
+        "tip": [
+          56,
+          229
+        ],
+        "native_angle": 2.547294225566907,
+        "length": 264.31988196123274
+      },
+      "right": {
+        "path": "assets/e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59.png",
+        "sha256": "e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59",
+        "bytes": 219908,
+        "width": 372,
+        "height": 339,
+        "source_box": [
+          1140,
+          350,
+          1512,
+          689
+        ],
+        "pivot": [
+          90,
+          86
+        ],
+        "tip": [
+          309,
+          234
+        ],
+        "native_angle": 0.5942984280228865,
+        "length": 264.31988196123274
+      },
+      "icon": {
+        "path": "assets/4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a.png",
+        "sha256": "4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a",
+        "bytes": 448695,
+        "width": 765,
+        "height": 339
+      },
+      "left_polygon": [
+        [
+          0,
+          350
+        ],
+        [
+          248,
+          350
+        ],
+        [
+          326,
+          410
+        ],
+        [
+          365,
+          455
+        ],
+        [
+          398,
+          510
+        ],
+        [
+          368,
+          568
+        ],
+        [
+          345,
+          620
+        ],
+        [
+          292,
+          704
+        ],
+        [
+          0,
+          704
+        ]
+      ]
+    },
+    "blades": {
+      "source_sha256": "a59beb9f5fcd2e9035aa8ebd916b1a5f70e08090d1fe4f856e2106c339364188",
+      "world_scale": 0.09,
+      "left": {
+        "path": "assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png",
+        "sha256": "73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b",
+        "bytes": 150839,
+        "width": 354,
+        "height": 409,
+        "source_box": [
+          14,
+          425,
+          368,
+          834
+        ],
+        "pivot": [
+          271,
+          45
+        ],
+        "tip": [
+          6,
+          396
+        ],
+        "native_angle": 2.2174806899565596,
+        "length": 439.80222827993947
+      },
+      "right": {
+        "path": "assets/942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e.png",
+        "sha256": "942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e",
+        "bytes": 143154,
+        "width": 354,
+        "height": 409,
+        "source_box": [
+          1168,
+          425,
+          1522,
+          834
+        ],
+        "pivot": [
+          82,
+          45
+        ],
+        "tip": [
+          347,
+          396
+        ],
+        "native_angle": 0.9241119636332337,
+        "length": 439.80222827993947
+      },
+      "icon": {
+        "path": "assets/7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef.png",
+        "sha256": "7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef",
+        "bytes": 301033,
+        "width": 732,
+        "height": 409
+      },
+      "left_polygon": [
+        [
+          0,
+          400
+        ],
+        [
+          220,
+          400
+        ],
+        [
+          300,
+          456
+        ],
+        [
+          400,
+          526
+        ],
+        [
+          445,
+          620
+        ],
+        [
+          445,
+          860
+        ],
+        [
+          0,
+          860
+        ]
+      ]
+    }
+  }
+}
