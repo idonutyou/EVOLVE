@@ -1,0 +1,1932 @@
+{
+  "version": {
+    "version": "V575-WEB-20-CLASSIC-COMBAT",
+    "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
+    "scriptBytes": 77509543,
+    "assets": 1014,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
+  },
+  "static_suites": "6 Python packaging tests plus web-client, isolated lightning library, monster motion, red pulse and boss cinematic tests passed",
+  "browser_suites": {
+    "player-combat-browser": {
+      "checks": [
+        "all five original starting choices are visible and actually select their own level-one weapon; ARM uses delayed contact only, tail sweeps, mouth projectiles, wing hits and leg shockwaves damage real campaign enemies",
+        "actual level-up choice generator restores all five attacks and offers no lightning",
+        "lightning button is dimmed and disabled; keyboard activation and future lightning cast are locked",
+        "eight actual renderer directions and 721 aim samples stay upright and away from vertical; left and right poses are pixel mirrors with broad tilt and no frame rebuilding"
+      ],
+      "weapons": [
+        {
+          "kind": "arm",
+          "initial": {
+            "arm": 1,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 22,
+          "anticipated": true,
+          "bullets": [],
+          "effects": [],
+          "casts": 1,
+          "lightning": 0
+        },
+        {
+          "kind": "tail",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 1,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 25.5,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "slash",
+            "impact",
+            "weaponHit",
+            "ember",
+            "ember",
+            "ember",
+            "ember",
+            "ember"
+          ],
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "mouth",
+          "initial": {
+            "arm": 0,
+            "mouth": 1,
+            "tail": 0,
+            "wing": 0,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 15.200000000000728,
+          "anticipated": true,
+          "bullets": [
+            "acid"
+          ],
+          "effects": [
+            "muzzle",
+            "muzzle",
+            "muzzle"
+          ],
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "wing",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 1,
+            "leg": 0
+          },
+          "level": 1,
+          "damage": 22.59399999999914,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "weaponHit",
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "fusionRing"
+          ],
+          "casts": 0,
+          "lightning": 0
+        },
+        {
+          "kind": "leg",
+          "initial": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "wing": 0,
+            "leg": 1
+          },
+          "level": 1,
+          "damage": 25.5,
+          "anticipated": false,
+          "bullets": [],
+          "effects": [
+            "impact",
+            "weaponHit",
+            "spark",
+            "spark",
+            "spark",
+            "deathRing"
+          ],
+          "casts": 0,
+          "lightning": 0
+        }
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "choices": {
+        "kinds": [
+          "arm",
+          "gene_bastion",
+          "gene_core",
+          "gene_haste",
+          "gene_hydra",
+          "gene_phase",
+          "gene_predator",
+          "gene_reactor",
+          "gene_virulent",
+          "leg",
+          "mouth",
+          "tail",
+          "wing"
+        ],
+        "titles": [
+          "BASTION GENE",
+          "CRUSH LEG",
+          "찌르기 · 관통력 강화",
+          "ACID MOUTH",
+          "PREDATOR GENE",
+          "HYDRA GENE",
+          "HASTE GENE",
+          "VIRULENT GENE",
+          "SPIKE TAIL",
+          "RAZOR WING",
+          "CORE GENE",
+          "REACTOR GENE",
+          "PHASE GENE"
+        ]
+      },
+      "lock": {
+        "disabled": true,
+        "opacity": 0.32,
+        "casts": 0,
+        "manualCast": false,
+        "active": false
+      },
+      "poses": {
+        "directions": [
+          {
+            "aim": 0,
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          {
+            "aim": 0.7853981633974483,
+            "facing": 1,
+            "localRotation": 0,
+            "rotation": 0,
+            "headAngle": 0.7853981633974483
+          },
+          {
+            "aim": 1.5707963267948966,
+            "facing": 1,
+            "localRotation": 0.5759586531581287,
+            "rotation": 0.5759586531581287,
+            "headAngle": 1.361356816555577
+          },
+          {
+            "aim": 2.356194490192345,
+            "facing": -1,
+            "localRotation": 1.1102230246251565e-16,
+            "rotation": -1.1102230246251565e-16,
+            "headAngle": 0.7853981633974484
+          },
+          {
+            "aim": 3.141592653589793,
+            "facing": -1,
+            "localRotation": -0.7853981633974482,
+            "rotation": 0.7853981633974482,
+            "headAngle": 1.1102230246251565e-16
+          },
+          {
+            "aim": 3.9269908169872414,
+            "facing": -1,
+            "localRotation": -1.3962634015954636,
+            "rotation": 1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          },
+          {
+            "aim": 4.71238898038469,
+            "facing": -1,
+            "localRotation": -1.3962634015954636,
+            "rotation": 1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          },
+          {
+            "aim": 5.497787143782138,
+            "facing": 1,
+            "localRotation": -1.3962634015954636,
+            "rotation": -1.3962634015954636,
+            "headAngle": -0.6108652381980153
+          }
+        ],
+        "maximumRotation": 1.3962634015954636,
+        "mirrorDifference": 0,
+        "frameBuilds": 20
+      },
+      "success": true
+    },
+    "player-scorpion-browser": {
+      "checks": [
+        "fresh equipment is empty, default scorpion replaces home preview, normal stage one and prior DNA/origin are preserved",
+        "all twenty painted poses are distinct and prepared once",
+        "normal level-one battle spawns enemies and the new organism walks through actual movement updates",
+        "left upper-limb anticipation causes no early damage; impact damages only its close target; nearby and distant enemies receive no chain or area damage",
+        "the next actual automatic stab uses the other upper limb and its separately painted impact frame",
+        "a target escaping range or crossing behind during the windup is missed; distant enemies do not trigger ranged attacks",
+        "painted walk frames visibly change in the actual renderer, damage uses a recoil pose, and drawing never rebuilds the frame cache",
+        "saved catalog arm selection keeps the painted player and bare ARM stabbing without unlocking future lightning combat",
+        "equipped and removed catalog selections survive reload; ARM stays bare stabbing and administrator tools remain hidden"
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "initial": {
+        "player": {
+          "character": "ivory-bio-scorpion",
+          "unarmed": true,
+          "weapon": "arm",
+          "lightningLocked": true,
+          "facing": {
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          "frame": 0,
+          "cachedFrames": 20,
+          "frameBuilds": 20,
+          "range": 44,
+          "casts": 0,
+          "hits": 0,
+          "misses": 0,
+          "left": 0,
+          "right": 0,
+          "moving": false,
+          "attack": null
+        },
+        "parts": {
+          "mode": "UI_ONLY",
+          "worn": {
+            "arm": null,
+            "head": null,
+            "skin": null,
+            "legs": null,
+            "back": null,
+            "tail": null
+          },
+          "filter": "all",
+          "sort": "slot",
+          "selected": null,
+          "total": 20
+        },
+        "admin": {
+          "enabled": false,
+          "taps": 0,
+          "required": 5,
+          "normal": {
+            "unlocked": 1,
+            "stage": 1
+          },
+          "stage": 1,
+          "selected": 1,
+          "level": 1
+        },
+        "heroIsNewFrame": true,
+        "meta": {
+          "dna": 1234,
+          "hp": 0,
+          "dmg": 0,
+          "pickup": 0,
+          "speed": 0,
+          "armor": 0,
+          "reroll": 0,
+          "route": "none",
+          "stage": 99,
+          "unlockedStageV522": 99,
+          "homeStageV522": 1,
+          "clears": 30,
+          "cryoMastery": 0,
+          "geneMastery": 0,
+          "infernoMastery": 0,
+          "origin": "acid",
+          "seen": [],
+          "claimedStages": [],
+          "stageVitality": 0,
+          "relicLuck": 0,
+          "organLuck": 0,
+          "apexGenes": 0,
+          "contractStreak": 0,
+          "bestContractStreak": 0,
+          "nemesis": null,
+          "nemesisDefeats": 0,
+          "memoryTraits": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "core": 0,
+            "speed": 0
+          },
+          "activeMemory": "none",
+          "feedback": {
+            "sound": false,
+            "haptic": false,
+            "shake": 2,
+            "flash": 2,
+            "reducedMotion": false,
+            "damageNumbers": true,
+            "highContrast": false,
+            "graphics": "quality",
+            "perfInfo": false
+          }
+        }
+      },
+      "contact": {
+        "cast": true,
+        "side": 0,
+        "early": true,
+        "damage": 22,
+        "secondaryHP": 10000,
+        "farHP": 10000,
+        "read": {
+          "character": "ivory-bio-scorpion",
+          "unarmed": true,
+          "weapon": "upper-limb-stab",
+          "lightningLocked": true,
+          "facing": {
+            "facing": 1,
+            "localRotation": -0.7853981633974483,
+            "rotation": -0.7853981633974483,
+            "headAngle": 0
+          },
+          "frame": 10,
+          "cachedFrames": 20,
+          "frameBuilds": 20,
+          "range": 44,
+          "casts": 1,
+          "hits": 1,
+          "misses": 0,
+          "left": 1,
+          "right": 0,
+          "moving": false,
+          "attack": {
+            "age": 0.121,
+            "side": 0,
+            "a": 0,
+            "hit": true
+          }
+        },
+        "lightning": {
+          "version": "V575-WEB-9-LIGHTNING06",
+          "weapon": "lightning",
+          "casts": 0,
+          "contacts": 0,
+          "strongContacts": 0,
+          "blockedDamage": 0,
+          "queued": 0,
+          "arcs": 0,
+          "fields": 0,
+          "cast": null,
+          "reacting": 0,
+          "atlasReady": true,
+          "atlasError": null,
+          "globalHitStop": 0
+        }
+      },
+      "frames": {
+        "walkChanges": true,
+        "hurt": 16,
+        "changedHP": true,
+        "frameBuilds": 20
+      },
+      "armed": {
+        "version": "V575-WEB-9-LIGHTNING06",
+        "weapon": "lightning",
+        "casts": 0,
+        "contacts": 0,
+        "strongContacts": 0,
+        "blockedDamage": 0,
+        "queued": 0,
+        "arcs": 0,
+        "fields": 0,
+        "cast": null,
+        "reacting": 0,
+        "atlasReady": true,
+        "atlasError": null,
+        "globalHitStop": 0
+      },
+      "success": true
+    },
+    "admin-mode-browser": {
+      "errors": [],
+      "failedRequests": [],
+      "checks": [
+        "normal defaults ignore old test stage, map and disabled natural-spawn preference without erasing them",
+        "real normal battle starts at stage 1 and character level 1 with natural enemies and no administrator controls",
+        "actual stage-one timer completion unlocks stage two in normal progress",
+        "ordinary codex still opens; four presses stay normal; another tab resets the count; fifth consecutive real press enables admin",
+        "admin test stage/map and collision editor work; exiting restores normal campaign without advancing its progress",
+        "reload hides admin again, earned progress persists, and landscape stays clean"
+      ],
+      "initial": {
+        "admin": {
+          "enabled": false,
+          "taps": 0,
+          "required": 5,
+          "normal": {
+            "unlocked": 1,
+            "stage": 1
+          },
+          "stage": 1,
+          "selected": 1,
+          "level": 1
+        },
+        "test": {
+          "version": 575,
+          "stage": 1,
+          "selected": 1,
+          "map": null,
+          "mapLabel": "기존 본편 지형",
+          "override": "auto",
+          "natural": true,
+          "busy": false,
+          "preparing": false,
+          "running": false,
+          "paused": false,
+          "ended": false,
+          "seconds": 0,
+          "ordinary": 0,
+          "testAlive": 0,
+          "queued": 0,
+          "batch": null,
+          "encounter": null,
+          "boss": null,
+          "warning": false,
+          "arena": false,
+          "fps": null,
+          "status": "스테이지와 맵을 선택해 주세요.",
+          "ready": true,
+          "panelOpen": false
+        },
+        "meta": {
+          "dna": 1234,
+          "hp": 0,
+          "dmg": 0,
+          "pickup": 0,
+          "speed": 0,
+          "armor": 0,
+          "reroll": 0,
+          "route": "none",
+          "stage": 99,
+          "unlockedStageV522": 99,
+          "homeStageV522": 1,
+          "clears": 0,
+          "cryoMastery": 0,
+          "geneMastery": 0,
+          "infernoMastery": 0,
+          "origin": "prime",
+          "seen": [],
+          "claimedStages": [],
+          "stageVitality": 0,
+          "relicLuck": 0,
+          "organLuck": 0,
+          "apexGenes": 0,
+          "contractStreak": 0,
+          "bestContractStreak": 0,
+          "nemesis": null,
+          "nemesisDefeats": 0,
+          "memoryTraits": {
+            "arm": 0,
+            "mouth": 0,
+            "tail": 0,
+            "core": 0,
+            "speed": 0
+          },
+          "activeMemory": "none",
+          "feedback": {
+            "sound": false,
+            "haptic": false,
+            "shake": 2,
+            "flash": 2,
+            "reducedMotion": false,
+            "damageNumbers": true,
+            "highContrast": false,
+            "graphics": "quality",
+            "perfInfo": false
+          }
+        },
+        "panel": "{\"map\":\"biolab\",\"natural\":false}"
+      },
+      "earned": {
+        "admin": {
+          "enabled": false,
+          "taps": 0,
+          "required": 5,
+          "normal": {
+            "unlocked": 2,
+            "stage": 1
+          },
+          "stage": 1,
+          "selected": 1,
+          "level": 1
+        },
+        "ended": true
+      },
+      "success": true
+    },
+    "browser-smoke": {
+      "checks": [
+        "boot and prior-version save migration",
+        "mobile movement, pause and resume",
+        "ordinary damage restored and saved catalog equipment cannot unlock future lightning",
+        "all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+        "update waits for home without interrupting combat",
+        "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+        "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+        "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+        "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+        "all five maps load",
+        "reload preserves save",
+        "landscape layout"
+      ],
+      "maps": [
+        "facility1",
+        "facility2",
+        "hub",
+        "biolab",
+        "red_biolab"
+      ],
+      "errors": [],
+      "failed": [],
+      "combat": {
+        "ordinaryDamage": true,
+        "castBlocked": true,
+        "casts": 0,
+        "locked": true
+      },
+      "monsterMotion": {
+        "surfaces": {
+          "crawler": true,
+          "runner": true,
+          "brute": true,
+          "spitter": true,
+          "warden": true,
+          "symbiote": true,
+          "embermaw": true,
+          "froststalker": true,
+          "legacy_crawler": true,
+          "legacy_warden": true
+        },
+        "originals": {
+          "warden": {
+            "gpu": true,
+            "canvas": true
+          },
+          "symbiote": {
+            "gpu": true,
+            "canvas": true
+          },
+          "embermaw": {
+            "gpu": true,
+            "canvas": true
+          },
+          "froststalker": {
+            "gpu": true,
+            "canvas": true
+          },
+          "legacy_crawler": {
+            "gpu": true,
+            "canvas": true
+          },
+          "legacy_warden": {
+            "gpu": true,
+            "canvas": true
+          }
+        },
+        "gpuEnabled": true,
+        "gpuFramesDiffer": true,
+        "canvasFramesDiffer": true,
+        "key0": "brute@0",
+        "key1": "brute@1",
+        "windup": 3,
+        "hurt": 3,
+        "cachedFrames": 40,
+        "noTextureRebuildDuringDraw": true
+      },
+      "success": true
+    },
+    "red-pulse-browser": {
+      "errors": [],
+      "maps": [
+        {
+          "id": "facility1",
+          "centered": true,
+          "exactBoss": true,
+          "playerDistance": 115,
+          "edge": 36.799999999999955,
+          "addRadius": 6.8,
+          "insideAfterMove": true,
+          "insideAfterUpdate": true,
+          "fieldDevicesHidden": true,
+          "playerClear": true
+        },
+        {
+          "id": "facility2",
+          "centered": true,
+          "exactBoss": true,
+          "playerDistance": 115,
+          "edge": 36.799999999999955,
+          "addRadius": 6.8,
+          "insideAfterMove": true,
+          "insideAfterUpdate": true,
+          "fieldDevicesHidden": true,
+          "playerClear": true
+        },
+        {
+          "id": "hub",
+          "centered": true,
+          "exactBoss": true,
+          "playerDistance": 115,
+          "edge": 36.799999999999955,
+          "addRadius": 6.8,
+          "insideAfterMove": true,
+          "insideAfterUpdate": true,
+          "fieldDevicesHidden": true,
+          "playerClear": true
+        },
+        {
+          "id": "biolab",
+          "centered": true,
+          "exactBoss": true,
+          "playerDistance": 115.00000000000006,
+          "edge": 36.799999999999955,
+          "addRadius": 6.8,
+          "insideAfterMove": true,
+          "insideAfterUpdate": true,
+          "fieldDevicesHidden": true,
+          "playerClear": true
+        },
+        {
+          "id": "red_biolab",
+          "centered": true,
+          "exactBoss": true,
+          "playerDistance": 115,
+          "edge": 36.799999999999955,
+          "addRadius": 6.8,
+          "insideAfterMove": true,
+          "insideAfterUpdate": true,
+          "fieldDevicesHidden": true,
+          "playerClear": true
+        }
+      ],
+      "device": {
+        "allowed": true,
+        "beforeLeave": 2,
+        "resetOnLeave": true,
+        "notEarly": true,
+        "visibleDamaged": true,
+        "offscreenSafe": true,
+        "playerSafe": true,
+        "oneDetonation": true,
+        "wave": true,
+        "pauseSafe": true,
+        "debug": {
+          "metrics": {
+            "detonations": 1,
+            "contacts": 1,
+            "spawned": 1,
+            "cooldown": 19.86,
+            "clock": 5.367877599999701,
+            "charging": 0,
+            "wave": {
+              "age": 0.14,
+              "radius": 286.0563648452834,
+              "maxRadius": 469.1356413661192,
+              "targets": 1
+            },
+            "artReady": true,
+            "artError": null,
+            "sites": [
+              {
+                "type": "regen",
+                "x": 708.1977558226308,
+                "y": 1076.7307228787204,
+                "hold": 0,
+                "hidden": false
+              },
+              {
+                "type": "shield",
+                "x": 566.1996146100746,
+                "y": 542.0863019166618,
+                "hold": 0,
+                "hidden": false
+              }
+            ],
+            "holdSeconds": 3,
+            "respawnSeconds": 20
+          },
+          "visibleHP": 15000,
+          "offscreenHP": 100000,
+          "enemyPresent": true,
+          "view": {
+            "l": 401,
+            "t": 633.5929214352104,
+            "r": 794,
+            "b": 1485.5929214352104
+          },
+          "target": {
+            "x": 597.5,
+            "y": 1059.5929214352104
+          },
+          "origin": {
+            "x": 597.5,
+            "y": 1059.5929214352104
+          },
+          "wave": {
+            "radius": 286.0563648452834,
+            "targets": [
+              {
+                "distance": 0,
+                "hit": true,
+                "same": true,
+                "hp": 15000
+              }
+            ]
+          }
+        }
+      },
+      "pickups": {
+        "healed": true,
+        "shielded": true
+      },
+      "encounters": [
+        {
+          "kind": "venom",
+          "warnedFirst": true,
+          "entryCentered": true,
+          "playerNearCenter": true,
+          "combatStarted": true,
+          "planned": 6,
+          "reinforcementDebug": {
+            "version": 554,
+            "phase": 3,
+            "tier": 0,
+            "multiplier": 1,
+            "hpPercent": 100,
+            "clock": 2.1199999999999997,
+            "nextWave": 5.119999999999999,
+            "waves": 1,
+            "spawned": 0,
+            "cancelled": 0,
+            "deferred": 0,
+            "alive": 0,
+            "melee": 0,
+            "ranged": 0,
+            "wave": {
+              "melee": 3,
+              "ranged": 3
+            },
+            "pending": [
+              {
+                "x": 551.9010127339554,
+                "y": 603,
+                "kind": "crawler",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              },
+              {
+                "x": 585.8160127339555,
+                "y": 603,
+                "kind": "spitter",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              },
+              {
+                "x": 517.9860127339555,
+                "y": 1317,
+                "kind": "crawler",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              },
+              {
+                "x": 484.0710127339555,
+                "y": 1317,
+                "kind": "spitter",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              },
+              {
+                "x": 619.7310127339556,
+                "y": 603,
+                "kind": "crawler",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              },
+              {
+                "x": 416.2410127339555,
+                "y": 1317,
+                "kind": "spitter",
+                "at": 3.0199999999999996,
+                "waveId": 1
+              }
+            ],
+            "history": [
+              {
+                "id": 1,
+                "at": 2.1199999999999997,
+                "releasesAt": 3.0199999999999996,
+                "tier": 0,
+                "multiplier": 1,
+                "melee": 3,
+                "ranged": 3,
+                "planned": 6,
+                "born": 0,
+                "cancelled": 0
+              }
+            ],
+            "profiles": {
+              "2": {
+                "interval": 3,
+                "melee": 96,
+                "ranged": 0,
+                "baseMelee": 6,
+                "baseRanged": 0
+              },
+              "3": {
+                "interval": 3,
+                "melee": 48,
+                "ranged": 48,
+                "baseMelee": 3,
+                "baseRanged": 3
+              }
+            },
+            "bossPhase": 3,
+            "bossKind": true,
+            "game": {
+              "version": 575,
+              "stage": 20,
+              "selected": 20,
+              "map": "red_biolab",
+              "mapLabel": "적색 배양공장",
+              "override": "red_biolab",
+              "natural": true,
+              "busy": false,
+              "preparing": false,
+              "running": true,
+              "paused": false,
+              "ended": false,
+              "seconds": 301.06600000000094,
+              "ordinary": 0,
+              "testAlive": 0,
+              "queued": 0,
+              "batch": null,
+              "encounter": {
+                "kind": "venom",
+                "phase": 3,
+                "state": "combat",
+                "elapsed": 3.000000000000001
+              },
+              "boss": {
+                "kind": "venom",
+                "phase": 3,
+                "hp": 14961.989952000024,
+                "maxHp": 14961.989952000024,
+                "arrival": 0,
+                "invulnerable": false
+              },
+              "warning": false,
+              "arena": true,
+              "fps": 54,
+              "status": "VENOM TITAN 3페이즈 전투 중",
+              "ready": true,
+              "panelOpen": false
+            }
+          },
+          "innerEdgePlans": true,
+          "born": 6,
+          "innerEdgeBirths": true
+        },
+        {
+          "kind": "bio",
+          "warnedFirst": true,
+          "entryCentered": true,
+          "playerNearCenter": true,
+          "combatStarted": true
+        }
+      ],
+      "success": true
+    },
+    "boss-cinematic-browser": {
+      "errors": [],
+      "failedRequests": [],
+      "encounters": [
+        {
+          "kind": "venom",
+          "orientation": "portrait",
+          "frames": [
+            {
+              "elapsed": 0.1500000000000341,
+              "frame": 0,
+              "name": "VENOM TITAN"
+            },
+            {
+              "elapsed": 0.9000000000000341,
+              "frame": 1,
+              "name": "VENOM TITAN"
+            },
+            {
+              "elapsed": 1.650000000000034,
+              "frame": 2,
+              "name": "VENOM TITAN"
+            },
+            {
+              "elapsed": 2.400000000000034,
+              "frame": 3,
+              "name": "VENOM TITAN"
+            }
+          ],
+          "pausedSafely": true,
+          "currentHUDImmediately": true,
+          "currentHUDThroughoutArrival": true,
+          "arrivalSamples": 22,
+          "arrivalProtected": true,
+          "legacyAbsent": true,
+          "venomSelected": true,
+          "warningHidden": true,
+          "bossArrived": true,
+          "centered": true,
+          "playerNearCenter": true,
+          "hp": 112
+        },
+        {
+          "kind": "bio",
+          "orientation": "portrait",
+          "frames": [
+            {
+              "elapsed": 0.1500000000000341,
+              "frame": 0,
+              "name": "BIO TITAN"
+            },
+            {
+              "elapsed": 0.9000000000000341,
+              "frame": 1,
+              "name": "BIO TITAN"
+            },
+            {
+              "elapsed": 1.650000000000034,
+              "frame": 2,
+              "name": "BIO TITAN"
+            },
+            {
+              "elapsed": 2.400000000000034,
+              "frame": 3,
+              "name": "BIO TITAN"
+            }
+          ],
+          "pausedSafely": true,
+          "currentHUDImmediately": true,
+          "currentHUDThroughoutArrival": true,
+          "arrivalSamples": 22,
+          "arrivalProtected": true,
+          "legacyAbsent": true,
+          "venomSelected": true,
+          "warningHidden": true,
+          "bossArrived": true,
+          "centered": true,
+          "playerNearCenter": true,
+          "hp": 112
+        },
+        {
+          "kind": "venom",
+          "orientation": "landscape",
+          "frames": [
+            {
+              "elapsed": 1.650000000000034,
+              "frame": 2,
+              "name": "VENOM TITAN"
+            }
+          ],
+          "pausedSafely": true,
+          "currentHUDImmediately": true,
+          "currentHUDThroughoutArrival": true,
+          "arrivalSamples": 22,
+          "arrivalProtected": true,
+          "legacyAbsent": true,
+          "venomSelected": true,
+          "warningHidden": true,
+          "bossArrived": true,
+          "centered": true,
+          "playerNearCenter": true,
+          "hp": 112
+        },
+        {
+          "kind": "bio",
+          "orientation": "landscape",
+          "frames": [
+            {
+              "elapsed": 1.650000000000034,
+              "frame": 2,
+              "name": "BIO TITAN"
+            }
+          ],
+          "pausedSafely": true,
+          "currentHUDImmediately": true,
+          "currentHUDThroughoutArrival": true,
+          "arrivalSamples": 22,
+          "arrivalProtected": true,
+          "legacyAbsent": true,
+          "venomSelected": true,
+          "warningHidden": true,
+          "bossArrived": true,
+          "centered": true,
+          "playerNearCenter": true,
+          "hp": 112
+        }
+      ],
+      "obsoleteRequests": [],
+      "branding": {
+        "ready": true,
+        "error": null,
+        "sprites": {
+          "bio": {
+            "clear": 59565,
+            "painted": 85478,
+            "width": 735,
+            "height": 210
+          },
+          "venom": {
+            "clear": 20222,
+            "painted": 34160,
+            "width": 478,
+            "height": 191
+          },
+          "warning": {
+            "clear": 2169,
+            "painted": 13907,
+            "width": 289,
+            "height": 96
+          },
+          "breach": {
+            "clear": 1473,
+            "painted": 6740,
+            "width": 186,
+            "height": 64
+          },
+          "phase": {
+            "clear": 6710,
+            "painted": 2366,
+            "width": 329,
+            "height": 48
+          },
+          "subtitle": {
+            "clear": 2761,
+            "painted": 2187,
+            "width": 443,
+            "height": 40
+          },
+          "crest": {
+            "clear": 18739,
+            "painted": 18433,
+            "width": 187,
+            "height": 220
+          },
+          "digit1": {
+            "clear": 3417,
+            "painted": 2734,
+            "width": 67,
+            "height": 112
+          },
+          "digit2": {
+            "clear": 2985,
+            "painted": 4083,
+            "width": 79,
+            "height": 112
+          },
+          "digit3": {
+            "clear": 2535,
+            "painted": 4854,
+            "width": 90,
+            "height": 112
+          },
+          "warning_ko": {
+            "clear": 2807,
+            "painted": 11532,
+            "width": 175,
+            "height": 96
+          },
+          "breach_ko": {
+            "clear": 2449,
+            "painted": 4088,
+            "width": 119,
+            "height": 64
+          },
+          "phase_ko": {
+            "clear": 949,
+            "painted": 4678,
+            "width": 146,
+            "height": 48
+          },
+          "subtitle_ko": {
+            "clear": 1468,
+            "painted": 8302,
+            "width": 244,
+            "height": 48
+          }
+        },
+        "cachedBytes": 1718064,
+        "design": "reference-1000027488",
+        "language": "ko",
+        "locales": [
+          "en",
+          "ko"
+        ],
+        "bossNames": "English in both locales",
+        "visibleFontText": false,
+        "legacyFinalHUD": false
+      },
+      "locales": [
+        {
+          "language": "en",
+          "kind": "bio",
+          "selected": "en",
+          "name": "BIO TITAN",
+          "aria": "BIO TITAN incoming",
+          "drawn": [
+            "breach",
+            "phase",
+            "digit3",
+            "digit2",
+            "warning",
+            "crest",
+            "bio",
+            "subtitle"
+          ]
+        },
+        {
+          "language": "en",
+          "kind": "venom",
+          "selected": "en",
+          "name": "VENOM TITAN",
+          "aria": "VENOM TITAN incoming",
+          "drawn": [
+            "breach",
+            "phase",
+            "digit3",
+            "digit2",
+            "warning",
+            "crest",
+            "venom",
+            "subtitle"
+          ]
+        },
+        {
+          "language": "ko",
+          "kind": "bio",
+          "selected": "ko",
+          "name": "BIO TITAN",
+          "aria": "BIO TITAN 보스 출현",
+          "drawn": [
+            "breach_ko",
+            "phase_ko",
+            "digit3",
+            "digit2",
+            "warning_ko",
+            "crest",
+            "bio",
+            "subtitle_ko"
+          ]
+        },
+        {
+          "language": "ko",
+          "kind": "venom",
+          "selected": "ko",
+          "name": "VENOM TITAN",
+          "aria": "VENOM TITAN 보스 출현",
+          "drawn": [
+            "breach_ko",
+            "phase_ko",
+            "digit3",
+            "digit2",
+            "warning_ko",
+            "crest",
+            "venom",
+            "subtitle_ko"
+          ]
+        }
+      ],
+      "wordmarks": {
+        "portrait": {
+          "venom": {
+            "inkBounds": [
+              9,
+              8,
+              468,
+              175
+            ],
+            "source": [
+              478,
+              191
+            ],
+            "destination": [
+              23.580000000000013,
+              663.5006616396156,
+              345.84,
+              87.31867672076878
+            ],
+            "visibleAspect": 4.333333333333332,
+            "strongGreenPixels": 1027,
+            "opaquePixels": 34160
+          },
+          "bio": {
+            "inkBounds": [
+              5,
+              4,
+              730,
+              204
+            ],
+            "source": [
+              735,
+              210
+            ],
+            "destination": [
+              23.580000000000013,
+              657.7542857142857,
+              345.84,
+              98.81142857142856
+            ],
+            "visibleAspect": 3.6119402985074625,
+            "strongGreenPixels": 0,
+            "opaquePixels": 85478
+          }
+        },
+        "landscape": {
+          "venom": {
+            "inkBounds": [
+              9,
+              8,
+              468,
+              175
+            ],
+            "source": [
+              478,
+              191
+            ],
+            "destination": [
+              309.25940814932846,
+              306.53999999999996,
+              233.481183701343,
+              58.949999999999996
+            ],
+            "visibleAspect": 4.333333333333333,
+            "strongGreenPixels": 1027,
+            "opaquePixels": 34160
+          },
+          "bio": {
+            "inkBounds": [
+              5,
+              4,
+              730,
+              204
+            ],
+            "source": [
+              735,
+              210
+            ],
+            "destination": [
+              322.8375,
+              306.53999999999996,
+              206.325,
+              58.949999999999996
+            ],
+            "visibleAspect": 3.6119402985074625,
+            "strongGreenPixels": 0,
+            "opaquePixels": 85478
+          }
+        }
+      },
+      "art": {
+        "bio": {
+          "hashes": [
+            3558820789,
+            2741768839,
+            77293267,
+            3073360518
+          ],
+          "sizes": [
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ]
+          ]
+        },
+        "venom": {
+          "hashes": [
+            3547556499,
+            4263331465,
+            2040295645,
+            3862457647
+          ],
+          "sizes": [
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ],
+            [
+              627,
+              627
+            ]
+          ]
+        }
+      },
+      "legacyShortcuts": [
+        {
+          "kind": "venom",
+          "visible": true,
+          "centered": true
+        },
+        {
+          "kind": "bio",
+          "visible": true,
+          "centered": true
+        },
+        {
+          "kind": "frost",
+          "visible": true,
+          "originalWarningPreserved": true
+        }
+      ],
+      "success": true
+    },
+    "attack-warnings-browser": {
+      "errors": [],
+      "failedRequests": [],
+      "geometry": {
+        "circleFilled": true,
+        "interiorPixel": [
+          41,
+          45,
+          37,
+          255
+        ],
+        "softInterior": true,
+        "laneFilled": true,
+        "sectorSafeGap": true,
+        "ringHole": true,
+        "fullyBlockedLaneDoesNotThrow": true,
+        "legacy": {
+          "acidBurst": 9888,
+          "charge": 8208,
+          "frostLine": 4864,
+          "spitPool": 9888,
+          "runnerDash": 2128,
+          "bruteSlam": 9888,
+          "ravagerStrike": 9888,
+          "alphaSlam": 9888,
+          "omegaPool": 9888,
+          "apexSweep": 9424,
+          "omegaLattice": 9888,
+          "genesisFracture": 24016,
+          "abyssCross": 15004,
+          "apexNova": 9888,
+          "counterPrism": 9888,
+          "counterBrood": 9888,
+          "counterPurify": 9888,
+          "counterExecution": 9888,
+          "counterNull": 9888,
+          "nullZone": 9888,
+          "acidZone": 9888,
+          "emberCharge": 3040,
+          "bioSpikes": 9888,
+          "frostFan": 13582,
+          "frostCross": 8704,
+          "geneLattice": 19240,
+          "magmaCrown": 13065
+        },
+        "activeLegacy": {
+          "acidBurst": 0,
+          "charge": 0,
+          "frostLine": 0,
+          "spitPool": 0,
+          "runnerDash": 0,
+          "bruteSlam": 0,
+          "ravagerStrike": 0,
+          "alphaSlam": 0,
+          "omegaPool": 0,
+          "apexSweep": 0,
+          "omegaLattice": 0,
+          "genesisFracture": 0,
+          "abyssCross": 0,
+          "apexNova": 0,
+          "counterPrism": 0,
+          "counterBrood": 0,
+          "counterPurify": 0,
+          "counterExecution": 0,
+          "counterNull": 0,
+          "nullZone": 0,
+          "acidZone": 0,
+          "emberCharge": 0,
+          "bioSpikes": 0,
+          "frostFan": 0,
+          "frostCross": 0,
+          "geneLattice": 0,
+          "magmaCrown": 0
+        },
+        "activeNativeFields": {
+          "acidZone": {
+            "warningDraws": 0,
+            "artVisible": true
+          },
+          "nullZone": {
+            "warningDraws": 0,
+            "artVisible": true
+          },
+          "purge": {
+            "warningDraws": 0,
+            "artVisible": true
+          },
+          "cryo": {
+            "warningDraws": 0,
+            "artVisible": true
+          },
+          "magma": {
+            "warningDraws": 0,
+            "artVisible": true
+          }
+        },
+        "environmentalWindup": true,
+        "venomZone": {
+          "windup": 1,
+          "active": 0
+        },
+        "venomCloud": {
+          "windup": 1,
+          "active": 0
+        },
+        "activeInfection": 0,
+        "activePainterSuppressed": true
+      },
+      "bosses": [
+        {
+          "kind": "venom",
+          "orientation": "portrait",
+          "skills": [
+            {
+              "key": "dart",
+              "phase": 1,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "tentacle",
+              "phase": 1,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 1,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "dart",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "tentacle",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 2,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "acid",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "infection",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 3,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "spore",
+              "phase": 3,
+              "cast": true,
+              "drawn": 5,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "gland",
+              "phase": 3,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "acid",
+              "phase": 3,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "infection-second-windup",
+              "cast": true,
+              "drawn": 1,
+              "stage": "active",
+              "activeDrawn": 0,
+              "recast": [
+                0,
+                1,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "bio",
+          "orientation": "portrait",
+          "skills": [
+            {
+              "key": "claw",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "twin",
+              "cast": true,
+              "drawn": 2,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "rear",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "spit",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "mortar",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "charge",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "crush2",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "pulse",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "backfire",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "feast",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            }
+          ]
+        },
+        {
+          "kind": "venom",
+          "orientation": "landscape",
+          "skills": [
+            {
+              "key": "dart",
+              "phase": 1,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "tentacle",
+              "phase": 1,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 1,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "dart",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "tentacle",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 2,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "acid",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "infection",
+              "phase": 2,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "breath",
+              "phase": 3,
+              "cast": true,
+              "drawn": 0,
+              "blocked": true,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "spore",
+              "phase": 3,
+              "cast": true,
+              "drawn": 6,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "gland",
+              "phase": 3,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "acid",
+              "phase": 3,
+              "cast": true,
+              "drawn": 1,
+              "blocked": false,
+              "stage": "active",
+              "activeDrawn": 0
+            },
+            {
+              "key": "infection-second-windup",
+              "cast": true,
+              "drawn": 1,
+              "stage": "active",
+              "activeDrawn": 0,
+              "recast": [
+                0,
+                1,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "bio",
+          "orientation": "landscape",
+          "skills": [
+            {
+              "key": "claw",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "twin",
+              "cast": true,
+              "drawn": 2,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "rear",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "spit",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "mortar",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "charge",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "crush2",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "pulse",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "backfire",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            },
+            {
+              "key": "feast",
+              "cast": true,
+              "drawn": 1,
+              "stage": "ACTIVE",
+              "activeDrawn": 0
+            }
+          ]
+        }
+      ],
+      "roof": {
+        "before": [
+          44,
+          25,
+          20,
+          255
+        ],
+        "after": [
+          59,
+          28,
+          24,
+          255
+        ],
+        "visible": true,
+        "foregroundPresent": true,
+        "drawn": 1
+      },
+      "success": true
+    }
+  }
+}

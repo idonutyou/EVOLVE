@@ -1,7 +1,7 @@
 {
   "task": "Upright mirrored player facing, locked future lightning, restored original weapon choices and bare ARM stabbing",
-  "progress": 60,
-  "status": "All five weapon attacks, restored level-up choices, locked lightning, 721 upright facing samples, exact pixel mirrors and normal/admin browser tests passed; remaining map/boss regression running",
+  "progress": 80,
+  "status": "All local static and seven full browser suites passed; source uploaded; release ready for automatic GitHub Pages publication",
   "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
   "version": "V575-WEB-20-CLASSIC-COMBAT",
   "build": "357f097b6699b42b3619d88d478150bbee68c909e3ed8e74b111f3b1edd2aa5f",
@@ -31,7 +31,7 @@
     "save_keys_preserved": true,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Verify all facing directions, classic attacks, skill choices, saved catalog items and existing deployment guards; automatically upload and publish",
+  "next": "Publish the verified tree and confirm live version, manifest, engine, player atlas, administrator gate and upright/combat integration",
   "verification": {
     "original_image_bytes_unchanged": 987,
     "static_suites": "passed",
@@ -40,6 +40,10 @@
     "normal_and_admin_browser": "passed",
     "facing_samples": 721,
     "pixel_mirror_difference": 0,
-    "physical_Galaxy_S23_plus_tested": false
-  }
+    "physical_Galaxy_S23_plus_tested": false,
+    "full_local_browser_suite": "passed",
+    "regression_report": "docs/WEB20_REGRESSION_REPORT.json"
+  },
+  "remote_checkpoint": "2c1d000fbc30b8fd3aca0ce74405c5c965a3d452",
+  "baseline_backup": "backup/web20-classic-combat-20261023"
 }
