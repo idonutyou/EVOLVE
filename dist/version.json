@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
-  "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
-  "scriptBytes": 77342351,
+  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
+  "scriptBytes": 77344649,
   "assets": 1011,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
 }

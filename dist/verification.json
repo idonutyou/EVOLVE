@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 270845,
-  "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
+  "index_bytes": 270846,
+  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
   "image_assets": 984,
   "cached_files": 1011,
-  "cached_bytes": 347510982,
+  "cached_bytes": 347513280,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -552,14 +552,24 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "attack_warnings": {
-    "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
-    "engine": "assets/7a76392f1f5405b71d76cf83246f3a63332d44512bf1b38ce4e5660e4159d754.js",
+    "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
+    "engine": "assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
     "safe_gaps_preserved": true,
     "image_processing": false,
     "original_image_bytes_unchanged": true,
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "windup_only": true,
+    "fill_opacity": 0.075,
+    "edge_opacity": 0.65,
+    "line_width": 1.25,
+    "active_overlays": false,
+    "native_active_artwork_preserved": true,
+    "sources": [
+      "web/attack-warning-v582.js",
+      "web/active-hazards-v583.js"
+    ]
   }
 }

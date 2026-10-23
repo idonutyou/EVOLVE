@@ -3,8 +3,8 @@
   "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "baseline_version": "V575-WEB-15-RED-ATTACK-WARNINGS",
   "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-  "progress": 20,
-  "status": "Source corrected: 7.5% interior, thin edge, windup-only overlays",
+  "progress": 60,
+  "status": "Subtle windup pixels, 27 legacy active exclusions, native active fields and native boss transitions passed",
   "request": "User screenshots show excessive red coverage; show attack range before casting only",
   "changes": [
     "Reduce interior opacity from 30% to 7.5%",
@@ -22,5 +22,52 @@
     "web/active-hazards-v583.js"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "next": "Package from current WEB-15 and test windup-to-active transitions and active artwork"
+  "next": "Complete full mobile regressions; upload verified final tree and deploy automatically",
+  "build": "bfdab9af0dd6e8bfcc65c992db02751c4f3b892a1c7c097e4ddf2dd637808dad",
+  "engine": "dist/assets/6491e4226c98f065133f90657fca2ecad00e3ca5231d0159881761087de56f5e.js",
+  "stage_backups": {
+    "20": "b3df61a18b1ae19b182688b9564483b38d72c1bf",
+    "40": "6af195fdb2d5b2596e88015e25fec7d3aab0587b"
+  },
+  "validation": {
+    "image_assets_unchanged": 984,
+    "soft_interior_pixel": [
+      41,
+      45,
+      37,
+      255
+    ],
+    "actual_underpass_before": [
+      44,
+      25,
+      20,
+      255
+    ],
+    "actual_underpass_after": [
+      59,
+      28,
+      24,
+      255
+    ],
+    "legacy_warning_cases": 27,
+    "active_legacy_warning_draws": 0,
+    "native_active_field_art_preserved": 5,
+    "native_bio_skills": 10,
+    "native_venom_phases": [
+      1,
+      2,
+      3
+    ],
+    "orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "infection_recast_warning_counts": [
+      0,
+      1,
+      0
+    ],
+    "unit_and_packaging_tests": "passed",
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
