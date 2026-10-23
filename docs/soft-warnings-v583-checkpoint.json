@@ -1,0 +1,26 @@
+{
+  "task": "Subtle pre-cast warnings; clear overlays when attacks activate",
+  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
+  "baseline_version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
+  "progress": 20,
+  "status": "Source corrected: 7.5% interior, thin edge, windup-only overlays",
+  "request": "User screenshots show excessive red coverage; show attack range before casting only",
+  "changes": [
+    "Reduce interior opacity from 30% to 7.5%",
+    "Remove heavy black border; use a thin translucent red edge",
+    "Hide warning geometry at activation; retain true next-volley windup",
+    "Keep native active skill and ground-effect artwork"
+  ],
+  "preservation": "Preserve image bytes, maps, collision and combat timing/damage, boss motion, progression and save keys",
+  "publication_authorization": {
+    "user_statement": "항상 자동 업로드, 배포 했잖아",
+    "scope": "Automatically upload and deploy requested EVOLVE updates through the existing workflow"
+  },
+  "source": [
+    "web/attack-warning-v582.js",
+    "web/active-hazards-v583.js"
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "next": "Package from current WEB-15 and test windup-to-active transitions and active artwork"
+}

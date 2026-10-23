@@ -1,8 +1,8 @@
 {
-  "task": "Red filled attack warnings above map foreground",
-  "status": "WEB-15 automatically uploaded and deployed; remote browser checks passed and live engine, index and manifest match",
-  "progress": 100,
-  "version": "V575-WEB-15-RED-ATTACK-WARNINGS",
+  "task": "Subtle pre-cast warnings; clear overlays when attacks activate",
+  "status": "Source corrected: 7.5% interior, thin edge, windup-only overlays",
+  "progress": 20,
+  "version": "V575-WEB-16-SOFT-WINDUP-WARNINGS",
   "build": "dc8bd41e47e47df421d926f1450ef2b5e8b29da4be7fcd03d5b26e269d1db00a",
   "baseline_commit": "b854b928e93912d8b5342bbd52f2971d09d4c7e4",
   "game_url": "https://idonutyou.github.io/EVOLVE/",
@@ -12,7 +12,7 @@
   "source": "web/attack-warning-v582.js",
   "scope": "Painted raster cinematic labels, countdown and threat crest; current VENOM HUD from first arrival; remove obsolete generic final HUD markup, updates, preprocessing and two exclusive images.",
   "preservation": "Preserve boss poses, map/collision data, combat, progression, saves and WEB-12 devices. Remove only confirmed obsolete HUD resources and code; preserve remaining image bytes exactly.",
-  "resume": "Read AGENTS.md and docs/attack-warnings-v582-checkpoint.json. Reuse verified WEB-15; retain all WEB-14 artwork, motion, maps, collisions and save keys. Upload and deploy routine requested EVOLVE updates automatically through the existing workflow.",
+  "resume": "Read AGENTS.md and docs/soft-warnings-v583-checkpoint.json. Continue WEB-16 from current WEB-15, preserving artwork, combat, maps and saves; upload and deploy automatically.",
   "preferences": [
     "Respond in Korean",
     "Show real progress in 10% increments",
@@ -23,7 +23,7 @@
     "No subagents unless explicitly requested",
     "Automatically upload and deploy requested EVOLVE updates using the existing GitHub Pages workflow"
   ],
-  "next": "Review WEB-15 user feedback. Continue routine requested EVOLVE changes with automatic upload and deployment through the existing workflow; preserve approved images, map collisions and save keys.",
+  "next": "Package from current WEB-15 and test windup-to-active transitions and active artwork",
   "legacy_atlases": [
     {
       "name": "A",
@@ -44,7 +44,7 @@
       "alpha": true
     }
   ],
-  "active_checkpoint": "docs/attack-warnings-v582-checkpoint.json",
+  "active_checkpoint": "docs/soft-warnings-v583-checkpoint.json",
   "previous_deployment": {
     "version": "V575-WEB-14-PAINTED-WARNING",
     "build": "564f076defe0538dce4abfc5df0f0ad748e13b79a4fb20f973d1b8be74379e9d",
