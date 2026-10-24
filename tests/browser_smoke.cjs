@@ -18,7 +18,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.deepEqual(report.errors,[],'Game startup raised a JavaScript exception');
   await page.screenshot({path:path.join(out,'mobile-home.png')});
   await require('./admin_unlock.cjs')(page);
-  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();
+  await page.locator('#start').click();await require('./choose_opening_skill.cjs')(page);
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running,null,{timeout:30000});
   const before=await page.evaluate(()=>{const p=window.__EVOLVE_TEST_MODULE_V575__.test.context().player;return{x:p.x,y:p.y};});
   await page.mouse.move(180,660);await page.mouse.down();await page.mouse.move(250,620,{steps:8});await page.waitForTimeout(650);await page.mouse.up();

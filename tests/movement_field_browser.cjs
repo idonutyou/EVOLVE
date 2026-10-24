@@ -6,7 +6,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']}),context=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true}),page=await context.newPage(),report={checks:[],errors:[],failedRequests:[],maps:[],physical_Galaxy_S23_plus_tested:false};
  page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push({url:r.url(),error:r.failure()?.errorText})});
  const ready=()=>page.waitForFunction(()=>window.__EVOLVE_MOVEMENT_FIELD_V590__&&window.__EVOLVE_ARM_ITEMS_V589__?.read().ready&&window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
- const start=async()=>{await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
+ const start=async()=>{await page.locator('#start').click();await require('./choose_opening_skill.cjs')(page);await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
  try{
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});await ready();await require('./admin_unlock.cjs')(page);
@@ -43,7 +43,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.screenshot({path:path.join(out,'movement-field-blades-expired.png')});
   const maps=await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.definitions().map(m=>m.id));
   for(const id of maps){
-   await page.evaluate(async id=>{await window.__EVOLVE_TEST_MODULE_V575__.go(1,id,false);window.__EVOLVE_TEST_MODULE_V575__.test.context().reset();},id);await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().ready,null,{timeout:60000});
+   await page.evaluate(async id=>{await window.__EVOLVE_TEST_MODULE_V575__.go(1,id,false);window.__EVOLVE_TEST_MODULE_V575__.test.context().reset();},id);await require('./choose_opening_skill.cjs')(page);await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().ready,null,{timeout:60000});
    const result=await page.evaluate(()=>{
     const c=window.__EVOLVE_MAPS_V567__.test.context(),f=window.__EVOLVE_MOVEMENT_FIELD_V590__,api=window.__EVOLVE_RED_PULSE_V579__,v=api.test.view(),extent=Math.max(c.nav.cols,c.nav.rows)*c.nav.cell;let valid=true,reachable=true,far=0,outside=0;const points=[];const originalRandom=Math.random;let seed=123456789;Math.random=()=>((seed=(Math.imul(seed,1664525)+1013904223)>>>0)/4294967296);
     for(let i=0;i<48;i++){

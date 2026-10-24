@@ -84,6 +84,7 @@ jobs:
           node tests/horde_roles.test.cjs
           node tests/visual_clarity.test.cjs
           node tests/boss_cinematic.test.cjs
+          node tests/organ_skills.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
@@ -97,6 +98,7 @@ jobs:
       - name: Verify mobile boot, maps, controls, saves and safe updates
         timeout-minutes: 10
         run: |
+          node tests/organ_skills_browser.cjs
           node tests/home_map_miniatures_browser.cjs
           node tests/admin_combat_browser.cjs
           node tests/playfield_browser.cjs

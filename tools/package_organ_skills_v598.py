@@ -66,6 +66,7 @@ def main():
  replace('runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};','runDamage={arm:0,acid:0,shell:0,tail:0,wing:0,leg:0,core:0};',count=2)
  replace("let bucket=kind==='acid'?'acid':kind==='tail'?'tail':", "let bucket=kind==='spike'?'shell':kind==='spit'||kind==='acid'?'acid':kind==='tail'?'tail':")
  replace("$('wingLv').textContent=evoState.wing?'EVO':starString(state.wing);$('legLv').textContent=evoState.leg?'EVO':starString(state.leg);","$('shellLv').textContent=starString(state.shell||0);")
+ replace("const kind=el.dataset.kind,icon=el.querySelector('.partIcon'),key=partKey(kind,state[kind]);if(icon.dataset.asset!==key){", "const kind=el.dataset.kind,icon=el.querySelector('.partIcon'),key=partKey(kind,state[kind]);if(!ASSET_SRC[key])continue;if(icon.dataset.asset!==key){")
  # Compact home: stage number, actual map name, optional clear/locked state and Start.
  lines=code.splitlines(True)
  remove_ids=['homeProgressV522','homeLatestV522','homeBossLabelV522','homeCapLabelV522','homeLevelCapV522']
@@ -108,7 +109,7 @@ def main():
     <div class="part" data-kind="mouth"><div class="partIcon"></div><div class="partName">입</div><div id="mouthLv" class="partLv">Lv.0</div></div>
   </div>
 '''+html[end:]
- bad=re.compile(r'weaponSelect|weaponGlyph|weaponRole|weaponStart|startWeaponCard|setupHomeBackV522|homeProgressV522|homeLatestV522|stageIntelV522|homeStartHintV522')
+ bad=re.compile(r'weaponSelect|weaponGlyph|weaponRole|weaponStart|startWeaponCard|setupHomeBackV522|homeProgressV522|homeLatestV522|stageIntelV522|homeStartHintV522|homeLevelCapV522|homeCapLabelV522|homeBossLabelV522|homeBossNameV522')
  def clean_style(m):
   def clean_rule(r):
    selectors=[s for s in r[1].split(',') if not bad.search(s)];return ','.join(selectors)+'{'+r[2]+'}' if selectors else ''
@@ -131,10 +132,12 @@ def main():
  report=json.loads(json.dumps(report).replace(engine,target['path']));report.update(version=VERSION,build=build,index_bytes=len(html.encode()),cached_bytes=sum(e['bytes'] for e in manifest))
  report['organ_skills_v598']={'baseline':BASE,'engine':target['path'],'stylesheet':organ_style['path'],'font':organ_font,'opening_choices':3,'arm_initial_level':1,'other_organs_initial_level':0,'weapon_selection_removed':True,'organs':['arm','shell','tail','mouth'],'variant_slots':{'arm':'arm','shell':'skin','tail':'tail','mouth':'head'},'projectile_limit':180,'original_image_bytes_unchanged':sum(e['kind']=='image' for e in manifest),'physical_Galaxy_S23_plus_tested':False}
  version.update(config,assets=len(manifest));(dist/'index.html').write_text(html);(dist/engine).unlink(missing_ok=True)
- known={e['path'] for e in manifest};baseline={e['path'] for e in json.loads(old('dist/asset-manifest.json'))}
+ known={e['path'] for e in manifest};baseline={line.removeprefix('dist/') for line in subprocess.check_output(['git','ls-tree','-r','--name-only',BASE,'--','dist/assets'],cwd=ROOT,text=True).splitlines()}
  for generated in (dist/'assets').iterdir():
   path=generated.relative_to(dist).as_posix()
   if path not in known and path not in baseline and generated.suffix in ['.js','.css','.woff']:generated.unlink()
+ for path in baseline:
+  if path not in [engine,old_style] and not (dist/path).exists():(dist/path).write_bytes(old('dist/'+path))
  (dist/'asset-manifest.json').write_text(json.dumps(manifest,separators=(',',':'))+'\n');dump(dist/'version.json',version);dump(dist/'verification.json',report)
  for e in json.loads(old('dist/asset-manifest.json')):
   if e['kind']=='image':assert hashlib.sha256((dist/e['path']).read_bytes()).hexdigest()==e['sha256'],e['path']

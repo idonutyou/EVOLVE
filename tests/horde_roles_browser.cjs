@@ -9,8 +9,8 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_HORDE_ROLES_V591__&&window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
-  report.homeLimit=await page.locator('#homeLevelCapV522').textContent();assert.ok(/No limit|제한 없음/.test(report.homeLimit));
-  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+  report.homeLimit='removed';assert.equal(await page.locator('#homeLevelCapV522').count(),0);
+  await page.locator('#start').click();await require('./choose_opening_skill.cjs')(page);await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.combat=await page.evaluate(()=>{
    const api=window.__EVOLVE_HORDE_ROLES_V591__,c=api.test.context(),m=window.__EVOLVE_MAPS_V567__.test.context(),f=window.__EVOLVE_MOVEMENT_FIELD_V590__,normal=window.__EVOLVE_TEST_MODULE_V575__.test.context();
    c.player.inv=999;for(const k of ['arm','mouth','tail','wing','leg'])c.state[k]=0;for(let i=0;i<30;i++)c.step(.05);const source=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!source)throw Error('No natural ordinary enemy');

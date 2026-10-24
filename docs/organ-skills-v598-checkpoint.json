@@ -1,8 +1,8 @@
 {
   "version": "V575-WEB-31-ORGAN-SKILLS",
   "baseline": "169505e96c4331a2072219e674862f51632e06a6",
-  "progress": 50,
-  "status": "First actual browser checks passed: streamlined home, three opening choices, equipped ARM filtering, spike/pierce/growth, whip arcs/knockback, spit, item profiles and pause cleanup",
+  "progress": 80,
+  "status": "All 17 browser suites passed; final changed flows rechecked; package ready for publication",
   "requirements": [
     "Delete home unlock/latest/replay/objective/level-limit/start-hint text; cleared status only 클리어",
     "Increase subtle vertical miniature floating motion",
@@ -16,5 +16,7 @@
     "Commit progress during work and automatically deploy after verification"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "build": "66f36462b7c716f741e42eeb3e6a2ce2a81d2486fa86fedd0f5a73036cbb0439"
+  "build": "1aa8e9680ade797922132fec3c3beb2ee47c7ddb6c33cda3c6e0defaf548206e",
+  "browser_suites": 17,
+  "deployment_pending": true
 }

@@ -3,6 +3,7 @@ const organNamesV598={arm:['팔','ARM'],shell:['외피','SHELL'],tail:['꼬리',
 const organSlotsV598={shell:'skin',tail:'tail',mouth:'head'};
 const organDefaultsV598={shell:'spike',tail:'whip',mouth:'spit'};
 const organStatKeysV598=['spikeDamage','spikeCount','spikePierce','spikeHaste','spikeRange','whipDamage','whipHaste','whipRange','whipArc','whipPush','spitDamage','spitCount','spitPierce','spitHaste','spitRange'];
+const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:230/82-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
 const organRunV598={opening:false,openingChosen:false,projectiles:[],whips:[],breaths:[],dots:new Map(),stats:{},cooldowns:{},casts:{},hits:{},serial:0,art:new Map(),icons:new Map()};
 function organClearV598(){
  organRunV598.opening=organRunV598.openingChosen=false;organRunV598.projectiles.length=organRunV598.whips.length=organRunV598.breaths.length=0;organRunV598.dots.clear();
@@ -119,6 +120,8 @@ organNewCardsV598.push(...[
 for(const c of UPGRADE_CARDS_V593)if(c.group==='gun'||c.group==='blade')c.organ='arm';
 UPGRADE_CARDS_V593.push(...organNewCardsV598);
 const organApplyBaseV598=upgradeApplyV593,organLinesBaseV598=upgradeLinesV593,organPartBaseV598=upgradePartV593;
+const organValueBaseV598=upgradeValueV593;
+upgradeValueV593=function(c,tier){const value=organValueBaseV598(c,tier),cap=organStatCapsV598[c.organStat];return cap===undefined?value:Math.min(value,Math.max(0,cap-organRunV598.stats[c.organStat]));};
 upgradePartV593=function(c){return c.organ?upgradeTextV593(...organNamesV598[c.organ]):organPartBaseV598(c);};
 upgradeLinesV593=function(c,tier){
  if(c.organStat){const n=upgradeValueV593(c,tier);return [upgradeTextV593(...c.label)+' +'+(c.unit==='percent'?upgradePercentV593(n):upgradeNumberV593(n)+(c.unit==='degrees'?'°':''))];}
@@ -136,6 +139,8 @@ upgradeApplyV593=function(c,tier){
 upgradePoolV593=function(){
  const mode=armItemModeV589();return UPGRADE_CARDS_V593.filter(c=>{
   if(c.available&&!c.available()||c.id.endsWith('_equip'))return false;
+  if(c.organStat&&organStatCapsV598[c.organStat]!==undefined&&organRunV598.stats[c.organStat]>=organStatCapsV598[c.organStat]-1e-8)return false;
+  if(c.organ==='mouth'&&organSpecV598('mouth').mode==='breath'&&['spitCount','spitPierce'].includes(c.organStat))return false;
   if(c.organ==='arm')return state.arm>0&&(mode==='cannon'?c.group==='gun':mode==='blades'?c.group==='blade':c.group==='bare');
   if(c.organ)return c.learn?!(state[c.organ]>0):state[c.organ]>0;
   return !organRunV598.opening;
@@ -199,5 +204,5 @@ window.__EVOLVE_ORGAN_SKILLS_V598__={
 };
 if(new URLSearchParams(location.search).get('evolveQA')==='1'){
  window.__EVOLVE_ORGAN_SKILLS_V598__.test={spec:organSpecV598,step:organStepV598,cast:organCastV598,clear:organClearV598,projectiles:()=>organRunV598.projectiles,whips:()=>organRunV598.whips,geometry:ORGAN_SKILL_MODEL_V598,canChoose:choiceInputReady,context:()=>({player,state,enemies,stats:organRunV598.stats,cooldowns:organRunV598.cooldowns,grid:rebuildEnemyGridV424,draw,home:returnToHome,lineClear:(a,b,r=1)=>!terrainHitV418(a.x,a.y,b.x,b.y,r)}),setItemVariant:(itemId,organ,variant)=>{const item=partsItemV523(itemId),p=ORGAN_SKILL_MODEL_V598.profiles[variant];if(!item||p?.organ!==organ||item.slot!==organSlotsV598[organ])throw Error('Invalid item/organ variant');item.skillVariantsV598={...item.skillVariantsV598,[organ]:variant};}};
- const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test;q.cards=UPGRADE_CARDS_V593;q.pool=()=>upgradePoolV593();q.apply=(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);};q.lines=(c,tier)=>upgradeLinesV593(c,tier);q.reset=()=>upgradeResetV593();
+ const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test;q.cards=UPGRADE_CARDS_V593;q.pool=()=>upgradePoolV593();q.apply=(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);};q.lines=(c,tier)=>upgradeLinesV593(c,tier);q.value=(c,tier)=>upgradeValueV593(c,tier);q.reset=()=>upgradeResetV593();
 }

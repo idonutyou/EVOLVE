@@ -1,0 +1,118 @@
+{
+  "success": true,
+  "browser_suites": 17,
+  "results": {
+    "upgrade_cards_browser": {
+      "test": "upgrade_cards_browser",
+      "success": true,
+      "seconds": 32.1,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/upgrade_cards_browser.log"
+    },
+    "player_combat_browser": {
+      "test": "player_combat_browser",
+      "success": true,
+      "seconds": 19.9,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/player_combat_browser.log"
+    },
+    "arm_items_browser": {
+      "test": "arm_items_browser",
+      "success": true,
+      "seconds": 48.2,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/arm_items_browser.log"
+    },
+    "player_scorpion_browser": {
+      "test": "player_scorpion_browser",
+      "success": true,
+      "seconds": 43.2,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/player_scorpion_browser.log"
+    },
+    "original_player_browser": {
+      "test": "original_player_browser",
+      "success": true,
+      "seconds": 23.2,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/original_player_browser.log"
+    },
+    "home_map_miniatures_browser": {
+      "test": "home_map_miniatures_browser",
+      "success": true,
+      "seconds": 37.7,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/home_map_miniatures_browser.log"
+    },
+    "admin_combat_browser": {
+      "test": "admin_combat_browser",
+      "success": true,
+      "seconds": 24.8,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/admin_combat_browser.log"
+    },
+    "admin_mode_browser": {
+      "test": "admin_mode_browser",
+      "success": true,
+      "seconds": 32.5,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/admin_mode_browser.log"
+    },
+    "playfield_browser": {
+      "test": "playfield_browser",
+      "success": true,
+      "seconds": 31.8,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/playfield_browser.log"
+    },
+    "browser_smoke": {
+      "test": "browser_smoke",
+      "success": true,
+      "seconds": 56.2,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/browser_smoke.log"
+    },
+    "horde_roles_browser": {
+      "test": "horde_roles_browser",
+      "success": true,
+      "seconds": 24.6,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/horde_roles_browser.log"
+    },
+    "movement_field_browser": {
+      "test": "movement_field_browser",
+      "success": true,
+      "seconds": 35.8,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/movement_field_browser.log"
+    },
+    "red_pulse_browser": {
+      "test": "red_pulse_browser",
+      "success": true,
+      "seconds": 32.5,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/red_pulse_browser.log"
+    },
+    "boss_cinematic_browser": {
+      "test": "boss_cinematic_browser",
+      "success": true,
+      "seconds": 59.5,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/boss_cinematic_browser.log"
+    },
+    "attack_warnings_browser": {
+      "test": "attack_warnings_browser",
+      "success": true,
+      "seconds": 41.0,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/attack_warnings_browser.log"
+    },
+    "visual_clarity_browser": {
+      "test": "visual_clarity_browser",
+      "success": true,
+      "seconds": 25.8,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/visual_clarity_browser.log"
+    },
+    "organ_skills_browser": {
+      "test": "organ_skills_browser",
+      "success": true,
+      "seconds": 28.3,
+      "log": "/workspace/scratch/7ccc35dc150f/qa-runtime/organ_skills_browser.log"
+    }
+  },
+  "final_changed_flows_rechecked": [
+    "organ_skills_browser",
+    "upgrade_cards_browser",
+    "player_scorpion_browser",
+    "browser_smoke",
+    "movement_field_browser",
+    "attack_warnings_browser"
+  ],
+  "publication_verification_pending": true,
+  "physical_Galaxy_S23_plus_tested": false
+}
