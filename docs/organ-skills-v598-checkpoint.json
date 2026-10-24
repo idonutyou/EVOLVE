@@ -1,0 +1,19 @@
+{
+  "version": "V575-WEB-31-ORGAN-SKILLS",
+  "baseline": "169505e96c4331a2072219e674862f51632e06a6",
+  "progress": 10,
+  "status": "Implementing user-requested streamlined home and organ skill progression",
+  "requirements": [
+    "Delete home unlock/latest/replay/objective/level-limit/start-hint text; cleared status only 클리어",
+    "Increase subtle vertical miniature floating motion",
+    "Delete weapon selection screen, DOM and live selection code",
+    "Start with current equipped ARM at level 1 and every other active organ at level 0",
+    "Open three distinct organ-skill upgrade choices immediately after entering battle",
+    "SHELL: simple homing spike, one target then disappears at base; count/pierce/haste/range upgrades",
+    "TAIL: sweeping whip with nearby damage and knockback; progression toward full-circle coverage",
+    "MOUTH: base spit projectile, extensible for poison/fire/ice spit or breath by equipped head",
+    "Preserve save keys, map art bytes, map geometry, bosses and safe update timing",
+    "Commit progress during work and automatically deploy after verification"
+  ],
+  "physical_Galaxy_S23_plus_tested": false
+}
