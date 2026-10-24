@@ -7,7 +7,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  try{
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1&evolveBioQA=1',{waitUntil:'domcontentloaded',timeout:180000});await page.waitForFunction(()=>window.__EVOLVE_VISUAL_CLARITY_V592__&&window.__EVOLVE_PAINTED_WARNING_V581__?.read().ready&&window.__EVOLVE_MONSTER_MOTION_V578__?.read().atlasReady&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});await require('./admin_unlock.cjs')(page);
-  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.health=await page.evaluate(()=>{
    const a=window.__EVOLVE_VISUAL_CLARITY_V592__,q=a.test.context(),c=window.__EVOLVE_TEST_MODULE_V575__.test.context(),motion=window.__EVOLVE_MONSTER_MOTION_V578__,map=window.__EVOLVE_MAP_TEST_V562__.test;
    q.player.inv=999;for(const k of ['arm','mouth','tail','wing','leg'])c.state[k]=0;for(let i=0;i<30;i++)c.step(.05);const source=q.enemies.find(e=>!e.dead&&!e.finalBoss);if(!source)throw Error('No natural enemy fixture');const v=window.__EVOLVE_RED_PULSE_V579__.test.view(),spots=[];

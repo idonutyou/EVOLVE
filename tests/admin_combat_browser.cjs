@@ -1,0 +1,71 @@
+const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');
+const dist=path.resolve(__dirname,'../dist'),out=path.resolve(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
+const mime={'.html':'text/html','.js':'application/javascript','.json':'application/json','.png':'image/png','.css':'text/css','.woff':'font/woff','.webp':'image/webp','.jpg':'image/jpeg'};
+const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),p=path.resolve(dist,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!p.startsWith(dist+path.sep)||!fs.existsSync(p)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',mime[path.extname(p)]||'application/octet-stream');if(u.pathname.startsWith('/assets/'))res.setHeader('Cache-Control','public,max-age=31536000,immutable');fs.createReadStream(p).pipe(res);});
+(async()=>{
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']}),context=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true}),page=await context.newPage(),report={checks:[],errors:[],physical_Galaxy_S23_plus_tested:false};
+ page.on('pageerror',e=>{report.errors.push(e.message);console.error('PAGE ERROR',e.message);});
+ const ready=()=>page.waitForFunction(()=>window.__EVOLVE_STARTUP_V595__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+ const start=async()=>{await page.locator('#start').click();assert.equal(await page.locator('#contractOverlay').count(),0);assert.equal(await page.locator('[data-contract]').count(),0);await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
+ try{
+  await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);localStorage.setItem('EVOLVE_V575_TEST_PANEL_V1',JSON.stringify({map:'biolab',natural:false}));localStorage.setItem('EVOLVE_V575_TEST_META_V1',JSON.stringify({dna:2345,contractStreak:9,bestContractStreak:12,feedback:{sound:false,haptic:false,graphics:'eco'}}));});
+  await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded'});await ready();console.log('READY');
+  const before=await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.read());assert.equal(before.map,null);
+  for(let i=0;i<5;i++)await page.locator('#codexBtn').click();await page.locator('#homeBattleTabV522').click();await ready();
+  report.adminMap=await page.evaluate(()=>({state:window.__EVOLVE_TEST_MODULE_V575__.read(),startup:window.__EVOLVE_STARTUP_V595__.read(),hint:document.getElementById('homeStartHintV522').textContent}));assert.equal(report.adminMap.state.override,'biolab');assert.equal(report.adminMap.state.map,'biolab');assert.equal(report.adminMap.state.ready,true);assert.doesNotMatch(report.adminMap.hint,/다운로드|준비하는 중/);
+  report.checks.push('enabling administrator mode automatically prepares the saved map without any stage change');console.log('ADMIN MAP READY');
+  await start();await page.evaluate(()=>{window.__EVOLVE_TEST_MODULE_V575__.setNatural(false);const c=window.__EVOLVE_COMBAT_V596__.test.context();c.player.inv=999;for(const k of ['arm','mouth','tail','wing','leg'])c.state[k]=0;});
+  report.species=await page.evaluate(()=>{
+   const api=window.__EVOLVE_COMBAT_V596__.test,c=api.context(),roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list(),q=window.__EVOLVE_STARTUP_V595__.test,result=[];
+   for(const id of ['crawler','runner','brute','spitter','ripper','mauler','bileback']){c.enemies.length=0;const s=roster.find(x=>x.id===id),e=q.spawn(s);if(!e)throw Error('Spawn failed '+id);const image=window.__EVOLVE_MONSTER_MOTION_V578__.test.rendered(e),motion=window.__EVOLVE_MONSTER_MOTION_V578__.test.surface(id,0);result.push({id,type:e.type,base:api.baseType(e),appearance:api.appearance(e),asset:api.asset(api.appearance(e)),imageWidth:image.width||image.naturalWidth,surface:motion.toDataURL(),hp:e.hp,damage:e.dmg,speed:e.spd});}
+   c.enemies.length=0;return {roster:roster.map(c=>({id:c.id,boss:!!c.boss})),result};
+  });
+  assert.equal(report.species.roster.length,19);assert.ok(report.species.roster.every(c=>!c.boss));for(const e of report.species.result){assert.equal(e.type,e.id);assert.ok(e.hp>0&&e.speed>0&&e.damage>0);assert.equal(e.appearance,e.id);}
+  for(const [base,fresh] of [['runner','ripper'],['brute','mauler'],['spitter','bileback']])assert.notEqual(report.species.result.find(e=>e.id===base).surface,report.species.result.find(e=>e.id===fresh).surface);
+  // Retain concise evidence, not image data, in the report.
+  for(const e of report.species.result){e.surfaceSHA= require('node:crypto').createHash('sha256').update(e.surface).digest('hex');delete e.surface;}
+  report.checks.push('all four original species retain their identities and separate artwork; the three new species have real distinct type IDs and animated artwork');console.log('SPECIES READY');
+  report.contact=await page.evaluate(()=>{
+   const api=window.__EVOLVE_COMBAT_V596__.test,c=api.context(),q=window.__EVOLVE_STARTUP_V595__.test,roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list(),origin={x:c.player.x,y:c.player.y},rows=[];
+   for(const id of ['crawler','runner','brute','spitter','warden','froststalker','symbiote','embermaw','ripper','mauler','bileback']){
+    c.enemies.length=0;c.eBullets.length=0;const e=q.spawn(roster.find(s=>s.id===id));if(!e)throw Error(id);
+    Object.assign(e,{x:origin.x,y:origin.y,r:10,spd:0,dmg:10,shot:999,dashCd:999,slamCd:999,chargePrep:0,dashPrep:0,burst:0,contactCd:0,elite:false,nemesis:false,midBoss:false,hp:1e6,maxHp:1e6});Object.assign(c.player,{x:origin.x,y:origin.y,hp:500,maxHp:500,shieldHP:0,inv:0});c.step(.01);rows.push({id,hp:c.player.hp});
+   }c.player.inv=999;c.enemies.length=0;return rows;
+  });assert.ok(report.contact.every(e=>e.hp<500),JSON.stringify(report.contact));report.checks.push('all eleven ordinary species inflict real contact damage, including support, ranged and walking charge types');console.log('CONTACT READY');
+  report.intent=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),o={x:c.player.x,y:c.player.y};
+   return ['crawler','brute','runner','spitter','froststalker','bileback'].map(type=>{const e={type,x:o.x+55,y:o.y,spd:40,strafe:1,flank:1,dead:false};a.intent(e,.05,.5,55);return {type,radialVelocity:e.vx,speed:Math.hypot(e.vx,e.vy)};});
+  });for(const e of report.intent)assert.ok(['spitter','froststalker','bileback'].includes(e.type)?e.radialVelocity>0:e.radialVelocity<0,JSON.stringify(e));report.checks.push('close ranged monsters move away with lateral motion; melee and charge monsters move toward the player');
+  report.ranks=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),saved=c.meta.stage,rows=[];
+   for(const stage of [3,6,11,16,25]){c.meta.stage=stage;const e={type:'brute',hp:250,maxHp:250,dmg:14,spd:29,r:12.5,xp:52,elite:true,eliteName:'ALPHA BRUTE'};a.apply(e,'crusher');rows.push({stage,rank:e.midRankV596.id,hp:e.maxHp,damage:e.dmg,speed:e.spd,size:e.midVisualSizeV596,armor:e.eliteArmor,relativeSize:e.midVisualSizeV596/51});}c.meta.stage=saved;return rows;
+  });assert.deepEqual(report.ranks.map(r=>r.rank),['common','rare','epic','legendary','mythic']);assert.ok(report.ranks[0].hp>=250*5);assert.equal(report.ranks[0].relativeSize,2);for(let i=1;i<report.ranks.length;i++)for(const key of ['hp','damage','speed','size','armor'])assert.ok(report.ranks[i][key]>report.ranks[i-1][key],key+JSON.stringify(report.ranks));report.checks.push('all five stage-based ranks strictly increase health, damage, speed, armor and size; common mid-bosses are twice ordinary size and at least five times the old test health');console.log('RANKS READY');
+  report.elites=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),q=window.__EVOLVE_STARTUP_V595__.test,roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list(),rows=[];
+   for(const id of ['alpha','sentinel','hunter','omega','nemesis_brute','nemesis_spitter']){
+    c.enemies.length=0;const e=q.spawn(roster.find(s=>s.id===id));if(!e)throw Error('Elite '+id);e.arrivalTime=0;e.arrivalInvuln=false;const health=window.__EVOLVE_VISUAL_CLARITY_V592__;health.test.clear();health.test.mark(e,1);health.test.health();
+    c.draw();rows.push({id,rank:e.midRankV596?.id,profile:e.midProfileV596,hp:e.maxHp,size:e.midVisualSizeV596,overheadBars:health.read().healthBars,auraDraws:window.__EVOLVE_COMBAT_V596__.read().auraDraws});
+   }return rows;
+  });assert.ok(report.elites.every(e=>e.rank&&e.profile&&e.overheadBars===0&&e.auraDraws>0),JSON.stringify(report.elites));report.checks.push('all six named administrator elite specimens receive ranks and body vapor, and none show an overhead health bar');
+  report.skills=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),q=window.__EVOLVE_STARTUP_V595__.test,roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list(),rows=[];
+   for(const [id,kinds] of [['alpha',['crush','rush','fault']],['sentinel',['fan','cross','pools']],['hunter',['pounce','scissors','needle']],['omega',['rupture','rush','cross']]]){
+    c.enemies.length=0;const e=q.spawn(roster.find(s=>s.id===id));e.arrivalTime=0;e.arrivalInvuln=false;
+    for(const kind of kinds){a.cast(e,kind);const fields=a.fields().filter(f=>f.owner===e&&f.kind===kind);rows.push({id,kind,fields:fields.length,warning:fields.every(f=>f.warn>=.72),damage:fields.some(f=>f.damage>0),projectiles:fields.some(f=>f.volley),dash:fields.some(f=>f.dash)});}e.dead=true;a.stepFields(0);
+   }return rows;
+  });assert.equal(report.skills.length,12);assert.ok(report.skills.every(s=>s.fields&&s.warning&&(s.damage||s.projectiles||s.dash)),JSON.stringify(report.skills));report.checks.push('four mid-boss identities each have three distinct attacks with visible preparation and real damage/projectile/dash actions');
+  // Actual skill warning is harmless; its active damage is applied at the same location.
+  report.skillDamage=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),q=window.__EVOLVE_STARTUP_V595__.test;c.enemies.length=0;c.eBullets.length=0;const e=q.spawn(window.__EVOLVE_MONSTER_CATALOG_V593__.list().find(s=>s.id==='alpha'));e.arrivalInvuln=false;e.arrivalTime=0;e.x=c.player.x;e.y=c.player.y;a.cast(e,'crush');c.player.hp=c.player.maxHp=1000;c.player.inv=0;c.player.shieldHP=0;const before=c.player.hp;a.stepFields(.1);const warning=c.player.hp;for(let i=0;i<11;i++)a.stepFields(.1);c.draw();return {before,warning,after:c.player.hp};
+  });assert.equal(report.skillDamage.warning,report.skillDamage.before);assert.ok(report.skillDamage.after<report.skillDamage.before);report.checks.push('mid-boss area warnings cause no damage until the displayed area activates');
+  report.autonomous=await page.evaluate(()=>{
+   const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context(),q=window.__EVOLVE_STARTUP_V595__.test,roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list(),rows=[];for(const e of c.enemies)e.dead=true;a.stepFields(0);c.enemies.length=0;
+   for(const id of ['alpha','sentinel','hunter','omega']){c.enemies.length=0;c.eBullets.length=0;const e=q.spawn(roster.find(s=>s.id===id));e.arrivalTime=0;e.arrivalInvuln=false;e.hp=e.maxHp=1e8;e.midSkillCdV596=0;c.player.inv=999;for(let i=0;i<400;i++)c.step(.05);rows.push({id,casts:e.midSkillIndexV596,alive:!e.dead,remainingAction:e.midActionV596?.kind||null});e.dead=true;a.stepFields(0);}return rows;
+  });assert.ok(report.autonomous.every(r=>r.alive&&r.casts>=3),JSON.stringify(report.autonomous));report.checks.push('all four mid-boss identities automatically cycle through at least three attacks during real fixed-step combat');
+  await page.evaluate(()=>{const a=window.__EVOLVE_COMBAT_V596__.test,c=a.context();for(const e of c.enemies)e.dead=true;a.stepFields(0);c.enemies.length=0;c.eBullets.length=0;const saved=c.meta.stage;c.meta.stage=25;const e=window.__EVOLVE_STARTUP_V595__.test.spawn(window.__EVOLVE_MONSTER_CATALOG_V593__.list().find(s=>s.id==='alpha'));c.meta.stage=saved;e.arrivalInvuln=false;e.arrivalTime=0;e.midSkillCdV596=99;const px=c.player.x,py=c.player.y;e.x=px+60;e.y=py-50;for(const id of ['bossIntro','waveIntro','evolutionCine']){const el=document.getElementById(id);if(el){el.style.display='none';el.classList.remove('show');}}for(let i=0;i<20;i++)c.step(.05);c.draw();});
+  await page.screenshot({path:path.join(out,'web29-midboss-portrait.png')});await page.setViewportSize({width:852,height:393});await page.screenshot({path:path.join(out,'web29-midboss-landscape.png')});
+  assert.equal(await page.locator('#contractBadge').count(),0);assert.deepEqual(report.errors,[]);report.success=true;console.log('COMPLETED');
+ }catch(error){report.success=false;report.failure=error.stack||String(error);await page.screenshot({path:path.join(out,'web29-failure.png')}).catch(()=>{});throw error;}
+ finally{fs.writeFileSync(path.join(out,'admin-combat-v596-browser.json'),JSON.stringify(report,null,2));await browser.close();server.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;server.close();});

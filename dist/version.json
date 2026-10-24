@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-28-PLAYFIELD",
-  "build": "01634b404ddfdef43b3735dece800e44ecc7d6fc39f5ba1026367e2deea41ba4",
-  "scriptBytes": 77569572,
+  "version": "V575-WEB-29-ADMIN-COMBAT",
+  "build": "a08eb3d767bccd07f9daa1bdc1910149d117054c3c5bd716b2524af7c889e415",
+  "scriptBytes": 77573630,
   "assets": 1026,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true

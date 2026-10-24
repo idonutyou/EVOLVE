@@ -18,7 +18,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.deepEqual(report.errors,[],'Game startup raised a JavaScript exception');
   await page.screenshot({path:path.join(out,'mobile-home.png')});
   await require('./admin_unlock.cjs')(page);
-  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();
+  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running,null,{timeout:30000});
   const before=await page.evaluate(()=>{const p=window.__EVOLVE_TEST_MODULE_V575__.test.context().player;return{x:p.x,y:p.y};});
   await page.mouse.move(180,660);await page.mouse.down();await page.mouse.move(250,620,{steps:8});await page.waitForTimeout(650);await page.mouse.up();
@@ -37,11 +37,11 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.equal(await page.locator('#ability').isDisabled(),true);
   await page.screenshot({path:path.join(out,'classic-combat-campaign.png')});
 
-  await page.waitForFunction(()=>window.__EVOLVE_MONSTER_MOTION_V577__?.read().atlasReady&&window.__EVOLVE_MONSTER_MOTION_V577__.read().cachedFrames===40,null,{timeout:30000});
+  await page.waitForFunction(()=>window.__EVOLVE_MONSTER_MOTION_V577__?.read().atlasReady&&window.__EVOLVE_MONSTER_MOTION_V577__.read().cachedFrames===52,null,{timeout:30000});
   const monsterMotion=await page.evaluate(()=>{
    const api=window.__EVOLVE_MONSTER_MOTION_V577__,c=window.__EVOLVE_TEST_MODULE_V575__.test.context(),e=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!e)throw Error('Motion fixture enemy missing');
    const surfaces={};for(const type of api.read().referenceTypes){const a=api.test.surface(type,0),b=api.test.surface(type,1),attack=api.test.surface(type,3);surfaces[type]=a!==b&&a.toDataURL()!==b.toDataURL()&&a.toDataURL()!==attack.toDataURL()&&a.width===b.width&&a.height===b.height}
-   const builds=api.read().gpuAtlasBuilds,originalType=e.type;e.type='brute';e.visualSetV516='base';
+   const builds=api.read().gpuAtlasBuilds,originalType=e.type;e.type='mauler';e.visualSetV516='base';
    api.test.forceWalk(e,0);const key0=api.test.gpuKey(e);c.draw();const gpu0=document.getElementById('game').toDataURL();
    api.test.forceWalk(e,1);const key1=api.test.gpuKey(e);c.draw();const gpu1=document.getElementById('game').toDataURL();
    const gpuEnabled=api.read().gpuEnabled,gpuWas=api.test.gpu(false);
@@ -50,7 +50,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    const originals={};for(const appearance of api.read().paintedOriginalTypes){e.type=appearance.replace('legacy_','');e.visualSetV516=appearance.startsWith('legacy_')?'legacy':'base';api.test.forceWalk(e,0);c.draw();const a=document.getElementById('game').toDataURL();api.test.forceWalk(e,1);c.draw();const b=document.getElementById('game').toDataURL();api.test.gpu(false);api.test.forceWalk(e,0);c.draw();const ca=document.getElementById('game').toDataURL();api.test.forceWalk(e,1);c.draw();const cb=document.getElementById('game').toDataURL();api.test.gpu(gpuWas);originals[appearance]={gpu:a!==b,canvas:ca!==cb};}e.type=originalType;e.visualSetV516='base';
    const result={surfaces,originals,gpuEnabled,gpuFramesDiffer:gpu0!==gpu1,canvasFramesDiffer:cpu0!==cpu1,key0,key1,windup,hurt,cachedFrames:api.read().cachedFrames,noTextureRebuildDuringDraw:api.read().gpuAtlasBuilds===builds};c.draw();return result;
   });
-  assert.equal(Object.keys(monsterMotion.surfaces).length,10);assert.ok(Object.values(monsterMotion.surfaces).every(Boolean));assert.equal(Object.keys(monsterMotion.originals).length,6);assert.ok(Object.values(monsterMotion.originals).every(x=>x.gpu&&x.canvas),JSON.stringify(monsterMotion));assert.ok(monsterMotion.gpuEnabled&&monsterMotion.gpuFramesDiffer&&monsterMotion.canvasFramesDiffer&&monsterMotion.noTextureRebuildDuringDraw);assert.notEqual(monsterMotion.key0,monsterMotion.key1);assert.equal(monsterMotion.windup,3);assert.equal(monsterMotion.hurt,3);assert.equal(monsterMotion.cachedFrames,40);report.monsterMotion=monsterMotion;report.checks.push('all 10 appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild');
+  assert.equal(Object.keys(monsterMotion.surfaces).length,9);assert.ok(Object.values(monsterMotion.surfaces).every(Boolean));assert.equal(Object.keys(monsterMotion.originals).length,6);assert.ok(Object.values(monsterMotion.originals).every(x=>x.gpu&&x.canvas),JSON.stringify(monsterMotion));assert.ok(monsterMotion.gpuEnabled&&monsterMotion.gpuFramesDiffer&&monsterMotion.canvasFramesDiffer&&monsterMotion.noTextureRebuildDuringDraw);assert.notEqual(monsterMotion.key0,monsterMotion.key1);assert.equal(monsterMotion.windup,3);assert.equal(monsterMotion.hurt,3);assert.equal(monsterMotion.cachedFrames,52);report.monsterMotion=monsterMotion;report.checks.push('all nine painted appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild');
   await page.screenshot({path:path.join(out,'monster-motion-campaign.png')});
   const poseGallery=await page.evaluate(()=>{const api=window.__EVOLVE_MONSTER_MOTION_V578__,names=api.read().paintedOriginalTypes,c=document.createElement('canvas');c.width=840;c.height=names.length*190;const g=c.getContext('2d');g.fillStyle='#10151b';g.fillRect(0,0,c.width,c.height);for(let row=0;row<names.length;row++){g.fillStyle='#dbe5e9';g.font='bold 14px sans-serif';g.fillText(names[row],12,row*190+20);for(let frame=0;frame<4;frame++){const s=api.test.surface(names[row],frame),scale=155/Math.max(s.width,s.height);g.drawImage(s,frame*210+(210-s.width*scale)/2,row*190+30+(155-s.height*scale),s.width*scale,s.height*scale);}}return c.toDataURL('image/png').split(',')[1];});fs.writeFileSync(path.join(out,'legacy-monster-poses.png'),Buffer.from(poseGallery,'base64'));
   console.log(JSON.stringify({checkpoint:'monster-motion',originals:monsterMotion.originals,cachedFrames:monsterMotion.cachedFrames,noTextureRebuildDuringDraw:monsterMotion.noTextureRebuildDuringDraw}));

@@ -13,7 +13,7 @@ try{
  assert.equal(state.admin.enabled,false);assert.equal(state.admin.stage,1);assert.equal(state.admin.selected,1);assert.equal(state.admin.normal.unlocked,1);assert.equal(state.test.override,'auto');assert.equal(state.test.natural,true);assert.equal(state.test.map,null);assert.equal(state.meta.dna,1234);assert.equal(state.meta.unlockedStageV522,99);assert.deepEqual(JSON.parse(state.panel),{map:'biolab',natural:false});
  for(const selector of controls)assert.equal(await page.locator(selector).isVisible(),false,selector);
  report.initial=state;report.checks.push('normal defaults ignore old test stage, map and disabled natural-spawn preference without erasing them');
- await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+ await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
  assert.equal(await page.evaluate(()=>window.__EVOLVE_ADMIN_MODE_V585__.read().level),1);
  const alive=await page.evaluate(()=>{const c=window.__EVOLVE_TEST_MODULE_V575__.test.context();c.player.inv=999;for(let i=0;i<30;i++)c.step(.05);c.draw();return c.enemies.filter(e=>!e.dead&&!e.finalBoss).length});assert.ok(alive>0,'Saved test settings suppressed ordinary monsters');
  for(const selector of controls)assert.equal(await page.locator(selector).isVisible(),false,selector);
@@ -31,7 +31,7 @@ try{
  assert.equal(await page.evaluate(()=>window.__EVOLVE_ADMIN_MODE_V585__.read().enabled),true);assert.equal(await page.locator('#tmOpenV573').isVisible(),true);
  await page.locator('#homeBattleTabV522').click();report.checks.push('ordinary codex still opens; four presses stay normal; another tab resets the count; fifth consecutive real press enables admin');
  await page.locator('#tmOpenV573').click();await page.locator('#tmStageV573').fill('20');await page.locator('#tmMapV573').selectOption('facility1');await page.locator('#tmGoV573').click();
- await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running&&window.__EVOLVE_TEST_MODULE_V575__.read().map==='facility1',null,{timeout:90000});
+ await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running&&window.__EVOLVE_TEST_MODULE_V575__.read().map==='facility1',null,{timeout:90000});
  assert.equal(await page.locator('#mapControlsV562').isVisible(),true);await page.locator('#mapEditButtonV562').click();await page.waitForFunction(()=>!window.__EVOLVE_MAP_TEST_V562__.test.editor.read().busy,null,{timeout:90000});assert.equal(await page.locator('#mapEditorV562').isVisible(),true);await page.locator('#meCloseV562').click();
  await page.locator('#tmOpenV573').click();await page.locator('#adminExitV585').click();await ready();
  state=await page.evaluate(()=>({admin:window.__EVOLVE_ADMIN_MODE_V585__.read(),test:window.__EVOLVE_TEST_MODULE_V575__.read()}));assert.equal(state.admin.enabled,false);assert.equal(state.admin.stage,1);assert.equal(state.admin.normal.unlocked,2);assert.equal(state.test.override,'auto');assert.equal(state.test.natural,true);

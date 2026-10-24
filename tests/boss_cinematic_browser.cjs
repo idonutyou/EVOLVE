@@ -50,7 +50,7 @@ try{
  }}finally{await page.evaluate(language=>{window.EVOLVE_I18N.setLanguage(language);window.__EVOLVE_CINEMATIC_V580__.test.hide()},previousLanguage)}
  await page.setViewportSize({width:393,height:852});
  report.art=await page.evaluate(()=>{const api=window.__EVOLVE_CINEMATIC_V580__,hash=c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=2166136261;for(let i=0;i<d.length;i+=13)n=Math.imul(n^d[i],16777619);return n>>>0};return Object.fromEntries(['bio','venom'].map(kind=>[kind,{hashes:[0,1,2,3].map(i=>hash(api.test.surface(kind,i))),sizes:[0,1,2,3].map(i=>{const c=api.test.surface(kind,i);return[c.width,c.height]})}]))});for(const v of Object.values(report.art))assert.equal(new Set(v.hashes).size,4);
- await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+ await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
  for(const orientation of ['portrait','landscape']){
   if(orientation==='landscape')await page.setViewportSize({width:852,height:393});
   for(const kind of ['venom','bio']){

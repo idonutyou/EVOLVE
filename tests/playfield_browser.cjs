@@ -7,7 +7,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  const browser=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']}),context=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true}),page=await context.newPage(),report={checks:[],errors:[],physical_Galaxy_S23_plus_tested:false};
  page.on('pageerror',e=>{report.errors.push(e.message);console.error(e.message);});
  const ready=()=>page.waitForFunction(()=>window.__EVOLVE_STARTUP_V595__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
- const start=async()=>{await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
+ const start=async()=>{await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);};
  try{
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
@@ -32,10 +32,10 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    }
    c.enemies.length=0;return {roster:roster.map(x=>({id:x.id,boss:!!x.boss})),result,options:[...document.querySelectorAll('#monsterSelectV593 option')].map(x=>x.value)};
   });
-  assert.equal(report.catalog.roster.length,16);assert.ok(report.catalog.roster.every(x=>!x.boss));assert.equal(report.catalog.options.length,16);
+  assert.equal(report.catalog.roster.length,19);assert.ok(report.catalog.roster.every(x=>!x.boss));assert.equal(report.catalog.options.length,19);
   assert.ok(report.catalog.result.every(x=>x.spawned&&x.writable&&!x.locked&&!x.route&&x.alive),JSON.stringify(report.catalog.result));
   for(const id of ['crawler','alpha'])assert.ok(report.catalog.result.find(x=>x.id===id).distance>5,JSON.stringify(report.catalog.result.find(x=>x.id===id)));
-  assert.ok(await page.locator('#tmSummonBossV573').count());report.checks.push('all 16 ordinary/variant/elite specimens spawn with writable coordinates and no stale entry route; crawler and alpha move; phase-specific boss controls remain separate');
+  assert.ok(await page.locator('#tmSummonBossV573').count());report.checks.push('all 19 ordinary/new/variant/elite specimens spawn with writable coordinates and no stale entry route; crawler and alpha move; phase-specific boss controls remain separate');
   console.log('CATALOG READY');await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();q.equip('cannon');c.draw();q.offer([['gun_count',1],['light',4],['giant',3]]);});
   await page.evaluate(()=>document.fonts.ready);
   report.selector=await page.evaluate(()=>{const p=document.getElementById('levelPanel'),r=p.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,viewport:innerHeight,background:getComputedStyle(document.getElementById('levelOverlay')).backgroundColor,head:getComputedStyle(p.querySelector('h2')).clipPath,backgrounds:[...p.querySelectorAll('.upgradeReferenceBgV594')].map(c=>getComputedStyle(c).display)};});

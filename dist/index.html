@@ -33,23 +33,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #predationLabel{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#ffe5c8;font-size:6px;font-weight:1000;letter-spacing:.10em;text-shadow:0 1px 3px #000}
 #predationWrap.frenzy{border-color:#ffd371;background:#261007;box-shadow:0 0 15px #ff713e44,inset 0 0 12px #ffae3c1e;animation:predPulse .28s ease-in-out infinite alternate}
 #predationWrap.frenzy #predationFill{background:linear-gradient(90deg,#ff5a2f,#ffbf45,#fff0a8)}
-#contractBadge{margin:4px 10px 0;padding:5px 8px;border:1px solid #7b8d9c42;border-radius:8px;background:#071017d8;color:#a7bac8;font-size:7px;font-weight:950;letter-spacing:.055em;line-height:1.35;display:none}
-#contractBadge b{color:#e5f6ff;font-size:8px}.contractGood{border-color:#65d58b66!important;color:#a9f8c0!important}.contractBad{border-color:#ff5d5366!important;color:#ffaaa2!important}
 #nemesisBadge{margin:4px 10px 0;padding:5px 8px;border:1px solid #b85cff5c;border-radius:8px;background:#13071bdc;color:#daa7ff;font-size:7px;font-weight:950;letter-spacing:.055em;line-height:1.35;display:none;box-shadow:0 0 14px #9f43ff1e}
 #nemesisBadge b{color:#f2dfff;font-size:8px}
 #nemesisPanel{width:100%;max-width:440px;margin:0 0 9px;padding:7px 9px;border:1px solid #7a4a9866;border-radius:10px;background:#100915d9;color:#c99be7;font-size:8px;font-weight:900;line-height:1.4;display:none}
 #nemesisPanel b{color:#f0d8ff;letter-spacing:.08em}
-#contractOverlay{position:absolute;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:calc(24px + var(--safeT)) 12px calc(22px + var(--safeB));background:#020609f2;backdrop-filter:blur(7px)}
-#contractPanel{width:100%;max-width:500px}.contractHead{text-align:center;margin-bottom:11px}.contractHead h2{margin:0;font-size:26px;letter-spacing:.08em}.contractHead p{margin:5px 0 0;color:#91a7b6;font-size:8px;font-weight:900;letter-spacing:.12em}
-#contractCards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.contractCard{min-height:225px;padding:10px 8px;border:1px solid #415363;border-radius:13px;background:linear-gradient(180deg,#0d171f,#070b0f);color:#fff;text-align:left;display:flex;flex-direction:column;box-shadow:inset 0 0 25px #ffffff06}
-#riskRow{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:0 0 8px}.riskBtn{min-height:40px;padding:5px;border:1px solid #3b4d5b;border-radius:9px;background:#091117;color:#9eafbb;font-size:7px;font-weight:1000;letter-spacing:.07em}.riskBtn b{display:block;font-size:9px;color:#dceaf2}.riskBtn.selected{border-color:#ff9d5c;background:#1d1009;box-shadow:0 0 13px #ff713328}.riskBtn.selected b{color:#ffd39c}.riskBtn:disabled{opacity:.25}
-#streakLine{margin:0 0 8px;padding:5px 8px;border:1px solid #5f4e3266;border-radius:8px;background:#120e09;color:#f5d08c;font-size:7px;font-weight:950;letter-spacing:.06em;text-align:center}
-.contractCard h3{margin:7px 0 4px;font-size:12px;line-height:1.05}.contractCard p{margin:0;color:#aab8c2;font-size:8px;line-height:1.45}.contractIcon{height:57px;border-radius:9px;border:1px solid #ffffff17;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:1000;letter-spacing:.05em}
-.contractObjective{margin-top:8px;padding-top:7px;border-top:1px solid #ffffff12;color:#d8edf9;font-size:8px;font-weight:900;line-height:1.5}.contractReward{margin-top:auto;padding-top:8px;color:#ffd789;font-size:7.5px;font-weight:950;line-height:1.45}
-.contractCard[data-contract="exterminate"]{border-color:#ff715d66}.contractCard[data-contract="exterminate"] .contractIcon{color:#ff8d72;background:#2b0c09}
-.contractCard[data-contract="predator"]{border-color:#ffb85666}.contractCard[data-contract="predator"] .contractIcon{color:#ffd06c;background:#251606}
-.contractCard[data-contract="harvest"]{border-color:#66e68266}.contractCard[data-contract="harvest"] .contractIcon{color:#8dffa3;background:#0b2110}
-@media(max-width:390px){#contractCards{gap:5px}.contractCard{min-height:214px;padding:8px 6px}.contractCard h3{font-size:10px}}
+@media(max-width:390px){}
 @keyframes predPulse{from{filter:brightness(1)}to{filter:brightness(1.35)}}
 #parts{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(13px + var(--safeB));display:flex;gap:7px;z-index:7;pointer-events:none}
 .part{width:56px;height:57px;border-radius:12px;border:1px solid #5f6b75;background:#080d12dd;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 12px #0008}
@@ -195,14 +183,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 .heroCoreGlow{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:radial-gradient(circle,rgba(255,118,50,.17),rgba(255,82,35,.05) 42%,transparent 70%);box-shadow:0 0 36px #ff653528;animation:heroPulse 1.8s ease-in-out infinite alternate}@keyframes heroPulse{to{transform:translate(-50%,-50%) scale(1.16);opacity:.7}}
 #heroStage{position:absolute;left:12px;bottom:10px;font-size:8px;font-weight:1000;letter-spacing:.09em;color:#e5edf2}.heroRoute{position:absolute;right:12px;bottom:10px;padding:4px 7px;border:1px solid #7890a855;border-radius:7px;background:#071019d9;color:#a9c9dd;font-size:7px;font-weight:1000;letter-spacing:.08em}
 #originPanel,#unlockPanel,#labPanel,#nemesisPanel{max-width:440px;border-radius:13px;backdrop-filter:blur(7px);box-shadow:0 8px 20px #0006}#originPanel{padding:8px;background:linear-gradient(180deg,#071018e8,#050b10e8)}#unlockPanel{padding:7px 8px;background:#070c10e8}#labPanel{padding:9px;background:linear-gradient(180deg,#100d0ce8,#07090ce8);margin-bottom:9px}
-.originCard{min-height:67px}.originCard b{font-size:9px}.originCard span{font-size:7px;line-height:1.25}.unlockNode{padding:5px 3px}.labUp{min-height:52px;padding:6px}.labUp b{font-size:8px}.labUp span{font-size:6.5px}.posterActions{position:sticky;bottom:-1px;z-index:4;padding:7px 0 1px;background:linear-gradient(180deg,transparent,#030405 30%);max-width:440px}.bigBtn{min-height:58px;border-radius:16px;font-size:18px;background:linear-gradient(180deg,#67200b,#250805);border-color:#ffad58;box-shadow:0 0 25px #ff642c38,inset 0 0 22px #ff6a2518}.memoryBtn,.codexBtn{border-radius:14px;min-width:70px}.tip{font-size:7px;margin:6px 0 0;color:#66727b;line-height:1.35;text-align:center;max-width:440px}
-
-/* Contract/blueprint screens: less document, more game selection */
-#contractOverlay,#blueprintOverlay{padding:calc(20px + var(--safeT)) 12px calc(18px + var(--safeB));background:radial-gradient(circle at 50% 24%,#14100d,#030609 62%)}.contractHead,.blueprintHead{margin-bottom:7px}.contractHead h2,.blueprintHead h2{font-size:25px}.contractHead p,.blueprintHead p{font-size:7px}.contractCard{min-height:166px;padding:8px 7px;border-radius:14px;background:linear-gradient(180deg,#0e171edd,#05080bdd)}.contractCard p{display:none}.contractIcon{height:48px;font-size:17px;border-radius:10px}.contractCard h3{font-size:10px;margin:6px 0}.contractObjective{font-size:7.4px;line-height:1.4;margin-top:2px}.contractReward{font-size:7px}.riskBtn{min-height:34px}.riskBtn b{font-size:8px}#streakLine{font-size:6.5px;padding:4px 7px}.blueprintCard{min-height:125px}.blueprintCard p{font-size:7px}.blueprintNeed{font-size:6.5px}
+.originCard{min-height:67px}.originCard b{font-size:9px}.originCard span{font-size:7px;line-height:1.25}.unlockNode{padding:5px 3px}.labUp{min-height:52px;padding:6px}.labUp b{font-size:8px}.labUp span{font-size:6.5px}.posterActions{position:sticky;bottom:-1px;z-index:4;padding:7px 0 1px;background:linear-gradient(180deg,transparent,#030405 30%);max-width:440px}.bigBtn{min-height:58px;border-radius:16px;font-size:18px;background:linear-gradient(180deg,#67200b,#250805);border-color:#ffad58;box-shadow:0 0 25px #ff642c38,inset 0 0 22px #ff6a2518}.memoryBtn,.codexBtn{border-radius:14px;min-width:70px}.tip{font-size:7px;margin:6px 0 0;color:#66727b;line-height:1.35;text-align:center;max-width:440px}#blueprintOverlay{padding:calc(20px + var(--safeT)) 12px calc(18px + var(--safeB));background:radial-gradient(circle at 50% 24%,#14100d,#030609 62%)}.blueprintHead{margin-bottom:7px}.blueprintHead h2{font-size:25px}.blueprintHead p{font-size:7px}.blueprintCard{min-height:125px}.blueprintCard p{font-size:7px}.blueprintNeed{font-size:6.5px}
 
 /* Combat HUD: preserve screen real estate */
 #hud{padding-top:calc(5px + var(--safeT))}#topline{gap:4px;padding:0 7px}.pill{height:28px;border-radius:9px;padding:0 7px;font-size:9px;background:#061018d8;border-color:#7b8b9860;box-shadow:0 3px 12px #0007}.pill::before{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 1px 0 #ffffff08;pointer-events:none}#hpPill{border-color:#a0444266}#hpText{padding:0 8px}#lvl{font-size:8px;letter-spacing:.08em}#hpNum{font-size:9px}#dnaPill{min-width:49px;justify-content:center;color:#ff8cdd}#timerPill{min-width:61px;font-size:8px}
-#xpbar{height:3px;margin:4px 8px 0;background:#101820}#runbar{height:2px;margin:3px 8px 0;border:0;background:#11171d}#predationWrap{height:11px;margin:3px 8px 0;border-radius:6px;background:#140b08b8;border-color:#a1553448}#predationLabel{font-size:6px;letter-spacing:.08em}#contractBadge{position:absolute;top:calc(50px + var(--safeT));left:50%;transform:translateX(-50%);width:auto;max-width:72%;margin:0;padding:4px 8px;border-radius:8px;font-size:6.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.15;background:#061018d5;box-shadow:0 4px 14px #0007}#contractBadge b{font-size:7px}#nemesisBadge{position:absolute;top:calc(75px + var(--safeT));left:8px;max-width:154px;margin:0;padding:4px 6px;font-size:6px;line-height:1.2}#nemesisBadge b{font-size:7px}
+#xpbar{height:3px;margin:4px 8px 0;background:#101820}#runbar{height:2px;margin:3px 8px 0;border:0;background:#11171d}#predationWrap{height:11px;margin:3px 8px 0;border-radius:6px;background:#140b08b8;border-color:#a1553448}#predationLabel{font-size:6px;letter-spacing:.08em}#nemesisBadge{position:absolute;top:calc(75px + var(--safeT));left:8px;max-width:154px;margin:0;padding:4px 6px;font-size:6px;line-height:1.2}#nemesisBadge b{font-size:7px}
 #bossbar{top:calc(36px + var(--safeT));left:8px;right:8px;height:16px;border-radius:8px;border-color:#d94c4c88;background:#120608e8}#bossname{font-size:7.5px;letter-spacing:.08em}#phaseBadge{top:calc(75px + var(--safeT));left:8px;padding:4px 6px;font-size:6.5px;border-radius:7px;background:#061018c9;max-width:165px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #statusRail{position:absolute;top:calc(75px + var(--safeT));right:8px;z-index:8;display:flex;flex-direction:column;align-items:flex-end;gap:3px;pointer-events:none;max-width:170px}#statusRail>#evoBadge,#statusRail>#fusionBadge,#statusRail>#blueprintBadge,#statusRail>#counterBadge,#statusRail>#evasionBadge,#statusRail>#threatBadge,#statusRail>#relicBadge{position:static!important;transform:none!important;max-width:170px;margin:0;padding:4px 6px;border-radius:7px;font-size:6px;line-height:1.2;text-align:right;box-shadow:0 3px 10px #0007}#statusRail b{font-size:7px!important}.blueprintBadge.complete{box-shadow:none}
 #objectiveBadge{top:calc(102px + var(--safeT));min-width:150px;max-width:58%;padding:4px 7px;font-size:7px}#waveBadge{position:absolute;top:calc(126px + var(--safeT));left:50%;transform:translateX(-50%);z-index:8;display:none;min-width:154px;max-width:62%;padding:4px 8px;border:1px solid #ffae5a70;border-radius:8px;background:#1a0d05d9;color:#ffd5a4;font-size:7px;font-weight:1000;letter-spacing:.06em;text-align:center;pointer-events:none;box-shadow:0 3px 12px #0008}#waveBadge.clear{border-color:#6ee59a88;background:#071a10df;color:#bfffd3}#focusHint{position:absolute;left:50%;bottom:calc(60px + var(--safeB));transform:translateX(-50%);z-index:8;display:none;padding:4px 8px;border:1px solid #79cfff45;border-radius:7px;background:#06131ac9;color:#bdeaff;font-size:6px;font-weight:1000;letter-spacing:.07em;pointer-events:none;white-space:nowrap}#priorityBadge{position:static!important;display:none;max-width:170px;margin:0;padding:4px 6px;border:1px solid #f0d36a55;border-radius:7px;background:#171307d6;color:#ffe7a1;font-size:6px;font-weight:1000;line-height:1.25;text-align:right;box-shadow:0 3px 10px #0007}#priorityBadge b{color:#fff3c6;font-size:7px!important}#bossIntro{position:absolute;inset:0;z-index:55;display:none;pointer-events:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.80) 0 18%,rgba(0,0,0,.12) 32% 68%,rgba(0,0,0,.84) 82% 100%);opacity:0;transition:opacity .16s ease}
@@ -225,7 +210,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 
 #message{font-size:17px!important;letter-spacing:.06em;opacity:0}
 #blueprintBadge.complete{box-shadow:0 0 12px #53e48622!important}
-@media(max-width:410px){#poster{padding-left:12px;padding-right:12px}.posterTitle{font-size:42px}#posterHero{height:122px}#heroSpecimenImg{height:108px}.originGrid{gap:5px}.labGrid{gap:5px}#contractCards{gap:5px}.contractCard{min-height:158px}.contractCard h3{font-size:9px}.contractObjective{font-size:6.7px}.contractReward{font-size:6.3px}#statusRail{max-width:150px}#statusRail>*{max-width:150px!important}}
+@media(max-width:410px){#poster{padding-left:12px;padding-right:12px}.posterTitle{font-size:42px}#posterHero{height:122px}#heroSpecimenImg{height:108px}.originGrid{gap:5px}.labGrid{gap:5px}#statusRail{max-width:150px}#statusRail>*{max-width:150px!important}}
 
 
 /* ===== V80 INTERFACE / VISUAL OVERHAUL ===== */
@@ -260,24 +245,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 .memoryBtn::after{content:'MEM';position:absolute;left:0;right:0;bottom:5px;font-size:5px;color:#9d7dad;font-weight:1000;letter-spacing:.06em}
 .codexBtn::before{content:'▦';font-size:19px;color:#bce8ff}
 .codexBtn::after{content:'LOG';position:absolute;left:0;right:0;bottom:5px;font-size:5px;color:#7897a8;font-weight:1000;letter-spacing:.06em}
-.tip{font-size:7px;margin-top:6px;opacity:.55;text-align:center}
-
-/* Contract cards: large icon, short information, faster scan */
-#contractPanel{max-width:470px}
-#contractCards{grid-template-columns:1fr;gap:6px;max-height:64vh;overflow:auto;padding:1px}
-.contractCard{min-height:112px;padding:8px;display:grid;grid-template-columns:62px 1fr 52px;grid-template-rows:auto 1fr;gap:4px 8px;align-items:center;border-radius:12px}
-.contractIcon{grid-row:1/3;width:62px;height:62px;border-radius:16px;font-size:27px;letter-spacing:0;align-self:center}
-.contractBody{min-width:0}.contractBody h3{margin:0 0 3px;font-size:11px}.contractBody p{font-size:7px;line-height:1.25;color:#8fa0ac;margin:0 0 5px}
-.contractObjective{margin:0;padding:0;border:0;font-size:7px;line-height:1.35;color:#dceaf3}
-.contractPay{grid-column:3;grid-row:1/3;align-self:stretch;border-left:1px solid #ffffff12;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:6px;color:#9eb0bb;font-weight:1000}
-.contractPay b{display:block;font-size:14px;color:#ffd27a;margin-bottom:2px}
-.contractPay span{display:block;font-size:5.5px;line-height:1.25}
-.contractCard[data-contract="exterminate"] .contractIcon::after{content:'HUNT';display:block;font-size:5px;margin-top:4px;opacity:.6}
-.contractCard[data-contract="predator"] .contractIcon::after{content:'CHAIN';display:block;font-size:5px;margin-top:4px;opacity:.6}
-.contractCard[data-contract="harvest"] .contractIcon::after{content:'ABSORB';display:block;font-size:5px;margin-top:4px;opacity:.6}
-.contractReward{display:none}
-#riskRow{margin-bottom:6px}.riskBtn{min-height:36px}
-#streakLine{margin-bottom:6px}
+.tip{font-size:7px;margin-top:6px;opacity:.55;text-align:center} short information{max-width:470px}
 
 /* Blueprint cards become visual recipes */
 #blueprintPanel{max-width:480px}
@@ -315,9 +283,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
   #posterHero{height:130px}
   #heroSpecimenImg{height:114px}
   .originCard{min-height:53px}
-  #contractCards{max-height:67vh}
-  .contractCard{grid-template-columns:54px 1fr 46px;min-height:102px}
-  .contractIcon{width:54px;height:54px;font-size:23px}
   .blueprintCard{min-height:122px}
 }
 
@@ -326,13 +291,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #bossIntroCard{will-change:transform,opacity}
 .part{transition:transform .12s ease,filter .12s ease}
 .part.mastered{transform:translateY(-1px)}
-#focusHint{transition:opacity .12s ease}
-
-/* ===== V90 COMBAT CINEMATIC POLISH ===== */
-#contractOverlay[style*="display: flex"],#blueprintOverlay[style*="display: flex"],#levelOverlay[style*="display: flex"],#rewardOverlay[style*="display: flex"],#routeOverlay[style*="display: flex"],#endOverlay[style*="display: flex"],#memoryOverlay[style*="display: flex"],#codexOverlay[style*="display: flex"],#masteryOverlay[style*="display: flex"]{animation:v90OverlayIn .20s ease-out}
+#focusHint{transition:opacity .12s ease}#blueprintOverlay[style*="display: flex"],#levelOverlay[style*="display: flex"],#rewardOverlay[style*="display: flex"],#routeOverlay[style*="display: flex"],#endOverlay[style*="display: flex"],#memoryOverlay[style*="display: flex"],#codexOverlay[style*="display: flex"],#masteryOverlay[style*="display: flex"]{animation:v90OverlayIn .20s ease-out}
 @keyframes v90OverlayIn{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
-#contractCards>*{animation:v90CardIn .24s ease-out both}
-#contractCards>*:nth-child(2){animation-delay:.035s}#contractCards>*:nth-child(3){animation-delay:.07s}
 #blueprintCards>*{animation:v90CardIn .22s ease-out both}
 #blueprintCards>*:nth-child(2){animation-delay:.025s}#blueprintCards>*:nth-child(3){animation-delay:.05s}#blueprintCards>*:nth-child(4){animation-delay:.075s}#blueprintCards>*:nth-child(5){animation-delay:.10s}
 @keyframes v90CardIn{from{opacity:0;transform:translateY(8px) scale(.985)}to{opacity:1;transform:none}}
@@ -398,11 +358,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 
 
 /* ===== V105 MOBILE STABILITY / FAIRNESS HARDENING ===== */
-#dash,#ability,#pauseBtn,.homeTab,.bigBtn,.riskBtn,.contractCard,.blueprintCard,.card,.masteryCard,.rewardCard{touch-action:manipulation}
+#dash,#ability,#pauseBtn,.homeTab,.bigBtn,.blueprintCard,.card,.masteryCard,.rewardCard{touch-action:manipulation}
 @media(pointer:coarse){
-  #pauseBtn{min-width:44px;min-height:44px}
-  .riskBtn{min-height:44px}.homeTab{min-height:42px}
-  .contractCard,.blueprintCard,.card,.masteryCard,.rewardCard{cursor:default}
+  #pauseBtn{min-width:44px;min-height:44px}.homeTab{min-height:42px}.blueprintCard,.card,.masteryCard,.rewardCard{cursor:default}
 }
 @media(orientation:landscape) and (max-height:560px){
   #topline{padding:0 7px;gap:4px}.pill{height:28px;font-size:9px;padding:0 6px}#timerPill{min-width:58px}
@@ -620,7 +578,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #predationWrap{margin:3px 12px 0 54px!important;background:linear-gradient(180deg,#190905,#0b0706)!important;border-color:#87452f66!important}
 #pauseBtn{left:10px!important;top:calc(9px + var(--safeT))!important;width:36px!important;height:36px!important;border-radius:6px!important;border:1px solid #8094a077!important;background:linear-gradient(180deg,#18242d,#081017)!important;box-shadow:inset 0 1px 0 #ffffff18,0 4px 13px #000b!important;font-size:16px!important}
 #phaseBadge{top:calc(84px + var(--safeT))!important;left:12px!important;border-radius:6px!important;background:#061018dc!important;border-color:#526b7c66!important;padding:5px 8px!important;font-size:6.8px!important;letter-spacing:.08em!important;box-shadow:0 4px 12px #000a!important}
-#contractBadge{top:calc(53px + var(--safeT))!important;background:#080c11e8!important;border-color:#5f4c4770!important;box-shadow:0 4px 15px #000b!important}
 #bossbar{top:calc(54px + var(--safeT))!important;height:20px!important;left:54px!important;right:12px!important;border-radius:4px!important;background:linear-gradient(180deg,#190909,#080607)!important;box-shadow:inset 0 1px 0 #ffffff0d,0 5px 14px #000b!important}
 #bossfill{background:linear-gradient(90deg,#851019,#e73e30,#ff754c)!important;box-shadow:0 0 12px #ff422d55}
 #bossname{font-size:8px!important;letter-spacing:.10em!important}.bossPhaseStrip{height:3px!important}
@@ -695,7 +652,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #combatBrand{top:calc(72px + var(--safeT))!important;font-size:27px!important;color:#fff0e51c!important;text-shadow:0 0 17px #ff55352e,0 2px 8px #000!important;letter-spacing:.15em!important}
 #combatBrand::after{color:#ff9d7c25!important;font-size:4.4px!important}
 #phaseBadge{border-left:2px solid #c75c49aa!important;background:linear-gradient(90deg,#0a141bdc,#061018c7)!important}
-#contractBadge{border-left:2px solid #8f6c55aa!important}
 #statusRail>*{background:linear-gradient(180deg,#081118e8,#05090ddc)!important;border-color:#52657055!important;box-shadow:0 5px 13px #0009,inset 0 1px 0 #ffffff08!important}
 
 /* V162 · player/controls presentation */
@@ -757,8 +713,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #xpbar{margin-top:6px!important;height:3px!important}#runbar{height:2px!important;margin-top:3px!important}#predationWrap{margin-top:3px!important;height:7px!important}
 #pauseBtn{top:calc(12px + var(--safeT))!important;left:12px!important;right:auto!important;width:36px!important;height:36px!important;border:0!important;border-radius:0!important;background:var(--asset) center/contain no-repeat!important;font-size:0!important;box-shadow:none!important}
 #phaseBadge{top:calc(124px + var(--safeT))!important;font-size:6px!important;padding:4px 6px!important;background:#080c0dbd!important}
-#contractBadge{position:absolute!important;top:calc(13px + var(--safeT))!important;right:8px!important;width:84px!important;margin:0!important;padding:4px!important;font-size:5px!important;border:1px solid #58616866!important;background:#07090ac7!important;max-height:40px;overflow:hidden}
-#contractBadge b{font-size:5.5px!important}
 #statusRail{top:calc(151px + var(--safeT))!important}
 #bossbar{top:calc(147px + var(--safeT))!important;border-radius:2px!important;overflow:visible!important;background:#160607!important}
 #bossbar::after{content:'';position:absolute;inset:-9px -7px;background:var(--asset) center/100% 100% no-repeat;pointer-events:none;z-index:0}
@@ -783,7 +737,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 .renderedCardArt{order:2;width:100%;height:95px;flex:0 0 95px;display:flex;align-items:center;justify-content:center}.renderedCardArt img{max-width:110%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 8px #000)}
 .renderedCard .cardDesc{order:3;font-size:8px!important;min-height:42px!important;line-height:1.4!important;margin:5px 0 0!important;padding:3px 1px!important;text-align:center}
 .renderedCard .cardTag{order:5;font-size:6px!important;margin-top:auto!important;line-height:1.3!important;text-align:center}
-.choiceRender{width:100%;height:82px;object-fit:contain;display:block;margin:2px auto 6px;pointer-events:none}.contractIcon .choiceRender{height:64px;margin:0}.contractIcon{border:0!important;background:transparent!important;height:68px!important}
+.choiceRender{width:100%;height:82px;object-fit:contain;display:block;margin:2px auto 6px;pointer-events:none}
 #heroSpecimenImg{object-fit:contain!important;filter:drop-shadow(0 8px 15px #000) drop-shadow(0 0 12px #ff4b251f)!important}
 #posterHero::before{background:var(--hero-prop) left center/auto 95% no-repeat!important;opacity:.52!important;inset:0!important;border:0!important;border-radius:0!important;transform:none!important}
 #posterHero::after{background:var(--hero-prop) right center/auto 85% no-repeat!important;opacity:.32!important;inset:0!important;border:0!important;border-radius:0!important;transform:none!important}
@@ -792,7 +746,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-acti
 #combatBrand{z-index:2!important}#posterHero::before{animation:none!important}#posterHero::after{content:''!important}
 .masteryIcon .choiceRender,.rewardIcon .choiceRender{height:78px;margin:0}.masteryIcon,.rewardIcon{background:transparent!important;box-shadow:none!important;border:0!important;overflow:visible}
 #levelContext{font-size:7px!important}#rerollHint{font-size:6px!important}#rerollBtn,#rerollBiasBtn{font-size:8px!important;min-height:40px!important}
-#contractBadge{left:auto!important;transform:none!important;white-space:normal!important;max-width:82px!important;text-align:center!important;line-height:1.25!important}
 #combatBrand{font-size:29px!important;left:48%!important}
 #objectiveBadge{top:calc(207px + var(--safeT))!important}#waveBadge{top:calc(229px + var(--safeT))!important}#flowBadge{top:calc(252px + var(--safeT))!important}
 #heroStage{font-size:6px!important;bottom:8px!important;max-width:48%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#heroMilestone{bottom:30px!important;font-size:5px!important}
@@ -928,7 +881,6 @@ html,body,button{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial
   #app.combat #hud{padding-top:calc(7px + var(--safeT))!important}
   #app.combat #topline{padding-left:58px!important;padding-right:12px!important;max-width:650px}
   #app.combat #phaseBadge{top:calc(53px + var(--safeT))!important;max-width:310px!important}
-  #app.combat #contractBadge{top:calc(10px + var(--safeT))!important;right:10px!important;width:112px!important;max-width:112px!important}
   #app.combat #statusRail{top:calc(58px + var(--safeT))!important;right:10px!important;max-width:190px!important}
   #app.combat #statusRail>*{max-width:190px!important}
   #app.combat #objectiveBadge{top:calc(83px + var(--safeT))!important}
@@ -1064,7 +1016,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 #app.combat #combatBrand,
 #app.combat #v100Milestone,
 #app.combat #phaseBadge,
-#app.combat #contractBadge,
 #app.combat #nemesisBadge,
 #app.combat #statusRail,
 #app.combat #objectiveBadge,
@@ -1183,7 +1134,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 #feedbackBar{display:none!important}
 #heroThreat,#heroMilestone{display:none!important}
 #levelCoach,#rerollHint{display:none!important}
-.levelHead p,.masteryHead p,.rewardHead p,.blueprintHead p,.contractHead p{opacity:.62;letter-spacing:.14em}
+.levelHead p,.masteryHead p,.rewardHead p,.blueprintHead p{opacity:.62;letter-spacing:.14em}
 
 /* Level-up: numbers first */
 #levelPanel{width:min(96vw,510px)!important}
@@ -1205,14 +1156,12 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 #rerollBtn,#rerollBiasBtn{height:38px!important;font-size:7px!important}
 
 /* Other choice screens: remove prose, emphasize effect */
-.masteryCard p,.rewardDesc,.blueprintCard p,.contractCard p{display:none!important}
+.masteryCard p,.rewardDesc,.blueprintCard p{display:none!important}
 .masteryCard,.rewardCard{min-height:160px!important;padding:10px!important}
 .masteryTag,.rewardTag{margin-top:auto!important;padding:7px 5px!important;border-top:1px solid #ffffff18!important;font-size:8px!important;line-height:1.35!important;color:#ffd18a!important;font-weight:1000!important}
 .rewardTitle,.masteryCard h3{font-size:12px!important;margin:5px 0!important}
 .blueprintCard{min-height:120px!important;padding:8px!important}
 .blueprintNeed{font-size:6.4px!important;line-height:1.35!important}.blueprintNeed strong{display:block;margin-top:4px;color:#ffd18a;font-size:8px}
-.contractCard{min-height:135px!important}.contractObjective{font-size:7.5px!important;line-height:1.35!important}.contractPay b{font-size:19px!important}.contractPay span{font-size:6px!important}
-#streakLine{font-size:6px!important;opacity:.72!important}
 
 @media(max-width:390px){
  .card{min-height:208px!important;padding:7px 5px!important}.renderedCardArt{height:68px!important}.cardTitle{font-size:10px!important}.statLine{font-size:5.6px!important}.statLine b{font-size:7.4px!important}
@@ -1423,7 +1372,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 </style>
 <style id="v450-hud-patch">
 #app.combat #killPill,#app.combat #dnaPill,#app.combat #hpPill{display:none!important}
-#app.combat #runbar,#app.combat #predationWrap,#app.combat #contractBadge,#app.combat #nemesisBadge{display:none!important}
+#app.combat #runbar,#app.combat #predationWrap,#app.combat #nemesisBadge{display:none!important}
 #app.combat #topline{position:absolute!important;top:calc(10px + var(--safeT))!important;left:0!important;right:0!important;height:48px!important;padding:0!important;display:block!important;max-width:none!important}
 #app.combat #timerPill{position:absolute!important;right:12px!important;top:0!important;width:132px!important;height:46px!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important;border-radius:10px!important;border:2px solid #8b3537!important;background:linear-gradient(180deg,#251013 0%,#0b0d11 100%)!important;box-shadow:inset 0 0 0 1px #3a2024,0 0 14px rgba(255,61,56,.20)!important;color:#fff6ec!important;padding:0!important;overflow:hidden!important}
 #app.combat #timerPill::before{content:'≡';position:absolute;left:14px;top:50%;transform:translateY(-58%);color:#ff4f4f;font-size:22px;font-weight:1000;line-height:1;text-shadow:0 0 8px rgba(255,76,76,.28)}
@@ -1533,9 +1482,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 #poster button:focus-visible{outline:2px solid #8ad7da!important;outline-offset:3px}
 #poster button:not(:disabled):active{filter:brightness(1.2)}
 .setupHomeBackV522{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:0 0 9px;padding:7px 12px;border:1px solid #435866;border-radius:5px;background:#121b24;color:#c1dce3;font:700 11px/1.3 system-ui,sans-serif}
-.setupHomeBackV522:focus-visible{outline:2px solid #8ad7da;outline-offset:3px}
-#contractOverlay,#weaponSelectOverlay{overflow-y:auto;overscroll-behavior:contain}
-#contractPanel,#weaponSelectPanel{margin-top:auto;margin-bottom:auto;flex-shrink:0}
+.setupHomeBackV522:focus-visible{outline:2px solid #8ad7da;outline-offset:3px}#weaponSelectOverlay{overflow-y:auto;overscroll-behavior:contain}#weaponSelectPanel{margin-top:auto;margin-bottom:auto;flex-shrink:0}
 #poster .homeSectionTitleV522{margin:0 0 7px;font-size:23px;color:#f0ddd0;letter-spacing:.02em}
 #poster .homeSectionHintV522{font-size:11px;line-height:1.55;color:#99a4b0;margin:0 0 19px}
 #poster #originPanel,#poster #unlockPanel,#poster #labPanel,#poster #nemesisPanel{padding:13px!important;border:1px solid #4e414d!important;border-radius:7px!important;margin-bottom:14px!important;clip-path:none!important;background:linear-gradient(150deg,#141d26,#0d121a)!important}
@@ -1670,7 +1617,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(min-width:460px){#poster #homeStatusV525{padding-left:16px;padding-right:16px;gap:9px;min-height:70px}.profileNameV525{font-size:14px}.profileLevelV525{font-size:9px}.profileXpV525{height:6px}.walletV525{gap:5px;min-height:40px}.walletIconV525{flex-basis:26px;width:26px;height:29px}.walletV525 b{font-size:14px}}
 @media(max-height:550px){#poster #homeStatusV525{min-height:58px;padding-top:calc(6px + var(--safeT));padding-bottom:6px}}
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version":"V575-WEB-28-PLAYFIELD","build":"01634b404ddfdef43b3735dece800e44ecc7d6fc39f5ba1026367e2deea41ba4","scriptBytes":77569572,"preloadResources":true};</script>
+<script>window.EVOLVE_WEB_CONFIG={"scriptBytes":77573630,"preloadResources":true,"version":"V575-WEB-29-ADMIN-COMBAT","build":"a08eb3d767bccd07f9daa1bdc1910149d117054c3c5bd716b2524af7c889e415"};</script>
 <script src="assets/c3dfb005a76a08fd3b04148811a22da679d856ce473429833f61992abc747901.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
@@ -1759,7 +1706,6 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
     <div id="xpbar" role="progressbar" aria-label="Experience to next level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="xpfill"></div><span id="xpLabel">EXP</span><span id="lvl">LV. 1</span></div>
     <div id="runbar"><div id="runfill"></div><div id="runmark"><i></i><i></i><i></i><i></i></div></div>
     <div id="predationWrap"><div id="predationFill"></div><div id="predationLabel">PREDATION 0%</div></div>
-    <div id="contractBadge"></div>
     <div id="nemesisBadge"></div>
   </div>
   <div id="bossbar"><div id="bossname">BIO TITAN</div><div id="bossTrack" role="progressbar" aria-label="Boss HP" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><svg class="bossSkinV414 bossSkinFinalV414" viewBox="12 140 2148 438" aria-hidden="true">
@@ -1831,7 +1777,6 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
   <div id="rewardOverlay"><div id="rewardPanel"><div class="rewardHead"><h2 id="rewardTitle">CORE ABSORPTION</h2><p id="rewardSource">ELITE BIO-CORE SECURED</p></div><div id="rewardCards"></div></div></div>
   <div id="endOverlay"><div class="endBox"><h1 id="endTitle" class="endTitle">EVOLVED</h1><div id="endSub" class="endSub">BIO-CONTAINMENT BREACHED.</div><div id="endGradeWrap"><div id="endGrade">A</div><div id="endScoreBox"><b id="endScore">0000</b><span>EVOLUTION SCORE</span></div></div><div id="endEvolution"><b>RUN EVOLUTION</b><div id="endEvolutionPath"></div><div id="endDamageShare"></div><div id="endBuildAnalysis"></div><div id="endAdaptation"></div><div id="endScoreBreakdown"></div></div><div id="endHighlights"></div><div id="bankGain"></div><div class="endStats"><div class="stat"><b id="endKills">0</b><span>KILLS</span></div><div class="stat"><b id="endLevel">1</b><span>LEVEL</span></div><div class="stat"><b id="endDNA">0</b><span>DNA</span></div><div class="stat"><b id="endBuild">-</b><span>DOMINANT MUTATION</span></div></div><div class="endActions"><button id="runBack" class="bigBtn" type="button">RUN IT BACK</button><button id="restart" class="bigBtn">NEW MUTATION</button><button id="labReturn" class="smallBtn labBtn" style="width:100%">GENOME LAB</button></div></div></div>
   <div id="blueprintOverlay"><div id="blueprintPanel"><div class="blueprintHead"><h2></h2><p>CHOOSE A BUILD</p></div><div id="blueprintCards"></div></div></div>
-  <div id="contractOverlay"><div id="contractPanel"><button id="homeContractBackV522" class="setupHomeBackV522" type="button" data-i18n-ignore>‹ HOME</button><div class="contractHead"><h2>CONTRACT</h2><p>CHOOSE A TARGET</p></div><div id="streakLine"></div><div id="riskRow"></div><div id="contractCards"></div></div></div>
   <div id="weaponSelectOverlay"><div id="weaponSelectPanel"><button id="homeWeaponBackV522" class="setupHomeBackV522" type="button" data-i18n-ignore>‹ HOME</button><div class="weaponSelectHead"><h2>CHOOSE WEAPON</h2><p>START THIS RUN AT ★1</p></div><div id="weaponSelectGrid"></div><div class="weaponSelectFoot">SELECTED WEAPON ★1 · ALL OTHER WEAPONS ★0</div></div></div>
   <div id="routeOverlay"><div id="routePanel"><div class="routeHead"><h2>STAGE CLEAR</h2><p>CHOOSE THE NEXT BIO-DOMAIN</p></div><div id="stageRewardBanner"></div><div id="routeCards"></div><div id="routeCurrent"></div></div></div>
   <div id="codexOverlay"><div id="codexPanel"><div class="codexTop"><h2>GENOME CODEX</h2><button id="codexClose" class="codexClose" type="button">×</button></div><div id="codexSummary" class="codexSummary"></div><div id="codexContent"></div></div></div>
@@ -1934,7 +1879,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
-<script type="application/evolve-resource" data-evolve-src="assets/273c7d116960539d3e7c68057a5351906c2ff3c74be237530b10de316452b958.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/1a64e9cfbb29b09c7432cdc014a633f0e79df3d3e2d2c7c594698b58c5a491a8.js"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->

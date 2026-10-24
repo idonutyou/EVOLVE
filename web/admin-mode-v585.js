@@ -9,7 +9,7 @@
  startHomeBattleV522=function(...args){const result=start(...args);if(result)persistSelection();return result;};$('start').onclick=startHomeBattleV522;
  grantStageClearReward=function(...args){if(!evolveAdminEnabledV585){normalProgressV585.unlocked=Math.max(normalProgressV585.unlocked,Math.min(99,(meta.stage||1)+1));saveNormalProgressV585();}return grant(...args);};
  returnToHome=function(...args){const result=home(...args);persistSelection();return result;};
- const enable=()=>{if(evolveAdminEnabledV585)return;evolveAdminEnabledV585=true;evolveAdminTapsV585=0;document.documentElement.dataset.evolveAdminV585='true';refreshEvolveHomeV522();tell(homeTextV522('Administrator mode enabled','관리자 모드가 켜졌어요.'));};
+ const enable=()=>{if(evolveAdminEnabledV585)return;evolveAdminEnabledV585=true;evolveAdminTapsV585=0;document.documentElement.dataset.evolveAdminV585='true';campaignPrepareStageV567(homeSelectedStageV522);refreshEvolveHomeV522();tell(homeTextV522('Administrator mode enabled','관리자 모드가 켜졌어요.'));};
  $('homeTabs').addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
   if(evolveAdminEnabledV585)return;

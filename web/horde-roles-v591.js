@@ -9,7 +9,7 @@ function enemyAttackRoleV591(e){
  if(e.type==='warden'||e.type==='symbiote')return 'support';
  return 'melee';
 }
-function enemyContactAllowedV591(e){const role=enemyAttackRoleV591(e);return role==='major'||role==='melee'||role==='charge'&&e.burst>0;}
+function enemyContactAllowedV591(e){return !!e&&!e.dead;}
 function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner);}
 function hordeSpawnDelayV591(delay,major){return major?delay:delay/HORDE_RULES_V591.spawnMultiplier;}
 function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(Math.round(density*1.5)*1.3));}

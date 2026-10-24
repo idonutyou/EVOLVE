@@ -8,6 +8,9 @@ const MONSTER_CATALOG_V593=[
  {id:'froststalker',type:'froststalker',name:'프로스트 스토커',en:'FROST STALKER',group:'일반'},
  {id:'symbiote',type:'symbiote',name:'심비오트',en:'SYMBIOTE',group:'일반'},
  {id:'embermaw',type:'embermaw',name:'엠버모',en:'EMBERMAW',group:'일반'},
+ {id:'ripper',type:'ripper',name:'리퍼',en:'RIPPER',group:'신규'},
+ {id:'mauler',type:'mauler',name:'파쇄자',en:'MAULER',group:'신규'},
+ {id:'bileback',type:'bileback',name:'독낭수',en:'BILEBACK',group:'신규'},
  {id:'legacy_crawler',type:'crawler',legacy:true,name:'크롤러 · 변형',en:'CRAWLER · LEGACY',group:'변형'},
  {id:'legacy_warden',type:'warden',legacy:true,name:'워든 · 변형',en:'WARDEN · LEGACY',group:'변형'},
  {id:'alpha',type:'brute',elite:'alpha',name:'알파 브루트',en:'ALPHA BRUTE',group:'정예'},
@@ -41,7 +44,7 @@ function monsterCatalogSpawnOneV593(c){
  if(!e||e.dead)return false;
  // Gate births expose locked coordinate accessors: restore actual writable positions first.
  if(e._mapBirthLockedV562)mapReleaseBirthV562(e);
- if(c.elite==='nemesis')Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});
+ if(c.elite==='nemesis'){Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});applyMidbossRankV596(e,'nemesis');}
  if(!monsterCatalogPointV593(e,monsterCatalogSpawnedV593)){e.dead=true;return false;}
  if(c.legacy)e.visualSetV516='legacy';else if(c.type==='crawler'||c.type==='warden')e.visualSetV516='base';
  Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false,mapEntranceRouteV562:null,mapRoadGateV562:null,_mapX560:e.x,_mapY560:e.y,vx:0,vy:0});
@@ -70,11 +73,11 @@ function monsterCatalogPumpV593(){
 }
 {
  const block=document.createElement('div');block.className='tmBlockV573';block.id='monsterCatalogV593';
- block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
+ block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','신규','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
  $('tmModalV573').querySelectorAll('.tmBlockV573')[1].before(block);
  function preview(){
   const c=MONSTER_CATALOG_V593.find(c=>c.id===$('monsterSelectV593').value);monsterCatalogSelectedV593=c.id;
-  const im=$('monsterImageV593');im.src=ASSET_SRC[monsterCatalogAssetV593(c)];im.alt=c.name;$('monsterNameV593').textContent=c.name+' · '+c.en;
+  const im=$('monsterImageV593');im.src=c.group==='신규'?monsterSurfaceV577(c.type,0)?.toDataURL()||ASSET_SRC[monsterCatalogAssetV593(c)]:ASSET_SRC[monsterCatalogAssetV593(c)];im.alt=c.name;$('monsterNameV593').textContent=c.name+' · '+c.en;
   const role=c.boss?['bio','venom'].includes(c.boss)?'보스전 · 선택한 페이즈로 시작':'보스 외형 · 기존 시험 패턴':c.elite?'정예 · 1마리씩 소환':({melee:'근접',ranged:'원거리',charge:'돌격',support:'지원'}[enemyAttackRoleV591({type:c.type})]||'');
   $('monsterRoleV593').textContent=role;for(const b of block.querySelectorAll('[data-monster-count-v593]'))b.disabled=!!(c.boss||c.elite)&&b.dataset.monsterCountV593!=='1';
  }

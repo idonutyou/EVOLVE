@@ -1,0 +1,17 @@
+{
+  "version": "V575-WEB-29-ADMIN-COMBAT",
+  "baseline": "3f8f3164bc19d89fb67d4ea95069674f9fcba1ab",
+  "progress": 70,
+  "tasks": [
+    "Restore original crawler/runner/brute/spitter and register three independent painted species",
+    "Delete contracts, difficulty modifiers, rewards and UI",
+    "Prepare effective saved test map on admin enable"
+  ],
+  "status": "Core browser checks passed; complete existing regression suite running",
+  "build": "a08eb3d767bccd07f9daa1bdc1910149d117054c3c5bd716b2524af7c889e415",
+  "new_tasks": [
+    "All species contact damage",
+    "Ranged retreat and melee pursuit",
+    "Five stage-based midboss ranks, body vapor, unique attacks and no overhead bar"
+  ]
+}

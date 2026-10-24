@@ -30,7 +30,7 @@ function warningTapeLayoutV592(width,height,elapsed,reduced=false){
 
 const enemyHealthVisibilityV592=createEnemyHealthVisibilityV592(1.2);
 const visualClarityStatsV592={healthBars:0,healthBoxes:[],volley:null,tape:null,tapeBuilds:0};
-function markEnemyHitV592(e,damage){if(!e.finalBoss)enemyHealthVisibilityV592.mark(e,t,damage);}
+function markEnemyHitV592(e,damage){if(!e.finalBoss&&!e.elite&&!e.midBoss&&!e.nemesis)enemyHealthVisibilityV592.mark(e,t,damage);}
 function enemyHealthLayoutV592(e){
  const img=renderedEnemy(e),crop=img?._spriteCrop||[0,0,img?.naturalWidth||1,img?.naturalHeight||1];
  const pose=e.elite||e.nemesis?{size:(e.bossName==='TITAN SENTINEL'?106.6:68)*1.12,sx:1,sy:1,rot:0,bob:0}:gpuEnemyVisualV426(e);
@@ -39,6 +39,7 @@ function enemyHealthLayoutV592(e){
 function drawEnemyHealthBarsV592(){
  visualClarityStatsV592.healthBars=0;visualClarityStatsV592.healthBoxes.length=0;
  enemyHealthVisibilityV592.each(t,(e,alpha)=>{
+  if(e.finalBoss||e.elite||e.midBoss||e.nemesis)return;
   if(!worldCircleVisibleV441(e.x,e.y,80,10))return;
   const b=enemyHealthLayoutV592(e),ratio=clamp(e.hp/Math.max(1,e.maxHp),0,1);
   ctx.save();ctx.globalAlpha=alpha;ctx.shadowBlur=0;ctx.fillStyle='#080b0eee';ctx.fillRect(b.x-1,b.y-1,b.width+2,b.height+2);ctx.fillStyle='#3b2023';ctx.fillRect(b.x,b.y,b.width,b.height);ctx.fillStyle='#e65b57';ctx.fillRect(b.x,b.y,b.width*ratio,b.height);ctx.restore();

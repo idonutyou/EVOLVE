@@ -12,7 +12,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.goto(`http://127.0.0.1:${server.address().port}/?evolveQA=1&evolveBioQA=1`,{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_ATTACK_WARNINGS_V582__&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
   await require('./admin_unlock.cjs')(page);
-  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();
+  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.geometry=await page.evaluate(()=>{
    const api=window.__EVOLVE_ATTACK_WARNINGS_V582__,a=api.test,c=a.context(),g=c.ctx,w=g.canvas.width,h=g.canvas.height,o=c.origin(),cx=o.x+150,cy=o.y+280,results={};
@@ -59,7 +59,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.locator('#meUnderV575').click();
   const roof=await page.evaluate(()=>{const e=window.__EVOLVE_MAP_TEST_V562__.test.editor,f=e.baseField();let x=432,y=768;outer:for(let yy=100;yy<1400;yy+=8)for(let xx=100;xx<760;xx+=8)if(f[yy*2*1728+xx*2]<-320){x=xx;y=yy;break outer}e.paint({mode:'under',radius:40,points:[[x,y],[x+2,y]]});return{x:x*1.25,y:y*1.25}});
   await page.locator('#meApplyV562').click();await page.waitForFunction(()=>document.getElementById('mapEditorV562').hidden&&!window.__EVOLVE_MAP_TEST_V562__.test.editor.read().busy,null,{timeout:60000});
-  await page.locator('#start').click();await page.locator('[data-contract="exterminate"]').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+  await page.locator('#start').click();await page.locator('[data-weapon="arm"]').click();await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.roof=await page.evaluate(roof=>{
    const game=window.__EVOLVE_TEST_MODULE_V575__.test.context(),a=window.__EVOLVE_ATTACK_WARNINGS_V582__.test,c=a.context();Object.assign(game.player,{...roof,inv:999});c.telegraphs.length=0;c.draw();
    const o=c.origin(),scale=c.ctx.canvas.width/innerWidth,x=Math.round((roof.x-o.x)*scale),y=Math.round((roof.y-o.y)*scale),pixel=()=>Array.from(c.ctx.getImageData(x,y,1,1).data),before=pixel(),layer=c.foreground();

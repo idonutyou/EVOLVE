@@ -1,3 +1,14 @@
+// Species retain independent identities while sharing a combat archetype.
+const NEW_MONSTER_SPECIES_V596=Object.freeze({
+ ripper:{name:'리퍼',en:'RIPPER',combatType:'runner',unlock:4,hp:.9,speed:1.12,damage:1},
+ mauler:{name:'파쇄자',en:'MAULER',combatType:'brute',unlock:7,hp:1.25,speed:.9,damage:1.15},
+ bileback:{name:'독낭수',en:'BILEBACK',combatType:'spitter',unlock:9,hp:1.1,speed:1,damage:1.1}
+});
+function enemyCombatTypeV596(enemy){
+ const type=typeof enemy==='string'?enemy:enemy?.type;
+ return NEW_MONSTER_SPECIES_V596[type]?.combatType||type;
+}
+
 
 (()=>{
 'use strict';
@@ -95,8 +106,8 @@ let worldSites=[],worldSiteSerial=0,worldSiteHintCd=0;
 let organSlots={predator:null,survival:null},organEquipCount=0;
 let enemies=[], bullets=[], eBullets=[], drops=[], particles=[], damageTexts=[], telegraphs=[], floorDecor=[], floorMarks=[], deathEchoes=[],runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};
 let keys={}, joy={active:false,id:null,x:0,y:0,cx:0,cy:0,dx:0,dy:0,startX:0,startY:0,moved:false,focusCandidate:null}, kills=0, dnaTotal=0;
-let directorLock=0,directorRelief=0,enemyTypeHistory=[],skillBankBonus=0,contractEdgeUsed=false;
-let dashReady=0, activeReady=0, activeDuration=0, activeMaxCd=15, predation=0, frenzy=0, killChain=0, maxChain=0, chainTimer=0,flowMilestone=0, evasionCharge=0,riposteTime=0,perfectDodges=0,hitStop=0,impactPulse=0,focusEnemy=null,focusHintTimer=0,tacticalWave=null,tacticalWaveIndex=0,tacticalWaveSerial=0,waveClears=0,rapidWaveClears=0,waveBreather=0,organHudTimer=0,proteostasisUsed=false, selectedContractId='exterminate',selectedRisk=0,selectedStartWeapon='arm',contract=null,contractDone=false,contractFailed=false,contractBankBonus=0,contractNodes=[],contractCores=0,contractEventFlags=[false,false,false],nemesisSpawned=false,nemesisKilledThisRun=false,cameraShake=0,cameraKickX=0,cameraKickY=0,bossDeathFx=null,evolutionPulse=null,cinematicFreeze=0,lastHudPaint=0,waveHudKey='',coachStep=0,coachLevelSeen=false;
+let directorLock=0,directorRelief=0,enemyTypeHistory=[],skillBankBonus=0;
+let dashReady=0, activeReady=0, activeDuration=0, activeMaxCd=15, predation=0, frenzy=0, killChain=0, maxChain=0, chainTimer=0,flowMilestone=0, evasionCharge=0,riposteTime=0,perfectDodges=0,hitStop=0,impactPulse=0,focusEnemy=null,focusHintTimer=0,tacticalWave=null,tacticalWaveIndex=0,tacticalWaveSerial=0,waveClears=0,rapidWaveClears=0,waveBreather=0,organHudTimer=0,proteostasisUsed=false, selectedStartWeapon='arm',objectiveBankBonus=0,nemesisSpawned=false,nemesisKilledThisRun=false,cameraShake=0,cameraKickX=0,cameraKickY=0,bossDeathFx=null,evolutionPulse=null,cinematicFreeze=0,lastHudPaint=0,waveHudKey='',coachStep=0,coachLevelSeen=false;
 const state={arm:0,mouth:0,tail:0,wing:0,leg:0,core:1,speed:0};
 const genes={reactor:0,virulent:0,predator:0,bastion:0,phase:0,hydra:0,core:0,haste:0};
 const evoState={arm:false,mouth:false,tail:false,wing:false,leg:false,core:false,speed:false};
@@ -138,7 +149,7 @@ function stageThreatScale(stage=meta.stage||1){let n=Math.max(0,stage-1),c=campa
 function stageSpeedScale(stage=meta.stage||1){const p=campaignStageProfile(stage);return (1+Math.min(.12,Math.max(0,stage-1)*.0055))*p.speed}
 function stageDamageScale(stage=meta.stage||1){let n=Math.max(0,stage-1),c=campaignCycleStage(stage);return 1+Math.min(.31,n*.017)+(c===10?.07:c===5?.035:0)}
 function stageCompositionTier(stage=meta.stage||1){return Math.min(4,Math.floor(Math.max(0,campaignCycleStage(stage)-1)/2))}
-function dangerousEnemyCount(){let n=0;for(const e of enemies)if(!e.dead&&!e.elite&&!e.finalBoss&&['brute','spitter','warden','froststalker','symbiote','embermaw'].includes(e.type))n++;return n}
+function dangerousEnemyCount(){let n=0;for(const e of enemies)if(!e.dead&&!e.elite&&!e.finalBoss&&['brute','spitter','warden','froststalker','symbiote','embermaw'].includes(enemyCombatTypeV596(e)))n++;return n}
 function specialistBudget(){const tier=stageCompositionTier(),profile=campaignStageProfile(),base=sector===0?2:sector===1?4:sector===2?6:8;return Math.max(2,Math.round((base+tier+(t>150?1:0))*profile.special)-(finalBossAlive()?3:0))}
 function stageThreatText(stage=meta.stage||1){let pct=Math.round((stageThreatScale(stage)-1)*100);return 'THREAT +'+pct+'% · CYCLE '+campaignCycle(stage)}
 function dominantMutationKind(){
@@ -465,13 +476,10 @@ function renderNemesisStatus(force=false){
 }
 function recordNemesis(e){
   if(!e)return;
-  let raw=(e.contractBossTitle||e.eliteName||e.bossName||'UNKNOWN PREDATOR').replace(/^NEMESIS · /,'');
+  let raw=(e.eliteName||e.bossName||'UNKNOWN PREDATOR').replace(/^NEMESIS · /,'');
   let old=meta.nemesis,power=(old&&old.name===raw)?Math.min(5,(old.power||1)+1):1;
   const adaptKind=dominantMutationKind();discover('nemesis:memory');meta.nemesis={
     name:raw,
-    contract:e.contractVariant||contract?.id||'exterminate',
-    risk:selectedRisk,
-    riskName:riskTier().name,
     power,
     sourceType:e.type||'brute',
     adaptKind
@@ -482,13 +490,13 @@ function spawnNemesis(){
   if(nemesisSpawned||!meta.nemesis||ended||!directorCanStart('nemesis'))return null;directorHold(1.7);
   nemesisSpawned=true;
   const n=meta.nemesis,power=Math.max(1,n.power||1);
-  let type=n.contract==='harvest'?'spitter':'brute';
+  let type=['runner','spitter'].includes(n.sourceType)?n.sourceType:'brute';
   let e=spawnEnemy(type);
   e.elite=true;e.nemesis=true;e.eliteName='NEMESIS · '+n.name;e.elitePatternCd=1.15;
   e.hp=Math.max(e.hp*(2.4+.38*power),560*stageScale*(1+.18*power));e.maxHp=e.hp;
-  e.dmg*=1.10+.07*power;e.spd*=n.contract==='predator'?(1.18+.035*power):(1.05+.02*power);e.xp=160+power*30;e.r+=2+power*.4;
+  e.dmg*=1.10+.07*power;e.spd*=1.05+.02*power;e.xp=160+power*30;e.r+=2+power*.4;
   e.nemesisPower=power;e.adaptKind=n.adaptKind||'core';if(e.adaptKind==='speed')e.spd*=1.15+.02*power;
-  if(type==='spitter'){e.shot=Math.min(e.shot||.7,.5);e.strafe=e.strafe||1;}
+  if(enemyCombatTypeV596(type)==='spitter'){e.shot=Math.min(e.shot||.7,.5);e.strafe=e.strafe||1;}
   const entry=stageMajorArrival(e,'NEMESIS',1.04,'#c47aff');
   $('bossbar').style.display='block';$('bossname').textContent=e.eliteName;$('bossfill').style.width='100%';
   announceEncounter(e.eliteName,entry.side+' APPROACH · POWER '+power+' · ADAPTED VS '+(MEMORY_TRAITS[e.adaptKind]?.short||'CORE'));
@@ -498,7 +506,7 @@ function spawnNemesis(){
 
 function setHomeTab(tab='battle'){selectHomePageV522(tab);}
 function updateLab(){
-  $('metaDNA').textContent=meta.dna;renderOrigins();renderUnlockTree();renderNemesisStatus(true);renderMemoryArchive();renderCampaignTrack();const stageNow=meta.stage||1,milNow=campaignMilestone(stageNow);if($('campaignStats'))$('campaignStats').textContent='STAGE '+stageNow+' · '+stageThreatText(stageNow)+' · CLEAR '+(meta.clears||0)+' · APEX GENE '+(meta.apexGenes||0);if($('heroStage'))$('heroStage').textContent='STAGE '+stageNow+' · CLEAR '+(meta.clears||0)+' · STREAK '+(meta.contractStreak||0);if($('heroRoute'))$('heroRoute').textContent=meta.route==='cryo'?'CRYO VAULT':meta.route==='gene'?'GENE TEMPLE':meta.route==='inferno'?'INFERNO HIVE':'CELL ORIGIN';if($('heroThreat')){$('heroThreat').textContent=(milNow?milNow+' · ':'')+stageThreatText(stageNow);$('heroThreat').className=milNow==='OMEGA'?'omega':milNow==='APEX'?'apex':'';}
+  $('metaDNA').textContent=meta.dna;renderOrigins();renderUnlockTree();renderNemesisStatus(true);renderMemoryArchive();renderCampaignTrack();const stageNow=meta.stage||1,milNow=campaignMilestone(stageNow);if($('campaignStats'))$('campaignStats').textContent='STAGE '+stageNow+' · '+stageThreatText(stageNow)+' · CLEAR '+(meta.clears||0)+' · APEX GENE '+(meta.apexGenes||0);if($('heroStage'))$('heroStage').textContent='STAGE '+stageNow+' · CLEAR '+(meta.clears||0);if($('heroRoute'))$('heroRoute').textContent=meta.route==='cryo'?'CRYO VAULT':meta.route==='gene'?'GENE TEMPLE':meta.route==='inferno'?'INFERNO HIVE':'CELL ORIGIN';if($('heroThreat')){$('heroThreat').textContent=(milNow?milNow+' · ':'')+stageThreatText(stageNow);$('heroThreat').className=milNow==='OMEGA'?'omega':milNow==='APEX'?'apex':'';}
   const defs=[
     {id:'labHp',key:'hp',name:'CELL DENSITY',desc:'MAX HP +5%',max:5,unlock:0,base:24},
     {id:'labDmg',key:'dmg',name:'PREDATOR GENES',desc:'DAMAGE +4%',max:5,unlock:0,base:30},
@@ -539,13 +547,13 @@ ASSET_SRC['enemy/crawler']='assets/ae146d4918419be0ba59c9166433bfb313ce7592da732
 ASSET_SRC['enemy/warden']='assets/1747a3e57301cb642cde9b795d07ce0a2589f4ae6a6271a4b59f25acdec03feb.png';
 function enemyAppearanceKeyV516(e){
  const type=typeof e==='string'?e:e?.type||'crawler';
- return e?.visualSetV516==='legacy'&&(type==='crawler'||type==='warden')?'legacy_'+type:type;
+ return e?.visualSetV516==='legacy'&&(enemyCombatTypeV596(type)==='crawler'||type==='warden')?'legacy_'+type:type;
 }
 function enemyAppearanceAssetV516(key){
- return key.startsWith('legacy_')?'enemy_legacy/'+key.slice(7):'enemy/'+(key==='froststalker'?'frost_stalker':key);
+ key=NEW_MONSTER_SPECIES_V596[key]?.combatType||key;return key.startsWith('legacy_')?'enemy_legacy/'+key.slice(7):'enemy/'+(key==='froststalker'?'frost_stalker':key);
 }
 function assignEnemyAppearanceV516(e,stage){
- if(e.finalBoss||e.type==='boss'||(e.type!=='crawler'&&e.type!=='warden'))return;
+ if(e.finalBoss||e.type==='boss'||(enemyCombatTypeV596(e.type)!=='crawler'&&e.type!=='warden'))return;
  e.visualSetV516=stage>=LEGACY_ENEMY_STAGE_V516&&++enemyAppearanceCountV516[e.type]%2===0?'legacy':'base';
 }
 function prepareApprovedEnemySurfaceV516(im){
@@ -1053,17 +1061,16 @@ function installRenderedUI(){
  updateRenderedDock();
  // Existing capstone/reward choices retain their handlers; only their art is decorated.
  const decorate=el=>{
-  for(const b of el.querySelectorAll('.masteryCard,.rewardCard,.blueprintCard,.contractCard')){
+  for(const b of el.querySelectorAll('.masteryCard,.rewardCard,.blueprintCard')){
    if(b.querySelector('.choiceRender'))continue;
    const text=(window.EVOLVE_I18N?.originalText?.(b)||b.textContent).toLowerCase();let key=Object.keys(ASSET_SRC).find(k=>k.startsWith('capstone_apex/')&&text.includes(k.split('/')[1].replaceAll('_',' ')));
    if(!key&&b.classList.contains('masteryCard')){const k=pendingEvoKind||'core';key=partKey(k,5);}
-   if(!key&&b.classList.contains('contractCard'))key='enemy/'+(b.dataset.contract==='exterminate'?'brute':b.dataset.contract==='predator'?'runner':'symbiote');
    if(!key&&b.classList.contains('blueprintCard'))key=text.includes('sun')?'capstone_apex/sun_lance':text.includes('plague')?'capstone_apex/plague_vortex':text.includes('reaper')?'capstone_apex/red_reaper':text.includes('void')?'capstone_apex/void_carapace':'icons/blueprint';
    if(!key&&b.classList.contains('rewardCard'))key='pickups/apex_crystal';
-   if(key){const img=document.createElement('img');img.className='choiceRender';img.alt='';img.src=ASSET_SRC[key];const slot=b.querySelector('.masteryIcon,.rewardIcon,.contractIcon,.blueprintIcon');if(slot){slot.textContent='';slot.appendChild(img);}else b.prepend(img);}
+   if(key){const img=document.createElement('img');img.className='choiceRender';img.alt='';img.src=ASSET_SRC[key];const slot=b.querySelector('.masteryIcon,.rewardIcon,.blueprintIcon');if(slot){slot.textContent='';slot.appendChild(img);}else b.prepend(img);}
   }
  };
- for(const id of ['masteryCards','rewardCards','blueprintCards','contractCards'])if($(id))new MutationObserver(()=>decorate($(id))).observe($(id),{childList:true,subtree:true});
+ for(const id of ['masteryCards','rewardCards','blueprintCards'])if($(id))new MutationObserver(()=>decorate($(id))).observe($(id),{childList:true,subtree:true});
 }
 
 $('poster').style.background='radial-gradient(circle at 50% 20%, #2a0e10 0%, #12090b 35%, #050608 100%)';
@@ -1075,110 +1082,15 @@ function reset(){
   running=true;paused=false;choosing=false;ended=false;app.classList.add('combat');resize();configureWorld();
   // Start non-idle motion preparation after the opening fight has settled.
   // Duplicate runs cannot schedule duplicate loads (state is single-flight).
-  setTimeout(()=>{if(running&&!ended)warmBioMotionV510();},12000);bankedThisRun=false;pendingBankGain=0;t=0;last=performance.now();spawnAcc=0;frameEMA=16.7;perfMode=0;perfHold=0;nextBoss=false;nextElite=false;nextElite2=false;nextElite3=false;nextElite4=false;bossWarningShown=false;bossArrivalPlan=null;bossArrivalCue=null;majorArrivalCue=null;bossArena=null;phase1=phase2=phase3=phase4=false;rerolls=2+(meta.reroll||0);levelChoiceRoll=0;rerollBias='build';levelLastOffer=[];utilityTakeCount={armor:0,magnet:0,repair:0};rift=null;rift1=rift2=rift3=false;riftSuccess=riftFail=0;purges=[];purge1=purge2=false;encounterTimer=0;rewardChoosing=false;bossRewardsTaken=0;anomalyTriggered=false;rareMutation='';originAscension='';pendingEvoKind=null;blueprintCompleted=false;blueprintBankBonus=0;evoForm={arm:null,mouth:null,tail:null,wing:null,leg:null,core:null,speed:null};sector=0;extractionMode=false;breachGate=null;threatMods={speed:1,hp:1,damage:1,acidExtra:0};threatNames=[];usedThreats=[];routeMods={enemySpeed:1,enemyHp:1,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:0,eliteHp:1};if(meta.route==='cryo'){let ml=meta.cryoMastery||0;routeMods={enemySpeed:.88,enemyHp:1.04,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:8,eliteHp:1.15,cryoResist:ml*.08};}else if(meta.route==='gene'){let ml=meta.geneMastery||0;routeMods={enemySpeed:1,enemyHp:1.10,enemyDmg:1,playerDmg:1,dna:1.18*(1+ml*.04),xp:1.12*(1+ml*.03),pickup:12,eliteHp:1.04};}else if(meta.route==='inferno'){let ml=meta.infernoMastery||0;routeMods={enemySpeed:1.09,enemyHp:1.04,enemyDmg:1.10,playerDmg:1.12*(1+ml*.03),dna:1.12,xp:1,pickup:0,eliteHp:1.08,heatResist:ml*.03};}stageScale=stageThreatScale(meta.stage);biomeHazards=[];biomeHazardCd=meta.route==='cryo'?9.5:meta.route==='gene'?12.5:meta.route==='inferno'?6.5:999;terrainNodes=[];relicDrops=[];runRelics=[];worldSites=[];worldSiteSerial=0;worldSiteHintCd=0;currentWorldZoneId='facility';worldZoneVisitCooldown=0;milestoneBonus=0;stageRewardText='';organSlots={predator:null,survival:null};organEquipCount=0;$('threatBadge').style.display='none';$('relicBadge').style.display='none';$('organHud').style.display='none';kills=0;dnaTotal=0;hordeTempo=1;hordeSampleTimer=2.5;hordeKillsPrev=0;hordeKps=0;lootSweep=0;bossDangerFocus=false;evolutionSurge=0;evoPity={arm:0,mouth:0,tail:0,wing:0,leg:0};evoVisualTick=0;runTelemetry={stage:meta.stage||1,startWeapon:selectedStartWeapon||'arm',evoTimes:{},evo2Time:null,evo3Time:null,bossSeen:false,bossKillTime:null,won:false,kills:0,level:1,pairProcs:{},bossPatterns:{},explore:{chest:0,regen:0,hotspot:0,rift:0,zoneEvent:0,zoneEventRepeats:0,zoneEventByZone:{facility:0,cultivation:0,disposal:0,titan:0},zoneEventTiers:{standard:0,hazard:0,anomaly:0},zones:{facility:1,cultivation:0,disposal:0,titan:0}}};currentWorldZoneId='facility';worldZoneVisitCooldown=0;directorLock=0;directorRelief=0;enemyTypeHistory=[];skillBankBonus=0;contractEdgeUsed=false;dashReady=0;activeReady=0;activeDuration=0;activeMaxCd=15;predation=0;frenzy=0;killChain=0;maxChain=0;chainTimer=0;flowMilestone=0;evasionCharge=0;riposteTime=0;perfectDodges=0;proteostasisUsed=false;focusEnemy=null;focusHintTimer=3.8;tacticalWave=null;tacticalWaveIndex=0;tacticalWaveSerial=0;waveClears=0;rapidWaveClears=0;waveBreather=0;organHudTimer=0;waveHudKey='';lastHudPaint=0;coachStep=0;coachLevelSeen=false;contractDone=false;contractFailed=false;contractBankBonus=0;contractNodes=[];contractCores=0;contractEventFlags=[false,false,false];nemesisSpawned=false;nemesisKilledThisRun=false;contract=createContract(selectedContractId);predation=Math.min(35,(meta.contractStreak||0)*4);cameraShake=0;cameraKickX=0;cameraKickY=0;bossDeathFx=null;evolutionPulse=null;cinematicFreeze=0;hitStop=0;impactPulse=0;$('phaseBadge').textContent='STAGE '+meta.stage+' · '+(campaignMilestone(meta.stage)?campaignMilestone(meta.stage)+' · ':'')+'SECTOR 1 · CELL AWAKENING';$('objectiveBadge').style.display='none';$('waveBadge').style.display='none';$('waveBadge').classList.remove('clear');$('flowBadge').style.display='none';$('flowBadge').className='';$('focusHint').textContent=(meta.clears||0)===0&&meta.stage===1?(coarsePointer?'MOVE · TOUCH ANYWHERE & DRAG':'MOVE · WASD / ARROW KEYS'):'TAP ENEMY · FOCUS';$('focusHint').style.display='block';$('focusHint').classList.toggle('coachStrong',(meta.clears||0)===0&&meta.stage===1);refreshFeedbackControls();$('rerollBtn').textContent='REROLL ×'+rerolls;$('rerollBtn').disabled=false;$('runfill').style.width='0%';
-  enemies=[];bullets=[];eBullets=[];drops=[];particles=[];damageTexts=[];telegraphs=[];deathEchoes=[];runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};updateContractHUD._key='';updatePriorityHUD._key='';updatePriorityHUD._next=0;renderNemesisStatus._key='';
+  setTimeout(()=>{if(running&&!ended)warmBioMotionV510();},12000);bankedThisRun=false;pendingBankGain=0;t=0;last=performance.now();spawnAcc=0;frameEMA=16.7;perfMode=0;perfHold=0;nextBoss=false;nextElite=false;nextElite2=false;nextElite3=false;nextElite4=false;bossWarningShown=false;bossArrivalPlan=null;bossArrivalCue=null;majorArrivalCue=null;bossArena=null;phase1=phase2=phase3=phase4=false;rerolls=2+(meta.reroll||0);levelChoiceRoll=0;rerollBias='build';levelLastOffer=[];utilityTakeCount={armor:0,magnet:0,repair:0};rift=null;rift1=rift2=rift3=false;riftSuccess=riftFail=0;purges=[];purge1=purge2=false;encounterTimer=0;rewardChoosing=false;bossRewardsTaken=0;anomalyTriggered=false;rareMutation='';originAscension='';pendingEvoKind=null;blueprintCompleted=false;blueprintBankBonus=0;evoForm={arm:null,mouth:null,tail:null,wing:null,leg:null,core:null,speed:null};sector=0;extractionMode=false;breachGate=null;threatMods={speed:1,hp:1,damage:1,acidExtra:0};threatNames=[];usedThreats=[];routeMods={enemySpeed:1,enemyHp:1,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:0,eliteHp:1};if(meta.route==='cryo'){let ml=meta.cryoMastery||0;routeMods={enemySpeed:.88,enemyHp:1.04,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:8,eliteHp:1.15,cryoResist:ml*.08};}else if(meta.route==='gene'){let ml=meta.geneMastery||0;routeMods={enemySpeed:1,enemyHp:1.10,enemyDmg:1,playerDmg:1,dna:1.18*(1+ml*.04),xp:1.12*(1+ml*.03),pickup:12,eliteHp:1.04};}else if(meta.route==='inferno'){let ml=meta.infernoMastery||0;routeMods={enemySpeed:1.09,enemyHp:1.04,enemyDmg:1.10,playerDmg:1.12*(1+ml*.03),dna:1.12,xp:1,pickup:0,eliteHp:1.08,heatResist:ml*.03};}stageScale=stageThreatScale(meta.stage);biomeHazards=[];biomeHazardCd=meta.route==='cryo'?9.5:meta.route==='gene'?12.5:meta.route==='inferno'?6.5:999;terrainNodes=[];relicDrops=[];runRelics=[];worldSites=[];worldSiteSerial=0;worldSiteHintCd=0;currentWorldZoneId='facility';worldZoneVisitCooldown=0;milestoneBonus=0;stageRewardText='';organSlots={predator:null,survival:null};organEquipCount=0;$('threatBadge').style.display='none';$('relicBadge').style.display='none';$('organHud').style.display='none';kills=0;dnaTotal=0;hordeTempo=1;hordeSampleTimer=2.5;hordeKillsPrev=0;hordeKps=0;lootSweep=0;bossDangerFocus=false;evolutionSurge=0;evoPity={arm:0,mouth:0,tail:0,wing:0,leg:0};evoVisualTick=0;runTelemetry={stage:meta.stage||1,startWeapon:selectedStartWeapon||'arm',evoTimes:{},evo2Time:null,evo3Time:null,bossSeen:false,bossKillTime:null,won:false,kills:0,level:1,pairProcs:{},bossPatterns:{},explore:{chest:0,regen:0,hotspot:0,rift:0,zoneEvent:0,zoneEventRepeats:0,zoneEventByZone:{facility:0,cultivation:0,disposal:0,titan:0},zoneEventTiers:{standard:0,hazard:0,anomaly:0},zones:{facility:1,cultivation:0,disposal:0,titan:0}}};currentWorldZoneId='facility';worldZoneVisitCooldown=0;directorLock=0;directorRelief=0;enemyTypeHistory=[];skillBankBonus=0;dashReady=0;activeReady=0;activeDuration=0;activeMaxCd=15;predation=0;frenzy=0;killChain=0;maxChain=0;chainTimer=0;flowMilestone=0;evasionCharge=0;riposteTime=0;perfectDodges=0;proteostasisUsed=false;focusEnemy=null;focusHintTimer=3.8;tacticalWave=null;tacticalWaveIndex=0;tacticalWaveSerial=0;waveClears=0;rapidWaveClears=0;waveBreather=0;organHudTimer=0;waveHudKey='';lastHudPaint=0;coachStep=0;coachLevelSeen=false;objectiveBankBonus=0;nemesisSpawned=false;nemesisKilledThisRun=false;predation=0;cameraShake=0;cameraKickX=0;cameraKickY=0;bossDeathFx=null;evolutionPulse=null;cinematicFreeze=0;hitStop=0;impactPulse=0;$('phaseBadge').textContent='STAGE '+meta.stage+' · '+(campaignMilestone(meta.stage)?campaignMilestone(meta.stage)+' · ':'')+'SECTOR 1 · CELL AWAKENING';$('objectiveBadge').style.display='none';$('waveBadge').style.display='none';$('waveBadge').classList.remove('clear');$('flowBadge').style.display='none';$('flowBadge').className='';$('focusHint').textContent=(meta.clears||0)===0&&meta.stage===1?(coarsePointer?'MOVE · TOUCH ANYWHERE & DRAG':'MOVE · WASD / ARROW KEYS'):'TAP ENEMY · FOCUS';$('focusHint').style.display='block';$('focusHint').classList.toggle('coachStrong',(meta.clears||0)===0&&meta.stage===1);refreshFeedbackControls();$('rerollBtn').textContent='REROLL ×'+rerolls;$('rerollBtn').disabled=false;$('runfill').style.width='0%';
+  enemies=[];bullets=[];eBullets=[];drops=[];particles=[];damageTexts=[];telegraphs=[];deathEchoes=[];runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};updatePriorityHUD._key='';updatePriorityHUD._next=0;renderNemesisStatus._key='';
   Object.assign(state,{arm:0,mouth:0,tail:0,wing:0,leg:0,core:1,speed:0});Object.assign(genes,{reactor:0,virulent:0,predator:0,bastion:0,phase:0,hydra:0,core:0,haste:0});Object.assign(evoState,{arm:false,mouth:false,tail:false,wing:false,leg:false,core:false,speed:false});Object.assign(synergy,{artillery:false,toxicCyclone:false,overdrive:false});Object.assign(fusion,{sunLance:false,broodstorm:false,plagueVortex:false,redReaper:false,voidCarapace:false});$('evoBadge').style.display='none';$('evoBadge').textContent='';$('fusionBadge').style.display='none';$('fusionBadge').textContent='';$('blueprintBadge').style.display='none';$('blueprintBadge').textContent='';
   let baseHp=Math.round(112*(1+meta.hp*.05)+(meta.stageVitality||0));Object.assign(player,{x:WORLD_W/2,y:WORLD_H/2,r:10,hp:baseHp,maxHp:baseHp,level:1,xp:0,xpNeed:xpNeedForLevel(1),speed:132*(1+(meta.speed||0)*.03),inv:0,shoot:.52,acid:1.1,tailCd:1.2,wingCd:.8,legCd:1.4,baseCd:.84,pickup:36+meta.pickup*10+routeMods.pickup,regen:0,look:0,armor:Math.min(.42,(meta.armor||0)*.03+(meta.route==='cryo'?(meta.cryoMastery||0)*.02:0)),dmgMul:(1+meta.dmg*.04)*(1+(meta.apexGenes||0)*.03)*routeMods.playerDmg,corePulse:1.35,envSlow:0,animTime:0,moveBlend:0,armKick:0,acidKick:0,tailKick:0,hurtKick:0,dashKick:0,hurtAng:0,dashAng:0});xpDropFractionV415=0;applyOrigin();for(const k of ['arm','mouth','tail','wing','leg'])state[k]=0;if(['arm','mouth','tail','wing','leg'].includes(selectedStartWeapon))state[selectedStartWeapon]=1;discover('mutation:'+selectedStartWeapon);applyMemoryTrait();player.zoneSetKills=0;player.disposalSetCd=0;player.titanSetKills=0;player.facilitySetCharge=0;/* Official game: no visual-only XP test samples or demo XP progress. */
-  $('poster').style.display='none';$('v100Milestone').textContent='';$('v100Milestone').style.display='none';$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('evolutionCine').classList.remove('show');$('evolutionCine').style.display='none';$('waveIntro').classList.remove('show');$('waveIntro').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('contractOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('settingsOverlay').style.display='none';$('pauseOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='block';$('parts').style.display='flex';updateOrganHud();$('pauseBtn').style.display='block';
+  $('poster').style.display='none';$('v100Milestone').textContent='';$('v100Milestone').style.display='none';$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('evolutionCine').classList.remove('show');$('evolutionCine').style.display='none';$('waveIntro').classList.remove('show');$('waveIntro').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('settingsOverlay').style.display='none';$('pauseOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='block';$('parts').style.display='flex';updateOrganHud();$('pauseBtn').style.display='block';
   updateControlVisibility();
   buildTerrain();buildWorldSites();if(!TEST_MANUAL_MODE_V458){for(let i=0;i<3;i++){let e=spawnEnemy(i<2?'crawler':'runner');e.spawnFx=.32;}}spawnAcc=0;updateHUD(true);requestAnimationFrame(loop);
 }
 
-const RISK_TIERS=[
-  {id:0,name:'STANDARD',unlock:0,target:1,deadline:0,hp:1,dmg:1,spd:1,reward:1,organLuck:0},
-  {id:1,name:'HAZARD',unlock:4,target:1.18,deadline:-6,hp:1.18,dmg:1.12,spd:1.06,reward:1.5,organLuck:.035},
-  {id:2,name:'NIGHTMARE',unlock:8,target:1.35,deadline:-12,hp:1.38,dmg:1.24,spd:1.12,reward:2,organLuck:.085}
-];
-function riskTier(){return RISK_TIERS[selectedRisk]||RISK_TIERS[0]}
-const CONTRACT_DEFS={
-  exterminate:{name:'EXTERMINATION',icon:'✕',desc:'Break through HIVE SURGE and defeat the target number of enemies.',reward:'SUCCESS · +12 BANK DNA · DAMAGE +10%',deadline:188},
-  predator:{name:'PREDATOR TRIAL',icon:'⟲',desc:'Maintain a kill streak against HUNT PACK.',reward:'SUCCESS · +12 BANK DNA · SPEED +8',deadline:188},
-  harvest:{name:'BIO HARVEST',icon:'◉',desc:'Capture and absorb 3 BIOMASS CORES yourself.',reward:'SUCCESS · +14 BANK DNA · GUARANTEED RELIC',deadline:188}
-};
-function createContract(id){
-  const stage=Math.max(1,meta.stage||1),d=CONTRACT_DEFS[id]||CONTRACT_DEFS.exterminate,risk=riskTier();
-  let baseTarget=id==='exterminate'?Math.min(520,105+stage*14):id==='predator'?Math.min(90,34+Math.floor(stage*2.8)):3;
-  let target=id==='harvest'?baseTarget:Math.ceil(baseTarget*risk.target);
-  return {id,name:d.name,deadline:d.deadline+risk.deadline,target,reward:d.reward,risk:risk.id,riskName:risk.name};
-}
-function contractProgress(){
-  if(!contract)return 0;
-  if(contract.id==='exterminate')return kills;
-  if(contract.id==='predator')return maxChain;
-  return contractCores;
-}
-function updateContractHUD(){
-  const el=$('contractBadge');if(!contract){el.style.display='none';updateContractHUD._key='';return}
-  const p=Math.min(contract.target,contractProgress()),left=Math.max(0,contract.deadline-t),sec=Math.ceil(left),key=[contract.name,p,contract.target,sec,contractDone?1:0,contractFailed?1:0].join('|');
-  if(updateContractHUD._key===key)return;updateContractHUD._key=key;el.style.display='block';el.classList.toggle('contractGood',contractDone);el.classList.toggle('contractBad',contractFailed);
-  if(contractDone)el.innerHTML='<b>✓ '+contract.name+'</b> · COMPLETE';else if(contractFailed)el.innerHTML='<b>! '+contract.name+'</b> · RETALIATION';else el.innerHTML='<b>'+contract.name+'</b> · '+p+'/'+contract.target+' · '+fmt(sec);
-}
-function completeContract(){
-  if(contractDone||contractFailed)return;
-  contractDone=true;contractNodes=[];
-  const rewardMult=riskTier().reward;
-  if(contract.id==='exterminate'){player.dmgMul*=1.10;contractBankBonus=Math.round(12*rewardMult)}
-  else if(contract.id==='predator'){player.speed+=8;contractBankBonus=Math.round(12*rewardMult);predation=Math.min(100,predation+35)}
-  else{player.pickup+=15;contractBankBonus=Math.round(14*rewardMult);dropRelic(player.x+rand(-20,20),player.y+rand(-20,20),true)}
-  contractBankBonus+=Math.min(20,(meta.contractStreak||0)*2);directorBreathe(1.25);
-  announceEncounter('CONTRACT COMPLETE',contract.name);flash(contract.reward,1200);cameraShake=6;beep(680,.11,'triangle',.035);
-}
-function contractSpawnPoint(){
-  const edge=Math.floor(Math.random()*4),m=28,c=cameraRect(m);
-  if(edge===0)return {x:rand(c.l,c.r),y:c.t};
-  if(edge===1)return {x:c.r,y:rand(c.t,c.b)};
-  if(edge===2)return {x:rand(c.l,c.r),y:c.b};
-  return {x:c.l,y:rand(c.t,c.b)};
-}
-function spawnContractCore(){
-  const s=sitePointV422({r:28,minCenter:0,minSep:95,preferred:worldPointAroundPlayer(Math.min(W,H)*.32,Math.min(W,H)*.62)});if(!s)return;
-  contractNodes.push({x:s.x,y:s.y,r:28,hold:0,need:1.05,life:38,pulse:Math.random()*TAU});
-  announceEncounter('BIOMASS CORE DETECTED','ENTER THE FIELD AND ABSORB');flash('BIO HARVEST · CORE DETECTED',850);
-}
-function triggerContractEncounter(i){
-  if(!contract||contractDone||contractFailed||contractEventFlags[i])return;
-  contractEventFlags[i]=true;
-  if(contract.id==='exterminate'){
-    let count=8+i*2+Math.min(4,Math.floor((meta.stage||1)/4));
-    announceEncounter('HIVE SURGE','EXTERMINATION WAVE '+(i+1));
-    for(let k=0;k<count;k++)setTimeout(()=>{if(running&&!ended&&!contractDone){let e=spawnEnemy(Math.random()<.32?'runner':Math.random()<.18?'spitter':'crawler');e.contractPrey=true}},k*65);
-    flash('HIVE SURGE · '+count+' HOSTILES',780);cameraShake=4;
-  }else if(contract.id==='predator'){
-    let count=6+i*2;
-    announceEncounter('HUNT PACK','KEEP THE CHAIN ALIVE');
-    for(let k=0;k<count;k++)setTimeout(()=>{if(running&&!ended&&!contractDone){let type=meta.route==='cryo'&&Math.random()<.28?'froststalker':meta.route==='inferno'&&Math.random()<.28?'embermaw':'runner';let e=spawnEnemy(type);e.contractPrey=true;e.spd*=1.08}},k*72);
-    predation=Math.min(100,predation+10);chainTimer=Math.max(chainTimer,2.8);flash('HUNT PACK · '+count+' PREY',780);
-  }else{
-    spawnContractCore();
-  }
-}
-function updateContractNodes(dt){
-  for(const n of contractNodes){
-    n.life-=dt;n.pulse+=dt*3.2;
-    let d=Math.hypot(player.x-n.x,player.y-n.y);
-    if(d<n.r+player.r+8)n.hold=Math.min(n.need,n.hold+dt);
-    else n.hold=Math.max(0,n.hold-dt*.65);
-    if(n.hold>=n.need&&!n.done){
-      n.done=true;contractCores++;dnaTotal+=12;player.hp=Math.min(player.maxHp,player.hp+10);
-      predation=Math.min(100,predation+18);flash('BIOMASS ABSORBED · '+contractCores+' / '+contract.target,700);
-      beep(760,.09,'triangle',.03);cameraShake=4;
-      for(let j=0;j<18;j++)particles.push({kind:'relic',x:n.x,y:n.y,vx:rand(-70,70),vy:rand(-70,70),r:rand(1.5,3.5),life:rand(.2,.55)});
-    }
-  }
-  contractNodes=contractNodes.filter(n=>!n.done&&n.life>0);
-}
-function updateContract(){
-  if(!contract||contractDone||contractFailed)return;
-  const marks=[58,124,176];
-  for(let i=0;i<marks.length;i++){
-    if(t>=marks[i]&&!contractEventFlags[i]){
-      const majorBusy=directorLock>0||directorRelief>0||tacticalWave||rift||purges.length||rewardChoosing||choosing||enemies.some(e=>!e.dead&&(e.elite||e.nemesis||e.finalBoss));
-      if(!majorBusy){directorHold(.9);triggerContractEncounter(i);}
-    }
-  }
-  if(contractProgress()>=contract.target){completeContract();return}
-  if(t>=contract.deadline){contractFailed=true;contractNodes=[];announceEncounter('CONTRACT FAILED',contract.name);flash('TITAN RESPONSE ESCALATED',1100);beep(105,.14,'sawtooth',.035)}
-}
 const START_WEAPONS={
   arm:{name:'CANNON ARM',glyph:'✦',role:'RANGED · PIERCE'},
   mouth:{name:'ACID MAW',glyph:'≈',role:'ACID · CONTROL'},
@@ -1194,26 +1106,6 @@ function openStartWeaponSelect(){
     b.onclick=()=>{selectedStartWeapon=id;$('weaponSelectOverlay').style.display='none';reset();};wrap.appendChild(b);
   }
   $('weaponSelectOverlay').style.display='flex';
-}
-function openContractSelect(){
-  if(running)return;
-  const riskWrap=$('riskRow');riskWrap.innerHTML='';
-  for(const r of RISK_TIERS){
-    const unlocked=(meta.clears||0)>=r.unlock,b=document.createElement('button');b.type='button';b.className='riskBtn'+(selectedRisk===r.id?' selected':'');b.disabled=!unlocked;
-    b.innerHTML=`<b>${unlocked?r.name:'LOCKED'}</b>${unlocked?('TARGET ×'+r.target.toFixed(2)+' · REWARD ×'+r.reward):('CLEAR '+r.unlock+' STAGES')}`;
-    b.onclick=()=>{selectedRisk=r.id;openContractSelect();};riskWrap.appendChild(b);
-  }
-  $('streakLine').textContent='STREAK '+(meta.contractStreak||0)+' · BONUS +'+Math.min(20,(meta.contractStreak||0)*2)+' DNA';
-  const wrap=$('contractCards');wrap.innerHTML='';
-  for(const [id,d] of Object.entries(CONTRACT_DEFS)){
-    const c=createContract(id),objective=id==='exterminate'?('ELIMINATE '+c.target+' HOSTILES'):id==='predator'?('REACH KILL CHAIN '+c.target):('ABSORB '+c.target+' BIOMASS CORES');
-    const risk=riskTier(),bonus=Math.round((id==='harvest'?14:12)*risk.reward);
-    const b=document.createElement('button');b.type='button';b.className='contractCard';b.dataset.contract=id;
-    b.innerHTML=`<div class="contractIcon">${d.icon}</div><div class="contractBody"><h3>${d.name}</h3><div class="contractObjective">${objective}</div></div><div class="contractPay"><b>+${bonus}</b><span>DNA</span></div>`;
-    b.onclick=()=>{selectedContractId=id;$('contractOverlay').style.display='none';openStartWeaponSelect();};
-    wrap.appendChild(b);
-  }
-  $('contractOverlay').style.display='flex';
 }
 function updatePredationHUD(){
   const wrap=$('predationWrap'),fill=$('predationFill'),label=$('predationLabel');
@@ -1238,7 +1130,7 @@ function gainPredation(v){
   predation=Math.min(100,predation+v);
   if(predation>=100)triggerPredation();
 }
-function updatePriorityHUD(){const el=$('priorityBadge');if(!el)return;const now=performance.now();if(now<(updatePriorityHUD._next||0))return;updatePriorityHUD._next=now+180;let shield=0,heal=0,ranged=0,slow=0;for(const e of enemies){if(e.dead||e.finalBoss||e.elite)continue;if(e.type==='warden')shield++;else if(e.type==='symbiote')heal++;else if(e.type==='spitter')ranged++;else if(e.type==='froststalker')slow++;}const parts=[];if(shield)parts.push('SHIELD '+shield);if(heal)parts.push('HEAL '+heal);if(slow)parts.push('SLOW '+slow);if(ranged>=3)parts.push('RANGED '+ranged);const key=parts.join('|');if(updatePriorityHUD._key===key)return;updatePriorityHUD._key=key;if(!parts.length){el.style.display='none';return}el.style.display='block';el.innerHTML='<b>PRIORITY THREATS</b><br>'+parts.join(' · ');}
+function updatePriorityHUD(){const el=$('priorityBadge');if(!el)return;const now=performance.now();if(now<(updatePriorityHUD._next||0))return;updatePriorityHUD._next=now+180;let shield=0,heal=0,ranged=0,slow=0;for(const e of enemies){if(e.dead||e.finalBoss||e.elite)continue;if(e.type==='warden')shield++;else if(e.type==='symbiote')heal++;else if(enemyCombatTypeV596(e.type)==='spitter')ranged++;else if(e.type==='froststalker')slow++;}const parts=[];if(shield)parts.push('SHIELD '+shield);if(heal)parts.push('HEAL '+heal);if(slow)parts.push('SLOW '+slow);if(ranged>=3)parts.push('RANGED '+ranged);const key=parts.join('|');if(updatePriorityHUD._key===key)return;updatePriorityHUD._key=key;if(!parts.length){el.style.display='none';return}el.style.display='block';el.innerHTML='<b>PRIORITY THREATS</b><br>'+parts.join(' · ');}
 function updateFlowHUD(){
   const el=$('flowBadge');if(!el)return;
   if(killChain<5||chainTimer<=0||ended){el.style.display='none';el.className='';return}
@@ -1255,7 +1147,7 @@ function updateHUD(force=false){const now=performance.now(),hudIntervalMs=perfMo
   $('lvl').textContent=String(player.level);$('killCount').textContent=kills.toLocaleString();$('xpbar').setAttribute('aria-valuenow',String(Math.round(stageXPProgressV521()*100)));$('xpbar').setAttribute('aria-label',stageLevelLimitedV521()?'Stage maximum level '+STAGE_LEVEL_CAP_V521:'Experience to next level');$('xpLabel').textContent=stageLevelLimitedV521()?'MAX':'EXP';
   $('dna').textContent=dnaTotal;$('timer').textContent=fmt(t);$('xpfill').style.width=(stageXPProgressV521()*100)+'%';$('runfill').style.width=(Math.min(1,t/300)*100)+'%';
   updateRenderedDock();$('armLv').textContent=evoState.arm?'EVO':starString(state.arm);$('mouthLv').textContent=evoState.mouth?'EVO':starString(state.mouth);$('tailLv').textContent=evoState.tail?'EVO':starString(state.tail);$('wingLv').textContent=evoState.wing?'EVO':starString(state.wing);$('legLv').textContent=evoState.leg?'EVO':starString(state.leg);
-  const dominant=dominantMutationKind(),hasBuild=state.arm+state.mouth+state.tail+state.wing+state.leg>0;for(const el of document.querySelectorAll('#parts .part')){let k=el.dataset.kind,v=state[k]??0;el.classList.toggle('maxed',v>=MAX_MUTATION_LEVEL);el.classList.toggle('mastered',!!evoState[k]);el.classList.toggle('dominant',hasBuild&&k===dominant);el.classList.toggle('signature',!!evoState[k]);}updateAbilityUI();updatePredationHUD();updateContractHUD();updateFlowHUD();updateBlueprintBadge();updateEvasionHUD();updatePriorityHUD();renderNemesisStatus();const bossFocus=finalBossAlive();app.classList.toggle('bossEncounter',!!bossFocus);if(bossFocus){$('priorityBadge').style.display='none';$('blueprintBadge').style.display='none';$('threatBadge').style.opacity='.42'}else $('threatBadge').style.opacity='1';const crit=$('criticalVignette'),hpq=player.maxHp?player.hp/player.maxHp:1;crit.style.opacity=hpq<.32?String(clamp((.32-hpq)*2.6,.10,.62)):'0';crit.classList.toggle('on',hpq<.22);
+  const dominant=dominantMutationKind(),hasBuild=state.arm+state.mouth+state.tail+state.wing+state.leg>0;for(const el of document.querySelectorAll('#parts .part')){let k=el.dataset.kind,v=state[k]??0;el.classList.toggle('maxed',v>=MAX_MUTATION_LEVEL);el.classList.toggle('mastered',!!evoState[k]);el.classList.toggle('dominant',hasBuild&&k===dominant);el.classList.toggle('signature',!!evoState[k]);}updateAbilityUI();updatePredationHUD();updateFlowHUD();updateBlueprintBadge();updateEvasionHUD();updatePriorityHUD();renderNemesisStatus();const bossFocus=finalBossAlive();app.classList.toggle('bossEncounter',!!bossFocus);if(bossFocus){$('priorityBadge').style.display='none';$('blueprintBadge').style.display='none';$('threatBadge').style.opacity='.42'}else $('threatBadge').style.opacity='1';const crit=$('criticalVignette'),hpq=player.maxHp?player.hp/player.maxHp:1;crit.style.opacity=hpq<.32?String(clamp((.32-hpq)*2.6,.10,.62)):'0';crit.classList.toggle('on',hpq<.22);
 }
 
 // V417: one artwork header, with simulation-time final-boss deadlines.
@@ -1657,7 +1549,7 @@ function triggerSectorPresentation(){
 }
 function showBossIntro(e,sub='APEX ORGANISM DETECTED'){
   if(!e||(!e.finalBoss&&!e.midBoss))return;
-  $('bossIntroName').textContent=e.contractBossTitle?e.contractBossTitle+' · '+(e.bossName||'BIO TITAN'):(e.bossName||'BIO TITAN');
+  $('bossIntroName').textContent=e.bossName||'BIO TITAN';
   $('bossIntroSub').textContent=sub;
   const el=$('bossIntro');cinematicFreeze=Math.max(cinematicFreeze,.72);player.inv=Math.max(player.inv,.95);el.style.display='flex';requestAnimationFrame(()=>el.classList.add('show'));
   clearTimeout(showBossIntro._timer);
@@ -1716,7 +1608,7 @@ function buildFloorDecor(keepMarks=false){
   for(let i=0;i<decorCount;i++)floorDecor.push({kind:kinds[i%kinds.length],x:rand(24,WORLD_W-24),y:rand(24,WORLD_H-24),r:rand(8,28),a:rand(0,TAU),s:rand(.6,1.35),alpha:rand(.10,.30)});
 }
 function addFloorMark(e){
-  if(!e)return;let color=e.type==='spitter'||e.type==='symbiote'?'#57c74d':e.finalBoss||e.elite?'#8c1f25':'#67201f';
+  if(!e)return;let color=enemyCombatTypeV596(e.type)==='spitter'||e.type==='symbiote'?'#57c74d':e.finalBoss||e.elite?'#8c1f25':'#67201f';
   floorMarks.push({x:e.x,y:e.y,r:rand(e.r*.55,e.r*1.15),a:rand(0,TAU),color,alpha:e.finalBoss?.38:e.elite?.28:.18});
   if(floorMarks.length>24)floorMarks.splice(0,floorMarks.length-24);
 }
@@ -1744,7 +1636,7 @@ function drawSceneVignette(){
 function siteClearV422(p,r=30,ignore=null,minSep=150){
  if(!p||p.x<r+28||p.x>WORLD_W-r-28||p.y<r+28||p.y>WORLD_H-r-28)return false;
  if(terrainNodes.some(n=>{const b=structureCollisionBoxV423(n);return Math.hypot(p.x-clamp(p.x,b.l,b.r),p.y-clamp(p.y,b.t,b.b))<r+24;}))return false;
- return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40)) && !contractNodes.some(s=>s!==ignore&&Math.hypot(p.x-s.x,p.y-s.y)<r+s.r+32);
+ return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40));
 }
 function sitePointV422({zone=null,r=30,minSep=180,minCenter=135,preferred=null,ignore=null}={}){
  const q=zone?worldZoneRect(zone):{x:0,y:0,w:WORLD_W,h:WORLD_H};
@@ -1885,7 +1777,6 @@ function drawWorldSites(){
 }
 function objectivePointerCandidates(){
   const a=[];if(rift)a.push({x:rift.x,y:rift.y,label:'RIFT',color:'#ff75df',priority:100});if(breachGate)a.push({x:breachGate.x,y:breachGate.y,label:'GATE',color:'#86e7ff',priority:110});
-  if(contractNodes.length){const n=[...contractNodes].sort((x,y)=>dist2(player,x)-dist2(player,y))[0];if(n)a.push({x:n.x,y:n.y,label:'CORE',color:'#83ff98',priority:95});}
   for(const type of ['zoneEvent','hotspot','bioChest','regen']){
     const choices=worldSites.filter(s=>s.type===type&&!s.claimed&&!s.arenaHidden).sort((x,y)=>dist2(player,x)-dist2(player,y));const s=choices[0];if(!s)continue;
     const pr=type==='zoneEvent'?(s.active?94:74):type==='hotspot'?(s.active?88:66):type==='bioChest'?62:52;a.push({x:s.x,y:s.y,label:type==='zoneEvent'?zoneEventDef(s).label:type==='hotspot'?'NEST':type==='bioChest'?'CHEST':'HEAL',color:worldSiteColor(s),priority:pr});
@@ -2102,10 +1993,10 @@ function prepareBossArena(){
   lootSweep=Math.max(lootSweep,1.2);cameraShake=Math.max(cameraShake,4);
 }
 function applyEliteEncounterStats(e,baseHp,baseSpd,baseDmg){
-  const rk=riskTier(),timeHp=hpTempoAt(t),stage=Math.max(1,meta.stage||1);
-  e.hp=baseHp*timeHp*threatMods.hp*routeMods.enemyHp*routeMods.eliteHp*stageScale*rk.hp;e.maxHp=e.hp;
-  e.spd=baseSpd*(1+Math.min(.30,t*.0010))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage)*rk.spd;
-  e.dmg=baseDmg*damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage)*rk.dmg;
+  const timeHp=hpTempoAt(t),stage=Math.max(1,meta.stage||1);
+  e.hp=baseHp*timeHp*threatMods.hp*routeMods.enemyHp*routeMods.eliteHp*stageScale;e.maxHp=e.hp;
+  e.spd=baseSpd*(1+Math.min(.30,t*.0010))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage);
+  e.dmg=baseDmg*damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage);
 }
 function runtimeCaps(){
   const touch=coarsePointer,wide=W/H>1.15,g=feedbackCfg().graphics;
@@ -2227,10 +2118,10 @@ function spawnEnemy(type=enemyType(),boss=false,venomOwnerV553=null){
   if(!venomAddV553)type=permittedEnemyV526(type,boss);
   let side=Math.random()*4|0,x,y,m=34,vr=cameraRect(m);if(side===0){x=rand(vr.l,vr.r);y=vr.t}else if(side===1){x=vr.r;y=rand(vr.t,vr.b)}else if(side===2){x=rand(vr.l,vr.r);y=vr.b}else{x=vr.l;y=rand(vr.t,vr.b)}x=clamp(x,16,WORLD_W-16);y=clamp(y,16,WORLD_H-16)
   let e={x,y,type,hit:0,shot:rand(.4,1.5),shotCount:0,boss:false,elite:false,finalBoss:false,vx:0,vy:0,kx:0,ky:0,dashCd:rand(.7,1.5),dashPrep:0,burst:0,slamCd:rand(1.2,2.1),strafe:Math.random()<.5?-1:1,flank:Math.random()<.5?-1:1,rolePhase:Math.random()*TAU,patternCd:rand(1.8,2.8),summonCd:5.5,contactCd:0,shieldPulseCd:rand(2.2,4.0),barrier:0,barrierMax:0,healBeam:0,healTarget:null,frostSpecialCd:rand(2.2,3.4),stagger:0,staggerLock:0,stunned:0,waveId:0,spawnFx:.28,animPhase:Math.random()*TAU,bodyKick:0};
-  if(type==='crawler')Object.assign(e,{r:6.8,hp:38,maxHp:38,spd:56,dmg:6.2,xp:1.35});
-  if(type==='runner')Object.assign(e,{r:5.8,hp:32,maxHp:32,spd:90,dmg:6.6,xp:1.55});
-  if(type==='brute')Object.assign(e,{r:12.5,hp:190,maxHp:190,spd:32,dmg:17,xp:5.2});
-  if(type==='spitter')Object.assign(e,{r:8,hp:80,maxHp:80,spd:35,dmg:8,xp:3.6,shot:rand(.9,1.5)});
+  if(enemyCombatTypeV596(type)==='crawler')Object.assign(e,{r:6.8,hp:38,maxHp:38,spd:56,dmg:6.2,xp:1.35});
+  if(enemyCombatTypeV596(type)==='runner')Object.assign(e,{r:5.8,hp:32,maxHp:32,spd:90,dmg:6.6,xp:1.55});
+  if(enemyCombatTypeV596(type)==='brute')Object.assign(e,{r:12.5,hp:190,maxHp:190,spd:32,dmg:17,xp:5.2});
+  if(enemyCombatTypeV596(type)==='spitter')Object.assign(e,{r:8,hp:80,maxHp:80,spd:35,dmg:8,xp:3.6,shot:rand(.9,1.5)});
   if(type==='warden')Object.assign(e,{r:10,hp:138,maxHp:138,spd:28,dmg:9,xp:5.2,aura:58,pulse:rand(0,TAU)});
   if(type==='froststalker')Object.assign(e,{r:8,hp:82,maxHp:82,spd:37,dmg:8,xp:4.2,shot:rand(.7,1.3),strafe:Math.random()<.5?-1:1});
   if(type==='symbiote')Object.assign(e,{r:9,hp:104,maxHp:104,spd:33,dmg:7,xp:4.4,healCd:.40,pulse:rand(0,TAU)});
@@ -2244,8 +2135,9 @@ function spawnEnemy(type=enemyType(),boss=false,venomOwnerV553=null){
     if(bossName==='BIO TITAN'&&!bioLoadStateV510.fullReady)warmBioMotionV510();
     $('bossbar').style.display='block';$('bossname').textContent=bossName;
   }
+  const species=NEW_MONSTER_SPECIES_V596[type];if(species){e.hp*=species.hp;e.maxHp=e.hp;e.spd*=species.speed;e.dmg*=species.damage;}
   const spawnZone=worldZoneAt(x,y);e.zoneId=spawnZone.id;if(!(type==='boss'||boss)){e.hp*=spawnZone.enemyHp;e.dmg*=spawnZone.enemyDmg;e.spd*=spawnZone.enemySpd;e.xp*=spawnZone.enemyXp;}
-  let rk=riskTier(),hpTempo=hpTempoAt(t),stage=Math.max(1,meta.stage||1),stageProfile=campaignStageProfile(stage);e.hp*=hpTempo*threatMods.hp*routeMods.enemyHp*stageScale*rk.hp;if(e.finalBoss)e.hp*=stageProfile.bossHp;e.maxHp=e.hp;e.spd*=(1+Math.min(.32,t*.00105))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage)*rk.spd;e.dmg*=damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage)*rk.dmg;if(e.finalBoss)e.dmg*=stageProfile.bossDmg;applyBioTitanBalanceV520(e);resolveTerrainBody(e,e.r);if(TEST_MANUAL_MODE_V458&&!testManualSpawnPermissionV458&&!venomAddV553){e.dead=true;return e;}assignEnemyAppearanceV516(e,stage);if(!TEST_MANUAL_MODE_V458&&(stageFlowV526.result||stageFlowV526.closing||bossArena?.v526)&&!e.finalBoss&&!venomAddV553){e.dead=true;return e;}if(venomAddV553){e.venomAddV553=true;e.venomAddOwnerV553=venomOwnerV553;}enemies.push(e);discover('enemy:'+e.type);if(e.finalBoss){discover('boss:'+e.bossName);syncArtHUDV417();}return e;
+  let hpTempo=hpTempoAt(t),stage=Math.max(1,meta.stage||1),stageProfile=campaignStageProfile(stage);e.hp*=hpTempo*threatMods.hp*routeMods.enemyHp*stageScale;if(e.finalBoss)e.hp*=stageProfile.bossHp;e.maxHp=e.hp;e.spd*=(1+Math.min(.32,t*.00105))*threatMods.speed*routeMods.enemySpeed*stageSpeedScale(stage);e.dmg*=damageTempoAt(t)*threatMods.damage*(routeMods.enemyDmg||1)*stageDamageScale(stage);if(e.finalBoss)e.dmg*=stageProfile.bossDmg;applyBioTitanBalanceV520(e);resolveTerrainBody(e,e.r);if(TEST_MANUAL_MODE_V458&&!testManualSpawnPermissionV458&&!venomAddV553){e.dead=true;return e;}assignEnemyAppearanceV516(e,stage);if(!TEST_MANUAL_MODE_V458&&(stageFlowV526.result||stageFlowV526.closing||bossArena?.v526)&&!e.finalBoss&&!venomAddV553){e.dead=true;return e;}if(venomAddV553){e.venomAddV553=true;e.venomAddOwnerV553=venomOwnerV553;}enemies.push(e);discover('enemy:'+e.type);if(e.finalBoss){discover('boss:'+e.bossName);syncArtHUDV417();}return e;
 }
 const ELITE_AFFIXES=[
   {id:'ravager',name:'RAVAGER',sub:'SPEED +12% · DAMAGE +10%',apply(e){e.spd*=1.12;e.dmg*=1.10;e.elitePatternCd*=.88;}},
@@ -3069,20 +2961,12 @@ function performanceBankReward(won){
   bonus+=Math.min(18,rapidWaveClears*5);
   bonus+=Math.min(15,perfectDodges*3);
   bonus+=Math.min(12,Math.floor(maxChain/10)*2);
-  if(contractDone)bonus+=8+riskTier().id*3;
   if(blueprintCompleted)bonus+=10;
   if(nemesisKilledThisRun)bonus+=8;
   if(riftSuccess>0&&riftFail===0)bonus+=5;
   const hpq=player.maxHp?player.hp/player.maxHp:0;if(won&&hpq>=.65)bonus+=5;
   const cap=38+Math.min(24,Math.max(0,(meta.stage||1)-1)*3);bonus=Math.min(cap,bonus);
   return won?bonus:Math.floor(bonus*.45);
-}
-function applyContractBossEdge(fb){
-  if(!fb||!contractDone||contractFailed||contractEdgeUsed)return '';
-  contractEdgeUsed=true;
-  if(contract.id==='exterminate'){fb.hp*=.90;fb.maxHp=fb.hp;fb.exposed=Math.max(fb.exposed||0,2.6);return 'EXTERMINATION EDGE · TITAN CORE EXPOSED';}
-  if(contract.id==='predator'){predation=0;frenzy=Math.max(frenzy,6);activeReady=0;return 'PREDATOR EDGE · FRENZY PRIMED';}
-  player.hp=Math.min(player.maxHp,player.hp+player.maxHp*.22);fb.contractRegen=Math.min(fb.contractRegen||0,.0011);fb.exposed=Math.max(fb.exposed||0,1.4);return 'HARVEST EDGE · TITAN METABOLISM DISRUPTED';
 }
 function combatClarityLevel(){
   // V440: visibility is never reduced because a wave becomes dense; graphics selection is explicit.
@@ -3116,7 +3000,6 @@ function spawnRate(){
   if(t>145)base*=.96;
   if(powerScore()>18&&t>115)base*=.97;
   base/=Math.sqrt(Math.max(.80,hordeTempo));
-  if(contract?.id==='exterminate'&&!contractDone&&!contractFailed&&t>48)base*=.97;
   base/=Math.min(1.06,1+Math.max(0,meta.stage-1)*.008);
   const hp=player.maxHp?player.hp/player.maxHp:1;if(hp<.25)base*=1.48;else if(hp<.40)base*=1.24;
   return Math.max(.28,base);
@@ -3304,7 +3187,7 @@ function updateCounterBadge(e){
 }
 function triggerBossCounter(e){
   if(!e||e.dead||!e.finalBoss||e.telegraphing||e.patternLock>0)return;
-  const mode=e.counterMode||playerBossCounterMode(),hard=e.superApex||riskTier().id>=2;
+  const mode=e.counterMode||playerBossCounterMode(),hard=e.superApex;
   e.telegraphing='counter';e.patternLock=mode==='null'?1.0:.86;
   if(mode==='prism'){
     telegraphs.push({kind:'counterPrism',owner:e,x:e.x,y:e.y,r:e.r+42,life:.86,max:.86});
@@ -3324,7 +3207,7 @@ function triggerBossCounter(e){
   e.counterCd=(e.superApex?4.2:e.apex?5.0:6.0)+Math.random()*.9;
 }
 
-function enemyDisplayName(e){if(!e)return '';return e.bossName||e.eliteName||({crawler:'CRAWLER',runner:'RUNNER',brute:'BRUTE',spitter:'SPITTER',warden:'WARDEN',froststalker:'FROST STALKER',symbiote:'SYMBIOTE',embermaw:'EMBERMAW',boss:'TITAN'}[e.type]||String(e.type).toUpperCase())}
+function enemyDisplayName(e){if(!e)return '';return e.bossName||e.eliteName||NEW_MONSTER_SPECIES_V596[e.type]?.en||({crawler:'CRAWLER',runner:'RUNNER',brute:'BRUTE',spitter:'SPITTER',warden:'WARDEN',froststalker:'FROST STALKER',symbiote:'SYMBIOTE',embermaw:'EMBERMAW',boss:'TITAN'}[e.type]||String(e.type).toUpperCase())}
 function setFocusEnemy(e){
   if(!e||e.dead){focusEnemy=null;return}
   focusEnemy=e;focusHintTimer=.9;discover('combat:focus');$('focusHint').textContent='FOCUS · '+enemyDisplayName(e);$('focusHint').style.display='block';$('focusHint').classList.remove('coachStrong');beep(520,.035,'triangle',.014);hapticCue('tap');if(firstRunCoach()&&coachStep<=4){coachStep=5;coachHint('FOCUS LOCKED · AUTO ATTACK PRIORITIZES THIS TARGET',2.8);updateCoachVisuals()}
@@ -3335,8 +3218,8 @@ function nearest(max=9999){
   const lim=max>=9000?Infinity:max*max;
   let priority=null,ps=Infinity,best=null,bd=lim;
   const test=e=>{if(e.dead)return;let d=dist2(player,e);if(d>lim*1.22)return;
-    let bias=e.finalBoss?.38:e.elite?.52:e.type==='warden'?.72:e.type==='spitter'?.84:1,score=d*bias;
-    if((e.finalBoss||e.elite||e.type==='warden'||e.type==='spitter')&&score<ps){ps=score;priority=e}
+    let bias=e.finalBoss?.38:e.elite?.52:e.type==='warden'?.72:enemyCombatTypeV596(e.type)==='spitter'?.84:1,score=d*bias;
+    if((e.finalBoss||e.elite||e.type==='warden'||enemyCombatTypeV596(e.type)==='spitter')&&score<ps){ps=score;priority=e}
     if(d<bd){bd=d;best=e}
   };
   if(max<9000&&enemyGridV424.length)enemyEachCandidateCircleV425(player.x,player.y,max*1.11,e=>{test(e);});
@@ -3466,8 +3349,8 @@ function nearestBasicTargetV552(max){
  if(focusEnemy&&withinBasicRangeV552(focusEnemy,player,range))return focusEnemy;
  let priority=null,priorityScore=Infinity,best=null,bestDistance=limit+1e-7;
  const test=e=>{if(e.dead)return;const d=dist2(player,e);if(d>limit+1e-7)return;
-  const bias=e.finalBoss?.38:e.elite?.52:e.type==='warden'?.72:e.type==='spitter'?.84:1,score=d*bias;
-  if((e.finalBoss||e.elite||e.type==='warden'||e.type==='spitter')&&score<priorityScore){priority=e;priorityScore=score;}
+  const bias=e.finalBoss?.38:e.elite?.52:e.type==='warden'?.72:enemyCombatTypeV596(e.type)==='spitter'?.84:1,score=d*bias;
+  if((e.finalBoss||e.elite||e.type==='warden'||enemyCombatTypeV596(e.type)==='spitter')&&score<priorityScore){priority=e;priorityScore=score;}
   if(d<bestDistance){best=e;bestDistance=d;}
  };
  if(enemyGridV424.length)enemyEachCandidateCircleV425(player.x,player.y,range,test);else for(const e of enemies)test(e);
@@ -3569,7 +3452,7 @@ function protectedByWarden(e){
   enemyEachCandidateCircleV425(e.x,e.y,76,w=>{if(w.dead||w.type!=='warden')return;let rr=w.aura||62;if((w.x-e.x)**2+(w.y-e.y)**2<rr*rr){found=w;return false;}});
   return found;
 }
-function hurtEnemy(e,dmg,kind){if(e.dead||e.arrivalInvuln)return;markEnemyHitV592(e,dmg);if(kind==='tail'&&state.tail>=5&&e.hp/Math.max(1,e.maxHp)<=(evoState.tail?.48:.34))dmg*=evoState.tail?1.76:1.26;if((kind==='arm'||kind==='artillery')&&state.arm>=3&&(e.elite||e.finalBoss))dmg*=1.05;const pairMul=weaponPairDamageMul(e,kind);dmg*=pairMul*triadDamageMul(kind)*organDamageMul(e,kind)*memoryDamageMul(kind)*evoDamageMul(e,kind);if((e.barrier||0)>0){let absorbed=Math.min(e.barrier,dmg);e.barrier-=absorbed;dmg-=absorbed;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+7,life:.13});if(e.barrier<=0){particles.push({kind:'shieldBreak',x:e.x,y:e.y,r:6,max:e.r+24,life:.30,maxLife:.30});hitStop=Math.max(hitStop,.009);}if(dmg<=.01)return;}if((e.exposed||0)>0)dmg*=1.35;else if(e.finalBoss)dmg*=.70;if(e.prism>0&&(kind==='arm'||kind==='artillery'))dmg*=.58;if(e.purify>0&&kind==='acid')dmg*=.68;if(frenzy>0)dmg*=1.20;if(e.nemesis){if(e.adaptKind==='arm'&&(kind==='arm'||kind==='artillery'))dmg*=.66;else if(e.adaptKind==='mouth'&&kind==='acid')dmg*=.66;else if(e.adaptKind==='tail'&&kind==='tail')dmg*=.66;else if(e.adaptKind==='core')dmg*=.86;}if(kind==='acid'&&hasOrgan('omegaBladder'))e.slow=Math.max(e.slow||0,1.45);if(kind==='acid'&&evoForm.mouth==='virulent')e.slow=Math.max(e.slow||0,2.0);if(e.eliteArmor)dmg*=1-e.eliteArmor;if(e.contractArmor)dmg*=1-e.contractArmor;let guard=protectedByWarden(e);if(guard){dmg*=.62;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+5,life:.16});}if(!e.finalBoss&&e.staggerLock<=0){let resist=e.elite?1.75:(e.type==='brute'||e.type==='warden'?1.45:1),gain=dmg*(kind==='leg'?1.42:kind==='tail'?1.30:kind==='wing'?.82:kind==='artillery'?1.12:kind==='acid'?.62:.76)/resist;e.stagger=(e.stagger||0)+gain;let threshold=e.elite?92:(e.type==='brute'||e.type==='warden'?52:38);if(e.stagger>=threshold){e.stagger=0;e.staggerLock=e.elite?1.7:1.05;e.stunned=e.elite?.14:.26;discover('combat:stagger');particles.push({kind:'staggerRing',x:e.x,y:e.y,r:5,max:e.r+18,life:.28,maxLife:.28});hitStop=Math.max(hitStop,e.elite?.018:.012);}}let dealt=Math.min(Math.max(0,dmg),Math.max(0,e.hp));let bucket=kind==='acid'?'acid':kind==='tail'?'tail':kind==='wing'?'wing':kind==='leg'?'leg':kind==='core'?'core':'arm';runDamage[bucket]=(runDamage[bucket]||0)+dealt;e.hp-=dmg;bioHitV435(e);e.hit=.11;e.bodyKick=Math.max(e.bodyKick||0,.12);e.lastHitKind=kind;if(kind==='acid')e.corrosion=Math.max(e.corrosion||0,.48);else if(kind==='tail'||kind==='wing')e.cutMark=Math.max(e.cutMark||0,.34);else if(kind==='arm'||kind==='artillery')e.puncture=Math.max(e.puncture||0,.24);else if(kind==='core'||kind==='leg')e.coreShock=Math.max(e.coreShock||0,.30);e.deathA=Math.atan2(e.y-player.y,e.x-player.x);let heavy=(e.exposed||0)>0||(kind==='artillery'&&fusion.sunLance)||(kind==='tail'&&fusion.redReaper)||(kind==='acid'&&fusion.plagueVortex)||(kind==='wing'&&evoState.wing)||(kind==='leg'&&evoState.leg);let ka=Math.atan2(e.y-player.y,e.x-player.x),kb=kind==='tail'?72:kind==='leg'?82:kind==='wing'?26:kind==='arm'||kind==='artillery'?42:kind==='acid'?18:28;if(e.finalBoss)kb*=.12;else if(e.elite)kb*=.32;e.kx=(e.kx||0)+Math.cos(ka)*kb;e.ky=(e.ky||0)+Math.sin(ka)*kb;if((heavy||e.elite||e.finalBoss)&&hitStop<=0)hitStop=Math.max(hitStop,e.finalBoss?.032:e.elite?.024:.018);if(heavy||e.elite||e.finalBoss){cameraKickX-=Math.cos(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);cameraKickY-=Math.sin(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);}impactPulse=Math.max(impactPulse,heavy?.8:.38);const clarity=combatClarityLevel();if(feedbackCfg().damageNumbers!==false&&(heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.13:.055)))damageTexts.push({x:e.x+rand(-6,6),y:e.y-8,v:heavy?-30:-22,life:heavy?.72:.55,text:Math.round(dmg),kind,heavy});const hitFx=heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.20:.07);if(hitFx){particles.push({kind:'impact',x:e.x,y:e.y,vx:0,vy:0,r:heavy?7:4,max:heavy?23:14,life:heavy?.18:.12,maxLife:heavy?.18:.12,color:kind});particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:heavy?24:16,life:heavy?.20:.14,maxLife:heavy?.20:.14,color:kind,a:Math.atan2(e.y-player.y,e.x-player.x)});for(let i=0;i<(kind==='tail'?(clarity?2:5):(clarity?1:3));i++)particles.push({kind:kind==='acid'?'acid':kind==='tail'?'ember':'spark',x:e.x+rand(-4,4),y:e.y+rand(-4,4),vx:rand(-48,48),vy:rand(-48,48),r:kind==='tail'?rand(1.6,3.6):rand(1.3,2.8),life:rand(.16,.34)});}if(pairMul>1.01){const pk=weaponPairProcKey(e,kind);if(pk)spawnPairSyncVfx(e,pk,kind);}if(e.finalBoss&&evoCount()>=2){let next=e._evoHitFxAt||0;if(t>=next){e._evoHitFxAt=t+(evoCount()>=3?.085:.15);const c=activeEvoColorForKind(kind);particles.push({kind:'phaseRing',x:e.x,y:e.y,r:4,max:e.r+(evoCount()>=3?34:23),life:evoCount()>=3?.26:.20,maxLife:evoCount()>=3?.26:.20,color:c});if(evoCount()>=3&&perfMode<2){for(let i=0;i<3;i++)particles.push({kind:'evolutionShard',x:e.x+rand(-e.r*.4,e.r*.4),y:e.y+rand(-e.r*.4,e.r*.4),vx:rand(-70,70),vy:rand(-70,70),r:rand(1.4,3.5),life:rand(.18,.42),color:c});}impactPulse=Math.max(impactPulse,evoCount()>=3?.72:.48);}}if(e.hp<=0)killEnemy(e)}
+function hurtEnemy(e,dmg,kind){if(e.dead||e.arrivalInvuln)return;markEnemyHitV592(e,dmg);if(kind==='tail'&&state.tail>=5&&e.hp/Math.max(1,e.maxHp)<=(evoState.tail?.48:.34))dmg*=evoState.tail?1.76:1.26;if((kind==='arm'||kind==='artillery')&&state.arm>=3&&(e.elite||e.finalBoss))dmg*=1.05;const pairMul=weaponPairDamageMul(e,kind);dmg*=pairMul*triadDamageMul(kind)*organDamageMul(e,kind)*memoryDamageMul(kind)*evoDamageMul(e,kind);if((e.barrier||0)>0){let absorbed=Math.min(e.barrier,dmg);e.barrier-=absorbed;dmg-=absorbed;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+7,life:.13});if(e.barrier<=0){particles.push({kind:'shieldBreak',x:e.x,y:e.y,r:6,max:e.r+24,life:.30,maxLife:.30});hitStop=Math.max(hitStop,.009);}if(dmg<=.01)return;}if((e.exposed||0)>0)dmg*=1.35;else if(e.finalBoss)dmg*=.70;if(e.prism>0&&(kind==='arm'||kind==='artillery'))dmg*=.58;if(e.purify>0&&kind==='acid')dmg*=.68;if(frenzy>0)dmg*=1.20;if(e.nemesis){if(e.adaptKind==='arm'&&(kind==='arm'||kind==='artillery'))dmg*=.66;else if(e.adaptKind==='mouth'&&kind==='acid')dmg*=.66;else if(e.adaptKind==='tail'&&kind==='tail')dmg*=.66;else if(e.adaptKind==='core')dmg*=.86;}if(kind==='acid'&&hasOrgan('omegaBladder'))e.slow=Math.max(e.slow||0,1.45);if(kind==='acid'&&evoForm.mouth==='virulent')e.slow=Math.max(e.slow||0,2.0);if(e.eliteArmor)dmg*=1-e.eliteArmor;let guard=protectedByWarden(e);if(guard){dmg*=.62;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+5,life:.16});}if(!e.finalBoss&&e.staggerLock<=0){let resist=e.elite?1.75:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?1.45:1),gain=dmg*(kind==='leg'?1.42:kind==='tail'?1.30:kind==='wing'?.82:kind==='artillery'?1.12:kind==='acid'?.62:.76)/resist;e.stagger=(e.stagger||0)+gain;let threshold=e.elite?92:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?52:38);if(e.stagger>=threshold){e.stagger=0;e.staggerLock=e.elite?1.7:1.05;e.stunned=e.elite?.14:.26;discover('combat:stagger');particles.push({kind:'staggerRing',x:e.x,y:e.y,r:5,max:e.r+18,life:.28,maxLife:.28});hitStop=Math.max(hitStop,e.elite?.018:.012);}}let dealt=Math.min(Math.max(0,dmg),Math.max(0,e.hp));let bucket=kind==='acid'?'acid':kind==='tail'?'tail':kind==='wing'?'wing':kind==='leg'?'leg':kind==='core'?'core':'arm';runDamage[bucket]=(runDamage[bucket]||0)+dealt;e.hp-=dmg;bioHitV435(e);e.hit=.11;e.bodyKick=Math.max(e.bodyKick||0,.12);e.lastHitKind=kind;if(kind==='acid')e.corrosion=Math.max(e.corrosion||0,.48);else if(kind==='tail'||kind==='wing')e.cutMark=Math.max(e.cutMark||0,.34);else if(kind==='arm'||kind==='artillery')e.puncture=Math.max(e.puncture||0,.24);else if(kind==='core'||kind==='leg')e.coreShock=Math.max(e.coreShock||0,.30);e.deathA=Math.atan2(e.y-player.y,e.x-player.x);let heavy=(e.exposed||0)>0||(kind==='artillery'&&fusion.sunLance)||(kind==='tail'&&fusion.redReaper)||(kind==='acid'&&fusion.plagueVortex)||(kind==='wing'&&evoState.wing)||(kind==='leg'&&evoState.leg);let ka=Math.atan2(e.y-player.y,e.x-player.x),kb=kind==='tail'?72:kind==='leg'?82:kind==='wing'?26:kind==='arm'||kind==='artillery'?42:kind==='acid'?18:28;if(e.finalBoss)kb*=.12;else if(e.elite)kb*=.32;e.kx=(e.kx||0)+Math.cos(ka)*kb;e.ky=(e.ky||0)+Math.sin(ka)*kb;if((heavy||e.elite||e.finalBoss)&&hitStop<=0)hitStop=Math.max(hitStop,e.finalBoss?.032:e.elite?.024:.018);if(heavy||e.elite||e.finalBoss){cameraKickX-=Math.cos(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);cameraKickY-=Math.sin(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);}impactPulse=Math.max(impactPulse,heavy?.8:.38);const clarity=combatClarityLevel();if(feedbackCfg().damageNumbers!==false&&(heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.13:.055)))damageTexts.push({x:e.x+rand(-6,6),y:e.y-8,v:heavy?-30:-22,life:heavy?.72:.55,text:Math.round(dmg),kind,heavy});const hitFx=heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.20:.07);if(hitFx){particles.push({kind:'impact',x:e.x,y:e.y,vx:0,vy:0,r:heavy?7:4,max:heavy?23:14,life:heavy?.18:.12,maxLife:heavy?.18:.12,color:kind});particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:heavy?24:16,life:heavy?.20:.14,maxLife:heavy?.20:.14,color:kind,a:Math.atan2(e.y-player.y,e.x-player.x)});for(let i=0;i<(kind==='tail'?(clarity?2:5):(clarity?1:3));i++)particles.push({kind:kind==='acid'?'acid':kind==='tail'?'ember':'spark',x:e.x+rand(-4,4),y:e.y+rand(-4,4),vx:rand(-48,48),vy:rand(-48,48),r:kind==='tail'?rand(1.6,3.6):rand(1.3,2.8),life:rand(.16,.34)});}if(pairMul>1.01){const pk=weaponPairProcKey(e,kind);if(pk)spawnPairSyncVfx(e,pk,kind);}if(e.finalBoss&&evoCount()>=2){let next=e._evoHitFxAt||0;if(t>=next){e._evoHitFxAt=t+(evoCount()>=3?.085:.15);const c=activeEvoColorForKind(kind);particles.push({kind:'phaseRing',x:e.x,y:e.y,r:4,max:e.r+(evoCount()>=3?34:23),life:evoCount()>=3?.26:.20,maxLife:evoCount()>=3?.26:.20,color:c});if(evoCount()>=3&&perfMode<2){for(let i=0;i<3;i++)particles.push({kind:'evolutionShard',x:e.x+rand(-e.r*.4,e.r*.4),y:e.y+rand(-e.r*.4,e.r*.4),vx:rand(-70,70),vy:rand(-70,70),r:rand(1.4,3.5),life:rand(.18,.42),color:c});}impactPulse=Math.max(impactPulse,evoCount()>=3?.72:.48);}}if(e.hp<=0)killEnemy(e)}
 
 const BIO_ORGANS=[
  {id:'predatorFang',slot:'predator',icon:'FNG',name:'PREDATOR FANG',desc:'Expose the bio-core weak points of elites and TITANs for extra damage.',tag:'ELITE / BOSS DAMAGE +18%'},
@@ -3593,7 +3476,7 @@ const ORGAN_RARITY={
 };
 function rollOrganRarity(){
   const clears=meta.clears||0,stage=meta.stage||1,r=Math.random();
-  const luck=Math.min(.22,(meta.organLuck||0)+(riskTier().organLuck||0)),epicChance=clears>=5?Math.min(.30,.055+stage*.006+luck*.45):0;
+  const luck=Math.min(.22,(meta.organLuck||0)),epicChance=clears>=5?Math.min(.30,.055+stage*.006+luck*.45):0;
   const rareChance=clears>=2?Math.min(.52,.20+stage*.012+luck):0;
   if(r<epicChance)return 'epic';
   if(r<epicChance+rareChance)return 'rare';
@@ -3751,7 +3634,7 @@ function showGenomeAnomaly(){
 function enemyDrawAsset(type){return ART[enemyAppearanceAssetV516(enemyAppearanceKeyV516(type))]||ART['enemy/crawler'];}
 
 function enemyDrawSize(e){
-  return e.finalBoss?(e.superApex?124:(e.apex?112:100)):e.elite?68:e.type==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:e.type==='spitter'?40:(e.type==='runner'?27:29);
+  return e.finalBoss?(e.superApex?124:(e.apex?112:100)):e.elite?(e.midVisualSizeV596||68):enemyCombatTypeV596(e.type)==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:enemyCombatTypeV596(e.type)==='spitter'?40:(enemyCombatTypeV596(e.type)==='runner'?27:29);
 }
 function spawnDeathEcho(e){
   if(!e)return;
@@ -3759,7 +3642,7 @@ function spawnDeathEcho(e){
   const life=e.finalBoss?.78:e.elite?.62:.42;
   let da=Number.isFinite(e.deathA)?e.deathA:Math.atan2(e.vy||0,e.vx||1);let force=e.finalBoss?18:e.elite?28:38;deathEchoes.push({type:e.type,visualSetV516:e.visualSetV516,x:e.x,y:e.y,size:enemyDrawSize(e),rot:da+Math.PI/2,life,max:life,elite:e.elite,finalBoss:e.finalBoss,affix:e.eliteAffix||'',bossName:e.bossName||'',vx:Math.cos(da)*force,vy:Math.sin(da)*force-10,spin:rand(-.8,.8)});
   if(deathEchoes.length>18)deathEchoes.splice(0,deathEchoes.length-18);
-  const color=e.type==='froststalker'?'frost':e.type==='spitter'||e.type==='symbiote'?'acid':e.type==='embermaw'?'ember':'flesh';
+  const color=e.type==='froststalker'?'frost':enemyCombatTypeV596(e.type)==='spitter'||e.type==='symbiote'?'acid':e.type==='embermaw'?'ember':'flesh';
   let n=e.finalBoss?34:e.elite?22:10;
   for(let i=0;i<n;i++)particles.push({kind:'dissolve',x:e.x+rand(-e.r,e.r),y:e.y+rand(-e.r,e.r),vx:rand(-70,70),vy:rand(-100,35),r:rand(1,3.5),life:rand(.28,.72),color});
 }
@@ -3802,14 +3685,14 @@ function killEnemy(e){
     if(majorArrivalCue?.owner===e)majorArrivalCue=null;
     const power=Math.max(1,e.nemesisPower||meta.nemesis?.power||1),adaptKind=e.adaptKind||meta.nemesis?.adaptKind||'core';
     nemesisKilledThisRun=true;meta.nemesis=null;meta.nemesisDefeats=(meta.nemesisDefeats||0)+1;
-    awardMemoryTrait(adaptKind);contractBankBonus+=10+power*4;dnaTotal+=18+power*6;saveMeta();renderNemesisStatus();
+    awardMemoryTrait(adaptKind);objectiveBankBonus+=10+power*4;dnaTotal+=18+power*6;saveMeta();renderNemesisStatus();
     dropRelic(e.x-10,e.y,true);dropRelic(e.x+12,e.y+4,true);
     announceEncounter('NEMESIS ERASED',(MEMORY_TRAITS[adaptKind]?.name||'MEMORY')+' EXTRACTED');flash('NEMESIS DESTROYED',1250);
   }
   if(e.lastHitKind==='acid'&&state.mouth>=3&&!e.finalBoss&&!e.elite){const rr=(fusion.plagueVortex?72:40)+state.mouth*7,spread=(5.5+state.mouth*2.4)*(player.acidPower||1)*(player.dmgMul||1)*(fusion.plagueVortex?1.55:1);enemyEachCandidateCircleV425(e.x,e.y,rr+40,x=>{if(x===e||x.dead||x.finalBoss||x.elite)return;if((x.x-e.x)**2+(x.y-e.y)**2<(rr+x.r)**2){hurtEnemy(x,spread,'acid');x.slow=Math.max(x.slow||0,.55);}});particles.push({kind:'supportPulse',x:e.x,y:e.y,r:5,max:rr,life:.24,maxLife:.24,color:'acid'});}
-  killChain=chainTimer>0?killChain+1:1;chainTimer=((contract?.id==='predator'&&!contractDone&&!contractFailed)?2.75:2.25)+(evoForm.speed==='hunt'?.45:0);maxChain=Math.max(maxChain,killChain);rewardFlowMilestone();triggerHordeRupture(e);
+  killChain=chainTimer>0?killChain+1:1;chainTimer=2.25+(evoForm.speed==='hunt'?.45:0);maxChain=Math.max(maxChain,killChain);rewardFlowMilestone();triggerHordeRupture(e);
   if(fusion.redReaper&&e.lastHitKind==='tail'){predation=Math.min(100,predation+7);activeReady=Math.max(0,activeReady-.30);chainTimer=Math.max(chainTimer,3.0);}
-  gainPredation(e.finalBoss?50:e.elite?28:(e.contractPrey?8:(e.type==='brute'||e.type==='warden'||e.type==='froststalker'||e.type==='symbiote'||e.type==='embermaw'?7:3)));
+  gainPredation(e.finalBoss?50:e.elite?28:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'||e.type==='froststalker'||e.type==='symbiote'||e.type==='embermaw'?7:3));
   if((player.origin||meta.origin)==='prime'&&kills%20===0){
     let before=player.hp;player.hp=Math.min(player.maxHp,player.hp+8);player.inv=Math.max(player.inv,.18);
     if(player.hp>before){flash('HOMEOSTASIS · +'+Math.round(player.hp-before)+' HP',420);for(let i=0;i<8;i++)particles.push({kind:'heal',x:player.x,y:player.y,vx:rand(-18,18),vy:rand(-25,0),r:rand(1.5,3),life:rand(.2,.4)});}
@@ -3820,11 +3703,11 @@ function killEnemy(e){
   }
   if(e.zoneElite){const def=ZONE_EVENT_DEFS[e.zoneId]||ZONE_EVENT_DEFS.facility;particles.push({kind:'phaseRing',x:e.x,y:e.y,r:8,max:e.r+64,life:.42,maxLife:.42,color:def.accent});for(let i=0;i<18;i++)particles.push({kind:'evolutionShard',x:e.x,y:e.y,vx:rand(-95,95),vy:rand(-105,65),r:rand(1.6,4.0),life:rand(.25,.60),color:def.accent});flash(def.eliteName+' DOWN',720);cameraShake=Math.max(cameraShake,8);}
   if(e.worldSiteId){const ws=worldSites.find(v=>v.id===e.worldSiteId);if(ws&&!ws.claimed){ws.remaining=Math.max(0,(ws.remaining||1)-1);if(ws.remaining<=0)completeWorldSite(ws);}}
-  let chainDNA=1+Math.min(.25,Math.floor(killChain/25)*.04),baseDNA=e.finalBoss?(e.apex?100:40):e.elite?14:(e.type==='brute'?3:(e.type==='warden'||e.type==='froststalker'||e.type==='symbiote'||e.type==='embermaw'?2:((kills%7===0)?1:0)));dnaTotal+=Math.round(baseDNA*routeMods.dna*(player.relicDna||1)*chainDNA);
+  let chainDNA=1+Math.min(.25,Math.floor(killChain/25)*.04),baseDNA=e.finalBoss?(e.apex?100:40):e.elite?14:(enemyCombatTypeV596(e.type)==='brute'?3:(e.type==='warden'||e.type==='froststalker'||e.type==='symbiote'||e.type==='embermaw'?2:((kills%7===0)?1:0)));dnaTotal+=Math.round(baseDNA*routeMods.dna*(player.relicDna||1)*chainDNA);
   const xpTempo=(t<AWAKENING_WINDOW?.94:t<95?.91:t<FINAL_BOSS_TIME?.87:.84)*(routeMods.xp||1);
   spawnXPV415(e.x,e.y,e.xp*xpTempo,26,e.finalBoss?22:14);
   if(killFxAllowed){particles.push({kind:'deathRing',x:e.x,y:e.y,r:6,max:e.finalBoss?44:e.elite?34:22,life:e.finalBoss?.52:e.elite?.44:.34,maxLife:e.finalBoss?.52:e.elite?.44:.34});
-  let fxHeavy=clarity>=1,deathFx=e.finalBoss?(fxHeavy?24:38):e.elite?(fxHeavy?14:22):(fxHeavy?4:7),deathKind=e.type==='spitter'||e.type==='symbiote'?'acid':e.type==='froststalker'?'iceShard':e.type==='embermaw'?'ash':e.type==='warden'?'shieldShard':'ember';for(let i=0;i<deathFx;i++)particles.push({kind:deathKind,x:e.x,y:e.y,vx:rand(-95,95),vy:rand(-95,95),r:rand(1.5,4.5),life:rand(.25,.7)});if(e.type==='brute'||e.type==='warden')particles.push({kind:'supportPulse',x:e.x,y:e.y,r:8,max:e.r+30,life:.34,maxLife:.34,color:e.type==='warden'?'shield':'impact'});if(e.type==='froststalker')for(let i=0;i<4;i++)particles.push({kind:'iceShard',x:e.x,y:e.y,vx:rand(-125,125),vy:rand(-125,60),r:rand(2,4.5),life:rand(.28,.62)});if(e.type==='embermaw')for(let i=0;i<4;i++)particles.push({kind:'ash',x:e.x,y:e.y,vx:rand(-70,70),vy:rand(-120,-25),r:rand(1.5,3.4),life:rand(.35,.8)});}
+  let fxHeavy=clarity>=1,deathFx=e.finalBoss?(fxHeavy?24:38):e.elite?(fxHeavy?14:22):(fxHeavy?4:7),deathKind=enemyCombatTypeV596(e.type)==='spitter'||e.type==='symbiote'?'acid':e.type==='froststalker'?'iceShard':e.type==='embermaw'?'ash':e.type==='warden'?'shieldShard':'ember';for(let i=0;i<deathFx;i++)particles.push({kind:deathKind,x:e.x,y:e.y,vx:rand(-95,95),vy:rand(-95,95),r:rand(1.5,4.5),life:rand(.25,.7)});if(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden')particles.push({kind:'supportPulse',x:e.x,y:e.y,r:8,max:e.r+30,life:.34,maxLife:.34,color:e.type==='warden'?'shield':'impact'});if(e.type==='froststalker')for(let i=0;i<4;i++)particles.push({kind:'iceShard',x:e.x,y:e.y,vx:rand(-125,125),vy:rand(-125,60),r:rand(2,4.5),life:rand(.28,.62)});if(e.type==='embermaw')for(let i=0;i<4;i++)particles.push({kind:'ash',x:e.x,y:e.y,vx:rand(-70,70),vy:rand(-120,-25),r:rand(1.5,3.4),life:rand(.35,.8)});}
   cameraShake=Math.max(cameraShake,e.finalBoss?14:e.elite?9:(kills%5===0?3:1.2));if(e.finalBoss||e.elite||kills%6===0)beep(e.finalBoss?62:e.elite?78:110,.045,'sawtooth',.014);if(e.elite)dropRelic(e.x,e.y,true);else if(e.type==='warden'||e.type==='froststalker'||e.type==='symbiote'||e.type==='embermaw')dropRelic(e.x,e.y,false);
   if(e.elite){if(majorArrivalCue?.owner===e)majorArrivalCue=null;lootSweep=Math.max(lootSweep,2.1);directorBreathe(2.1);$('bossbar').style.display='none';player.hp=Math.min(player.maxHp,player.hp+(e.bossName==='TITAN SENTINEL'?22:e.bossName==='OMEGA HUNTER'?24:e.bossName==='GENOME HUNTER'?18:14));flash((e.eliteName||'ELITE')+' CORE EXPOSED',900);if(e.bossName==='TITAN SENTINEL')setTimeout(()=>{queueEvoChests('TITAN SENTINEL',1,()=>showOrganChoice('TITAN SENTINEL'))},300);else if(e.bossName==='GENOME HUNTER'||e.bossName==='OMEGA HUNTER'){const hunterReward=()=>{if(choosing||rewardChoosing){setTimeout(hunterReward,220);return}queueEvoChests(e.bossName,e.evoChestTier||1,()=>showBossReward(e.bossName));};setTimeout(hunterReward,520);}else setTimeout(()=>{if(eligibleEvos().length)queueEvoChests(e.eliteName||'ALPHA BRUTE',1,()=>showBossReward(e.eliteName||'ELITE'));else showBossReward(e.eliteName||'ELITE')},260);}
   if(e.finalBoss){bossArrivalCue=null;bossArrivalPlan=null;majorArrivalCue=null;restoreBossArena();directorBreathe(3.2);hapticCue('death');triggerBossDeathCinematic(e);eBullets=[];biomeHazards=[];purges=[];telegraphs=[];$('bossbar').style.display='none';$('bossIntentBadge').style.display='none';setTimeout(()=>announceEncounter('BIO-CORE EXPOSED',(e.bossName||'BIO TITAN')+' · SECURE ORGAN'),220);if(e.apex){dropRelic(e.x,e.y,true);dropRelic(e.x+18,e.y-10,true);setTimeout(()=>announceEncounter(e.superApex?'OMEGA MILESTONE CLEARED':'MILESTONE CLEARED','STAGE '+meta.stage+' CONQUERED'),520)}flash((e.bossName||'BIO TITAN')+' ELIMINATED',1200);setTimeout(()=>{const n=e.bossName||'TITAN';if(!showEvoChest(n,()=>showOrganChoice(n)))showOrganChoice(n)},e.apex?1280:1080)}
@@ -4163,7 +4046,7 @@ function update(dt){
   if(!TEST_MANUAL_MODE_V458 && t>138&&!anomalyTriggered&&!rewardChoosing&&!choosing){showGenomeAnomaly()}
   if(!TEST_MANUAL_MODE_V458 && t>82&&!purge1&&directorCanStart('purge')){if(spawnPurgeWave(3,1))purge1=true}
   if(!TEST_MANUAL_MODE_V458 && t>210&&!purge2&&directorCanStart('purge')){if(spawnPurgeWave(4,2))purge2=true}
-  updateGeneRift(dt);updatePurges(dt);updateBreachGate(dt);updateBiomeHazards(dt);updateContractNodes(dt);updateWorldSites(dt);updateContract();if(!TEST_MANUAL_MODE_V458){updateTacticalWaves(dt);updateAdaptiveHorde(dt);}bossDangerFocus=bossDangerActive();if(finalBossAlive())runTelemetry.bossSeen=true;
+  updateGeneRift(dt);updatePurges(dt);updateBreachGate(dt);updateBiomeHazards(dt);updateWorldSites(dt);if(!TEST_MANUAL_MODE_V458){updateTacticalWaves(dt);updateAdaptiveHorde(dt);}bossDangerFocus=bossDangerActive();if(finalBossAlive())runTelemetry.bossSeen=true;
   if(!TEST_MANUAL_MODE_V458 && !nextBoss&&!stageFlowV526.closing&&!stageFlowV526.result&&!extractionMode&&waveBreather<=0&&directorRelief<=0&&!tacticalWave){
   const bossHorde=finalBossAlive(),eliteHorde=!bossHorde&&enemies.some(e=>!e.dead&&e.elite);spawnAcc+=dt;let density=combatDensityCap(),rate=spawnRate()*(bossHorde?3.25:eliteHorde?1.70:1),softCap=bossHorde?Math.min(8,Math.floor(density*.15)):eliteHorde?Math.min(14,Math.floor(density*.46)):density,batches=0;
   while(spawnAcc>rate&&batches<(bossHorde?1:eliteHorde?1:2)){
@@ -4179,24 +4062,18 @@ function update(dt){
   if(!TEST_MANUAL_MODE_V458 && !nextBoss&&bossSpawnReady()){
     nextBoss=true;setBossWarningV526(false);prepareBossArena();let fb=spawnEnemy('boss',true);stageFlowV526.spawnTime=t;
     const entry=bossEntryPlan(bossArrivalPlan?.side);fb.x=entry.x;fb.y=entry.y;fb.arrivalStartX=entry.x;fb.arrivalStartY=entry.y;fb.arrivalTargetX=entry.tx;fb.arrivalTargetY=entry.ty;fb.arrivalTime=1.10;fb.arrivalMax=1.10;fb.arrivalInvuln=true;fb.arrivalSide=entry.side;fb.spawnFx=.82;fb.patternLock=Math.max(fb.patternLock||0,1.25);bossArrivalCue={side:entry.side,until:t+1.25,label:'BOSS',color:fb.superApex?'#d57cff':fb.apex?'#ff9a63':'#ff755d'};
-    fb.contractVariant=contract?.id||'exterminate';
-    if(fb.contractVariant==='exterminate'){fb.contractBossTitle='HIVE TYRANT';fb.summonCd*=.72;fb.patternCd*=.92;}
-    else if(fb.contractVariant==='predator'){fb.contractBossTitle='BLOOD HUNTER';fb.spd*=1.14;fb.dmg*=1.08;fb.patternCd*=.78;}
-    else{fb.contractBossTitle='CORE DEVOURER';fb.hp*=1.12;fb.maxHp=fb.hp;fb.contractRegen=.0028;fb.contractArmor=.07;}
-    if(contractFailed){fb.hp*=1.25;fb.maxHp=fb.hp;fb.dmg*=1.12;fb.spd*=1.06;fb.contractEnraged=true;}const evoN=evoCount();if(fb.apex&&evoN>=2){const hpM=fb.superApex?(evoN>=3?1.30:1.15):(evoN>=3?1.20:1.09),dmgM=fb.superApex?(evoN>=3?1.10:1.04):(evoN>=3?1.06:1.02);fb.hp*=hpM;fb.maxHp=fb.hp;fb.dmg*=dmgM;fb.transcendResponse=evoN;fb.summonCd*=evoN>=3?.88:.94;}
-    let contractEdgeLabel=contractDone?applyContractBossEdge(fb):'';directorHold(2.0);
+    const evoN=evoCount();if(fb.apex&&evoN>=2){const hpM=fb.superApex?(evoN>=3?1.30:1.15):(evoN>=3?1.20:1.09),dmgM=fb.superApex?(evoN>=3?1.10:1.04):(evoN>=3?1.06:1.02);fb.hp*=hpM;fb.maxHp=fb.hp;fb.dmg*=dmgM;fb.transcendResponse=evoN;fb.summonCd*=evoN>=3?.88:.94;}
+    directorHold(2.0);
     if(fb.venomV537){fb.counterMode=null;updateCounterBadge(fb);}else assignBossCounter(fb);updateBossPhaseStrip(fb);
     let encounterSub=fb.transcendResponse>=3?'TRANSCENDENCE RESPONSE':fb.transcendResponse===2?'HYPERMUTATION RESPONSE':'FINAL MUTATION';
-    if(contractFailed)encounterSub='CONTRACT RETALIATION';
-    else if(contractDone)encounterSub='CONTRACT HUNT COMPLETE';
-    else if(fb.superApex)encounterSub='STAGE '+meta.stage+' · OMEGA MILESTONE';
+    if(fb.superApex)encounterSub='STAGE '+meta.stage+' · OMEGA MILESTONE';
     else if(fb.apex)encounterSub='MILESTONE BOSS · STAGE '+meta.stage;
     else if(meta.route==='cryo')encounterSub='CRYO APEX';
     else if(fb.venomV537)encounterSub='VENOM TITAN · LIVING PLAGUE';
     else if(meta.route==='gene')encounterSub='GENOME APEX';
     else if(meta.route==='inferno')encounterSub='THERMAL APEX';
-    if(!fb.encounterPhaseV526)showBossIntro(fb,encounterSub);announceEncounter(fb.bossName||'BIO TITAN',fb.encounterPhaseV526?'PHASE '+fb.encounterPhaseV526:contractEdgeLabel||encounterSub);
-    flash(contractEdgeLabel||((contractFailed?'ENRAGED ':'WARNING: ')+(fb.bossName||'BIO TITAN')),1600);cameraShake=fb.apex?12:8;audioCue('boss');hapticCue('boss');
+    if(!fb.encounterPhaseV526)showBossIntro(fb,encounterSub);announceEncounter(fb.bossName||'BIO TITAN',fb.encounterPhaseV526?'PHASE '+fb.encounterPhaseV526:encounterSub);
+    flash('WARNING: '+(fb.bossName||'BIO TITAN'),1600);cameraShake=fb.apex?12:8;audioCue('boss');hapticCue('boss');
   }
   firePlayer(dt);
   for(const b of bullets){
@@ -4219,9 +4096,9 @@ function update(dt){
   for(const e of enemies){
     if(e.dead)continue;
     if(window.__EVOLVE_LIGHTNING_V576__&&lightningV576.holdEnemy(e))continue;
-    if(e.eliteRegen&&e.hp>0&&e.hp<e.maxHp)e.hp=Math.min(e.maxHp,e.hp+e.maxHp*e.eliteRegen*dt);if(e.contractRegen&&e.hp>0&&e.hp<e.maxHp&&(!isBioTitanV435(e)||e.titanPhase<3))e.hp=Math.min(e.maxHp,e.hp+e.maxHp*e.contractRegen*dt);e.exposed=Math.max(0,(e.exposed||0)-dt);
+    if(e.eliteRegen&&e.hp>0&&e.hp<e.maxHp)e.hp=Math.min(e.maxHp,e.hp+e.maxHp*e.eliteRegen*dt);e.exposed=Math.max(0,(e.exposed||0)-dt);
     e.hit=Math.max(0,e.hit-dt);e.bodyKick=Math.max(0,(e.bodyKick||0)-dt);e.spawnFx=Math.max(0,(e.spawnFx||0)-dt);e.slow=Math.max(0,(e.slow||0)-dt);e.corrosion=Math.max(0,(e.corrosion||0)-dt);e.cutMark=Math.max(0,(e.cutMark||0)-dt);e.puncture=Math.max(0,(e.puncture||0)-dt);e.coreShock=Math.max(0,(e.coreShock||0)-dt);
-    if(e.elite){
+    if(e.elite&&!e.midRankV596){
       e.affixCd=Math.max(0,(e.affixCd||0)-dt);
       if(e.eliteAffix==='ravager'&&e.affixCd<=0&&!e.telegraphing){
         e.telegraphing='ravagerStrike';e.patternLock=.58;e.affixCd=4.0+Math.random();
@@ -4261,7 +4138,7 @@ function update(dt){
       if(e.farLife>4.2&&d>Math.max(W,H)*1.25){let side=Math.random()*4|0,vr=cameraRect(46);if(side===0){e.x=rand(vr.l,vr.r);e.y=vr.t}else if(side===1){e.x=vr.r;e.y=rand(vr.t,vr.b)}else if(side===2){e.x=rand(vr.l,vr.r);e.y=vr.b}else{e.x=vr.l;e.y=rand(vr.t,vr.b)}e.x=clamp(e.x,20,WORLD_W-20);e.y=clamp(e.y,20,WORLD_H-20);e.farLife=0;e.spawnFx=.22;}continue;
     }else e.farLife=0;
     // V439: only aiming/charging enemy types need the initial angle. Far horde followers skip atan2.
-    if(e.type==='boss'||e.type==='runner'||e.type==='spitter'||e.type==='froststalker'||e.type==='embermaw')a=Math.atan2(aimDyV438,aimDxV438);
+    if(e.type==='boss'||enemyCombatTypeV596(e.type)==='runner'||enemyCombatTypeV596(e.type)==='spitter'||e.type==='froststalker'||e.type==='embermaw')a=Math.atan2(aimDyV438,aimDxV438);
     if(e.type==='warden'){
       let desired=120, toward=(d>desired+18?1:d<desired-18?-.35:0), sp=e.spd*slowMul;e.vx=aimNXV438*sp*toward;e.vy=aimNYV438*sp*toward;
       e.pulse=(e.pulse||0)+dt*2.2;e.shieldPulseCd-=dt;
@@ -4282,7 +4159,7 @@ function update(dt){
       if(e.chargePrep>0){e.chargePrep-=dt;e.vx=e.vy=0;if(e.chargePrep<=0){e.burst=.48;e.chargeA=Math.atan2(player.y-e.y,player.x-e.x);}}
       else if(e.burst>0){let sp=e.spd*3.25*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;if(!ordinaryEnemyV591(e)&&e.trailCd<=0){biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}}
       else{let sp=e.spd*slowMul;e.vx=aimNXV438*sp;e.vy=aimNYV438*sp;if(e.dashCd<=0&&d<230){e.chargePrep=.42;e.dashCd=2.05+Math.random()*.65;telegraphs.push({kind:'emberCharge',owner:e,x:e.x,y:e.y,a:a,len:145,life:.42,max:.42});}}
-    } else if(e.type==='runner'){
+    } else if(enemyCombatTypeV596(e.type)==='runner'){
       e.dashCd-=dt;e.burst=Math.max(0,(e.burst||0)-dt);
       if(e.dashPrep>0){e.dashPrep-=dt;e.vx=e.vy=0;if(e.dashPrep<=0)e.burst=.30;}
       else if(e.burst>0){let sp=e.spd*2.85*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;}
@@ -4291,9 +4168,9 @@ function update(dt){
         let tx=aimNXV438,ty=aimNYV438,px=-ty,py=tx,flank=e.flank||1,sp=e.spd*slowMul,side=d>82?.62:.22;
         e.vx=tx*sp*.72+px*sp*side*flank;e.vy=ty*sp*.72+py*sp*side*flank;
       }
-    } else if(e.type==='brute'){
+    } else if(enemyCombatTypeV596(e.type)==='brute'){
       e.slamCd-=dt;e.burst=Math.max(0,(e.burst||0)-dt);if(e.elite)e.elitePatternCd-=dt;
-      if(e.elite&&e.elitePatternCd<=0&&!e.telegraphing){
+      if(e.elite&&!e.midRankV596&&e.elitePatternCd<=0&&!e.telegraphing){
         e.telegraphing='alphaSlam';e.patternLock=.72;
         telegraphs.push({kind:'alphaSlam',owner:e,x:e.x,y:e.y,r:76,life:.72,max:.72});
         flash('ALPHA SLAM · GET OUT',460);e.elitePatternCd=2.7+Math.random()*.8;
@@ -4303,9 +4180,9 @@ function update(dt){
       }
       let sp=e.spd*(d<58?.38:1)*slowMul;e.vx=aimNXV438*sp;e.vy=aimNYV438*sp;
       if(e.telegraphing==='alphaSlam'||e.telegraphing==='bruteSlam'){e.vx*=.12;e.vy*=.12;}
-    } else if(e.type==='spitter'){
+    } else if(enemyCombatTypeV596(e.type)==='spitter'){
       let tx=aimNXV438, ty=aimNYV438, px=-ty, py=tx; e.shot-=dt;if(e.elite)e.elitePatternCd-=dt;
-      if(e.elite&&e.elitePatternCd<=0&&!e.telegraphing&&t>=(e._v490PhaseUntil||0)){
+      if(e.elite&&!e.midRankV596&&e.elitePatternCd<=0&&!e.telegraphing&&t>=(e._v490PhaseUntil||0)){
         if(e.bossName==='TITAN SENTINEL'){
           const hpq=e.hp/e.maxHp,phase=hpq>.66?1:hpq>.32?2:3;
           if((e.sentinelPhase||1)!==phase){e.sentinelPhase=phase;announceEncounter('TITAN SENTINEL','PHASE '+phase+' · '+(phase===2?'CROSS-LANCE MATRIX':'OVERLOAD GRID'));particles.push({kind:'bossVfx',asset:phase===2?'cryo_impact':'warning_ring',x:e.x,y:e.y,size:e.r*4.1,spin:phase===2?.7:-1.0,life:.58,maxLife:.58});cameraShake=Math.max(cameraShake,7+phase*2);bossPhaseResumeV433(e,.14);}
@@ -4322,7 +4199,7 @@ function update(dt){
       e.vx=(tx*e.spd*.42*toward + px*strafeSp*e.strafe)*slowMul; e.vy=(ty*e.spd*.42*toward + py*strafeSp*e.strafe)*slowMul;
       if(Math.random()<dt*.6)e.strafe*=-1;
       if(e.shot<=0 && e.bossName!=='TITAN SENTINEL' && d<(e.elite?340:280)){
-        e.shotCount=(e.shotCount||0)+1;let spreadCount=(e.elite?5:3)+threatMods.acidExtra, mid=(spreadCount-1)/2;for(let k=0;k<spreadCount;k++){let aa=a+(k-mid)*(e.elite?.13:.15); eBullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*(e.elite?142:122),vy:Math.sin(aa)*(e.elite?142:122),r:e.elite?5:4.3,dmg:e.elite?12:9,life:3,...(e.venomAddV553?{venomAddV553:true,venomAddOwnerV553:e.venomAddOwnerV553}:{})});}
+        e.shotCount=(e.shotCount||0)+1;let spreadCount=(e.elite?5:3)+threatMods.acidExtra, mid=(spreadCount-1)/2;for(let k=0;k<spreadCount;k++){let aa=a+(k-mid)*(e.elite?.13:.15); eBullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*(e.elite?142:122),vy:Math.sin(aa)*(e.elite?142:122),r:e.elite?5:4.3,dmg:e.midRankV596?e.dmg*.65:e.elite?12:9,life:3,...(e.venomAddV553?{venomAddV553:true,venomAddOwnerV553:e.venomAddOwnerV553}:{})});}
         /* Ordinary spitters use their ranged volley only. */
         e.shot=(e.elite?.92:1.65)+Math.random()*(e.elite?.22:.55); for(let i=0;i<(e.elite?8:5);i++)particles.push({kind:'acid',x:e.x,y:e.y,vx:rand(-40,40),vy:rand(-40,40),r:rand(1.6,3.6),life:rand(.14,.28)});
       }
@@ -4440,7 +4317,7 @@ function update(dt){
       }
       if(e.summonCd<=0&&!isBioTitanV435(e)&&!e.finalBoss){
         if(livingCount()<runtimeCaps().enemyHard){
-        if(e.apex){spawnEnemy(['warden','runner','spitter','brute'][Math.floor(Math.random()*4)]);if(e.apexPhase>=3)spawnEnemy(['froststalker','symbiote','embermaw'][Math.floor(Math.random()*3)]);if(e.superApex&&e.apexPhase>=4)spawnEnemy(['runner','spitter','warden'][Math.floor(Math.random()*3)]);if(e.contractVariant==='exterminate'&&Math.random()<.55)spawnEnemy(Math.random()<.5?'runner':'crawler');}
+        if(e.apex){spawnEnemy(['warden','runner','spitter','brute'][Math.floor(Math.random()*4)]);if(e.apexPhase>=3)spawnEnemy(['froststalker','symbiote','embermaw'][Math.floor(Math.random()*3)]);if(e.superApex&&e.apexPhase>=4)spawnEnemy(['runner','spitter','warden'][Math.floor(Math.random()*3)]);}
         else if(e.variant==='gene'){spawnEnemy('warden');spawnEnemy(Math.random()<.5?'runner':'spitter');}
         else if(e.variant==='inferno'){spawnEnemy('runner');spawnEnemy('runner');}
         else if(e.variant==='cryo'){spawnEnemy('brute');}
@@ -4457,7 +4334,7 @@ function update(dt){
     if(isBioTitanV435(e)&&e.burst>0){bioTrailStepV491(e,dt);}
     if((e.stunned||0)>0){e.vx=0;e.vy=0;}if(e.telegraphing==='frostLine'){e.vx*=.12;e.vy*=.12;}if(bossDangerFocus&&!e.finalBoss&&!e.elite&&Math.hypot(player.x-e.x,player.y-e.y)<180){e.vx*=.70;e.vy*=.70;}
     const bioRushBeforeV492=isBioTitanV435(e)&&e.burst>0?{x:e.x,y:e.y}:null;
-    steerTerrainV418(e);moveTerrainBodyV418(e,(e.vx+(e.kx||0))*dt,(e.vy+(e.ky||0))*dt,e.r);if(e.finalBoss)containFinalBoss(e);
+    enemyIntentV596(e,dt,slowMul,d);steerTerrainV418(e);moveTerrainBodyV418(e,(e.vx+(e.kx||0))*dt,(e.vy+(e.ky||0))*dt,e.r);if(e.finalBoss)containFinalBoss(e);
     if(bioRushBeforeV492){
       const moved=Math.hypot(e.x-bioRushBeforeV492.x,e.y-bioRushBeforeV492.y);
       e._bioRushRemainV492=Math.max(0,(e._bioRushRemainV492||0)-moved);
@@ -4468,15 +4345,15 @@ function update(dt){
       }
     }
     const postMoveDxV439=player.x-e.x,postMoveDyV439=player.y-e.y;
-    let rr=e.r+player.r, hitDmg=e.dmg + (e.type==='runner'&&e.burst>0?6:0) + (e.type==='embermaw'&&e.burst>0?9:0) + (e.type==='brute'&&e.burst>0?12:0) + (e.type==='boss'&&e.burst>0?10:0);
+    let rr=e.r+player.r, hitDmg=e.dmg + (enemyCombatTypeV596(e.type)==='runner'&&e.burst>0?6:0) + (e.type==='embermaw'&&e.burst>0?9:0) + (enemyCombatTypeV596(e.type)==='brute'&&e.burst>0?12:0) + (e.type==='boss'&&e.burst>0?10:0);
     if(enemyContactAllowedV591(e)&&(e.contactCd<=0||(bioRushBeforeV492&&!e._bioRushHitV492))&&t>=(e._v490PhaseUntil||0)&&postMoveDxV439*postMoveDxV439+postMoveDyV439*postMoveDyV439<rr*rr &&
        (!bioRushBeforeV492||!e._bioRushHitV492)){
       // A charge has one hit total; touching the boss while it is dashing cannot multi-hit.
       const contactAngleV439=Math.atan2(postMoveDyV439,postMoveDxV439);
       if(bioRushBeforeV492){e._bioRushHitV492=true;playerDamage(e._bioRushDamageV492||hitDmg);e.contactCd=.65;}
-      else {playerDamage(isBioTitanV435(e)?e.dmg*.38:hitDmg);e.contactCd=e.type==='runner'?.34:isBioTitanV435(e)?.54:.28;}
-      e.x-=Math.cos(contactAngleV439)*(e.type==='brute'?18:12);e.y-=Math.sin(contactAngleV439)*(e.type==='brute'?18:12);
-      if(e.type==='brute'||e.type==='boss')cameraShake=Math.max(cameraShake,4);
+      else {playerDamage(isBioTitanV435(e)?e.dmg*.38:hitDmg);e.contactCd=enemyCombatTypeV596(e.type)==='runner'?.34:isBioTitanV435(e)?.54:.28;}
+      e.x-=Math.cos(contactAngleV439)*(enemyCombatTypeV596(e.type)==='brute'?18:12);e.y-=Math.sin(contactAngleV439)*(enemyCombatTypeV596(e.type)==='brute'?18:12);
+      if(enemyCombatTypeV596(e.type)==='brute'||e.type==='boss')cameraShake=Math.max(cameraShake,4);
     }
   }
   for(const tg of telegraphs){
@@ -4553,7 +4430,7 @@ function update(dt){
         }
         cameraShake=Math.max(cameraShake,5);for(let i=0;i<14;i++)particles.push({kind:e.variant==='cryo'?'dash':e.variant==='inferno'?'ember':'acid',x:e.x,y:e.y,vx:rand(-70,70),vy:rand(-70,70),r:rand(1.5,4),life:rand(.18,.36)});
       }else if(tg.kind==='charge'){
-        e.burst=e.contractVariant==='predator'?.92:.72; e.chargeA=tg.a;
+        e.burst=.72; e.chargeA=tg.a;
         if(e.variant==='inferno')biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:36,warn:.35,active:2.2,tick:0});
         if(e.variant==='cryo')biomeHazards.push({kind:'cryo',x:e.x,y:e.y,r:40,warn:.28,active:3.2,tick:0});
         for(let i=0;i<12;i++)particles.push({kind:e.variant==='cryo'?'dash':'ember',x:e.x,y:e.y,vx:rand(-55,55),vy:rand(-55,55),r:rand(2,4),life:rand(.16,.3)});
@@ -4586,7 +4463,7 @@ function update(dt){
       }else if(tg.kind==='counterPrism'){
         e.prism=e.superApex?3.0:2.35;particles.push({kind:'counterRing',x:e.x,y:e.y,r:8,max:e.r+58,life:.42,maxLife:.42,color:'prism'});flash('PRISM CARAPACE · ARM RESIST',700);cameraShake=Math.max(cameraShake,5);
       }else if(tg.kind==='counterBrood'){
-        spawnEnemy('warden');spawnEnemy('runner');spawnEnemy(Math.random()<.5?'runner':'spitter');if(e.superApex||riskTier().id>=2)spawnEnemy('runner');
+        spawnEnemy('warden');spawnEnemy('runner');spawnEnemy(Math.random()<.5?'runner':'spitter');if(e.superApex)spawnEnemy('runner');
         for(let i=0;i<20;i++)particles.push({kind:'counter',x:e.x,y:e.y,vx:rand(-95,95),vy:rand(-95,95),r:rand(1.5,4),life:rand(.2,.55),color:'brood'});
         cameraShake=Math.max(cameraShake,6);
       }else if(tg.kind==='counterPurify'){
@@ -4930,7 +4807,6 @@ function draw(){
   // relic drops
   for(const r of relicDrops){ctx.save();ctx.translate(r.x,r.y);ctx.rotate(t*1.8+r.pulse);ctx.shadowBlur=18;ctx.shadowColor='#77dcff';ctx.fillStyle='#0e2632';ctx.strokeStyle='#9ce9ff';ctx.lineWidth=2;ctx.beginPath();for(let i=0;i<6;i++){let a=i/6*TAU-Math.PI/2,rr=i%2?r.r*.72:r.r;let x=Math.cos(a)*rr,y=Math.sin(a)*rr;i?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}
   // Collectible biomass is an actual high resolution capsule.
-  for(const n of contractNodes){stamp('pickups/capsule_knowledge',n.x,n.y-8,42);ctx.save();ctx.fillStyle='#83ffad';ctx.fillRect(n.x-15,n.y+20,30*clamp(n.hold/n.need,0,1),3);ctx.restore();}
   // The active crystal uses the same art and position as its dormant site.
   if(rift){drawSiteArtV422({...rift,type:'rift',active:true,pulse:t*3});}
   // breach gate
@@ -5093,9 +4969,9 @@ function drawWorldShadowsV421(){
    material=clamp(1-(e.spawnFx||0)/spawnBase,0,1),hitKick=clamp((e.bodyKick||0)/.12,0,1);
   const scale=(.72+.28*material)*(1+hitKick*.035),actualSize=baseSize*scale*(e.hit>0?1.045:1);
   const speed=Math.hypot(e.vx||0,e.vy||0),blend=clamp(speed/Math.max(40,e.spd||60),0,1),
-   phase=e.animPhase||0,gait=Math.sin(t*(e.type==='runner'?13:e.type==='brute'?6.2:8.5)+phase),wave=Math.cos(t*9+phase);
+   phase=e.animPhase||0,gait=Math.sin(t*(enemyCombatTypeV596(e.type)==='runner'?13:enemyCombatTypeV596(e.type)==='brute'?6.2:8.5)+phase),wave=Math.cos(t*9+phase);
   let sx=1+blend*.035*wave,sy=1-blend*.025*wave;
-  if(e.type==='runner'&&((e.burst||0)>0||e.dashPrep>0)){sx*=.80;sy*=1.28;}
+  if(enemyCombatTypeV596(e.type)==='runner'&&((e.burst||0)>0||e.dashPrep>0)){sx*=.80;sy*=1.28;}
   if(e.telegraphing==='bruteSlam'||e.telegraphing==='alphaSlam'){sx*=1.14;sy*=.86;}
   if(e.telegraphing==='frostLine'||e.telegraphing==='omegaPool'){sx*=.94;sy*=1.08;}
   const size=sp.side*(actualSize/sp.D);
@@ -5171,8 +5047,8 @@ function threatSpriteV426(type){
 }
 function drawThreatPriority(e,size){
  if(e.dead||e.finalBoss||e.elite)return;if(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))return;const clarity=combatClarityLevel(),dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy;if(d2>260*260)return;
- const priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';if(!priority)return;if(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))return;
- const v=threatSpriteV426(e.type),sc=size/40,p=.5+.5*Math.sin(t*5+(e.rolePhase||0)),css=v.css*sc;ctx.save();ctx.globalAlpha=.28+.14*p;ctx.drawImage(v.surface,e.x-css/2,e.y-css/2,css,css);ctx.restore();
+ const priority=e.type==='warden'||e.type==='symbiote'||(enemyCombatTypeV596(e.type)==='spitter'&&d2<190*190)||e.type==='froststalker';if(!priority)return;if(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))return;
+ const v=threatSpriteV426(enemyCombatTypeV596(e)),sc=size/40,p=.5+.5*Math.sin(t*5+(e.rolePhase||0)),css=v.css*sc;ctx.save();ctx.globalAlpha=.28+.14*p;ctx.drawImage(v.surface,e.x-css/2,e.y-css/2,css,css);ctx.restore();
 }
 
 /* ===== V161-V165 VISUAL-ONLY CANVAS POLISH ===== */
@@ -5207,13 +5083,13 @@ function drawPlayerGroundV165(bodySize,ang){
 }
 function drawEnemySilhouetteV165(e,size,rot,alpha=1){
   if(e.dead)return;ctx.save();ctx.translate(e.x,e.y);ctx.rotate(rot);ctx.globalAlpha=.28*alpha;ctx.lineWidth=1.4;
-  const col=e.type==='warden'?'#8fe9ff':e.type==='symbiote'?'#8dff9f':e.type==='spitter'?'#83ff68':e.type==='froststalker'?'#a7eaff':e.type==='embermaw'?'#ff7049':e.type==='runner'?'#ff7b72':e.type==='brute'?'#d8a38f':'#be7874';ctx.strokeStyle=col;ctx.fillStyle=col;ctx.shadowBlur=10;ctx.shadowColor=col;
+  const col=e.type==='warden'?'#8fe9ff':e.type==='symbiote'?'#8dff9f':enemyCombatTypeV596(e.type)==='spitter'?'#83ff68':e.type==='froststalker'?'#a7eaff':e.type==='embermaw'?'#ff7049':enemyCombatTypeV596(e.type)==='runner'?'#ff7b72':enemyCombatTypeV596(e.type)==='brute'?'#d8a38f':'#be7874';ctx.strokeStyle=col;ctx.fillStyle=col;ctx.shadowBlur=10;ctx.shadowColor=col;
   if(e.finalBoss||e.elite){ctx.globalAlpha=e.finalBoss?.20:.15;ctx.lineWidth=e.finalBoss?2.3:1.7;for(let i=0;i<(e.finalBoss?3:2);i++){ctx.beginPath();ctx.arc(0,0,size*(.33+i*.08),-.9+i*.5,1.9+i*.5);ctx.stroke();}}
   if(!e.finalBoss){
-    if(e.type==='crawler'){for(const s of [-1,0,1]){ctx.beginPath();ctx.moveTo(s*size*.10,-size*.06);ctx.lineTo(s*size*.14,-size*.31-Math.abs(s)*2);ctx.lineTo(s*size*.03,-size*.12);ctx.closePath();ctx.fill();}}
-    else if(e.type==='runner'){for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*size*.10,-size*.06);ctx.lineTo(s*size*.30,-size*.25);ctx.lineTo(s*size*.17,size*.03);ctx.closePath();ctx.fill();}}
-    else if(e.type==='brute'){for(const s of [-1,1]){ctx.beginPath();ctx.ellipse(s*size*.28,-size*.03,size*.16,size*.22,s*.12,0,TAU);ctx.fill();}}
-    else if(e.type==='spitter'){ctx.globalAlpha=.22*alpha;ctx.beginPath();ctx.ellipse(0,size*.16,size*.22,size*.31,0,0,TAU);ctx.fill();ctx.globalAlpha=.42*alpha;ctx.fillStyle='#a3ff6f';ctx.beginPath();ctx.arc(0,size*.20,size*.08,0,TAU);ctx.fill();}
+    if(enemyCombatTypeV596(e.type)==='crawler'){for(const s of [-1,0,1]){ctx.beginPath();ctx.moveTo(s*size*.10,-size*.06);ctx.lineTo(s*size*.14,-size*.31-Math.abs(s)*2);ctx.lineTo(s*size*.03,-size*.12);ctx.closePath();ctx.fill();}}
+    else if(enemyCombatTypeV596(e.type)==='runner'){for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*size*.10,-size*.06);ctx.lineTo(s*size*.30,-size*.25);ctx.lineTo(s*size*.17,size*.03);ctx.closePath();ctx.fill();}}
+    else if(enemyCombatTypeV596(e.type)==='brute'){for(const s of [-1,1]){ctx.beginPath();ctx.ellipse(s*size*.28,-size*.03,size*.16,size*.22,s*.12,0,TAU);ctx.fill();}}
+    else if(enemyCombatTypeV596(e.type)==='spitter'){ctx.globalAlpha=.22*alpha;ctx.beginPath();ctx.ellipse(0,size*.16,size*.22,size*.31,0,0,TAU);ctx.fill();ctx.globalAlpha=.42*alpha;ctx.fillStyle='#a3ff6f';ctx.beginPath();ctx.arc(0,size*.20,size*.08,0,TAU);ctx.fill();}
     else if(e.type==='warden'){for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*size*.18,-size*.22);ctx.lineTo(s*size*.38,-size*.02);ctx.lineTo(s*size*.29,size*.25);ctx.lineTo(s*size*.14,size*.11);ctx.closePath();ctx.stroke();}}
     else if(e.type==='symbiote'){for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*size*.09,size*.02);ctx.bezierCurveTo(s*size*.30,size*.12,s*size*.37,size*.31,s*size*.22,size*.43);ctx.stroke();}}
     else if(e.type==='froststalker'){for(let i=-1;i<=1;i++){ctx.beginPath();ctx.moveTo(i*size*.11,-size*.13);ctx.lineTo(i*size*.16,-size*(.38-Math.abs(i)*.05));ctx.lineTo(i*size*.05,-size*.20);ctx.closePath();ctx.stroke();}}
@@ -5568,22 +5444,22 @@ function drawBioGroundMotionV435(){
 function drawEnemy(e,shadowOnly=false){
   const bob=Math.sin(t*4+e.x*.01+e.y*.01)*(e.boss?1.2:.7);
   let img=renderedEnemy(e);
-  let size=e.finalBoss?(e.superApex?244:(e.apex?224:208)):e.elite?(e.bossName==='TITAN SENTINEL'?106.6:68):e.type==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:e.type==='spitter'?40:(e.type==='runner'?27:29),rot=0;let spawnBase=e.waveMarked?.42:.28,material=clamp(1-(e.spawnFx||0)/spawnBase,0,1),visualScale=.72+.28*material,visualAlpha=.30+.70*material;
+  let size=e.finalBoss?(e.superApex?244:(e.apex?224:208)):e.elite?(e.midVisualSizeV596||(e.bossName==='TITAN SENTINEL'?106.6:68)):enemyCombatTypeV596(e.type)==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:enemyCombatTypeV596(e.type)==='spitter'?40:(enemyCombatTypeV596(e.type)==='runner'?27:29),rot=0;let spawnBase=e.waveMarked?.42:.28,material=clamp(1-(e.spawnFx||0)/spawnBase,0,1),visualScale=.72+.28*material,visualAlpha=.30+.70*material;
   if(bossDangerFocus&&!e.finalBoss&&!e.elite)visualAlpha*=.68;
-  const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*(e.type==='runner'?13:e.type==='brute'?6.2:8.5)+(e.animPhase||0));
+  const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*(enemyCombatTypeV596(e.type)==='runner'?13:enemyCombatTypeV596(e.type)==='brute'?6.2:8.5)+(e.animPhase||0));
   const hitKick=clamp((e.bodyKick||0)/.12,0,1),prep=!!e.telegraphing,charging=(e.burst||0)>0||e.dashPrep>0;
   let enemySX=1+moveBlend*.035*Math.cos(t*9+(e.animPhase||0)),enemySY=1-moveBlend*.025*Math.cos(t*9+(e.animPhase||0));
-  if(e.type==='runner'&&charging){enemySX*=.80;enemySY*=1.28}
+  if(enemyCombatTypeV596(e.type)==='runner'&&charging){enemySX*=.80;enemySY*=1.28}
   if(e.telegraphing==='bruteSlam'||e.telegraphing==='alphaSlam'){enemySX*=1.14;enemySY*=.86}
   if(e.telegraphing==='frostLine'||e.telegraphing==='omegaPool'){enemySX*=.94;enemySY*=1.08}
   if(e.finalBoss&&e.telegraphing==='charge'){enemySX*=.78;enemySY*=1.34;rot+=Math.sin(t*18)*.018}
   if(e.finalBoss&&(e.telegraphing==='acidBurst'||e.telegraphing==='counterPurify')){enemySX*=1.09;enemySY*=.92}
   if(e.finalBoss&&(e.telegraphing==='counterExecution'||e.telegraphing==='counterNull')){enemySX*=1.04;enemySY*=1.04}
   visualScale*=1+hitKick*.035;
-  if(e.type==='runner') rot=Math.atan2((e.vy||0.01),(e.vx||1))+Math.PI/2;
-  else if(e.type==='spitter') rot=Math.atan2(player.y-e.y,player.x-e.x)+Math.PI/2;
+  if(enemyCombatTypeV596(e.type)==='runner') rot=Math.atan2((e.vy||0.01),(e.vx||1))+Math.PI/2;
+  else if(enemyCombatTypeV596(e.type)==='spitter') rot=Math.atan2(player.y-e.y,player.x-e.x)+Math.PI/2;
   else if(e.type==='boss') rot=Math.atan2(player.y-e.y,player.x-e.x)+Math.PI/2;
-  else rot=Math.atan2((e.vy||0.01),(e.vx||1))+Math.PI/2;rot+=gait*moveBlend*(e.type==='brute'?.018:.035)+hitKick*.055*Math.sin((e.animPhase||0)+t*18);
+  else rot=Math.atan2((e.vy||0.01),(e.vx||1))+Math.PI/2;rot+=gait*moveBlend*(enemyCombatTypeV596(e.type)==='brute'?.018:.035)+hitKick*.055*Math.sin((e.animPhase||0)+t*18);
   if(shadowOnly&&e.venomV537&&VENOM_V537.drawSprite(e,true,size*visualScale,material))return;
   if(shadowOnly&&drawBioMotionV435(e,size*visualScale,material,true))return;
   if(shadowOnly){
@@ -5607,8 +5483,8 @@ function drawEnemy(e,shadowOnly=false){
   /* WEB-27: support-aura removed for every monster. */
   if(false&&e.type==='froststalker'&&(e.elite||e.finalBoss)){ctx.save();ctx.globalAlpha=.34;ctx.shadowBlur=15;ctx.shadowColor='#71d8ff';ctx.strokeStyle='#96e7ff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,size*.29,0,TAU);ctx.stroke();ctx.restore();}
   if(false&&e.type==='embermaw'&&(e.elite||e.finalBoss)){ctx.save();ctx.globalAlpha=.28+.12*Math.sin(t*9);ctx.shadowBlur=16;ctx.shadowColor='#ff552c';ctx.strokeStyle='#ff7849';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,size*.31,0,TAU);ctx.stroke();ctx.restore();}
-  if(e.hit>0&&!e.finalBoss&&!e.elite&&!e.nemesis&&!e.zoneElite&&!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))){ctx.save();ctx.globalAlpha=.34;ctx.fillStyle=e.type==='spitter'?'#80ff75':'#ff8d6a';ctx.shadowBlur=16;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(e.x,e.y,size*.26,0,TAU);ctx.fill();ctx.restore();}if(!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))&&!drawBioMotionV435(e,size*visualScale,visualAlpha)&&!VENOM_V537.drawSprite(e,false,size*visualScale,visualAlpha))drawSpriteImage(img,e.x,e.y,size*visualScale*(e.hit>0?1.045:1),gait*moveBlend*.025,(e.hit?0.97:1)*visualAlpha,bob+gait*moveBlend*.55,enemySX*(player.x<e.x?-1:1),enemySY);if(e.venomV537)VENOM_V537.drawBossOverlay(e);drawEnemyHitLanguage(e,size);
-  if(e.type==='runner'&&(e.burst||0)>0){
+  if(e.hit>0&&!e.finalBoss&&!e.elite&&!e.nemesis&&!e.zoneElite&&!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))){ctx.save();ctx.globalAlpha=.34;ctx.fillStyle=enemyCombatTypeV596(e.type)==='spitter'?'#80ff75':'#ff8d6a';ctx.shadowBlur=16;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(e.x,e.y,size*.26,0,TAU);ctx.fill();ctx.restore();}if(!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))&&!drawBioMotionV435(e,size*visualScale,visualAlpha)&&!VENOM_V537.drawSprite(e,false,size*visualScale,visualAlpha))drawSpriteImage(img,e.x,e.y,size*visualScale*(e.hit>0?1.045:1),gait*moveBlend*.025,(e.hit?0.97:1)*visualAlpha,bob+gait*moveBlend*.55,enemySX*(player.x<e.x?-1:1),enemySY);if(e.venomV537)VENOM_V537.drawBossOverlay(e);drawEnemyHitLanguage(e,size);
+  if(enemyCombatTypeV596(e.type)==='runner'&&(e.burst||0)>0){
     drawSpriteImage(img,e.x-(e.vx||0)*.045,e.y-(e.vy||0)*.045,size*.36,rot,.12,0,.82,1.22);
   }
 
@@ -5631,7 +5507,7 @@ function drawNormalEnemyOverlayV426(e){
  if(e.type==='symbiote'&&(e.healBeam||0)>0&&e.healTarget&&!e.healTarget.dead){ctx.save();let q=clamp((e.healBeam||0)/.24,0,1);ctx.globalAlpha=.20+.34*q;ctx.strokeStyle='#87ff9a';ctx.shadowBlur=9;ctx.shadowColor='#59ff72';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.healTarget.x,e.healTarget.y);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
  /* WEB-27: exposure-ring removed for every monster. */
  drawEnemyHitLanguage(e,size);
- if(e.type==='runner'&&(e.burst||0)>0){const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*13+(e.animPhase||0)),hitKick=clamp((e.bodyKick||0)/.12,0,1),rot=Math.atan2((e.vy||.01),(e.vx||1))+Math.PI/2+gait*moveBlend*.035+hitKick*.055*Math.sin((e.animPhase||0)+t*18);drawSpriteImage(renderedEnemy(e),e.x-(e.vx||0)*.045,e.y-(e.vy||0)*.045,size*.36,rot,.12,0,.82,1.22);}
+ if(enemyCombatTypeV596(e.type)==='runner'&&(e.burst||0)>0){const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*13+(e.animPhase||0)),hitKick=clamp((e.bodyKick||0)/.12,0,1),rot=Math.atan2((e.vy||.01),(e.vx||1))+Math.PI/2+gait*moveBlend*.035+hitKick*.055*Math.sin((e.animPhase||0)+t*18);drawSpriteImage(renderedEnemy(e),e.x-(e.vx||0)*.045,e.y-(e.vy||0)*.045,size*.36,rot,.12,0,.82,1.22);}
  /* WEB-25: spawn circles removed. */
  /* WEB-25: wave target circles removed. */
  /* WEB-27: stun-symbols removed for every monster. */
@@ -5719,20 +5595,15 @@ function gainRouteMastery(){
   else if(meta.route==='inferno')meta.infernoMastery=Math.min(5,(meta.infernoMastery||0)+1);
   saveMeta();
 }
-function settleContractStreak(success){
-  if(success){meta.contractStreak=(meta.contractStreak||0)+1;meta.bestContractStreak=Math.max(meta.bestContractStreak||0,meta.contractStreak);}
-  else meta.contractStreak=0;
-  saveMeta();
-}
 let runWonV506I18n=false;
-function win(){if(ended)return;runWonV506I18n=true;finalizeRunTelemetry(true);ended=true;running=false;settleContractStreak(!!contractDone);gainRouteMastery();grantStageClearReward();$('endTitle').textContent='EVOLVED';$('endTitle').style.color='#ffba57';let masteryNow=meta.route==='cryo'?meta.cryoMastery:meta.route==='gene'?meta.geneMastery:meta.route==='inferno'?meta.infernoMastery:0;
-    $('endSub').textContent='STAGE '+meta.stage+' · '+(campaignMilestone(meta.stage)?campaignMilestone(meta.stage)+' · ':'')+stageThreatText(meta.stage)+' · '+contract.riskName+' · '+contract.name+' '+(contractDone?'COMPLETE':'FAILED')+' · WAVE '+waveClears+'/'+TACTICAL_WAVES.length+' · RAPID '+rapidWaveClears+' · PERFECT EVASION '+perfectDodges+' · '+(activeFusionNames().length?('EVO '+activeFusionNames().join('/')):'BASE BUILD');setTimeout(()=>showRouteSelect(),350)}
-function lose(){if(ended)return;runWonV506I18n=false;finalizeRunTelemetry(false);let killer=enemies.find(e=>!e.dead&&e.nemesis)||enemies.find(e=>!e.dead&&e.finalBoss)||enemies.find(e=>!e.dead&&e.elite);if(killer)recordNemesis(killer);ended=true;running=false;settleContractStreak(false);$('endTitle').textContent='EXTINCT';$('endTitle').style.color='#ff4f58';$('endSub').textContent=meta.nemesis?('NEMESIS FORMED · '+meta.nemesis.name+' · RETURNS IN THE NEXT RUN.'):'Cells collapsed. Try a different mutation build.';finish()}
+function win(){if(ended)return;runWonV506I18n=true;finalizeRunTelemetry(true);ended=true;running=false;gainRouteMastery();grantStageClearReward();$('endTitle').textContent='EVOLVED';$('endTitle').style.color='#ffba57';let masteryNow=meta.route==='cryo'?meta.cryoMastery:meta.route==='gene'?meta.geneMastery:meta.route==='inferno'?meta.infernoMastery:0;
+    $('endSub').textContent='STAGE '+meta.stage+' · '+(campaignMilestone(meta.stage)?campaignMilestone(meta.stage)+' · ':'')+stageThreatText(meta.stage)+' · WAVE '+waveClears+'/'+TACTICAL_WAVES.length+' · RAPID '+rapidWaveClears+' · PERFECT EVASION '+perfectDodges+' · '+(activeFusionNames().length?('EVO '+activeFusionNames().join('/')):'BASE BUILD');setTimeout(()=>showRouteSelect(),350)}
+function lose(){if(ended)return;runWonV506I18n=false;finalizeRunTelemetry(false);let killer=enemies.find(e=>!e.dead&&e.nemesis)||enemies.find(e=>!e.dead&&e.finalBoss)||enemies.find(e=>!e.dead&&e.elite);if(killer)recordNemesis(killer);ended=true;running=false;$('endTitle').textContent='EXTINCT';$('endTitle').style.color='#ff4f58';$('endSub').textContent=meta.nemesis?('NEMESIS FORMED · '+meta.nemesis.name+' · RETURNS IN THE NEXT RUN.'):'Cells collapsed. Try a different mutation build.';finish()}
 
 function evolutionScoreBreakdown(){
   const combat=Math.round(kills*4+player.level*18+bossRewardsTaken*60);
   const skill=Math.round(rapidWaveClears*80+perfectDodges*55+Math.min(120,maxChain*3));
-  const objectives=Math.round((contractDone?180:0)+(nemesisKilledThisRun?120:0));
+  const objectives=Math.round((nemesisKilledThisRun?120:0));
   const evolution=Math.round(activeFusionNames().length*180+Object.values(genes).reduce((a,b)=>a+b,0)*8);
   const survival=Math.round(player.maxHp?player.hp/player.maxHp*90:0);
   return {combat,skill,objectives,evolution,survival,total:Math.max(0,combat+skill+objectives+evolution+survival)};
@@ -5764,12 +5635,11 @@ function renderEndEvolution(buildName){
   if(fusionName)highlights.push('APEX FUSION · '+fusionName);
   if(rapidWaveClears)highlights.push('RAPID DOMINATION ×'+rapidWaveClears);
   if(perfectDodges)highlights.push('PERFECT EVASION ×'+perfectDodges);
-  if(contractDone)highlights.push('CONTRACT COMPLETE');
   
   if(nemesisKilledThisRun)highlights.push('NEMESIS EXTRACTED');
   $('endHighlights').textContent=highlights.length?highlights.join(' · '):'SURVIVAL DATA SECURED';
 }
-function finish(){$('artHudV417').hidden=true;if(!bankedThisRun){skillBankBonus=performanceBankReward(runWonV506I18n);pendingBankGain=Math.max(0,Math.floor(dnaTotal)+contractBankBonus+skillBankBonus);meta.dna+=pendingBankGain;saveMeta();bankedThisRun=true;updateLab();}$('bankGain').textContent=pendingBankGain?('+'+pendingBankGain+' GENOME DNA BANKED'+(skillBankBonus?' · SKILL +'+skillBankBonus:'')):'';setTimeout(()=>{$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('minimapWrap'))$('minimapWrap').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('endKills').textContent=kills;$('endLevel').textContent=player.level;$('endDNA').textContent=Math.floor(dnaTotal);let arr=[['ARM',state.arm],['MOUTH',state.mouth],['TAIL',state.tail],['WING',state.wing],['LEG',state.leg]].sort((a,b)=>b[1]-a[1]);let cap=arr.map(x=>x[0].toLowerCase()).find(k=>evoForm[k]),fuse=activeFusionNames()[0],buildName=fuse|| (cap?evoFormName(cap):(originAscension||(synergy.artillery?'ARTILLERY':synergy.toxicCyclone?'TOXIC':synergy.overdrive?'OVERDRIVE':rareMutation?rareMutation:arr[0][0])));$('endBuild').textContent=(ORIGINS[meta.origin]?.name||'PRIME')+' · '+buildName;renderEndEvolution(buildName);$('runBack').textContent=!runWonV506I18n?'RETRY SAME BUILD':'RUN IT BACK';$('endOverlay').style.display='flex'},250)}
+function finish(){$('artHudV417').hidden=true;if(!bankedThisRun){skillBankBonus=performanceBankReward(runWonV506I18n);pendingBankGain=Math.max(0,Math.floor(dnaTotal)+objectiveBankBonus+skillBankBonus);meta.dna+=pendingBankGain;saveMeta();bankedThisRun=true;updateLab();}$('bankGain').textContent=pendingBankGain?('+'+pendingBankGain+' GENOME DNA BANKED'+(skillBankBonus?' · SKILL +'+skillBankBonus:'')):'';setTimeout(()=>{$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('minimapWrap'))$('minimapWrap').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('endKills').textContent=kills;$('endLevel').textContent=player.level;$('endDNA').textContent=Math.floor(dnaTotal);let arr=[['ARM',state.arm],['MOUTH',state.mouth],['TAIL',state.tail],['WING',state.wing],['LEG',state.leg]].sort((a,b)=>b[1]-a[1]);let cap=arr.map(x=>x[0].toLowerCase()).find(k=>evoForm[k]),fuse=activeFusionNames()[0],buildName=fuse|| (cap?evoFormName(cap):(originAscension||(synergy.artillery?'ARTILLERY':synergy.toxicCyclone?'TOXIC':synergy.overdrive?'OVERDRIVE':rareMutation?rareMutation:arr[0][0])));$('endBuild').textContent=(ORIGINS[meta.origin]?.name||'PRIME')+' · '+buildName;renderEndEvolution(buildName);$('runBack').textContent=!runWonV506I18n?'RETRY SAME BUILD':'RUN IT BACK';$('endOverlay').style.display='flex'},250)}
 
 let simCostEMAV425=0,renderCostEMAV425=0;
 let simAccumulatorV426=0,simDebtDroppedV428=0;
@@ -5900,7 +5770,6 @@ function drawMinimapAssetUI(){
     if(site.type==='zoneEvent'){drawV410MinimapTierMarker(site,cx,cy,r);continue;}
     minimapDiamond(p,minimapObjectiveColor(site.type),site.type==='bioChest'?5:4,3);
   }
-  for(const n of contractNodes){const p=minimapWorldPoint(n.x,n.y,r,cx,cy);if(p.visible)minimapDiamond(p,'#8cffad',4,2);}
   for(const n of relicDrops){if(n.dead)continue;const p=minimapWorldPoint(n.x,n.y,r,cx,cy);if(p.visible)minimapDiamond(p,'#8ce9ff',3.5,2);}
   for(const [object,color] of [[rift,'#e889ff'],[breachGate,'#81f3df']]){if(!object)continue;const p=minimapWorldPoint(object.x,object.y,r,cx,cy);if(p.visible)minimapDiamond(p,color,6,5);}
   let nearBoss=false,nearNemesis=false,count=0;
@@ -6109,9 +5978,9 @@ function showIntroSplash(action){
   intro.focus?.();
 }
 function launchRunIntro(nextAction){primeAudio();showIntroSplash(nextAction);}
-function returnToHome(tab='battle'){$('artHudV417').hidden=true;running=false;paused=false;choosing=false;rewardChoosing=false;app.classList.remove('combat','hudBoss');resize();$('pauseOverlay').style.display='none';$('settingsOverlay').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('contractOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('v100Milestone').style.display='none';$('poster').style.display='flex';setHomeTab(tab);updateLab();}
-$('homeSpecimenTab').onclick=()=>setHomeTab('specimen');$('homeLabTab').onclick=()=>setHomeTab('lab');$('start').onclick=()=>{primeAudio();openContractSelect()};$('runBack').onclick=()=>{primeAudio();$('endOverlay').style.display='none';reset()};$('restart').onclick=()=>{primeAudio();openContractSelect()};$('settingsBtn').onclick=()=>openSettings();$('settingsClose').onclick=()=>closeSettings();$('pauseSettings').onclick=()=>openSettings();$('memoryBtn').onclick=()=>{renderMemoryArchive();$('memoryOverlay').style.display='flex'};$('memoryClose').onclick=()=>{$('memoryOverlay').style.display='none'};$('memoryNone').onclick=()=>{meta.activeMemory='none';saveMeta();renderMemoryArchive();updateLab();};$('codexBtn').onclick=()=>{renderCodex();$('codexOverlay').style.display='flex'};$('codexClose').onclick=()=>{$('codexOverlay').style.display='none'};$('labReturn').onclick=()=>returnToHome('lab');$('dash').onpointerdown=e=>{e.preventDefault();dash()};$('ability').onpointerdown=e=>{e.preventDefault();originActive()};for(const id of ['homeSound','pauseSound'])$(id).onclick=()=>toggleFeedback('sound');for(const id of ['homeHaptic','pauseHaptic'])$(id).onclick=()=>toggleFeedback('haptic');for(const id of ['homeShake','pauseShake'])$(id).onclick=()=>toggleFeedback('shake');$('setSound').onclick=()=>toggleSetting('sound');$('setHaptic').onclick=()=>toggleSetting('haptic');$('setShake').onclick=()=>toggleSetting('shake');$('setFlash').onclick=()=>toggleSetting('flash');$('setMotion').onclick=()=>toggleSetting('motion');$('setDamageText').onclick=()=>toggleSetting('damageText');$('setContrast').onclick=()=>toggleSetting('contrast');$('setGraphics').onclick=()=>toggleSetting('graphics');$('setPerfInfo').onclick=()=>toggleSetting('perfInfo');$('exportSave').onclick=()=>exportSaveData();$('importSave').onclick=()=>importSaveData();$('resetSave').onclick=()=>resetProgressSafe();refreshFeedbackControls();refreshSettingsPanel();applyAccessibilitySettings();updateLab();$('introSplash').onclick=()=>fadeOutIntroAndContinue();$('introSplash').onpointerdown=e=>{if(e.target=== $('introSplash')) e.preventDefault();};$('introSplash').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fadeOutIntroAndContinue();}};setTimeout(()=>{$('introSplash').focus?.();},0);
-$('pauseBtn').onclick=()=>{if(choosing||ended)return;paused=true;refreshFeedbackControls();$('pauseOverlay').style.display='flex'};$('resume').onclick=()=>{paused=false;$('pauseOverlay').style.display='none';combatGrace(.40)};$('homeFromPause').onclick=()=>returnToHome('battle');$('restartRun').onclick=()=>{running=false;paused=false;$('pauseOverlay').style.display='none';openContractSelect()};$('quit').onclick=()=>returnToHome('battle');
+function returnToHome(tab='battle'){$('artHudV417').hidden=true;running=false;paused=false;choosing=false;rewardChoosing=false;app.classList.remove('combat','hudBoss');resize();$('pauseOverlay').style.display='none';$('settingsOverlay').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('v100Milestone').style.display='none';$('poster').style.display='flex';setHomeTab(tab);updateLab();}
+$('homeSpecimenTab').onclick=()=>setHomeTab('specimen');$('homeLabTab').onclick=()=>setHomeTab('lab');$('start').onclick=()=>{primeAudio();openStartWeaponSelect()};$('runBack').onclick=()=>{primeAudio();$('endOverlay').style.display='none';reset()};$('restart').onclick=()=>{primeAudio();openStartWeaponSelect()};$('settingsBtn').onclick=()=>openSettings();$('settingsClose').onclick=()=>closeSettings();$('pauseSettings').onclick=()=>openSettings();$('memoryBtn').onclick=()=>{renderMemoryArchive();$('memoryOverlay').style.display='flex'};$('memoryClose').onclick=()=>{$('memoryOverlay').style.display='none'};$('memoryNone').onclick=()=>{meta.activeMemory='none';saveMeta();renderMemoryArchive();updateLab();};$('codexBtn').onclick=()=>{renderCodex();$('codexOverlay').style.display='flex'};$('codexClose').onclick=()=>{$('codexOverlay').style.display='none'};$('labReturn').onclick=()=>returnToHome('lab');$('dash').onpointerdown=e=>{e.preventDefault();dash()};$('ability').onpointerdown=e=>{e.preventDefault();originActive()};for(const id of ['homeSound','pauseSound'])$(id).onclick=()=>toggleFeedback('sound');for(const id of ['homeHaptic','pauseHaptic'])$(id).onclick=()=>toggleFeedback('haptic');for(const id of ['homeShake','pauseShake'])$(id).onclick=()=>toggleFeedback('shake');$('setSound').onclick=()=>toggleSetting('sound');$('setHaptic').onclick=()=>toggleSetting('haptic');$('setShake').onclick=()=>toggleSetting('shake');$('setFlash').onclick=()=>toggleSetting('flash');$('setMotion').onclick=()=>toggleSetting('motion');$('setDamageText').onclick=()=>toggleSetting('damageText');$('setContrast').onclick=()=>toggleSetting('contrast');$('setGraphics').onclick=()=>toggleSetting('graphics');$('setPerfInfo').onclick=()=>toggleSetting('perfInfo');$('exportSave').onclick=()=>exportSaveData();$('importSave').onclick=()=>importSaveData();$('resetSave').onclick=()=>resetProgressSafe();refreshFeedbackControls();refreshSettingsPanel();applyAccessibilitySettings();updateLab();$('introSplash').onclick=()=>fadeOutIntroAndContinue();$('introSplash').onpointerdown=e=>{if(e.target=== $('introSplash')) e.preventDefault();};$('introSplash').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fadeOutIntroAndContinue();}};setTimeout(()=>{$('introSplash').focus?.();},0);
+$('pauseBtn').onclick=()=>{if(choosing||ended)return;paused=true;refreshFeedbackControls();$('pauseOverlay').style.display='flex'};$('resume').onclick=()=>{paused=false;$('pauseOverlay').style.display='none';combatGrace(.40)};$('homeFromPause').onclick=()=>returnToHome('battle');$('restartRun').onclick=()=>{running=false;paused=false;$('pauseOverlay').style.display='none';openStartWeaponSelect()};$('quit').onclick=()=>returnToHome('battle');
 addEventListener('keydown',e=>{keys[e.key]=true;keys[e.key.toLowerCase()]=true;if(e.code==='Space'){e.preventDefault();dash()}if(e.key.toLowerCase()==='e'){e.preventDefault();originActive()}if(e.key==='Escape'){if($('settingsOverlay').style.display==='flex'){closeSettings();return}if(running&&!choosing){paused=!paused;$('pauseOverlay').style.display=paused?'flex':'none';last=performance.now()}}});addEventListener('keyup',e=>{keys[e.key]=false;keys[e.key.toLowerCase()]=false});
 const jb=$('joyBase'),js=$('joyStick');
 const JOY_BLOCK_IDS=['pauseBtn','dash','ability','parts','bossbar','topline','xpbar','minimapWrap','farmRouteBadge'];
@@ -6299,7 +6168,7 @@ window.__EVOLVE_STRESS_TEST_V438__=window.__EVOLVE_STRESS_TEST_V437__=window.__E
 function startStressTestV424(){
   if(!HORDE_STRESS_TEST_V424)return;
   simAccumulatorV426=0;
-  selectedContractId='exterminate';selectedRisk=0;selectedStartWeapon='arm';meta.route='none';
+  selectedStartWeapon='arm';meta.route='none';
   reset();
   // Reset creates three tutorial enemies; remove them so the buttons map exactly to requested targets.
   enemies=[];eBullets=[];bullets=[];drops=[];particles=[];damageTexts=[];telegraphs=[];
@@ -6318,15 +6187,15 @@ function startStressTestV424(){
 let gpuEnemyBatchEnabledV426=true,gpuEnemyBatchReadyV426=false,gpuEnemyBatchCanvasV426=null,gpuEnemyBatchGLV426=null,gpuEnemyBatchProgramV426=null,gpuEnemyBatchBufferV426=null,gpuEnemyBatchVAOV426=null,gpuEnemyBatchUResV426=null,gpuEnemyBatchUTexV426=null;
 let gpuEnemyBodyTextureV426=null,gpuEnemyShadowTextureV426=null,gpuEnemyFXTextureV426=null,gpuEnemyAtlasUVV426={},gpuEnemyShadowUVV426={},gpuEnemyFXUVV426={},gpuEnemyFXMetaV426={};
 const GPU_INSTANCE_CAP_V426=5000,gpuEnemyInstanceV426=new Float32Array(GPU_INSTANCE_CAP_V426*11);
-const GPU_TYPES_V426=['crawler','runner','brute','spitter','warden','symbiote','embermaw','froststalker','legacy_crawler','legacy_warden'];
+const GPU_TYPES_V426=['crawler','runner','brute','spitter','warden','symbiote','embermaw','froststalker','legacy_crawler','legacy_warden','ripper','mauler','bileback'];
 const gpuShadowRatioV439=Object.create(null);
-function gpuEnemyBaseSizeV426(e){return e.type==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:e.type==='spitter'?40:(e.type==='runner'?27:29)}
+function gpuEnemyBaseSizeV426(e){return enemyCombatTypeV596(e.type)==='brute'?51:e.type==='warden'?38:e.type==='froststalker'?35:e.type==='symbiote'?34:e.type==='embermaw'?43:enemyCombatTypeV596(e.type)==='spitter'?40:(enemyCombatTypeV596(e.type)==='runner'?27:29)}
 function gpuEnemyVisualV426(e){
  // Shadow pass and body pass use identical pose data at the same simulation timestamp.
  if(e._gpuPoseStampV437===simFrame&&e._gpuPoseTimeV437===t)return e._gpuPoseV437;
  const size=gpuEnemyBaseSizeV426(e),bob=Math.sin(t*4+e.x*.01+e.y*.01)*.7,spawnBase=e.waveMarked?.42:.28,material=clamp(1-(e.spawnFx||0)/spawnBase,0,1);let visualScale=.72+.28*material,visualAlpha=.30+.70*material;if(bossDangerFocus)visualAlpha*=.68;
- const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*(e.type==='runner'?13:e.type==='brute'?6.2:8.5)+(e.animPhase||0)),hitKick=clamp((e.bodyKick||0)/.12,0,1),charging=(e.burst||0)>0||e.dashPrep>0;
- let sx=1+moveBlend*.035*Math.cos(t*9+(e.animPhase||0)),sy=1-moveBlend*.025*Math.cos(t*9+(e.animPhase||0));if(e.type==='runner'&&charging){sx*=.80;sy*=1.28}if(e.telegraphing==='bruteSlam'||e.telegraphing==='alphaSlam'){sx*=1.14;sy*=.86}if(e.telegraphing==='frostLine'||e.telegraphing==='omegaPool'){sx*=.94;sy*=1.08}visualScale*=1+hitKick*.035;
+ const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*(enemyCombatTypeV596(e.type)==='runner'?13:enemyCombatTypeV596(e.type)==='brute'?6.2:8.5)+(e.animPhase||0)),hitKick=clamp((e.bodyKick||0)/.12,0,1),charging=(e.burst||0)>0||e.dashPrep>0;
+ let sx=1+moveBlend*.035*Math.cos(t*9+(e.animPhase||0)),sy=1-moveBlend*.025*Math.cos(t*9+(e.animPhase||0));if(enemyCombatTypeV596(e.type)==='runner'&&charging){sx*=.80;sy*=1.28}if(e.telegraphing==='bruteSlam'||e.telegraphing==='alphaSlam'){sx*=1.14;sy*=.86}if(e.telegraphing==='frostLine'||e.telegraphing==='omegaPool'){sx*=.94;sy*=1.08}visualScale*=1+hitKick*.035;
  const actual=size*visualScale*(e.hit>0?1.045:1),flip=player.x<e.x?-1:1;const visual={size:actual,rot:gait*moveBlend*.025,sx:sx*flip,sy,alpha:(e.hit?0.97:1)*visualAlpha,bob:bob+gait*moveBlend*.55,material};
  e._gpuPoseStampV437=simFrame;e._gpuPoseTimeV437=t;e._gpuPoseV437=visual;return visual;
 }
@@ -6374,8 +6243,8 @@ function renderEnemyBatchV426(mode){
    if(false&&e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p);}
    else if(false&&e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p);}
    if(false&&(e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq);}
-   if(e.hit>0){const key=e.type==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34);}
-   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';
+   if(e.hit>0){const key=enemyCombatTypeV596(e.type)==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34);}
+   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(enemyCombatTypeV596(e.type)==='spitter'&&d2<190*190)||e.type==='froststalker';
    if(false&&priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p);}
   }
   gpuDrawInstancesV426(gpuEnemyFXTextureV426,n);
@@ -6438,10 +6307,10 @@ function buildFxInstancesV428(layer,camX,camY){let n=0;const clarity=combatClari
   if(layer==='under'){
    if(false&&e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p,Math.max(0,depth-.002));}
    else if(false&&e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p,Math.max(0,depth-.002));}
-   if(e.hit>0){const key=e.type==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34,Math.max(0,depth-.001));}
+   if(e.hit>0){const key=enemyCombatTypeV596(e.type)==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34,Math.max(0,depth-.001));}
   }else{
    if(false&&(e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq,Math.min(1,depth+.001));}
-   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';if(false&&priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p,Math.min(1,depth+.0015));}
+   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(enemyCombatTypeV596(e.type)==='spitter'&&d2<190*190)||e.type==='froststalker';if(false&&priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p,Math.min(1,depth+.0015));}
   }
  }return n;}
 function renderWorldSceneV428(){
@@ -6493,7 +6362,7 @@ toggleGpuBatchV426=function(){const b=document.getElementById('stressGpuV426');i
 const FLOW_SOFT_NORMAL_V429=.70,FLOW_SOFT_DENSE_V429=.58,FLOW_STUCK_TRIGGER_V429=.28,FLOW_ESCAPE_TIME_V429=.62;
 let flowStuckCountV429=0,flowEscapeCountV429=0,flowSampleFrameV429=-1;
 function flowIsMajorV429(e){return !!(e&&(e.finalBoss||e.elite||e.nemesis||e.zoneElite));}
-function flowIsMeleeV429(e){return !!(e&&['crawler','brute','runner','embermaw'].includes(e.type));}
+function flowIsMeleeV429(e){return !!(e&&['crawler','brute','runner','embermaw'].includes(enemyCombatTypeV596(e)));}
 function flowSeedV429(e){const n=((e?._gridOrderV426||0)+1)*.61803398875+(e?.animPhase||0)*.071;return n-Math.floor(n);}
 function flowLaneV429(e){if(!e._flowLaneV429)e._flowLaneV429=flowSeedV429(e)<.5?-1:1;return e._flowLaneV429;}
 function flowTrackStuckV429(e,speed){
@@ -6518,7 +6387,7 @@ function flowApproachSlotV429(e,speed){
  if(!e||!flowIsMeleeV429(e)||flowIsMajorV429(e)||e.burst>0||e.telegraphing||speed<1)return;
  const dx=player.x-e.x,dy=player.y-e.y,d=Math.hypot(dx,dy)||1;if(d>175)return;
  const seed=flowSeedV429(e),slotA=seed*TAU+(Math.floor((e._gridOrderV426||0)/32)%2)*.11;
- const ring=(e.type==='brute'?7:e.type==='runner'?9:4)+(((e._gridOrderV426||0)%3)-1)*2;
+ const ring=(enemyCombatTypeV596(e.type)==='brute'?7:enemyCombatTypeV596(e.type)==='runner'?9:4)+(((e._gridOrderV426||0)%3)-1)*2;
  const slotR=Math.max(8,player.r+e.r*.70+ring),tx=player.x+Math.cos(slotA)*slotR,ty=player.y+Math.sin(slotA)*slotR;
  let sx=tx-e.x,sy=ty-e.y,sd=Math.hypot(sx,sy)||1;sx/=sd;sy/=sd;
  let vx=e.vx/speed,vy=e.vy/speed,blend=clamp((175-d)/135,0,.58);
@@ -6584,7 +6453,7 @@ let flowIdNextV430=1,flowJamExactV430=0,flowEscapeExactV430=0,flowPanelScanAtV43
 const FLOW_STUCK_TRIGGER_V430=.36,FLOW_ESCAPE_TIME_V430=.82;
 function flowEnsureIdV430(e){if(!e)return 0;if(!e._flowIdV430)e._flowIdV430=flowIdNextV430++;return e._flowIdV430;}
 flowSeedV429=function(e){const id=flowEnsureIdV430(e),n=id*.618033988749895+(e?.animPhase||0)*.013;return n-Math.floor(n);};
-function flowPriorityV430(e){if(flowIsMajorV429(e))return 3.2;if(!e)return 1;if(e.type==='brute'||e.type==='crawler'||e.type==='runner'||e.type==='embermaw')return 1.75;if(e.type==='spitter'||e.type==='froststalker')return .86;if(e.type==='warden'||e.type==='symbiote')return .62;return 1.15;}
+function flowPriorityV430(e){if(flowIsMajorV429(e))return 3.2;if(!e)return 1;if(enemyCombatTypeV596(e.type)==='brute'||enemyCombatTypeV596(e.type)==='crawler'||enemyCombatTypeV596(e.type)==='runner'||e.type==='embermaw')return 1.75;if(enemyCombatTypeV596(e.type)==='spitter'||e.type==='froststalker')return .86;if(e.type==='warden'||e.type==='symbiote')return .62;return 1.15;}
 let flowRingCountV440=3,flowRingLastFrameV440=-1;
 function flowRingsV440(){
  if(flowRingLastFrameV440===simFrame)return flowRingCountV440;
@@ -7043,7 +6912,7 @@ drawWorldShadowsV421=function(){
 function siteClearV422(p,r=30,ignore=null,minSep=150){
  if(!p||p.x<r+28||p.x>WORLD_W-r-28||p.y<r+28||p.y>WORLD_H-r-28)return false;
  if(terrainNodes.some(n=>{const b=structureBoxV419(n);return Math.hypot(p.x-clamp(p.x,b.l,b.r),p.y-clamp(p.y,b.t,b.b))<r+24;}))return false;
- return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40))&&!contractNodes.some(s=>s!==ignore&&Math.hypot(p.x-s.x,p.y-s.y)<r+s.r+32);
+ return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40));
 }
 
 // V503: one shared visual rectangle for GPU, Canvas, contact and collision.
@@ -9785,18 +9654,18 @@ function refreshEvolveHomeV522(){
  if(preview.getAttribute('data-origin-v522')!==meta.origin){preview.src=previewSrc;preview.setAttribute('data-origin-v522',meta.origin);preview.alt=ORIGINS[meta.origin]?.name||'PRIME CELL';}
  $('start').disabled=!homeReadyV522||locked||!!homeLoadErrorV522;
  homeSetTextV522('start',homeLoadErrorV522?homeTextV522('ASSET LOAD FAILED','이미지 로딩 실패'):!homeReadyV522?homeTextV522('LOADING…','불러오는 중…'):locked?homeTextV522('PREVIOUS STAGE CLEAR REQUIRED','이전 스테이지 클리어 필요'):homeTextV522('START BATTLE','전투 시작'));
- homeSetTextV522('homeStartHintV522',homeLoadErrorV522?homeLoadErrorV522.slice(0,90):locked?homeTextV522('Complete the previous stage to unlock this stage.','이전 단계를 완료하면 이 스테이지가 열립니다.'):homeTextV522('SELECT CONTRACT & STARTING WEAPON','계약과 시작 무기를 선택한 뒤 진입합니다.'));
+ homeSetTextV522('homeStartHintV522',homeLoadErrorV522?homeLoadErrorV522.slice(0,90):locked?homeTextV522('Complete the previous stage to unlock this stage.','이전 단계를 완료하면 이 스테이지가 열립니다.'):homeTextV522('SELECT STARTING WEAPON','시작 무기를 선택한 뒤 진입합니다.'));
  for(const [id,en,ko] of [
   ['homeLabLabelV522','PARTS','파츠'],['homeSpecimenLabelV522','ORGANISM','개체'],['homeBattleLabelV522','BATTLE','전투'],['homeMemoryLabelV522','MEMORY','기억'],['homeCodexLabelV522','CODEX','도감'],
   ['homeSpecimenTitleV522','ORGANISM','시작 개체'],['homeSpecimenHintV522','Choose the organism you will enter the stage with.','전투에 진입할 시작 생명체를 선택하세요.'],
   ['homeLabTitleV522','GENOME LAB','유전체 연구소'],['homeLabHintV522','Use stored DNA to improve your organism.','모은 DNA로 생명체의 영구 능력을 강화하세요.']
  ])homeSetTextV522(id,homeTextV522(en,ko));
- homeSetTextV522('homeContractBackV522',homeTextV522('‹ HOME','‹ 홈으로'));
+ 
  homeSetTextV522('homeWeaponBackV522',homeTextV522('‹ HOME','‹ 홈으로'));
  if(homePageV522==='parts')renderEvolvePartsV523();
 }
 function selectHomeStageV522(stage){
- if(running||paused||$('poster').style.display==='none'||$('contractOverlay').style.display==='flex'||$('weaponSelectOverlay').style.display==='flex')return false;
+ if(running||paused||$('poster').style.display==='none'||$('weaponSelectOverlay').style.display==='flex')return false;
  const unlocked=homeUnlockedStageV522(),s=Math.max(1,Math.min(Math.max(unlocked,Math.min(99,unlocked+1)),Math.trunc(Number(stage)||1)));
  homeSelectedStageV522=s;
  if(s<=unlocked){meta.stage=s;meta.homeStageV522=s;saveMeta();}
@@ -9821,7 +9690,7 @@ function selectHomePageV522(page='battle'){
 }
 function startHomeBattleV522(){
  if(!homeReadyV522||homeLoadErrorV522||homeSelectedStageV522>homeUnlockedStageV522()||running||paused)return false;
- meta.stage=homeSelectedStageV522;meta.homeStageV522=homeSelectedStageV522;saveMeta();primeAudio();openContractSelect();return true;
+ meta.stage=homeSelectedStageV522;meta.homeStageV522=homeSelectedStageV522;saveMeta();primeAudio();openStartWeaponSelect();return true;
 }
 function installEvolveHomeV522(){
  // Existing archive and codex become full home pages; their data/actions are retained.
@@ -9848,7 +9717,7 @@ function installEvolveHomeV522(){
  $('homeNextStageV522').onclick=()=>selectHomeStageV522(homeSelectedStageV522+1);
  $('homeLatestV522').onclick=()=>selectHomeStageV522(homeUnlockedStageV522());
  $('start').onclick=startHomeBattleV522;
- $('homeContractBackV522').onclick=()=>returnToHome('battle');$('homeWeaponBackV522').onclick=()=>returnToHome('battle');
+ $('homeWeaponBackV522').onclick=()=>returnToHome('battle');
  window.refreshEvolveHomeV522=refreshEvolveHomeV522;
  installEvolvePartsV523();setHomeTab('battle');saveMeta();
 }
@@ -9876,7 +9745,7 @@ function stageSpecV526(stage=meta.stage||1){
 function permittedEnemyV526(type,boss=false){
  if(type==='boss'||boss)return type;
  const types=stageSpecV526().types;
- return types.includes(type)?type:(type==='brute'&&types.includes('runner')?'runner':'crawler');
+ return types.includes(enemyCombatTypeV596(type))?type:(enemyCombatTypeV596(type)==='brute'&&types.includes('runner')?'runner':'crawler');
 }
 function freshStageFlowV526(){return {midSpawned:false,closing:false,result:null,retreat:null,wallTouch:false,warningActive:false,spawnTime:null,runStage:meta.stage||1};}
 function resetStageFlowV526(){
@@ -10734,7 +10603,7 @@ function createVenomReinforcementsV554(host){
   glow.addColorStop(0,'rgba(167,240,89,.34)');glow.addColorStop(1,'rgba(72,132,45,0)');g.fillStyle=glow;g.fillRect(0,0,64,64);g.strokeStyle=kind==='spitter'?'#c9e77f':'#91c975';g.lineWidth=1.8;g.beginPath();g.ellipse(32,32,20,13,0,0,Math.PI*2);g.stroke();sprites.set(kind,c);return c;
  }
  function draw(ctx){if(!host.ready())return;for(const q of pending){const age=1-Math.max(0,q.at-clock)/.9,r=13+age*6;ctx.save();ctx.globalAlpha=.35+age*.55;ctx.drawImage(warningSprite(q.kind),q.x-r,q.y-r,r*2,r*2);ctx.restore();}}
- function info(){const living=host.living().filter(e=>!e.dead),profile=profiles[phase],multiplier=2**tier;return {version:554,phase,tier,multiplier,hpPercent:owner?owner.hp/owner.maxHp*100:100,clock,nextWave,waves:waveCount,spawned:spawnCount,cancelled,deferred,alive:living.length,melee:living.filter(e=>e.type==='crawler').length,ranged:living.filter(e=>e.type==='spitter').length,wave:{melee:(profile?.baseMelee||0)*multiplier,ranged:(profile?.baseRanged||0)*multiplier},pending:pending.map(p=>({...p})),history:history.map(w=>({...w})),profiles};}
+ function info(){const living=host.living().filter(e=>!e.dead),profile=profiles[phase],multiplier=2**tier;return {version:554,phase,tier,multiplier,hpPercent:owner?owner.hp/owner.maxHp*100:100,clock,nextWave,waves:waveCount,spawned:spawnCount,cancelled,deferred,alive:living.length,melee:living.filter(e=>enemyCombatTypeV596(e.type)==='crawler').length,ranged:living.filter(e=>enemyCombatTypeV596(e.type)==='spitter').length,wave:{melee:(profile?.baseMelee||0)*multiplier,ranged:(profile?.baseRanged||0)*multiplier},pending:pending.map(p=>({...p})),history:history.map(w=>({...w})),profiles};}
  return {tick,clear,draw,info};
 }
 
@@ -11083,7 +10952,7 @@ function mapPlaceNewBodyV562(o,r=o.r||8){
   if(!mapNavV562)return clear(p,r,ignore,minSep);
   if(!p||!mapCircleClearV562(p.x,p.y,r+24))return false;
   const k=mapNearestCellV562(p.x,p.y,null);if(k<0||mapNavV562.component[k]!==mapNavV562.main)return false;
-  return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40))&&!contractNodes.some(s=>s!==ignore&&Math.hypot(p.x-s.x,p.y-s.y)<r+s.r+32);
+  return !worldSites.some(s=>s!==ignore&&!s.claimed&&Math.hypot(p.x-s.x,p.y-s.y)<Math.max(minSep,r+s.r+40));
  };
  const tick=update;
  update=function(dt){
@@ -11786,7 +11655,7 @@ if(new URLSearchParams(location.search).get('evolveQA')==='1'){
 const TestModuleV573=(()=>{
  const STORE='EVOLVE_V575_TEST_PANEL_V1';
  try{if(localStorage.getItem(STORE)===null){const previous=localStorage.getItem('EVOLVE_V574_TEST_PANEL_V1')??localStorage.getItem('EVOLVE_V573_TEST_PANEL_V1');if(previous!==null)localStorage.setItem(STORE,previous);}}catch(_){}
- const original={mapping:campaignMapForStageV567,prepare:campaignPrepareStageV567,spec:stageSpecV526,spawn:spawnEnemy,reset,home:returnToHome,update,bossReady:bossSpawnReady,warning:refreshBossWarningV526,contract:updateContract,waves:updateTacticalWaves};
+ const original={mapping:campaignMapForStageV567,prepare:campaignPrepareStageV567,spec:stageSpecV526,spawn:spawnEnemy,reset,home:returnToHome,update,bossReady:bossSpawnReady,warning:refreshBossWarningV526,waves:updateTacticalWaves};
  const B={map:'auto',natural:true,busy:false,preparing:false,epoch:0,pending:null,queue:null,lastBatch:null,encounter:null,spawning:false,panelPaused:false,status:'스테이지와 맵을 선택해 주세요.',serial:0};
  try{const s=JSON.parse(localStorage.getItem(STORE)||'null');if(s){if(s.map==='auto'||CAMPAIGN_MAPS_V567.some(m=>m.id===s.map))B.map=s.map;B.natural=s.natural!==false;}}catch(_){}
  const cleanStage=v=>Math.max(1,Math.min(99,Math.trunc(Number(v)||1)));
@@ -11794,7 +11663,7 @@ const TestModuleV573=(()=>{
  const saveOptions=()=>{try{localStorage.setItem(STORE,JSON.stringify({map:B.map,natural:B.natural}));}catch(_){}};
  const ownBoss=()=>enemies.find(e=>!e.dead&&e.finalBoss)||null;
  const arenaBusy=()=>!!bossArena?.active||!!ownBoss()||B.encounter?.state==='warning'||B.encounter?.state==='entry';
- const blockedChoice=()=>choosing||rewardChoosing||$('contractOverlay').style.display==='flex'||$('weaponSelectOverlay').style.display==='flex';
+ const blockedChoice=()=>choosing||rewardChoosing||$('weaponSelectOverlay').style.display==='flex';
  const root=document.createElement('div');root.id='testModuleV573';root.dataset.i18nIgnore='';
  root.innerHTML=`<button type="button" id="tmOpenV573" aria-haspopup="dialog">TEST</button><div id="tmPreparingV573" hidden role="status">보스 전투를 준비하고 있습니다…</div>
  <div id="tmModalV573" hidden><section role="dialog" aria-modal="true" aria-labelledby="tmTitleV573" tabindex="-1">
@@ -11888,15 +11757,15 @@ const TestModuleV573=(()=>{
    eBullets=[];bullets=[];telegraphs=[];biomeHazards=[];purges=[];rift=null;tacticalWave=null;bossArrivalCue=null;bossArrivalPlan=null;majorArrivalCue=null;bossDeathFx=null;deathEchoes=[];focusEnemy=null;
    $('bossbar').style.display='none';$('bossIntentBadge').style.display='none';$('bossPhaseStrip').style.display='none';
    stageFlowV526=freshStageFlowV526();stageFlowV526.midSpawned=true;nextElite=nextElite2=nextElite3=nextElite4=true;nextBoss=false;bossWarningShown=true;extractionMode=false;
-   phase1=phase2=phase3=phase4=true;rift1=rift2=rift3=true;purge1=purge2=true;anomalyTriggered=true;tacticalWaveIndex=TACTICAL_WAVES.length;contractEventFlags=[true,true,true];
-   const jump=Math.max(0,297-t);if(jump&&contract&&!contractDone&&!contractFailed)contract.deadline+=jump;t+=jump;spawnAcc=0;directorLock=0;directorRelief=3.1;waveBreather=3.1;
+   phase1=phase2=phase3=phase4=true;rift1=rift2=rift3=true;purge1=purge2=true;anomalyTriggered=true;tacticalWaveIndex=TACTICAL_WAVES.length;
+   const jump=Math.max(0,297-t);t+=jump;spawnAcc=0;directorLock=0;directorRelief=3.1;waveBreather=3.1;
    B.encounter={kind:resolved,phase:Math.max(1,Math.min(3,Number(phase)||1)),state:'warning',elapsed:0,boss:null,epoch};VENOM_V537.setAuto(true);if(resolved==='bio')BIO_STEP13_V519.setAuto(true);B.preparing=false;resumeAction();armBossArrivalWarning();refreshBossWarningV526();status(`${resolved==='venom'?'VENOM':'BIO'} TITAN ${B.encounter.phase}페이즈 · 3초 경고`);draw();return true;
   }catch(error){if(epoch!==B.epoch)return false;throw error;}finally{if(epoch===B.epoch){B.busy=false;B.preparing=false;if(!B.encounter&&running&&!ended)paused=false;paint();}}
  }
  async function request(action,settings=selected()){
   if(B.busy)return false;const n=cleanStage(settings.stage),map=settings.map||'auto';
   if(!running||ended||n!==homeSelectedStageV522||map!==B.map){
-   if(!await go(n,map,false))return false;B.pending={...action,epoch:B.epoch};if(action.type==='boss'){ui.kind.value=action.kind||'stage';ui.phase.value=String(action.phase||1);}resumeAction();if(!startHomeBattleV522()){B.pending=null;throw Error('전투를 시작할 수 없습니다.');}status('계약과 시작 무기를 선택하면 시험이 시작됩니다.');return true;
+   if(!await go(n,map,false))return false;B.pending={...action,epoch:B.epoch};if(action.type==='boss'){ui.kind.value=action.kind||'stage';ui.phase.value=String(action.phase||1);}resumeAction();if(!startHomeBattleV522()){B.pending=null;throw Error('전투를 시작할 수 없습니다.');}status('시작 무기를 선택하면 시험이 시작됩니다.');return true;
   }
   if(blockedChoice()){status('열려 있는 선택창을 먼저 완료해 주세요.');return false;}resumeAction();return action.type==='boss'?boss(action.kind,action.phase):queue(action.count);
  }
@@ -11916,7 +11785,6 @@ const TestModuleV573=(()=>{
  window.__EVOLVE_STAGE_V526__.spec=stageSpecV526;
  spawnEnemy=function(...args){const e=original.spawn(...args);if(e&&!e.dead&&!e.finalBoss&&!e.venomAddV553&&!B.spawning&&!upgradeSpawnPermissionV593&&evolveAdminEnabledV585&&!B.natural){e.dead=true;e.testModuleSuppressedV573=true;}return e;};
  updateTacticalWaves=function(...args){if(evolveAdminEnabledV585&&!B.natural&&!B.encounter)return;return original.waves(...args);};
- updateContract=function(...args){if(B.encounter)return;return original.contract(...args);};
  bossSpawnReady=function(...args){if(B.encounter)return B.encounter.state==='warning'&&B.encounter.elapsed>=3-1e-8&&!nextBoss&&!ended;return original.bossReady(...args);};
  refreshBossWarningV526=function(...args){
   if(B.encounter?.state==='warning'){const show=running&&!ended&&!paused&&!choosing&&!rewardChoosing,clock=t;try{t=297+Math.min(2.999999,B.encounter.elapsed);setBossWarningV526(show);}finally{t=clock;}return;}
@@ -11947,7 +11815,7 @@ const TestModuleV573=(()=>{
  root.addEventListener('keydown',e=>{if(e.key==='Escape'&&!ui.modal.hidden){e.stopPropagation();close(true);}if(e.key==='Tab'&&!ui.modal.hidden){const controls=[...ui.modal.querySelectorAll('button,input,select,[tabindex]')].filter(el=>!el.disabled),first=controls[0],last=controls.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
  defaults();paint();const timer=setInterval(paint,250);window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
  const api={read:snapshot,open,close,go,add:(n,settings)=>request({type:'spawn',count:n},settings||{stage:homeSelectedStageV522,map:B.map}),boss:(kind,phase,settings)=>request({type:'boss',kind,phase},settings||{stage:homeSelectedStageV522,map:B.map}),clear:clearOrdinary,setNatural:value=>{B.natural=!!value;ui.natural.checked=B.natural;saveOptions();paint();}};
- if(new URLSearchParams(location.search).get('evolveQA')==='1')api.test={context:()=>({player,enemies,meta,state,keys,joy,step:dt=>update(dt),draw,reset,home:returnToHome,kill:killEnemy,clear:terrainBodyClearV505,move:moveTerrainBodyV418,arena:()=>bossArena,flow:()=>stageFlowV526,contract:()=>({done:contractDone,failed:contractFailed,deadline:contract?.deadline}),setChoosing:v=>{choosing=!!v;},setReward:v=>{rewardChoosing=!!v;}}),field:()=>mapFieldV562,environment:()=>mapEnvironmentV562,definitions:()=>CAMPAIGN_MAPS_V567,cache:()=>[...campaignCacheV567.keys()],warmState:()=>bioLoadStateV510};
+ if(new URLSearchParams(location.search).get('evolveQA')==='1')api.test={context:()=>({player,enemies,meta,state,keys,joy,step:dt=>update(dt),draw,reset,home:returnToHome,kill:killEnemy,clear:terrainBodyClearV505,move:moveTerrainBodyV418,arena:()=>bossArena,flow:()=>stageFlowV526,setChoosing:v=>{choosing=!!v;},setReward:v=>{rewardChoosing=!!v;}}),field:()=>mapFieldV562,environment:()=>mapEnvironmentV562,definitions:()=>CAMPAIGN_MAPS_V567,cache:()=>[...campaignCacheV567.keys()],warmState:()=>bioLoadStateV510};
  window.__EVOLVE_TEST_MODULE_V573__=api;return api;
 })();
 
@@ -12155,7 +12023,7 @@ function createCampaignLightningV576(host){
   for(const q of queue){
    q.delay-=dt;if(q.delay>0)continue;q.done=true;const e=q.target;if(!valid(e))continue;
    const p=player(),a=cast?.a??p.look??0,source=q.from||p;if(!host.canLink(source,e))continue;const from=q.from?{x:q.from.x,y:q.from.y-5}:{x:p.x+Math.cos(a)*20,y:p.y-12+Math.sin(a)*8},to={x:e.x,y:e.y-5},angle=Math.atan2(to.y-from.y,to.x-from.x);
-   const mass=e.finalBoss?.12:e.elite?.36:e.type==='brute'?.58:1;
+   const mass=e.finalBoss?.12:e.elite?.36:enemyCombatTypeV596(e.type)==='brute'?.58:1;
    const old=e.arcShockV576;e.arcShockV576={age:0,hold:q.strong?.058:.034,life:q.strong?.32:.23,a:angle,strong:q.strong,mass,hp:Math.max(old?.hp||0,e.hp/Math.max(1,e.maxHp)),wait:.13,vx:e.vx||0,vy:e.vy||0};
    e.kx=(e.kx||0)+Math.cos(angle)*(q.strong?285:142)*mass;e.ky=(e.ky||0)+Math.sin(angle)*(q.strong?285:142)*mass;
    host.damageEnemy(e,q.damage,q.strong,angle);metrics.contacts++;if(q.strong)metrics.strongContacts++;
@@ -12218,7 +12086,7 @@ const lightningEchoBaseV576=spawnDeathEcho;spawnDeathEcho=function(e){const n=de
 
 // GPU and canvas actors use the same reaction; existing GPU batching stays enabled.
 const lightningGpuPoseBaseV576=gpuEnemyVisualV426;gpuEnemyVisualV426=function(e){const s=e.arcShockV576;let v;if(s&&s.age<s.hold)v=s.gpuPose||(s.gpuPose={...lightningGpuPoseBaseV576(e)});else v=lightningGpuPoseBaseV576(e);const p=lightningV576.pose(e);return p?{...v,rot:v.rot+p.bend,sx:v.sx*p.sx,sy:v.sy*p.sy,bob:v.bob+(1-p.sy)*v.size*.4}:v};
-const lightningEnemyDrawBaseV576=drawEnemy;drawEnemy=function(e,shadowOnly=false){const p=lightningV576.pose(e);if(!p)return lightningEnemyDrawBaseV576(e,shadowOnly);const size=e.finalBoss?208:e.elite?68:gpuEnemyBaseSizeV426(e),hit=e.hit,kick=e.bodyKick;e.hit=0;e.bodyKick=0;ctx.save();ctx.translate(e.x,e.y+size*.30);ctx.rotate(p.bend);ctx.scale(p.sx,p.sy);ctx.translate(-e.x,-e.y-size*.30);try{return lightningEnemyDrawBaseV576(e,shadowOnly)}finally{ctx.restore();e.hit=hit;e.bodyKick=kick;if(!shadowOnly)lightningV576.overlay(ctx,e,size)}};
+const lightningEnemyDrawBaseV576=drawEnemy;drawEnemy=function(e,shadowOnly=false){const p=lightningV576.pose(e);if(!p)return lightningEnemyDrawBaseV576(e,shadowOnly);const size=e.finalBoss?208:e.elite?(e.midVisualSizeV596||68):gpuEnemyBaseSizeV426(e),hit=e.hit,kick=e.bodyKick;e.hit=0;e.bodyKick=0;ctx.save();ctx.translate(e.x,e.y+size*.30);ctx.rotate(p.bend);ctx.scale(p.sx,p.sy);ctx.translate(-e.x,-e.y-size*.30);try{return lightningEnemyDrawBaseV576(e,shadowOnly)}finally{ctx.restore();e.hit=hit;e.bodyKick=kick;if(!shadowOnly)lightningV576.overlay(ctx,e,size)}};
 const lightningNormalOverlayBaseV576=drawNormalEnemyOverlayV426;drawNormalEnemyOverlayV426=function(e){lightningNormalOverlayBaseV576(e);lightningV576.overlay(ctx,e,gpuEnemyBaseSizeV426(e))};
 const lightningPlayerDrawBaseV576=drawPlayer;drawPlayer=function(shadowOnly=false){const c=lightningV576.cast();if(!c||shadowOnly)return lightningPlayerDrawBaseV576(shadowOnly);const lead=c.strong?.125:.085,wind=c.age<lead,phase=wind?c.age/lead:clamp((c.age-lead)/.16,0,1),force=wind?-phase:Math.sin(phase*Math.PI)*Math.exp(-phase*.6),oldLook=player.look,oldKick=player.armKick;player.look=c.a;player.armKick=wind?0:.18*Math.max(0,1-phase);ctx.save();ctx.translate(player.x,player.y+15);ctx.rotate(Math.cos(c.a)*force*.12);ctx.scale(1,1+(wind?-.055:.035)*Math.abs(force));ctx.translate(-player.x,-player.y-15);try{return lightningPlayerDrawBaseV576(false)}finally{ctx.restore();player.look=oldLook;player.armKick=oldKick}};
 
@@ -12263,14 +12131,14 @@ function createMonsterMotionV577(host){
 
 const monsterImageV577=new Image();let monsterImageErrorV577=null,monsterPreparedV577=false,monsterAtlasBuildsV577=0;
 const monsterFramesV577=new Map(),monsterBaseRenderV577=renderedEnemy;
-const monsterSourceV577={crawler:{row:0,b:[24,91,307,381]},runner:{row:0,b:[24,91,307,381]},brute:{row:1,b:[4,0,314,375]},spitter:{row:2,b:[0,0,309,364]}};
+const monsterSourceV577={ripper:{row:0,b:[24,91,307,381]},mauler:{row:1,b:[4,0,314,375]},bileback:{row:2,b:[0,0,309,364]}};
 const monsterLegacyDataV578={"sheets":[{"name":"A","path":"assets/4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f.png","sha256":"4179651f696e5b7412d464a3573376db794977e8a26ee866bb362cb0a158592f","bytes":2306775,"width":1448,"height":1086,"alpha":true},{"name":"B","path":"assets/f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c.png","sha256":"f9a634e76a09ba7f5829fae010b3f3aa65f45fc55e1d424b89ed3966d85b720c","bytes":2358905,"width":1448,"height":1086,"alpha":true}],"types":{"warden":{"sheet":0,"frames":[[15,48,370,340],[395,47,732,355],[754,49,1098,353],[1110,45,1434,352]],"width":355,"height":308},"symbiote":{"sheet":0,"frames":[[41,356,380,710],[405,355,757,714],[772,363,1112,709],[1132,351,1444,703]],"width":352,"height":359},"embermaw":{"sheet":0,"frames":[[15,729,380,1058],[386,723,730,1058],[745,727,1092,1058],[1097,720,1437,1057]],"width":365,"height":337},"froststalker":{"sheet":1,"frames":[[31,64,361,362],[385,59,724,382],[748,61,1084,385],[1094,57,1440,394]],"width":346,"height":337},"legacy_crawler":{"sheet":1,"frames":[[16,425,371,705],[392,414,727,705],[753,417,1087,693],[1111,402,1438,736]],"width":355,"height":334},"legacy_warden":{"sheet":1,"frames":[[24,716,375,1015],[390,719,727,1035],[741,719,1096,1044],[1110,734,1440,1054]],"width":355,"height":325}}};
 const monsterLegacyImagesV578=monsterLegacyDataV578.sheets.map(()=>new Image());
 Object.assign(monsterSourceV577,monsterLegacyDataV578.types);
 function monsterLoadV578(image,path){return new Promise(resolve=>{image.onload=()=>resolve(true);image.onerror=()=>{monsterImageErrorV577='Monster motion atlas failed to load: '+path;resolve(false)};image.src=path})}
 const monsterReadyV577=Promise.all([monsterLoadV578(monsterImageV577,'assets/1957116b5da4e7d11cc66e4b5bf4bce48af2fc1ec649a5b13f3a6f428f10b63b.png'),...monsterLegacyImagesV578.map((im,i)=>monsterLoadV578(im,monsterLegacyDataV578.sheets[i].path))]);
 function monsterAllReadyV578(){return !!monsterImageV577.naturalWidth&&monsterLegacyImagesV578.every(im=>im.naturalWidth>0)}
-const monsterMotionV577=createMonsterMotionV577({active:()=>running&&!paused&&!choosing&&!rewardChoosing&&!ended,enemies:()=>enemies,size:e=>e.elite?68:gpuEnemyBaseSizeV426(e),appearance:e=>enemyAppearanceKeyV516(e)});
+const monsterMotionV577=createMonsterMotionV577({active:()=>running&&!paused&&!choosing&&!rewardChoosing&&!ended,enemies:()=>enemies,size:e=>e.elite?(e.midVisualSizeV596||68):gpuEnemyBaseSizeV426(e),appearance:e=>enemyAppearanceKeyV516(e)});
 
 function monsterCanvasV577(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
 function monsterSurfaceV577(type,frame){
@@ -12320,7 +12188,7 @@ renderedEnemy=function(e){if(monsterMotionV577.eligible(e)&&monsterImageV577.nat
 const monsterGpuPoseBaseV577=gpuEnemyVisualV426;gpuEnemyVisualV426=function(e){const v=monsterGpuPoseBaseV577(e);if(!monsterMotionV577.eligible(e))return v;const s=monsterMotionV577.state(e),p=monsterSourceV577[enemyAppearanceKeyV516(e)],action=s.mode==='windup'?-1:s.mode==='attack'?1:0;
  return {...v,bob:p?-v.size*.20:v.bob,rot:v.rot+action*.055,sx:v.sx*(1+(action<0?-.045:action>0?.06:0)),sy:v.sy*(1+(action<0?-.055:action>0?.035:0))};
 };
-const monsterEnemyDrawBaseV577=drawEnemy;drawEnemy=function(e,shadowOnly=false){if(!monsterMotionV577.eligible(e))return monsterEnemyDrawBaseV577(e,shadowOnly);monsterMotionV577.state(e);const size=e.elite?68:gpuEnemyBaseSizeV426(e),direct=monsterSourceV577[enemyAppearanceKeyV516(e)];ctx.save();if(direct&&!shadowOnly)ctx.translate(0,-size*.20);try{return monsterEnemyDrawBaseV577(e,shadowOnly)}finally{ctx.restore()}};
+const monsterEnemyDrawBaseV577=drawEnemy;drawEnemy=function(e,shadowOnly=false){if(!monsterMotionV577.eligible(e))return monsterEnemyDrawBaseV577(e,shadowOnly);monsterMotionV577.state(e);const size=e.elite?(e.midVisualSizeV596||68):gpuEnemyBaseSizeV426(e),direct=monsterSourceV577[enemyAppearanceKeyV516(e)];ctx.save();if(direct&&!shadowOnly)ctx.translate(0,-size*.20);try{return monsterEnemyDrawBaseV577(e,shadowOnly)}finally{ctx.restore()}};
 
 // Ordinary deaths keep the attack/impact pose while the body falls in the hit direction.
 const monsterEchoBaseV577=spawnDeathEcho;spawnDeathEcho=function(e){const previous=deathEchoes.at(-1),out=monsterEchoBaseV577(e),d=deathEchoes.at(-1);if(d&&d!==previous&&monsterMotionV577.eligible(e)){d.motionTypeV577=enemyAppearanceKeyV516(e);d.motionFrameV577=3;const s=e.arcShockV576;if(s){d.vx=Math.cos(s.a)*(s.strong?165:95);d.vy=Math.sin(s.a)*(s.strong?165:95)-12;d.life=d.max=s.strong?.62:.48;d.spin=Math.cos(s.a)*1.4}}return out};
@@ -12379,7 +12247,7 @@ updateWorldSites=function(dt){
  for(const s of worldSites){if(s.type==='redPulse')continue;if(s.claimed||s.arenaHidden)continue;s.pulse+=dt*3;const full=s.type==='regen'&&player.hp>=player.maxHp,inside=Math.hypot(player.x-s.x,player.y-s.y)<=s.r;if(inside&&!full)s.hold=Math.min(s.need,s.hold+dt);else s.hold=Math.max(0,s.hold-dt*.8);if(s.hold>=s.need&&!full)completeWorldSite(s)}
  redPulseV579.step(dt);
 };
-// Optional gene-rift field devices are disabled; stage exits and contract progression remain native.
+// Optional gene-rift field devices are disabled; stage exits remain native.
 spawnGeneRift=function(){return false};
 const redPulseLabelBaseV579=worldSiteLabel;worldSiteLabel=function(s){return s.type==='redPulse'?'방전 장치':redPulseLabelBaseV579(s)};
 const redPulseColorBaseV579=worldSiteColor;worldSiteColor=function(s){return s.type==='redPulse'?'#ff3d32':redPulseColorBaseV579(s)};
@@ -12547,7 +12415,7 @@ if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_CI
  startHomeBattleV522=function(...args){const result=start(...args);if(result)persistSelection();return result;};$('start').onclick=startHomeBattleV522;
  grantStageClearReward=function(...args){if(!evolveAdminEnabledV585){normalProgressV585.unlocked=Math.max(normalProgressV585.unlocked,Math.min(99,(meta.stage||1)+1));saveNormalProgressV585();}return grant(...args);};
  returnToHome=function(...args){const result=home(...args);persistSelection();return result;};
- const enable=()=>{if(evolveAdminEnabledV585)return;evolveAdminEnabledV585=true;evolveAdminTapsV585=0;document.documentElement.dataset.evolveAdminV585='true';refreshEvolveHomeV522();tell(homeTextV522('Administrator mode enabled','관리자 모드가 켜졌어요.'));};
+ const enable=()=>{if(evolveAdminEnabledV585)return;evolveAdminEnabledV585=true;evolveAdminTapsV585=0;document.documentElement.dataset.evolveAdminV585='true';campaignPrepareStageV567(homeSelectedStageV522);refreshEvolveHomeV522();tell(homeTextV522('Administrator mode enabled','관리자 모드가 켜졌어요.'));};
  $('homeTabs').addEventListener('click',event=>{
   const button=event.target.closest('button');if(!button)return;
   if(evolveAdminEnabledV585)return;
@@ -12947,7 +12815,7 @@ function redPulseSiteClearV590(x,y){
  const r=24;if(x<r+28||y<r+28||x>WORLD_W-r-28||y>WORLD_H-r-28)return false;
  if(mapNavV562){if(mapSignedDistanceV562(null,x,y)<r+4)return false;}
  else if(!terrainBodyClearV505({x,y},r+4))return false;
- return !worldSites.some(s=>!s.claimed&&Math.hypot(x-s.x,y-s.y)<Math.max(120,r+s.r+40))&&!contractNodes.some(s=>Math.hypot(x-s.x,y-s.y)<r+s.r+32);
+ return !worldSites.some(s=>!s.claimed&&Math.hypot(x-s.x,y-s.y)<Math.max(120,r+s.r+40));
 }
 function redPulseReachablePointV590(){
  return fieldSpawnSamplerV590.sample({key:mapNavV562||terrainNodes,width:WORLD_W,height:WORLD_H,cell:mapNavV562?.cell||14,offsetY:mapNavV562?MAP_PLAYER_FOOT_V562.offsetY:0,player,clearFoot:redPulseFootClearV590,clearSite:redPulseSiteClearV590});
@@ -12965,12 +12833,12 @@ function ordinaryEnemyV591(e){return !!e&&!e.boss&&!e.finalBoss&&!e.elite&&!e.mi
 function enemyMoveScaleV591(e){return ordinaryEnemyV591(e)?HORDE_RULES_V591.movementMultiplier:1;}
 function enemyAttackRoleV591(e){
  if(!ordinaryEnemyV591(e))return 'major';
- if(e.type==='spitter'||e.type==='froststalker')return 'ranged';
- if(e.type==='runner'||e.type==='embermaw')return 'charge';
+ if(enemyCombatTypeV596(e.type)==='spitter'||e.type==='froststalker')return 'ranged';
+ if(enemyCombatTypeV596(e.type)==='runner'||e.type==='embermaw')return 'charge';
  if(e.type==='warden'||e.type==='symbiote')return 'support';
  return 'melee';
 }
-function enemyContactAllowedV591(e){const role=enemyAttackRoleV591(e);return role==='major'||role==='melee'||role==='charge'&&e.burst>0;}
+function enemyContactAllowedV591(e){return !!e&&!e.dead;}
 function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner);}
 function hordeSpawnDelayV591(delay,major){return major?delay:delay/HORDE_RULES_V591.spawnMultiplier;}
 function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(Math.round(density*1.5)*1.3));}
@@ -13015,7 +12883,7 @@ function warningTapeLayoutV592(width,height,elapsed,reduced=false){
 
 const enemyHealthVisibilityV592=createEnemyHealthVisibilityV592(1.2);
 const visualClarityStatsV592={healthBars:0,healthBoxes:[],volley:null,tape:null,tapeBuilds:0};
-function markEnemyHitV592(e,damage){if(!e.finalBoss)enemyHealthVisibilityV592.mark(e,t,damage);}
+function markEnemyHitV592(e,damage){if(!e.finalBoss&&!e.elite&&!e.midBoss&&!e.nemesis)enemyHealthVisibilityV592.mark(e,t,damage);}
 function enemyHealthLayoutV592(e){
  const img=renderedEnemy(e),crop=img?._spriteCrop||[0,0,img?.naturalWidth||1,img?.naturalHeight||1];
  const pose=e.elite||e.nemesis?{size:(e.bossName==='TITAN SENTINEL'?106.6:68)*1.12,sx:1,sy:1,rot:0,bob:0}:gpuEnemyVisualV426(e);
@@ -13024,6 +12892,7 @@ function enemyHealthLayoutV592(e){
 function drawEnemyHealthBarsV592(){
  visualClarityStatsV592.healthBars=0;visualClarityStatsV592.healthBoxes.length=0;
  enemyHealthVisibilityV592.each(t,(e,alpha)=>{
+  if(e.finalBoss||e.elite||e.midBoss||e.nemesis)return;
   if(!worldCircleVisibleV441(e.x,e.y,80,10))return;
   const b=enemyHealthLayoutV592(e),ratio=clamp(e.hp/Math.max(1,e.maxHp),0,1);
   ctx.save();ctx.globalAlpha=alpha;ctx.shadowBlur=0;ctx.fillStyle='#080b0eee';ctx.fillRect(b.x-1,b.y-1,b.width+2,b.height+2);ctx.fillStyle='#3b2023';ctx.fillRect(b.x,b.y,b.width,b.height);ctx.fillStyle='#e65b57';ctx.fillRect(b.x,b.y,b.width*ratio,b.height);ctx.restore();
@@ -13205,6 +13074,9 @@ const MONSTER_CATALOG_V593=[
  {id:'froststalker',type:'froststalker',name:'프로스트 스토커',en:'FROST STALKER',group:'일반'},
  {id:'symbiote',type:'symbiote',name:'심비오트',en:'SYMBIOTE',group:'일반'},
  {id:'embermaw',type:'embermaw',name:'엠버모',en:'EMBERMAW',group:'일반'},
+ {id:'ripper',type:'ripper',name:'리퍼',en:'RIPPER',group:'신규'},
+ {id:'mauler',type:'mauler',name:'파쇄자',en:'MAULER',group:'신규'},
+ {id:'bileback',type:'bileback',name:'독낭수',en:'BILEBACK',group:'신규'},
  {id:'legacy_crawler',type:'crawler',legacy:true,name:'크롤러 · 변형',en:'CRAWLER · LEGACY',group:'변형'},
  {id:'legacy_warden',type:'warden',legacy:true,name:'워든 · 변형',en:'WARDEN · LEGACY',group:'변형'},
  {id:'alpha',type:'brute',elite:'alpha',name:'알파 브루트',en:'ALPHA BRUTE',group:'정예'},
@@ -13238,9 +13110,9 @@ function monsterCatalogSpawnOneV593(c){
  if(!e||e.dead)return false;
  // Gate births expose locked coordinate accessors: restore actual writable positions first.
  if(e._mapBirthLockedV562)mapReleaseBirthV562(e);
- if(c.elite==='nemesis')Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});
+ if(c.elite==='nemesis'){Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});applyMidbossRankV596(e,'nemesis');}
  if(!monsterCatalogPointV593(e,monsterCatalogSpawnedV593)){e.dead=true;return false;}
- if(c.legacy)e.visualSetV516='legacy';else if(c.type==='crawler'||c.type==='warden')e.visualSetV516='base';
+ if(c.legacy)e.visualSetV516='legacy';else if(enemyCombatTypeV596(c.type)==='crawler'||c.type==='warden')e.visualSetV516='base';
  Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false,mapEntranceRouteV562:null,mapRoadGateV562:null,_mapX560:e.x,_mapY560:e.y,vx:0,vy:0});
  delete e._mapBirthRecordV562;
  monsterCatalogSpawnedV593++;return e;
@@ -13267,11 +13139,11 @@ function monsterCatalogPumpV593(){
 }
 {
  const block=document.createElement('div');block.className='tmBlockV573';block.id='monsterCatalogV593';
- block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
+ block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','신규','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
  $('tmModalV573').querySelectorAll('.tmBlockV573')[1].before(block);
  function preview(){
   const c=MONSTER_CATALOG_V593.find(c=>c.id===$('monsterSelectV593').value);monsterCatalogSelectedV593=c.id;
-  const im=$('monsterImageV593');im.src=ASSET_SRC[monsterCatalogAssetV593(c)];im.alt=c.name;$('monsterNameV593').textContent=c.name+' · '+c.en;
+  const im=$('monsterImageV593');im.src=c.group==='신규'?monsterSurfaceV577(c.type,0)?.toDataURL()||ASSET_SRC[monsterCatalogAssetV593(c)]:ASSET_SRC[monsterCatalogAssetV593(c)];im.alt=c.name;$('monsterNameV593').textContent=c.name+' · '+c.en;
   const role=c.boss?['bio','venom'].includes(c.boss)?'보스전 · 선택한 페이즈로 시작':'보스 외형 · 기존 시험 패턴':c.elite?'정예 · 1마리씩 소환':({melee:'근접',ranged:'원거리',charge:'돌격',support:'지원'}[enemyAttackRoleV591({type:c.type})]||'');
   $('monsterRoleV593').textContent=role;for(const b of block.querySelectorAll('[data-monster-count-v593]'))b.disabled=!!(c.boss||c.elite)&&b.dataset.monsterCountV593!=='1';
  }
@@ -13441,6 +13313,187 @@ const startupReadyV595=Promise.all([groundReadyV595,upgradeSkinReadyV594]).then(
 }));
 window.__EVOLVE_STARTUP_V595__={ready:startupReadyV595,read:()=>({mapPrepares:mapPrepareCountV595,mapReuses:mapReuseCountV595,ready:homeReadyV522&&!campaignLoadingV567&&(!campaignActiveV567||mapReadyV562),groundArt:groundArtV595.path,groundStamps:groundStampsV595})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_STARTUP_V595__.test={prepare:campaignPrepareStageV567,ground:prepareGroundFieldsV595,paint:paintGroundFieldV595,spawn:monsterCatalogSpawnOneV593,purges:()=>purges,biome:()=>biomeHazards};
+
+// WEB-29: readable pursuit, evasive shooters and ranked mid-boss encounters.
+const MIDBOSS_RANKS_V596=Object.freeze([
+ {id:'common',name:'커먼',en:'COMMON',stage:3,color:'#d4e1e7',hp:6,damage:1.7,speed:1.12,size:2,armor:.06,cap:.40,cooldown:1},
+ {id:'rare',name:'레어',en:'RARE',stage:6,color:'#489eff',hp:7.2,damage:2,speed:1.16,size:2.15,armor:.09,cap:.44,cooldown:.94},
+ {id:'epic',name:'에픽',en:'EPIC',stage:11,color:'#ba6aff',hp:8.5,damage:2.35,speed:1.20,size:2.32,armor:.12,cap:.48,cooldown:.87},
+ {id:'legendary',name:'전설',en:'LEGENDARY',stage:16,color:'#ffc34b',hp:10,damage:2.8,speed:1.24,size:2.52,armor:.16,cap:.54,cooldown:.80},
+ {id:'mythic',name:'신화',en:'MYTHIC',stage:25,color:'#ff527d',hp:12,damage:3.4,speed:1.30,size:2.75,armor:.20,cap:.62,cooldown:.72}
+]);
+const MIDBOSS_SKILLS_V596=Object.freeze({
+ crusher:['crush','rush','fault'],
+ sentinel:['fan','cross','pools'],
+ hunter:['pounce','scissors','needle'],
+ omega:['rupture','rush','cross'],
+ nemesis:['crush','cross','fan']
+});
+function midbossRankForStageV596(stage){let rank=MIDBOSS_RANKS_V596[0];for(const q of MIDBOSS_RANKS_V596)if(stage>=q.stage)rank=q;return rank;}
+function midbossTitleV596(e){return (e.midRankV596?homeTextV522(e.midRankV596.en,e.midRankV596.name)+' · ':'')+(e.bossName||e.midBaseNameV596||e.eliteName||'MID-BOSS');}
+function applyMidbossRankV596(e,profile='crusher'){
+ if(!e||e.dead||e.finalBoss||e.midRankV596)return e;
+ const rank=midbossRankForStageV596(meta.stage||1),stage=meta.stage||1,sc=campaignStageProfile(stage);
+ const cap=4200*rank.cap*hpTempoAt(t)*stageScale*threatMods.hp*routeMods.enemyHp*(sc.bossHp||1);
+ e.midBaseNameV596=e.eliteName;e.midRankV596=rank;e.midBoss=true;e.midProfileV596=profile;
+ e.hp=e.maxHp=Math.max(e.maxHp,Math.min(e.maxHp*rank.hp,cap));e.dmg*=rank.damage;e.spd*=rank.speed;
+ e.eliteArmor=Math.max(e.eliteArmor||0,rank.armor);
+ e.midVisualSizeV596=gpuEnemyBaseSizeV426({type:e.type})*rank.size;
+ const body={crawler:6.8,runner:5.8,brute:12.5,spitter:8,warden:10,froststalker:8,symbiote:9,embermaw:10}[enemyCombatTypeV596(e)]||10;
+ e.r=body*rank.size;e.xp=Math.round((e.xp||52)*(1.5+MIDBOSS_RANKS_V596.indexOf(rank)*.4));
+ e.midSkillIndexV596=0;e.midSkillCdV596=1.3;e.midActionV596=null;e.elitePatternCd=999;
+ e.eliteName=homeTextV522(rank.en,rank.name)+' · '+e.midBaseNameV596;
+ $('bossname').textContent=midbossTitleV596(e);$('bossname').style.color=rank.color;
+ return e;
+}
+// Scheduled encounters rotate their combat identity instead of being an enlarged grunt.
+const midAlphaSpawnV596=spawnElite,midSentinelSpawnV596=spawnEliteSpitter,midHunterSpawnV596=spawnEvoHunter,midNemesisSpawnV596=spawnNemesis;
+spawnEliteSpitter=function(...args){return applyMidbossRankV596(midSentinelSpawnV596(...args),'sentinel');};
+spawnEvoHunter=function(omega=false,...args){return applyMidbossRankV596(midHunterSpawnV596(omega,...args),omega?'omega':'hunter');};
+spawnNemesis=function(...args){return applyMidbossRankV596(midNemesisSpawnV596(...args),'nemesis');};
+spawnElite=function(...args){
+ let e;
+ if(upgradeSpawnPermissionV593)e=applyMidbossRankV596(midAlphaSpawnV596(...args),'crusher');
+ else{
+  const kind=Math.floor(Math.max(0,(meta.stage||1)-3)/3)%4;
+  e=kind===1?spawnEliteSpitter():kind===2?spawnEvoHunter(false):kind===3?spawnEvoHunter(true):applyMidbossRankV596(midAlphaSpawnV596(...args),'crusher');
+  if(e){e.stageMidV526=true;stageFlowV526.midSpawned=true;}
+ }
+ return e;
+};
+
+// New appearances join ordinary spawns without replacing any existing species.
+const speciesEnemyTypeBaseV596=enemyType;
+enemyType=function(...args){const type=speciesEnemyTypeBaseV596(...args),entry=Object.entries(NEW_MONSTER_SPECIES_V596).find(([,s])=>s.combatType===type&&(meta.stage||1)>=s.unlock);return entry&&Math.random()<.24?entry[0]:type;};
+
+function enemyIntentV596(e,dt,slowMul,d){
+ if(e.dead||e.finalBoss||e.arrivalInvuln||(e.stunned||0)>0)return;
+ if(e.midRankV596&&midbossStepV596(e,dt))return;
+ if(e.telegraphing||e.dashPrep>0||e.chargePrep>0||e.burst>0)return;
+ const type=enemyCombatTypeV596(e),dx=player.x-e.x,dy=player.y-e.y,len=Math.hypot(dx,dy)||1,tx=dx/len,ty=dy/len;
+ const ranged=type==='spitter'||type==='froststalker';
+ if(ranged){
+  const desired=e.elite?220:type==='froststalker'?215:195,near=d<desired-28,far=d>desired+28;
+  const radial=near?-1.85:far?.9:0,tangent=(near?.48:.72)*(e.strafe||1),sp=e.spd*slowMul;
+  e.vx=(tx*radial-ty*tangent)*sp;e.vy=(ty*radial+tx*tangent)*sp;
+  // Try the other lateral direction before existing terrain steering resolves the wall.
+  if(terrainHitV418(e.x,e.y,e.x+e.vx*.3,e.y+e.vy*.3,Math.min(e.r,10))){e.strafe=-(e.strafe||1);e.vx=(tx*radial+ty*tangent)*sp;e.vy=(ty*radial-tx*tangent)*sp;}
+ }else if(type==='crawler'||type==='brute'||type==='runner'||type==='embermaw'){
+  const sp=e.spd*slowMul,weave=type==='runner'?.12*(e.flank||1):0;
+  e.vx=(tx-ty*weave)*sp;e.vy=(ty+tx*weave)*sp;
+ }
+}
+
+let midFieldsV596=[],midCastCountV596=0;
+function midLineDistanceV596(x,y,a){const dx=x-a.x,dy=y-a.y,c=Math.cos(a.a),s=Math.sin(a.a),u=dx*c+dy*s,v=-dx*s+dy*c;return u>=-player.r&&u<=a.len+player.r&&Math.abs(v)<=a.w+player.r;}
+function midFieldContainsV596(f,x=player.x,y=player.y){
+ if(f.shape==='line')return midLineDistanceV596(x,y,f);
+ const dx=x-f.x,dy=y-f.y;
+ if(dx*dx+dy*dy>(f.r+player.r)**2)return false;
+ if(f.shape==='cone'){const delta=Math.atan2(Math.sin(Math.atan2(dy,dx)-f.a),Math.cos(Math.atan2(dy,dx)-f.a));return Math.abs(delta)<f.arc;}
+ return true;
+}
+function midAddFieldV596(e,kind,shape,props={}){
+ const rank=MIDBOSS_RANKS_V596.indexOf(e.midRankV596),prepare=props.prepare||Math.max(.72,1.05-rank*.04);
+ const f={owner:e,kind,shape,x:e.x,y:e.y,r:95,a:Math.atan2(player.y-e.y,player.x-e.x),len:240,w:24,arc:1.0,warn:prepare,maxWarn:prepare,life:.30,damage:e.dmg*1.05,tick:0,hit:false,...props};
+ midFieldsV596.push(f);return f;
+}
+function midbossCastV596(e,kind){
+ const rank=MIDBOSS_RANKS_V596.indexOf(e.midRankV596),a=Math.atan2(player.y-e.y,player.x-e.x),grow=1+rank*.06;
+ e.midActionV596={kind,left:.9,phase:'warn',a};e.telegraphing='mid_'+kind;e.patternLock=1.0;e.dashCd=e.shot=1.1;
+ if(kind==='crush')midAddFieldV596(e,kind,'circle',{r:100*grow,prepare:1.05,damage:e.dmg*1.25});
+ else if(kind==='rush'||kind==='pounce'){
+  const length=kind==='pounce'?220:250;e.midActionV596.left=kind==='pounce'?.78:.95;
+  midAddFieldV596(e,kind,'line',{len:length,w:e.r+7,prepare:e.midActionV596.left,damage:0,dash:true});
+ }else if(kind==='fault'||kind==='rupture'){
+  e.midActionV596.left=1.05;
+  const targets=kind==='rupture'?[-.7,0,.7]:[-.30,0,.30];
+  for(const da of targets)midAddFieldV596(e,kind,'circle',{x:e.x+Math.cos(a+da)*145,y:e.y+Math.sin(a+da)*145,r:(kind==='rupture'?62:48)*grow,prepare:1.05,damage:e.dmg*1.05});
+ }else if(kind==='cross'){
+  e.midActionV596.left=1.0;
+  for(const da of [-.33,.33])midAddFieldV596(e,kind,'line',{a:a+da,len:270*grow,w:16+rank*2,prepare:1,damage:e.dmg*1.05});
+ }else if(kind==='pools'){
+  e.midActionV596.left=1.0;
+  for(let i=0;i<3;i++){const da=a+Math.PI/2*(i-1),r=i===1?0:65;midAddFieldV596(e,kind,'circle',{x:clamp(player.x+Math.cos(da)*r,20,WORLD_W-20),y:clamp(player.y+Math.sin(da)*r,20,WORLD_H-20),r:43*grow,prepare:1,life:1.8,damage:e.dmg*.5,pool:true});}
+ }else if(kind==='scissors'){
+  e.midActionV596.left=.82;
+  for(const da of [-.43,.43])midAddFieldV596(e,kind,'cone',{a:a+da,arc:.55,r:130*grow,prepare:.82,damage:e.dmg*1.05});
+ }else{
+  e.midActionV596.left=.85;midAddFieldV596(e,kind,'cone',{a,arc:kind==='needle'?.32:.65,r:300,prepare:.85,damage:0,volley:true,count:kind==='needle'?3:5+rank*2});
+ }
+ midCastCountV596++;return e.midActionV596;
+}
+function midbossStepV596(e,dt){
+ if(!e.midRankV596||e.dead||e.finalBoss)return false;
+ const q=e.midActionV596;
+ if(!q){e.midSkillCdV596-=dt;if(e.midSkillCdV596<=0&&Math.hypot(e.x-player.x,e.y-player.y)<430&&!e.telegraphing){const skills=MIDBOSS_SKILLS_V596[e.midProfileV596];midbossCastV596(e,skills[e.midSkillIndexV596++%skills.length]);}return false;}
+ q.left-=dt;e.patternLock=Math.max(e.patternLock||0,.15);e.dashCd=e.shot=Math.max(e.dashCd||0,.3);
+ if(q.phase==='warn'){
+  // Sentinel winds up while strafing; melee attacks plant their feet clearly.
+  if(e.midProfileV596==='sentinel'){e.vx*=.55;e.vy*=.55;}else e.vx=e.vy=0;
+  if(q.left<=0){
+   if(q.kind==='rush'||q.kind==='pounce'){q.phase='dash';q.left=.58;e.burst=.58;e.chargeA=q.a;e.telegraphing=null;}
+   else{q.phase='recover';q.left=.36;e.telegraphing=null;}
+  }
+ }else if(q.phase==='dash'){
+  const sp=e.spd*(q.kind==='pounce'?4.5:4.1);e.vx=Math.cos(q.a)*sp;e.vy=Math.sin(q.a)*sp;
+  if(q.left<=0){q.phase='recover';q.left=.4;e.burst=0;e.vx=e.vy=0;}
+ }else{
+  e.vx*=.2;e.vy*=.2;
+  if(q.left<=0){e.midActionV596=null;e.telegraphing=null;e.midSkillCdV596=(2.7+(e.midProfileV596==='sentinel'?.3:0))*e.midRankV596.cooldown;}
+ }
+ return true;
+}
+function updateMidFieldsV596(dt){
+ for(const f of midFieldsV596){
+  if(f.owner.dead){f.expired=true;continue;}
+  if(f.warn>0){f.warn-=dt;if(f.warn>0)continue;
+   if(f.volley){const e=f.owner;for(let i=0;i<f.count;i++){const a=f.a+(i-(f.count-1)/2)*(f.kind==='needle'?.15:.145);eBullets.push({x:e.x,y:e.y,vx:Math.cos(a)*(155+MIDBOSS_RANKS_V596.indexOf(e.midRankV596)*9),vy:Math.sin(a)*(155+MIDBOSS_RANKS_V596.indexOf(e.midRankV596)*9),r:5.5,dmg:e.dmg*.65,life:3,midBossV596:true});}e.shotCount=(e.shotCount||0)+1;f.expired=true;continue;}
+   if(!f.dash)particles.push({kind:'bossVfx',asset:'warning_ring',x:f.x,y:f.y,size:f.r*2,spin:.3,life:.30,maxLife:.30});
+  }
+  f.life-=dt;f.tick-=dt;
+  if(f.damage>0&&f.tick<=0&&midFieldContainsV596(f)&&(!f.hit||f.pool)){playerDamage(f.damage);f.hit=true;f.tick=.55;}
+  if(f.life<=0)f.expired=true;
+ }
+ midFieldsV596=midFieldsV596.filter(f=>!f.expired);
+}
+function drawMidFieldsV596(){
+ for(const f of midFieldsV596){
+  if(f.owner.dead||!worldCircleVisibleV441(f.x,f.y,Math.max(f.r,f.len),30))continue;
+  const warning=f.warn>0,pulse=.5+.5*Math.sin(t*10);ctx.save();ctx.translate(f.x,f.y);ctx.rotate(f.shape==='circle'?0:f.a);
+  ctx.fillStyle=warning?'rgba(255,34,38,'+(.15+.08*pulse)+')':'rgba(255,28,32,.48)';ctx.strokeStyle=warning?'#ff5b5e':'#ffb3a2';ctx.lineWidth=warning?2:3;ctx.beginPath();
+  if(f.shape==='line')ctx.rect(0,-f.w,f.len,f.w*2);
+  else if(f.shape==='cone'){ctx.moveTo(0,0);ctx.arc(0,0,f.r,-f.arc,f.arc);ctx.closePath();}
+  else ctx.arc(0,0,f.r,0,TAU);
+  ctx.fill();ctx.stroke();
+  if(!warning&&f.pool&&groundImageV595.naturalWidth){ctx.beginPath();ctx.arc(0,0,f.r,0,TAU);ctx.clip();ctx.globalAlpha=.75;ctx.drawImage(groundImageV595,-f.r,-f.r,f.r*2,f.r*2);}
+  ctx.restore();
+ }
+}
+
+// Cached tinted anatomy creates rising body vapor; no ground ring or body symbol.
+const midAuraCacheV596=new WeakMap();let midAuraDrawsV596=0;
+function drawMidAuraV596(e){
+ const image=renderedEnemy(e),rank=e.midRankV596;if(!image||!rank)return;
+ const mip=actorMipV424(image,e.midVisualSizeV596*2);if(!mip?.source)return;
+ let colors=midAuraCacheV596.get(mip.source);if(!colors)midAuraCacheV596.set(mip.source,colors=new Map());let tint=colors.get(rank.id);
+ if(!tint){tint=document.createElement('canvas');tint.width=mip.w;tint.height=mip.h;const g=tint.getContext('2d');g.drawImage(mip.source,0,0);g.globalCompositeOperation='source-in';g.fillStyle=rank.color;g.fillRect(0,0,tint.width,tint.height);colors.set(rank.id,tint);}
+ const clock=feedbackCfg().reducedMotion?0:t,size=e.midVisualSizeV596,sc=size/Math.max(tint.width,tint.height),w=tint.width*sc,h=tint.height*sc;
+ ctx.save();ctx.translate(e.x,e.y);ctx.scale(player.x<e.x?-1:1,1);ctx.globalCompositeOperation='screen';
+ for(let i=3;i>=0;i--){const phase=(clock*(.6+i*.1)+i*.24)%1,rise=phase*(10+MIDBOSS_RANKS_V596.indexOf(rank)*2),wave=Math.sin(clock*3+i*1.8)*2;ctx.globalAlpha=(1-phase)*(.16+.045*Math.sin(clock*5+i));ctx.drawImage(tint,-w/2-2+wave,-h/2-rise-1,w+4,h+3);}
+ ctx.restore();midAuraDrawsV596++;
+}
+const midDrawBaseV596=drawEnemy;
+drawEnemy=function(e,shadowOnly=false){if(!shadowOnly&&e.midRankV596&&!e.dead)drawMidAuraV596(e);return midDrawBaseV596(e,shadowOnly);};
+const midWarningBaseV596=drawAttackWarningsV582;
+drawAttackWarningsV582=function(...args){const out=midWarningBaseV596(...args);drawMidFieldsV596();return out;};
+const midUpdateBaseV596=update;
+update=function(dt){const before=t,out=midUpdateBaseV596(dt);if(t>before)updateMidFieldsV596(t-before);const e=enemies.find(e=>!e.dead&&e.midRankV596&&!e.finalBoss);if(e&&!finalBossAlive()){$('bossname').textContent=midbossTitleV596(e);$('bossname').style.color=e.midRankV596.color;}else $('bossname').style.color='';return out;};
+const midResetBaseV596=reset,midHomeBaseV596=returnToHome;
+reset=function(...args){midFieldsV596=[];return midResetBaseV596(...args);};
+returnToHome=function(...args){midFieldsV596=[];$('bossname').style.color='';return midHomeBaseV596(...args);};
+window.__EVOLVE_COMBAT_V596__={read:()=>({contactAllTypes:true,contracts:false,species:Object.keys(NEW_MONSTER_SPECIES_V596),ranks:MIDBOSS_RANKS_V596.map(r=>({...r})),casts:midCastCountV596,fields:midFieldsV596.length,auraDraws:midAuraDrawsV596,physical_Galaxy_S23_plus_tested:false})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_COMBAT_V596__.test={rank:midbossRankForStageV596,apply:applyMidbossRankV596,cast:midbossCastV596,contains:midFieldContainsV596,fields:()=>midFieldsV596,stepFields:updateMidFieldsV596,intent:enemyIntentV596,types:NEW_MONSTER_SPECIES_V596,baseType:enemyCombatTypeV596,appearance:enemyAppearanceKeyV516,asset:enemyAppearanceAssetV516,health:()=>enemyHealthVisibilityV592.read(),context:()=>({player,enemies,meta,state,eBullets,step:dt=>update(dt),draw,home:returnToHome,damage:playerDamage,clock:()=>t})};
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 
