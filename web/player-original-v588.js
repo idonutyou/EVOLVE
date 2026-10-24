@@ -107,12 +107,8 @@ updateAbilityUI=function(){
 };
 const playerCombatStyleV587=document.createElement('style');playerCombatStyleV587.textContent='#app.combat #ability:disabled,#ability:disabled{opacity:.32!important;filter:grayscale(1)!important;cursor:default!important;box-shadow:none!important}#abilityName{font-size:8px!important}';document.head.appendChild(playerCombatStyleV587);
 function playerWeaponLabelsV586(){
- const labels={arm:['UPPER LIMB STAB','기본 찌르기','상단 두 다리로 번갈아 근접 찌르기'],mouth:['ACID MAW','산성 분사','산성 투사체 · 부식'],tail:['RAZOR TAIL','꼬리 휘두르기','꼬리 휩쓸기 · 처형'],wing:['RAZOR WING','칼날 날개','다중 타격 · 궤도'],leg:['CRUSH LEG','분쇄 다리','내려찍기 · 충격파']};
- for(const [id,[en,ko,role]] of Object.entries(labels)){Object.assign(START_WEAPONS[id],{name:homeTextV522(en,ko),role});const b=document.querySelector('[data-weapon="'+id+'"]');if(b){const name=b.querySelector('b,h3,strong,.weaponName'),desc=b.querySelector('.weaponRole,p,.weaponDesc'),start=b.querySelector('.weaponStart');if(name)name.textContent=START_WEAPONS[id].name;if(desc)desc.textContent=role;if(start)start.textContent='시작 · ★☆☆☆☆';}}
- START_WEAPONS.arm.glyph='↗';
- const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>homeTextV522('UPPER LIMB STAB','찌르기 · 관통력 강화');
+ const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>homeTextV522('ARM UPGRADE','팔 강화');
 }
-const playerLegacyStartSelectV586=openStartWeaponSelect;openStartWeaponSelect=function(...args){playerWeaponLabelsV586();const result=playerLegacyStartSelectV586(...args);playerWeaponLabelsV586();return result;};
 levelStatHtml=function(u){if(u.active&&u.kind==='arm')return '<div class="statRow"><span>기본 찌르기</span><b>찌르기 피해량 증가</b></div><div class="statRow"><span>상단 두 다리</span><b>좌우 교대 · 근접 공격</b></div>';return classicCombatV587.levelStatHtml(u);};
 const playerLegacyPartEquipV586=equipPartV523;equipPartV523=function(...args){const result=playerLegacyPartEquipV586(...args);playerMotionV586.attack=null;playerMotionV586.cooldown=.18;playerWeaponLabelsV586();updateAbilityUI();return result;};
 const playerLegacyHomeRefreshV586=refreshEvolveHomeV522;refreshEvolveHomeV522=function(...args){const result=playerLegacyHomeRefreshV586(...args);playerWeaponLabelsV586();return result;};

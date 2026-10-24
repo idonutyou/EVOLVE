@@ -111,8 +111,6 @@ playerWeaponLabelsV586=function(){
  armBareLabelsV589();const mode=armItemModeV589();if(mode==='bare')return;
  const item=partsItemV523(mode==='cannon'?'arm_cannon':'arm_blades'),name=partsNameV523(item);
  const role=mode==='cannon'?partsTextV523('Alternating biological cannons · original projectile upgrades','생체 쌍포 교대 사격 · 기존 탄막 강화'):partsTextV523('Alternating blade swings · cuts enemies in the swept arc','쌍날 교대 베기 · 휘두른 범위의 적 타격');
- Object.assign(START_WEAPONS.arm,{name,role,glyph:mode==='cannon'?'⌁':'⌁'});
- const b=document.querySelector('[data-weapon="arm"]');if(b){const title=b.querySelector('b,h3,strong,.weaponName'),desc=b.querySelector('.weaponRole,p,.weaponDesc');if(title)title.textContent=name;if(desc)desc.textContent=role;}
  const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>partsNameV523(item)+' · '+partsTextV523('Enhance','강화');
 };
 const armBareStatsV589=levelStatHtml;

@@ -1,0 +1,10 @@
+@font-face{font-family:'EVOLVE Organ Sans';src:url('__ORGAN_FONT_V598__') format('woff');font-weight:100 900;font-style:normal;font-display:swap}
+#poster #homeBattleViewV522{padding-top:30px;padding-bottom:30px}
+#poster .stageSelectorV522{min-height:112px}
+#poster #homeStageStateV522:empty{display:none}
+#poster #posterHero{margin-top:8px!important;margin-bottom:18px!important}
+#poster .homeStartV522{margin-top:12px;margin-bottom:0}
+#app.combat #parts{justify-content:center;gap:12px}
+#parts .partIcon canvas{width:100%;height:100%;object-fit:contain}
+#levelPanel .upgradeNameV593,#levelPanel .upgradeStatsV593,#levelPanel .upgradePartV593{font-family:'EVOLVE Organ Sans','EVOLVE Upgrade Sans',system-ui,sans-serif}
+@media(max-height:600px){#poster #homeBattleViewV522{padding-top:16px;padding-bottom:20px}#poster .stageSelectorV522{min-height:90px}}

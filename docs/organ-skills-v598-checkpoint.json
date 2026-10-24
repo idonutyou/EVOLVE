@@ -1,8 +1,8 @@
 {
   "version": "V575-WEB-31-ORGAN-SKILLS",
   "baseline": "169505e96c4331a2072219e674862f51632e06a6",
-  "progress": 10,
-  "status": "Implementing user-requested streamlined home and organ skill progression",
+  "progress": 50,
+  "status": "First actual browser checks passed: streamlined home, three opening choices, equipped ARM filtering, spike/pierce/growth, whip arcs/knockback, spit, item profiles and pause cleanup",
   "requirements": [
     "Delete home unlock/latest/replay/objective/level-limit/start-hint text; cleared status only 클리어",
     "Increase subtle vertical miniature floating motion",
@@ -15,5 +15,6 @@
     "Preserve save keys, map art bytes, map geometry, bosses and safe update timing",
     "Commit progress during work and automatically deploy after verification"
   ],
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "build": "66f36462b7c716f741e42eeb3e6a2ce2a81d2486fa86fedd0f5a73036cbb0439"
 }

@@ -74,7 +74,7 @@ function skinPaintActiveV594(){
  const header=$('levelPanel').querySelector('.upgradeHeaderRefV594');if(header)skinPaintCanvasV594(header,upgradeSkinV594.header);
  for(const b of $('cards').querySelectorAll('.upgradeCardV593')){
   const row=Number(b.dataset.artRow),tier=Number(b.dataset.artTier),card=UPGRADE_CARDS_V593.find(c=>c.id===b.dataset.kind);if(!card)continue;
-  skinPaintCanvasV594(b.querySelector('.upgradeFrameV594'),skinFrameV594(tier));skinPaintCanvasV594(b.querySelector('.upgradeSpriteV593'),skinArtV594(row,tier));skinPaintCanvasV594(b.querySelector('.upgradePartIconV594'),skinIconV594(card.group,tier));
+  skinPaintCanvasV594(b.querySelector('.upgradeFrameV594'),skinFrameV594(tier));skinPaintCanvasV594(b.querySelector('.upgradeSpriteV593'),organCardArtV598(card,tier));skinPaintCanvasV594(b.querySelector('.upgradePartIconV594'),organCardIconV598(card,tier));
  }
 }
 renderLevelChoices=function(isReroll=false){

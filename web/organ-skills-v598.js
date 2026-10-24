@@ -190,7 +190,7 @@ reset=function(...args){
 const organHomeBaseV598=returnToHome;
 returnToHome=function(...args){organClearV598();return organHomeBaseV598(...args);};
 const organRenderBaseV598=renderLevelChoices;
-renderLevelChoices=function(...args){const result=organRenderBaseV598(...args);if(organRunV598.opening){const h=$('levelPanel').querySelector('.levelHead');h.querySelector('h2').textContent=upgradeTextV593('스킬 선택','CHOOSE SKILL');h.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');}return result;};
+renderLevelChoices=function(...args){const result=organRenderBaseV598(...args);$('levelPanel').dataset.organOpening=String(organRunV598.opening);for(const b of $('cards').querySelectorAll('.card')){const c=UPGRADE_CARDS_V593.find(c=>c.id===b.dataset.kind);b.dataset.organ=c?.organ||c?.group||'';}if(organRunV598.opening){const h=$('levelPanel').querySelector('.levelHead');h.querySelector('h2').textContent=upgradeTextV593('스킬 선택','CHOOSE SKILL');h.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');}return result;};
 const organUpgradeResetV598=upgradeResetV593;
 upgradeResetV593=function(){const result=organUpgradeResetV598();organClearV598();return result;};
 window.__EVOLVE_ORGAN_SKILLS_V598__={
@@ -198,6 +198,6 @@ window.__EVOLVE_ORGAN_SKILLS_V598__={
  variants:()=>Object.fromEntries(Object.entries(ORGAN_SKILL_MODEL_V598.profiles).map(([id,v])=>[id,{...v}]))
 };
 if(new URLSearchParams(location.search).get('evolveQA')==='1'){
- window.__EVOLVE_ORGAN_SKILLS_V598__.test={spec:organSpecV598,step:organStepV598,cast:organCastV598,clear:organClearV598,projectiles:()=>organRunV598.projectiles,whips:()=>organRunV598.whips,geometry:ORGAN_SKILL_MODEL_V598,canChoose:choiceInputReady,context:()=>({player,state,enemies,stats:organRunV598.stats,cooldowns:organRunV598.cooldowns,grid:rebuildEnemyGridV424,draw,home:returnToHome}),setItemVariant:(itemId,organ,variant)=>{const item=partsItemV523(itemId),p=ORGAN_SKILL_MODEL_V598.profiles[variant];if(!item||p?.organ!==organ||item.slot!==organSlotsV598[organ])throw Error('Invalid item/organ variant');item.skillVariantsV598={...item.skillVariantsV598,[organ]:variant};}};
+ window.__EVOLVE_ORGAN_SKILLS_V598__.test={spec:organSpecV598,step:organStepV598,cast:organCastV598,clear:organClearV598,projectiles:()=>organRunV598.projectiles,whips:()=>organRunV598.whips,geometry:ORGAN_SKILL_MODEL_V598,canChoose:choiceInputReady,context:()=>({player,state,enemies,stats:organRunV598.stats,cooldowns:organRunV598.cooldowns,grid:rebuildEnemyGridV424,draw,home:returnToHome,lineClear:(a,b,r=1)=>!terrainHitV418(a.x,a.y,b.x,b.y,r)}),setItemVariant:(itemId,organ,variant)=>{const item=partsItemV523(itemId),p=ORGAN_SKILL_MODEL_V598.profiles[variant];if(!item||p?.organ!==organ||item.slot!==organSlotsV598[organ])throw Error('Invalid item/organ variant');item.skillVariantsV598={...item.skillVariantsV598,[organ]:variant};}};
  const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test;q.cards=UPGRADE_CARDS_V593;q.pool=()=>upgradePoolV593();q.apply=(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);};q.lines=(c,tier)=>upgradeLinesV593(c,tier);q.reset=()=>upgradeResetV593();
 }

@@ -1,0 +1,10 @@
+{
+  "checks": [],
+  "errors": [
+    "Cannot set properties of null (setting 'onclick')"
+  ],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "success": false,
+  "failure": "page.waitForFunction: Timeout 180000ms exceeded.\n    at ready (/workspace/scratch/7ccc35dc150f/EVOLVE/tests/organ_skills_browser.cjs:9:23)\n    at /workspace/scratch/7ccc35dc150f/EVOLVE/tests/organ_skills_browser.cjs:13:129"
+}
