@@ -97,6 +97,7 @@ jobs:
       - name: Verify mobile boot, maps, controls, saves and safe updates
         timeout-minutes: 10
         run: |
+          node tests/home_map_miniatures_browser.cjs
           node tests/admin_combat_browser.cjs
           node tests/playfield_browser.cjs
           node tests/upgrade_cards_browser.cjs

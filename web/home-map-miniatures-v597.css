@@ -2,6 +2,9 @@
 @font-face{font-family:'EVOLVE Home Sans';src:url('__HOME_MAP_FONT_V597__') format('woff');font-style:normal;font-weight:100 900;font-display:swap}
 #poster #posterHero{--map-accent:#954a40;isolation:isolate;min-height:225px;flex-basis:245px;margin:4px 0 15px!important;background:radial-gradient(ellipse at 50% 60%,color-mix(in srgb,var(--map-accent) 12%,transparent),transparent 68%)!important;overflow:visible!important}
 #poster #heroSpecimenImg{position:absolute!important;inset:50% auto auto 50%!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:translate(-50%,-50%)!important;filter:drop-shadow(0 15px 13px #0008)!important;z-index:2;animation:homeMapFloatV597 6s ease-in-out infinite}
+/* The restored reference has an opaque black matte; preserve its exact bytes. */
+#poster #posterHero[data-opaque-map="true"]{isolation:auto}
+#poster #posterHero[data-opaque-map="true"] #heroSpecimenImg{mix-blend-mode:screen}
 #poster .homeMapShadowV597{position:absolute;left:17%;right:17%;bottom:6%;height:9%;z-index:0;background:radial-gradient(ellipse,#0009,transparent 70%);pointer-events:none}
 #poster #homeStageTitleV522{font-family:'EVOLVE Home Sans','Noto Sans KR',system-ui,sans-serif;font-size:26px;line-height:1.25;font-weight:650;letter-spacing:-.035em;word-break:keep-all;text-wrap:balance;margin:8px 0!important}
 #poster .stageSelectorV522{min-height:105px}

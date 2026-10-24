@@ -13,6 +13,7 @@ function paintHomeMapV597(){
  if(!window.__EVOLVE_HOME_MAPS_V597__)return;
  const destination=homeMapDestinationV597(),image=$('heroSpecimenImg'),hero=$('posterHero');
  homeSetTextV522('homeStageTitleV522',destination.name);hero.dataset.destination=destination.id;
+ hero.dataset.opaqueMap=destination.art.opaque?'true':'false';
  hero.style.setProperty('--map-accent',destination.art.accent);
  image.alt=destination.name+' · '+homeTextV522('map miniature','맵 미니어처');
  image.setAttribute('data-i18n-ignore','');image.removeAttribute('data-origin-v522');

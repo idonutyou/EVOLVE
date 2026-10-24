@@ -71,12 +71,18 @@ def main():
         assert 'data-evolve-src=' in html and '"preloadResources":true' in html
         for path in [playfield['ground_art']['path'],playfield['stylesheet'],playfield['shell']]:
             assert hashlib.sha256(fetch(path)).hexdigest()==Path(path).stem, 'Live playfield asset differs: '+path
+    home_maps=verification.get('home_map_miniatures_v597')
+    if home_maps:
+        assert b'window.__EVOLVE_HOME_MAPS_V597__' in code and b' paintHomeMapV597();' in code
+        assert 'homeMapStageV597' in html and '<span class="chamberTagV522">' not in html
+        for path in [home_maps['stylesheet'],home_maps['font']['path']]+[art['path'] for art in home_maps['art'].values()]:
+            assert hashlib.sha256(fetch(path)).hexdigest()==Path(path).stem, 'Live home map asset differs: '+path
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],
               'version_matches': True, 'manifest_matches': True, 'engine_matches': True,
               'entry_matches': True, 'engine': engine, 'engine_sha256': digest,
               'movement_field': verification['movement_field'], 'horde_roles': verification['horde_roles'],
               'visual_clarity': verification['visual_clarity'], 'upgrade_cards': upgrade, 'upgrade_reference': reference,
-              'playfield_v595': playfield, 'physical_Galaxy_S23_plus_tested': False}
+              'playfield_v595': playfield, 'home_map_miniatures_v597': home_maps, 'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
     print(json.dumps(result, ensure_ascii=False))
