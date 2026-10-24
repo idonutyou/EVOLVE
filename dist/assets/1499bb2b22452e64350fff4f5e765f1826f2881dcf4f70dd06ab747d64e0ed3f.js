@@ -104,11 +104,11 @@ let biomeHazards=[],biomeHazardCd=999,stageScale=1;
 let terrainNodes=[],relicDrops=[],runRelics=[],milestoneBonus=0,stageRewardText='';
 let worldSites=[],worldSiteSerial=0,worldSiteHintCd=0;
 let organSlots={predator:null,survival:null},organEquipCount=0;
-let enemies=[], bullets=[], eBullets=[], drops=[], particles=[], damageTexts=[], telegraphs=[], floorDecor=[], floorMarks=[], deathEchoes=[],runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};
+let enemies=[], bullets=[], eBullets=[], drops=[], particles=[], damageTexts=[], telegraphs=[], floorDecor=[], floorMarks=[], deathEchoes=[],runDamage={arm:0,acid:0,shell:0,tail:0,wing:0,leg:0,core:0};
 let keys={}, joy={active:false,id:null,x:0,y:0,cx:0,cy:0,dx:0,dy:0,startX:0,startY:0,moved:false,focusCandidate:null}, kills=0, dnaTotal=0;
 let directorLock=0,directorRelief=0,enemyTypeHistory=[],skillBankBonus=0;
 let dashReady=0, activeReady=0, activeDuration=0, activeMaxCd=15, predation=0, frenzy=0, killChain=0, maxChain=0, chainTimer=0,flowMilestone=0, evasionCharge=0,riposteTime=0,perfectDodges=0,hitStop=0,impactPulse=0,focusEnemy=null,focusHintTimer=0,tacticalWave=null,tacticalWaveIndex=0,tacticalWaveSerial=0,waveClears=0,rapidWaveClears=0,waveBreather=0,organHudTimer=0,proteostasisUsed=false, selectedStartWeapon='arm',objectiveBankBonus=0,nemesisSpawned=false,nemesisKilledThisRun=false,cameraShake=0,cameraKickX=0,cameraKickY=0,bossDeathFx=null,evolutionPulse=null,cinematicFreeze=0,lastHudPaint=0,waveHudKey='',coachStep=0,coachLevelSeen=false;
-const state={arm:0,mouth:0,tail:0,wing:0,leg:0,core:1,speed:0};
+const state={arm:0,shell:0,mouth:0,tail:0,wing:0,leg:0,core:1,speed:0};
 const genes={reactor:0,virulent:0,predator:0,bastion:0,phase:0,hydra:0,core:0,haste:0};
 const evoState={arm:false,mouth:false,tail:false,wing:false,leg:false,core:false,speed:false};
 const synergy={artillery:false,toxicCyclone:false,overdrive:false};
@@ -1004,7 +1004,7 @@ function renderedEnemy(e){
 }
 function partKey(kind,lv){const mapped=kind==='wing'?'tail':kind==='leg'?'core':kind==='speed'?'haste':kind;return 'mutation_parts/'+mapped+'_l'+Math.max(1,Math.min(5,lv||1));}
 function cardArtSource(kind){return ASSET_SRC[['arm','mouth','tail','wing','leg'].includes(kind)?partKey(kind,Math.min(5,(state[kind]||0)+1)):kind==='repair'?'pickups/capsule_health':kind==='armor'?'pickups/capsule_shield':'icons/knowledge'];}
-function updateRenderedDock(){for(const el of document.querySelectorAll('#parts .part')){const kind=el.dataset.kind,icon=el.querySelector('.partIcon'),key=partKey(kind,state[kind]);if(icon.dataset.asset!==key){icon.dataset.asset=key;icon.innerHTML='<img alt="" src="'+ASSET_SRC[key]+'">';}icon.style.opacity=state[kind]>0?'1':'.45';}}
+function updateRenderedDock(){for(const el of document.querySelectorAll('#parts .part')){const kind=el.dataset.kind,icon=el.querySelector('.partIcon'),key=partKey(kind,state[kind]);if(!ASSET_SRC[key])continue;if(icon.dataset.asset!==key){icon.dataset.asset=key;icon.innerHTML='<img alt="" src="'+ASSET_SRC[key]+'">';}icon.style.opacity=state[kind]>0?'1':'.45';}}
 let renderedWorld=null,renderedWorldKey='',renderedFront=null;
 // Native-resolution chunks retain detail without allocating a full-world HD bitmap.
 const worldChunksV413=new Map();
@@ -1083,30 +1083,14 @@ function reset(){
   // Start non-idle motion preparation after the opening fight has settled.
   // Duplicate runs cannot schedule duplicate loads (state is single-flight).
   setTimeout(()=>{if(running&&!ended)warmBioMotionV510();},12000);bankedThisRun=false;pendingBankGain=0;t=0;last=performance.now();spawnAcc=0;frameEMA=16.7;perfMode=0;perfHold=0;nextBoss=false;nextElite=false;nextElite2=false;nextElite3=false;nextElite4=false;bossWarningShown=false;bossArrivalPlan=null;bossArrivalCue=null;majorArrivalCue=null;bossArena=null;phase1=phase2=phase3=phase4=false;rerolls=2+(meta.reroll||0);levelChoiceRoll=0;rerollBias='build';levelLastOffer=[];utilityTakeCount={armor:0,magnet:0,repair:0};rift=null;rift1=rift2=rift3=false;riftSuccess=riftFail=0;purges=[];purge1=purge2=false;encounterTimer=0;rewardChoosing=false;bossRewardsTaken=0;anomalyTriggered=false;rareMutation='';originAscension='';pendingEvoKind=null;blueprintCompleted=false;blueprintBankBonus=0;evoForm={arm:null,mouth:null,tail:null,wing:null,leg:null,core:null,speed:null};sector=0;extractionMode=false;breachGate=null;threatMods={speed:1,hp:1,damage:1,acidExtra:0};threatNames=[];usedThreats=[];routeMods={enemySpeed:1,enemyHp:1,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:0,eliteHp:1};if(meta.route==='cryo'){let ml=meta.cryoMastery||0;routeMods={enemySpeed:.88,enemyHp:1.04,enemyDmg:1,playerDmg:1,dna:1,xp:1,pickup:8,eliteHp:1.15,cryoResist:ml*.08};}else if(meta.route==='gene'){let ml=meta.geneMastery||0;routeMods={enemySpeed:1,enemyHp:1.10,enemyDmg:1,playerDmg:1,dna:1.18*(1+ml*.04),xp:1.12*(1+ml*.03),pickup:12,eliteHp:1.04};}else if(meta.route==='inferno'){let ml=meta.infernoMastery||0;routeMods={enemySpeed:1.09,enemyHp:1.04,enemyDmg:1.10,playerDmg:1.12*(1+ml*.03),dna:1.12,xp:1,pickup:0,eliteHp:1.08,heatResist:ml*.03};}stageScale=stageThreatScale(meta.stage);biomeHazards=[];biomeHazardCd=meta.route==='cryo'?9.5:meta.route==='gene'?12.5:meta.route==='inferno'?6.5:999;terrainNodes=[];relicDrops=[];runRelics=[];worldSites=[];worldSiteSerial=0;worldSiteHintCd=0;currentWorldZoneId='facility';worldZoneVisitCooldown=0;milestoneBonus=0;stageRewardText='';organSlots={predator:null,survival:null};organEquipCount=0;$('threatBadge').style.display='none';$('relicBadge').style.display='none';$('organHud').style.display='none';kills=0;dnaTotal=0;hordeTempo=1;hordeSampleTimer=2.5;hordeKillsPrev=0;hordeKps=0;lootSweep=0;bossDangerFocus=false;evolutionSurge=0;evoPity={arm:0,mouth:0,tail:0,wing:0,leg:0};evoVisualTick=0;runTelemetry={stage:meta.stage||1,startWeapon:selectedStartWeapon||'arm',evoTimes:{},evo2Time:null,evo3Time:null,bossSeen:false,bossKillTime:null,won:false,kills:0,level:1,pairProcs:{},bossPatterns:{},explore:{chest:0,regen:0,hotspot:0,rift:0,zoneEvent:0,zoneEventRepeats:0,zoneEventByZone:{facility:0,cultivation:0,disposal:0,titan:0},zoneEventTiers:{standard:0,hazard:0,anomaly:0},zones:{facility:1,cultivation:0,disposal:0,titan:0}}};currentWorldZoneId='facility';worldZoneVisitCooldown=0;directorLock=0;directorRelief=0;enemyTypeHistory=[];skillBankBonus=0;dashReady=0;activeReady=0;activeDuration=0;activeMaxCd=15;predation=0;frenzy=0;killChain=0;maxChain=0;chainTimer=0;flowMilestone=0;evasionCharge=0;riposteTime=0;perfectDodges=0;proteostasisUsed=false;focusEnemy=null;focusHintTimer=3.8;tacticalWave=null;tacticalWaveIndex=0;tacticalWaveSerial=0;waveClears=0;rapidWaveClears=0;waveBreather=0;organHudTimer=0;waveHudKey='';lastHudPaint=0;coachStep=0;coachLevelSeen=false;objectiveBankBonus=0;nemesisSpawned=false;nemesisKilledThisRun=false;predation=0;cameraShake=0;cameraKickX=0;cameraKickY=0;bossDeathFx=null;evolutionPulse=null;cinematicFreeze=0;hitStop=0;impactPulse=0;$('phaseBadge').textContent='STAGE '+meta.stage+' · '+(campaignMilestone(meta.stage)?campaignMilestone(meta.stage)+' · ':'')+'SECTOR 1 · CELL AWAKENING';$('objectiveBadge').style.display='none';$('waveBadge').style.display='none';$('waveBadge').classList.remove('clear');$('flowBadge').style.display='none';$('flowBadge').className='';$('focusHint').textContent=(meta.clears||0)===0&&meta.stage===1?(coarsePointer?'MOVE · TOUCH ANYWHERE & DRAG':'MOVE · WASD / ARROW KEYS'):'TAP ENEMY · FOCUS';$('focusHint').style.display='block';$('focusHint').classList.toggle('coachStrong',(meta.clears||0)===0&&meta.stage===1);refreshFeedbackControls();$('rerollBtn').textContent='REROLL ×'+rerolls;$('rerollBtn').disabled=false;$('runfill').style.width='0%';
-  enemies=[];bullets=[];eBullets=[];drops=[];particles=[];damageTexts=[];telegraphs=[];deathEchoes=[];runDamage={arm:0,acid:0,tail:0,wing:0,leg:0,core:0};updatePriorityHUD._key='';updatePriorityHUD._next=0;renderNemesisStatus._key='';
+  enemies=[];bullets=[];eBullets=[];drops=[];particles=[];damageTexts=[];telegraphs=[];deathEchoes=[];runDamage={arm:0,acid:0,shell:0,tail:0,wing:0,leg:0,core:0};updatePriorityHUD._key='';updatePriorityHUD._next=0;renderNemesisStatus._key='';
   Object.assign(state,{arm:0,mouth:0,tail:0,wing:0,leg:0,core:1,speed:0});Object.assign(genes,{reactor:0,virulent:0,predator:0,bastion:0,phase:0,hydra:0,core:0,haste:0});Object.assign(evoState,{arm:false,mouth:false,tail:false,wing:false,leg:false,core:false,speed:false});Object.assign(synergy,{artillery:false,toxicCyclone:false,overdrive:false});Object.assign(fusion,{sunLance:false,broodstorm:false,plagueVortex:false,redReaper:false,voidCarapace:false});$('evoBadge').style.display='none';$('evoBadge').textContent='';$('fusionBadge').style.display='none';$('fusionBadge').textContent='';$('blueprintBadge').style.display='none';$('blueprintBadge').textContent='';
-  let baseHp=Math.round(112*(1+meta.hp*.05)+(meta.stageVitality||0));Object.assign(player,{x:WORLD_W/2,y:WORLD_H/2,r:10,hp:baseHp,maxHp:baseHp,level:1,xp:0,xpNeed:xpNeedForLevel(1),speed:132*(1+(meta.speed||0)*.03),inv:0,shoot:.52,acid:1.1,tailCd:1.2,wingCd:.8,legCd:1.4,baseCd:.84,pickup:36+meta.pickup*10+routeMods.pickup,regen:0,look:0,armor:Math.min(.42,(meta.armor||0)*.03+(meta.route==='cryo'?(meta.cryoMastery||0)*.02:0)),dmgMul:(1+meta.dmg*.04)*(1+(meta.apexGenes||0)*.03)*routeMods.playerDmg,corePulse:1.35,envSlow:0,animTime:0,moveBlend:0,armKick:0,acidKick:0,tailKick:0,hurtKick:0,dashKick:0,hurtAng:0,dashAng:0});xpDropFractionV415=0;applyOrigin();for(const k of ['arm','mouth','tail','wing','leg'])state[k]=0;if(['arm','mouth','tail','wing','leg'].includes(selectedStartWeapon))state[selectedStartWeapon]=1;discover('mutation:'+selectedStartWeapon);applyMemoryTrait();player.zoneSetKills=0;player.disposalSetCd=0;player.titanSetKills=0;player.facilitySetCharge=0;/* Official game: no visual-only XP test samples or demo XP progress. */
-  $('poster').style.display='none';$('v100Milestone').textContent='';$('v100Milestone').style.display='none';$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('evolutionCine').classList.remove('show');$('evolutionCine').style.display='none';$('waveIntro').classList.remove('show');$('waveIntro').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('settingsOverlay').style.display='none';$('pauseOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='block';$('parts').style.display='flex';updateOrganHud();$('pauseBtn').style.display='block';
+  let baseHp=Math.round(112*(1+meta.hp*.05)+(meta.stageVitality||0));Object.assign(player,{x:WORLD_W/2,y:WORLD_H/2,r:10,hp:baseHp,maxHp:baseHp,level:1,xp:0,xpNeed:xpNeedForLevel(1),speed:132*(1+(meta.speed||0)*.03),inv:0,shoot:.52,acid:1.1,tailCd:1.2,wingCd:.8,legCd:1.4,baseCd:.84,pickup:36+meta.pickup*10+routeMods.pickup,regen:0,look:0,armor:Math.min(.42,(meta.armor||0)*.03+(meta.route==='cryo'?(meta.cryoMastery||0)*.02:0)),dmgMul:(1+meta.dmg*.04)*(1+(meta.apexGenes||0)*.03)*routeMods.playerDmg,corePulse:1.35,envSlow:0,animTime:0,moveBlend:0,armKick:0,acidKick:0,tailKick:0,hurtKick:0,dashKick:0,hurtAng:0,dashAng:0});xpDropFractionV415=0;applyOrigin();Object.assign(state,{arm:1,shell:0,mouth:0,tail:0,wing:0,leg:0});discover('mutation:'+selectedStartWeapon);applyMemoryTrait();player.zoneSetKills=0;player.disposalSetCd=0;player.titanSetKills=0;player.facilitySetCharge=0;/* Official game: no visual-only XP test samples or demo XP progress. */
+  $('poster').style.display='none';$('v100Milestone').textContent='';$('v100Milestone').style.display='none';$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('evolutionCine').classList.remove('show');$('evolutionCine').style.display='none';$('waveIntro').classList.remove('show');$('waveIntro').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('settingsOverlay').style.display='none';$('pauseOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='block';$('parts').style.display='flex';updateOrganHud();$('pauseBtn').style.display='block';
   updateControlVisibility();
   buildTerrain();buildWorldSites();if(!TEST_MANUAL_MODE_V458){for(let i=0;i<3;i++){let e=spawnEnemy(i<2?'crawler':'runner');e.spawnFx=.32;}}spawnAcc=0;updateHUD(true);requestAnimationFrame(loop);
 }
 
-const START_WEAPONS={
-  arm:{name:'CANNON ARM',glyph:'✦',role:'RANGED · PIERCE'},
-  mouth:{name:'ACID MAW',glyph:'≈',role:'ACID · CONTROL'},
-  tail:{name:'RAZOR TAIL',glyph:'⌁',role:'SWEEP · EXECUTE'},
-  wing:{name:'RAZOR WING',glyph:'◢',role:'MULTI HIT · ORBIT'},
-  leg:{name:'CRUSH LEG',glyph:'⬢',role:'STOMP · STAGGER'}
-};
-function openStartWeaponSelect(){
-  const wrap=$('weaponSelectGrid');wrap.innerHTML='';
-  for(const [id,w] of Object.entries(START_WEAPONS)){
-    const b=document.createElement('button');b.type='button';b.className='startWeaponCard';b.dataset.weapon=id;
-    b.innerHTML=`<span class="weaponGlyph">${w.glyph}</span><b>${w.name}</b><div class="weaponRole">${w.role}</div><div class="weaponStart">START · ★☆☆☆☆</div>`;
-    b.onclick=()=>{selectedStartWeapon=id;$('weaponSelectOverlay').style.display='none';reset();};wrap.appendChild(b);
-  }
-  $('weaponSelectOverlay').style.display='flex';
-}
 function updatePredationHUD(){
   const wrap=$('predationWrap'),fill=$('predationFill'),label=$('predationLabel');
   if(frenzy>0){
@@ -1146,7 +1130,7 @@ function rewardFlowMilestone(){
 function updateHUD(force=false){const now=performance.now(),hudIntervalMs=perfMode>=2?100:perfMode===1?75:50;if(!force&&now-lastHudPaint<hudIntervalMs)return;lastHudPaint=now;syncEncounterHUDV411();syncArtHUDV417();
   $('lvl').textContent=String(player.level);$('killCount').textContent=kills.toLocaleString();$('xpbar').setAttribute('aria-valuenow',String(Math.round(stageXPProgressV521()*100)));$('xpbar').setAttribute('aria-label',stageLevelLimitedV521()?'Stage maximum level '+STAGE_LEVEL_CAP_V521:'Experience to next level');$('xpLabel').textContent=stageLevelLimitedV521()?'MAX':'EXP';
   $('dna').textContent=dnaTotal;$('timer').textContent=fmt(t);$('xpfill').style.width=(stageXPProgressV521()*100)+'%';$('runfill').style.width=(Math.min(1,t/300)*100)+'%';
-  updateRenderedDock();$('armLv').textContent=evoState.arm?'EVO':starString(state.arm);$('mouthLv').textContent=evoState.mouth?'EVO':starString(state.mouth);$('tailLv').textContent=evoState.tail?'EVO':starString(state.tail);$('wingLv').textContent=evoState.wing?'EVO':starString(state.wing);$('legLv').textContent=evoState.leg?'EVO':starString(state.leg);
+  updateRenderedDock();$('armLv').textContent=evoState.arm?'EVO':starString(state.arm);$('mouthLv').textContent=evoState.mouth?'EVO':starString(state.mouth);$('tailLv').textContent=evoState.tail?'EVO':starString(state.tail);$('shellLv').textContent=starString(state.shell||0);
   const dominant=dominantMutationKind(),hasBuild=state.arm+state.mouth+state.tail+state.wing+state.leg>0;for(const el of document.querySelectorAll('#parts .part')){let k=el.dataset.kind,v=state[k]??0;el.classList.toggle('maxed',v>=MAX_MUTATION_LEVEL);el.classList.toggle('mastered',!!evoState[k]);el.classList.toggle('dominant',hasBuild&&k===dominant);el.classList.toggle('signature',!!evoState[k]);}updateAbilityUI();updatePredationHUD();updateFlowHUD();updateBlueprintBadge();updateEvasionHUD();updatePriorityHUD();renderNemesisStatus();const bossFocus=finalBossAlive();app.classList.toggle('bossEncounter',!!bossFocus);if(bossFocus){$('priorityBadge').style.display='none';$('blueprintBadge').style.display='none';$('threatBadge').style.opacity='.42'}else $('threatBadge').style.opacity='1';const crit=$('criticalVignette'),hpq=player.maxHp?player.hp/player.maxHp:1;crit.style.opacity=hpq<.32?String(clamp((.32-hpq)*2.6,.10,.62)):'0';crit.classList.toggle('on',hpq<.22);
 }
 
@@ -3382,77 +3366,15 @@ function firePlayer(dt){
     }else player.shoot=.12;
   }
 
-  // MOUTH: splash starts at 2★, extra glob at 3★, deeper corrosion at 4★, plague burst at 5★.
-  if(state.mouth>0&&player.acid<=0){
-    const lv=state.mouth,plague=evoState.mouth,catalytic=weaponSync('mouth');let target=nearestBasicTargetV552(plague?340:270);
-    if(target){let a=Math.atan2(target.y-player.y,target.x-player.x),n=plague?Math.max(3,acidProjectileCount()):acidProjectileCount(),cycle=(player.acidCycle=(player.acidCycle||0)+1),plagueBurst=lv>=5&&cycle%(plague?3:4)===0;
-      for(let i=0;i<n;i++){
-        let aa=a+(n===1?0:rand(-.20,.20)),px=player.x+Math.cos(aa)*24,py=player.y+Math.sin(aa)*24;
-        const blast=plagueBurst?(plague?86:62):(lv>=2?12+lv*5+(catalytic?8:0):0),blastMul=plagueBurst?(plague?.58:.50):(catalytic?.42:.34);
-        pushBasicShotV552({x:px,y:py,vx:Math.cos(aa)*rand(205,250),vy:Math.sin(aa)*rand(205,250),r:(5.4+(plagueBurst?1.5:0))*PROJECTILE_SCALE,dmg:(10.2+lv*5.0)*(plague?1.24:1)*coreBoost*(player.acidPower||1),life:1.08,pierce:1+(lv>=3?1:0)+(lv>=5?1:0)+(player.origin==='acid'?1:0)+(originAscension==='PLAGUE WYRM'?1:0)+(evoForm.mouth==='virulent'?2:0),kind:'acid',blast,blastMul,slowDur:lv>=4?1.45:.95,plagueBurst});
-        for(let j=0;j<3;j++)particles.push({kind:'muzzle',x:px,y:py,vx:Math.cos(aa)*rand(8,22)+rand(-18,18),vy:Math.sin(aa)*rand(8,22)+rand(-18,18),r:rand(2.2,4.2),life:rand(.16,.28),color:'acid'});
-      }
-      if(plagueBurst){particles.push({kind:'supportPulse',x:target.x,y:target.y,r:8,max:plague?92:66,life:.34,maxLife:.34,color:'acid'});cameraShake=Math.max(cameraShake,plague?5:3);}
-      if(plague){let aura=178,cap=0;if(cycle%2===0)enemyEachCandidateCircleV425(player.x,player.y,aura+40,e=>{if(e.dead||!withinBasicRangeV552(e))return;if(dist2(player,e)<(aura+e.r)*(aura+e.r)){hurtEnemy(e,(7.4+lv*1.75)*coreBoost*(player.acidPower||1),'acid');e.slow=Math.max(e.slow||0,2.2);if(++cap>=16)return false;}});particles.push({kind:'supportPulse',x:player.x,y:player.y,r:12,max:aura,life:.38,maxLife:.38,color:'acid'});}
-      player.acidKick=.24;player.acid=Math.max(.30,(1.15-lv*.125-(player.acidHaste||0))*tempo*(frenzy>0?.78:1)*(plague?.68:1));audioCue('acid',lv);
-    }else player.acid=.2;
-  }
-
-  // TAIL: directional at low stars, then full sweep, double sweep, execution at 5★.
-  if(state.tail>0&&player.tailCd<=0){
-    const lv=state.tail,bladeAsc=originAscension==='BLADE SERAPH',execution=evoState.tail,bloodDance=weaponSync('tail');
-    let radius=60+lv*17+(synergy.toxicCyclone?14:0)+(bladeAsc?14:0)+(execution?30:0),dmg=(15.5+lv*10.0)*coreBoost*(synergy.toxicCyclone?1.15:1)*(player.tailPower||1),tailHits=0;
-    const aim=nearest(radius+90),facing=aim?Math.atan2(aim.y-player.y,aim.x-player.x):(player.look||0),halfArc=execution?Math.PI+.01:(lv===1?.88:lv===2?1.62:Math.PI+.01),doubleSweep=lv>=4||bladeAsc||execution;
-    particles.push({kind:'slash',x:player.x,y:player.y,r:radius,life:.32,max:.32,start:facing-halfArc,end:facing+halfArc});
-    if(doubleSweep)particles.push({kind:'slash',x:player.x,y:player.y,r:radius*.94,life:.35,max:.35,start:facing+Math.PI-.95,end:facing+Math.PI+.95});
-    if(execution)particles.push({kind:'slash',x:player.x,y:player.y,r:radius*.78,life:.38,max:.38,start:facing-2.45,end:facing+2.45});
-    enemyEachCandidateCircleV425(player.x,player.y,radius+40,e=>{if(e.dead)return;let inside=dist2(player,e)<(radius+e.r)**2;if(!inside)return;let a=Math.atan2(e.y-player.y,e.x-player.x);if(lv<3&&angleDelta(a,facing)>halfArc)return;tailHits++;hurtEnemy(e,dmg,synergy.toxicCyclone?'acid':'tail');if(doubleSweep)hurtEnemy(e,dmg*(execution?.66:.43),'tail');if(execution){hurtEnemy(e,dmg*.72,'tail');hurtEnemy(e,dmg*.34,'tail');}if(synergy.toxicCyclone)e.slow=Math.max(e.slow||0,1.1);});
-    if(tailHits===0){let tw=nearest(300);if(tw){hurtEnemy(tw,dmg*(lv>=2?.82:.62),'tail');tw.stagger=(tw.stagger||0)+10+lv*2;let splash=0;enemyEachCandidateCircleV425(tw.x,tw.y,76,x=>{if(x===tw||x.dead||x.finalBoss||x.elite)return;if((x.x-tw.x)**2+(x.y-tw.y)**2<(38+x.r)**2&&splash<(lv>=4?3:2)){hurtEnemy(x,dmg*(lv>=4?.40:.30),'tail');splash++;if(splash>=(lv>=4?3:2))return false;}});particles.push({kind:'weaponHit',x:tw.x,y:tw.y,vx:0,vy:0,r:2,max:24,life:.18,maxLife:.18,color:'tail',a:Math.atan2(tw.y-player.y,tw.x-player.x)});tailHits=1;}}
-    if(lv>=4&&tailHits)player.hp=Math.min(player.maxHp,player.hp+Math.min(bloodDance?4.4:3.2,tailHits*(bloodDance?.64:.46)));if(execution&&tailHits)player.hp=Math.min(player.maxHp,player.hp+Math.min(13.5,tailHits*1.75));if(lv>=3&&tailHits>=3)player.inv=Math.max(player.inv,.055);
-    player.tailKick=.34;player.tailCd=Math.max(.44,(1.50-lv*.180-(synergy.toxicCyclone?.08:0)-(player.tailHaste||0))*tempo*(bloodDance?.88:1)*(frenzy>0?.78:1)*(execution?.58:1));cameraShake=5;audioCue('tail',lv);
-  }
-
-  // WING: blade count, return cut, wider orbit, then periodic feather storm.
-  if(state.wing>0&&player.wingCd<=0){
-    const lv=state.wing,phantom=evoState.wing,raptor=weaponSync('wing'),range=Math.min(playerBasicRangeV552(),142+lv*19+(lv>=4?18:0)+(phantom?72:0)),count=(lv===1?2:lv===2?3:lv===3?3:lv===4?4:5)+(phantom?5:0),dmg=(8.5+lv*5.8)*(phantom?1.28:1)*coreBoost*(player.wingPower||1),targets=collectNearestV426(nearestScratchAV426,player.x,player.y,range,count,e=>withinBasicRangeV552(e));
-    let n=0;for(const e of targets){n++;let focusBoost=(raptor&&(e.elite||e.finalBoss))?1.25:1;hurtEnemy(e,dmg*(1+(n===1?.12:0))*focusBoost,'wing');if(lv>=3)hurtEnemy(e,dmg*(phantom?.72:.38)*focusBoost,'wing');if(phantom){hurtEnemy(e,dmg*.42*focusBoost,'wing');hurtEnemy(e,dmg*.22*focusBoost,'wing');}e.stagger=(e.stagger||0)+5+lv;particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:20+(phantom?8:0),life:.18,maxLife:.18,color:'wing',a:Math.atan2(e.y-player.y,e.x-player.x)});}
-    if(targets.length&&count>targets.length){const focus=targets[0],extra=count-targets.length;for(let i=0;i<extra;i++)hurtEnemy(focus,dmg*(phantom?.92:.46)*(raptor&&(focus.elite||focus.finalBoss)?1.22:1),'wing');focus.stagger=(focus.stagger||0)+extra*(3+lv*.5);}
-    if(lv>=4&&targets.length){let last=targets[targets.length-1],chain=collectNearestV426(nearestScratchBV426,last.x,last.y,74,1,e=>!targets.includes(e)&&withinBasicRangeV552(e))[0];if(chain){hurtEnemy(chain,dmg*.58,'wing');particles.push({kind:'weaponHit',x:chain.x,y:chain.y,vx:0,vy:0,r:2,max:24,life:.18,maxLife:.18,color:'wing',a:Math.atan2(chain.y-last.y,chain.x-last.x)});}}
-    const storm=lv>=5&&((player.wingStormCycle=(player.wingStormCycle||0)+1)%(phantom?1:3)===0);if(storm){let extra=collectNearestV426(nearestScratchBV426,player.x,player.y,260,phantom?14:6,e=>!targets.includes(e)&&withinBasicRangeV552(e));for(const e of extra){hurtEnemy(e,dmg*(phantom?1.04:.58),'wing');particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:22,life:.16,maxLife:.16,color:'wing',a:Math.atan2(e.y-player.y,e.x-player.x)});}particles.push({kind:'fusionRing',x:player.x,y:player.y,r:12,max:range*.92,life:.30,maxLife:.30});}
-    else particles.push({kind:'fusionRing',x:player.x,y:player.y,r:12,max:range*.58,life:.25,maxLife:.25});
-    player.wingCd=Math.max(.38,(1.02-lv*.105)*tempo*(phantom?.54:1)*(frenzy>0?.80:1));
-  }
-
-  // LEG: stomp → knockback → outer shockwave → double stomp → moving momentum crush.
-  if(state.leg>0){if(state.leg>=5){if((player.moveBlend||0)>.32)player.legMomentum=Math.min(1,(player.legMomentum||0)+dt*.82);else player.legMomentum=Math.max(0,(player.legMomentum||0)-dt*.32);}else player.legMomentum=0;}
-  if(state.leg>0&&player.legCd<=0){
-    const lv=state.leg,titan=evoState.leg,gravityStep=weaponSync('leg'),moving=(player.moveBlend||0)>.35,momentum=lv>=5?(player.legMomentum||0):0,radius=50+lv*13+(lv>=3?4:0)+(titan?52:0)+(gravityStep?10:0)+momentum*18,dmg=(17+lv*8.5)*(titan?1.30:1)*coreBoost*(player.legPower||1)*(moving?1.10:1)*(1+momentum*(titan?.62:.44)),push=28+lv*9+(lv>=2?10:0)+(titan?18:0);let hits=0;
-    enemyEachCandidateCircleV425(player.x,player.y,radius+40,e=>{if(!e.dead&&dist2(player,e)<(radius+e.r)*(radius+e.r)){let impact=dmg*((e.elite||e.finalBoss)&&lv>=4?1.24:1);hurtEnemy(e,impact,'leg');if(lv>=4)hurtEnemy(e,impact*(titan?.56:.40),'leg');let ax=e.x-player.x,ay=e.y-player.y,al=Math.hypot(ax,ay)||1;e.kx=(e.kx||0)+ax/al*(e.finalBoss?push*.18:e.elite?push*.42:push);e.ky=(e.ky||0)+ay/al*(e.finalBoss?push*.18:e.elite?push*.42:push);e.stagger=(e.stagger||0)+(titan?22:11)+lv*2+(gravityStep?6:0);hits++;}});
-    if(lv>=4){let heavy=collectNearestV426(nearestScratchBV426,player.x,player.y,330,1,e=>e.elite||e.finalBoss)[0];if(heavy){hurtEnemy(heavy,dmg*(titan?1.18:.58),'leg');if(titan)hurtEnemy(heavy,dmg*.58,'leg');heavy.stagger=(heavy.stagger||0)+18+lv*2;particles.push({kind:'weaponHit',x:heavy.x,y:heavy.y,vx:0,vy:0,r:3,max:32,life:.20,maxLife:.20,color:'leg',a:Math.atan2(heavy.y-player.y,heavy.x-player.x)});}}
-    if(lv>=3){const outer=radius+46+(titan?16:0);enemyEachCandidateCircleV425(player.x,player.y,outer+40,e=>{if(e.dead)return;let d=Math.sqrt(dist2(player,e));if(d>radius+e.r&&d<outer+e.r){hurtEnemy(e,dmg*(titan?.62:.43),'leg');e.stagger=(e.stagger||0)+7+lv;}});particles.push({kind:'staggerRing',x:player.x,y:player.y,r:radius*.72,max:outer,life:.30,maxLife:.30});}
-    if(hits===0){let quake=nearest(235+(lv>=3?35:0));if(quake){hurtEnemy(quake,dmg*(lv>=3?.70:.52),'leg');quake.stagger=(quake.stagger||0)+8+lv*2;let qn=0;if(lv>=3)enemyEachCandidateCircleV425(quake.x,quake.y,82,x=>{if(x===quake||x.dead)return;if(dist2(quake,x)<(44+x.r)*(44+x.r)&&qn<(lv>=5?3:2)){hurtEnemy(x,dmg*.30,'leg');qn++;if(qn>=(lv>=5?3:2))return false;}});particles.push({kind:'weaponHit',x:quake.x,y:quake.y,vx:0,vy:0,r:2,max:28,life:.18,maxLife:.18,color:'leg',a:Math.atan2(quake.y-player.y,quake.x-player.x)});hits=1;}}
-    if(titan){let fiss=collectNearestV426(nearestScratchCV426,player.x,player.y,360,3,null,true);for(const e of fiss){hurtEnemy(e,dmg*(e.finalBoss||e.elite?1.02:.74),'leg');e.stagger=(e.stagger||0)+24;particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:3,max:34,life:.22,maxLife:.22,color:'leg',a:Math.atan2(e.y-player.y,e.x-player.x)});}}
-    particles.push({kind:'deathRing',x:player.x,y:player.y,r:8,max:radius,life:.24,maxLife:.24});if(titan){particles.push({kind:'staggerRing',x:player.x,y:player.y,r:12,max:radius+52,life:.48,maxLife:.48});particles.push({kind:'deathRing',x:player.x,y:player.y,r:18,max:radius+82,life:.38,maxLife:.38});}if(hits>=3)player.inv=Math.max(player.inv,titan?.10:.045);if(lv>=5)player.legMomentum=.16;
-    player.legCd=Math.max(.58,(1.78-lv*.17)*tempo*(titan?.56:1)*(frenzy>0?.82:1));cameraShake=Math.max(cameraShake,hits?4+(momentum>0.7?2:0):2);
-  }
-
-  if(false&&state.core>=1){
-    player.corePulse=(player.corePulse??.45)-dt;
-    if(player.corePulse<=0){
-      const radius=42+state.core*10+(evoForm.core==='reactor'?12:0)+(fusion.voidCarapace?14:0),damage=(4.2+state.core*3.4)*coreBoost*(evoForm.core==='reactor'?1.12:1);
-      let hits=0;for(const e of enemies){if(!e.dead&&dist2(player,e)<(radius+e.r)**2){hurtEnemy(e,damage,'core');let ax=e.x-player.x,ay=e.y-player.y,al=Math.hypot(ax,ay)||1,push=e.finalBoss?7:e.elite?13:28;e.kx=(e.kx||0)+ax/al*push;e.ky=(e.ky||0)+ay/al*push;e.stagger=(e.stagger||0)+(e.finalBoss?0:state.core*2.1);hits++;}}
-      if(hits){particles.push({kind:'fusionRing',x:player.x,y:player.y,r:8,max:radius,life:.28,maxLife:.28});impactPulse=Math.max(impactPulse,.34);}else if(state.core>=1){let cb=nearest(260);if(cb){hurtEnemy(cb,damage*(state.core>=2?.88:.45),'core');cb.stagger=(cb.stagger||0)+8+state.core*2;let arc=0;for(const x of enemies){if(x===cb||x.dead||x.finalBoss||x.elite)continue;if((x.x-cb.x)**2+(x.y-cb.y)**2<(34+x.r)**2&&arc<1){hurtEnemy(x,damage*.34,'core');arc++;}}particles.push({kind:'weaponHit',x:cb.x,y:cb.y,vx:0,vy:0,r:2,max:20,life:.16,maxLife:.16,color:'core',a:Math.atan2(cb.y-player.y,cb.x-player.x)});}}
-      player.corePulse=Math.max(1.08,(2.65-state.core*.16)*tempo*(synergy.overdrive?.88:1));
-    }
-  }
 }
+
 function protectedByWarden(e){
   if(e.type==='warden')return null;
   let found=null;
   enemyEachCandidateCircleV425(e.x,e.y,76,w=>{if(w.dead||w.type!=='warden')return;let rr=w.aura||62;if((w.x-e.x)**2+(w.y-e.y)**2<rr*rr){found=w;return false;}});
   return found;
 }
-function hurtEnemy(e,dmg,kind){if(e.dead||e.arrivalInvuln)return;markEnemyHitV592(e,dmg);if(kind==='tail'&&state.tail>=5&&e.hp/Math.max(1,e.maxHp)<=(evoState.tail?.48:.34))dmg*=evoState.tail?1.76:1.26;if((kind==='arm'||kind==='artillery')&&state.arm>=3&&(e.elite||e.finalBoss))dmg*=1.05;const pairMul=weaponPairDamageMul(e,kind);dmg*=pairMul*triadDamageMul(kind)*organDamageMul(e,kind)*memoryDamageMul(kind)*evoDamageMul(e,kind);if((e.barrier||0)>0){let absorbed=Math.min(e.barrier,dmg);e.barrier-=absorbed;dmg-=absorbed;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+7,life:.13});if(e.barrier<=0){particles.push({kind:'shieldBreak',x:e.x,y:e.y,r:6,max:e.r+24,life:.30,maxLife:.30});hitStop=Math.max(hitStop,.009);}if(dmg<=.01)return;}if((e.exposed||0)>0)dmg*=1.35;else if(e.finalBoss)dmg*=.70;if(e.prism>0&&(kind==='arm'||kind==='artillery'))dmg*=.58;if(e.purify>0&&kind==='acid')dmg*=.68;if(frenzy>0)dmg*=1.20;if(e.nemesis){if(e.adaptKind==='arm'&&(kind==='arm'||kind==='artillery'))dmg*=.66;else if(e.adaptKind==='mouth'&&kind==='acid')dmg*=.66;else if(e.adaptKind==='tail'&&kind==='tail')dmg*=.66;else if(e.adaptKind==='core')dmg*=.86;}if(kind==='acid'&&hasOrgan('omegaBladder'))e.slow=Math.max(e.slow||0,1.45);if(kind==='acid'&&evoForm.mouth==='virulent')e.slow=Math.max(e.slow||0,2.0);if(e.eliteArmor)dmg*=1-e.eliteArmor;let guard=protectedByWarden(e);if(guard){dmg*=.62;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+5,life:.16});}if(!e.finalBoss&&e.staggerLock<=0){let resist=e.elite?1.75:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?1.45:1),gain=dmg*(kind==='leg'?1.42:kind==='tail'?1.30:kind==='wing'?.82:kind==='artillery'?1.12:kind==='acid'?.62:.76)/resist;e.stagger=(e.stagger||0)+gain;let threshold=e.elite?92:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?52:38);if(e.stagger>=threshold){e.stagger=0;e.staggerLock=e.elite?1.7:1.05;e.stunned=e.elite?.14:.26;discover('combat:stagger');particles.push({kind:'staggerRing',x:e.x,y:e.y,r:5,max:e.r+18,life:.28,maxLife:.28});hitStop=Math.max(hitStop,e.elite?.018:.012);}}let dealt=Math.min(Math.max(0,dmg),Math.max(0,e.hp));let bucket=kind==='acid'?'acid':kind==='tail'?'tail':kind==='wing'?'wing':kind==='leg'?'leg':kind==='core'?'core':'arm';runDamage[bucket]=(runDamage[bucket]||0)+dealt;e.hp-=dmg;bioHitV435(e);e.hit=.11;e.bodyKick=Math.max(e.bodyKick||0,.12);e.lastHitKind=kind;if(kind==='acid')e.corrosion=Math.max(e.corrosion||0,.48);else if(kind==='tail'||kind==='wing')e.cutMark=Math.max(e.cutMark||0,.34);else if(kind==='arm'||kind==='artillery')e.puncture=Math.max(e.puncture||0,.24);else if(kind==='core'||kind==='leg')e.coreShock=Math.max(e.coreShock||0,.30);e.deathA=Math.atan2(e.y-player.y,e.x-player.x);let heavy=(e.exposed||0)>0||(kind==='artillery'&&fusion.sunLance)||(kind==='tail'&&fusion.redReaper)||(kind==='acid'&&fusion.plagueVortex)||(kind==='wing'&&evoState.wing)||(kind==='leg'&&evoState.leg);let ka=Math.atan2(e.y-player.y,e.x-player.x),kb=kind==='tail'?72:kind==='leg'?82:kind==='wing'?26:kind==='arm'||kind==='artillery'?42:kind==='acid'?18:28;if(e.finalBoss)kb*=.12;else if(e.elite)kb*=.32;e.kx=(e.kx||0)+Math.cos(ka)*kb;e.ky=(e.ky||0)+Math.sin(ka)*kb;if((heavy||e.elite||e.finalBoss)&&hitStop<=0)hitStop=Math.max(hitStop,e.finalBoss?.032:e.elite?.024:.018);if(heavy||e.elite||e.finalBoss){cameraKickX-=Math.cos(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);cameraKickY-=Math.sin(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);}impactPulse=Math.max(impactPulse,heavy?.8:.38);const clarity=combatClarityLevel();if(feedbackCfg().damageNumbers!==false&&(heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.13:.055)))damageTexts.push({x:e.x+rand(-6,6),y:e.y-8,v:heavy?-30:-22,life:heavy?.72:.55,text:Math.round(dmg),kind,heavy});const hitFx=heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.20:.07);if(hitFx){particles.push({kind:'impact',x:e.x,y:e.y,vx:0,vy:0,r:heavy?7:4,max:heavy?23:14,life:heavy?.18:.12,maxLife:heavy?.18:.12,color:kind});particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:heavy?24:16,life:heavy?.20:.14,maxLife:heavy?.20:.14,color:kind,a:Math.atan2(e.y-player.y,e.x-player.x)});for(let i=0;i<(kind==='tail'?(clarity?2:5):(clarity?1:3));i++)particles.push({kind:kind==='acid'?'acid':kind==='tail'?'ember':'spark',x:e.x+rand(-4,4),y:e.y+rand(-4,4),vx:rand(-48,48),vy:rand(-48,48),r:kind==='tail'?rand(1.6,3.6):rand(1.3,2.8),life:rand(.16,.34)});}if(pairMul>1.01){const pk=weaponPairProcKey(e,kind);if(pk)spawnPairSyncVfx(e,pk,kind);}if(e.finalBoss&&evoCount()>=2){let next=e._evoHitFxAt||0;if(t>=next){e._evoHitFxAt=t+(evoCount()>=3?.085:.15);const c=activeEvoColorForKind(kind);particles.push({kind:'phaseRing',x:e.x,y:e.y,r:4,max:e.r+(evoCount()>=3?34:23),life:evoCount()>=3?.26:.20,maxLife:evoCount()>=3?.26:.20,color:c});if(evoCount()>=3&&perfMode<2){for(let i=0;i<3;i++)particles.push({kind:'evolutionShard',x:e.x+rand(-e.r*.4,e.r*.4),y:e.y+rand(-e.r*.4,e.r*.4),vx:rand(-70,70),vy:rand(-70,70),r:rand(1.4,3.5),life:rand(.18,.42),color:c});}impactPulse=Math.max(impactPulse,evoCount()>=3?.72:.48);}}if(e.hp<=0)killEnemy(e)}
+function hurtEnemy(e,dmg,kind){if(e.dead||e.arrivalInvuln)return;markEnemyHitV592(e,dmg);if(kind==='tail'&&state.tail>=5&&e.hp/Math.max(1,e.maxHp)<=(evoState.tail?.48:.34))dmg*=evoState.tail?1.76:1.26;if((kind==='arm'||kind==='artillery')&&state.arm>=3&&(e.elite||e.finalBoss))dmg*=1.05;const pairMul=weaponPairDamageMul(e,kind);dmg*=pairMul*triadDamageMul(kind)*organDamageMul(e,kind)*memoryDamageMul(kind)*evoDamageMul(e,kind);if((e.barrier||0)>0){let absorbed=Math.min(e.barrier,dmg);e.barrier-=absorbed;dmg-=absorbed;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+7,life:.13});if(e.barrier<=0){particles.push({kind:'shieldBreak',x:e.x,y:e.y,r:6,max:e.r+24,life:.30,maxLife:.30});hitStop=Math.max(hitStop,.009);}if(dmg<=.01)return;}if((e.exposed||0)>0)dmg*=1.35;else if(e.finalBoss)dmg*=.70;if(e.prism>0&&(kind==='arm'||kind==='artillery'))dmg*=.58;if(e.purify>0&&kind==='acid')dmg*=.68;if(frenzy>0)dmg*=1.20;if(e.nemesis){if(e.adaptKind==='arm'&&(kind==='arm'||kind==='artillery'))dmg*=.66;else if(e.adaptKind==='mouth'&&kind==='acid')dmg*=.66;else if(e.adaptKind==='tail'&&kind==='tail')dmg*=.66;else if(e.adaptKind==='core')dmg*=.86;}if(kind==='acid'&&hasOrgan('omegaBladder'))e.slow=Math.max(e.slow||0,1.45);if(kind==='acid'&&evoForm.mouth==='virulent')e.slow=Math.max(e.slow||0,2.0);if(e.eliteArmor)dmg*=1-e.eliteArmor;let guard=protectedByWarden(e);if(guard){dmg*=.62;particles.push({kind:'shield',x:e.x,y:e.y,vx:0,vy:0,r:e.r+5,life:.16});}if(!e.finalBoss&&e.staggerLock<=0){let resist=e.elite?1.75:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?1.45:1),gain=dmg*(kind==='leg'?1.42:kind==='tail'?1.30:kind==='wing'?.82:kind==='artillery'?1.12:kind==='acid'?.62:.76)/resist;e.stagger=(e.stagger||0)+gain;let threshold=e.elite?92:(enemyCombatTypeV596(e.type)==='brute'||e.type==='warden'?52:38);if(e.stagger>=threshold){e.stagger=0;e.staggerLock=e.elite?1.7:1.05;e.stunned=e.elite?.14:.26;discover('combat:stagger');particles.push({kind:'staggerRing',x:e.x,y:e.y,r:5,max:e.r+18,life:.28,maxLife:.28});hitStop=Math.max(hitStop,e.elite?.018:.012);}}let dealt=Math.min(Math.max(0,dmg),Math.max(0,e.hp));let bucket=kind==='spike'?'shell':kind==='spit'||kind==='acid'?'acid':kind==='tail'?'tail':kind==='wing'?'wing':kind==='leg'?'leg':kind==='core'?'core':'arm';runDamage[bucket]=(runDamage[bucket]||0)+dealt;e.hp-=dmg;bioHitV435(e);e.hit=.11;e.bodyKick=Math.max(e.bodyKick||0,.12);e.lastHitKind=kind;if(kind==='acid')e.corrosion=Math.max(e.corrosion||0,.48);else if(kind==='tail'||kind==='wing')e.cutMark=Math.max(e.cutMark||0,.34);else if(kind==='arm'||kind==='artillery')e.puncture=Math.max(e.puncture||0,.24);else if(kind==='core'||kind==='leg')e.coreShock=Math.max(e.coreShock||0,.30);e.deathA=Math.atan2(e.y-player.y,e.x-player.x);let heavy=(e.exposed||0)>0||(kind==='artillery'&&fusion.sunLance)||(kind==='tail'&&fusion.redReaper)||(kind==='acid'&&fusion.plagueVortex)||(kind==='wing'&&evoState.wing)||(kind==='leg'&&evoState.leg);let ka=Math.atan2(e.y-player.y,e.x-player.x),kb=kind==='tail'?72:kind==='leg'?82:kind==='wing'?26:kind==='arm'||kind==='artillery'?42:kind==='acid'?18:28;if(e.finalBoss)kb*=.12;else if(e.elite)kb*=.32;e.kx=(e.kx||0)+Math.cos(ka)*kb;e.ky=(e.ky||0)+Math.sin(ka)*kb;if((heavy||e.elite||e.finalBoss)&&hitStop<=0)hitStop=Math.max(hitStop,e.finalBoss?.032:e.elite?.024:.018);if(heavy||e.elite||e.finalBoss){cameraKickX-=Math.cos(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);cameraKickY-=Math.sin(ka)*(e.finalBoss?1.8:e.elite?2.6:3.4);}impactPulse=Math.max(impactPulse,heavy?.8:.38);const clarity=combatClarityLevel();if(feedbackCfg().damageNumbers!==false&&(heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.13:.055)))damageTexts.push({x:e.x+rand(-6,6),y:e.y-8,v:heavy?-30:-22,life:heavy?.72:.55,text:Math.round(dmg),kind,heavy});const hitFx=heavy||e.elite||e.finalBoss||clarity===0||Math.random()<(clarity===1?.20:.07);if(hitFx){particles.push({kind:'impact',x:e.x,y:e.y,vx:0,vy:0,r:heavy?7:4,max:heavy?23:14,life:heavy?.18:.12,maxLife:heavy?.18:.12,color:kind});particles.push({kind:'weaponHit',x:e.x,y:e.y,vx:0,vy:0,r:2,max:heavy?24:16,life:heavy?.20:.14,maxLife:heavy?.20:.14,color:kind,a:Math.atan2(e.y-player.y,e.x-player.x)});for(let i=0;i<(kind==='tail'?(clarity?2:5):(clarity?1:3));i++)particles.push({kind:kind==='acid'?'acid':kind==='tail'?'ember':'spark',x:e.x+rand(-4,4),y:e.y+rand(-4,4),vx:rand(-48,48),vy:rand(-48,48),r:kind==='tail'?rand(1.6,3.6):rand(1.3,2.8),life:rand(.16,.34)});}if(pairMul>1.01){const pk=weaponPairProcKey(e,kind);if(pk)spawnPairSyncVfx(e,pk,kind);}if(e.finalBoss&&evoCount()>=2){let next=e._evoHitFxAt||0;if(t>=next){e._evoHitFxAt=t+(evoCount()>=3?.085:.15);const c=activeEvoColorForKind(kind);particles.push({kind:'phaseRing',x:e.x,y:e.y,r:4,max:e.r+(evoCount()>=3?34:23),life:evoCount()>=3?.26:.20,maxLife:evoCount()>=3?.26:.20,color:c});if(evoCount()>=3&&perfMode<2){for(let i=0;i<3;i++)particles.push({kind:'evolutionShard',x:e.x+rand(-e.r*.4,e.r*.4),y:e.y+rand(-e.r*.4,e.r*.4),vx:rand(-70,70),vy:rand(-70,70),r:rand(1.4,3.5),life:rand(.18,.42),color:c});}impactPulse=Math.max(impactPulse,evoCount()>=3?.72:.48);}}if(e.hp<=0)killEnemy(e)}
 
 const BIO_ORGANS=[
  {id:'predatorFang',slot:'predator',icon:'FNG',name:'PREDATOR FANG',desc:'Expose the bio-core weak points of elites and TITANs for extra damage.',tag:'ELITE / BOSS DAMAGE +18%'},
@@ -5978,9 +5900,9 @@ function showIntroSplash(action){
   intro.focus?.();
 }
 function launchRunIntro(nextAction){primeAudio();showIntroSplash(nextAction);}
-function returnToHome(tab='battle'){$('artHudV417').hidden=true;running=false;paused=false;choosing=false;rewardChoosing=false;app.classList.remove('combat','hudBoss');resize();$('pauseOverlay').style.display='none';$('settingsOverlay').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('weaponSelectOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('v100Milestone').style.display='none';$('poster').style.display='flex';setHomeTab(tab);updateLab();}
-$('homeSpecimenTab').onclick=()=>setHomeTab('specimen');$('homeLabTab').onclick=()=>setHomeTab('lab');$('start').onclick=()=>{primeAudio();openStartWeaponSelect()};$('runBack').onclick=()=>{primeAudio();$('endOverlay').style.display='none';reset()};$('restart').onclick=()=>{primeAudio();openStartWeaponSelect()};$('settingsBtn').onclick=()=>openSettings();$('settingsClose').onclick=()=>closeSettings();$('pauseSettings').onclick=()=>openSettings();$('memoryBtn').onclick=()=>{renderMemoryArchive();$('memoryOverlay').style.display='flex'};$('memoryClose').onclick=()=>{$('memoryOverlay').style.display='none'};$('memoryNone').onclick=()=>{meta.activeMemory='none';saveMeta();renderMemoryArchive();updateLab();};$('codexBtn').onclick=()=>{renderCodex();$('codexOverlay').style.display='flex'};$('codexClose').onclick=()=>{$('codexOverlay').style.display='none'};$('labReturn').onclick=()=>returnToHome('lab');$('dash').onpointerdown=e=>{e.preventDefault();dash()};$('ability').onpointerdown=e=>{e.preventDefault();originActive()};for(const id of ['homeSound','pauseSound'])$(id).onclick=()=>toggleFeedback('sound');for(const id of ['homeHaptic','pauseHaptic'])$(id).onclick=()=>toggleFeedback('haptic');for(const id of ['homeShake','pauseShake'])$(id).onclick=()=>toggleFeedback('shake');$('setSound').onclick=()=>toggleSetting('sound');$('setHaptic').onclick=()=>toggleSetting('haptic');$('setShake').onclick=()=>toggleSetting('shake');$('setFlash').onclick=()=>toggleSetting('flash');$('setMotion').onclick=()=>toggleSetting('motion');$('setDamageText').onclick=()=>toggleSetting('damageText');$('setContrast').onclick=()=>toggleSetting('contrast');$('setGraphics').onclick=()=>toggleSetting('graphics');$('setPerfInfo').onclick=()=>toggleSetting('perfInfo');$('exportSave').onclick=()=>exportSaveData();$('importSave').onclick=()=>importSaveData();$('resetSave').onclick=()=>resetProgressSafe();refreshFeedbackControls();refreshSettingsPanel();applyAccessibilitySettings();updateLab();$('introSplash').onclick=()=>fadeOutIntroAndContinue();$('introSplash').onpointerdown=e=>{if(e.target=== $('introSplash')) e.preventDefault();};$('introSplash').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fadeOutIntroAndContinue();}};setTimeout(()=>{$('introSplash').focus?.();},0);
-$('pauseBtn').onclick=()=>{if(choosing||ended)return;paused=true;refreshFeedbackControls();$('pauseOverlay').style.display='flex'};$('resume').onclick=()=>{paused=false;$('pauseOverlay').style.display='none';combatGrace(.40)};$('homeFromPause').onclick=()=>returnToHome('battle');$('restartRun').onclick=()=>{running=false;paused=false;$('pauseOverlay').style.display='none';openStartWeaponSelect()};$('quit').onclick=()=>returnToHome('battle');
+function returnToHome(tab='battle'){$('artHudV417').hidden=true;running=false;paused=false;choosing=false;rewardChoosing=false;app.classList.remove('combat','hudBoss');resize();$('pauseOverlay').style.display='none';$('settingsOverlay').style.display='none';$('endOverlay').style.display='none';$('routeOverlay').style.display='none';$('blueprintOverlay').style.display='none';$('memoryOverlay').style.display='none';$('codexOverlay').style.display='none';$('levelOverlay').style.display='none';$('masteryOverlay').style.display='none';$('rewardOverlay').style.display='none';$('hud').style.display='none';$('parts').style.display='none';$('organHud').style.display='none';$('flowBadge').style.display='none';$('pauseBtn').style.display='none';if($('farmRouteBadge'))$('farmRouteBadge').style.display='none';$('joyBase').style.display='none';$('dash').style.display='none';$('ability').style.display='none';$('bossbar').style.display='none';$('bossbar').classList.remove('finalBossHUD','eliteBossHUD','nemesisBossHUD');$('bossPhaseStrip').style.display='none';$('bossIntentBadge').classList.remove('danger');$('bossIntro').classList.remove('show');$('bossIntro').style.display='none';$('bossIntentBadge').style.display='none';$('counterBadge').style.display='none';$('evasionBadge').style.display='none';$('v100Milestone').style.display='none';$('poster').style.display='flex';setHomeTab(tab);updateLab();}
+$('homeSpecimenTab').onclick=()=>setHomeTab('specimen');$('homeLabTab').onclick=()=>setHomeTab('lab');$('start').onclick=()=>{primeAudio();startOrganRunV598()};$('runBack').onclick=()=>{primeAudio();$('endOverlay').style.display='none';reset()};$('restart').onclick=()=>{primeAudio();startOrganRunV598()};$('settingsBtn').onclick=()=>openSettings();$('settingsClose').onclick=()=>closeSettings();$('pauseSettings').onclick=()=>openSettings();$('memoryBtn').onclick=()=>{renderMemoryArchive();$('memoryOverlay').style.display='flex'};$('memoryClose').onclick=()=>{$('memoryOverlay').style.display='none'};$('memoryNone').onclick=()=>{meta.activeMemory='none';saveMeta();renderMemoryArchive();updateLab();};$('codexBtn').onclick=()=>{renderCodex();$('codexOverlay').style.display='flex'};$('codexClose').onclick=()=>{$('codexOverlay').style.display='none'};$('labReturn').onclick=()=>returnToHome('lab');$('dash').onpointerdown=e=>{e.preventDefault();dash()};$('ability').onpointerdown=e=>{e.preventDefault();originActive()};for(const id of ['homeSound','pauseSound'])$(id).onclick=()=>toggleFeedback('sound');for(const id of ['homeHaptic','pauseHaptic'])$(id).onclick=()=>toggleFeedback('haptic');for(const id of ['homeShake','pauseShake'])$(id).onclick=()=>toggleFeedback('shake');$('setSound').onclick=()=>toggleSetting('sound');$('setHaptic').onclick=()=>toggleSetting('haptic');$('setShake').onclick=()=>toggleSetting('shake');$('setFlash').onclick=()=>toggleSetting('flash');$('setMotion').onclick=()=>toggleSetting('motion');$('setDamageText').onclick=()=>toggleSetting('damageText');$('setContrast').onclick=()=>toggleSetting('contrast');$('setGraphics').onclick=()=>toggleSetting('graphics');$('setPerfInfo').onclick=()=>toggleSetting('perfInfo');$('exportSave').onclick=()=>exportSaveData();$('importSave').onclick=()=>importSaveData();$('resetSave').onclick=()=>resetProgressSafe();refreshFeedbackControls();refreshSettingsPanel();applyAccessibilitySettings();updateLab();$('introSplash').onclick=()=>fadeOutIntroAndContinue();$('introSplash').onpointerdown=e=>{if(e.target=== $('introSplash')) e.preventDefault();};$('introSplash').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fadeOutIntroAndContinue();}};setTimeout(()=>{$('introSplash').focus?.();},0);
+$('pauseBtn').onclick=()=>{if(choosing||ended)return;paused=true;refreshFeedbackControls();$('pauseOverlay').style.display='flex'};$('resume').onclick=()=>{paused=false;$('pauseOverlay').style.display='none';combatGrace(.40)};$('homeFromPause').onclick=()=>returnToHome('battle');$('restartRun').onclick=()=>{running=false;paused=false;$('pauseOverlay').style.display='none';startOrganRunV598()};$('quit').onclick=()=>returnToHome('battle');
 addEventListener('keydown',e=>{keys[e.key]=true;keys[e.key.toLowerCase()]=true;if(e.code==='Space'){e.preventDefault();dash()}if(e.key.toLowerCase()==='e'){e.preventDefault();originActive()}if(e.key==='Escape'){if($('settingsOverlay').style.display==='flex'){closeSettings();return}if(running&&!choosing){paused=!paused;$('pauseOverlay').style.display=paused?'flex':'none';last=performance.now()}}});addEventListener('keyup',e=>{keys[e.key]=false;keys[e.key.toLowerCase()]=false});
 const jb=$('joyBase'),js=$('joyStick');
 const JOY_BLOCK_IDS=['pauseBtn','dash','ability','parts','bossbar','topline','xpbar','minimapWrap','farmRouteBadge'];
@@ -9630,12 +9552,8 @@ function homeBossV522(s){
 function refreshEvolveHomeV522(){
  const unlocked=homeUnlockedStageV522(),s=homeSelectedStageV522,locked=s>unlocked,cleared=meta.claimedStages.includes(s),milestone=s===30?'VENOM TITAN · P3':campaignMilestone(s),num=String(s).padStart(2,'0');
  homeSetTextV522('homeDNAAmountV522',Math.max(0,meta.dna).toLocaleString());
- homeSetTextV522('homeProgressV522',homeTextV522('STAGE '+String(unlocked).padStart(2,'0')+' UNLOCKED','스테이지 '+unlocked+' 해금'));
- homeSetTextV522('homeLatestV522',homeTextV522('LATEST STAGE','최신 단계로'));
- $('homeLatestV522').disabled=s===unlocked;
  homeSetTextV522('homeStageNumberV522',num);
- const status=locked?homeTextV522('LOCKED · CLEAR STAGE '+(s-1),'잠김 · 스테이지 '+(s-1)+' 클리어 필요'):cleared?homeTextV522('CLEARED · REPLAY AVAILABLE','클리어 완료 · 다시 도전 가능'):homeTextV522('READY TO ENTER','진입 준비 완료');
- homeSetTextV522('homeStageStateV522',(milestone?milestone+' · ':'')+status);
+ homeSetTextV522('homeStageStateV522',cleared?homeTextV522('CLEAR','클리어'):locked?homeTextV522('LOCKED','잠김'):'');
  $('homeStageStateV522').style.color=locked?'#a7989e':cleared?'#9bbdaa':'#83c3c8';
  $('homePrevStageV522').disabled=s<=1;
  $('homeNextStageV522').disabled=s>=Math.max(unlocked,Math.min(99,unlocked+1));
@@ -9643,25 +9561,19 @@ function refreshEvolveHomeV522(){
  $('homeNextStageV522').setAttribute('aria-label',homeTextV522('Next stage','다음 스테이지'));
  $('settingsBtn').setAttribute('aria-label',homeTextV522('Settings','설정'));
  $('homeTabs').setAttribute('aria-label',homeTextV522('Main menu','주요 메뉴'));
- homeSetTextV522('homeBossLabelV522',homeTextV522('FINAL BOSS','최종 보스'));
- const boss=homeBossV522(s);homeSetTextV522('homeBossNameV522',homeTextV522(...boss));
- homeSetTextV522('homeCapLabelV522',homeTextV522('LEVEL LIMIT','최대 레벨'));
- homeSetTextV522('homeLevelCapV522',homeTextV522('No limit','제한 없음'));
  paintHomeMapV597();
  $('start').disabled=!homeReadyV522||locked||!!homeLoadErrorV522;
  homeSetTextV522('start',homeLoadErrorV522?homeTextV522('ASSET LOAD FAILED','이미지 로딩 실패'):!homeReadyV522?homeTextV522('LOADING…','불러오는 중…'):locked?homeTextV522('PREVIOUS STAGE CLEAR REQUIRED','이전 스테이지 클리어 필요'):homeTextV522('START BATTLE','전투 시작'));
- homeSetTextV522('homeStartHintV522',homeLoadErrorV522?homeLoadErrorV522.slice(0,90):locked?homeTextV522('Complete the previous stage to unlock this stage.','이전 단계를 완료하면 이 스테이지가 열립니다.'):homeTextV522('SELECT STARTING WEAPON','시작 무기를 선택한 뒤 진입합니다.'));
  for(const [id,en,ko] of [
   ['homeLabLabelV522','PARTS','파츠'],['homeSpecimenLabelV522','ORGANISM','개체'],['homeBattleLabelV522','BATTLE','전투'],['homeMemoryLabelV522','MEMORY','기억'],['homeCodexLabelV522','CODEX','도감'],
   ['homeSpecimenTitleV522','ORGANISM','시작 개체'],['homeSpecimenHintV522','Choose the organism you will enter the stage with.','전투에 진입할 시작 생명체를 선택하세요.'],
   ['homeLabTitleV522','GENOME LAB','유전체 연구소'],['homeLabHintV522','Use stored DNA to improve your organism.','모은 DNA로 생명체의 영구 능력을 강화하세요.']
  ])homeSetTextV522(id,homeTextV522(en,ko));
  
- homeSetTextV522('homeWeaponBackV522',homeTextV522('‹ HOME','‹ 홈으로'));
  if(homePageV522==='parts')renderEvolvePartsV523();
 }
 function selectHomeStageV522(stage){
- if(running||paused||$('poster').style.display==='none'||$('weaponSelectOverlay').style.display==='flex')return false;
+ if(running||paused||$('poster').style.display==='none')return false;
  const unlocked=homeUnlockedStageV522(),s=Math.max(1,Math.min(Math.max(unlocked,Math.min(99,unlocked+1)),Math.trunc(Number(stage)||1)));
  homeSelectedStageV522=s;
  if(s<=unlocked){meta.stage=s;meta.homeStageV522=s;saveMeta();}
@@ -9686,7 +9598,7 @@ function selectHomePageV522(page='battle'){
 }
 function startHomeBattleV522(){
  if(!homeReadyV522||homeLoadErrorV522||homeSelectedStageV522>homeUnlockedStageV522()||running||paused)return false;
- meta.stage=homeSelectedStageV522;meta.homeStageV522=homeSelectedStageV522;saveMeta();primeAudio();openStartWeaponSelect();return true;
+ meta.stage=homeSelectedStageV522;meta.homeStageV522=homeSelectedStageV522;saveMeta();primeAudio();startOrganRunV598();return true;
 }
 function installEvolveHomeV522(){
  // Existing archive and codex become full home pages; their data/actions are retained.
@@ -9711,9 +9623,7 @@ function installEvolveHomeV522(){
  $('memoryClose').onclick=()=>setHomeTab('battle');$('codexClose').onclick=()=>setHomeTab('battle');
  $('homePrevStageV522').onclick=()=>selectHomeStageV522(homeSelectedStageV522-1);
  $('homeNextStageV522').onclick=()=>selectHomeStageV522(homeSelectedStageV522+1);
- $('homeLatestV522').onclick=()=>selectHomeStageV522(homeUnlockedStageV522());
  $('start').onclick=startHomeBattleV522;
- $('homeWeaponBackV522').onclick=()=>returnToHome('battle');
  window.refreshEvolveHomeV522=refreshEvolveHomeV522;
  installEvolvePartsV523();setHomeTab('battle');saveMeta();
 }
@@ -9945,9 +9855,7 @@ function installStageSystemV526(){
  draw=function(...args){refreshBossWarningV526();return base.draw(...args);};
  refreshEvolveHomeV522=function(...args){
   const out=base.refreshHome(...args),s=stageSpecV526(homeSelectedStageV522);
-  homeSetTextV522('homeBossLabelV522',homeTextV522(s.stage===30?'STAGE 30 PLAYTEST':s.boss?'BOSS ENCOUNTER':'STAGE OBJECTIVE',s.stage===30?'30스테이지 본편 시험':s.boss?'보스 조우':'전투 목표'));
-  homeSetTextV522('homeBossNameV522',homeTextV522(s.boss?(s.bossKind==='venom'?'VENOM TITAN':'BIO TITAN')+' · PHASE '+s.phase:'SURVIVE 05:00'+(s.midAt?' · MID-BOSS':''),s.boss?(s.bossKind==='venom'?'베놈 타이탄':'바이오 타이탄')+' · '+s.phase+'페이즈':'5분 생존'+(s.midAt?' · 중간보스':'')));
-  if(homeReadyV522&&!homeLoadErrorV522&&s.stage<=homeUnlockedStageV522())homeSetTextV522('homeStartHintV522',homeTextV522(s.types.length+' ENEMY TYPES · '+(s.boss?'BOSS AT 05:00':'5 MINUTE SURVIVAL'),s.types.length+'종 몬스터 · '+(s.boss?'5분 정각 보스 출현':'5분 생존')));return out;
+  return out;
  };
  window.__EVOLVE_STAGE_V526__={read:stageSnapshotV526,spec:stageSpecV526};
 }
@@ -10666,7 +10574,7 @@ function finishVenomStageEncounterV554(e){
 })();
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_STAGE_V554__={
  spec:stageSpecV526,
- context:()=>({player,enemies,terrain:terrainNodes,flow:stageFlowV526,meta,finish:finishStageEncounterV526,home:s=>{homeSelectedStageV522=s;refreshEvolveHomeV522();return $('homeBossNameV522').textContent;},
+ context:()=>({player,enemies,terrain:terrainNodes,flow:stageFlowV526,meta,finish:finishStageEncounterV526,home:s=>{homeSelectedStageV522=s;refreshEvolveHomeV522();return $('homeStageTitleV522').textContent;},
   scheduled:stage=>{bossTestV550=null;VENOM_V537.clear();BIO_STEP13_V519.reset();restoreBossArena();for(const e of enemies)e.dead=true;enemies=[];meta.stage=stage;stageFlowV526=freshStageFlowV526();t=299.99;running=true;ended=false;choosing=rewardChoosing=false;paused=false;extractionMode=false;nextBoss=false;waveBreather=0;directorRelief=0;tacticalWave=null;nextElite=nextElite2=nextElite3=nextElite4=true;bossWarningShown=true;const r=window.__EVOLVE_RANGE_V552__.context();r.tick(.02);paused=true;return enemies.find(e=>e.finalBoss&&!e.dead);},
   outcome:()=>({result:stageFlowV526.result,retreat:stageFlowV526.retreat?{venom:!!stageFlowV526.retreat.e?.venomV537,hp:stageFlowV526.retreat.e?.hp,duration:stageFlowV526.retreat.duration}:null,ended,stage:meta.stage,unlocked:homeUnlockedStageV522(),clears:meta.clears,kills})})
 };
@@ -11532,7 +11440,7 @@ for(const input of mapEditorV562.querySelectorAll('[data-me-gate]'))input.onchan
 $('meFilesV562').addEventListener('toggle',()=>meResizeV562());window.addEventListener('resize',()=>meResizeV562());
 document.addEventListener('keydown',e=>{if(!mapEditorV562.hidden&&e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeMapEditorV562();}},true);
 const mapEditButtonV562=document.createElement('button');mapEditButtonV562.type='button';mapEditButtonV562.id='mapEditButtonV562';mapEditButtonV562.textContent='충돌 편집';mapEditButtonV562.onclick=openMapEditorV562;mapControlsV562.appendChild(mapEditButtonV562);
-const homeMapEditV562=document.createElement('button');homeMapEditV562.type='button';homeMapEditV562.id='homeMapEditV562';homeMapEditV562.dataset.i18nIgnore='';homeMapEditV562.textContent='맵 충돌 직접 편집';homeMapEditV562.onclick=openMapEditorV562;$('homeStartHintV522').after(homeMapEditV562);
+const homeMapEditV562=document.createElement('button');homeMapEditV562.type='button';homeMapEditV562.id='homeMapEditV562';homeMapEditV562.dataset.i18nIgnore='';homeMapEditV562.textContent='맵 충돌 직접 편집';homeMapEditV562.onclick=openMapEditorV562;$('homeBattleViewV522').appendChild(homeMapEditV562);
 {
  const refresh=refreshEvolveHomeV522,drawBase=draw,baseReset=reset;
  refreshEvolveHomeV522=function(...args){const out=refresh(...args);homeMapEditV562.disabled=!mapReadyV562||mapEditBootBusyV562;if(mapEditBootBusyV562)$('start').disabled=true;return out;};window.refreshEvolveHomeV522=refreshEvolveHomeV522;
@@ -11610,8 +11518,7 @@ async function campaignPrepareStageV567(stage){
  startHomeBattleV522=function(){const id=campaignMapForStageV567(homeSelectedStageV522);if(campaignLoadingV567||id!==(campaignActiveV567?.id||null)||id&&!mapReadyV562)return false;return start();};$('start').onclick=startHomeBattleV522;
  refreshEvolveHomeV522=function(...args){const out=refresh(...args),id=campaignMapForStageV567(homeSelectedStageV522),ready=!id||!campaignLoadingV567&&mapReadyV562&&campaignActiveV567?.id===id;
   mapControlsV562.hidden=!campaignActiveV567;mapControlsV562.style.visibility=campaignActiveV567?'':'hidden';homeMapEditV562.hidden=!id;homeMapEditV562.disabled=!ready||!id;
-  if(!ready){$('start').disabled=true;homeSetTextV522('homeStartHintV522','맵을 준비하는 중');}
-  else if(id&&!homeLoadErrorV522)homeSetTextV522('homeStartHintV522',CAMPAIGN_MAPS_V567.find(d=>d.id===id).label+' · '+homeSelectedStageV522+'스테이지');return out;
+  if(!ready)$('start').disabled=true;return out;
  };window.refreshEvolveHomeV522=refreshEvolveHomeV522;
  returnToHome=function(...args){if(!mapEditorV562.hidden)closeMapEditorV562();const out=home(...args);campaignPrepareStageV567(homeSelectedStageV522);return out;};
 }
@@ -11659,7 +11566,7 @@ const TestModuleV573=(()=>{
  const saveOptions=()=>{try{localStorage.setItem(STORE,JSON.stringify({map:B.map,natural:B.natural}));}catch(_){}};
  const ownBoss=()=>enemies.find(e=>!e.dead&&e.finalBoss)||null;
  const arenaBusy=()=>!!bossArena?.active||!!ownBoss()||B.encounter?.state==='warning'||B.encounter?.state==='entry';
- const blockedChoice=()=>choosing||rewardChoosing||$('weaponSelectOverlay').style.display==='flex';
+ const blockedChoice=()=>choosing||rewardChoosing;
  const root=document.createElement('div');root.id='testModuleV573';root.dataset.i18nIgnore='';
  root.innerHTML=`<button type="button" id="tmOpenV573" aria-haspopup="dialog">TEST</button><div id="tmPreparingV573" hidden role="status">보스 전투를 준비하고 있습니다…</div>
  <div id="tmModalV573" hidden><section role="dialog" aria-modal="true" aria-labelledby="tmTitleV573" tabindex="-1">
@@ -11761,7 +11668,7 @@ const TestModuleV573=(()=>{
  async function request(action,settings=selected()){
   if(B.busy)return false;const n=cleanStage(settings.stage),map=settings.map||'auto';
   if(!running||ended||n!==homeSelectedStageV522||map!==B.map){
-   if(!await go(n,map,false))return false;B.pending={...action,epoch:B.epoch};if(action.type==='boss'){ui.kind.value=action.kind||'stage';ui.phase.value=String(action.phase||1);}resumeAction();if(!startHomeBattleV522()){B.pending=null;throw Error('전투를 시작할 수 없습니다.');}status('시작 무기를 선택하면 시험이 시작됩니다.');return true;
+   if(!await go(n,map,false))return false;B.pending={...action,epoch:B.epoch};if(action.type==='boss'){ui.kind.value=action.kind||'stage';ui.phase.value=String(action.phase||1);}resumeAction();if(!startHomeBattleV522()){B.pending=null;throw Error('전투를 시작할 수 없습니다.');}status('첫 스킬을 선택하면 시험이 시작됩니다.');return true;
   }
   if(blockedChoice()){status('열려 있는 선택창을 먼저 완료해 주세요.');return false;}resumeAction();return action.type==='boss'?boss(action.kind,action.phase):queue(action.count);
  }
@@ -11790,7 +11697,7 @@ const TestModuleV573=(()=>{
   const pending=B.pending;B.pending=null;B.epoch++;cancelQueue('새 전투를 시작했습니다.');B.lastBatch=null;B.encounter=null;B.preparing=false;B.busy=false;const result=original.reset(...args);
   const start=campaignActiveV567?.id==='biolab'?[432,572]:campaignActiveV567?.id==='red_biolab'?[432,780]:null;
   if(start){const old={x:player.x,y:player.y};player.x=start[0]*MAP_SCALE_V562;player.y=start[1]*MAP_SCALE_V562-MAP_PLAYER_FOOT_V562.offsetY;if(!terrainBodyClearV505(player,player.r)){player.x=old.x;player.y=old.y;}}
-  if(pending){const epoch=B.epoch;Promise.resolve().then(()=>{if(epoch!==B.epoch||!running||ended)return;return pending.type==='boss'?boss(pending.kind,pending.phase):queue(pending.count);}).catch(error=>{if(epoch!==B.epoch)return;B.busy=B.preparing=false;paused=false;status(error.message);paint();});}
+  if(pending){const epoch=B.epoch;const deliver=()=>{if(epoch!==B.epoch||!running||ended)return;if(choosing||rewardChoosing){setTimeout(deliver,40);return;}Promise.resolve(pending.type==='boss'?boss(pending.kind,pending.phase):queue(pending.count)).catch(error=>{if(epoch!==B.epoch)return;B.busy=B.preparing=false;paused=false;status(error.message);paint();});};Promise.resolve().then(deliver);}
   paint();return result;
  };
  returnToHome=function(...args){B.epoch++;B.pending=null;cancelQueue('홈 이동으로 대기 소환을 취소했습니다.');stopEncounter();B.busy=false;close(false);const r=original.home(...args);ui.stage.value=String(homeSelectedStageV522);paint();return r;};
@@ -12088,7 +11995,6 @@ const lightningPlayerDrawBaseV576=drawPlayer;drawPlayer=function(shadowOnly=fals
 
 // Keep upgrades meaningful while the other weapons are disabled.
 const lightningArmUpgradeV576=upgrades.find(u=>u.active&&u.kind==='arm');if(lightningArmUpgradeV576)lightningArmUpgradeV576.title=()=> '연쇄전격 · 출력 강화';
-Object.assign(START_WEAPONS.arm,{name:'CHAIN LIGHTNING',glyph:'ϟ',role:'자동 연쇄전격 · E 강화전격'});
 chooseLevelPicks=function(){const pool=upgrades.filter(u=>u.passive?(genes[u.gene]||0)<5:u.active&&u.kind==='arm'&&!evoState.arm&&(state.arm||0)<5),picks=[];while(pool.length&&picks.length<3){const u=weightedChoice(pool,choiceScore);picks.push(u);pool.splice(pool.indexOf(u),1)}return picks};
 const lightningStatBaseV576=levelStatHtml;levelStatHtml=function(u){if(u.active&&u.kind==='arm')return '<div class="statRow"><span>연쇄전격</span><b>전격 출력 증가</b></div><div class="statRow"><span>일반 / 강화</span><b>감전 · 방향 반동</b></div>';return lightningStatBaseV576(u)};
 const lightningStartUIV576=document.createElement('style');lightningStartUIV576.textContent='[data-weapon]:not([data-weapon="arm"]){display:none!important}#abilityName{font-size:8px!important}#ability{border-color:#8bdfff!important;background:radial-gradient(circle,#174f70,#091421 74%)!important}.weaponGrid{justify-content:center}';document.head.appendChild(lightningStartUIV576);
@@ -12538,12 +12444,8 @@ updateAbilityUI=function(){
 };
 const playerCombatStyleV587=document.createElement('style');playerCombatStyleV587.textContent='#app.combat #ability:disabled,#ability:disabled{opacity:.32!important;filter:grayscale(1)!important;cursor:default!important;box-shadow:none!important}#abilityName{font-size:8px!important}';document.head.appendChild(playerCombatStyleV587);
 function playerWeaponLabelsV586(){
- const labels={arm:['UPPER LIMB STAB','기본 찌르기','상단 두 다리로 번갈아 근접 찌르기'],mouth:['ACID MAW','산성 분사','산성 투사체 · 부식'],tail:['RAZOR TAIL','꼬리 휘두르기','꼬리 휩쓸기 · 처형'],wing:['RAZOR WING','칼날 날개','다중 타격 · 궤도'],leg:['CRUSH LEG','분쇄 다리','내려찍기 · 충격파']};
- for(const [id,[en,ko,role]] of Object.entries(labels)){Object.assign(START_WEAPONS[id],{name:homeTextV522(en,ko),role});const b=document.querySelector('[data-weapon="'+id+'"]');if(b){const name=b.querySelector('b,h3,strong,.weaponName'),desc=b.querySelector('.weaponRole,p,.weaponDesc'),start=b.querySelector('.weaponStart');if(name)name.textContent=START_WEAPONS[id].name;if(desc)desc.textContent=role;if(start)start.textContent='시작 · ★☆☆☆☆';}}
- START_WEAPONS.arm.glyph='↗';
- const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>homeTextV522('UPPER LIMB STAB','찌르기 · 관통력 강화');
+ const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>homeTextV522('ARM UPGRADE','팔 강화');
 }
-const playerLegacyStartSelectV586=openStartWeaponSelect;openStartWeaponSelect=function(...args){playerWeaponLabelsV586();const result=playerLegacyStartSelectV586(...args);playerWeaponLabelsV586();return result;};
 levelStatHtml=function(u){if(u.active&&u.kind==='arm')return '<div class="statRow"><span>기본 찌르기</span><b>찌르기 피해량 증가</b></div><div class="statRow"><span>상단 두 다리</span><b>좌우 교대 · 근접 공격</b></div>';return classicCombatV587.levelStatHtml(u);};
 const playerLegacyPartEquipV586=equipPartV523;equipPartV523=function(...args){const result=playerLegacyPartEquipV586(...args);playerMotionV586.attack=null;playerMotionV586.cooldown=.18;playerWeaponLabelsV586();updateAbilityUI();return result;};
 const playerLegacyHomeRefreshV586=refreshEvolveHomeV522;refreshEvolveHomeV522=function(...args){const result=playerLegacyHomeRefreshV586(...args);playerWeaponLabelsV586();return result;};
@@ -12679,8 +12581,6 @@ playerWeaponLabelsV586=function(){
  armBareLabelsV589();const mode=armItemModeV589();if(mode==='bare')return;
  const item=partsItemV523(mode==='cannon'?'arm_cannon':'arm_blades'),name=partsNameV523(item);
  const role=mode==='cannon'?partsTextV523('Alternating biological cannons · original projectile upgrades','생체 쌍포 교대 사격 · 기존 탄막 강화'):partsTextV523('Alternating blade swings · cuts enemies in the swept arc','쌍날 교대 베기 · 휘두른 범위의 적 타격');
- Object.assign(START_WEAPONS.arm,{name,role,glyph:mode==='cannon'?'⌁':'⌁'});
- const b=document.querySelector('[data-weapon="arm"]');if(b){const title=b.querySelector('b,h3,strong,.weaponName'),desc=b.querySelector('.weaponRole,p,.weaponDesc');if(title)title.textContent=name;if(desc)desc.textContent=role;}
  const upgrade=upgrades.find(u=>u.active&&u.kind==='arm');if(upgrade)upgrade.title=()=>partsNameV523(item)+' · '+partsTextV523('Enhance','강화');
 };
 const armBareStatsV589=levelStatHtml;
@@ -13230,7 +13130,7 @@ function skinPaintActiveV594(){
  const header=$('levelPanel').querySelector('.upgradeHeaderRefV594');if(header)skinPaintCanvasV594(header,upgradeSkinV594.header);
  for(const b of $('cards').querySelectorAll('.upgradeCardV593')){
   const row=Number(b.dataset.artRow),tier=Number(b.dataset.artTier),card=UPGRADE_CARDS_V593.find(c=>c.id===b.dataset.kind);if(!card)continue;
-  skinPaintCanvasV594(b.querySelector('.upgradeFrameV594'),skinFrameV594(tier));skinPaintCanvasV594(b.querySelector('.upgradeSpriteV593'),skinArtV594(row,tier));skinPaintCanvasV594(b.querySelector('.upgradePartIconV594'),skinIconV594(card.group,tier));
+  skinPaintCanvasV594(b.querySelector('.upgradeFrameV594'),skinFrameV594(tier));skinPaintCanvasV594(b.querySelector('.upgradeSpriteV593'),organCardArtV598(card,tier));skinPaintCanvasV594(b.querySelector('.upgradePartIconV594'),organCardIconV598(card,tier));
  }
 }
 renderLevelChoices=function(isReroll=false){
@@ -13526,6 +13426,256 @@ window.__EVOLVE_HOME_MAPS_V597__={
 paintHomeMapV597();
 const homeStartupBaseV597=window.__EVOLVE_STARTUP_V595__.ready;
 window.__EVOLVE_STARTUP_V595__.ready=Promise.all([homeStartupBaseV597,homeMapReadyV597]).then(()=>true);
+
+// Shared bounded combat geometry. Also used by the meaningful Node regression checks.
+const ORGAN_SKILL_MODEL_V598=(()=>{
+ const TAU=Math.PI*2,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ const profiles={
+  spike:{organ:'shell',slot:'skin',mode:'homing',element:'physical',color:'#e9ddc1'},
+  whip:{organ:'tail',slot:'tail',mode:'sweep',element:'physical',color:'#dcc9b4'},
+  spit:{organ:'mouth',slot:'head',mode:'projectile',element:'physical',color:'#d8e9d3'},
+  poison_spit:{organ:'mouth',slot:'head',mode:'projectile',element:'poison',color:'#a6dc62'},
+  fire_breath:{organ:'mouth',slot:'head',mode:'breath',element:'fire',color:'#ff9858'},
+  ice_spit:{organ:'mouth',slot:'head',mode:'projectile',element:'ice',color:'#a7e0ee'},
+  ice_breath:{organ:'mouth',slot:'head',mode:'breath',element:'ice',color:'#a7e0ee'},
+  poison_spike:{organ:'shell',slot:'skin',mode:'homing',element:'poison',color:'#b3d47a'},
+  ice_spike:{organ:'shell',slot:'skin',mode:'homing',element:'ice',color:'#b9e7ed'},
+  poison_whip:{organ:'tail',slot:'tail',mode:'sweep',element:'poison',color:'#b4cc84'}
+ };
+ function spec(organ,level,s={},variant){
+  const n=k=>Math.max(0,Number(s[k])||0),base=organ==='shell'?'spike':organ==='tail'?'whip':'spit';
+  const profile=profiles[variant]?.organ===organ?profiles[variant]:profiles[base];
+  if(!(level>0))return {enabled:false,organ,...profile};
+  const prefix=organ==='shell'?'spike':organ==='tail'?'whip':'spit';
+  const common={enabled:true,organ,...profile,damage:(organ==='shell'?19:organ==='tail'?28:24)*(1+n(prefix+'Damage'))};
+  if(organ==='tail')return {...common,radius:Math.min(230,82*(1+n('whipRange'))),arc:clamp((125+n('whipArc'))*Math.PI/180,.1,TAU),cooldown:Math.max(.22,1.48/(1+n('whipHaste'))),push:Math.min(400,82*(1+n('whipPush'))),duration:.42};
+  return {...common,count:clamp(1+Math.floor(n(prefix+'Count')),1,12),hits:clamp(1+Math.floor(n(prefix+'Pierce')),1,9),range:Math.min(1800,(organ==='shell'?300:275)*(1+n(prefix+'Range'))),speed:organ==='shell'?330:275,cooldown:Math.max(.14,(organ==='shell'?1.34:1.42)/(1+n(prefix+'Haste'))),turn:8};
+ }
+ function segmentHit(a,b,e,r=0){
+  const dx=b.x-a.x,dy=b.y-a.y,l=dx*dx+dy*dy,t=l?clamp(((e.x-a.x)*dx+(e.y-a.y)*dy)/l,0,1):0;
+  const radius=(e.r||0)+r;return (a.x+dx*t-e.x)**2+(a.y+dy*t-e.y)**2<=radius*radius?t:null;
+ }
+ function angle(a){return Math.atan2(Math.sin(a),Math.cos(a));}
+ function sweepWindow(age,dt,arc){
+  const p=v=>clamp((v-.055)/.285,0,1);if(age<.055||age-dt>.34)return null;
+  return {lo:-arc/2+p(Math.max(.055,age-dt))*arc,hi:-arc/2+p(Math.min(.34,age))*arc};
+ }
+ function sweepHit(center,aim,radius,window,e){
+  if(!window)return false;const dx=e.x-center.x,dy=e.y-center.y,d=Math.hypot(dx,dy),r=e.r||0;if(d>radius+r)return false;
+  const a=angle(Math.atan2(dy,dx)-aim),edge=Math.asin(Math.min(1,r/Math.max(r,d)||0));return a+edge>=window.lo&&a-edge<=window.hi;
+ }
+ return {profiles,spec,segmentHit,angle,sweepWindow,sweepHit};
+})();
+if(typeof module!=='undefined'&&module.exports)module.exports=ORGAN_SKILL_MODEL_V598;
+
+// WEB-31: equipped ARM is always available; three learned organs grow within this run.
+const organNamesV598={arm:['팔','ARM'],shell:['외피','SHELL'],tail:['꼬리','TAIL'],mouth:['입','MOUTH']};
+const organSlotsV598={shell:'skin',tail:'tail',mouth:'head'};
+const organDefaultsV598={shell:'spike',tail:'whip',mouth:'spit'};
+const organStatKeysV598=['spikeDamage','spikeCount','spikePierce','spikeHaste','spikeRange','whipDamage','whipHaste','whipRange','whipArc','whipPush','spitDamage','spitCount','spitPierce','spitHaste','spitRange'];
+const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:230/82-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
+const organRunV598={opening:false,openingChosen:false,projectiles:[],whips:[],breaths:[],dots:new Map(),stats:{},cooldowns:{},casts:{},hits:{},serial:0,art:new Map(),icons:new Map()};
+function organClearV598(){
+ organRunV598.opening=organRunV598.openingChosen=false;organRunV598.projectiles.length=organRunV598.whips.length=organRunV598.breaths.length=0;organRunV598.dots.clear();
+ organRunV598.stats=Object.fromEntries(organStatKeysV598.map(k=>[k,0]));organRunV598.cooldowns={shell:.18,tail:.18,mouth:.18};organRunV598.casts={shell:0,tail:0,mouth:0};organRunV598.hits={shell:0,tail:0,mouth:0};organRunV598.serial=0;
+}
+organClearV598();
+function organVariantV598(organ){
+ const slot=organSlotsV598[organ],item=partsItemV523(partsStateV523.worn[slot]),variant=item?.skillVariantsV598?.[organ];
+ return ORGAN_SKILL_MODEL_V598.profiles[variant]?.organ===organ?variant:organDefaultsV598[organ];
+}
+function organSpecV598(organ){return ORGAN_SKILL_MODEL_V598.spec(organ,state[organ]||0,organRunV598.stats,organVariantV598(organ));}
+function organBodyPointV598(kind){
+ const local=kind==='mouth'?{x:13,y:20}:kind==='tail'?{x:-7,y:-12}:{x:-2,y:-3},scale=playerArtV586.displaySize/96;
+ const pose=playerFacingV587(playerBodyAngleV590(),playerMotionV586.facing),c=Math.cos(pose.rotation),s=Math.sin(pose.rotation);
+ return {x:player.x+(local.x*pose.facing*c-local.y*s)*scale,y:player.y+(local.x*pose.facing*s+local.y*c)*scale};
+}
+function organNearestV598(x,y,range,exclude=null){
+ let best=null,distance=Infinity;enemyEachCandidateCircleV425(x,y,range+36,e=>{
+  if(!playerTargetV586(e)||exclude?.has(e))return;const d=Math.hypot(e.x-x,e.y-y);if(d>range+(e.r||0)||d>=distance||terrainHitV418(x,y,e.x,e.y,1))return;best=e;distance=d;
+ });return best;
+}
+function organElementV598(e,s,damage){
+ if(s.element==='ice')e.slow=Math.max(e.slow||0,1.15);
+ if((s.element==='poison'||s.element==='fire')&&!e.dead){const old=organRunV598.dots.get(e);organRunV598.dots.set(e,{left:2,clock:old?.clock||0,dps:Math.max(old?.dps||0,damage*.12),organ:s.organ});}
+}
+function organHitV598(e,s,damage){
+ if(!playerTargetV586(e))return;const before=e.hp;hurtEnemy(e,damage,s.organ==='shell'?'spike':s.organ==='mouth'?'spit':'tail');
+ if(e.hp<before){organRunV598.hits[s.organ]++;organElementV598(e,s,damage);}
+}
+function organCastV598(organ){
+ const s=organSpecV598(organ);if(!s.enabled)return false;
+ const origin=organBodyPointV598(organ),range=s.radius||s.range,target=organNearestV598(player.x,player.y,range);if(!target)return false;
+ const aim=Math.atan2(target.y-player.y,target.x-player.x);organRunV598.casts[organ]++;const damage=s.damage*coreDamageBoost();
+ if(organ==='tail'){
+  organRunV598.whips.push({id:++organRunV598.serial,age:0,aim,s:{...s,damage},targets:new Set()});player.tailKick=.35;return true;
+ }
+ if(s.mode==='breath'){
+  organRunV598.breaths.push({id:++organRunV598.serial,age:0,clock:0,aim,s:{...s,damage},origin});player.acidKick=.2;return true;
+ }
+ const spread=Math.min(.15,1.1/Math.max(1,s.count-1)),assigned=new Set();
+ for(let i=0;i<s.count&&organRunV598.projectiles.length<180;i++){
+  const tracked=s.mode==='homing'?(organNearestV598(origin.x,origin.y,s.range,assigned)||target):null;if(tracked)assigned.add(tracked);
+  const a=Math.atan2((tracked||target).y-origin.y,(tracked||target).x-origin.x)+(i-(s.count-1)/2)*spread;
+  organRunV598.projectiles.push({id:++organRunV598.serial,organ,x:origin.x,y:origin.y,angle:a,remaining:s.range,life:s.range/s.speed+.3,hitsLeft:s.hits,hit:new Set(),target:tracked,s:{...s,damage}});
+ }
+ if(organ==='mouth')player.acidKick=.16;return true;
+}
+function organProjectileStepV598(p,dt){
+ const s=p.s;p.life-=dt;if(p.life<=0||p.remaining<=0)return false;
+ if(s.mode==='homing'){
+  if(!playerTargetV586(p.target)||p.hit.has(p.target))p.target=organNearestV598(p.x,p.y,p.remaining,p.hit);
+  if(p.target){const desired=Math.atan2(p.target.y-p.y,p.target.x-p.x),delta=ORGAN_SKILL_MODEL_V598.angle(desired-p.angle);p.angle+=clamp(delta,-s.turn*dt,s.turn*dt);}
+ }
+ const distance=Math.min(p.remaining,s.speed*dt),a={x:p.x,y:p.y},b={x:p.x+Math.cos(p.angle)*distance,y:p.y+Math.sin(p.angle)*distance},contacts=[];
+ enemyEachCandidateCircleV425((a.x+b.x)/2,(a.y+b.y)/2,distance/2+56,e=>{
+  if(!playerTargetV586(e)||p.hit.has(e))return;const contact=ORGAN_SKILL_MODEL_V598.segmentHit(a,b,e,p.organ==='shell'?2.8:4);if(contact===null)return;
+  const x=a.x+(b.x-a.x)*contact,y=a.y+(b.y-a.y)*contact;if(!terrainHitV418(a.x,a.y,x,y,1))contacts.push({e,t:contact});
+ });
+ contacts.sort((x,y)=>x.t-y.t);
+ for(const {e}of contacts){if(!playerTargetV586(e))continue;p.hit.add(e);organHitV598(e,s,s.damage);p.hitsLeft--;if(p.hitsLeft<=0)return false;if(e===p.target)p.target=null;}
+ if(terrainHitV418(a.x,a.y,b.x,b.y,1))return false;p.x=b.x;p.y=b.y;p.remaining-=distance;return p.remaining>0;
+}
+function organWhipStepV598(w,dt){
+ w.age+=dt;const window=ORGAN_SKILL_MODEL_V598.sweepWindow(w.age,dt,w.s.arc);
+ if(window)enemyEachCandidateCircleV425(player.x,player.y,w.s.radius+48,e=>{
+  if(!playerTargetV586(e)||w.targets.has(e)||!ORGAN_SKILL_MODEL_V598.sweepHit(player,w.aim,w.s.radius,window,e)||terrainHitV418(player.x,player.y,e.x,e.y,1))return;
+  w.targets.add(e);organHitV598(e,w.s,w.s.damage);const a=Math.atan2(e.y-player.y,e.x-player.x),push=w.s.push*(e.finalBoss?.14:e.elite?.38:1);e.kx=(e.kx||0)+Math.cos(a)*push;e.ky=(e.ky||0)+Math.sin(a)*push;
+ });return w.age<w.s.duration;
+}
+function organStepV598(dt){
+ if(!(dt>0))return;
+ for(const organ of ['shell','tail','mouth']){
+  const s=organSpecV598(organ);if(!s.enabled)continue;organRunV598.cooldowns[organ]-=dt;
+  if(organRunV598.cooldowns[organ]<=0)organRunV598.cooldowns[organ]=organCastV598(organ)?s.cooldown:.12;
+ }
+ compactArrayV426(organRunV598.projectiles,p=>organProjectileStepV598(p,dt));compactArrayV426(organRunV598.whips,w=>organWhipStepV598(w,dt));
+ compactArrayV426(organRunV598.breaths,b=>{
+  b.age+=dt;b.clock-=dt;b.origin=organBodyPointV598('mouth');if(b.clock<=0){b.clock=.12;let hits=0;enemyEachCandidateCircleV425(b.origin.x,b.origin.y,b.s.range+40,e=>{
+   if(!playerTargetV586(e)||!ORGAN_SKILL_MODEL_V598.sweepHit(b.origin,b.aim,b.s.range,{lo:-.35,hi:.35},e)||terrainHitV418(b.origin.x,b.origin.y,e.x,e.y,1))return;organHitV598(e,b.s,b.s.damage*.28);if(++hits>=32)return false;
+  });}return b.age<.55;
+ });
+ for(const [e,d]of organRunV598.dots){if(!playerTargetV586(e)){organRunV598.dots.delete(e);continue;}const elapsed=Math.min(dt,d.left);d.left-=elapsed;d.clock+=elapsed;if(d.clock>=.25||d.left<=0){hurtEnemy(e,d.dps*d.clock,d.organ==='shell'?'spike':d.organ==='mouth'?'spit':'tail');d.clock=0;}if(d.left<=0||e.dead)organRunV598.dots.delete(e);}
+}
+function drawOrganNeedleV598(g,color='#e9ddc1'){
+ g.fillStyle=color;g.strokeStyle='#69484a';g.lineWidth=.8;g.beginPath();g.moveTo(12,0);g.lineTo(-7,-3.5);g.lineTo(-3,0);g.lineTo(-7,3.5);g.closePath();g.fill();g.stroke();g.strokeStyle='#fff6dd';g.lineWidth=.6;g.beginPath();g.moveTo(-2,0);g.lineTo(9,0);g.stroke();
+}
+function drawOrganWhipV598(g,w,preview=false){
+ const progress=clamp((w.age-.055)/.285,0,1),angle=w.aim-w.s.arc/2+progress*w.s.arc,root=preview?{x:0,y:0}:organBodyPointV598('tail'),center=preview?{x:0,y:0}:player;
+ const tip={x:center.x+Math.cos(angle)*w.s.radius,y:center.y+Math.sin(angle)*w.s.radius},c1={x:center.x+Math.cos(angle-.55)*w.s.radius*.42,y:center.y+Math.sin(angle-.55)*w.s.radius*.42},c2={x:center.x+Math.cos(angle-.25)*w.s.radius*.82,y:center.y+Math.sin(angle-.25)*w.s.radius*.82};
+ g.save();g.lineCap='round';g.lineJoin='round';g.globalAlpha*=Math.min(1,Math.max(0,(w.s.duration-w.age)/.07));
+ for(const [width,color]of [[7,'#593b41'],[4.5,w.s.color],[1.2,'#f6ecdb']]){g.lineWidth=width;g.strokeStyle=color;g.beginPath();g.moveTo(root.x,root.y);g.bezierCurveTo(c1.x,c1.y,c2.x,c2.y,tip.x,tip.y);g.stroke();}
+ // Segmentation belongs to the actual curved tail, not an unrelated circular hit effect.
+ for(let i=1;i<=9;i++){const t=i/10,q=1-t,x=q*q*q*root.x+3*q*q*t*c1.x+3*q*t*t*c2.x+t*t*t*tip.x,y=q*q*q*root.y+3*q*q*t*c1.y+3*q*t*t*c2.y+t*t*t*tip.y;g.fillStyle='#905f62';g.beginPath();g.arc(x,y,1.8*(1-t*.5),0,TAU);g.fill();}
+ g.translate(tip.x,tip.y);g.rotate(angle);g.scale(.75,.75);drawOrganNeedleV598(g,w.s.color);g.restore();
+}
+function drawOrganAttacksV598(){
+ for(const p of organRunV598.projectiles){if(!worldCircleVisibleV441(p.x,p.y,14,20))continue;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);if(p.organ==='shell')drawOrganNeedleV598(ctx,p.s.color);else{ctx.fillStyle=p.s.color;ctx.strokeStyle='#6e8779';ctx.lineWidth=.8;ctx.beginPath();ctx.ellipse(0,0,6,3.6,0,0,TAU);ctx.fill();ctx.stroke();ctx.fillStyle='#f4fff1';ctx.beginPath();ctx.ellipse(1,-1,2.4,1,0,0,TAU);ctx.fill();}ctx.restore();}
+ for(const w of organRunV598.whips)drawOrganWhipV598(ctx,w);
+ for(const b of organRunV598.breaths){ctx.save();ctx.translate(b.origin.x,b.origin.y);ctx.rotate(b.aim);const fade=1-b.age/.55,g=ctx.createLinearGradient(0,0,b.s.range,0);g.addColorStop(0,b.s.color+'99');g.addColorStop(1,b.s.color+'00');ctx.fillStyle=g;ctx.globalAlpha=fade;ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,b.s.range,-.35,.35);ctx.closePath();ctx.fill();ctx.restore();}
+}
+const organLearnNamesV598={shell:['가시','SPIKES'],tail:['채찍','WHIP'],mouth:['침 뱉기','SPIT']};
+const organNewCardsV598=[];
+for(const organ of ['shell','tail','mouth'])organNewCardsV598.push({id:organ+'_learn',organ,group:organ,row:3,learn:true,name:organLearnNamesV598[organ],base:.1,apply:()=>{},lines:()=>[upgradeTextV593('Lv.0 → Lv.1','Lv.0 → Lv.1'),upgradeTextV593(organ==='shell'?'유도 가시 1개':organ==='tail'?'휩쓸기 · 밀치기':'침 1개 발사',organ==='shell'?'1 homing spike':organ==='tail'?'Sweep · knockback':'1 spit projectile')]});
+for(const [organ,prefix,defs]of [
+ ['shell','spike',[['damage','강한 가시','SHARP SPIKES','공격력','Damage',.1,'percent'],['count','다중 가시','MULTISPIKE','발사 수','Projectiles',1,'count'],['pierce','관통 가시','PIERCING SPIKES','관통','Pierce',1,'count'],['haste','빠른 가시','RAPID SPIKES','발사 속도','Fire rate',.1,'percent'],['range','긴 가시','LONG SPIKES','사거리','Range',.12,'percent']]],
+ ['tail','whip',[['damage','강한 채찍','HEAVY WHIP','공격력','Damage',.1,'percent'],['haste','빠른 채찍','QUICK WHIP','공격 속도','Attack speed',.1,'percent'],['range','긴 채찍','LONG WHIP','범위','Range',.12,'percent'],['arc','넓은 채찍','WIDE WHIP','공격 각도','Arc',30,'degrees'],['push','밀치는 채찍','REPELLING WHIP','밀치기','Knockback',.15,'percent']]],
+ ['mouth','spit',[['damage','강한 침','POWER SPIT','공격력','Damage',.1,'percent'],['count','다중 침','MULTISPIT','발사 수','Projectiles',1,'count'],['pierce','관통 침','PIERCING SPIT','관통','Pierce',1,'count'],['haste','빠른 침','RAPID SPIT','발사 속도','Fire rate',.1,'percent'],['range','긴 사거리','LONG SPIT','사거리','Range',.12,'percent']]]
+])for(const [key,ko,en,label,labelEn,base,unit]of defs)organNewCardsV598.push({id:prefix+'_'+key,organ,group:organ,row:3,name:[ko,en],organStat:prefix+key[0].toUpperCase()+key.slice(1),base,count:unit==='count',unit,label:[label,labelEn]});
+organNewCardsV598.push(...[
+ {id:'bare_damage',name:['강한 찌르기','HEAVY STAB'],stat:'bladeDamage',label:['공격력','Damage'],base:.1,unit:'percent'},
+ {id:'bare_haste',name:['빠른 찌르기','QUICK STAB'],stat:'bladeHaste',label:['공격 속도','Attack speed'],base:.1,unit:'percent'},
+ {id:'bare_range',name:['긴 찌르기','LONG STAB'],stat:'bladeRange',label:['범위','Range'],base:.1,unit:'percent'}
+].map(c=>({...c,organ:'arm',group:'bare',row:1})));
+for(const c of UPGRADE_CARDS_V593)if(c.group==='gun'||c.group==='blade')c.organ='arm';
+UPGRADE_CARDS_V593.push(...organNewCardsV598);
+const organApplyBaseV598=upgradeApplyV593,organLinesBaseV598=upgradeLinesV593,organPartBaseV598=upgradePartV593;
+const organValueBaseV598=upgradeValueV593;
+upgradeValueV593=function(c,tier){const value=organValueBaseV598(c,tier),cap=organStatCapsV598[c.organStat];return cap===undefined?value:Math.min(value,Math.max(0,cap-organRunV598.stats[c.organStat]));};
+upgradePartV593=function(c){return c.organ?upgradeTextV593(...organNamesV598[c.organ]):organPartBaseV598(c);};
+upgradeLinesV593=function(c,tier){
+ if(c.organStat){const n=upgradeValueV593(c,tier);return [upgradeTextV593(...c.label)+' +'+(c.unit==='percent'?upgradePercentV593(n):upgradeNumberV593(n)+(c.unit==='degrees'?'°':''))];}
+ return organLinesBaseV598(c,tier);
+};
+upgradeApplyV593=function(c,tier){
+ if(c.organ&&c.organ!=='arm'){
+  if(!state[c.organ])state[c.organ]=1;else if(!c.learn)state[c.organ]=Math.min(5,state[c.organ]+1);
+  organRunV598.cooldowns[c.organ]=Math.min(organRunV598.cooldowns[c.organ]||0,.15);
+ }
+ if(c.organStat){organRunV598.stats[c.organStat]+=upgradeValueV593(c,tier);upgradeRunV593.selected++;upgradeRunV593.taken[c.id]=(upgradeRunV593.taken[c.id]||0)+1;upgradeRunV593.highest[c.group]=Math.max(upgradeRunV593.highest[c.group]||0,tier);}
+ else{organApplyBaseV598(c,tier);if(c.learn){const prefix=c.organ==='shell'?'spike':c.organ==='tail'?'whip':'spit';organRunV598.stats[prefix+'Damage']+=.1*(UPGRADE_RARITIES_V593[tier].mult-1);}}
+ if(organRunV598.opening){organRunV598.opening=false;organRunV598.openingChosen=true;}
+};
+upgradePoolV593=function(){
+ const mode=armItemModeV589();return UPGRADE_CARDS_V593.filter(c=>{
+  if(c.available&&!c.available()||c.id.endsWith('_equip'))return false;
+  if(c.organStat&&organStatCapsV598[c.organStat]!==undefined&&organRunV598.stats[c.organStat]>=organStatCapsV598[c.organStat]-1e-8)return false;
+  if(c.organ==='mouth'&&organSpecV598('mouth').mode==='breath'&&['spitCount','spitPierce'].includes(c.organStat))return false;
+  if(c.organ==='arm')return state.arm>0&&(mode==='cannon'?c.group==='gun':mode==='blades'?c.group==='blade':c.group==='bare');
+  if(c.organ)return c.learn?!(state[c.organ]>0):state[c.organ]>0;
+  return !organRunV598.opening;
+ });
+};
+chooseLevelPicks=function(){
+ const pool=upgradePoolV593(),families=new Map();for(const c of pool){const key=c.organ||c.group;if(!families.has(key))families.set(key,[]);families.get(key).push(c);}
+ const keys=[...families.keys()],selected=[];
+ // An equipped-arm upgrade stays available at entry, alongside two different organs.
+ if(organRunV598.opening&&families.has('arm'))selected.push('arm');
+ while(keys.length&&selected.length<3){const key=keys.splice(Math.floor(Math.random()*keys.length),1)[0];if(!selected.includes(key))selected.push(key);}
+ return selected.map(key=>{const options=families.get(key),c=options[Math.floor(Math.random()*options.length)],tier=upgradeRollV593();return {kind:c.id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)};});
+};
+function organCardArtV598(c,tier){
+ if(!c.organ||c.organ==='arm')return skinArtV594(c.row,tier);
+ const key=c.organ+':'+tier;if(organRunV598.art.has(key))return organRunV598.art.get(key);
+ const canvas=skinCanvasV594(320,320),g=canvas.getContext('2d'),color=UPGRADE_RARITIES_V593[tier].color;g.translate(160,160);g.shadowColor=color;g.shadowBlur=tier*3;
+ if(c.organ==='shell'){g.rotate(-.7);g.scale(8,8);drawOrganNeedleV598(g);}
+ else if(c.organ==='tail'){g.scale(1.4,1.4);drawOrganWhipV598(g,{age:.25,aim:-.25,s:{arc:2.4,radius:83,duration:.42,color:'#e5d2be'}},true);}
+ else{g.rotate(-.6);g.fillStyle='#d8e9d3';g.strokeStyle='#819580';g.lineWidth=2;g.beginPath();g.moveTo(-60,0);g.bezierCurveTo(-25,-5,20,-45,50,-25);g.bezierCurveTo(100,15,0,55,-60,0);g.fill();g.stroke();g.fillStyle='#f3fff0';g.beginPath();g.ellipse(35,-10,14,5,-.4,0,TAU);g.fill();}
+ organRunV598.art.set(key,canvas);return canvas;
+}
+function organCardIconV598(c,tier){
+ if(!c.organ||c.organ==='arm')return skinIconV594(c.group==='bare'?'blade':c.group,tier);
+ const key=c.organ+':'+tier;if(organRunV598.icons.has(key))return organRunV598.icons.get(key);
+ const canvas=skinCanvasV594(40,40),g=canvas.getContext('2d');g.strokeStyle=UPGRADE_RARITIES_V593[tier].color;g.lineWidth=2;g.lineCap='round';g.lineJoin='round';g.beginPath();
+ if(c.organ==='shell'){g.moveTo(8,30);g.lineTo(29,5);g.lineTo(24,28);g.lineTo(18,23);g.closePath();}
+ else if(c.organ==='tail'){g.moveTo(7,31);g.bezierCurveTo(35,36,37,8,20,7);g.bezierCurveTo(5,6,12,23,24,17);}
+ else{g.moveTo(20,5);g.bezierCurveTo(17,14,8,20,8,25);g.bezierCurveTo(8,39,32,39,32,25);g.bezierCurveTo(32,20,23,13,20,5);}
+ g.stroke();organRunV598.icons.set(key,canvas);return canvas;
+}
+const organDockBaseV598=updateRenderedDock;
+updateRenderedDock=function(){
+ for(const el of document.querySelectorAll('#parts .part')){
+  const organ=el.dataset.kind,level=state[organ]||0,icon=el.querySelector('.partIcon'),name=el.querySelector('.partName');
+  if(organ==='arm'){
+   const mode=armItemModeV589(),key=mode==='bare'?partKey('arm',level):'arm_items/'+mode;if(icon.dataset.asset!==key){icon.dataset.asset=key;icon.innerHTML='<img alt="" src="'+ASSET_SRC[key]+'">';}
+  }else if(icon.dataset.asset!==organ){icon.dataset.asset=organ;icon.replaceChildren();const c=document.createElement('canvas');skinPaintCanvasV594(c,organCardArtV598({organ},0));icon.appendChild(c);}
+  icon.style.opacity=level>0?'1':'.32';name.textContent=upgradeTextV593(...organNamesV598[organ]);el.setAttribute('aria-label',name.textContent+' Lv.'+level);
+ }
+};
+const organUpdateBaseV598=update;
+update=function(dt){const active=running&&!paused&&!choosing&&!rewardChoosing&&!ended,before=t,result=organUpdateBaseV598(dt);if(active&&running&&!ended&&t>before&&!choosing&&!rewardChoosing)organStepV598(t-before);return result;};
+const organDrawBaseV598=drawPlayer;
+drawPlayer=function(shadowOnly=false){const result=organDrawBaseV598(shadowOnly);if(!shadowOnly)drawOrganAttacksV598();return result;};
+function startOrganRunV598(){selectedStartWeapon='arm';reset();return true;}
+const organResetBaseV598=reset;
+reset=function(...args){
+ const result=organResetBaseV598(...args);organClearV598();Object.assign(state,{arm:1,shell:0,mouth:0,tail:0,wing:0,leg:0});selectedStartWeapon='arm';
+ organRunV598.opening=true;showLevelUp();updateHUD(true);return result;
+};
+const organHomeBaseV598=returnToHome;
+returnToHome=function(...args){organClearV598();return organHomeBaseV598(...args);};
+const organRenderBaseV598=renderLevelChoices;
+renderLevelChoices=function(...args){const result=organRenderBaseV598(...args);$('levelPanel').dataset.organOpening=String(organRunV598.opening);for(const b of $('cards').querySelectorAll('.card')){const c=UPGRADE_CARDS_V593.find(c=>c.id===b.dataset.kind);b.dataset.organ=c?.organ||c?.group||'';}if(organRunV598.opening){const h=$('levelPanel').querySelector('.levelHead');h.querySelector('h2').textContent=upgradeTextV593('스킬 선택','CHOOSE SKILL');h.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');}return result;};
+const organUpgradeResetV598=upgradeResetV593;
+upgradeResetV593=function(){const result=organUpgradeResetV598();organClearV598();return result;};
+window.__EVOLVE_ORGAN_SKILLS_V598__={
+ read:()=>({version:598,opening:organRunV598.opening,openingChosen:organRunV598.openingChosen,levels:Object.fromEntries(Object.keys(organNamesV598).map(k=>[k,state[k]||0])),equippedArm:partsStateV523.worn.arm,armMode:armItemModeV589(),stats:{...organRunV598.stats},casts:{...organRunV598.casts},hits:{...organRunV598.hits},projectiles:organRunV598.projectiles.length,whips:organRunV598.whips.length,variants:Object.fromEntries(Object.keys(organSlotsV598).map(k=>[k,organVariantV598(k)])),physical_Galaxy_S23_plus_tested:false}),
+ variants:()=>Object.fromEntries(Object.entries(ORGAN_SKILL_MODEL_V598.profiles).map(([id,v])=>[id,{...v}]))
+};
+if(new URLSearchParams(location.search).get('evolveQA')==='1'){
+ window.__EVOLVE_ORGAN_SKILLS_V598__.test={spec:organSpecV598,step:organStepV598,cast:organCastV598,clear:organClearV598,projectiles:()=>organRunV598.projectiles,whips:()=>organRunV598.whips,geometry:ORGAN_SKILL_MODEL_V598,canChoose:choiceInputReady,context:()=>({player,state,enemies,stats:organRunV598.stats,cooldowns:organRunV598.cooldowns,grid:rebuildEnemyGridV424,draw,home:returnToHome,lineClear:(a,b,r=1)=>!terrainHitV418(a.x,a.y,b.x,b.y,r)}),setItemVariant:(itemId,organ,variant)=>{const item=partsItemV523(itemId),p=ORGAN_SKILL_MODEL_V598.profiles[variant];if(!item||p?.organ!==organ||item.slot!==organSlotsV598[organ])throw Error('Invalid item/organ variant');item.skillVariantsV598={...item.skillVariantsV598,[organ]:variant};}};
+ const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test;q.cards=UPGRADE_CARDS_V593;q.pool=()=>upgradePoolV593();q.apply=(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);};q.lines=(c,tier)=>upgradeLinesV593(c,tier);q.value=(c,tier)=>upgradeValueV593(c,tier);q.reset=()=>upgradeResetV593();
+}
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 
