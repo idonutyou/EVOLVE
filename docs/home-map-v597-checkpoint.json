@@ -1,8 +1,8 @@
 {
   "version": "V575-WEB-30-MAP-HOME",
   "build": "b81a65c5865125130f350b7675eed52c5db78a725356823bb36238ee4ea0c3c4",
-  "progress": 90,
-  "status": "Main and online-v575 updated; automated Pages publication checks running",
+  "progress": 100,
+  "status": "Published successfully; all 16 browser suites and public asset/hash checks passed",
   "baseline": "f336a949c51a9dedc74c48c031c8c594f0a5b59f",
   "branch": "home-map-miniatures-v597",
   "saved_images": [
@@ -13,10 +13,12 @@
     "biolab",
     "red_biolab"
   ],
-  "deployment_pending": true,
+  "deployment_pending": false,
   "automated_browser_checks": true,
   "physical_Galaxy_S23_plus_tested": false,
   "release_commit": "dff19233680389f7031c528dc0761a42e6b5dc10",
   "workflow_run": 40100524853,
-  "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40100524853"
+  "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40100524853",
+  "live_url": "https://idonutyou.github.io/EVOLVE/",
+  "publication_verification": "docs/home-map-v597-live.json"
 }
