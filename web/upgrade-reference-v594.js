@@ -16,38 +16,41 @@ function skinFrameV594(tier){
 function skinAlphaV594(c,feather=0){
  const g=c.getContext('2d',{willReadFrequently:true}),data=g.getImageData(0,0,c.width,c.height),p=data.data,w=c.width,h=c.height;
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-  const i=(y*w+x)*4,m=Math.max(p[i],p[i+1],p[i+2]);let a=Math.max(0,Math.min(1,(m-16)/42));
+  const i=(y*w+x)*4,m=Math.max(p[i],p[i+1],p[i+2]);let a=Math.max(0,Math.min(1,(m-70)/100));
   if(feather){const edge=Math.min(x,y,w-1-x,h-1-y),q=Math.min(1,edge/feather);a*=q*q*(3-2*q);}
   if(a<.004){p[i+3]=0;continue;}
-  const light=Math.max(0,Math.min(1,(m-16)/42));if(light>0&&light<1){p[i]=Math.min(255,p[i]/light);p[i+1]=Math.min(255,p[i+1]/light);p[i+2]=Math.min(255,p[i+2]/light);}
+  const light=Math.max(0,Math.min(1,(m-70)/100));if(light>0&&light<1){p[i]=Math.min(255,p[i]/light);p[i+1]=Math.min(255,p[i+1]/light);p[i+2]=Math.min(255,p[i+2]/light);}
   p[i+3]=Math.round(255*a);
  }g.putImageData(data,0,0);return c;
 }
-function skinIsolateArtV594(c,canonicalTop,canonicalBottom){
+function skinIsolateArtV594(c,canonicalTop,canonicalBottom,row,tier){
  const g=c.getContext('2d',{willReadFrequently:true}),data=g.getImageData(0,0,c.width,c.height),p=data.data,w=c.width,h=c.height,n=w*h,seen=new Uint8Array(n),keep=new Uint8Array(n),queue=new Int32Array(n);
- const bright=i=>Math.max(p[i*4],p[i*4+1],p[i*4+2])>=32;
+ const material=k=>{const i=k*4,max=Math.max(p[i],p[i+1],p[i+2]),min=Math.min(p[i],p[i+1],p[i+2]);return max>35&&min/max>.15;};
+ let left=w,top=h,right=0,bottom=0;const pieces=[];
  for(let seed=0;seed<n;seed++){
-  if(seen[seed]||!bright(seed))continue;let read=0,write=1,inside=false;queue[0]=seed;seen[seed]=1;
-  while(read<write){const k=queue[read++],x=k%w,y=(k/w)|0;if(x>12&&x<w-13&&y>canonicalTop+15&&y<canonicalBottom-15)inside=true;
-   for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=w||yy>=h)continue;const j=yy*w+xx;if(!seen[j]&&bright(j)){seen[j]=1;queue[write++]=j;}}
-  }if(inside)for(let i=0;i<write;i++)keep[queue[i]]=1;
+  if(seen[seed]||!material(seed))continue;let read=0,write=1,sumY=0;seen[seed]=1;queue[0]=seed;
+  while(read<write){const k=queue[read++],x=k%w,y=(k/w)|0;sumY+=y;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=w||yy>=h)continue;const j=yy*w+xx;if(!seen[j]&&material(j)){seen[j]=1;queue[write++]=j;}}}
+  const center=sumY/write;if(write<3||center<canonicalTop+10||center>canonicalBottom-10)continue;
+  let l=w,t=h,r=0,b=0;const pixels=queue.slice(0,write);for(const k of pixels){const x=k%w,y=(k/w)|0;l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y);}pieces.push({pixels,l,t,r,b});
  }
- // Keep the whole item and nearby glow; discard fragments of adjacent atlas rows.
+ const largest=Math.max(...pieces.map(p=>p.pixels.length)),major=pieces.filter(p=>p.pixels.length>=largest*.12),bounds={l:Math.min(...major.map(p=>p.l))-16,r:Math.max(...major.map(p=>p.r))+16,t:Math.min(...major.map(p=>p.t))-16,b:Math.max(...major.map(p=>p.b))+16};
+ // Ignore isolated fragments from neighbouring atlas cells, while retaining separate equipment pieces.
+ for(const piece of pieces){if(piece.r<bounds.l||piece.l>bounds.r||piece.b<bounds.t||piece.t>bounds.b)continue;for(const k of piece.pixels){const x=k%w,y=(k/w)|0;keep[k]=1;left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}}
  const distance=new Uint16Array(n);for(let i=0;i<n;i++)distance[i]=keep[i]?0:1000;
  for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;let d=distance[i];if(x)d=Math.min(d,distance[i-1]+1);if(y){d=Math.min(d,distance[i-w]+1);if(x)d=Math.min(d,distance[i-w-1]+1);if(x<w-1)d=Math.min(d,distance[i-w+1]+1);}distance[i]=d;}
  for(let y=h-1;y>=0;y--)for(let x=w-1;x>=0;x--){const i=y*w+x;let d=distance[i];if(x<w-1)d=Math.min(d,distance[i+1]+1);if(y<h-1){d=Math.min(d,distance[i+w]+1);if(x)d=Math.min(d,distance[i+w-1]+1);if(x<w-1)d=Math.min(d,distance[i+w+1]+1);}distance[i]=d;}
- for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-  const k=y*w+x,i=k*4,m=Math.max(p[i],p[i+1],p[i+2]),base=Math.max(0,Math.min(1,(m-12)/36)),edge=Math.min(1,Math.min(x,y,w-1-x,h-1-y)/18),near=Math.max(0,Math.min(1,(34-distance[k])/10)),alpha=base*edge*edge*(3-2*edge)*near;
-  if(alpha<.004){p[i+3]=0;continue;}if(base<1){p[i]=Math.min(255,p[i]/base);p[i+1]=Math.min(255,p[i+1]/base);p[i+2]=Math.min(255,p[i+2]/base);}p[i+3]=Math.round(alpha*255);
- }g.putImageData(data,0,0);return c;
+ for(let k=0;k<n;k++){const i=k*4,m=Math.max(p[i],p[i+1],p[i+2]),base=Math.max(0,Math.min(1,(m-12)/36)),alpha=base*Math.exp(-Math.pow(Math.max(0,distance[k]-5)/4,2));if(alpha<.004){p[i+3]=0;continue;}if(base<1){p[i]=Math.min(255,p[i]/base);p[i+1]=Math.min(255,p[i+1]/base);p[i+2]=Math.min(255,p[i+2]/base);}p[i+3]=Math.round(alpha*255);}
+ g.putImageData(data,0,0);if(right<left||bottom<top)throw Error('Empty upgrade icon');
+ const x=Math.max(0,left-12),y=Math.max(0,top-12),cw=Math.min(w,right+13)-x,ch=Math.min(h,bottom+13)-y,pad=64,out=skinCanvasV594(cw+pad*2,ch+pad*2),q=out.getContext('2d');
+ // Rebuild the aura from the isolated silhouette, so it has no rectangular atlas boundary.
+ q.shadowColor=UPGRADE_RARITIES_V593[tier].color;q.shadowBlur=[0,8,14,20,28][tier];q.drawImage(c,x,y,cw,ch,pad,pad,cw,ch);q.shadowBlur=0;
+ return out;
 }
 function skinArtV594(row,tier){
  const key=row+':'+tier;if(upgradeSkinV594.art.has(key))return upgradeSkinV594.art.get(key);
  const [canonicalTop,canonicalBottom]=upgradeArtV593.row_bounds[row],top=Math.max(0,canonicalTop-20),bottom=Math.min(upgradeArtV593.height,canonicalBottom+20),left=Math.round(tier*upgradeArtV593.width/5),right=Math.round((tier+1)*upgradeArtV593.width/5),raw=skinCanvasV594(right-left,bottom-top),g=raw.getContext('2d');
- g.drawImage(upgradeAtlasV594,left,top,raw.width,raw.height,0,0,raw.width,raw.height);skinIsolateArtV594(raw,canonicalTop-top,canonicalBottom-top);
- // A genuine alpha margin lets the glow fade naturally instead of ending at a square edge.
- const pad=32,c=skinCanvasV594(raw.width+pad*2,raw.height+pad*2);c.getContext('2d').drawImage(raw,pad,pad);
- upgradeSkinV594.art.set(key,c);upgradeSkinV594.artMetrics.set(key,{width:c.width,height:c.height,padding:pad,edgeAlpha:0,source:[left,top,right-left,bottom-top],extendedSource:20,feather:18});return c;
+ g.drawImage(upgradeAtlasV594,left,top,raw.width,raw.height,0,0,raw.width,raw.height);const c=skinIsolateArtV594(raw,canonicalTop-top,canonicalBottom-top,row,tier);
+ upgradeSkinV594.art.set(key,c);upgradeSkinV594.artMetrics.set(key,{width:c.width,height:c.height,padding:64,edgeAlpha:0,source:[left,top,right-left,bottom-top],extendedSource:20,silhouetteAura:true});return c;
 }
 function skinIconV594(group,tier){
  const key=group==='gun'||group==='blade'?'arm':group==='legs'?'feet':'shell';const cache=key+':'+tier;if(upgradeSkinV594.icons[cache])return upgradeSkinV594.icons[cache];
@@ -90,7 +93,7 @@ renderLevelChoices=function(isReroll=false){
 drawEnemyHitLanguage=function(){};
 drawThreatPriority=function(){};
 drawEnemySilhouetteV165=function(){};
-window.__EVOLVE_UPGRADE_REFERENCE_V594__={ready:upgradeSkinReadyV594,read:()=>({ready:upgradeSkinV594.ready,reference:upgradeReferenceV594.path,sourceBytesPreserved:true,originalItemAtlasUnchanged:true,transparentItemPadding:32,artCache:upgradeSkinV594.art.size,frameBuilds:upgradeSkinV594.builds,failures:[...upgradeSkinV594.failures],equippingCards:false,physical_Galaxy_S23_plus_tested:false})};
+window.__EVOLVE_UPGRADE_REFERENCE_V594__={ready:upgradeSkinReadyV594,read:()=>({ready:upgradeSkinV594.ready,reference:upgradeReferenceV594.path,sourceBytesPreserved:true,originalItemAtlasUnchanged:true,transparentItemPadding:64,artCache:upgradeSkinV594.art.size,frameBuilds:upgradeSkinV594.builds,failures:[...upgradeSkinV594.failures],equippingCards:false,physical_Galaxy_S23_plus_tested:false})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test={reference:()=>referenceImageV594,background:()=>upgradeSkinV594.backgrounds[0],frame:skinFrameV594,art:skinArtV594,artMetrics:()=>[...upgradeSkinV594.artMetrics.entries()],context:()=>({ctx,drawEnemy,normalOverlay:drawNormalEnemyOverlayV426,hitLanguage:drawEnemyHitLanguage,threat:drawThreatPriority,setGPU:value=>{gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426;},gpu:()=>({enabled:gpuEnemyBatchEnabledV426,ready:gpuEnemyBatchReadyV426}),draw,focus:e=>{focusEnemy=e;}})};
 
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test.probeGPU=function(){const original=gpuWriteInstanceV426,fx=[],uvs=new Map(Object.entries(gpuEnemyFXUVV426).map(([k,v])=>[v,k]));let body=0;gpuWriteInstanceV426=function(...args){const key=uvs.get(args[8]);if(key)fx.push(key);else body++;return original(...args);};try{visibleSimV428=-1;renderEnemyBatchV426('body');return {fx,body,ready:gpuEnemyBatchReadyV426};}finally{gpuWriteInstanceV426=original;}};

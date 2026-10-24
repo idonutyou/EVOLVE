@@ -1,11 +1,11 @@
 {
-  "progress": 40,
+  "progress": 80,
   "version": "V575-WEB-27-REFERENCE-CARDS",
-  "build": "5a5a3bb8ed39d8638de20f31574ce968311aaa2eaf89822e4f69ba14e8ebe43d",
-  "engine": "assets/27fcd429bdfb16d3d68649444889e017a4b2f02b57f577e335f4cc4e92af95ef.js",
-  "status": "Packaged; functional and pixel/layout verification pending",
+  "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
+  "engine": "assets/514571182ba68d57f36fcd2d60f9140cff8ccfffaee640c7883a96081d17ba8f.js",
+  "status": "Local functional, pixel, mobile viewport, combat and unit checks passed; publication pending",
   "rules": {
-    "engine": "assets/27fcd429bdfb16d3d68649444889e017a4b2f02b57f577e335f4cc4e92af95ef.js",
+    "engine": "assets/514571182ba68d57f36fcd2d60f9140cff8ccfffaee640c7883a96081d17ba8f.js",
     "baseline_commit": "79ea7d94d753f67fd59b491a40ddecd1041b711e",
     "reference": {
       "path": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
@@ -62,7 +62,7 @@
         ]
       }
     },
-    "stylesheet": "assets/9073cce837b901512a6c9b59775a0385b1d2e9e8a069637a0615dacdbf94909d.css",
+    "stylesheet": "assets/daf47db6bb5d0395705a6eea081d9e1ced8a16541bcf537657ed002721556598.css",
     "font": {
       "path": "assets/7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9.woff",
       "sha256": "7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9",
@@ -83,8 +83,8 @@
     "weapon_equipping_cards_removed": true,
     "only_current_equipped_weapon_stats": true,
     "generic_existing_body_upgrades_retained": true,
-    "item_art_alpha_margin": 32,
-    "item_edge_feather": 18,
+    "item_art_alpha_margin": 64,
+    "item_silhouette_glow": true,
     "item_source_region_extension": 20,
     "item_art_original_bytes_unchanged": true,
     "monster_body_marker_paths_removed": [
@@ -113,5 +113,19 @@
     "new_image_assets": 1,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Verify supplied UI resemblance, all rarity art edges, equipment-only pools, unchanged wear after choices, and clean CPU/GPU monster bodies; upload, deploy and verify Pages."
+  "next": "Publish the verified tree to GitHub, complete server browser checks, deploy and verify actual Pages hashes.",
+  "local_verification": {
+    "upgrade_cards_browser": true,
+    "equipment_rolls_per_mode": 300,
+    "transparent_icons": 25,
+    "frame_pixels_identical": 857,
+    "clean_cpu_gpu_body_paths": 18,
+    "gpu_status_instances": 0,
+    "visual_clarity_browser": true,
+    "player_combat_browser": true,
+    "python_unit_tests": 6,
+    "client_unit_tests": true,
+    "existing_images_preserved": 995,
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }

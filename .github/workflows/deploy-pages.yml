@@ -138,7 +138,7 @@ jobs:
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
-          python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web26-live.json
+          python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
       - name: Retain publication evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -146,5 +146,5 @@ jobs:
           name: evolve-publication-verification
           path: |
             test-results/web17-live.json
-            test-results/web26-live.json
+            test-results/web27-live.json
           if-no-files-found: ignore

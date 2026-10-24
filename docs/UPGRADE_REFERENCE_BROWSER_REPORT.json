@@ -1,0 +1,1409 @@
+{
+  "checks": [
+    "17 simple stat cards have 1–2 effect lines; rarity increments, five independent rarity boundaries, and +1/+2/+3/+4/+5 counts agree with actual stats",
+    "real cannon volleys gain two projectiles, three pierces, a bounce and 30% range; damage rises by exactly 20%; body radius and visible size follow size cards; every level needs 12 XP",
+    "an actual projectile pierces two different enemies, then ricochets to a third without repeatedly hitting the same enemy",
+    "a projectile already in flight keeps gun damage after changing to blades and cannot gain blade crit or bleeding",
+    "300 real choice rolls per equipment mode offer only the current gun/blade and existing body stats; no acquisition or equipment-changing card remains",
+    "blade crit caps at 100% and stops being offered; a real hit applies 15 bleed over 3 seconds; faster swings advance the real attack; regeneration heals once each five gameplay seconds",
+    "real card clicks advance levels 2/10/100/1000 and preserve all three upgrades earned from 36 XP",
+    "all 25 rarity icons have transparent safe margins with no opaque rectangular edges; real supplied frame pixels match exactly; current level remains visible and foot label is 발",
+    "ordinary, elite affixes, nemesis, zone elite and boss render paths produce no body glyph/ring/target/stun geometry; actual GPU body pass emits no status FX instances",
+    "every ordinary appearance, elite and all seven boss images can be selected; exact selected ordinary/elite monsters spawn on clear terrain even in stage one with natural spawning disabled; admin guard works",
+    "run bonuses and QA weapon fixtures reset, while saved ARM equipment remains intact"
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "build": {
+    "version": "V575-WEB-27-REFERENCE-CARDS",
+    "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
+    "scriptBytes": 77566965
+  },
+  "cards": {
+    "base": [
+      {
+        "dmg": 13.200000000000001,
+        "pierce": 1,
+        "range": 196.5,
+        "bounce": 0
+      }
+    ],
+    "enhanced": [
+      {
+        "dmg": 13.200000000000001,
+        "pierce": 4,
+        "range": 255.45000000000002,
+        "bounce": 1
+      },
+      {
+        "dmg": 13.200000000000001,
+        "pierce": 4,
+        "range": 255.45000000000002,
+        "bounce": 1
+      },
+      {
+        "dmg": 13.200000000000001,
+        "pierce": 4,
+        "range": 255.45000000000002,
+        "bounce": 1
+      }
+    ],
+    "cooldown": 0.6541666666666667,
+    "baseDamage": 100,
+    "boostedDamage": 120,
+    "health": 85,
+    "large": 1.05,
+    "largeRadius": 10.5,
+    "light": 0.95,
+    "lightRadius": 9.5,
+    "speed": 0.1,
+    "defs": [
+      {
+        "id": "gun_damage",
+        "lines": [
+          [
+            "공격력 +10%"
+          ],
+          [
+            "공격력 +15%"
+          ],
+          [
+            "공격력 +20%"
+          ],
+          [
+            "공격력 +30%"
+          ],
+          [
+            "공격력 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "gun_count",
+        "lines": [
+          [
+            "탄수 +1"
+          ],
+          [
+            "탄수 +2"
+          ],
+          [
+            "탄수 +3"
+          ],
+          [
+            "탄수 +4"
+          ],
+          [
+            "탄수 +5"
+          ]
+        ],
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "gun_haste",
+        "lines": [
+          [
+            "연사 속도 +10%"
+          ],
+          [
+            "연사 속도 +15%"
+          ],
+          [
+            "연사 속도 +20%"
+          ],
+          [
+            "연사 속도 +30%"
+          ],
+          [
+            "연사 속도 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "gun_pierce",
+        "lines": [
+          [
+            "관통 +1"
+          ],
+          [
+            "관통 +2"
+          ],
+          [
+            "관통 +3"
+          ],
+          [
+            "관통 +4"
+          ],
+          [
+            "관통 +5"
+          ]
+        ],
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "gun_range",
+        "lines": [
+          [
+            "사거리 +10%"
+          ],
+          [
+            "사거리 +15%"
+          ],
+          [
+            "사거리 +20%"
+          ],
+          [
+            "사거리 +30%"
+          ],
+          [
+            "사거리 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "gun_bounce",
+        "lines": [
+          [
+            "튕김 +1"
+          ],
+          [
+            "튕김 +2"
+          ],
+          [
+            "튕김 +3"
+          ],
+          [
+            "튕김 +4"
+          ],
+          [
+            "튕김 +5"
+          ]
+        ],
+        "values": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "id": "blade_damage",
+        "lines": [
+          [
+            "공격력 +10%"
+          ],
+          [
+            "공격력 +15%"
+          ],
+          [
+            "공격력 +20%"
+          ],
+          [
+            "공격력 +30%"
+          ],
+          [
+            "공격력 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "blade_haste",
+        "lines": [
+          [
+            "공격 속도 +10%"
+          ],
+          [
+            "공격 속도 +15%"
+          ],
+          [
+            "공격 속도 +20%"
+          ],
+          [
+            "공격 속도 +30%"
+          ],
+          [
+            "공격 속도 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "blade_range",
+        "lines": [
+          [
+            "범위 +10%"
+          ],
+          [
+            "범위 +15%"
+          ],
+          [
+            "범위 +20%"
+          ],
+          [
+            "범위 +30%"
+          ],
+          [
+            "범위 +50%"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "blade_crit",
+        "lines": [
+          [
+            "치명타 확률 +10%p"
+          ],
+          [
+            "치명타 확률 +15%p"
+          ],
+          [
+            "치명타 확률 +20%p"
+          ],
+          [
+            "치명타 확률 +30%p"
+          ],
+          [
+            "치명타 확률 +50%p"
+          ]
+        ],
+        "values": [
+          0.1,
+          0.15000000000000002,
+          0.2,
+          0.30000000000000004,
+          0.5
+        ]
+      },
+      {
+        "id": "blade_bleed",
+        "lines": [
+          [
+            "3초간 출혈 +15"
+          ],
+          [
+            "3초간 출혈 +22.5"
+          ],
+          [
+            "3초간 출혈 +30"
+          ],
+          [
+            "3초간 출혈 +45"
+          ],
+          [
+            "3초간 출혈 +75"
+          ]
+        ],
+        "values": [
+          15,
+          22.5,
+          30,
+          45,
+          75
+        ]
+      },
+      {
+        "id": "move",
+        "lines": [
+          [
+            "이동 속도 +5%"
+          ],
+          [
+            "이동 속도 +7.5%"
+          ],
+          [
+            "이동 속도 +10%"
+          ],
+          [
+            "이동 속도 +15%"
+          ],
+          [
+            "이동 속도 +25%"
+          ]
+        ],
+        "values": [
+          0.05,
+          0.07500000000000001,
+          0.1,
+          0.15000000000000002,
+          0.25
+        ]
+      },
+      {
+        "id": "light",
+        "lines": [
+          [
+            "이동 속도 +5%",
+            "크기 −5%"
+          ],
+          [
+            "이동 속도 +7.5%",
+            "크기 −7.5%"
+          ],
+          [
+            "이동 속도 +10%",
+            "크기 −10%"
+          ],
+          [
+            "이동 속도 +15%",
+            "크기 −15%"
+          ],
+          [
+            "이동 속도 +25%",
+            "크기 −25%"
+          ]
+        ],
+        "values": [
+          0.05,
+          0.07500000000000001,
+          0.1,
+          0.15000000000000002,
+          0.25
+        ]
+      },
+      {
+        "id": "health",
+        "lines": [
+          [
+            "체력 +10"
+          ],
+          [
+            "체력 +15"
+          ],
+          [
+            "체력 +20"
+          ],
+          [
+            "체력 +30"
+          ],
+          [
+            "체력 +50"
+          ]
+        ],
+        "values": [
+          10,
+          15,
+          20,
+          30,
+          50
+        ]
+      },
+      {
+        "id": "giant",
+        "lines": [
+          [
+            "체력 +25",
+            "크기 +5%"
+          ],
+          [
+            "체력 +37.5",
+            "크기 +5%"
+          ],
+          [
+            "체력 +50",
+            "크기 +5%"
+          ],
+          [
+            "체력 +75",
+            "크기 +5%"
+          ],
+          [
+            "체력 +125",
+            "크기 +5%"
+          ]
+        ],
+        "values": [
+          25,
+          37.5,
+          50,
+          75,
+          125
+        ]
+      },
+      {
+        "id": "armor",
+        "lines": [
+          [
+            "방어력 +1"
+          ],
+          [
+            "방어력 +1.5"
+          ],
+          [
+            "방어력 +2"
+          ],
+          [
+            "방어력 +3"
+          ],
+          [
+            "방어력 +5"
+          ]
+        ],
+        "values": [
+          1,
+          1.5,
+          2,
+          3,
+          5
+        ]
+      },
+      {
+        "id": "regen",
+        "lines": [
+          [
+            "5초마다 체력 +1"
+          ],
+          [
+            "5초마다 체력 +1.5"
+          ],
+          [
+            "5초마다 체력 +2"
+          ],
+          [
+            "5초마다 체력 +3"
+          ],
+          [
+            "5초마다 체력 +5"
+          ]
+        ],
+        "values": [
+          1,
+          1.5,
+          2,
+          3,
+          5
+        ]
+      }
+    ],
+    "rolls": [
+      0,
+      0,
+      1,
+      1,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4
+    ],
+    "rarities": [
+      {
+        "id": "common",
+        "ko": "커먼",
+        "en": "COMMON",
+        "color": "#bec5ce",
+        "mult": 1,
+        "count": 1,
+        "chance": 0.6
+      },
+      {
+        "id": "rare",
+        "ko": "레어",
+        "en": "RARE",
+        "color": "#46ceff",
+        "mult": 1.5,
+        "count": 2,
+        "chance": 0.27
+      },
+      {
+        "id": "epic",
+        "ko": "에픽",
+        "en": "EPIC",
+        "color": "#c578ff",
+        "mult": 2,
+        "count": 3,
+        "chance": 0.1
+      },
+      {
+        "id": "legendary",
+        "ko": "전설",
+        "en": "LEGENDARY",
+        "color": "#ffe16b",
+        "mult": 3,
+        "count": 4,
+        "chance": 0.027
+      },
+      {
+        "id": "mythic",
+        "ko": "신화",
+        "en": "MYTHIC",
+        "color": "#ff913d",
+        "mult": 5,
+        "count": 5,
+        "chance": 0.003
+      }
+    ],
+    "needs": [
+      12,
+      12,
+      12,
+      12,
+      12,
+      12
+    ]
+  },
+  "pierceBounce": {
+    "damage": [
+      13.199999999953434,
+      13.199999999953434,
+      13.199999999953434
+    ],
+    "distinct": 3,
+    "bouncesLeft": 0,
+    "points": 29
+  },
+  "weaponSwitch": {
+    "expected": 15.84,
+    "actual": 15.839999999967404,
+    "bleeding": 0,
+    "mode": "blades"
+  },
+  "equipmentPools": [
+    {
+      "mode": "cannon",
+      "pool": [
+        {
+          "id": "gun_damage",
+          "group": "gun"
+        },
+        {
+          "id": "gun_count",
+          "group": "gun"
+        },
+        {
+          "id": "gun_haste",
+          "group": "gun"
+        },
+        {
+          "id": "gun_pierce",
+          "group": "gun"
+        },
+        {
+          "id": "gun_range",
+          "group": "gun"
+        },
+        {
+          "id": "gun_bounce",
+          "group": "gun"
+        },
+        {
+          "id": "move",
+          "group": "legs"
+        },
+        {
+          "id": "light",
+          "group": "legs"
+        },
+        {
+          "id": "health",
+          "group": "shell"
+        },
+        {
+          "id": "giant",
+          "group": "shell"
+        },
+        {
+          "id": "armor",
+          "group": "shell"
+        },
+        {
+          "id": "regen",
+          "group": "shell"
+        }
+      ],
+      "seen": [
+        "gun_range",
+        "gun_damage",
+        "gun_pierce",
+        "light",
+        "regen",
+        "gun_bounce",
+        "armor",
+        "giant",
+        "gun_count",
+        "move",
+        "gun_haste",
+        "health"
+      ],
+      "after": "cannon"
+    },
+    {
+      "mode": "blades",
+      "pool": [
+        {
+          "id": "blade_damage",
+          "group": "blade"
+        },
+        {
+          "id": "blade_haste",
+          "group": "blade"
+        },
+        {
+          "id": "blade_range",
+          "group": "blade"
+        },
+        {
+          "id": "blade_bleed",
+          "group": "blade"
+        },
+        {
+          "id": "move",
+          "group": "legs"
+        },
+        {
+          "id": "light",
+          "group": "legs"
+        },
+        {
+          "id": "health",
+          "group": "shell"
+        },
+        {
+          "id": "giant",
+          "group": "shell"
+        },
+        {
+          "id": "armor",
+          "group": "shell"
+        },
+        {
+          "id": "regen",
+          "group": "shell"
+        }
+      ],
+      "seen": [
+        "health",
+        "move",
+        "giant",
+        "light",
+        "blade_range",
+        "armor",
+        "blade_bleed",
+        "blade_damage",
+        "blade_haste",
+        "regen"
+      ],
+      "after": "blades"
+    },
+    {
+      "mode": "bare",
+      "pool": [
+        {
+          "id": "move",
+          "group": "legs"
+        },
+        {
+          "id": "light",
+          "group": "legs"
+        },
+        {
+          "id": "health",
+          "group": "shell"
+        },
+        {
+          "id": "giant",
+          "group": "shell"
+        },
+        {
+          "id": "armor",
+          "group": "shell"
+        },
+        {
+          "id": "regen",
+          "group": "shell"
+        }
+      ],
+      "seen": [
+        "health",
+        "armor",
+        "move",
+        "regen",
+        "giant",
+        "light"
+      ],
+      "after": "bare"
+    }
+  ],
+  "blade": {
+    "critical": 200,
+    "bleed": 15,
+    "cast": true,
+    "damage": 215,
+    "age": 0.24,
+    "bullets": 0,
+    "regen": 1,
+    "crit": 1,
+    "critStillOffered": false
+  },
+  "armor": {
+    "baseline": 10,
+    "protectedDamage": 8
+  },
+  "levels": [
+    {
+      "level": 2,
+      "need": 12,
+      "xp": 0,
+      "choosing": false
+    },
+    {
+      "level": 10,
+      "need": 12,
+      "xp": 0,
+      "choosing": false
+    },
+    {
+      "level": 100,
+      "need": 12,
+      "xp": 0,
+      "choosing": false
+    },
+    {
+      "level": 1000,
+      "need": 12,
+      "xp": 0,
+      "choosing": false
+    }
+  ],
+  "portrait": [
+    {
+      "rarity": "rare",
+      "x": 6.359375,
+      "y": 275.921875,
+      "w": 124,
+      "h": 353.4375,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    },
+    {
+      "rarity": "epic",
+      "x": 134.484375,
+      "y": 275.921875,
+      "w": 124.015625,
+      "h": 353.4375,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    },
+    {
+      "rarity": "legendary",
+      "x": 262.625,
+      "y": 275.921875,
+      "w": 124,
+      "h": 353.4375,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    }
+  ],
+  "landscape": [
+    {
+      "rarity": "common",
+      "x": 83.65625,
+      "y": 100.21875,
+      "w": 218.890625,
+      "h": 261.875,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    },
+    {
+      "rarity": "mythic",
+      "x": 316.546875,
+      "y": 100.21875,
+      "w": 218.890625,
+      "h": 261.875,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    },
+    {
+      "rarity": "legendary",
+      "x": 549.4375,
+      "y": 100.21875,
+      "w": 218.890625,
+      "h": 261.875,
+      "statsWithin": true,
+      "partWithin": true,
+      "buttonText": false,
+      "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+    }
+  ],
+  "referenceEnglish": {
+    "language": "ko",
+    "heading": "LEVEL UP",
+    "parts": [
+      "ARM",
+      "FEET",
+      "SHELL"
+    ],
+    "headingVisible": true
+  },
+  "skin": {
+    "read": {
+      "ready": true,
+      "reference": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+      "sourceBytesPreserved": true,
+      "originalItemAtlasUnchanged": true,
+      "transparentItemPadding": 64,
+      "artCache": 25,
+      "frameBuilds": 5,
+      "failures": [],
+      "equippingCards": false,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "metrics": [
+      {
+        "row": 0,
+        "tier": 0,
+        "edges": 0,
+        "visible": 25602,
+        "width": 363,
+        "height": 305
+      },
+      {
+        "row": 0,
+        "tier": 1,
+        "edges": 0,
+        "visible": 33167,
+        "width": 358,
+        "height": 290
+      },
+      {
+        "row": 0,
+        "tier": 2,
+        "edges": 0,
+        "visible": 39351,
+        "width": 357,
+        "height": 288
+      },
+      {
+        "row": 0,
+        "tier": 3,
+        "edges": 0,
+        "visible": 47389,
+        "width": 359,
+        "height": 296
+      },
+      {
+        "row": 0,
+        "tier": 4,
+        "edges": 0,
+        "visible": 61120,
+        "width": 360,
+        "height": 314
+      },
+      {
+        "row": 1,
+        "tier": 0,
+        "edges": 0,
+        "visible": 19315,
+        "width": 362,
+        "height": 326
+      },
+      {
+        "row": 1,
+        "tier": 1,
+        "edges": 0,
+        "visible": 26959,
+        "width": 368,
+        "height": 328
+      },
+      {
+        "row": 1,
+        "tier": 2,
+        "edges": 0,
+        "visible": 34484,
+        "width": 367,
+        "height": 338
+      },
+      {
+        "row": 1,
+        "tier": 3,
+        "edges": 0,
+        "visible": 40800,
+        "width": 361,
+        "height": 338
+      },
+      {
+        "row": 1,
+        "tier": 4,
+        "edges": 0,
+        "visible": 59345,
+        "width": 364,
+        "height": 346
+      },
+      {
+        "row": 2,
+        "tier": 0,
+        "edges": 0,
+        "visible": 28340,
+        "width": 298,
+        "height": 409
+      },
+      {
+        "row": 2,
+        "tier": 1,
+        "edges": 0,
+        "visible": 37147,
+        "width": 280,
+        "height": 404
+      },
+      {
+        "row": 2,
+        "tier": 2,
+        "edges": 0,
+        "visible": 44817,
+        "width": 284,
+        "height": 404
+      },
+      {
+        "row": 2,
+        "tier": 3,
+        "edges": 0,
+        "visible": 53348,
+        "width": 286,
+        "height": 404
+      },
+      {
+        "row": 2,
+        "tier": 4,
+        "edges": 0,
+        "visible": 69999,
+        "width": 317,
+        "height": 406
+      },
+      {
+        "row": 3,
+        "tier": 0,
+        "edges": 0,
+        "visible": 36731,
+        "width": 369,
+        "height": 369
+      },
+      {
+        "row": 3,
+        "tier": 1,
+        "edges": 0,
+        "visible": 47610,
+        "width": 375,
+        "height": 372
+      },
+      {
+        "row": 3,
+        "tier": 2,
+        "edges": 0,
+        "visible": 57925,
+        "width": 378,
+        "height": 373
+      },
+      {
+        "row": 3,
+        "tier": 3,
+        "edges": 0,
+        "visible": 62821,
+        "width": 357,
+        "height": 375
+      },
+      {
+        "row": 3,
+        "tier": 4,
+        "edges": 0,
+        "visible": 83669,
+        "width": 370,
+        "height": 376
+      },
+      {
+        "row": 4,
+        "tier": 0,
+        "edges": 0,
+        "visible": 27866,
+        "width": 312,
+        "height": 372
+      },
+      {
+        "row": 4,
+        "tier": 1,
+        "edges": 0,
+        "visible": 35928,
+        "width": 302,
+        "height": 369
+      },
+      {
+        "row": 4,
+        "tier": 2,
+        "edges": 0,
+        "visible": 44731,
+        "width": 310,
+        "height": 372
+      },
+      {
+        "row": 4,
+        "tier": 3,
+        "edges": 0,
+        "visible": 50701,
+        "width": 309,
+        "height": 371
+      },
+      {
+        "row": 4,
+        "tier": 4,
+        "edges": 0,
+        "visible": 76808,
+        "width": 355,
+        "height": 385
+      }
+    ],
+    "referenceFramePixels": {
+      "checked": 857,
+      "different": 0
+    },
+    "level": "Lv. 95",
+    "levelVisible": true,
+    "parts": [
+      "외피",
+      "발",
+      "외피"
+    ],
+    "panelRadius": "0px"
+  },
+  "monsterMarks": {
+    "results": [
+      {
+        "type": "crawler",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "crawler",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "warden",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "warden",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "symbiote",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "symbiote",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": true,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": false,
+        "finalBoss": false,
+        "gpu": true,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": false,
+        "finalBoss": true,
+        "gpu": false,
+        "geometry": 0
+      },
+      {
+        "type": "brute",
+        "elite": false,
+        "finalBoss": true,
+        "gpu": true,
+        "geometry": 0
+      }
+    ],
+    "fx": {
+      "fx": [],
+      "body": 4,
+      "ready": true
+    }
+  },
+  "catalog": [
+    {
+      "id": "crawler",
+      "type": "crawler",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "runner",
+      "type": "runner",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "brute",
+      "type": "brute",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "spitter",
+      "type": "spitter",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "warden",
+      "type": "warden",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "froststalker",
+      "type": "froststalker",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "symbiote",
+      "type": "symbiote",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "embermaw",
+      "type": "embermaw",
+      "legacy": false,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "legacy_crawler",
+      "type": "crawler",
+      "legacy": true,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "legacy_warden",
+      "type": "warden",
+      "legacy": true,
+      "elite": false,
+      "clear": true
+    },
+    {
+      "id": "alpha",
+      "type": "brute",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "sentinel",
+      "type": "spitter",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "hunter",
+      "type": "runner",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "omega",
+      "type": "brute",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "nemesis_brute",
+      "type": "brute",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "nemesis_spitter",
+      "type": "spitter",
+      "legacy": false,
+      "elite": true,
+      "clear": true
+    },
+    {
+      "id": "bio",
+      "preview": true
+    },
+    {
+      "id": "venom",
+      "preview": true
+    },
+    {
+      "id": "blade",
+      "preview": true
+    },
+    {
+      "id": "frost",
+      "preview": true
+    },
+    {
+      "id": "pyre",
+      "preview": true
+    },
+    {
+      "id": "origin",
+      "preview": true
+    },
+    {
+      "id": "abyss",
+      "preview": true
+    }
+  ],
+  "success": true
+}

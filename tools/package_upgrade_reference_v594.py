@@ -105,7 +105,7 @@ def main():
         'stylesheet': style, 'font': font, 'reference_background_and_frames': True, 'level_visible': True,
         'part_labels': {'gun': '팔', 'blade': '팔', 'legs': '발', 'shell': '외피'},
         'weapon_equipping_cards_removed': True, 'only_current_equipped_weapon_stats': True,
-        'generic_existing_body_upgrades_retained': True, 'item_art_alpha_margin': 32, 'item_edge_feather': 18, 'item_source_region_extension': 20,
+        'generic_existing_body_upgrades_retained': True, 'item_art_alpha_margin': 64, 'item_silhouette_glow': True, 'item_source_region_extension': 20,
         'item_art_original_bytes_unchanged': True, 'monster_body_marker_paths_removed': [p['name'] for p in patches],
         'all_monster_types_including_elites_and_bosses': True, 'both_cpu_and_gpu': True,
         'attack_warnings_damage_and_hp_behavior_preserved': True, 'existing_image_bytes_unchanged': preserved,

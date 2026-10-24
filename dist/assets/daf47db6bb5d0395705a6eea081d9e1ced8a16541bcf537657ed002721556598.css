@@ -1,0 +1,133 @@
+/*
+Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded,
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+*/
+@font-face{font-family:'EVOLVE Upgrade Sans';src:url('7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9.woff') format('woff');font-style:normal;font-weight:100 900;font-display:swap}
+#levelOverlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:10000!important;align-items:center!important;justify-content:center!important;padding:0!important;background:#020104!important;backdrop-filter:none!important;overflow:hidden!important}
+#levelPanel{container-type:inline-size;isolation:isolate;position:relative!important;flex:none!important;width:min(100vw,56.25dvh)!important;height:auto!important;aspect-ratio:864/1536;max-width:none!important;max-height:none!important;padding:0!important;margin:0!important;overflow:visible!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;font-family:'EVOLVE Upgrade Sans','Noto Sans KR',system-ui,sans-serif!important}
+#levelPanel::before,#levelPanel::after{display:none!important}.upgradeReferenceBgV594{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}.upgradeReferenceBgV594.landscape{display:none}
+#levelPanel .levelHead{position:absolute!important;inset:0 0 auto!important;width:100%!important;height:29.04%!important;margin:0!important;padding:0!important;background:none!important;border:0!important;border-radius:0!important;clip-path:none!important;z-index:4;pointer-events:none}
+#levelPanel .levelHead h2,#levelPanel .levelHead p{position:absolute!important;width:1px!important;height:1px!important;clip-path:inset(50%)!important;overflow:hidden!important;margin:0!important;padding:0!important;white-space:nowrap!important}
+.upgradeHeaderRefV594{display:none}
+#levelPanel #levelContext{position:absolute!important;top:88.6%!important;right:11%!important;width:auto!important;margin:0!important;padding:0 1.2cqw!important;border:0!important;background:#02050977!important;font:500 2.8cqw/1.6 'EVOLVE Upgrade Sans',system-ui,sans-serif!important;letter-spacing:.025em!important;color:#c7d7e5!important;text-shadow:0 1px 5px #000!important;border-radius:3px}
+#levelCoach,#rerollBiasBtn,#rerollHint{display:none!important}
+#levelPanel #cards{position:absolute!important;left:1.62%!important;right:1.62%!important;top:28.52%!important;height:50.59%!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1.05cqw!important;align-items:stretch!important;margin:0!important;padding:0!important}
+#levelPanel #cards .upgradeCardV593{--rarity:#bec5ce;position:relative!important;display:block!important;min-width:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;padding:0!important;border:0!important;border-radius:0!important;clip-path:none!important;background:none!important;background-image:none!important;box-shadow:none!important;overflow:visible!important;color:#f5f4f5!important;text-align:center!important;touch-action:manipulation!important;font-family:inherit!important;transform:none}
+#levelPanel #cards .upgradeCardV593::before{content:''!important;position:absolute!important;inset:2% 5% 2%!important;clip-path:polygon(7% 0,93% 0,100% 3%,100% 97%,93% 100%,7% 100%,0 97%,0 3%)!important;border:0!important;background:#030309!important;border-radius:0!important;pointer-events:none!important;z-index:0!important}
+#levelPanel #cards .upgradeCardV593::after{display:none!important}.upgradeFrameV594{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.upgradeRarityV593{position:absolute;left:12%;right:12%;top:4.8%;height:9%;display:flex;align-items:center;justify-content:center;gap:1.6cqw;color:var(--rarity);font-size:3.8cqw;font-weight:450;line-height:1.2;letter-spacing:.035em;z-index:3}
+.upgradeRarityV593::before,.upgradeRarityV593::after{content:'';height:1px;width:18%;background:var(--rarity);opacity:.6}
+.upgradeArtV593{position:absolute;left:6%;right:6%;top:16%;height:41%;display:flex;align-items:center;justify-content:center;margin:0;overflow:visible;z-index:2;pointer-events:none}
+.upgradeSpriteV593{display:block;width:100%;height:100%;object-fit:contain;overflow:visible;transform:scale(1.12)}
+.upgradeNameV593{position:absolute;left:9%;right:9%;top:57.8%;height:9.3%;display:flex;align-items:center;justify-content:center;font-size:4.6cqw;line-height:1.3;font-weight:650;word-break:keep-all;letter-spacing:-.045em;z-index:3}
+.upgradeStatsV593{position:absolute;left:11%;right:11%;top:67%;height:13%;padding-top:2.2cqw;border-top:1px solid #7b8b9b58;font-size:3.7cqw;line-height:1.6;font-weight:450;letter-spacing:-.045em;white-space:normal;word-break:keep-all;color:#f1eff1;z-index:3}
+.upgradePartV593{position:absolute;left:6%;right:6%;bottom:6.4%;height:9%;display:flex;align-items:center;justify-content:center;gap:1.8cqw;font-size:3cqw;line-height:1.4;font-weight:450;color:#e6e7ed;z-index:3}
+.upgradePartIconV594{width:5.9cqw;height:6.4cqw;object-fit:contain}
+.upgradeCardV593[data-rarity='mythic'] .upgradeArtV593{animation:mythicRadianceV594 1.4s ease-in-out infinite alternate}
+@keyframes mythicRadianceV594{from{filter:brightness(1.06) saturate(1.05)}to{filter:brightness(1.65) saturate(1.12)}}
+#levelPanel #rerollRow{position:absolute!important;right:4%!important;bottom:3.4%!important;display:flex!important;justify-content:center!important;margin:0!important;padding:0!important;z-index:5}#levelPanel #rerollRow[hidden]{display:none!important}
+#levelPanel #rerollBtn{min-width:0!important;min-height:34px!important;height:auto!important;margin:0!important;padding:1.1cqw 2.8cqw!important;border:1px solid #70383788!important;border-radius:4px!important;background:#12090dc7!important;font:450 2.7cqw/1.4 'EVOLVE Upgrade Sans',system-ui,sans-serif!important;color:#dac8d0!important;letter-spacing:.015em!important;box-shadow:none!important}
+#levelPanel #cards .upgradeCardV593:focus-visible{outline:2px solid #fff!important;outline-offset:-10px!important}#levelPanel #cards .upgradeCardV593:active{filter:brightness(1.15)!important;transform:scale(.99)!important}
+#levelPanel[data-upgrade-language='en'] .levelHead h2,#levelPanel[data-upgrade-language='en'] .levelHead p{clip-path:none!important;width:auto!important;height:auto!important;overflow:visible!important;white-space:normal!important;left:22%!important;right:22%!important;text-align:center!important;background:#03090ff5!important}
+#levelPanel[data-upgrade-language='en'] .levelHead h2{top:53%!important;font:500 8.8cqw/1.3 'EVOLVE Upgrade Sans',system-ui,sans-serif!important;color:#eff6ff!important;letter-spacing:.04em!important}
+#levelPanel[data-upgrade-language='en'] .levelHead p{top:77%!important;font:400 3.8cqw/1.6 'EVOLVE Upgrade Sans',system-ui,sans-serif!important;color:#b9c9d9!important}
+#levelPanel[data-upgrade-language='en'] .upgradeStatsV593{font-size:3cqw;letter-spacing:-.02em}
+@media(prefers-reduced-motion:reduce){.upgradeCardV593[data-rarity='mythic'] .upgradeArtV593{animation:none;filter:brightness(1.25)}}
+@media(orientation:landscape){#levelPanel{width:min(98vw,900px)!important;height:98dvh!important;aspect-ratio:auto}.upgradeReferenceBgV594.portrait{display:none}.upgradeReferenceBgV594.landscape{display:block}#levelPanel .levelHead{left:25%!important;right:25%!important;width:50%!important;height:25%!important;top:0!important}.upgradeHeaderRefV594{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}#levelPanel #levelContext{top:74%!important;right:-22%!important;font-size:11px!important}#levelPanel #cards{left:9%!important;right:9%!important;top:25%!important;height:68%!important;gap:14px!important}.upgradeRarityV593{font-size:14px;gap:10px}.upgradeArtV593{left:9%;right:9%;top:15%;height:43%}.upgradeNameV593{font-size:17px}.upgradeStatsV593{font-size:12px;padding-top:8px;line-height:1.5}.upgradePartV593{font-size:12px;gap:8px}.upgradePartIconV594{width:22px;height:25px}#levelPanel #rerollRow{right:2%!important;bottom:2%!important}#levelPanel #rerollBtn{font-size:10px!important;padding:4px 8px!important;min-height:28px!important}#levelPanel[data-upgrade-language='en'] .levelHead h2{top:15%!important;left:8%!important;right:8%!important;font-size:28px!important}#levelPanel[data-upgrade-language='en'] .levelHead p{top:65%!important;left:8%!important;right:8%!important;font-size:11px!important}#levelPanel[data-upgrade-language='en'] .upgradeStatsV593{font-size:11px}}
+
+#levelPanel canvas{border:0!important;box-shadow:none!important;background:none!important;pointer-events:none!important}
+#levelPanel #levelContext{display:block!important;opacity:1!important;visibility:visible!important;clip-path:none!important;height:auto!important}
+#levelPanel .upgradeSpriteV593,#levelPanel .upgradePartIconV594{position:static!important;inset:auto!important;flex:none!important}
+#levelPanel #cards .upgradePartV593 span{font:inherit!important;color:inherit!important;letter-spacing:inherit!important}
+#levelPanel .upgradeNameV593,#levelPanel .upgradeStatsV593{transform:translateZ(0)!important;z-index:20!important;will-change:transform!important}

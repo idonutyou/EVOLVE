@@ -5616,20 +5616,18 @@ function drawEnemy(e,shadowOnly=false){
   }
   drawBossGroundV165(e,size);
   // Native PNG silhouette supplies the anatomy.
-  if(e.elite){ctx.save();ctx.globalAlpha=.38;let ec=e.eliteAffix==='ravager'?'#ff5c4c':e.eliteAffix==='bulwark'?'#75bfff':e.eliteAffix==='regenerative'?'#69ff8d':'#ff9b3d';ctx.strokeStyle=ec;ctx.shadowBlur=14;ctx.shadowColor=ec;ctx.lineWidth=e.eliteAffix==='bulwark'?3:2;ctx.beginPath();ctx.arc(e.x,e.y,size*.34,0,TAU);ctx.stroke();ctx.restore()}if(e.elite&&e.eliteAffix==='regenerative'&&e.affixTriggered){ctx.save();let rp=.5+.5*Math.sin(t*8);ctx.globalAlpha=.18+.10*rp;ctx.strokeStyle='#7cff98';ctx.shadowBlur=15;ctx.shadowColor='#54ff77';ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(e.x,e.y,size*(.40+.03*rp),0,TAU);ctx.stroke();ctx.restore()}if(e.nemesis){ctx.save();let np=.5+.5*Math.sin(t*7);ctx.globalAlpha=.30+.10*np;ctx.strokeStyle='#d47aff';ctx.shadowBlur=20;ctx.shadowColor='#983dff';ctx.lineWidth=2.4;ctx.setLineDash([5,4]);ctx.beginPath();ctx.arc(e.x,e.y,size*.44,0,TAU);ctx.stroke();ctx.setLineDash([]);for(let i=0;i<3;i++){let a=t*(.7+i*.18)+i*2.1;ctx.fillStyle='#f0b0ff';ctx.beginPath();ctx.arc(e.x+Math.cos(a)*size*.39,e.y+Math.sin(a)*size*.39,2.2+np,0,TAU);ctx.fill();}ctx.restore()}if(e.nemesis&&e.adaptKind){ctx.save();let ac=e.adaptKind==='arm'?'#ff9b50':e.adaptKind==='mouth'?'#75ff5c':e.adaptKind==='tail'?'#ff6ea5':e.adaptKind==='speed'?'#72ddff':'#f0a0ff';ctx.globalAlpha=.52;ctx.strokeStyle=ac;ctx.shadowBlur=12;ctx.shadowColor=ac;ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,size*.51,t*1.2,t*1.2+Math.PI*.95);ctx.stroke();ctx.restore()}
+  /* WEB-27: elite-affix-ring removed for every monster. *//* WEB-27: regeneration-ring removed for every monster. *//* WEB-27: nemesis-ring removed for every monster. *//* WEB-27: nemesis-adaptation-ring removed for every monster. */
   if(false&&e.finalBoss&&prep){
     ctx.save();let cp=.5+.5*Math.sin(t*18);ctx.globalAlpha=.20+.20*cp;ctx.fillStyle=e.telegraphing==='acidBurst'||e.telegraphing==='counterPurify'?'#7dff68':e.telegraphing==='omegaPool'||e.telegraphing==='counterNull'?'#d881ff':'#ff8b67';ctx.shadowBlur=20;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(e.x,e.y,4+cp*4,0,TAU);ctx.fill();ctx.restore();
   }
   if(false&&prep&&e.elite&&!e.finalBoss){
     ctx.save();let wp=.5+.5*Math.sin(t*14);ctx.globalAlpha=.12+.10*wp;ctx.strokeStyle=e.finalBoss?'#ff9a70':'#ffd06e';ctx.shadowBlur=16;ctx.shadowColor=ctx.strokeStyle;ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(e.x,e.y,size*(.38+.04*wp),0,TAU);ctx.stroke();ctx.restore();
   }
-  if(e.apex){ctx.save();let p=.5+.5*Math.sin(t*4);ctx.globalAlpha=.18+.10*p;ctx.strokeStyle='#ffd77c';ctx.shadowBlur=22;ctx.shadowColor='#ff6b39';ctx.lineWidth=2.3;for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(e.x,e.y,size*(.34+i*.08),t*(.6+i*.15)+i,t*(.6+i*.15)+i+Math.PI*1.3);ctx.stroke();}ctx.restore();}
-  if(e.finalBoss&&((e.prism||0)>0||(e.purify||0)>0)){ctx.save();let p=.5+.5*Math.sin(t*9),isPrism=(e.prism||0)>0;ctx.globalAlpha=.28+.10*p;ctx.strokeStyle=isPrism?'#9cecff':'#b8ffd1';ctx.shadowBlur=22;ctx.shadowColor=isPrism?'#5bcfff':'#68ff9c';ctx.lineWidth=2.6;ctx.setLineDash(isPrism?[7,4]:[3,5]);ctx.beginPath();ctx.arc(e.x,e.y,size*.47,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
-  if((e.exposed||0)>0){ctx.save();let ep=.5+.5*Math.sin(t*12);ctx.globalAlpha=.40+.14*ep;ctx.strokeStyle='#ffd26f';ctx.shadowBlur=24;ctx.shadowColor='#ff9f37';ctx.lineWidth=3;ctx.setLineDash([5,3]);ctx.beginPath();ctx.arc(e.x,e.y,size*(.49+.03*ep),0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff1ae';for(let i=0;i<4;i++){let a=i/4*TAU-t*1.1,rr=size*.52;ctx.beginPath();ctx.arc(e.x+Math.cos(a)*rr,e.y+Math.sin(a)*rr,2.6+ep,0,TAU);ctx.fill();}ctx.restore();}
+  /* WEB-27: apex-rings removed for every monster. */
+  /* WEB-27: boss-resistance-ring removed for every monster. */
+  /* WEB-27: exposure-ring removed for every monster. */
   if(e.type==='symbiote'&&(e.healBeam||0)>0&&e.healTarget&&!e.healTarget.dead){ctx.save();let q=clamp((e.healBeam||0)/.24,0,1);ctx.globalAlpha=.20+.34*q;ctx.strokeStyle='#87ff9a';ctx.shadowBlur=9;ctx.shadowColor='#59ff72';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.healTarget.x,e.healTarget.y);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
-  if((e.type==='warden'||e.type==='symbiote')&&!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))){
-    let rr=e.type==='warden'?(e.aura||62):44,p=.5+.5*Math.sin((e.pulse||0)*3),stroke=e.type==='warden'?'#8ce8ff':'#89ffa0',fill=e.type==='warden'?'#62d9ff':'#6dff88';drawGlowCircleV424(e.x,e.y,rr,stroke,1,11,.035+.025*p,fill);
-  }
+  /* WEB-27: support-aura removed for every monster. */
   if(false&&e.type==='froststalker'&&(e.elite||e.finalBoss)){ctx.save();ctx.globalAlpha=.34;ctx.shadowBlur=15;ctx.shadowColor='#71d8ff';ctx.strokeStyle='#96e7ff';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,size*.29,0,TAU);ctx.stroke();ctx.restore();}
   if(false&&e.type==='embermaw'&&(e.elite||e.finalBoss)){ctx.save();ctx.globalAlpha=.28+.12*Math.sin(t*9);ctx.shadowBlur=16;ctx.shadowColor='#ff552c';ctx.strokeStyle='#ff7849';ctx.lineWidth=2;ctx.beginPath();ctx.arc(e.x,e.y,size*.31,0,TAU);ctx.stroke();ctx.restore();}
   if(e.hit>0&&!e.finalBoss&&!e.elite&&!e.nemesis&&!e.zoneElite&&!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))){ctx.save();ctx.globalAlpha=.34;ctx.fillStyle=e.type==='spitter'?'#80ff75':'#ff8d6a';ctx.shadowBlur=16;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(e.x,e.y,size*.26,0,TAU);ctx.fill();ctx.restore();}if(!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))&&!drawBioMotionV435(e,size*visualScale,visualAlpha)&&!VENOM_V537.drawSprite(e,false,size*visualScale,visualAlpha))drawSpriteImage(img,e.x,e.y,size*visualScale*(e.hit>0?1.045:1),gait*moveBlend*.025,(e.hit?0.97:1)*visualAlpha,bob+gait*moveBlend*.55,enemySX*(player.x<e.x?-1:1),enemySY);if(e.venomV537)VENOM_V537.drawBossOverlay(e);drawEnemyHitLanguage(e,size);
@@ -5637,21 +5635,15 @@ function drawEnemy(e,shadowOnly=false){
     drawSpriteImage(img,e.x-(e.vx||0)*.045,e.y-(e.vy||0)*.045,size*.36,rot,.12,0,.82,1.22);
   }
 
-  if(e.elite){
-    ctx.save();ctx.translate(e.x,e.y);ctx.rotate(rot);let ec=e.eliteAffix==='ravager'?'#ff6656':e.eliteAffix==='bulwark'?'#82dfff':'#7dff9a';ctx.strokeStyle=ec;ctx.fillStyle=ec;ctx.shadowBlur=12;ctx.shadowColor=ec;ctx.globalAlpha=.58*visualAlpha;ctx.lineWidth=1.6;
-    if(e.eliteAffix==='ravager'){for(const s of [-1,1]){ctx.beginPath();ctx.moveTo(s*size*.12,-size*.18);ctx.lineTo(s*size*.32,-size*.34);ctx.lineTo(s*size*.22,-size*.04);ctx.stroke()}}
-    else if(e.eliteAffix==='bulwark'){for(const s of [-1,1]){ctx.beginPath();ctx.roundRect(s*size*.16-size*.09,-size*.18,size*.18,size*.34,4);ctx.stroke()}}
-    else if(e.eliteAffix==='regenerative'){for(let i=0;i<3;i++){let a=i/3*TAU+t*.35;ctx.beginPath();ctx.arc(Math.cos(a)*size*.25,Math.sin(a)*size*.20,2.2,0,TAU);ctx.fill()}}
-    ctx.restore();
-  }
+  /* WEB-27: elite-body-triangles removed for every monster. */
   // V493: Remove the legacy final-boss compass spikes and ornamental circular targeting ring.
   // Attack telegraphs, boss collision and all combat indicators are handled separately.
   drawBossIdentityAccents(e,size,rot);
-  if((e.barrier||0)>0&&!(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuNormalEnemyV426(e))){let bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1);drawGlowCircleV424(e.x,e.y,size*.31+5,'#9cecff',2,11,.32+.18*bq,null,'#59d7ff');}if(e.zoneElite){const zc=ZONE_EVENT_DEFS[e.zoneId]?.accent||'#ffe074';ctx.save();ctx.globalAlpha=.55+.18*Math.sin(t*5);ctx.strokeStyle=zc;ctx.shadowBlur=12;ctx.shadowColor=zc;ctx.lineWidth=1.8;ctx.beginPath();ctx.arc(e.x,e.y,size*.36+8,0,TAU);ctx.stroke();ctx.fillStyle='#fff4dc';ctx.font='1000 6px system-ui';ctx.textAlign='center';ctx.fillText(e.zoneEliteName||'ZONE ELITE',e.x,e.y-size*.36-11);ctx.restore();}
+  /* WEB-27: shield-circle removed for every monster. *//* WEB-27: zone-elite-ring removed for every monster. */
   /* WEB-25: spawn circles removed. */
   /* WEB-25: wave target circles removed. */
-  if((e.stunned||0)>0){ctx.save();ctx.globalAlpha=.8;ctx.strokeStyle='#ffe89a';ctx.shadowBlur=10;ctx.shadowColor='#ffc14f';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(e.x,e.y-size*.28,5,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(e.x-6,e.y-size*.30,1.7,0,TAU);ctx.arc(e.x+6,e.y-size*.30,1.7,0,TAU);ctx.fillStyle='#fff0a8';ctx.fill();ctx.restore();}
-  if(focusEnemy===e&&!e.dead){ctx.save();let fp=.5+.5*Math.sin(t*6);ctx.globalAlpha=.68+.22*fp;ctx.strokeStyle='#8be8ff';ctx.shadowBlur=14;ctx.shadowColor='#52cfff';ctx.lineWidth=1.8;ctx.setLineDash([6,4]);ctx.beginPath();ctx.arc(e.x,e.y,size*.34+9,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+  /* WEB-27: stun-symbols removed for every monster. */
+  /* WEB-27: target-ring removed for every monster. */
   drawThreatPriority(e,size);
   /* WEB-25: shared hit-only health pass follows all actors. */
 }
@@ -5660,13 +5652,13 @@ function drawEnemy(e,shadowOnly=false){
 function drawNormalEnemyOverlayV426(e){
  const size=gpuEnemyBaseSizeV426(e);
  if(e.type==='symbiote'&&(e.healBeam||0)>0&&e.healTarget&&!e.healTarget.dead){ctx.save();let q=clamp((e.healBeam||0)/.24,0,1);ctx.globalAlpha=.20+.34*q;ctx.strokeStyle='#87ff9a';ctx.shadowBlur=9;ctx.shadowColor='#59ff72';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(e.x,e.y);ctx.lineTo(e.healTarget.x,e.healTarget.y);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
- if((e.exposed||0)>0){ctx.save();let ep=.5+.5*Math.sin(t*12);ctx.globalAlpha=.40+.14*ep;ctx.strokeStyle='#ffd26f';ctx.shadowBlur=24;ctx.shadowColor='#ff9f37';ctx.lineWidth=3;ctx.setLineDash([5,3]);ctx.beginPath();ctx.arc(e.x,e.y,size*(.49+.03*ep),0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff1ae';for(let i=0;i<4;i++){let a=i/4*TAU-t*1.1,rr=size*.52;ctx.beginPath();ctx.arc(e.x+Math.cos(a)*rr,e.y+Math.sin(a)*rr,2.6+ep,0,TAU);ctx.fill();}ctx.restore();}
+ /* WEB-27: exposure-ring removed for every monster. */
  drawEnemyHitLanguage(e,size);
  if(e.type==='runner'&&(e.burst||0)>0){const moveSpeed=Math.hypot(e.vx||0,e.vy||0),moveBlend=clamp(moveSpeed/Math.max(40,e.spd||60),0,1),gait=Math.sin(t*13+(e.animPhase||0)),hitKick=clamp((e.bodyKick||0)/.12,0,1),rot=Math.atan2((e.vy||.01),(e.vx||1))+Math.PI/2+gait*moveBlend*.035+hitKick*.055*Math.sin((e.animPhase||0)+t*18);drawSpriteImage(renderedEnemy(e),e.x-(e.vx||0)*.045,e.y-(e.vy||0)*.045,size*.36,rot,.12,0,.82,1.22);}
  /* WEB-25: spawn circles removed. */
  /* WEB-25: wave target circles removed. */
- if((e.stunned||0)>0){ctx.save();ctx.globalAlpha=.8;ctx.strokeStyle='#ffe89a';ctx.shadowBlur=10;ctx.shadowColor='#ffc14f';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(e.x,e.y-size*.28,5,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(e.x-6,e.y-size*.30,1.7,0,TAU);ctx.arc(e.x+6,e.y-size*.30,1.7,0,TAU);ctx.fillStyle='#fff0a8';ctx.fill();ctx.restore();}
- if(focusEnemy===e&&!e.dead){ctx.save();let fp=.5+.5*Math.sin(t*6);ctx.globalAlpha=.68+.22*fp;ctx.strokeStyle='#8be8ff';ctx.shadowBlur=14;ctx.shadowColor='#52cfff';ctx.lineWidth=1.8;ctx.setLineDash([6,4]);ctx.beginPath();ctx.arc(e.x,e.y,size*.34+9,0,TAU);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+ /* WEB-27: stun-symbols removed for every monster. */
+ /* WEB-27: target-ring removed for every monster. */
  /* WEB-25: batched actors use the same hit-only health pass. */
 }
 function drawPlayerAttackAccents(bodySize,bob,ang,armKick,acidKick,tailKick){
@@ -6402,12 +6394,12 @@ function renderEnemyBatchV426(mode){
   const push=(key,e,css,alpha,rot=0,sx=1,sy=1)=>{if(n>=GPU_INSTANCE_CAP_V426)return;const uv=gpuEnemyFXUVV426[key],m=gpuEnemyFXMetaV426[key];if(!uv||!m)return;n=gpuWriteInstanceV426(n,e.x-camX,e.y-camY,css,rot,sx,sy,alpha,uv);};
   for(let i=0;i<enemies.length&&n<GPU_INSTANCE_CAP_V426;i++){
    const e=enemies[i];if(!gpuNormalEnemyV426(e)||e.x<view.l||e.x>view.r||e.y<view.t||e.y>view.b)continue;const size=gpuEnemyBaseSizeV426(e);
-   if(e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p);}
-   else if(e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p);}
-   if((e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq);}
+   if(false&&e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p);}
+   else if(false&&e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p);}
+   if(false&&(e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq);}
    if(e.hit>0){const key=e.type==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34);}
    const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';
-   if(priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p);}
+   if(false&&priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p);}
   }
   gpuDrawInstancesV426(gpuEnemyFXTextureV426,n);
  }
@@ -6467,12 +6459,12 @@ function setupWorldGpuStateV428(){const gl=gpuEnemyBatchGLV426,c=gpuEnemyBatchCa
 function buildFxInstancesV428(layer,camX,camY){let n=0;const clarity=combatClarityLevel();const push=(key,e,css,alpha,depth,rot=0,sx=1,sy=1)=>{const uv=gpuEnemyFXUVV426[key],m=gpuEnemyFXMetaV426[key];if(!uv||!m||n>=GPU_WORLD_INSTANCE_CAP_V428)return;n=gpuWriteWorldV428(n,e.x-camX,e.y-camY,css,rot,sx,sy,alpha,uv,depth);};
  for(let i=0;i<visibleNormalsV428.length;i++){const e=visibleNormalsV428[i],size=gpuEnemyBaseSizeV426(e),depth=clamp((e.y+e.r-camY)/Math.max(1,H),0,1);
   if(layer==='under'){
-   if(e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p,Math.max(0,depth-.002));}
-   else if(e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p,Math.max(0,depth-.002));}
+   if(false&&e.type==='warden'){const rr=e.aura||62,p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.wardenAura;if(m)push('wardenAura',e,m.css*(rr/62),.035+.025*p,Math.max(0,depth-.002));}
+   else if(false&&e.type==='symbiote'){const p=.5+.5*Math.sin((e.pulse||0)*3),m=gpuEnemyFXMetaV426.symbioteAura;if(m)push('symbioteAura',e,m.css,.035+.025*p,Math.max(0,depth-.002));}
    if(e.hit>0){const key=e.type==='spitter'?'hitGreen':'hitRed',m=gpuEnemyFXMetaV426[key];if(m)push(key,e,m.css*(size*.26/12),.34,Math.max(0,depth-.001));}
   }else{
-   if((e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq,Math.min(1,depth+.001));}
-   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';if(priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p,Math.min(1,depth+.0015));}
+   if(false&&(e.barrier||0)>0){const bq=clamp(e.barrier/Math.max(1,e.barrierMax||e.barrier),0,1),r=size*.31+5,m=gpuEnemyFXMetaV426.barrier;if(m)push('barrier',e,m.css*(r/30),.32+.18*bq,Math.min(1,depth+.001));}
+   const dx=e.x-player.x,dy=e.y-player.y,d2=dx*dx+dy*dy,priority=e.type==='warden'||e.type==='symbiote'||(e.type==='spitter'&&d2<190*190)||e.type==='froststalker';if(false&&priority&&d2<=260*260&&!(clarity>=2&&focusEnemy!==e&&(e.type!=='warden'&&e.type!=='symbiote'))){const key=e.type==='warden'?'threatW':e.type==='symbiote'?'threatS':e.type==='froststalker'?'threatF':'threatP',m=gpuEnemyFXMetaV426[key],p=.5+.5*Math.sin(t*5+(e.rolePhase||0));if(m)push(key,e,m.css*(size/40),.28+.14*p,Math.min(1,depth+.0015));}
   }
  }return n;}
 function renderWorldSceneV428(){
@@ -13112,8 +13104,6 @@ function upgradeEquipV593(mode){
  armItemsRefreshV589();
 }
 const UPGRADE_CARDS_V593=[
- {id:'gun_equip',group:'gun',row:0,name:['생체 총','BIO CANNONS'],available:()=>armItemModeV589()!=='cannon',base:.10,lines:v=>[upgradeTextV593('총 장착','Equip cannons'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('cannon');upgradeRunV593.gunDamage+=v;}},
- {id:'blade_equip',group:'blade',row:1,name:['생체 칼','BIO BLADES'],available:()=>armItemModeV589()!=='blades',base:.10,lines:v=>[upgradeTextV593('칼 장착','Equip blades'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('blades');upgradeRunV593.bladeDamage+=v;}},
  {id:'gun_damage',group:'gun',row:0,name:['강력한 사격','POWER SHOT'],stat:'gunDamage',base:.10,label:['공격력','Damage'],unit:'percent'},
  {id:'gun_count',group:'gun',row:0,name:['다중 사격','MULTISHOT'],stat:'gunCount',count:true,label:['탄수','Projectiles']},
  {id:'gun_haste',group:'gun',row:0,name:['고속 사격','RAPID FIRE'],stat:'gunHaste',base:.10,label:['연사 속도','Fire rate'],unit:'percent'},
@@ -13144,7 +13134,7 @@ function upgradeLinesV593(card,tier){
  const n=upgradeValueV593(card,tier);if(card.lines)return card.lines(n);
  return [upgradeTextV593(...card.label)+' +'+(card.unit==='points'?upgradePercentV593(n)+'p':card.unit==='percent'?upgradePercentV593(n):upgradeNumberV593(n))];
 }
-function upgradePartV593(card){return {gun:upgradeTextV593('총','GUN'),blade:upgradeTextV593('칼','BLADE'),legs:upgradeTextV593('뒷발','HIND LEGS'),shell:upgradeTextV593('외피','SHELL')}[card.group];}
+function upgradePartV593(card){return {gun:upgradeTextV593('팔','ARM'),blade:upgradeTextV593('팔','ARM'),legs:upgradeTextV593('발','FEET'),shell:upgradeTextV593('외피','SHELL')}[card.group];}
 function upgradeApplyV593(card,tier){
  const amount=upgradeValueV593(card,tier);if(card.stat)upgradeRunV593[card.stat]+=amount;else card.apply(amount);
  upgradeRunV593.selected++;upgradeRunV593.taken[card.id]=(upgradeRunV593.taken[card.id]||0)+1;
@@ -13153,9 +13143,9 @@ function upgradeApplyV593(card,tier){
 function upgradeRollV593(random=Math.random){let n=Math.floor(random()*1000000);for(let i=0;i<UPGRADE_RARITIES_V593.length;i++){n-=Math.round(UPGRADE_RARITIES_V593[i].chance*1000000);if(n<0)return i;}return 4;}
 function upgradePoolV593(){
  const mode=armItemModeV589();return UPGRADE_CARDS_V593.filter(c=>{
-  if(c.available&&!c.available())return false;if(c.id.endsWith('_equip'))return true;
+  if(c.available&&!c.available())return false;if(c.id.endsWith('_equip'))return false;
   if(c.group==='gun')return state.arm>0&&mode==='cannon';
-  if(c.group==='blade')return state.arm>0&&mode!=='cannon';return true;
+  if(c.group==='blade')return state.arm>0&&mode==='blades';return true;
  });
 }
 chooseLevelPicks=function(){
@@ -13224,7 +13214,7 @@ reset=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;const 
 const upgradeHomeBaseV593=returnToHome;
 returnToHome=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;upgradeRunV593.mode=null;upgradeBleedsV593.clear();const result=upgradeHomeBaseV593(...args);armItemsRefreshV589();return result;};
 window.__EVOLVE_UPGRADE_CARDS_V593__={read:()=>({version:593,experiencePerLevel:12,cards:UPGRADE_CARDS_V593.length,rarities:UPGRADE_RARITIES_V593.map(r=>({...r})),run:{...upgradeRunV593,highest:{...upgradeRunV593.highest},taken:{...upgradeRunV593.taken}},bodyScale:upgradeBodyScaleV593(),bleeding:upgradeBleedsV593.size,art:upgradeArtV593.path,physical_Galaxy_S23_plus_tested:false})};
-if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test={cards:UPGRADE_CARDS_V593,pool:upgradePoolV593,roll:upgradeRollV593,lines:upgradeLinesV593,value:upgradeValueV593,apply:(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);},reset:upgradeResetV593,show:showLevelUp,render:renderLevelChoices,damage:hurtEnemy,need:xpNeedForLevel,context:()=>({player,enemies,state,bullets,step:dt=>update(dt),fire:dt=>firePlayer(dt),draw,grid:rebuildEnemyGridV424,home:returnToHome,xp:addXP,clock:()=>t,choosing:()=>choosing}),bounce:upgradeBounceV593,tag:upgradeTagShotV593};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test={equip:upgradeEquipV593,cards:UPGRADE_CARDS_V593,pool:upgradePoolV593,roll:upgradeRollV593,lines:upgradeLinesV593,value:upgradeValueV593,apply:(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);},reset:upgradeResetV593,show:showLevelUp,render:renderLevelChoices,damage:hurtEnemy,need:xpNeedForLevel,context:()=>({player,enemies,state,bullets,step:dt=>update(dt),fire:dt=>firePlayer(dt),draw,grid:rebuildEnemyGridV424,home:returnToHome,xp:addXP,clock:()=>t,choosing:()=>choosing}),bounce:upgradeBounceV593,tag:upgradeTagShotV593};
 
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test.offer=function(specs){const choose=chooseLevelPicks;try{chooseLevelPicks=()=>specs.map(([id,tier])=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);return {kind:id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)};});choosing=true;$('levelOverlay').style.display='flex';armChoiceInput(260);renderLevelChoices();}finally{chooseLevelPicks=choose;}};
 
@@ -13322,6 +13312,106 @@ reset=function(...args){monsterCatalogQueueV593=null;return monsterResetBaseV593
 const monsterHomeBaseV593=returnToHome;
 returnToHome=function(...args){monsterCatalogQueueV593=null;return monsterHomeBaseV593(...args);};
 window.__EVOLVE_MONSTER_CATALOG_V593__={read:()=>({count:MONSTER_CATALOG_V593.length,selected:monsterCatalogSelectedV593,queued:monsterCatalogQueueV593?{...monsterCatalogQueueV593}:null,spawned:monsterCatalogSpawnedV593,enabled:evolveAdminEnabledV585}),list:()=>MONSTER_CATALOG_V593.map(c=>({...c,asset:monsterCatalogAssetV593(c)})),summon:monsterCatalogRequestV593};
+
+// WEB-27: consume the supplied UI pixels, with independent transparent item art.
+const upgradeReferenceV594={"path":"assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg","sha256":"a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c","bytes":302370,"width":864,"height":1536,"source":"1000027564.png","original_bytes_preserved":true,"header":[0,0,864,446],"frames":{"rare":[14,438,278,777],"epic":[295,438,276,777],"legendary":[576,438,278,777]},"icons":{"arm":[96,1088,54,57],"feet":[369,1087,57,61],"shell":[652,1085,52,63]}};
+const upgradeSkinV594={ready:false,backgrounds:[],frames:[],icons:{},art:new Map(),artMetrics:new Map(),failures:[],builds:0};
+const skinCanvasV594=(w,h)=>{const c=document.createElement('canvas');c.width=Math.ceil(w);c.height=Math.ceil(h);return c;};
+function skinLoadV594(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error('강화창 이미지를 불러오지 못했습니다.'));im.src=src;});}
+let referenceImageV594=null,upgradeAtlasV594=null;
+function skinFrameV594(tier){
+ if(upgradeSkinV594.frames[tier])return upgradeSkinV594.frames[tier];
+ const key=tier===2?'epic':tier===3?'legendary':'rare',box=upgradeReferenceV594.frames[key],c=skinCanvasV594(box[2],box[3]),g=c.getContext('2d');
+ g.drawImage(referenceImageV594,...box,0,0,c.width,c.height);
+ // Remove only the reference's static words and objects; keep the real frame pixels.
+ g.globalCompositeOperation='destination-out';g.fillRect(35,35,c.width-70,c.height-77);g.globalCompositeOperation='source-over';
+ if(tier===0||tier===4){const copy=skinCanvasV594(c.width,c.height),q=copy.getContext('2d');q.filter=tier===0?'grayscale(1) brightness(.65)':'hue-rotate(190deg) saturate(1.15)';q.drawImage(c,0,0);g.clearRect(0,0,c.width,c.height);g.drawImage(copy,0,0);}
+ upgradeSkinV594.frames[tier]=c;upgradeSkinV594.builds++;return c;
+}
+function skinAlphaV594(c,feather=0){
+ const g=c.getContext('2d',{willReadFrequently:true}),data=g.getImageData(0,0,c.width,c.height),p=data.data,w=c.width,h=c.height;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const i=(y*w+x)*4,m=Math.max(p[i],p[i+1],p[i+2]);let a=Math.max(0,Math.min(1,(m-70)/100));
+  if(feather){const edge=Math.min(x,y,w-1-x,h-1-y),q=Math.min(1,edge/feather);a*=q*q*(3-2*q);}
+  if(a<.004){p[i+3]=0;continue;}
+  const light=Math.max(0,Math.min(1,(m-70)/100));if(light>0&&light<1){p[i]=Math.min(255,p[i]/light);p[i+1]=Math.min(255,p[i+1]/light);p[i+2]=Math.min(255,p[i+2]/light);}
+  p[i+3]=Math.round(255*a);
+ }g.putImageData(data,0,0);return c;
+}
+function skinIsolateArtV594(c,canonicalTop,canonicalBottom,row,tier){
+ const g=c.getContext('2d',{willReadFrequently:true}),data=g.getImageData(0,0,c.width,c.height),p=data.data,w=c.width,h=c.height,n=w*h,seen=new Uint8Array(n),keep=new Uint8Array(n),queue=new Int32Array(n);
+ const material=k=>{const i=k*4,max=Math.max(p[i],p[i+1],p[i+2]),min=Math.min(p[i],p[i+1],p[i+2]);return max>35&&min/max>.15;};
+ let left=w,top=h,right=0,bottom=0;const pieces=[];
+ for(let seed=0;seed<n;seed++){
+  if(seen[seed]||!material(seed))continue;let read=0,write=1,sumY=0;seen[seed]=1;queue[0]=seed;
+  while(read<write){const k=queue[read++],x=k%w,y=(k/w)|0;sumY+=y;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=w||yy>=h)continue;const j=yy*w+xx;if(!seen[j]&&material(j)){seen[j]=1;queue[write++]=j;}}}
+  const center=sumY/write;if(write<3||center<canonicalTop+10||center>canonicalBottom-10)continue;
+  let l=w,t=h,r=0,b=0;const pixels=queue.slice(0,write);for(const k of pixels){const x=k%w,y=(k/w)|0;l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y);}pieces.push({pixels,l,t,r,b});
+ }
+ const largest=Math.max(...pieces.map(p=>p.pixels.length)),major=pieces.filter(p=>p.pixels.length>=largest*.12),bounds={l:Math.min(...major.map(p=>p.l))-16,r:Math.max(...major.map(p=>p.r))+16,t:Math.min(...major.map(p=>p.t))-16,b:Math.max(...major.map(p=>p.b))+16};
+ // Ignore isolated fragments from neighbouring atlas cells, while retaining separate equipment pieces.
+ for(const piece of pieces){if(piece.r<bounds.l||piece.l>bounds.r||piece.b<bounds.t||piece.t>bounds.b)continue;for(const k of piece.pixels){const x=k%w,y=(k/w)|0;keep[k]=1;left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}}
+ const distance=new Uint16Array(n);for(let i=0;i<n;i++)distance[i]=keep[i]?0:1000;
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;let d=distance[i];if(x)d=Math.min(d,distance[i-1]+1);if(y){d=Math.min(d,distance[i-w]+1);if(x)d=Math.min(d,distance[i-w-1]+1);if(x<w-1)d=Math.min(d,distance[i-w+1]+1);}distance[i]=d;}
+ for(let y=h-1;y>=0;y--)for(let x=w-1;x>=0;x--){const i=y*w+x;let d=distance[i];if(x<w-1)d=Math.min(d,distance[i+1]+1);if(y<h-1){d=Math.min(d,distance[i+w]+1);if(x)d=Math.min(d,distance[i+w-1]+1);if(x<w-1)d=Math.min(d,distance[i+w+1]+1);}distance[i]=d;}
+ for(let k=0;k<n;k++){const i=k*4,m=Math.max(p[i],p[i+1],p[i+2]),base=Math.max(0,Math.min(1,(m-12)/36)),alpha=base*Math.exp(-Math.pow(Math.max(0,distance[k]-5)/4,2));if(alpha<.004){p[i+3]=0;continue;}if(base<1){p[i]=Math.min(255,p[i]/base);p[i+1]=Math.min(255,p[i+1]/base);p[i+2]=Math.min(255,p[i+2]/base);}p[i+3]=Math.round(alpha*255);}
+ g.putImageData(data,0,0);if(right<left||bottom<top)throw Error('Empty upgrade icon');
+ const x=Math.max(0,left-12),y=Math.max(0,top-12),cw=Math.min(w,right+13)-x,ch=Math.min(h,bottom+13)-y,pad=64,out=skinCanvasV594(cw+pad*2,ch+pad*2),q=out.getContext('2d');
+ // Rebuild the aura from the isolated silhouette, so it has no rectangular atlas boundary.
+ q.shadowColor=UPGRADE_RARITIES_V593[tier].color;q.shadowBlur=[0,8,14,20,28][tier];q.drawImage(c,x,y,cw,ch,pad,pad,cw,ch);q.shadowBlur=0;
+ return out;
+}
+function skinArtV594(row,tier){
+ const key=row+':'+tier;if(upgradeSkinV594.art.has(key))return upgradeSkinV594.art.get(key);
+ const [canonicalTop,canonicalBottom]=upgradeArtV593.row_bounds[row],top=Math.max(0,canonicalTop-20),bottom=Math.min(upgradeArtV593.height,canonicalBottom+20),left=Math.round(tier*upgradeArtV593.width/5),right=Math.round((tier+1)*upgradeArtV593.width/5),raw=skinCanvasV594(right-left,bottom-top),g=raw.getContext('2d');
+ g.drawImage(upgradeAtlasV594,left,top,raw.width,raw.height,0,0,raw.width,raw.height);const c=skinIsolateArtV594(raw,canonicalTop-top,canonicalBottom-top,row,tier);
+ upgradeSkinV594.art.set(key,c);upgradeSkinV594.artMetrics.set(key,{width:c.width,height:c.height,padding:64,edgeAlpha:0,source:[left,top,right-left,bottom-top],extendedSource:20,silhouetteAura:true});return c;
+}
+function skinIconV594(group,tier){
+ const key=group==='gun'||group==='blade'?'arm':group==='legs'?'feet':'shell';const cache=key+':'+tier;if(upgradeSkinV594.icons[cache])return upgradeSkinV594.icons[cache];
+ const box=upgradeReferenceV594.icons[key],c=skinCanvasV594(box[2],box[3]);c.getContext('2d').drawImage(referenceImageV594,...box,0,0,c.width,c.height);skinAlphaV594(c);const q=c.getContext('2d');q.globalCompositeOperation='source-in';q.fillStyle=UPGRADE_RARITIES_V593[tier].color;q.fillRect(0,0,c.width,c.height);upgradeSkinV594.icons[cache]=c;return c;
+}
+function skinPaintCanvasV594(target,source){target.width=source.width;target.height=source.height;target.getContext('2d').drawImage(source,0,0);}
+function skinBackgroundsV594(){
+ const ref=upgradeReferenceV594,portrait=skinCanvasV594(ref.width,ref.height),p=portrait.getContext('2d');p.drawImage(referenceImageV594,0,0);
+ p.fillStyle='#020106';p.fillRect(0,438,ref.width,780);p.drawImage(referenceImageV594,0,0,ref.width,446,0,0,ref.width,446);
+ const landscape=skinCanvasV594(1200,550),g=landscape.getContext('2d');g.fillStyle='#020106';g.fillRect(0,0,landscape.width,landscape.height);
+ g.drawImage(referenceImageV594,0,0,ref.width,215,0,0,1200,145);g.drawImage(referenceImageV594,0,1218,ref.width,318,0,350,1200,200);
+ upgradeSkinV594.backgrounds=[portrait,landscape];
+ const root=$('levelPanel');for(let i=0;i<2;i++){const c=document.createElement('canvas');c.className='upgradeReferenceBgV594 '+(i?'landscape':'portrait');c.setAttribute('aria-hidden','true');skinPaintCanvasV594(c,upgradeSkinV594.backgrounds[i]);root.prepend(c);}
+ const header=skinCanvasV594(664,215);header.getContext('2d').drawImage(referenceImageV594,100,210,664,215,0,0,664,215);upgradeSkinV594.header=header;
+}
+const upgradeSkinReadyV594=Promise.all([skinLoadV594(upgradeReferenceV594.path),skinLoadV594(upgradeArtV593.path)]).then(([ref,atlas])=>{
+ referenceImageV594=ref;upgradeAtlasV594=atlas;skinBackgroundsV594();upgradeSkinV594.ready=true;skinPaintActiveV594();return true;
+}).catch(e=>{upgradeSkinV594.failures.push(e.message);return false;});
+function skinPaintActiveV594(){
+ if(!upgradeSkinV594.ready)return;
+ const header=$('levelPanel').querySelector('.upgradeHeaderRefV594');if(header)skinPaintCanvasV594(header,upgradeSkinV594.header);
+ for(const b of $('cards').querySelectorAll('.upgradeCardV593')){
+  const row=Number(b.dataset.artRow),tier=Number(b.dataset.artTier),card=UPGRADE_CARDS_V593.find(c=>c.id===b.dataset.kind);if(!card)continue;
+  skinPaintCanvasV594(b.querySelector('.upgradeFrameV594'),skinFrameV594(tier));skinPaintCanvasV594(b.querySelector('.upgradeSpriteV593'),skinArtV594(row,tier));skinPaintCanvasV594(b.querySelector('.upgradePartIconV594'),skinIconV594(card.group,tier));
+ }
+}
+renderLevelChoices=function(isReroll=false){
+ const picks=chooseLevelPicks(isReroll),cards=$('cards'),panel=$('levelPanel'),head=panel.querySelector('.levelHead');cards.innerHTML='';levelLastOffer=picks.map(p=>p.kind);
+ panel.dataset.upgradeLanguage=upgradeTextV593('ko','en');head.querySelector('h2').textContent=upgradeTextV593('레벨 업','LEVEL UP');head.querySelector('p').textContent=upgradeTextV593('강화 1개 선택','CHOOSE 1 UPGRADE');
+ if(!head.querySelector('.upgradeHeaderRefV594')){const c=document.createElement('canvas');c.className='upgradeHeaderRefV594';c.setAttribute('aria-hidden','true');head.prepend(c);}
+ $('levelContext').textContent='Lv. '+player.level;$('levelCoach').textContent='';
+ for(const p of picks){const c=p.card,r=UPGRADE_RARITIES_V593[p.tier],b=document.createElement('button');b.type='button';b.className='card upgradeCardV593';b.dataset.kind=c.id;b.dataset.rarity=r.id;b.dataset.artRow=c.row;b.dataset.artTier=p.tier;b.style.setProperty('--rarity',r.color);
+  b.innerHTML=`<canvas class="upgradeFrameV594" aria-hidden="true"></canvas><div class="upgradeRarityV593">${upgradeTextV593(r.ko,r.en)}</div><div class="upgradeArtV593" aria-hidden="true"><canvas class="upgradeSpriteV593"></canvas></div><div class="upgradeNameV593">${p.title()}</div><div class="upgradeStatsV593">${upgradeLinesV593(c,p.tier).map(line=>'<div>'+line+'</div>').join('')}</div><div class="upgradePartV593"><canvas class="upgradePartIconV594" aria-hidden="true"></canvas><span>${upgradePartV593(c)}</span></div>`;
+  b.setAttribute('aria-label',upgradeTextV593(r.ko,r.en)+' · '+p.title()+' · '+upgradeLinesV593(c,p.tier).join(' · '));
+  b.onclick=()=>{if(!choosing||!choiceInputReady())return;p.apply();$('levelOverlay').style.display='none';choosing=false;updateHUD(true);audioCue('evolve');hapticCue('evolve');combatGrace(.20);addXP(0);};cards.appendChild(b);
+ }
+ updateRerollControls();$('rerollBtn').textContent=upgradeTextV593('다시 뽑기 ×','REROLL ×')+rerolls;$('rerollRow').hidden=rerolls<=0;skinPaintActiveV594();updateHUD(true);
+};
+// Geometric status/identity marks are presentation only. Combat, warnings and HP remain active.
+drawEnemyHitLanguage=function(){};
+drawThreatPriority=function(){};
+drawEnemySilhouetteV165=function(){};
+window.__EVOLVE_UPGRADE_REFERENCE_V594__={ready:upgradeSkinReadyV594,read:()=>({ready:upgradeSkinV594.ready,reference:upgradeReferenceV594.path,sourceBytesPreserved:true,originalItemAtlasUnchanged:true,transparentItemPadding:64,artCache:upgradeSkinV594.art.size,frameBuilds:upgradeSkinV594.builds,failures:[...upgradeSkinV594.failures],equippingCards:false,physical_Galaxy_S23_plus_tested:false})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test={reference:()=>referenceImageV594,background:()=>upgradeSkinV594.backgrounds[0],frame:skinFrameV594,art:skinArtV594,artMetrics:()=>[...upgradeSkinV594.artMetrics.entries()],context:()=>({ctx,drawEnemy,normalOverlay:drawNormalEnemyOverlayV426,hitLanguage:drawEnemyHitLanguage,threat:drawThreatPriority,setGPU:value=>{gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426;},gpu:()=>({enabled:gpuEnemyBatchEnabledV426,ready:gpuEnemyBatchReadyV426}),draw,focus:e=>{focusEnemy=e;}})};
+
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test.probeGPU=function(){const original=gpuWriteInstanceV426,fx=[],uvs=new Map(Object.entries(gpuEnemyFXUVV426).map(([k,v])=>[v,k]));let body=0;gpuWriteInstanceV426=function(...args){const key=uvs.get(args[8]);if(key)fx.push(key);else body++;return original(...args);};try{visibleSimV428=-1;renderEnemyBatchV426('body');return {fx,body,ready:gpuEnemyBatchReadyV426};}finally{gpuWriteInstanceV426=original;}};
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

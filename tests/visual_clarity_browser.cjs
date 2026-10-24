@@ -28,7 +28,10 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    }
   }
   await page.evaluate(()=>window.__EVOLVE_CINEMATIC_V580__.test.hide());await page.setViewportSize({width:393,height:852});
-  await page.evaluate(async()=>{const api=window.__EVOLVE_TEST_MODULE_V575__;await api.boss('venom',3);const c=api.test.context();c.player.inv=999;for(let i=0;i<260;i++)c.step(.02);c.draw();});
+  await page.evaluate(async()=>{const api=window.__EVOLVE_TEST_MODULE_V575__;await api.boss('venom',3);api.test.context().player.inv=999;});
+  // Yield between accelerated clock changes so SVG bitmap digits can finish loading.
+  // A synchronous five-second fast-forward otherwise cancels an in-flight digit request.
+  for(let batch=0;batch<26;batch++)await page.evaluate(async()=>{const c=window.__EVOLVE_TEST_MODULE_V575__.test.context();for(let i=0;i<10;i++)c.step(.02);c.draw();await Promise.all([...document.querySelectorAll('#venomArtV538 image')].map(node=>new Promise((resolve,reject)=>{const image=new Image();image.onload=resolve;image.onerror=()=>reject(Error('Venom HUD artwork unavailable'));image.src=node.getAttribute('href');})));});
   report.volleys=await page.evaluate(()=>{const w=window.__EVOLVE_ATTACK_WARNINGS_V582__,c=w.test.context(),qa=window.__EVOLVE_V554_QA__,vc=qa.test.context(),s=c.venom(),out=[];s.boss.venomDebugV537=true;qa.auto(false);for(const key of ['acid','dart','gland']){s.boss.venomPhaseV554=key==='dart'?1:3;vc.reset(s.boss);if(!qa.cast(key))throw Error('Could not cast '+key);c.draw();out.push({key,drawn:w.read().drawn,group:window.__EVOLVE_VISUAL_CLARITY_V592__.read().volley});}return out;});
   assert.ok(report.volleys.every(v=>v.drawn===1),JSON.stringify(report.volleys));assert.ok(report.volleys.filter(v=>v.key!=='gland').every(v=>v.group.paths===1&&v.group.lanes>1),JSON.stringify(report.volleys));
   await page.evaluate(()=>{const q=window.__EVOLVE_V554_QA__,c=q.test.context();c.reset(c.boss);q.cast('acid');window.__EVOLVE_TEST_MODULE_V575__.test.context().draw();});await page.screenshot({path:path.join(out,'visual-venom-volley-portrait.png')});await page.setViewportSize({width:852,height:393});await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().draw());await page.screenshot({path:path.join(out,'visual-venom-volley-landscape.png')});

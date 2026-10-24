@@ -14,7 +14,7 @@
 .upgradeRarityV593{position:absolute;left:12%;right:12%;top:4.8%;height:9%;display:flex;align-items:center;justify-content:center;gap:1.6cqw;color:var(--rarity);font-size:3.8cqw;font-weight:450;line-height:1.2;letter-spacing:.035em;z-index:3}
 .upgradeRarityV593::before,.upgradeRarityV593::after{content:'';height:1px;width:18%;background:var(--rarity);opacity:.6}
 .upgradeArtV593{position:absolute;left:6%;right:6%;top:16%;height:41%;display:flex;align-items:center;justify-content:center;margin:0;overflow:visible;z-index:2;pointer-events:none}
-.upgradeSpriteV593{display:block;width:100%;height:100%;object-fit:contain;overflow:visible}
+.upgradeSpriteV593{display:block;width:100%;height:100%;object-fit:contain;overflow:visible;transform:scale(1.12)}
 .upgradeNameV593{position:absolute;left:9%;right:9%;top:57.8%;height:9.3%;display:flex;align-items:center;justify-content:center;font-size:4.6cqw;line-height:1.3;font-weight:650;word-break:keep-all;letter-spacing:-.045em;z-index:3}
 .upgradeStatsV593{position:absolute;left:11%;right:11%;top:67%;height:13%;padding-top:2.2cqw;border-top:1px solid #7b8b9b58;font-size:3.7cqw;line-height:1.6;font-weight:450;letter-spacing:-.045em;white-space:normal;word-break:keep-all;color:#f1eff1;z-index:3}
 .upgradePartV593{position:absolute;left:6%;right:6%;bottom:6.4%;height:9%;display:flex;align-items:center;justify-content:center;gap:1.8cqw;font-size:3cqw;line-height:1.4;font-weight:450;color:#e6e7ed;z-index:3}
@@ -35,3 +35,4 @@
 #levelPanel #levelContext{display:block!important;opacity:1!important;visibility:visible!important;clip-path:none!important;height:auto!important}
 #levelPanel .upgradeSpriteV593,#levelPanel .upgradePartIconV594{position:static!important;inset:auto!important;flex:none!important}
 #levelPanel #cards .upgradePartV593 span{font:inherit!important;color:inherit!important;letter-spacing:inherit!important}
+#levelPanel .upgradeNameV593,#levelPanel .upgradeStatsV593{transform:translateZ(0)!important;z-index:20!important;will-change:transform!important}

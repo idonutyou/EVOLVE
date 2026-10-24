@@ -57,11 +57,18 @@ def main():
         for path in [upgrade['stylesheet'], upgrade['rarity_art']['path'], upgrade['font']['path']]:
             data = fetch(path)
             assert hashlib.sha256(data).hexdigest() == Path(path).stem, 'Live upgrade asset differs: '+path
+    reference = verification.get('upgrade_reference')
+    if reference:
+        assert b'window.__EVOLVE_UPGRADE_REFERENCE_V594__' in code
+        assert b'elite-body-triangles removed for every monster' in code
+        assert b"if(c.id.endsWith('_equip'))return false;" in code
+        asset = reference['reference']['path']
+        assert hashlib.sha256(fetch(asset)).hexdigest() == Path(asset).stem, 'Live reference UI differs'
     result = {'success': True, 'url': root, 'version': expected['version'], 'build': expected['build'],
               'version_matches': True, 'manifest_matches': True, 'engine_matches': True,
               'entry_matches': True, 'engine': engine, 'engine_sha256': digest,
               'movement_field': verification['movement_field'], 'horde_roles': verification['horde_roles'],
-              'visual_clarity': verification['visual_clarity'], 'upgrade_cards': upgrade,
+              'visual_clarity': verification['visual_clarity'], 'upgrade_cards': upgrade, 'upgrade_reference': reference,
               'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2)+'\n')
