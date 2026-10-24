@@ -6,13 +6,15 @@
     "file_id": "file_000000006a24820bad319238b85e3455",
     "role": "User-restored infected facility miniature; keep unchanged"
   },
-  "remaining": [
+  "remaining": [],
+  "backup": "Commit each completed image immediately to art/home-map-miniatures-v597/<map>.png before displaying it.",
+  "environment": "Execution restored; all five generated assets and exact recovered source saved in repository",
+  "completed": [
+    "infected",
     "facility1",
     "facility2",
     "hub",
     "biolab",
     "red_biolab"
-  ],
-  "backup": "Commit each completed image immediately to art/home-map-miniatures-v597/<map>.png before displaying it.",
-  "environment": "Execution environment unavailable; use cloud image generation and GitHub persistence."
+  ]
 }

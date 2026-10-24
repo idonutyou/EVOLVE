@@ -85,7 +85,7 @@ const playerReadyV586=new Promise((resolve,reject)=>{
    if(new URLSearchParams(location.search).get('evolveQA')==='1')playerNativePoseV588=playerOriginalPoseV588(source,0,playerArtV586.width,false);
    source.width=source.height=1;
    ASSET_SRC['player_static/base_specimen']=preview;SPRITE_SRC.player=preview;
-   for(const id of ['heroSpecimenImg','partsSpecimenImgV523']){const image=$(id);if(image){image.src=preview;image.removeAttribute('data-origin-v522');delete image.dataset.origin;}}
+   for(const id of ['partsSpecimenImgV523']){const image=$(id);if(image){image.src=preview;image.removeAttribute('data-origin-v522');delete image.dataset.origin;}}
    playerWeaponLabelsV586();resolve(true);
   }catch(error){reject(error);}
  };

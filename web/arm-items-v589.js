@@ -128,7 +128,7 @@ function armItemsRefreshV589(){
  const mode=armItemModeV589();if(mode!==armItemsV589.lastMode){playerMotionV586.attack=null;playerMotionV586.cooldown=.18;player.shoot=.18;armItemsV589.lastMode=mode;}
  playerWeaponLabelsV586();if(!armItemsV589.ready)return;
  const preview=mode==='bare'?ASSET_SRC['player_static/base_specimen']:armItemsV589.previews[mode];
- for(const id of ['heroSpecimenImg','partsSpecimenImgV523']){const image=$(id);if(image&&image.getAttribute('src')!==preview)image.src=preview;}
+ for(const id of ['partsSpecimenImgV523']){const image=$(id);if(image&&image.getAttribute('src')!==preview)image.src=preview;}
 }
 const armBareEquipV589=equipPartV523;
 equipPartV523=function(...args){const result=armBareEquipV589(...args);armItemsRefreshV589();return result;};

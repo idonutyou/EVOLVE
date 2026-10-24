@@ -1,0 +1,19 @@
+{
+  "version": "V575-WEB-30-MAP-HOME",
+  "build": "b81a65c5865125130f350b7675eed52c5db78a725356823bb36238ee4ea0c3c4",
+  "progress": 80,
+  "status": "Six map previews, stage boundaries, equipment, Korean/English, portrait/landscape, reduced motion and battle start verified",
+  "baseline": "f336a949c51a9dedc74c48c031c8c594f0a5b59f",
+  "branch": "home-map-miniatures-v597",
+  "saved_images": [
+    "infected",
+    "facility1",
+    "facility2",
+    "hub",
+    "biolab",
+    "red_biolab"
+  ],
+  "deployment_pending": true,
+  "automated_browser_checks": true,
+  "physical_Galaxy_S23_plus_tested": false
+}

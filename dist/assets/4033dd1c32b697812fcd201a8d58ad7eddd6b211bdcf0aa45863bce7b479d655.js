@@ -9634,7 +9634,6 @@ function refreshEvolveHomeV522(){
  homeSetTextV522('homeLatestV522',homeTextV522('LATEST STAGE','최신 단계로'));
  $('homeLatestV522').disabled=s===unlocked;
  homeSetTextV522('homeStageNumberV522',num);
- homeSetTextV522('homeStageTitleV522',homeTextV522('INFECTED FACILITY','감염 시설'));
  const status=locked?homeTextV522('LOCKED · CLEAR STAGE '+(s-1),'잠김 · 스테이지 '+(s-1)+' 클리어 필요'):cleared?homeTextV522('CLEARED · REPLAY AVAILABLE','클리어 완료 · 다시 도전 가능'):homeTextV522('READY TO ENTER','진입 준비 완료');
  homeSetTextV522('homeStageStateV522',(milestone?milestone+' · ':'')+status);
  $('homeStageStateV522').style.color=locked?'#a7989e':cleared?'#9bbdaa':'#83c3c8';
@@ -9648,10 +9647,7 @@ function refreshEvolveHomeV522(){
  const boss=homeBossV522(s);homeSetTextV522('homeBossNameV522',homeTextV522(...boss));
  homeSetTextV522('homeCapLabelV522',homeTextV522('LEVEL LIMIT','최대 레벨'));
  homeSetTextV522('homeLevelCapV522',homeTextV522('No limit','제한 없음'));
- homeSetTextV522('homeOriginNameV522',ORIGINS[meta.origin]?.name||'PRIME CELL');
- const previewKey='base_specimen';
- const preview=$('heroSpecimenImg'),previewSrc=ASSET_SRC['player_static/'+previewKey];
- if(preview.getAttribute('data-origin-v522')!==meta.origin){preview.src=previewSrc;preview.setAttribute('data-origin-v522',meta.origin);preview.alt=ORIGINS[meta.origin]?.name||'PRIME CELL';}
+ paintHomeMapV597();
  $('start').disabled=!homeReadyV522||locked||!!homeLoadErrorV522;
  homeSetTextV522('start',homeLoadErrorV522?homeTextV522('ASSET LOAD FAILED','이미지 로딩 실패'):!homeReadyV522?homeTextV522('LOADING…','불러오는 중…'):locked?homeTextV522('PREVIOUS STAGE CLEAR REQUIRED','이전 스테이지 클리어 필요'):homeTextV522('START BATTLE','전투 시작'));
  homeSetTextV522('homeStartHintV522',homeLoadErrorV522?homeLoadErrorV522.slice(0,90):locked?homeTextV522('Complete the previous stage to unlock this stage.','이전 단계를 완료하면 이 스테이지가 열립니다.'):homeTextV522('SELECT STARTING WEAPON','시작 무기를 선택한 뒤 진입합니다.'));
@@ -12520,7 +12516,7 @@ const playerReadyV586=new Promise((resolve,reject)=>{
    if(new URLSearchParams(location.search).get('evolveQA')==='1')playerNativePoseV588=playerOriginalPoseV588(source,0,playerArtV586.width,false);
    source.width=source.height=1;
    ASSET_SRC['player_static/base_specimen']=preview;SPRITE_SRC.player=preview;
-   for(const id of ['heroSpecimenImg','partsSpecimenImgV523']){const image=$(id);if(image){image.src=preview;image.removeAttribute('data-origin-v522');delete image.dataset.origin;}}
+   for(const id of ['partsSpecimenImgV523']){const image=$(id);if(image){image.src=preview;image.removeAttribute('data-origin-v522');delete image.dataset.origin;}}
    playerWeaponLabelsV586();resolve(true);
   }catch(error){reject(error);}
  };
@@ -12700,7 +12696,7 @@ function armItemsRefreshV589(){
  const mode=armItemModeV589();if(mode!==armItemsV589.lastMode){playerMotionV586.attack=null;playerMotionV586.cooldown=.18;player.shoot=.18;armItemsV589.lastMode=mode;}
  playerWeaponLabelsV586();if(!armItemsV589.ready)return;
  const preview=mode==='bare'?ASSET_SRC['player_static/base_specimen']:armItemsV589.previews[mode];
- for(const id of ['heroSpecimenImg','partsSpecimenImgV523']){const image=$(id);if(image&&image.getAttribute('src')!==preview)image.src=preview;}
+ for(const id of ['partsSpecimenImgV523']){const image=$(id);if(image&&image.getAttribute('src')!==preview)image.src=preview;}
 }
 const armBareEquipV589=equipPartV523;
 equipPartV523=function(...args){const result=armBareEquipV589(...args);armItemsRefreshV589();return result;};
@@ -13494,6 +13490,42 @@ reset=function(...args){midFieldsV596=[];return midResetBaseV596(...args);};
 returnToHome=function(...args){midFieldsV596=[];$('bossname').style.color='';return midHomeBaseV596(...args);};
 window.__EVOLVE_COMBAT_V596__={read:()=>({contactAllTypes:true,contracts:false,species:Object.keys(NEW_MONSTER_SPECIES_V596),ranks:MIDBOSS_RANKS_V596.map(r=>({...r})),casts:midCastCountV596,fields:midFieldsV596.length,auraDraws:midAuraDrawsV596,physical_Galaxy_S23_plus_tested:false})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_COMBAT_V596__.test={rank:midbossRankForStageV596,apply:applyMidbossRankV596,cast:midbossCastV596,contains:midFieldContainsV596,fields:()=>midFieldsV596,stepFields:updateMidFieldsV596,intent:enemyIntentV596,types:NEW_MONSTER_SPECIES_V596,baseType:enemyCombatTypeV596,appearance:enemyAppearanceKeyV516,asset:enemyAppearanceAssetV516,health:()=>enemyHealthVisibilityV592.read(),context:()=>({player,enemies,meta,state,eBullets,step:dt=>update(dt),draw,home:returnToHome,damage:playerDamage,clock:()=>t})};
+
+// WEB-30: the battle home depicts the selected destination; organisms stay in their own menu.
+const homeMapArtV597=JSON.parse("{\"version\":\"V575-WEB-30-MAP-HOME\",\"maps\":{\"infected\":{\"id\":\"infected\",\"ko\":\"감염 시설\",\"en\":\"INFECTED FACILITY\",\"accent\":\"#954a40\",\"path\":\"assets/0bac4ff84e93141d62bc5de185dc551903b97932c2498a6a1c5f98328b083c1e.jpg\",\"sha256\":\"0bac4ff84e93141d62bc5de185dc551903b97932c2498a6a1c5f98328b083c1e\",\"bytes\":368388,\"width\":1536,\"height\":1536,\"opaque\":true},\"facility1\":{\"id\":\"facility1\",\"ko\":\"독성 화학공장\",\"en\":\"TOXIC CHEMICAL PLANT\",\"accent\":\"#809b44\",\"path\":\"assets/f612088e5d4f8ca6aac71f7524a8e0578c32f9f5a28ef3d1c01ecec3c5f59623.png\",\"sha256\":\"f612088e5d4f8ca6aac71f7524a8e0578c32f9f5a28ef3d1c01ecec3c5f59623\",\"bytes\":2138030,\"width\":1254,\"height\":1254,\"opaque\":false},\"facility2\":{\"id\":\"facility2\",\"ko\":\"핵폐기물 처리시설\",\"en\":\"NUCLEAR WASTE PROCESSING\",\"accent\":\"#a39641\",\"path\":\"assets/9a6db074715465310eb3007921c0cef3ae90c074f7bdef5efef2bdbce6ece4a1.png\",\"sha256\":\"9a6db074715465310eb3007921c0cef3ae90c074f7bdef5efef2bdbce6ece4a1\",\"bytes\":2295405,\"width\":1254,\"height\":1254,\"opaque\":false},\"hub\":{\"id\":\"hub\",\"ko\":\"방사성 폐기물 중앙 광장\",\"en\":\"RADIOACTIVE WASTE PLAZA\",\"accent\":\"#87984a\",\"path\":\"assets/16bc0bbdb26dbcfce1a7bf2c49daa2af3f810360ccded97556b671093d341a47.png\",\"sha256\":\"16bc0bbdb26dbcfce1a7bf2c49daa2af3f810360ccded97556b671093d341a47\",\"bytes\":2168805,\"width\":1254,\"height\":1254,\"opaque\":false},\"biolab\":{\"id\":\"biolab\",\"ko\":\"격리 배양시설\",\"en\":\"QUARANTINE CULTIVATION LAB\",\"accent\":\"#9d6556\",\"path\":\"assets/dada1b22904d7ef0c359e3fb0e95035acf7c4023a58c6b0cf17ebb8cbef4bb7c.png\",\"sha256\":\"dada1b22904d7ef0c359e3fb0e95035acf7c4023a58c6b0cf17ebb8cbef4bb7c\",\"bytes\":2124792,\"width\":1254,\"height\":1254,\"opaque\":false},\"red_biolab\":{\"id\":\"red_biolab\",\"ko\":\"적색 배양공장\",\"en\":\"RED CULTIVATION FACTORY\",\"accent\":\"#aa3e3a\",\"path\":\"assets/36143edcead4d1421a7115b6ff7506b2d768e4235379e895de3e1362ede1cc9b.png\",\"sha256\":\"36143edcead4d1421a7115b6ff7506b2d768e4235379e895de3e1362ede1cc9b\",\"bytes\":2331267,\"width\":1254,\"height\":1254,\"opaque\":false}}}");
+let homeMapPaintsV597=0,homeMapInitialResolveV597,homeMapInitialRejectV597;
+const homeMapReadyV597=new Promise((resolve,reject)=>{homeMapInitialResolveV597=resolve;homeMapInitialRejectV597=reject;});
+function homeMapDestinationV597(){
+ const id=campaignMapForStageV567(homeSelectedStageV522)||'infected';
+ const art=homeMapArtV597.maps[id]||homeMapArtV597.maps.infected;
+ const definition=CAMPAIGN_MAPS_V567.find(map=>map.id===id);
+ const name=homeTextV522(art.en,definition?.label||art.ko);
+ return {id:art.id,name,art};
+}
+function paintHomeMapV597(){
+ if(!window.__EVOLVE_HOME_MAPS_V597__)return;
+ const destination=homeMapDestinationV597(),image=$('heroSpecimenImg'),hero=$('posterHero');
+ homeSetTextV522('homeStageTitleV522',destination.name);hero.dataset.destination=destination.id;
+ hero.dataset.opaqueMap=destination.art.opaque?'true':'false';
+ hero.style.setProperty('--map-accent',destination.art.accent);
+ image.alt=destination.name+' · '+homeTextV522('map miniature','맵 미니어처');
+ image.setAttribute('data-i18n-ignore','');image.removeAttribute('data-origin-v522');
+ if(image.dataset.mapId!==destination.id){
+  image.dataset.mapId=destination.id;hero.dataset.ready='false';homeMapPaintsV597++;
+  image.onload=()=>{hero.dataset.ready='true';homeMapInitialResolveV597(true);};
+  image.onerror=()=>{hero.dataset.ready='error';homeMapInitialRejectV597(Error(homeTextV522('Map preview failed to load.','맵 미니어처를 불러오지 못했습니다.')));};
+  image.src=destination.art.path;
+  if(image.complete&&image.naturalWidth){hero.dataset.ready='true';homeMapInitialResolveV597(true);}
+ }
+}
+window.__EVOLVE_HOME_MAPS_V597__={
+ ready:homeMapReadyV597,
+ read:()=>({stage:homeSelectedStageV522,...homeMapDestinationV597(),paints:homeMapPaintsV597,ready:$('posterHero').dataset.ready==='true',physical_Galaxy_S23_plus_tested:false}),
+ list:()=>Object.values(homeMapArtV597.maps).map(art=>({id:art.id,ko:art.ko,en:art.en,path:art.path,width:art.width,height:art.height,sha256:art.sha256}))
+};
+paintHomeMapV597();
+const homeStartupBaseV597=window.__EVOLVE_STARTUP_V595__.ready;
+window.__EVOLVE_STARTUP_V595__.ready=Promise.all([homeStartupBaseV597,homeMapReadyV597]).then(()=>true);
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

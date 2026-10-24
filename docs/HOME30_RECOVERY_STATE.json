@@ -2,7 +2,7 @@
   "version": "V575-WEB-30-MAP-HOME",
   "baseline": "f336a949c51a9dedc74c48c031c8c594f0a5b59f",
   "branch": "home-map-miniatures-v597",
-  "status": "Rebuild lost temporary asset files; preserve exact destination names and original combat maps",
+  "status": "Six miniatures saved remotely; home-only implementation and browser checks complete; publication pending",
   "completed_validation_before_session_reset": [
     "Six destination miniatures and matching map names",
     "Stage mapping boundaries",
@@ -11,5 +11,5 @@
     "Korean/English and mobile layouts",
     "Original character regression and image checksum tests"
   ],
-  "next": "Each generated replacement is immediately committed to docs/home30-art/<map>.png; then restore home-only code and recheck."
+  "next": "Publish tested WEB-30 tree and verify Pages build. Do not regenerate any of the six saved images."
 }
