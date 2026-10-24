@@ -1,8 +1,8 @@
 {
   "version": "V575-WEB-31-ORGAN-SKILLS",
   "baseline": "169505e96c4331a2072219e674862f51632e06a6",
-  "progress": 80,
-  "status": "All 17 browser suites passed; final changed flows rechecked; package ready for publication",
+  "progress": 90,
+  "status": "Uploaded to main; guarded automatic publication running",
   "requirements": [
     "Delete home unlock/latest/replay/objective/level-limit/start-hint text; cleared status only 클리어",
     "Increase subtle vertical miniature floating motion",
@@ -18,5 +18,8 @@
   "physical_Galaxy_S23_plus_tested": false,
   "build": "1aa8e9680ade797922132fec3c3beb2ee47c7ddb6c33cda3c6e0defaf548206e",
   "browser_suites": 17,
-  "deployment_pending": true
+  "deployment_pending": true,
+  "release_commit": "45ad341aae5c1d8101c192a39a79617ca79c4322",
+  "workflow_run": 40107630679,
+  "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40107630679"
 }
