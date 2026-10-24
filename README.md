@@ -1,5 +1,7 @@
 # EVOLVE — V575 Web Version
 
+Current update: **V575-WEB-29-ADMIN-COMBAT**. Original monster identities are restored; RIPPER, MAULER and BILEBACK are separate species. Contracts are removed. All monsters cause contact damage, shooters retreat while firing, and ranked mid-bosses have distinct attacks, body vapor and the existing dedicated health HUD. See [current combat rules](docs/ADMIN_COMBAT_RULES_KO.md) and [browser evidence](docs/ADMIN_COMBAT_BROWSER_REPORT.json).
+
 Play EVOLVE: **https://idonutyou.github.io/EVOLVE/**
 
 The full V575-WEB-2 website is deployed on GitHub Pages and installed in `main` under `dist/`. All 68 manual upload files were restored successfully. All 1001 asset checksums and automated browser checks passed. The public game URL was opened in a browser; the home screen, original character image and enabled battle-start button were verified.

@@ -1,17 +1,50 @@
 {
   "version": "V575-WEB-29-ADMIN-COMBAT",
   "baseline": "3f8f3164bc19d89fb67d4ea95069674f9fcba1ab",
-  "progress": 70,
+  "progress": 85,
   "tasks": [
     "Restore original crawler/runner/brute/spitter and register three independent painted species",
     "Delete contracts, difficulty modifiers, rewards and UI",
     "Prepare effective saved test map on admin enable"
   ],
-  "status": "Core browser checks passed; complete existing regression suite running",
+  "status": "All local core and regression checks passed; ready for automatic publication",
   "build": "a08eb3d767bccd07f9daa1bdc1910149d117054c3c5bd716b2524af7c889e415",
   "new_tasks": [
     "All species contact damage",
     "Ranged retreat and melee pursuit",
     "Five stage-based midboss ranks, body vapor, unique attacks and no overhead bar"
-  ]
+  ],
+  "browser_report": "docs/ADMIN_COMBAT_BROWSER_REPORT.json",
+  "regression": {
+    "python_tests": 6,
+    "node_suites": [
+      "web_client",
+      "campaign_lightning",
+      "monster_motion",
+      "red_pulse",
+      "movement_field",
+      "horde_roles",
+      "visual_clarity",
+      "boss_cinematic"
+    ],
+    "browser_suites": [
+      "admin_combat",
+      "playfield",
+      "upgrade_cards",
+      "visual_clarity",
+      "horde_roles",
+      "movement_field",
+      "arm_items",
+      "original_player",
+      "player_combat",
+      "player_scorpion",
+      "admin_mode",
+      "browser_smoke",
+      "red_pulse",
+      "boss_cinematic",
+      "attack_warnings"
+    ],
+    "javascript_errors": [],
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
