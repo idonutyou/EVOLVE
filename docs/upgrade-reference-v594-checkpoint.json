@@ -1,9 +1,9 @@
 {
-  "progress": 80,
+  "progress": 100,
   "version": "V575-WEB-27-REFERENCE-CARDS",
   "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
   "engine": "assets/514571182ba68d57f36fcd2d60f9140cff8ccfffaee640c7883a96081d17ba8f.js",
-  "status": "Local functional, pixel, mobile viewport, combat and unit checks passed; publication pending",
+  "status": "Uploaded, all server checks passed, Pages deployed and independently verified",
   "rules": {
     "engine": "assets/514571182ba68d57f36fcd2d60f9140cff8ccfffaee640c7883a96081d17ba8f.js",
     "baseline_commit": "79ea7d94d753f67fd59b491a40ddecd1041b711e",
@@ -113,7 +113,7 @@
     "new_image_assets": 1,
     "physical_Galaxy_S23_plus_tested": false
   },
-  "next": "Publish the verified tree to GitHub, complete server browser checks, deploy and verify actual Pages hashes.",
+  "next": "Complete",
   "local_verification": {
     "upgrade_cards_browser": true,
     "equipment_rolls_per_mode": 300,
@@ -126,6 +126,27 @@
     "python_unit_tests": 6,
     "client_unit_tests": true,
     "existing_images_preserved": 995,
+    "physical_Galaxy_S23_plus_tested": false,
+    "browser_smoke": true
+  },
+  "publication": {
+    "completed_at": "2026-10-24T14:23:35+09:00",
+    "version": "V575-WEB-27-REFERENCE-CARDS",
+    "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
+    "source_commit": "557c135b62454f480a5ef20f0831ef214e6340c1",
+    "source_tree": "0ba799de7446182af6049bba136034b57f015be3",
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "publish_workflow": {
+      "id": 40064766127,
+      "conclusion": "success",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40064766127"
+    },
+    "migration_workflow": {
+      "id": 40064766097,
+      "conclusion": "success"
+    },
+    "server_browser_suites_passed": 13,
+    "actual_pages_version_manifest_engine_entry_style_font_atlas_reference_verified": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

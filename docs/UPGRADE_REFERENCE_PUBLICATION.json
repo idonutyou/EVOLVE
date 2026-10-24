@@ -1,0 +1,20 @@
+{
+  "completed_at": "2026-10-24T14:23:35+09:00",
+  "version": "V575-WEB-27-REFERENCE-CARDS",
+  "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
+  "source_commit": "557c135b62454f480a5ef20f0831ef214e6340c1",
+  "source_tree": "0ba799de7446182af6049bba136034b57f015be3",
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "publish_workflow": {
+    "id": 40064766127,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40064766127"
+  },
+  "migration_workflow": {
+    "id": 40064766097,
+    "conclusion": "success"
+  },
+  "server_browser_suites_passed": 13,
+  "actual_pages_version_manifest_engine_entry_style_font_atlas_reference_verified": true,
+  "physical_Galaxy_S23_plus_tested": false
+}
