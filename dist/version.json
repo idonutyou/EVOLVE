@@ -1,7 +1,8 @@
 {
-  "version": "V575-WEB-27-REFERENCE-CARDS",
-  "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab",
-  "scriptBytes": 77566965,
-  "assets": 1025,
-  "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea"
+  "version": "V575-WEB-28-PLAYFIELD",
+  "build": "01634b404ddfdef43b3735dece800e44ecc7d6fc39f5ba1026367e2deea41ba4",
+  "scriptBytes": 77569572,
+  "assets": 1026,
+  "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+  "preloadResources": true
 }

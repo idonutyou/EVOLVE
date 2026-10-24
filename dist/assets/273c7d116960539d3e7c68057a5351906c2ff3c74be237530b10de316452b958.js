@@ -1984,7 +1984,7 @@ function updateGeneRift(dt){
 
 function spawnPurgeWave(count=3,tier=1,force=false){
   if(!force&& !directorCanStart('purge'))return false;directorHold(force ? .35 : 1.0);
-  flash('CONTAINMENT PURGE · MOVE',1000);beep(115,.18,'sawtooth',.035);
+  flash(homeTextV522('CONTAINMENT PURGE · MOVE','시설 정화 · 붉은 범위에서 벗어나세요'),1300);beep(115,.18,'sawtooth',.035);
   for(let i=0;i<count;i++){
     let x,y,tries=0,r=42+tier*4,p;
     do{p=worldPointInView(70);x=p.x;y=p.y;tries++}while(tries<16&&Math.hypot(x-player.x,y-player.y)<90);
@@ -4896,31 +4896,8 @@ if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_AT
 // Native active fields retain their original artwork below actors and foreground.
 // The red telegraph pass is reserved for the preparation interval.
 function drawActiveHazardsV583(){
- for(const z of purges){
-  if(z.warn>0||!worldCircleVisibleV441(z.x,z.y,z.r,36))continue;
-  const pulse=.5+.5*Math.sin(t*10);ctx.save();ctx.translate(z.x,z.y);
-      ctx.globalAlpha=.30+.14*pulse;ctx.fillStyle='rgba(255,54,32,.28)';ctx.strokeStyle='#ff3e31';ctx.lineWidth=3;ctx.shadowBlur=14;ctx.shadowColor='#ff3728';
-      ctx.beginPath();ctx.arc(0,0,z.r,0,TAU);ctx.fill();ctx.stroke();
-      for(let i=0;i<5;i++){let a=i/5*TAU+t*1.7;ctx.strokeStyle='rgba(255,190,115,.55)';ctx.beginPath();ctx.moveTo(Math.cos(a)*z.r*.25,Math.sin(a)*z.r*.25);ctx.lineTo(Math.cos(a)*z.r*.9,Math.sin(a)*z.r*.9);ctx.stroke();}
-
-  ctx.restore();
- }
-  // biome route hazards
-  for(const z of biomeHazards){
-    if(z.warn>0||!worldCircleVisibleV441(z.x,z.y,z.r,36))continue;
-    const warning=z.warn>0,p=.5+.5*Math.sin(t*7);ctx.save();ctx.translate(z.x,z.y);
-    if(z.kind==='cryo'){
-      ctx.fillStyle=warning?'rgba(91,186,255,.08)':'rgba(86,181,255,.19)';ctx.strokeStyle='#7ed0ff';ctx.shadowBlur=warning?5:13;ctx.shadowColor='#65c9ff';ctx.lineWidth=2;ctx.setLineDash(warning?[6,5]:[]);
-      ctx.beginPath();ctx.arc(0,0,z.r*(warning?.88+.10*(1-Math.max(0,z.warn/.85)):1),0,TAU);ctx.fill();ctx.stroke();ctx.setLineDash([]);
-      if(!warning)for(let i=0;i<6;i++){let a=i/6*TAU;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(Math.cos(a)*z.r*.82,Math.sin(a)*z.r*.82);ctx.stroke();}
-    }else{
-      ctx.fillStyle=warning?'rgba(255,89,40,.09)':'rgba(255,72,28,.24)';ctx.strokeStyle='#ff7549';ctx.shadowBlur=warning?5:15;ctx.shadowColor='#ff3c21';ctx.lineWidth=2.5;ctx.setLineDash(warning?[7,5]:[]);
-      ctx.beginPath();ctx.arc(0,0,z.r,0,TAU);ctx.fill();ctx.stroke();ctx.setLineDash([]);
-      if(!warning){ctx.globalAlpha=.55;for(let i=0;i<5;i++){let a=i/5*TAU+t*.8;ctx.beginPath();ctx.arc(Math.cos(a)*z.r*.46,Math.sin(a)*z.r*.46,4+2*p,0,TAU);ctx.stroke();}}
-    }
-    ctx.restore();
-  }
-
+ for(const z of purges)if(z.warn<=0)paintGroundFieldV595(z,true,true);
+ for(const z of biomeHazards)if(z.warn<=0)paintGroundFieldV595(z,false,true);
  for(const tg of telegraphs){
   if(!tg.active||tg.life<=0||!['acidZone','nullZone'].includes(tg.kind)||!telegraphVisibleV441(tg))continue;
   ctx.save();ctx.lineWidth=2.5;
@@ -11291,7 +11268,7 @@ mapPlaceNewBodyV562=function(o,r=o.r||8){const p=mapChooseDoorV562(o,r);if(!p)re
  buildTerrain=function(...args){mapGateCacheV562.clear();return build(...args);};
  resolveTerrainBody=function(o,r=10){if(o._mapBirthLockedV562){if(!mapCircleClearV562(o.x,o.y,r))mapPlaceNewBodyV562(o,r);return;}return resolve(o,r);};
  spawnEnemy=function(...args){
-  const e=spawn(...args);if(!e||e.dead||e.finalBoss||e.venomAddV553||bossArena?.active)return e;const p=mapChooseDoorV562(e,e.r);
+  const e=spawn(...args);if(evolveAdminEnabledV585&&upgradeSpawnPermissionV593)return e;if(!e||e.dead||e.finalBoss||e.venomAddV553||bossArena?.active)return e;const p=mapChooseDoorV562(e,e.r);
   if(!p){e.dead=true;e.mapGateSuppressedV562=true;mapBirthAuditV562.suppressed++;return e;}
   mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;
   const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();
@@ -11352,7 +11329,7 @@ function mapRoadOverviewV562(){
 }
 {
  const tick=update;let admitted=0;
- function admitUnregistered(){if(bossArena?.active)return;for(const e of enemies){if(e.dead||e.finalBoss||e.venomAddV553||e.mapDoorSpawnV562)continue;const p=mapChooseDoorV562(e,e.r);if(!p){e.dead=true;mapBirthAuditV562.suppressed++;continue;}mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type,source:'legacy-admission'};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();admitted++;}}
+ function admitUnregistered(){if(bossArena?.active)return;for(const e of enemies){if(e.dead||e.finalBoss||e.venomAddV553||e.mapDoorSpawnV562||e.catalogSpawnV593)continue;const p=mapChooseDoorV562(e,e.r);if(!p){e.dead=true;mapBirthAuditV562.suppressed++;continue;}mapSetBirthV562(e,p);e.mapDoorSpawnV562=true;const rec={serial:++mapBirthAuditV562.total,time:t,gate:p.gate.id,x:p.x,y:p.y,r:e.r,type:e.type,source:'legacy-admission'};e._mapBirthRecordV562=rec;mapBirthAuditV562.byGate[p.gate.id]++;mapBirthAuditV562.records.push(rec);if(mapBirthAuditV562.records.length>512)mapBirthAuditV562.records.shift();admitted++;}}
  update=function(dt){admitUnregistered();const out=tick(dt);admitUnregistered();return out;};
  if(window.__EVOLVE_MAP_TEST_V562__.test)window.__EVOLVE_MAP_TEST_V562__.test.admissionCount=()=>admitted;
 }
@@ -13235,14 +13212,7 @@ const MONSTER_CATALOG_V593=[
  {id:'hunter',type:'runner',elite:'hunter',name:'게놈 사냥꾼',en:'GENOME HUNTER',group:'정예'},
  {id:'omega',type:'brute',elite:'omega',name:'오메가 사냥꾼',en:'OMEGA HUNTER',group:'정예'},
  {id:'nemesis_brute',type:'brute',elite:'nemesis',name:'네메시스 · 근접',en:'NEMESIS · BRUTE',group:'정예'},
- {id:'nemesis_spitter',type:'spitter',elite:'nemesis',name:'네메시스 · 원거리',en:'NEMESIS · SPITTER',group:'정예'},
- {id:'bio',boss:'bio',asset:'boss/bio_titan',name:'바이오 타이탄',en:'BIO TITAN',group:'보스'},
- {id:'venom',boss:'venom',asset:'boss/aberrant_titan',name:'베놈 타이탄',en:'VENOM TITAN',group:'보스'},
- {id:'blade',boss:'blade',asset:'boss/boss_blade_variant',name:'칼날 보스',en:'BOSS BLADE VARIANT',group:'보스'},
- {id:'frost',boss:'frost',asset:'boss/frost_titan',name:'프로스트 타이탄',en:'FROST TITAN',group:'보스'},
- {id:'pyre',boss:'pyre',asset:'boss/pyre_titan',name:'파이어 타이탄',en:'PYRE TITAN',group:'보스'},
- {id:'origin',boss:'origin',asset:'boss/origin_colossus',name:'오리진 콜로서스',en:'ORIGIN COLOSSUS',group:'보스'},
- {id:'abyss',boss:'abyss',asset:'boss/abyss_matriarch',name:'어비스 마트리아크',en:'ABYSS MATRIARCH',group:'보스'}
+ {id:'nemesis_spitter',type:'spitter',elite:'nemesis',name:'네메시스 · 원거리',en:'NEMESIS · SPITTER',group:'정예'}
 ];
 function monsterCatalogAssetV593(c){return c.asset||enemyAppearanceAssetV516(c.legacy?'legacy_'+c.type:c.type);}
 const monsterPermittedBaseV593=permittedEnemyV526;
@@ -13266,10 +13236,13 @@ function monsterCatalogSpawnOneV593(c){
   else if(c.boss)e=stressBossPresetV424(c.boss);else e=spawnEnemy(c.type,false);
  }finally{upgradeSpawnPermissionV593=false;}
  if(!e||e.dead)return false;
+ // Gate births expose locked coordinate accessors: restore actual writable positions first.
+ if(e._mapBirthLockedV562)mapReleaseBirthV562(e);
  if(c.elite==='nemesis')Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});
  if(!monsterCatalogPointV593(e,monsterCatalogSpawnedV593)){e.dead=true;return false;}
  if(c.legacy)e.visualSetV516='legacy';else if(c.type==='crawler'||c.type==='warden')e.visualSetV516='base';
- Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false});
+ Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false,mapEntranceRouteV562:null,mapRoadGateV562:null,_mapX560:e.x,_mapY560:e.y,vx:0,vy:0});
+ delete e._mapBirthRecordV562;
  monsterCatalogSpawnedV593++;return e;
 }
 function monsterCatalogRequestV593(id,count=1){
@@ -13294,7 +13267,7 @@ function monsterCatalogPumpV593(){
 }
 {
  const block=document.createElement('div');block.className='tmBlockV573';block.id='monsterCatalogV593';
- block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예','보스'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
+ block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
  $('tmModalV573').querySelectorAll('.tmBlockV573')[1].before(block);
  function preview(){
   const c=MONSTER_CATALOG_V593.find(c=>c.id===$('monsterSelectV593').value);monsterCatalogSelectedV593=c.id;
@@ -13412,6 +13385,62 @@ window.__EVOLVE_UPGRADE_REFERENCE_V594__={ready:upgradeSkinReadyV594,read:()=>({
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test={reference:()=>referenceImageV594,background:()=>upgradeSkinV594.backgrounds[0],frame:skinFrameV594,art:skinArtV594,artMetrics:()=>[...upgradeSkinV594.artMetrics.entries()],context:()=>({ctx,drawEnemy,normalOverlay:drawNormalEnemyOverlayV426,hitLanguage:drawEnemyHitLanguage,threat:drawThreatPriority,setGPU:value=>{gpuEnemyBatchEnabledV426=!!value&&gpuEnemyBatchReadyV426;},gpu:()=>({enabled:gpuEnemyBatchEnabledV426,ready:gpuEnemyBatchReadyV426}),draw,focus:e=>{focusEnemy=e;}})};
 
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_REFERENCE_V594__.test.probeGPU=function(){const original=gpuWriteInstanceV426,fx=[],uvs=new Map(Object.entries(gpuEnemyFXUVV426).map(([k,v])=>[v,k]));let body=0;gpuWriteInstanceV426=function(...args){const key=uvs.get(args[8]);if(key)fx.push(key);else body++;return original(...args);};try{visibleSimV428=-1;renderEnemyBatchV426('body');return {fx,body,ready:gpuEnemyBatchReadyV426};}finally{gpuWriteInstanceV426=original;}};
+
+// Re-entering the same prepared map must not recompose five million collision samples.
+let mapFlightV595=null,mapPrepareCountV595=0,mapReuseCountV595=0;
+const mapPrepareBaseV595=campaignPrepareStageV567;
+campaignPrepareStageV567=function(stage){
+ const id=campaignMapForStageV567(stage);
+ if(!campaignLoadingV567&&id===(campaignActiveV567?.id||null)&&(!id||mapReadyV562)&&!mapEditBootBusyV562){mapReuseCountV595++;return Promise.resolve(true);}
+ if(mapFlightV595?.id===id&&campaignRequestedV567===id)return mapFlightV595.task;
+ if(campaignLoadingV567&&campaignRequestedV567===id){
+  return new Promise(resolve=>{const check=()=>{if(campaignRequestedV567!==id)return resolve(false);if(!campaignLoadingV567)return resolve(!id||mapReadyV562);setTimeout(check,25);};check();});
+ }
+ mapPrepareCountV595++;const flight={id,task:null};
+ flight.task=mapPrepareBaseV595(stage).finally(()=>{if(mapFlightV595===flight)mapFlightV595=null;});mapFlightV595=flight;return flight.task;
+};
+
+const groundArtV595={"path":"assets/4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697.png","sha256":"4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697","bytes":2487966},groundImageV595=new Image();
+const groundReadyV595=new Promise((resolve,reject)=>{groundImageV595.onload=resolve;groundImageV595.onerror=()=>reject(Error('바닥 공격 이미지를 불러오지 못했습니다.'));});
+groundImageV595.src=groundArtV595.path;
+let groundStampsV595=0;
+function prepareGroundFieldsV595(){
+ for(const [list,purge] of [[purges,true],[biomeHazards,false]])for(const z of list){
+  if(z.groundPreparedV595)continue;z.groundPreparedV595=true;z.originalRadiusV595=z.r;
+  z.r=purge?Math.max(72,z.r*1.65):z.r*(z.warn>0?1.5:1.35);
+  if(z.warn>0)z.warn=Math.max(z.warn,purge?1.25:1.1);
+  z.groundWarningV595=Math.max(.1,z.warn||0);z.groundPurgeV595=purge;
+ }
+}
+function paintGroundFieldV595(z,purge,floor=false){
+ if(!worldCircleVisibleV441(z.x,z.y,z.r,40))return;
+ const warning=z.warn>0,pulse=.5+.5*Math.sin(t*8),label=purge?upgradeTextV593('시설 정화','PURGE'):upgradeTextV593(z.kind==='cryo'?'냉각 분출':'화염 분출',z.kind==='cryo'?'CRYO VENT':'FIRE VENT');
+ ctx.save();ctx.translate(z.x,z.y);
+ if(!warning&&floor){
+  ctx.save();ctx.beginPath();ctx.arc(0,0,z.r,0,TAU);ctx.clip();ctx.globalAlpha=.78+.10*pulse;
+  // Clip the rendered eruption to the exact damage radius. Sparks cannot imply extra damage.
+  if(groundImageV595.complete&&groundImageV595.naturalWidth){ctx.drawImage(groundImageV595,-z.r*1.03,-z.r*1.03,z.r*2.06,z.r*2.06);groundStampsV595++;}
+  else{ctx.fillStyle='rgba(255,37,17,.55)';ctx.fillRect(-z.r,-z.r,z.r*2,z.r*2);}
+  ctx.restore();
+ }
+ if(floor){ctx.restore();return;}
+ if(!warning){ctx.strokeStyle='#ff6548';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,z.r,0,TAU);ctx.stroke();}
+ else{
+  ctx.strokeStyle='#ffb09a';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,z.r*.95,-Math.PI/2,-Math.PI/2+TAU*Math.max(0,1-z.warn/(z.groundWarningV595||1.25)));ctx.stroke();
+ }
+ ctx.font='600 10px "EVOLVE Upgrade Sans",system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+ const text=label+' · '+(warning?upgradeTextV593('대피','MOVE'):upgradeTextV593('위험','DANGER')),width=ctx.measureText(text).width+14;
+ ctx.fillStyle='#140606df';ctx.fillRect(-width/2,-z.r-21,width,17);ctx.fillStyle=warning?'#ffd2c3':'#ffb099';ctx.fillText(text,0,-z.r-12.5);ctx.restore();
+}
+const groundWarningBaseV595=drawAttackWarningsV582;
+drawAttackWarningsV582=function(){groundWarningBaseV595();for(const z of purges)paintGroundFieldV595(z,true);for(const z of biomeHazards)paintGroundFieldV595(z,false);};
+const groundUpdateBaseV595=update;
+update=function(dt){prepareGroundFieldsV595();const result=groundUpdateBaseV595(dt);prepareGroundFieldsV595();return result;};
+const startupReadyV595=Promise.all([groundReadyV595,upgradeSkinReadyV594]).then(()=>new Promise((resolve,reject)=>{
+ const check=()=>{if(window.__EVOLVE_ASSET_ERROR__||homeLoadErrorV522)return reject(Error(window.__EVOLVE_ASSET_ERROR__||homeLoadErrorV522));if(homeReadyV522&&!campaignLoadingV567&&(!campaignActiveV567||mapReadyV562)&&!mapEditBootBusyV562)return resolve(true);setTimeout(check,30);};check();
+}));
+window.__EVOLVE_STARTUP_V595__={ready:startupReadyV595,read:()=>({mapPrepares:mapPrepareCountV595,mapReuses:mapReuseCountV595,ready:homeReadyV522&&!campaignLoadingV567&&(!campaignActiveV567||mapReadyV562),groundArt:groundArtV595.path,groundStamps:groundStampsV595})};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_STARTUP_V595__.test={prepare:campaignPrepareStageV567,ground:prepareGroundFieldsV595,paint:paintGroundFieldV595,spawn:monsterCatalogSpawnOneV593,purges:()=>purges,biome:()=>biomeHazards};
 
 window.EVOLVE_WEB_GUARD={atHome:()=>!running&&!document.getElementById('app').classList.contains('combat'),persist:()=>{saveMeta();savePartsV523();}};
 

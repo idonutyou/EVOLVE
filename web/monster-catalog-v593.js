@@ -15,14 +15,7 @@ const MONSTER_CATALOG_V593=[
  {id:'hunter',type:'runner',elite:'hunter',name:'게놈 사냥꾼',en:'GENOME HUNTER',group:'정예'},
  {id:'omega',type:'brute',elite:'omega',name:'오메가 사냥꾼',en:'OMEGA HUNTER',group:'정예'},
  {id:'nemesis_brute',type:'brute',elite:'nemesis',name:'네메시스 · 근접',en:'NEMESIS · BRUTE',group:'정예'},
- {id:'nemesis_spitter',type:'spitter',elite:'nemesis',name:'네메시스 · 원거리',en:'NEMESIS · SPITTER',group:'정예'},
- {id:'bio',boss:'bio',asset:'boss/bio_titan',name:'바이오 타이탄',en:'BIO TITAN',group:'보스'},
- {id:'venom',boss:'venom',asset:'boss/aberrant_titan',name:'베놈 타이탄',en:'VENOM TITAN',group:'보스'},
- {id:'blade',boss:'blade',asset:'boss/boss_blade_variant',name:'칼날 보스',en:'BOSS BLADE VARIANT',group:'보스'},
- {id:'frost',boss:'frost',asset:'boss/frost_titan',name:'프로스트 타이탄',en:'FROST TITAN',group:'보스'},
- {id:'pyre',boss:'pyre',asset:'boss/pyre_titan',name:'파이어 타이탄',en:'PYRE TITAN',group:'보스'},
- {id:'origin',boss:'origin',asset:'boss/origin_colossus',name:'오리진 콜로서스',en:'ORIGIN COLOSSUS',group:'보스'},
- {id:'abyss',boss:'abyss',asset:'boss/abyss_matriarch',name:'어비스 마트리아크',en:'ABYSS MATRIARCH',group:'보스'}
+ {id:'nemesis_spitter',type:'spitter',elite:'nemesis',name:'네메시스 · 원거리',en:'NEMESIS · SPITTER',group:'정예'}
 ];
 function monsterCatalogAssetV593(c){return c.asset||enemyAppearanceAssetV516(c.legacy?'legacy_'+c.type:c.type);}
 const monsterPermittedBaseV593=permittedEnemyV526;
@@ -46,10 +39,13 @@ function monsterCatalogSpawnOneV593(c){
   else if(c.boss)e=stressBossPresetV424(c.boss);else e=spawnEnemy(c.type,false);
  }finally{upgradeSpawnPermissionV593=false;}
  if(!e||e.dead)return false;
+ // Gate births expose locked coordinate accessors: restore actual writable positions first.
+ if(e._mapBirthLockedV562)mapReleaseBirthV562(e);
  if(c.elite==='nemesis')Object.assign(e,{elite:true,nemesis:true,eliteName:c.en,nemesisPower:1,adaptKind:'core',elitePatternCd:1.15,hp:e.hp*4,maxHp:e.maxHp*4,r:e.r+3,xp:160});
  if(!monsterCatalogPointV593(e,monsterCatalogSpawnedV593)){e.dead=true;return false;}
  if(c.legacy)e.visualSetV516='legacy';else if(c.type==='crawler'||c.type==='warden')e.visualSetV516='base';
- Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false});
+ Object.assign(e,{testModuleSpawnV573:true,catalogSpawnV593:c.id,arrivalTime:0,arrivalInvuln:false,spawnFx:0,mapDoorSpawnV562:false,_mapBirthLockedV562:false,mapEntranceRouteV562:null,mapRoadGateV562:null,_mapX560:e.x,_mapY560:e.y,vx:0,vy:0});
+ delete e._mapBirthRecordV562;
  monsterCatalogSpawnedV593++;return e;
 }
 function monsterCatalogRequestV593(id,count=1){
@@ -74,7 +70,7 @@ function monsterCatalogPumpV593(){
 }
 {
  const block=document.createElement('div');block.className='tmBlockV573';block.id='monsterCatalogV593';
- block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예','보스'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
+ block.innerHTML=`<h3>전체 몬스터 직접 선택</h3><label class="tmLabelV573">몬스터 <select id="monsterSelectV593">${['일반','변형','정예'].map(group=>'<optgroup label="'+group+'">'+MONSTER_CATALOG_V593.filter(c=>c.group===group).map(c=>'<option value="'+c.id+'">'+c.name+' · '+c.en+'</option>').join('')+'</optgroup>').join('')}</select></label><div id="monsterPreviewV593"><img id="monsterImageV593" alt=""><div><b id="monsterNameV593"></b><p id="monsterRoleV593"></p></div></div><div class="tmTripleV573"><button type="button" data-monster-count-v593="1">1마리 소환</button><button type="button" data-monster-count-v593="10">10마리 소환</button><button type="button" data-monster-count-v593="50">50마리 소환</button></div><p id="monsterStatusV593" role="status"></p>`;
  $('tmModalV573').querySelectorAll('.tmBlockV573')[1].before(block);
  function preview(){
   const c=MONSTER_CATALOG_V593.find(c=>c.id===$('monsterSelectV593').value);monsterCatalogSelectedV593=c.id;

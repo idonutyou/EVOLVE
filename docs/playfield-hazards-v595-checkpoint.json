@@ -1,0 +1,53 @@
+{
+  "version": "V575-WEB-28-PLAYFIELD",
+  "progress": 75,
+  "baseline_local": "7689cab",
+  "baseline_remote": "5cb99ef40f0f1ed056a24767f94ed9875b522c60",
+  "baseline_tree": "a9e98e4bb2f32d7bce96f952ae519fc420ff39eb",
+  "tasks": [
+    "Compact transparent upgrade overlay",
+    "Release administrator spawn coordinate locks and entrance routes",
+    "Large red ground attack with rendered sprite",
+    "Startup resource download progress and reuse prepared maps"
+  ],
+  "status": "Local browser, integrity, save, progression and original upgrade checks passed; preparing automatic publication",
+  "build": "01634b404ddfdef43b3735dece800e44ecc7d6fc39f5ba1026367e2deea41ba4",
+  "rules": {
+    "engine": "assets/273c7d116960539d3e7c68057a5351906c2ff3c74be237530b10de316452b958.js",
+    "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
+    "shell": "assets/c3dfb005a76a08fd3b04148811a22da679d856ce473429833f61992abc747901.js",
+    "ground_art": {
+      "path": "assets/4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697.png",
+      "sha256": "4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697",
+      "bytes": 2487966,
+      "kind": "image"
+    },
+    "compact_transparent_selector": true,
+    "prepared_map_reused": true,
+    "gate_accessor_and_route_release": true,
+    "bosses_only_in_phase_controls": true,
+    "catalog_entries": 16,
+    "download_bytes_and_eta": true,
+    "cache_reused": true,
+    "existing_image_bytes_unchanged": 996,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "local_verification": {
+    "playfield_browser": [
+      "actual streamed asset bytes, percentage and remaining time are visible before game startup; all downloads finish before loader removal",
+      "four repeated preparations of the active map reuse the existing collision field without any new preparation",
+      "all 16 ordinary/variant/elite specimens spawn with writable coordinates and no stale entry route; crawler and alpha move; phase-specific boss controls remain separate",
+      "compact portrait and landscape selectors leave the battlefield visible while real card selection still works",
+      "purge radius grows 65%; warning is harmless and subsequent visible rendered field damages inside the same radius",
+      "second startup reuses every cached asset with zero asset network bytes and administrator mode remains nonpersistent"
+    ],
+    "errors": [],
+    "map_repeat_ms": 0.10000000009313226,
+    "second_boot_network_asset_bytes": 0,
+    "all_catalog_entries": 16,
+    "existing_upgrade_suite": true,
+    "python_tests": 6,
+    "web_client_test": true,
+    "physical_Galaxy_S23_plus_tested": false
+  }
+}

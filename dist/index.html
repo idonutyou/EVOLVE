@@ -1670,8 +1670,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(min-width:460px){#poster #homeStatusV525{padding-left:16px;padding-right:16px;gap:9px;min-height:70px}.profileNameV525{font-size:14px}.profileLevelV525{font-size:9px}.profileXpV525{height:6px}.walletV525{gap:5px;min-height:40px}.walletIconV525{flex-basis:26px;width:26px;height:29px}.walletV525 b{font-size:14px}}
 @media(max-height:550px){#poster #homeStatusV525{min-height:58px;padding-top:calc(6px + var(--safeT));padding-bottom:6px}}
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version": "V575-WEB-27-REFERENCE-CARDS", "build": "8426b8d1bdc5ade98bb5727f592cd85d1a79c94a2d4e6c116f5defe8fe50f6ab", "scriptBytes": 77566965};</script>
-<script src="assets/c8c40b6de2a69c5b79c3bfffa87b68860115b974c6c93b468b0c517730e43f81.js"></script>
+<script>window.EVOLVE_WEB_CONFIG={"version":"V575-WEB-28-PLAYFIELD","build":"01634b404ddfdef43b3735dece800e44ecc7d6fc39f5ba1026367e2deea41ba4","scriptBytes":77569572,"preloadResources":true};</script>
+<script src="assets/c3dfb005a76a08fd3b04148811a22da679d856ce473429833f61992abc747901.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
 html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#homeMapEditV562,#mapModalV562,#mapEditorV562,#stressPanelV424,#stressBadgeV424,#venomV537TestButton,#evolvePerfQA513){display:none!important}
@@ -1679,13 +1679,14 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 #adminNoticeV585{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20001;max-width:calc(100vw - 32px);padding:11px 16px;border:1px solid #658677;border-radius:9px;background:#101d18f5;color:#eff9f2;font:700 13px/1.5 system-ui,sans-serif;box-shadow:0 4px 20px #0008;pointer-events:none;text-align:center}
 #tmModalV573 #adminExitV585{width:100%;margin:0 0 12px;background:#382c27;border-color:#987c61;color:#ffe8c5}
 </style>
-<link rel="stylesheet" href="assets/daf47db6bb5d0395705a6eea081d9e1ced8a16541bcf537657ed002721556598.css">
+<link rel="stylesheet" href="assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css">
+<style>#webProgress{width:min(76vw,340px);height:8px;accent-color:#d84a43;margin:auto}#webDetail{max-width:380px}</style>
 </head>
 <body>
 <style>
 #webLoader{position:fixed;inset:0;z-index:2147483640;display:grid;place-content:center;gap:18px;background:#05070a;color:#e1f3f0;text-align:center;font:15px system-ui,sans-serif;padding:24px}#webLoader b{font-size:36px;letter-spacing:.18em;color:#84cba7}#webLoader small{color:#9aa9a4;line-height:1.6}#webRetry,#webApply{font:inherit;color:#d9ffeb;background:#153428;border:1px solid #4b7f65;border-radius:8px;padding:10px 14px}#webUpdate{position:fixed;z-index:2147483639;top:max(12px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(94vw,510px);padding:12px;display:flex;align-items:center;gap:12px;color:#e1f5e8;background:#102219f2;border:1px solid #50775a;border-radius:10px;font:12px system-ui,sans-serif}#webUpdate[hidden],#webRetry[hidden]{display:none}#webUpdateText{flex:1;line-height:1.5}
 </style>
-<div id="webLoader" role="status" aria-live="polite"><b>EVOLVE</b><span id="webStatus">실행 준비 0%</span><small>첫 접속에는 원본 파일을 불러와.<br>다음 접속부터 저장된 파일을 재사용해.</small><button id="webRetry" type="button" hidden>다시 열기</button></div>
+<div id="webLoader" role="status" aria-live="polite"><b>EVOLVE</b><span id="webStatus">리소스를 다운로드 중 · 0%</span><progress id="webProgress" max="100" value="0" aria-label="리소스 다운로드 진행률"></progress><small id="webDetail">남은 시간 계산 중 · 다음 접속부터 저장된 리소스를 재사용해.</small><button id="webRetry" type="button" hidden>다시 열기</button></div>
 <div id="webUpdate" hidden><span id="webUpdateText">새 버전이 준비됐어. 저장을 유지하고 적용할 수 있어.</span><button id="webApply" type="button">업데이트 적용</button></div>
 
 <div id="app">
@@ -1924,16 +1925,16 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
     <div class="partsDetailActionsV523"><button id="partsDetailCancelV523" type="button">닫기</button><button id="partsDetailEquipV523" type="button">장착</button></div>
   </dialog>
 
-<script defer src="assets/2098b1e0daa1a1ba35d3a34fc29aeeef2c19da37f8cc127eadb238e61bca94f5.js" onload="EVOLVE_WEB_CLIENT.loaded(4539805)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/7f9b7e145e68d9e5185e5584580ad4262fcb20d8ad71017c9905d30434bcb587.js" onload="EVOLVE_WEB_CLIENT.loaded(14254041)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/45804a343d6fc0c314baffcda667db1ceba284eec3c24d1b26840b4e4bb71d62.js" onload="EVOLVE_WEB_CLIENT.loaded(14270996)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/a1e937d5f56653668f436b34f337d765f5effa819e5b950ee31270770f9e3a44.js" onload="EVOLVE_WEB_CLIENT.loaded(14245736)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/c98f5fff0aa836cf7632da273332c4446c7ffdc51d88f60dee01683e938eee0a.js" onload="EVOLVE_WEB_CLIENT.loaded(14247194)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/2c2b27d575a39a1bc1f8b90164a07b3249b276c66889c3c771fe79524fec7510.js" onload="EVOLVE_WEB_CLIENT.loaded(14242765)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js" onload="EVOLVE_WEB_CLIENT.loaded(142065)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js" onload="EVOLVE_WEB_CLIENT.loaded(16316)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js" onload="EVOLVE_WEB_CLIENT.loaded(25295)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
-<script defer src="assets/514571182ba68d57f36fcd2d60f9140cff8ccfffaee640c7883a96081d17ba8f.js" onload="EVOLVE_WEB_CLIENT.loaded(1513719)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/2098b1e0daa1a1ba35d3a34fc29aeeef2c19da37f8cc127eadb238e61bca94f5.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/7f9b7e145e68d9e5185e5584580ad4262fcb20d8ad71017c9905d30434bcb587.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/45804a343d6fc0c314baffcda667db1ceba284eec3c24d1b26840b4e4bb71d62.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/a1e937d5f56653668f436b34f337d765f5effa819e5b950ee31270770f9e3a44.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/c98f5fff0aa836cf7632da273332c4446c7ffdc51d88f60dee01683e938eee0a.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/2c2b27d575a39a1bc1f8b90164a07b3249b276c66889c3c771fe79524fec7510.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/273c7d116960539d3e7c68057a5351906c2ff3c74be237530b10de316452b958.js"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->
@@ -1943,7 +1944,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <!-- V453 ENGINE PIXEL CALIBRATION: deterministic 100 objects, alpha128 bounds, engine screenshots, reference 864x1536 -->
 <!-- V439 QUALITY-SAFE: CONTACT BROADPHASE; ANGLE ON DEMAND; XP VIEW CULL REUSE; GPU SHADOW TYPE RATIO; GRID GRADIENT MEMOIZATION -->
 <!-- EVOLVE_I18N_EN_KO_V1_START -->
-<script id="evolveI18nENKO" defer src="assets/ab8b54699b4e28d743a7658e5f69844d0f1c6b1e29deaeb48dff7968aaa32e1f.js" onload="EVOLVE_WEB_CLIENT.loaded(69033)" onerror="EVOLVE_WEB_CLIENT.failed()"></script>
+<script id="evolveI18nENKO" type="application/evolve-resource" data-evolve-src="assets/ab8b54699b4e28d743a7658e5f69844d0f1c6b1e29deaeb48dff7968aaa32e1f.js"></script>
 <!-- EVOLVE_I18N_EN_KO_V1_END -->
 </body></html>
 <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
