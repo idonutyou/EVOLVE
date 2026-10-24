@@ -37,8 +37,6 @@ function upgradeEquipV593(mode){
  armItemsRefreshV589();
 }
 const UPGRADE_CARDS_V593=[
- {id:'gun_equip',group:'gun',row:0,name:['생체 총','BIO CANNONS'],available:()=>armItemModeV589()!=='cannon',base:.10,lines:v=>[upgradeTextV593('총 장착','Equip cannons'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('cannon');upgradeRunV593.gunDamage+=v;}},
- {id:'blade_equip',group:'blade',row:1,name:['생체 칼','BIO BLADES'],available:()=>armItemModeV589()!=='blades',base:.10,lines:v=>[upgradeTextV593('칼 장착','Equip blades'),upgradeTextV593('공격력 +','Damage +')+upgradePercentV593(v)],apply:v=>{upgradeEquipV593('blades');upgradeRunV593.bladeDamage+=v;}},
  {id:'gun_damage',group:'gun',row:0,name:['강력한 사격','POWER SHOT'],stat:'gunDamage',base:.10,label:['공격력','Damage'],unit:'percent'},
  {id:'gun_count',group:'gun',row:0,name:['다중 사격','MULTISHOT'],stat:'gunCount',count:true,label:['탄수','Projectiles']},
  {id:'gun_haste',group:'gun',row:0,name:['고속 사격','RAPID FIRE'],stat:'gunHaste',base:.10,label:['연사 속도','Fire rate'],unit:'percent'},
@@ -69,7 +67,7 @@ function upgradeLinesV593(card,tier){
  const n=upgradeValueV593(card,tier);if(card.lines)return card.lines(n);
  return [upgradeTextV593(...card.label)+' +'+(card.unit==='points'?upgradePercentV593(n)+'p':card.unit==='percent'?upgradePercentV593(n):upgradeNumberV593(n))];
 }
-function upgradePartV593(card){return {gun:upgradeTextV593('총','GUN'),blade:upgradeTextV593('칼','BLADE'),legs:upgradeTextV593('뒷발','HIND LEGS'),shell:upgradeTextV593('외피','SHELL')}[card.group];}
+function upgradePartV593(card){return {gun:upgradeTextV593('팔','ARM'),blade:upgradeTextV593('팔','ARM'),legs:upgradeTextV593('발','FEET'),shell:upgradeTextV593('외피','SHELL')}[card.group];}
 function upgradeApplyV593(card,tier){
  const amount=upgradeValueV593(card,tier);if(card.stat)upgradeRunV593[card.stat]+=amount;else card.apply(amount);
  upgradeRunV593.selected++;upgradeRunV593.taken[card.id]=(upgradeRunV593.taken[card.id]||0)+1;
@@ -78,9 +76,9 @@ function upgradeApplyV593(card,tier){
 function upgradeRollV593(random=Math.random){let n=Math.floor(random()*1000000);for(let i=0;i<UPGRADE_RARITIES_V593.length;i++){n-=Math.round(UPGRADE_RARITIES_V593[i].chance*1000000);if(n<0)return i;}return 4;}
 function upgradePoolV593(){
  const mode=armItemModeV589();return UPGRADE_CARDS_V593.filter(c=>{
-  if(c.available&&!c.available())return false;if(c.id.endsWith('_equip'))return true;
+  if(c.available&&!c.available())return false;if(c.id.endsWith('_equip'))return false;
   if(c.group==='gun')return state.arm>0&&mode==='cannon';
-  if(c.group==='blade')return state.arm>0&&mode!=='cannon';return true;
+  if(c.group==='blade')return state.arm>0&&mode==='blades';return true;
  });
 }
 chooseLevelPicks=function(){
@@ -149,6 +147,6 @@ reset=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;const 
 const upgradeHomeBaseV593=returnToHome;
 returnToHome=function(...args){playerArtV586.displaySize=upgradeRunV593.baseSize;upgradeRunV593.mode=null;upgradeBleedsV593.clear();const result=upgradeHomeBaseV593(...args);armItemsRefreshV589();return result;};
 window.__EVOLVE_UPGRADE_CARDS_V593__={read:()=>({version:593,experiencePerLevel:12,cards:UPGRADE_CARDS_V593.length,rarities:UPGRADE_RARITIES_V593.map(r=>({...r})),run:{...upgradeRunV593,highest:{...upgradeRunV593.highest},taken:{...upgradeRunV593.taken}},bodyScale:upgradeBodyScaleV593(),bleeding:upgradeBleedsV593.size,art:upgradeArtV593.path,physical_Galaxy_S23_plus_tested:false})};
-if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test={cards:UPGRADE_CARDS_V593,pool:upgradePoolV593,roll:upgradeRollV593,lines:upgradeLinesV593,value:upgradeValueV593,apply:(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);},reset:upgradeResetV593,show:showLevelUp,render:renderLevelChoices,damage:hurtEnemy,need:xpNeedForLevel,context:()=>({player,enemies,state,bullets,step:dt=>update(dt),fire:dt=>firePlayer(dt),draw,grid:rebuildEnemyGridV424,home:returnToHome,xp:addXP,clock:()=>t,choosing:()=>choosing}),bounce:upgradeBounceV593,tag:upgradeTagShotV593};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test={equip:upgradeEquipV593,cards:UPGRADE_CARDS_V593,pool:upgradePoolV593,roll:upgradeRollV593,lines:upgradeLinesV593,value:upgradeValueV593,apply:(id,tier=0)=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);if(!c)throw Error('Unknown card');upgradeApplyV593(c,tier);},reset:upgradeResetV593,show:showLevelUp,render:renderLevelChoices,damage:hurtEnemy,need:xpNeedForLevel,context:()=>({player,enemies,state,bullets,step:dt=>update(dt),fire:dt=>firePlayer(dt),draw,grid:rebuildEnemyGridV424,home:returnToHome,xp:addXP,clock:()=>t,choosing:()=>choosing}),bounce:upgradeBounceV593,tag:upgradeTagShotV593};
 
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_UPGRADE_CARDS_V593__.test.offer=function(specs){const choose=chooseLevelPicks;try{chooseLevelPicks=()=>specs.map(([id,tier])=>{const c=UPGRADE_CARDS_V593.find(c=>c.id===id);return {kind:id,card:c,tier,title:()=>upgradeTextV593(...c.name),apply:()=>upgradeApplyV593(c,tier)};});choosing=true;$('levelOverlay').style.display='flex';armChoiceInput(260);renderLevelChoices();}finally{chooseLevelPicks=choose;}};
