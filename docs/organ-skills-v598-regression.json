@@ -113,6 +113,10 @@
     "movement_field_browser",
     "attack_warnings_browser"
   ],
-  "publication_verification_pending": true,
-  "physical_Galaxy_S23_plus_tested": false
+  "publication_verification_pending": false,
+  "physical_Galaxy_S23_plus_tested": false,
+  "exact_published_build_verified_in_CI": true,
+  "version": "V575-WEB-31-ORGAN-SKILLS",
+  "build": "1aa8e9680ade797922132fec3c3beb2ee47c7ddb6c33cda3c6e0defaf548206e",
+  "workflow_run": 40107630679
 }
