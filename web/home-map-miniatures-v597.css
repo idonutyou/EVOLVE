@@ -1,5 +1,6 @@
 /* Keep the EVOLVE shell and give the selected destination the central space. */
 @font-face{font-family:'EVOLVE Home Sans';src:url('__HOME_MAP_FONT_V597__') format('woff');font-style:normal;font-weight:100 900;font-display:swap}
+#poster #homeContentV522{z-index:auto}
 #poster #posterHero{--map-accent:#954a40;isolation:isolate;min-height:225px;flex-basis:245px;margin:4px 0 15px!important;background:radial-gradient(ellipse at 50% 60%,color-mix(in srgb,var(--map-accent) 12%,transparent),transparent 68%)!important;overflow:visible!important}
 #poster #heroSpecimenImg{position:absolute!important;inset:50% auto auto 50%!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:translate(-50%,-50%)!important;filter:drop-shadow(0 15px 13px #0008)!important;z-index:2;animation:homeMapFloatV597 6s ease-in-out infinite}
 /* The restored reference has an opaque black matte; preserve its exact bytes. */
@@ -14,3 +15,4 @@
 @media(prefers-reduced-motion:reduce){#poster #heroSpecimenImg{animation:none}}
 @media(max-width:370px){#poster #homeStageTitleV522{font-size:23px}}
 @media(max-height:600px){#poster #posterHero{min-height:175px;flex-basis:175px}#poster .stageSelectorV522{min-height:90px}#poster #homeStageTitleV522{font-size:22px}}
+@media(orientation:landscape) and (max-height:600px){#poster #homeBattleViewV522{padding-left:14px;padding-right:14px}#poster #homeStageTitleV522{font-size:16px;word-break:normal;overflow-wrap:anywhere}#poster .stageHeadingV522 .stageEyebrowV522{letter-spacing:.08em}#poster #homeStageStateV522{font-size:8px}}
