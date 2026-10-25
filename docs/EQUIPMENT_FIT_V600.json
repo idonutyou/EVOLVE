@@ -77,8 +77,8 @@
   "preserve_all_previous_backups": true,
   "automatic_upload_and_deployment_authorized": true,
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Verified release candidate and all earlier milestone backups preserved",
-  "next": "Upload tested tree to GitHub, complete Pages deployment and verify public game",
+  "status": "All requested fixes, local checks and GitHub backup are complete. Full Pages publication checks are running.",
+  "next": "Monitor GitHub run 40203826282, verify public WEB-33 build and save checkpoint100. The upload is already complete; do not repeat implementation or request deployment permission.",
   "diagnosis": [
     "Legacy cannon and blade world scales were copied unchanged onto the smaller native creature, and previews use the same oversized transforms.",
     "The two blade cutouts have opposite chirality, so rotating both long axes to the same direction makes one cutting edge face up.",
@@ -150,5 +150,14 @@
     },
     "organ_model_passed": true,
     "site_asset_hashes_passed": true
+  },
+  "publication": {
+    "release_commit": "4b12583052e04195ef5c4bf11ae99711ab1c23b6",
+    "backup_verified": true,
+    "backup_branch": "backup/web33-090-20261025",
+    "deployment_run_id": 40203826282,
+    "deployment_status": "in_progress",
+    "native_review_run_id": 40203796385,
+    "native_review_passed": true
   }
 }
