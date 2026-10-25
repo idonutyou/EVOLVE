@@ -1,0 +1,32 @@
+{
+  "fonts": [
+    {
+      "path": "art/home-hub-v601/home-ui-400.woff2",
+      "sha256": "87a79250417599aa47dbb5c7a54f48b7c68b155a0e44f4611110c623570414a7",
+      "bytes": 35420,
+      "format": "woff2",
+      "weight": "400"
+    },
+    {
+      "path": "art/home-hub-v601/home-ui-600.woff2",
+      "sha256": "87a79250417599aa47dbb5c7a54f48b7c68b155a0e44f4611110c623570414a7",
+      "bytes": 35420,
+      "format": "woff2",
+      "weight": "600"
+    },
+    {
+      "path": "art/home-hub-v601/home-ui-800.woff2",
+      "sha256": "87a79250417599aa47dbb5c7a54f48b7c68b155a0e44f4611110c623570414a7",
+      "bytes": 35420,
+      "format": "woff2",
+      "weight": "800"
+    }
+  ],
+  "glyphs": 235,
+  "characters": " !\"#$%'()*+,-./0123456789:;<=>?ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_`abcdefghijklmnopqrstuvwxyz{|}가각감갑강개거격견고공관광구군근금급기김나는능니다단대도독동됩둔등량레력로률를름리린매면명모물밀박받발방배범벨변보부브비뽑사산상색생선설성세소속수숙순스시식알압앙양어억없역연염영예와요용우원웨위유융은음이입자작잠장재적전절점접정조좌중지진집챌처체최추츠클택테투파팔폐포피하학합해핵협화확회흡",
+  "family": "Noto Sans KR",
+  "source": "https://fonts.google.com/noto/specimen/Noto+Sans+KR",
+  "license": "docs/NOTO_SANS_KR_OFL.txt",
+  "all_required_glyphs_covered": true,
+  "original_game_fonts_unchanged": true
+}

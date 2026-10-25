@@ -1,0 +1,73 @@
+/* WEB-34: the approved home artwork, with a selected state for every tab. */
+__HOME_HUB_FONTS_V601__
+#app #poster.homeHubV601{--hub-nav:clamp(80px,21vw,104px);--hub-ink:#f5ead8;--hub-muted:#a89488;--hub-line:#7b4b41;background:radial-gradient(ellipse at 50% 43%,#50151d55,transparent 61%),radial-gradient(ellipse at 24% 80%,#63131b28,transparent 45%),#080a0e!important;font-family:'EVOLVE Hub Sans','Noto Sans KR',system-ui,sans-serif}
+#poster.homeHubV601 #homeStatusV525{min-height:54px;padding:calc(8px + var(--safeT)) 10px 8px;gap:6px;grid-template-columns:minmax(118px,1.5fr) repeat(3,minmax(0,1fr));background:radial-gradient(ellipse at 5% 0%,#6a33333b,transparent 56%),linear-gradient(#242128,#101216);border-bottom-color:#a16c58;box-shadow:0 3px 14px #0008;z-index:6}
+#poster.homeHubV601 #homeStatusV525 #settingsBtn{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;flex-basis:38px}
+#poster.homeHubV601 .profileNameV525{font-size:12px;letter-spacing:.08em}
+#poster.homeHubV601 .profileLevelV525{font-size:8px;letter-spacing:.08em}
+#poster.homeHubV601 .walletV525{border-color:#85634a;min-height:32px;border-radius:5px;background:linear-gradient(145deg,#0a0c10,#11141b);box-shadow:inset 0 1px 5px #0008}
+#poster.homeHubV601 .premiumV525{border-color:#79618d}
+#poster.homeHubV601 .walletV525 b{font-family:'EVOLVE Hub Sans',system-ui,sans-serif;font-size:12px;font-weight:750}
+#poster.homeHubV601 #homeContentV522{min-height:0;flex:1 1 0;z-index:auto}
+#poster.homeHubV601[data-home-page="battle"] #homeContentV522{overflow:hidden}
+#poster.homeHubV601 #homeBattleViewV522{height:100%;min-height:0!important;display:flex;flex-direction:column;gap:0;padding:clamp(18px,5vh,38px) 14px 12px!important;box-sizing:border-box}
+#poster.homeHubV601 .stageSelectorV522{flex:0 0 auto;min-height:90px;gap:14px}
+#poster.homeHubV601 .stageArrowV522{width:44px;flex-basis:44px;height:47px;padding:10px 12px;border:1px solid #945c57;border-radius:5px;background:linear-gradient(145deg,#281c2170,#101016c0);color:#e5a79e;box-shadow:inset 0 0 12px #0004}
+#poster.homeHubV601 .stageArrowV522:disabled{opacity:.43}
+#poster.homeHubV601 .stageHeadingV522 .stageEyebrowV522{font:750 10px/1.5 'EVOLVE Hub Sans',system-ui,sans-serif;letter-spacing:.23em;color:#d6847a}
+#poster.homeHubV601 #homeStageNumberV522{font-size:12px;color:#f7e2a7;margin-left:4px}
+#poster.homeHubV601 #homeStageTitleV522{font-family:'EVOLVE Home Sans','EVOLVE Hub Sans',system-ui,sans-serif;font-size:clamp(23px,6vw,31px)!important;font-weight:800;line-height:1.3;letter-spacing:-.025em;margin:7px 0!important;color:#fff8eb}
+#poster.homeHubV601 #homeStageStateV522{min-height:16px;font-size:11px;font-weight:600;line-height:1.5}
+#poster.homeHubV601 #posterHero.homeMapStageV597{flex:1 1 0;min-height:0!important;max-height:none;width:100%!important;height:auto!important;flex-basis:0!important;margin:8px 0 12px!important;background:transparent!important;isolation:auto!important;overflow:visible!important}
+#poster.homeHubV601 #posterHero[data-opaque-map="true"] #heroSpecimenImg{mix-blend-mode:screen!important}
+#poster.homeHubV601 #heroSpecimenImg{width:100%!important;height:112%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;filter:drop-shadow(0 12px 15px #0008)!important}
+#poster.homeHubV601 .homeStartV522{position:relative;isolation:isolate;flex:0 0 auto;height:clamp(58px,15.8vw,76px);margin:0 0 11px!important;background:linear-gradient(165deg,#8b3325,#6c2529 53%,#3b161d);box-shadow:0 0 28px #dd321315}
+#poster.homeHubV601 .hubStartFrameV601{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#poster.homeHubV601 .hubStartFrameV601,#poster.homeHubV601 .hubPlateV601,#poster.homeHubV601 .hubGlyphV601{overflow:hidden!important}
+#poster.homeHubV601 #start{position:relative;z-index:1;width:100%!important;height:100%!important;min-height:0!important;padding:0 20px!important;border:0!important;border-radius:0!important;clip-path:none!important;background:transparent!important;box-shadow:none!important;color:#fff7e9!important;font:800 clamp(20px,5.5vw,29px)/1.2 'EVOLVE Hub Sans',system-ui,sans-serif!important;letter-spacing:.035em!important;text-shadow:0 2px 3px #250606!important}
+#poster.homeHubV601 .homeStartV522.is-disabled{filter:grayscale(.85) brightness(.6)}
+#poster.homeHubV601 #start:disabled{color:#d2c3bc!important;font-size:13px!important}
+#poster.homeHubV601 #homeTabs.homeHubNavV601{height:calc(var(--hub-nav) + var(--safeB));min-height:0;margin:0!important;padding:0 clamp(10px,2.6vw,22px) calc(6px + var(--safeB))!important;display:flex!important;align-items:flex-end!important;gap:0!important;isolation:isolate;border-top:0!important;background:linear-gradient(180deg,transparent 0 12%,#242b2f 13%,#080c0f 17%,#161e23 89%,#05090c 96%);box-shadow:0 -5px 20px #0005!important;z-index:8;overflow:visible!important}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .homeNavV522{display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1 1 0;gap:4px;height:calc(var(--hub-nav) - 21px)!important;min-height:0!important;width:0!important;min-width:0!important;margin:0!important;padding:6px 0 9px!important;border:0!important;border-radius:0!important;background:transparent!important;clip-path:none!important;box-shadow:none!important;color:#d9c3a7!important;transform:none;font:750 11px/1.2 'EVOLVE Hub Sans',system-ui,sans-serif!important;isolation:isolate;overflow:visible;z-index:1;transition:flex-grow .18s ease,height .18s ease,color .18s ease}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522{margin:0!important;padding:6px 0 9px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .homeNavV522.active{flex-grow:1.2;height:calc(var(--hub-nav) - 3px)!important;color:#fff0c9!important;background:transparent!important;border:0!important;box-shadow:none!important;z-index:3}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateFillV601{position:absolute;inset:8% 4% 9%;clip-path:polygon(13% 0,87% 0,100% 12%,100% 88%,88% 100%,12% 100%,0 87%,0 13%);background:linear-gradient(145deg,#1b2024,#0d1216 55%,#11171c);z-index:-2;pointer-events:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubPlateFillV601{inset:2% 3% 7%;background:radial-gradient(ellipse at 50% 23%,#9c432c60,transparent 64%),linear-gradient(150deg,#30201f,#1e1318 70%,#1b1418)}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateV601{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;z-index:-1;fill:none;stroke:none;overflow:visible}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateSelectedV601{display:none;left:-10%;top:-9%;width:120%;height:118%}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubPlateRestV601{display:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubPlateSelectedV601{display:block;filter:drop-shadow(0 -3px 5px #ff541d35)}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubGlyphV601{position:relative;display:block;flex:0 0 auto;width:29px;height:29px;fill:none;stroke:none;filter:drop-shadow(0 2px 2px #000);transition:width .18s ease,height .18s ease}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubGlyphV601{width:39px;height:39px;filter:drop-shadow(0 0 5px #ff742a45)}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522>.hubPlateV601{width:100%;height:100%;fill:none;stroke:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522>.hubPlateSelectedV601{width:120%;height:118%}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522>.hubGlyphV601{width:29px;height:29px;fill:none;stroke:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522.active>.hubGlyphV601{width:39px;height:39px;fill:none;stroke:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubNavLabelV601{position:relative;display:block;white-space:nowrap;font-family:'EVOLVE Hub Sans',system-ui,sans-serif;font-size:11px;line-height:1.2;font-weight:750;letter-spacing:0;text-shadow:0 2px 3px #000}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubNavLabelV601{font-size:12px}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 [lang="en"] .hubNavLabelV601{font-size:8px;letter-spacing:.015em}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .active[lang="en"] .hubNavLabelV601{font-size:9px}
+#poster.homeHubV601 .hubPageV601{min-height:100%;padding:20px 16px 28px!important;font-family:'EVOLVE Hub Sans',system-ui,sans-serif}
+#poster.homeHubV601 .hubPageHeadV601{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px}
+#poster.homeHubV601 .hubPageHeadV601 h2{margin:0;color:var(--hub-ink);font-family:'EVOLVE Hub Sans',system-ui,sans-serif;font-size:23px;font-weight:800;letter-spacing:-.02em}
+#poster.homeHubV601 .hubSubButtonV601{min-height:34px!important;width:auto!important;padding:7px 12px!important;border:1px solid #806050!important;border-radius:4px!important;background:linear-gradient(#242126,#13161b)!important;color:#e4c8a4!important;font:650 11px/1.25 'EVOLVE Hub Sans',system-ui,sans-serif!important;white-space:nowrap;box-shadow:none!important;clip-path:none!important}
+#poster.homeHubV601 .hubSubButtonV601>svg{display:none}
+#poster.homeHubV601 .hubPartsToolsV601{display:flex;align-items:center;justify-content:flex-end;padding:8px 10px 0;gap:8px}
+#poster.homeHubV601 .hubPageIntroV601{font-size:12px;line-height:1.7;color:#bda89a;margin:0 0 20px}
+#poster.homeHubV601 .hubChallengeGridV601{display:grid;gap:12px}
+#poster.homeHubV601 .hubChallengeCardV601{display:grid;grid-template-columns:1fr auto;gap:9px;padding:16px;border:1px solid #614b46;border-radius:7px;background:radial-gradient(ellipse at 100% 0,#693c292a,transparent 70%),linear-gradient(145deg,#171b20,#101115);color:#e9d8c4}
+#poster.homeHubV601 .hubChallengeCardV601 b{font-size:14px;font-weight:750}
+#poster.homeHubV601 .hubChallengeCardV601 p{margin:8px 0 0;font-size:11px;line-height:1.6;color:#b39c8e}
+#poster.homeHubV601 .hubChallengeCardV601 button{align-self:center}
+#poster.homeHubV601 .hubChallengeCardV601 button:disabled{opacity:.4}
+#poster.homeHubV601 #homeShopViewV601 #labPanel{margin:0!important;background:linear-gradient(145deg,#211b1d,#11151b)!important;border-color:#76503e!important}
+#poster.homeHubV601 #homeShopViewV601 .labUp{border-color:#70513f;background:linear-gradient(150deg,#292126,#11151b)}
+#poster.homeHubV601 #homeShopViewV601 .labUp b{font-family:'EVOLVE Hub Sans',system-ui,sans-serif}
+#poster.homeHubV601 #memoryOverlay,#poster.homeHubV601 #codexOverlay{font-family:'EVOLVE Hub Sans',system-ui,sans-serif}
+#app.reducedMotion #poster.homeHubV601 .homeNavV522,#app.reducedMotion #poster.homeHubV601 .hubGlyphV601{transition:none!important}
+@media(max-width:370px){#poster.homeHubV601 #homeStatusV525{grid-template-columns:minmax(104px,1.4fr) repeat(3,minmax(0,1fr));gap:4px;padding-left:8px;padding-right:8px}#poster.homeHubV601 .walletV525 b{font-size:10px}#poster.homeHubV601 .profileNameV525{font-size:11px}#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubNavLabelV601{font-size:10px}#poster.homeHubV601 #homeStageTitleV522{font-size:22px!important}}
+@media(min-height:780px) and (orientation:portrait){#poster.homeHubV601 #homeBattleViewV522{padding-top:clamp(28px,6vh,58px)!important}#poster.homeHubV601 .stageSelectorV522{min-height:100px}#poster.homeHubV601 #posterHero.homeMapStageV597{margin-top:22px!important;margin-bottom:22px!important}}
+@media(max-height:620px) and (orientation:portrait){#poster.homeHubV601 #homeBattleViewV522{padding-top:18px!important;padding-bottom:9px!important}#poster.homeHubV601 .stageSelectorV522{min-height:82px}#poster.homeHubV601 .homeStartV522{height:58px;margin-bottom:9px!important}#poster.homeHubV601 #posterHero.homeMapStageV597{margin-top:5px!important;margin-bottom:8px!important}}
+@media(orientation:landscape) and (max-height:600px){#app #poster.homeHubV601{--hub-nav:70px}#poster.homeHubV601 #homeStatusV525{min-height:43px;padding-top:5px;padding-bottom:5px}#poster.homeHubV601 #homeStatusV525 #settingsBtn{height:32px!important;width:32px!important;min-width:32px!important;min-height:32px!important}#poster.homeHubV601 #homeBattleViewV522{display:grid;grid-template-columns:minmax(220px,.85fr) 1.15fr;grid-template-rows:1fr 58px;gap:0 20px;padding:12px 24px 9px!important}#poster.homeHubV601 .stageSelectorV522{grid-column:1;grid-row:1;min-height:60px}#poster.homeHubV601 #posterHero.homeMapStageV597{grid-column:2;grid-row:1/3;height:100%!important;margin:0!important}#poster.homeHubV601 .homeStartV522{grid-column:1;grid-row:2;height:53px;margin:0!important}#poster.homeHubV601 #homeStageTitleV522{font-size:22px!important}#poster.homeHubV601 #homeTabs.homeHubNavV601{max-width:none}#poster.homeHubV601 .hubChallengeGridV601{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){#poster.homeHubV601 .homeNavV522,#poster.homeHubV601 .hubGlyphV601{transition:none!important}}
+@media(orientation:landscape) and (max-height:600px){#app.homeHubShellV601:not(.combat){width:min(100vw,960px)!important;max-width:960px!important}#poster.homeHubV601 #heroSpecimenImg{width:100%!important;height:100%!important}}

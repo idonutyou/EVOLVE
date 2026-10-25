@@ -101,6 +101,7 @@ jobs:
           node tests/player_mutant_browser.cjs
           node tests/organ_skills_browser.cjs
           node tests/home_map_miniatures_browser.cjs
+          node tests/home_hub_browser.cjs
           node tests/admin_combat_browser.cjs
           node tests/playfield_browser.cjs
           node tests/upgrade_cards_browser.cjs
@@ -143,6 +144,7 @@ jobs:
 
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
+          EVOLVE_TEST_BASE_URL="${{ steps.pages.outputs.page_url }}" node tests/home_hub_browser.cjs
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
           python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
       - name: Retain publication evidence
@@ -151,6 +153,8 @@ jobs:
         with:
           name: evolve-publication-verification
           path: |
+            test-results/home-hub-live-browser.json
+            test-results/home-hub-*.png
             test-results/web17-live.json
             test-results/web27-live.json
           if-no-files-found: ignore
