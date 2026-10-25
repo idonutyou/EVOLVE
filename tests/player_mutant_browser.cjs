@@ -19,13 +19,13 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
     const m=this.getTransform(),w=args.length===2?image.width:args[2],h=args.length===2?image.height:args[3],x=args[0],y=args[1];
     const point=(px,py)=>({x:m.a*(x+px*w/image.width)+m.c*(y+py*h/image.height)+m.e,y:m.b*(x+px*w/image.width)+m.d*(y+py*h/image.height)+m.f});
     if(image===parts.armedFull.canvas)records.push({bodyWidth:Math.hypot(m.a*w,m.b*w)});
-    for(const mode of ['cannon','blades'])for(const side of ['left','right'])if(image===images[mode][side]){const spec=art.items[mode][side],p=point(...spec.pivot),tip=point(...spec.tip),edge=point(side==='left'?199:154,255),dx=tip.x-p.x,dy=tip.y-p.y;records.push({mode,side,length:Math.hypot(dx,dy),edgeSide:(dx*(edge.y-p.y)-dy*(edge.x-p.x))/Math.hypot(dx,dy)});}
+    for(const mode of ['cannon','blades'])for(const side of ['left','right'])if(image===images[mode][side]){const spec=art.items[mode][side],p=point(...spec.pivot),tip=point(...spec.tip),edge=point(side==='left'?119:234,197),spine=point(side==='left'?199:154,255),dx=tip.x-p.x,dy=tip.y-p.y;records.push({mode,side,length:Math.hypot(dx,dy),edgeSide:(dx*(edge.y-p.y)-dy*(edge.x-p.x))/Math.hypot(dx,dy),spineSide:(dx*(spine.y-p.y)-dy*(spine.x-p.x))/Math.hypot(dx,dy)});}
     return original.call(this,image,...args);
    };
    try{for(const mode of ['cannon','blades']){records=[];const c=api.test.preview(mode,384);const width=records.find(r=>r.bodyWidth)?.bodyWidth;rows.push({mode,bodyWidth:width,weapons:records.filter(r=>r.mode).map(r=>({...r,bodyRatio:r.length/width})),png:c.toDataURL().split(',')[1]});}}finally{CanvasRenderingContext2D.prototype.drawImage=original;}
    return rows;
   });
-  for(const row of fit){fs.writeFileSync(path.join(out,'equipment-fit-'+row.mode+'.png'),Buffer.from(row.png,'base64'));delete row.png;assert.equal(row.weapons.length,2);for(const weapon of row.weapons){assert.ok(weapon.bodyRatio<(row.mode==='blades'?.28:.16),JSON.stringify(weapon));if(row.mode==='blades')assert.ok(weapon.edgeSide>0,'Blade cutting edge points up: '+JSON.stringify(weapon));}}
+  for(const row of fit){fs.writeFileSync(path.join(out,'equipment-fit-'+row.mode+'.png'),Buffer.from(row.png,'base64'));delete row.png;assert.equal(row.weapons.length,2);for(const weapon of row.weapons){assert.ok(weapon.bodyRatio<(row.mode==='blades'?.28:.16),JSON.stringify(weapon));if(row.mode==='blades')assert.ok(weapon.edgeSide>0&&weapon.spineSide<0,'Blade cutting edge must hang below its spine: '+JSON.stringify(weapon));}}
   report.equipmentFit=fit;report.checks.push('Actual preview drawing transforms keep both weapons in body proportion and both blade cutting edges on the lower side');
   report.previewBounds=await page.evaluate(()=>Object.fromEntries(['bare','cannon','blades'].map(mode=>{
    const c=window.__EVOLVE_PLAYER_MUTANT_V599__.test.preview(mode,384),pixels=c.getContext('2d').getImageData(0,0,384,384).data;let left=384,top=384,right=0,bottom=0;

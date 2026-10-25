@@ -72,18 +72,21 @@ playerStepV586=function(dt){
 };
 function armItemOffsetV600(mode,side,x,y,angle,scale=1,facing=1){
  const spec=armItemsArtV589.items[mode],part=spec[side?'right':'left'],dx=x-part.pivot[0],dy=y-part.pivot[1],c=Math.cos(part.native_angle),s=Math.sin(part.native_angle);
- const u=(dx*c+dy*s)*spec.world_scale*scale,v=(-dx*s+dy*c)*spec.world_scale*scale*(mode==='blades'?(side?1:-1)*facing:1),co=Math.cos(angle),si=Math.sin(angle);
+ const u=(dx*c+dy*s)*spec.world_scale*scale,v=(-dx*s+dy*c)*spec.world_scale*scale*(mode==='blades'?(side?-1:1)*facing:1),co=Math.cos(angle),si=Math.sin(angle);
  return {x:u*co-v*si,y:u*si+v*co};
 }
 function armItemSpriteV589(g,mode,side,p,angle,scale=1,alpha=1,facing=1){
  const key=side?'right':'left',spec=armItemsArtV589.items[mode],part=spec[key],image=armItemsV589.images[mode]?.[key];if(!image)return;
  const size=spec.world_scale*scale;
- g.save();g.translate(p.x,p.y);g.rotate(angle);if(mode==='blades')g.scale(1,(side?1:-1)*facing);g.rotate(-part.native_angle);g.globalAlpha*=alpha;
+ g.save();g.translate(p.x,p.y);g.rotate(angle);if(mode==='blades')g.scale(1,(side?-1:1)*facing);g.rotate(-part.native_angle);g.globalAlpha*=alpha;
  g.drawImage(image,-part.pivot[0]*size,-part.pivot[1]*size,part.width*size,part.height*size);g.restore();
+}
+function armBladeRestAngleV602(side,bodyAngle=playerBodyAngleV590()){
+ return bodyAngle+(playerMotionV586.facing||1)*(side?.48:.30);
 }
 function armItemAngleV589(side,a){
  const mode=armItemModeV589();if(mode==='cannon')return playerWeaponAngleV590();
- const rest=playerBodyAngleV590()+(side?.20:-.20),attack=playerMotionV586.attack;
+ const rest=armBladeRestAngleV602(side),attack=playerMotionV586.attack;
  if(mode==='blades'&&attack?.kind==='blades'&&attack.side===side){
   const angle=armSlashAngleV589(attack);if(attack.age<=.30)return angle;
   const t=clamp((attack.age-.30)/.10,0,1),ease=t*t*(3-2*t);

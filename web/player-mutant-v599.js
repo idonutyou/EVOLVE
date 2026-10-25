@@ -2,6 +2,7 @@
 const mutantArtV599=__MUTANT_ART_V599__;
 const mutantV599={ready:false,image:new Image(),parts:{},clock:0,distance:0,x:0,y:0,moving:false,speed:0,vx:0,vy:0,blend:0,feet:[],renders:0,builds:0,deadAt:0,lastFacing:1,lastRotation:0,tailLength:0,tailSegments:0,previews:{}};
 const mutantBaseScaleV599=mutantArtV599.sourceScale*mutantArtV599.displaySize/mutantArtV599.surface;
+const mutantGaitV602=Object.freeze({stride:40,stance:.38,liftNear:.85,liftFar:.55,roll:.045});
 let mutantScaleV599=mutantBaseScaleV599;
 const mutantClampV599=(n,a,b)=>Math.max(a,Math.min(b,n));
 const mutantMixV599=(a,b,t)=>a+(b-a)*t;
@@ -23,7 +24,7 @@ function mutantWorldSourceV599(p,pose=mutantPoseV599()){
 function mutantBodyMotionV599(){
  const m=mutantV599,attack=playerMotionV586.attack,phase=attack?clamp(attack.age/(attack.life||.44),0,1):0;
  const lunge=attack?Math.sin(phase*Math.PI)*17:0,recoil=Math.min(.3,player.armKick||0)*36,flinch=Math.min(.4,player.hurtKick||0)*35;
- const dx=(lunge-recoil-flinch)*Math.cos(mutantArtV599.nativeFacing),dy=(lunge-recoil)*Math.sin(mutantArtV599.nativeFacing)+Math.sin(m.clock*2.25)*2+Math.sin(m.distance/28*TAU*2)*m.blend*3;
+ const dx=(lunge-recoil-flinch)*Math.cos(mutantArtV599.nativeFacing),dy=(lunge-recoil)*Math.sin(mutantArtV599.nativeFacing)+Math.sin(m.clock*2.25)*2+Math.sin(m.distance/mutantGaitV602.stride*TAU*2)*m.blend;
  let death=0;if(player.hp<=0){if(!m.deadAt)m.deadAt=performance.now();death=clamp((performance.now()-m.deadAt)/450,0,1);}else m.deadAt=0;
  return {dx,dy:dy+death*38,angle:(attack?(attack.side?1:-1)*Math.sin(phase*TAU)*.025:0)+death*.08,death};
 }
@@ -64,19 +65,19 @@ function mutantStepV599(dt){
  if(m.moving){m.distance+=d;m.vx=dx/dt;m.vy=dy/dt;}
  // Predict one half-step from the current displacement. Smoothed speed starts
  // near zero; using it here sent the first landing 40+ world pixels ahead.
- const period=28/Math.max(20,d/dt);
+ const period=mutantGaitV602.stride/Math.max(20,d/dt);
  mutantArtV599.legs.forEach((leg,i)=>{
-  const f=m.feet[i],q=(m.distance/28+leg.phase)%1;
+  const f=m.feet[i],q=(m.distance/mutantGaitV602.stride+leg.phase)%1;
   if(!m.moving){
    const p=mutantSourceWorldV599(leg.ankle,pose),k=1-Math.exp(-dt*13);f.world.x=mutantMixV599(f.world.x,p.x,k);f.world.y=mutantMixV599(f.world.y,p.y,k);f.ground={...f.world};f.anchor={...f.world};f.mode='idle';f.lift=0;f.roll=0;return;
   }
-  if(q<.5){
+  if(q<mutantGaitV602.stance){
    if(f.mode!=='stance'){const p=f.mode==='swing'?{...f.to}:mutantLandingV599(leg,pose);f.anchor=p;f.mode='stance';}
    f.world={...f.anchor};f.ground={...f.anchor};f.lift=0;f.roll=0;
   }else{
-   if(f.mode!=='swing'){f.from={...f.world};f.to=mutantLandingV599(leg,pose,period*.48);f.mode='swing';}
-   const u=(q-.5)*2,e=u*u*(3-2*u);f.ground={x:mutantMixV599(f.from.x,f.to.x,e),y:mutantMixV599(f.from.y,f.to.y,e)};
-   f.lift=Math.sin(Math.PI*u)*(leg.far?1.55:2.25)*m.blend;f.roll=Math.sin(Math.PI*u)*.14;f.world={x:f.ground.x,y:f.ground.y-f.lift};
+   if(f.mode!=='swing'){f.from={...f.world};f.to=mutantLandingV599(leg,pose,period*(1-mutantGaitV602.stance)*.96);f.mode='swing';}
+   const u=(q-mutantGaitV602.stance)/(1-mutantGaitV602.stance),e=u*u*(3-2*u);f.ground={x:mutantMixV599(f.from.x,f.to.x,e),y:mutantMixV599(f.from.y,f.to.y,e)};
+   f.lift=Math.sin(Math.PI*u)*(leg.far?mutantGaitV602.liftFar:mutantGaitV602.liftNear)*m.blend;f.roll=Math.sin(Math.PI*u)*mutantGaitV602.roll;f.world={x:f.ground.x,y:f.ground.y-f.lift};
   }
  });
  m.x=player.x;m.y=player.y;m.lastFacing=pose.facing;m.lastRotation=pose.rotation;
@@ -98,8 +99,9 @@ function mutantDrawLegV599(g,leg,i,pose,motion){
  const actual=mutantSourceWorldV599(ik.ankle,pose);f.actual=actual;f.stanceError=f.mode==='stance'?Math.hypot(actual.x-f.world.x,actual.y-f.world.y):0;
 }
 function mutantTailCurveV599(root,pose,length){
- const a=playerBodyAngleV590(),fx=Math.cos(a),fy=Math.sin(a),px=-fy,py=fx,sway=Math.sin(mutantV599.clock*2.1)*.07;
- return [root,{x:root.x-fx*length*.38-px*length*.18,y:root.y-fy*length*.38-py*length*.18},{x:root.x-fx*length*.72+px*length*(.45+sway),y:root.y-fy*length*.72+py*length*(.45+sway)},{x:root.x+px*length*.58,y:root.y+py*length*.58}];
+ const c=Math.cos(pose.rotation),s=Math.sin(pose.rotation),sway=Math.sin(mutantV599.clock*2.1)*.035;
+ const point=(x,y)=>({x:root.x+(x*pose.facing*c-y*s)*length,y:root.y+(x*pose.facing*s+y*c)*length});
+ return [root,point(-.52,.06),point(-.92,-.66+sway),point(-.34,-.88+sway)];
 }
 function mutantBezierV599(p,t){const q=1-t;return {x:q*q*q*p[0].x+3*q*q*t*p[1].x+3*q*t*t*p[2].x+t*t*t*p[3].x,y:q*q*q*p[0].y+3*q*q*t*p[1].y+3*q*t*t*p[2].y+t*t*t*p[3].y};}
 function mutantDrawTailV599(g,pose,motion){
@@ -189,4 +191,4 @@ const mutantReadyV599=Promise.all([mutantImageReadyV599,armItemsReadyV589]).then
  m.ready=true;mutantInitFeetV599();mutantRefreshV599();refreshEvolveHomeV522();return true;
 });
 window.__EVOLVE_PLAYER_MUTANT_V599__={ready:mutantReadyV599,read:()=>({version:599,character:'approved-armored-mutant',ready:mutantV599.ready,source:mutantArtV599.path,sha256:mutantArtV599.sha256,sourceBytes:mutantArtV599.bytes,sourceWidth:mutantArtV599.width,sourceHeight:mutantArtV599.height,sourceUnchanged:true,displaySize:mutantArtV599.displaySize,partBuilds:mutantV599.builds,renders:mutantV599.renders,moving:mutantV599.moving,distance:mutantV599.distance,tailLength:mutantV599.tailLength,tailSegments:mutantV599.tailSegments,tailRange:organSpecV598('tail').radius||0,feet:mutantV599.feet.map(f=>({mode:f.mode,world:f.actual||f.world,anchor:f.anchor,lift:f.lift,stanceError:f.stanceError})),physical_Galaxy_S23_plus_tested:false})};
-if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_PLAYER_MUTANT_V599__.test={art:()=>mutantArtV599,image:()=>mutantV599.image,parts:()=>mutantV599.parts,rig:()=>mutantV599,reset:mutantInitFeetV599,step:mutantStepV599,draw:mutantDrawV599,preview:mutantPreviewV599,pose:mutantFacingV599,point:mutantSourceWorldV599,inspect:mutantInspectV599};
+if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_PLAYER_MUTANT_V599__.test={tailCurve:mutantTailCurveV599,gaitProfile:()=>mutantGaitV602,art:()=>mutantArtV599,image:()=>mutantV599.image,parts:()=>mutantV599.parts,rig:()=>mutantV599,reset:mutantInitFeetV599,step:mutantStepV599,draw:mutantDrawV599,preview:mutantPreviewV599,pose:mutantFacingV599,point:mutantSourceWorldV599,inspect:mutantInspectV599};
