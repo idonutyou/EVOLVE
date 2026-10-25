@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-32-ARMORED-MUTANT",
+  "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
+  "checked_at": "2026-10-25T09:51:33.916762+00:00",
+  "source_bytes_unchanged": true,
+  "files": {
+    "version.json": {
+      "bytes": 285,
+      "sha256": "0f7ac131f7e93fff0c1b9de5d3e08e49264b06401db1098fc4e11d46f2438f95",
+      "matches_local": true
+    },
+    "index.html": {
+      "bytes": 258271,
+      "sha256": "5aff2e7402624bb8fe8d4179e2713c484a0dc2333f9df1a72d267d93d0773f13",
+      "matches_local": true
+    },
+    "asset-manifest.json": {
+      "bytes": 199782,
+      "sha256": "fe21c5aa3686e7f616e629d517c8b87cb305457e42f9dee4e206d7881c3f3845",
+      "matches_local": true
+    },
+    "assets/d476499a81ca6c93d82fb542bb2a2215f982f9aefa6ce1dcb050caf3d70dc55a.js": {
+      "bytes": 1640880,
+      "sha256": "d476499a81ca6c93d82fb542bb2a2215f982f9aefa6ce1dcb050caf3d70dc55a",
+      "matches_local": true
+    },
+    "assets/6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531.png": {
+      "bytes": 2098944,
+      "sha256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
+      "matches_local": true
+    }
+  },
+  "physical_Galaxy_S23_plus_tested": false
+}

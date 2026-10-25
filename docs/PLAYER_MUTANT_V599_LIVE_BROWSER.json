@@ -1,0 +1,93 @@
+{
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "errors": [],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "runtime_proxy_used": true,
+  "chromium_certificate_override": true,
+  "actor": {
+    "version": 599,
+    "character": "approved-armored-mutant",
+    "ready": true,
+    "source": "assets/6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531.png",
+    "sha256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
+    "sourceBytes": 2098944,
+    "sourceWidth": 1254,
+    "sourceHeight": 1254,
+    "sourceUnchanged": true,
+    "displaySize": 84,
+    "partBuilds": 25,
+    "renders": 0,
+    "moving": false,
+    "distance": 0,
+    "tailLength": 0,
+    "tailSegments": 0,
+    "tailRange": 0,
+    "feet": [
+      {
+        "mode": "idle",
+        "world": {
+          "x": 238.72218150662408,
+          "y": 441.384152890004
+        },
+        "anchor": {
+          "x": 238.72218150662408,
+          "y": 441.384152890004
+        },
+        "lift": 0,
+        "stanceError": 0
+      },
+      {
+        "mode": "idle",
+        "world": {
+          "x": 263.5487209598462,
+          "y": 437.88036105334527
+        },
+        "anchor": {
+          "x": 263.5487209598462,
+          "y": 437.88036105334527
+        },
+        "lift": 0,
+        "stanceError": 0
+      },
+      {
+        "mode": "idle",
+        "world": {
+          "x": 218.23517893722317,
+          "y": 450.65311598804067
+        },
+        "anchor": {
+          "x": 218.23517893722317,
+          "y": 450.65311598804067
+        },
+        "lift": 0,
+        "stanceError": 0
+      },
+      {
+        "mode": "idle",
+        "world": {
+          "x": 260.30766542527454,
+          "y": 448.3346281326939
+        },
+        "anchor": {
+          "x": 260.30766542527454,
+          "y": 448.3346281326939
+        },
+        "lift": 0,
+        "stanceError": 0
+      }
+    ],
+    "physical_Galaxy_S23_plus_tested": false,
+    "downloadedBytes": 2098944,
+    "downloadedSHA256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
+    "previewWidth": 1536,
+    "configuration": {
+      "version": "V575-WEB-32-ARMORED-MUTANT",
+      "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
+      "scriptBytes": 77694126,
+      "preloadResources": true
+    }
+  },
+  "gameRunning": true,
+  "success": true
+}

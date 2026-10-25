@@ -46,6 +46,16 @@
       "bytes": 2762892,
       "library_file_id": "libfile_681fefc8946881918f942eed378609a6",
       "confirmed_saved": true
+    },
+    {
+      "stage": 100,
+      "filename": "EVOLVE_WEB32_CHECKPOINT_100.zip",
+      "bytes": 2767218,
+      "sha256": "29ddf58f2dd9aa49da987cbc1064a1ef59a22d264f29d27a3da3caa96b58d477",
+      "library_file_id": "libfile_3ca379c56a008191b62acbaffe8e869a",
+      "file_id": "file_00000000e48481f58eb51a327060d09b",
+      "confirmed_saved": true,
+      "archive_files_verified": 27
     }
   ],
   "remote_upload_confirmed": true,
@@ -69,6 +79,36 @@
       "git ls-remote and fetched tree"
     ],
     "deployment_run_id": 40181733457,
-    "deployment_status": "in_progress"
+    "deployment_status": "success",
+    "immutable_backup_branch": "backup/web32-090-20261025",
+    "completion_backup_branch": "backup/web32-100-20261025"
+  },
+  "publication": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "release_commit": "bae18a41b9bf972f56e0cb656addf691d6dc8851",
+    "run_id": 40181733457,
+    "run_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40181733457",
+    "native_review_passed": true,
+    "browser_suites_passed": 18,
+    "live_version_and_files_match": true,
+    "live_browser_home_ready": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "source_bytes_unchanged": true,
+    "checked_at": "2026-10-25T09:54:03.430252+00:00",
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "preserve_all_previous_backups": true,
+  "final_checkpoint": {
+    "stage": 100,
+    "filename": "EVOLVE_WEB32_CHECKPOINT_100.zip",
+    "bytes": 2767218,
+    "sha256": "29ddf58f2dd9aa49da987cbc1064a1ef59a22d264f29d27a3da3caa96b58d477",
+    "library_file_id": "libfile_3ca379c56a008191b62acbaffe8e869a",
+    "file_id": "file_00000000e48481f58eb51a327060d09b",
+    "confirmed_saved": true,
+    "archive_files_verified": 27
   }
 }

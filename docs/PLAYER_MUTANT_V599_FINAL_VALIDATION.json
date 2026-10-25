@@ -100,5 +100,21 @@
   "client_and_combat_model_checks_passed": true,
   "isolated_checkpoint_restore_verified": true,
   "physical_Galaxy_S23_plus_tested": false,
-  "deployment": "Not published; git push was rejected by automatic approval review."
+  "deployment": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "release_commit": "bae18a41b9bf972f56e0cb656addf691d6dc8851",
+    "run_id": 40181733457,
+    "run_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40181733457",
+    "native_review_passed": true,
+    "browser_suites_passed": 18,
+    "live_version_and_files_match": true,
+    "live_browser_home_ready": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "source_bytes_unchanged": true,
+    "checked_at": "2026-10-25T09:54:03.430252+00:00",
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
