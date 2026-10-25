@@ -1,0 +1,3932 @@
+{
+  "source": "https://idonutyou.github.io/EVOLVE/",
+  "checks": [
+    "Five enlarged plates, icons and labels stay within their buttons and the screen during size transitions on four phone/landscape viewports",
+    "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+    "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+    "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+  ],
+  "navigation": [
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 10,
+            "y": 459.265625,
+            "right": 77.53125,
+            "bottom": 562,
+            "width": 67.53125,
+            "height": 102.734375
+          },
+          "frame": {
+            "x": 10,
+            "y": 459.265625,
+            "right": 77.53125,
+            "bottom": 562,
+            "width": 67.53125,
+            "height": 102.734375
+          },
+          "glyph": {
+            "x": 25,
+            "y": 482.09375,
+            "right": 62.515625,
+            "bottom": 519.609375,
+            "width": 37.515625,
+            "height": 37.515625
+          },
+          "label": {
+            "x": 32.71875,
+            "y": 526.609375,
+            "right": 54.8125,
+            "bottom": 541,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 77.53125,
+            "y": 478,
+            "right": 135.21875,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 77.53125,
+            "y": 478,
+            "right": 135.21875,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 91.875,
+            "y": 496,
+            "right": 120.875,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 97.171875,
+            "y": 532,
+            "right": 115.578125,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 135.21875,
+            "y": 474.75,
+            "right": 194.625,
+            "bottom": 562,
+            "width": 59.40625,
+            "height": 87.25
+          },
+          "frame": {
+            "x": 135.21875,
+            "y": 474.75,
+            "right": 194.625,
+            "bottom": 562,
+            "width": 59.40625,
+            "height": 87.25
+          },
+          "glyph": {
+            "x": 149.6875,
+            "y": 494.53125,
+            "right": 180.15625,
+            "bottom": 525,
+            "width": 30.46875,
+            "height": 30.46875
+          },
+          "label": {
+            "x": 155.71875,
+            "y": 532,
+            "right": 174.125,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 194.625,
+            "y": 478,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 194.625,
+            "y": 478,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 208.96875,
+            "y": 496,
+            "right": 237.96875,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 209.65625,
+            "y": 532,
+            "right": 237.265625,
+            "bottom": 544,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 266.65625,
+            "y": 496,
+            "right": 295.65625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 271.953125,
+            "y": 532,
+            "right": 290.359375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10,
+            "y": 472.8125,
+            "right": 70.421875,
+            "bottom": 562,
+            "width": 60.421875,
+            "height": 89.1875
+          },
+          "frame": {
+            "x": 10,
+            "y": 472.8125,
+            "right": 70.421875,
+            "bottom": 562,
+            "width": 60.421875,
+            "height": 89.1875
+          },
+          "glyph": {
+            "x": 24.53125,
+            "y": 493.640625,
+            "right": 55.890625,
+            "bottom": 525,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 31,
+            "y": 532,
+            "right": 49.40625,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 70.421875,
+            "y": 461.203125,
+            "right": 136.9375,
+            "bottom": 562,
+            "width": 66.515625,
+            "height": 100.796875
+          },
+          "frame": {
+            "x": 70.421875,
+            "y": 461.203125,
+            "right": 136.9375,
+            "bottom": 562,
+            "width": 66.515625,
+            "height": 100.796875
+          },
+          "glyph": {
+            "x": 85.359375,
+            "y": 482.984375,
+            "right": 121.984375,
+            "bottom": 519.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 92.625,
+            "y": 526.609375,
+            "right": 114.71875,
+            "bottom": 541,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 136.9375,
+            "y": 478,
+            "right": 194.625,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 136.9375,
+            "y": 478,
+            "right": 194.625,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 151.28125,
+            "y": 496,
+            "right": 180.28125,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 156.578125,
+            "y": 532,
+            "right": 174.984375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 194.625,
+            "y": 478,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 194.625,
+            "y": 478,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 208.96875,
+            "y": 496,
+            "right": 237.96875,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 209.65625,
+            "y": 532,
+            "right": 237.265625,
+            "bottom": 544,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 266.65625,
+            "y": 496,
+            "right": 295.65625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 271.953125,
+            "y": 532,
+            "right": 290.359375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10,
+            "y": 478,
+            "right": 67.90625,
+            "bottom": 562,
+            "width": 57.90625,
+            "height": 84
+          },
+          "frame": {
+            "x": 10,
+            "y": 478,
+            "right": 67.90625,
+            "bottom": 562,
+            "width": 57.90625,
+            "height": 84
+          },
+          "glyph": {
+            "x": 24.453125,
+            "y": 496,
+            "right": 53.453125,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 29.75,
+            "y": 532,
+            "right": 48.15625,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 67.90625,
+            "y": 468.359375,
+            "right": 130.875,
+            "bottom": 562,
+            "width": 62.96875,
+            "height": 93.640625
+          },
+          "frame": {
+            "x": 67.90625,
+            "y": 468.359375,
+            "right": 130.875,
+            "bottom": 562,
+            "width": 62.96875,
+            "height": 93.640625
+          },
+          "glyph": {
+            "x": 82.703125,
+            "y": 491.625,
+            "right": 116.078125,
+            "bottom": 525,
+            "width": 33.375,
+            "height": 33.375
+          },
+          "label": {
+            "x": 90.1875,
+            "y": 532,
+            "right": 108.59375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 130.875,
+            "y": 467.6875,
+            "right": 194.203125,
+            "bottom": 562,
+            "width": 63.328125,
+            "height": 94.3125
+          },
+          "frame": {
+            "x": 130.875,
+            "y": 467.6875,
+            "right": 194.203125,
+            "bottom": 562,
+            "width": 63.328125,
+            "height": 94.3125
+          },
+          "glyph": {
+            "x": 145.6875,
+            "y": 488.921875,
+            "right": 179.375,
+            "bottom": 522.609375,
+            "width": 33.6875,
+            "height": 33.6875
+          },
+          "label": {
+            "x": 151.484375,
+            "y": 529.609375,
+            "right": 173.578125,
+            "bottom": 544,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 194.203125,
+            "y": 478,
+            "right": 252.09375,
+            "bottom": 562,
+            "width": 57.890625,
+            "height": 84
+          },
+          "frame": {
+            "x": 194.203125,
+            "y": 478,
+            "right": 252.09375,
+            "bottom": 562,
+            "width": 57.890625,
+            "height": 84
+          },
+          "glyph": {
+            "x": 208.640625,
+            "y": 496,
+            "right": 237.640625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 209.34375,
+            "y": 532,
+            "right": 236.953125,
+            "bottom": 544,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 252.09375,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.90625,
+            "height": 84
+          },
+          "frame": {
+            "x": 252.09375,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.90625,
+            "height": 84
+          },
+          "glyph": {
+            "x": 266.546875,
+            "y": 496,
+            "right": 295.546875,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 271.84375,
+            "y": 532,
+            "right": 290.25,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10,
+            "y": 478,
+            "right": 67.6875,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 10,
+            "y": 478,
+            "right": 67.6875,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 24.34375,
+            "y": 496,
+            "right": 53.34375,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 29.640625,
+            "y": 532,
+            "right": 48.046875,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 67.6875,
+            "y": 478,
+            "right": 125.390625,
+            "bottom": 562,
+            "width": 57.703125,
+            "height": 84
+          },
+          "frame": {
+            "x": 67.6875,
+            "y": 478,
+            "right": 125.390625,
+            "bottom": 562,
+            "width": 57.703125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 82.03125,
+            "y": 496,
+            "right": 111.03125,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 87.328125,
+            "y": 532,
+            "right": 105.734375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 125.390625,
+            "y": 472.796875,
+            "right": 185.8125,
+            "bottom": 562,
+            "width": 60.421875,
+            "height": 89.203125
+          },
+          "frame": {
+            "x": 125.390625,
+            "y": 472.796875,
+            "right": 185.8125,
+            "bottom": 562,
+            "width": 60.421875,
+            "height": 89.203125
+          },
+          "glyph": {
+            "x": 139.921875,
+            "y": 493.640625,
+            "right": 171.28125,
+            "bottom": 525,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 146.390625,
+            "y": 532,
+            "right": 164.796875,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 185.8125,
+            "y": 461.21875,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 66.5,
+            "height": 100.78125
+          },
+          "frame": {
+            "x": 185.8125,
+            "y": 461.21875,
+            "right": 252.3125,
+            "bottom": 562,
+            "width": 66.5,
+            "height": 100.78125
+          },
+          "glyph": {
+            "x": 200.75,
+            "y": 482.984375,
+            "right": 237.375,
+            "bottom": 519.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 202.5,
+            "y": 526.609375,
+            "right": 235.625,
+            "bottom": 541,
+            "width": 33.125,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "frame": {
+            "x": 252.3125,
+            "y": 478,
+            "right": 310,
+            "bottom": 562,
+            "width": 57.6875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 266.65625,
+            "y": 496,
+            "right": 295.65625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 271.953125,
+            "y": 532,
+            "right": 290.359375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10,
+            "y": 478,
+            "right": 67.828125,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "frame": {
+            "x": 10,
+            "y": 478,
+            "right": 67.828125,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 24.40625,
+            "y": 496,
+            "right": 53.40625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 29.703125,
+            "y": 532,
+            "right": 48.109375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 67.828125,
+            "y": 478,
+            "right": 125.65625,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "frame": {
+            "x": 67.828125,
+            "y": 478,
+            "right": 125.65625,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 82.234375,
+            "y": 496,
+            "right": 111.234375,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 87.53125,
+            "y": 532,
+            "right": 105.9375,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 125.65625,
+            "y": 478,
+            "right": 183.484375,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "frame": {
+            "x": 125.65625,
+            "y": 478,
+            "right": 183.484375,
+            "bottom": 562,
+            "width": 57.828125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 140.0625,
+            "y": 496,
+            "right": 169.0625,
+            "bottom": 525,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 145.359375,
+            "y": 532,
+            "right": 163.765625,
+            "bottom": 544,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 183.484375,
+            "y": 474.15625,
+            "right": 243.34375,
+            "bottom": 562,
+            "width": 59.859375,
+            "height": 87.84375
+          },
+          "frame": {
+            "x": 183.484375,
+            "y": 474.15625,
+            "right": 243.34375,
+            "bottom": 562,
+            "width": 59.859375,
+            "height": 87.84375
+          },
+          "glyph": {
+            "x": 198.046875,
+            "y": 494.265625,
+            "right": 228.78125,
+            "bottom": 525,
+            "width": 30.734375,
+            "height": 30.734375
+          },
+          "label": {
+            "x": 199.609375,
+            "y": 532,
+            "right": 227.21875,
+            "bottom": 544,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 243.34375,
+            "y": 461.21875,
+            "right": 310,
+            "bottom": 562,
+            "width": 66.65625,
+            "height": 100.78125
+          },
+          "frame": {
+            "x": 243.34375,
+            "y": 461.21875,
+            "right": 310,
+            "bottom": 562,
+            "width": 66.65625,
+            "height": 100.78125
+          },
+          "glyph": {
+            "x": 258.359375,
+            "y": 482.984375,
+            "right": 294.984375,
+            "bottom": 519.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 265.625,
+            "y": 526.609375,
+            "right": 287.71875,
+            "bottom": 541,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 10.203125,
+            "y": 622.25,
+            "right": 92.78125,
+            "bottom": 725,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 622.25,
+            "right": 92.78125,
+            "bottom": 725,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 33.171875,
+            "y": 645.984375,
+            "right": 69.796875,
+            "bottom": 682.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 40.4375,
+            "y": 689.609375,
+            "right": 62.53125,
+            "bottom": 704,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 92.78125,
+            "y": 639.03125,
+            "right": 164.4375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 92.78125,
+            "y": 639.03125,
+            "right": 164.4375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 114.109375,
+            "y": 657.8125,
+            "right": 143.109375,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 118.484375,
+            "y": 693.8125,
+            "right": 138.734375,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 164.4375,
+            "y": 639.03125,
+            "right": 236.09375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 164.4375,
+            "y": 639.03125,
+            "right": 236.09375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 185.765625,
+            "y": 657.8125,
+            "right": 214.765625,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 190.140625,
+            "y": 693.8125,
+            "right": 210.390625,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 236.09375,
+            "y": 639.03125,
+            "right": 307.75,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 236.09375,
+            "y": 639.03125,
+            "right": 307.75,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 257.421875,
+            "y": 657.8125,
+            "right": 286.421875,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 256.734375,
+            "y": 693.8125,
+            "right": 287.109375,
+            "bottom": 707,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 307.75,
+            "y": 633.8125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.1875
+          },
+          "frame": {
+            "x": 307.75,
+            "y": 633.8125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.1875
+          },
+          "glyph": {
+            "x": 329.59375,
+            "y": 655.453125,
+            "right": 360.953125,
+            "bottom": 686.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 335.140625,
+            "y": 693.8125,
+            "right": 355.390625,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 633.828125,
+            "right": 85.25,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 633.828125,
+            "right": 85.25,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "glyph": {
+            "x": 32.046875,
+            "y": 655.453125,
+            "right": 63.40625,
+            "bottom": 686.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 37.59375,
+            "y": 693.8125,
+            "right": 57.84375,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 85.25,
+            "y": 622.25,
+            "right": 167.828125,
+            "bottom": 725,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 85.25,
+            "y": 622.25,
+            "right": 167.828125,
+            "bottom": 725,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 108.21875,
+            "y": 645.984375,
+            "right": 144.84375,
+            "bottom": 682.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 115.484375,
+            "y": 689.609375,
+            "right": 137.578125,
+            "bottom": 704,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 167.828125,
+            "y": 639.03125,
+            "right": 239.484375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 167.828125,
+            "y": 639.03125,
+            "right": 239.484375,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 189.15625,
+            "y": 657.8125,
+            "right": 218.15625,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 193.53125,
+            "y": 693.8125,
+            "right": 213.78125,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 239.484375,
+            "y": 639.03125,
+            "right": 311.140625,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 239.484375,
+            "y": 639.03125,
+            "right": 311.140625,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 260.8125,
+            "y": 657.8125,
+            "right": 289.8125,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 260.125,
+            "y": 693.8125,
+            "right": 290.5,
+            "bottom": 707,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 311.140625,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 311.140625,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.46875,
+            "y": 657.8125,
+            "right": 361.46875,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.84375,
+            "y": 693.8125,
+            "right": 357.09375,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 82.0625,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 82.0625,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.625,
+            "y": 657.8125,
+            "right": 60.625,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 36,
+            "y": 693.8125,
+            "right": 56.25,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 82.0625,
+            "y": 632.796875,
+            "right": 158.015625,
+            "bottom": 725,
+            "width": 75.953125,
+            "height": 92.203125
+          },
+          "frame": {
+            "x": 82.0625,
+            "y": 632.796875,
+            "right": 158.015625,
+            "bottom": 725,
+            "width": 75.953125,
+            "height": 92.203125
+          },
+          "glyph": {
+            "x": 104.125,
+            "y": 654.984375,
+            "right": 135.953125,
+            "bottom": 686.8125,
+            "width": 31.828125,
+            "height": 31.828125
+          },
+          "label": {
+            "x": 109.90625,
+            "y": 693.8125,
+            "right": 130.15625,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 158.015625,
+            "y": 624.984375,
+            "right": 239.0625,
+            "bottom": 725,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "frame": {
+            "x": 158.015625,
+            "y": 624.984375,
+            "right": 239.0625,
+            "bottom": 725,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "glyph": {
+            "x": 180.84375,
+            "y": 650.234375,
+            "right": 216.21875,
+            "bottom": 685.609375,
+            "width": 35.375,
+            "height": 35.375
+          },
+          "label": {
+            "x": 187.484375,
+            "y": 692.609375,
+            "right": 209.578125,
+            "bottom": 707,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 239.0625,
+            "y": 639.03125,
+            "right": 310.9375,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 239.0625,
+            "y": 639.03125,
+            "right": 310.9375,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 260.5,
+            "y": 657.8125,
+            "right": 289.5,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 259.8125,
+            "y": 693.8125,
+            "right": 290.1875,
+            "bottom": 707,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 310.9375,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 310.9375,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.359375,
+            "y": 657.8125,
+            "right": 361.359375,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.734375,
+            "y": 693.8125,
+            "right": 356.984375,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 81.84375,
+            "bottom": 725,
+            "width": 71.640625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 81.84375,
+            "bottom": 725,
+            "width": 71.640625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.515625,
+            "y": 657.8125,
+            "right": 60.515625,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 35.890625,
+            "y": 693.8125,
+            "right": 56.140625,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 81.84375,
+            "y": 639.03125,
+            "right": 153.5,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 81.84375,
+            "y": 639.03125,
+            "right": 153.5,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 103.171875,
+            "y": 657.8125,
+            "right": 132.171875,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 107.546875,
+            "y": 693.8125,
+            "right": 127.796875,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153.5,
+            "y": 633.828125,
+            "right": 228.546875,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 153.5,
+            "y": 633.828125,
+            "right": 228.546875,
+            "bottom": 725,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "glyph": {
+            "x": 175.34375,
+            "y": 655.453125,
+            "right": 206.703125,
+            "bottom": 686.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 180.890625,
+            "y": 693.8125,
+            "right": 201.140625,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 228.546875,
+            "y": 622.25,
+            "right": 311.140625,
+            "bottom": 725,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 228.546875,
+            "y": 622.25,
+            "right": 311.140625,
+            "bottom": 725,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 251.53125,
+            "y": 645.984375,
+            "right": 288.15625,
+            "bottom": 682.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 253.28125,
+            "y": 689.609375,
+            "right": 286.40625,
+            "bottom": 704,
+            "width": 33.125,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 311.140625,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 311.140625,
+            "y": 639.03125,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.46875,
+            "y": 657.8125,
+            "right": 361.46875,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.84375,
+            "y": 693.8125,
+            "right": 357.09375,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 82.0625,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 639.03125,
+            "right": 82.0625,
+            "bottom": 725,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.625,
+            "y": 657.8125,
+            "right": 60.625,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 36,
+            "y": 693.8125,
+            "right": 56.25,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 82.0625,
+            "y": 639.03125,
+            "right": 153.9375,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 82.0625,
+            "y": 639.03125,
+            "right": 153.9375,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 103.5,
+            "y": 657.8125,
+            "right": 132.5,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 107.875,
+            "y": 693.8125,
+            "right": 128.125,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153.9375,
+            "y": 639.03125,
+            "right": 225.8125,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 153.9375,
+            "y": 639.03125,
+            "right": 225.8125,
+            "bottom": 725,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 175.375,
+            "y": 657.8125,
+            "right": 204.375,
+            "bottom": 686.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 179.75,
+            "y": 693.8125,
+            "right": 200,
+            "bottom": 707,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 225.8125,
+            "y": 632.796875,
+            "right": 301.75,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 92.203125
+          },
+          "frame": {
+            "x": 225.8125,
+            "y": 632.796875,
+            "right": 301.75,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 92.203125
+          },
+          "glyph": {
+            "x": 247.859375,
+            "y": 654.984375,
+            "right": 279.6875,
+            "bottom": 686.8125,
+            "width": 31.828125,
+            "height": 31.828125
+          },
+          "label": {
+            "x": 248.59375,
+            "y": 693.8125,
+            "right": 278.96875,
+            "bottom": 707,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 301.75,
+            "y": 624.984375,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "frame": {
+            "x": 301.75,
+            "y": 624.984375,
+            "right": 382.796875,
+            "bottom": 725,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "glyph": {
+            "x": 324.578125,
+            "y": 647.234375,
+            "right": 359.953125,
+            "bottom": 682.609375,
+            "width": 35.375,
+            "height": 35.375
+          },
+          "label": {
+            "x": 331.21875,
+            "y": 689.609375,
+            "right": 353.3125,
+            "bottom": 704,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 10.203125,
+            "y": 743.25,
+            "right": 92.78125,
+            "bottom": 846,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 743.25,
+            "right": 92.78125,
+            "bottom": 846,
+            "width": 82.578125,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 33.171875,
+            "y": 766.984375,
+            "right": 69.796875,
+            "bottom": 803.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 40.4375,
+            "y": 810.609375,
+            "right": 62.53125,
+            "bottom": 825,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 92.78125,
+            "y": 760.03125,
+            "right": 164.4375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 92.78125,
+            "y": 760.03125,
+            "right": 164.4375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 114.109375,
+            "y": 778.8125,
+            "right": 143.109375,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 118.484375,
+            "y": 814.8125,
+            "right": 138.734375,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 164.4375,
+            "y": 760.03125,
+            "right": 236.09375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 164.4375,
+            "y": 760.03125,
+            "right": 236.09375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 185.765625,
+            "y": 778.8125,
+            "right": 214.765625,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 190.140625,
+            "y": 814.8125,
+            "right": 210.390625,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 236.09375,
+            "y": 760.03125,
+            "right": 307.75,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 236.09375,
+            "y": 760.03125,
+            "right": 307.75,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 257.421875,
+            "y": 778.8125,
+            "right": 286.421875,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 256.734375,
+            "y": 814.8125,
+            "right": 287.109375,
+            "bottom": 828,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 307.75,
+            "y": 754.828125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 307.75,
+            "y": 754.828125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "glyph": {
+            "x": 329.59375,
+            "y": 776.453125,
+            "right": 360.953125,
+            "bottom": 807.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 335.140625,
+            "y": 814.8125,
+            "right": 355.390625,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 754.828125,
+            "right": 85.234375,
+            "bottom": 846,
+            "width": 75.03125,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 754.828125,
+            "right": 85.234375,
+            "bottom": 846,
+            "width": 75.03125,
+            "height": 91.171875
+          },
+          "glyph": {
+            "x": 32.03125,
+            "y": 776.453125,
+            "right": 63.390625,
+            "bottom": 807.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 37.59375,
+            "y": 814.8125,
+            "right": 57.84375,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 85.234375,
+            "y": 743.25,
+            "right": 167.828125,
+            "bottom": 846,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 85.234375,
+            "y": 743.25,
+            "right": 167.828125,
+            "bottom": 846,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 108.21875,
+            "y": 766.984375,
+            "right": 144.84375,
+            "bottom": 803.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 115.484375,
+            "y": 810.609375,
+            "right": 137.578125,
+            "bottom": 825,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 167.828125,
+            "y": 760.03125,
+            "right": 239.484375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 167.828125,
+            "y": 760.03125,
+            "right": 239.484375,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 189.15625,
+            "y": 778.8125,
+            "right": 218.15625,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 193.53125,
+            "y": 814.8125,
+            "right": 213.78125,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 239.484375,
+            "y": 760.03125,
+            "right": 311.140625,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 239.484375,
+            "y": 760.03125,
+            "right": 311.140625,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 260.8125,
+            "y": 778.8125,
+            "right": 289.8125,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 260.125,
+            "y": 814.8125,
+            "right": 290.5,
+            "bottom": 828,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 311.140625,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 311.140625,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.46875,
+            "y": 778.8125,
+            "right": 361.46875,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.84375,
+            "y": 814.8125,
+            "right": 357.09375,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 82.0625,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 82.0625,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.625,
+            "y": 778.8125,
+            "right": 60.625,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 36,
+            "y": 814.8125,
+            "right": 56.25,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 82.0625,
+            "y": 753.78125,
+            "right": 158.015625,
+            "bottom": 846,
+            "width": 75.953125,
+            "height": 92.21875
+          },
+          "frame": {
+            "x": 82.0625,
+            "y": 753.78125,
+            "right": 158.015625,
+            "bottom": 846,
+            "width": 75.953125,
+            "height": 92.21875
+          },
+          "glyph": {
+            "x": 104.125,
+            "y": 775.984375,
+            "right": 135.953125,
+            "bottom": 807.8125,
+            "width": 31.828125,
+            "height": 31.828125
+          },
+          "label": {
+            "x": 109.90625,
+            "y": 814.8125,
+            "right": 130.15625,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 158.015625,
+            "y": 746,
+            "right": 239.0625,
+            "bottom": 846,
+            "width": 81.046875,
+            "height": 100
+          },
+          "frame": {
+            "x": 158.015625,
+            "y": 746,
+            "right": 239.0625,
+            "bottom": 846,
+            "width": 81.046875,
+            "height": 100
+          },
+          "glyph": {
+            "x": 180.84375,
+            "y": 771.234375,
+            "right": 216.21875,
+            "bottom": 806.609375,
+            "width": 35.375,
+            "height": 35.375
+          },
+          "label": {
+            "x": 187.484375,
+            "y": 813.609375,
+            "right": 209.578125,
+            "bottom": 828,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 239.0625,
+            "y": 760.03125,
+            "right": 310.921875,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 239.0625,
+            "y": 760.03125,
+            "right": 310.921875,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 260.484375,
+            "y": 778.8125,
+            "right": 289.484375,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 259.796875,
+            "y": 814.8125,
+            "right": 290.171875,
+            "bottom": 828,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 310.921875,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 310.921875,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.359375,
+            "y": 778.8125,
+            "right": 361.359375,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.734375,
+            "y": 814.8125,
+            "right": 356.984375,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 81.84375,
+            "bottom": 846,
+            "width": 71.640625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 81.84375,
+            "bottom": 846,
+            "width": 71.640625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.515625,
+            "y": 778.8125,
+            "right": 60.515625,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 35.890625,
+            "y": 814.8125,
+            "right": 56.140625,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 81.84375,
+            "y": 760.03125,
+            "right": 153.5,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 81.84375,
+            "y": 760.03125,
+            "right": 153.5,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 103.171875,
+            "y": 778.8125,
+            "right": 132.171875,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 107.546875,
+            "y": 814.8125,
+            "right": 127.796875,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153.5,
+            "y": 754.828125,
+            "right": 228.546875,
+            "bottom": 846,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 153.5,
+            "y": 754.828125,
+            "right": 228.546875,
+            "bottom": 846,
+            "width": 75.046875,
+            "height": 91.171875
+          },
+          "glyph": {
+            "x": 175.34375,
+            "y": 776.453125,
+            "right": 206.703125,
+            "bottom": 807.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 180.890625,
+            "y": 814.8125,
+            "right": 201.140625,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 228.546875,
+            "y": 743.25,
+            "right": 311.140625,
+            "bottom": 846,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 228.546875,
+            "y": 743.25,
+            "right": 311.140625,
+            "bottom": 846,
+            "width": 82.59375,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 251.53125,
+            "y": 766.984375,
+            "right": 288.15625,
+            "bottom": 803.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 253.28125,
+            "y": 810.609375,
+            "right": 286.40625,
+            "bottom": 825,
+            "width": 33.125,
+            "height": 14.390625
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 311.140625,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 311.140625,
+            "y": 760.03125,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 71.65625,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 332.46875,
+            "y": 778.8125,
+            "right": 361.46875,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 336.84375,
+            "y": 814.8125,
+            "right": 357.09375,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 82.0625,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 10.203125,
+            "y": 760.03125,
+            "right": 82.0625,
+            "bottom": 846,
+            "width": 71.859375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 31.625,
+            "y": 778.8125,
+            "right": 60.625,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 36,
+            "y": 814.8125,
+            "right": 56.25,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 82.0625,
+            "y": 760.03125,
+            "right": 153.9375,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 82.0625,
+            "y": 760.03125,
+            "right": 153.9375,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 103.5,
+            "y": 778.8125,
+            "right": 132.5,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 107.875,
+            "y": 814.8125,
+            "right": 128.125,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153.9375,
+            "y": 760.03125,
+            "right": 225.8125,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 153.9375,
+            "y": 760.03125,
+            "right": 225.8125,
+            "bottom": 846,
+            "width": 71.875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 175.375,
+            "y": 778.8125,
+            "right": 204.375,
+            "bottom": 807.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 179.75,
+            "y": 814.8125,
+            "right": 200,
+            "bottom": 828,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 225.8125,
+            "y": 753.796875,
+            "right": 301.75,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 92.203125
+          },
+          "frame": {
+            "x": 225.8125,
+            "y": 753.796875,
+            "right": 301.75,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 92.203125
+          },
+          "glyph": {
+            "x": 247.859375,
+            "y": 775.984375,
+            "right": 279.6875,
+            "bottom": 807.8125,
+            "width": 31.828125,
+            "height": 31.828125
+          },
+          "label": {
+            "x": 248.59375,
+            "y": 814.8125,
+            "right": 278.96875,
+            "bottom": 828,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 301.75,
+            "y": 745.984375,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "frame": {
+            "x": 301.75,
+            "y": 745.984375,
+            "right": 382.796875,
+            "bottom": 846,
+            "width": 81.046875,
+            "height": 100.015625
+          },
+          "glyph": {
+            "x": 324.578125,
+            "y": 768.234375,
+            "right": 359.953125,
+            "bottom": 803.609375,
+            "width": 35.375,
+            "height": 35.375
+          },
+          "label": {
+            "x": 331.21875,
+            "y": 810.609375,
+            "right": 353.3125,
+            "bottom": 825,
+            "width": 22.09375,
+            "height": 14.390625
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 21,
+            "y": 306.203125,
+            "right": 199.671875,
+            "bottom": 387,
+            "width": 178.671875,
+            "height": 80.796875
+          },
+          "frame": {
+            "x": 21,
+            "y": 306.203125,
+            "right": 199.671875,
+            "bottom": 387,
+            "width": 178.671875,
+            "height": 80.796875
+          },
+          "glyph": {
+            "x": 95.40625,
+            "y": 322.953125,
+            "right": 125.265625,
+            "bottom": 352.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 100.203125,
+            "y": 356.8125,
+            "right": 120.453125,
+            "bottom": 370,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 199.671875,
+            "y": 323,
+            "right": 354.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 199.671875,
+            "y": 323,
+            "right": 354.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 265.671875,
+            "y": 336,
+            "right": 288.671875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 267.96875,
+            "y": 363,
+            "right": 286.375,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 354.671875,
+            "y": 323,
+            "right": 509.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 354.671875,
+            "y": 323,
+            "right": 509.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 420.671875,
+            "y": 336,
+            "right": 443.671875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 422.96875,
+            "y": 363,
+            "right": 441.375,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 509.671875,
+            "y": 323,
+            "right": 664.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 509.671875,
+            "y": 323,
+            "right": 664.671875,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 575.671875,
+            "y": 336,
+            "right": 598.671875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 573.359375,
+            "y": 363,
+            "right": 600.96875,
+            "bottom": 375,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 664.671875,
+            "y": 317.8125,
+            "right": 827,
+            "bottom": 387,
+            "width": 162.328125,
+            "height": 69.1875
+          },
+          "frame": {
+            "x": 664.671875,
+            "y": 317.8125,
+            "right": 827,
+            "bottom": 387,
+            "width": 162.328125,
+            "height": 69.1875
+          },
+          "glyph": {
+            "x": 733.265625,
+            "y": 333.875,
+            "right": 758.390625,
+            "bottom": 359,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 736.625,
+            "y": 363,
+            "right": 755.03125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 23,
+            "y": 317.796875,
+            "right": 185.34375,
+            "bottom": 387,
+            "width": 162.34375,
+            "height": 69.203125
+          },
+          "frame": {
+            "x": 23,
+            "y": 317.796875,
+            "right": 185.34375,
+            "bottom": 387,
+            "width": 162.34375,
+            "height": 69.203125
+          },
+          "glyph": {
+            "x": 91.609375,
+            "y": 333.875,
+            "right": 116.734375,
+            "bottom": 359,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 94.96875,
+            "y": 363,
+            "right": 113.375,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 185.34375,
+            "y": 306.21875,
+            "right": 364,
+            "bottom": 387,
+            "width": 178.65625,
+            "height": 80.78125
+          },
+          "frame": {
+            "x": 185.34375,
+            "y": 306.21875,
+            "right": 364,
+            "bottom": 387,
+            "width": 178.65625,
+            "height": 80.78125
+          },
+          "glyph": {
+            "x": 259.734375,
+            "y": 322.953125,
+            "right": 289.59375,
+            "bottom": 352.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 264.546875,
+            "y": 356.8125,
+            "right": 284.796875,
+            "bottom": 370,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 364,
+            "y": 323,
+            "right": 519,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 364,
+            "y": 323,
+            "right": 519,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 430,
+            "y": 336,
+            "right": 453,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 432.296875,
+            "y": 363,
+            "right": 450.703125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 519,
+            "y": 323,
+            "right": 674,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 519,
+            "y": 323,
+            "right": 674,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 585,
+            "y": 336,
+            "right": 608,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 582.6875,
+            "y": 363,
+            "right": 610.296875,
+            "bottom": 375,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 674,
+            "y": 323,
+            "right": 829,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 674,
+            "y": 323,
+            "right": 829,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 740,
+            "y": 336,
+            "right": 763,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 742.296875,
+            "y": 363,
+            "right": 760.703125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 23,
+            "y": 323,
+            "right": 178.453125,
+            "bottom": 387,
+            "width": 155.453125,
+            "height": 64
+          },
+          "frame": {
+            "x": 23,
+            "y": 323,
+            "right": 178.453125,
+            "bottom": 387,
+            "width": 155.453125,
+            "height": 64
+          },
+          "glyph": {
+            "x": 89.21875,
+            "y": 336,
+            "right": 112.21875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 91.515625,
+            "y": 363,
+            "right": 109.921875,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 178.453125,
+            "y": 316.765625,
+            "right": 342.734375,
+            "bottom": 387,
+            "width": 164.28125,
+            "height": 70.234375
+          },
+          "frame": {
+            "x": 178.453125,
+            "y": 316.765625,
+            "right": 342.734375,
+            "bottom": 387,
+            "width": 164.28125,
+            "height": 70.234375
+          },
+          "glyph": {
+            "x": 247.8125,
+            "y": 333.453125,
+            "right": 273.359375,
+            "bottom": 359,
+            "width": 25.546875,
+            "height": 25.546875
+          },
+          "label": {
+            "x": 251.390625,
+            "y": 363,
+            "right": 269.796875,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 342.734375,
+            "y": 308.953125,
+            "right": 518.0625,
+            "bottom": 387,
+            "width": 175.328125,
+            "height": 78.046875
+          },
+          "frame": {
+            "x": 342.734375,
+            "y": 308.953125,
+            "right": 518.0625,
+            "bottom": 387,
+            "width": 175.328125,
+            "height": 78.046875
+          },
+          "glyph": {
+            "x": 416.03125,
+            "y": 324.078125,
+            "right": 444.765625,
+            "bottom": 352.8125,
+            "width": 28.734375,
+            "height": 28.734375
+          },
+          "label": {
+            "x": 420.265625,
+            "y": 356.8125,
+            "right": 440.515625,
+            "bottom": 370,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 518.0625,
+            "y": 323,
+            "right": 673.53125,
+            "bottom": 387,
+            "width": 155.46875,
+            "height": 64
+          },
+          "frame": {
+            "x": 518.0625,
+            "y": 323,
+            "right": 673.53125,
+            "bottom": 387,
+            "width": 155.46875,
+            "height": 64
+          },
+          "glyph": {
+            "x": 584.296875,
+            "y": 336,
+            "right": 607.296875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 581.984375,
+            "y": 363,
+            "right": 609.59375,
+            "bottom": 375,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 673.53125,
+            "y": 323,
+            "right": 829,
+            "bottom": 387,
+            "width": 155.46875,
+            "height": 64
+          },
+          "frame": {
+            "x": 673.53125,
+            "y": 323,
+            "right": 829,
+            "bottom": 387,
+            "width": 155.46875,
+            "height": 64
+          },
+          "glyph": {
+            "x": 739.765625,
+            "y": 336,
+            "right": 762.765625,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 742.0625,
+            "y": 363,
+            "right": 760.46875,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 21,
+            "y": 323,
+            "right": 176,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 21,
+            "y": 323,
+            "right": 176,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 87,
+            "y": 336,
+            "right": 110,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 89.296875,
+            "y": 363,
+            "right": 107.703125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 176,
+            "y": 323,
+            "right": 331,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 176,
+            "y": 323,
+            "right": 331,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 242,
+            "y": 336,
+            "right": 265,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 244.296875,
+            "y": 363,
+            "right": 262.703125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 331,
+            "y": 317.796875,
+            "right": 493.328125,
+            "bottom": 387,
+            "width": 162.328125,
+            "height": 69.203125
+          },
+          "frame": {
+            "x": 331,
+            "y": 317.796875,
+            "right": 493.328125,
+            "bottom": 387,
+            "width": 162.328125,
+            "height": 69.203125
+          },
+          "glyph": {
+            "x": 399.59375,
+            "y": 333.875,
+            "right": 424.71875,
+            "bottom": 359,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 402.953125,
+            "y": 363,
+            "right": 421.359375,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 493.328125,
+            "y": 306.21875,
+            "right": 672,
+            "bottom": 387,
+            "width": 178.671875,
+            "height": 80.78125
+          },
+          "frame": {
+            "x": 493.328125,
+            "y": 306.21875,
+            "right": 672,
+            "bottom": 387,
+            "width": 178.671875,
+            "height": 80.78125
+          },
+          "glyph": {
+            "x": 567.734375,
+            "y": 322.953125,
+            "right": 597.59375,
+            "bottom": 352.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 567.46875,
+            "y": 356.8125,
+            "right": 597.84375,
+            "bottom": 370,
+            "width": 30.375,
+            "height": 13.1875
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 672,
+            "y": 323,
+            "right": 827,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "frame": {
+            "x": 672,
+            "y": 323,
+            "right": 827,
+            "bottom": 387,
+            "width": 155,
+            "height": 64
+          },
+          "glyph": {
+            "x": 738,
+            "y": 336,
+            "right": 761,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 740.296875,
+            "y": 363,
+            "right": 758.703125,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 21,
+            "y": 323,
+            "right": 176.359375,
+            "bottom": 387,
+            "width": 155.359375,
+            "height": 64
+          },
+          "frame": {
+            "x": 21,
+            "y": 323,
+            "right": 176.359375,
+            "bottom": 387,
+            "width": 155.359375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 87.171875,
+            "y": 336,
+            "right": 110.171875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 89.46875,
+            "y": 363,
+            "right": 107.875,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 176.359375,
+            "y": 323,
+            "right": 331.734375,
+            "bottom": 387,
+            "width": 155.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 176.359375,
+            "y": 323,
+            "right": 331.734375,
+            "bottom": 387,
+            "width": 155.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 242.546875,
+            "y": 336,
+            "right": 265.546875,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 244.84375,
+            "y": 363,
+            "right": 263.25,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 331.734375,
+            "y": 323,
+            "right": 487.09375,
+            "bottom": 387,
+            "width": 155.359375,
+            "height": 64
+          },
+          "frame": {
+            "x": 331.734375,
+            "y": 323,
+            "right": 487.09375,
+            "bottom": 387,
+            "width": 155.359375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 397.90625,
+            "y": 336,
+            "right": 420.90625,
+            "bottom": 359,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 400.203125,
+            "y": 363,
+            "right": 418.609375,
+            "bottom": 375,
+            "width": 18.40625,
+            "height": 12
+          }
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 487.09375,
+            "y": 319.15625,
+            "right": 647.90625,
+            "bottom": 387,
+            "width": 160.8125,
+            "height": 67.84375
+          },
+          "frame": {
+            "x": 487.09375,
+            "y": 319.15625,
+            "right": 647.90625,
+            "bottom": 387,
+            "width": 160.8125,
+            "height": 67.84375
+          },
+          "glyph": {
+            "x": 555.21875,
+            "y": 334.4375,
+            "right": 579.78125,
+            "bottom": 359,
+            "width": 24.5625,
+            "height": 24.5625
+          },
+          "label": {
+            "x": 553.6875,
+            "y": 363,
+            "right": 581.296875,
+            "bottom": 375,
+            "width": 27.609375,
+            "height": 12
+          }
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 647.90625,
+            "y": 306.21875,
+            "right": 827,
+            "bottom": 387,
+            "width": 179.09375,
+            "height": 80.78125
+          },
+          "frame": {
+            "x": 647.90625,
+            "y": 306.21875,
+            "right": 827,
+            "bottom": 387,
+            "width": 179.09375,
+            "height": 80.78125
+          },
+          "glyph": {
+            "x": 722.515625,
+            "y": 322.953125,
+            "right": 752.375,
+            "bottom": 352.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 727.328125,
+            "y": 356.8125,
+            "right": 747.578125,
+            "bottom": 370,
+            "width": 20.25,
+            "height": 13.1875
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "release": {
+    "version": "V575-WEB-35-VISUAL-FIT",
+    "build": "120c6ab87c9bcd69fa497bc07b6dfdee79102628a1d43b36aac3042032effa87",
+    "scriptBytes": 77706482,
+    "preloadResources": true
+  },
+  "startContour": {
+    "corners": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "center": [
+      103,
+      35,
+      40,
+      255
+    ],
+    "background": "none",
+    "shadow": "none"
+  },
+  "character": [
+    {
+      "direction": 1,
+      "blades": [
+        {
+          "side": "right",
+          "p": {
+            "x": 462.496337890625,
+            "y": 246.33740234375
+          },
+          "tip": {
+            "x": 544.8859528402162,
+            "y": 289.2303293352494
+          },
+          "cuttingSide": 6.2773815648853954,
+          "spineSide": -14.587997030147495
+        },
+        {
+          "side": "left",
+          "p": {
+            "x": 411.8984375,
+            "y": 277.732666015625
+          },
+          "tip": {
+            "x": 500.63604294167044,
+            "y": 305.1824240822898
+          },
+          "cuttingSide": 6.277381564885397,
+          "spineSide": -14.58799703014746
+        }
+      ],
+      "tailTip": {
+        "x": 113.00761190566865,
+        "y": 190.2153765945851
+      },
+      "tailRoot": {
+        "x": 226.8612060546875,
+        "y": 318.480224609375
+      }
+    },
+    {
+      "direction": -1,
+      "blades": [
+        {
+          "side": "right",
+          "p": {
+            "x": 177.503662109375,
+            "y": 246.33740234375
+          },
+          "tip": {
+            "x": 95.11404715978378,
+            "y": 289.2303293352494
+          },
+          "cuttingSide": -6.277381564885397,
+          "spineSide": 14.587997030147474
+        },
+        {
+          "side": "left",
+          "p": {
+            "x": 228.1015625,
+            "y": 277.732666015625
+          },
+          "tip": {
+            "x": 139.3639570583296,
+            "y": 305.1824240822898
+          },
+          "cuttingSide": -6.277381564885385,
+          "spineSide": 14.587997030147465
+        }
+      ],
+      "tailTip": {
+        "x": 526.992388094331,
+        "y": 190.21537659458545
+      },
+      "tailRoot": {
+        "x": 413.1387939453125,
+        "y": 318.480224609375
+      }
+    }
+  ],
+  "gait": {
+    "cycles": [
+      14,
+      13,
+      13,
+      14
+    ],
+    "maxLift": 0.849999999999984,
+    "maxRoll": 0.045,
+    "maxStanceError": 2.338863904815466,
+    "distance": 528.0000000000109,
+    "partBuildsBefore": 25,
+    "partBuildsAfter": 25,
+    "movingAfterStop": false
+  },
+  "success": true
+}

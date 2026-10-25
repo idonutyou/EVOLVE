@@ -91,13 +91,33 @@
       "sha256": "1f4d40ef77e58149c8798f3dacc909f961035d539d775d235d8bd56f0351b80f",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_443b94ea4698819196d6df81ed9e1e8d&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB35_CHECKPOINT_090.zip",
+      "library_file_id": "libfile_06cfe8b7b08c8191923ab07100a48c13",
+      "bytes": 847196,
+      "sha256": "df438512d2a30c9bdfd53850f6726784ace12c85b501136851835b25ce110503",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_06cfe8b7b08c8191923ab07100a48c13&account_id=personal"
+    },
+    {
+      "stage": 100,
+      "filename": "EVOLVE_WEB35_CHECKPOINT_100.zip",
+      "library_file_id": "libfile_7452d42f0af881918ae3a410cb101568",
+      "bytes": 870285,
+      "sha256": "69235244fc168d7e24620770ac57040a9526c5dcb86a278dfb29bf83eb6612cc",
+      "confirmed_saved": true,
+      "download_and_all_file_hashes_reverified": true,
+      "archive_files_verified": 23,
+      "url": "https://chatgpt.com/library?file_id=libfile_7452d42f0af881918ae3a410cb101568&account_id=personal"
     }
   ],
   "automatic_upload_and_deployment_authorized": true,
   "physical_Galaxy_S23_plus_tested": false,
-  "progress": 90,
-  "status": "Verified release is ready for GitHub backup and guarded publication; all targeted render and combat checks passed",
-  "next": "Publish the exact tested tree, finish all browser regressions and confirm the public URL",
+  "progress": 100,
+  "status": "Published successfully; all 20 regression suites and real public visual checks passed with no errors",
+  "next": "Completed; retain every checkpoint and continue future changes from the current WEB-35 release",
   "current_release": {
     "version": "V575-WEB-35-VISUAL-FIT",
     "build": "120c6ab87c9bcd69fa497bc07b6dfdee79102628a1d43b36aac3042032effa87",
@@ -160,13 +180,39 @@
     ],
     "maximum_foot_lift": 0.85,
     "no_bitmap_rebuilds": true,
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "public_requested_visual_fixes_passed": true,
+    "remote_archive_hashes_reverified_after_resume": [
+      60,
+      70,
+      80,
+      90,
+      100
+    ]
   },
   "deployment": {
     "parent_commit": "516c66825ab577c30c63c0c7b606b02bc7fe41c0",
     "backup_branch": "backup/web35-090-20261026",
     "public_url": "https://idonutyou.github.io/EVOLVE/",
-    "status": "Tested release ready for guarded GitHub Pages publication",
-    "public_regression_test_added": true
-  }
+    "status": "Published and all public browser checks passed",
+    "public_regression_test_added": true,
+    "release_commit": "627de44ce70e8df4ecd43a85164267a0fb5e0a5a",
+    "release_tree": "c33528a7a79a2d73f5b6c49035b2000ae122b3da",
+    "all_19_source_hashes_reverified_on_github": true,
+    "workflow_run_id": 40244382070,
+    "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40244382070",
+    "backup_verified": true,
+    "completion_backup_branch": "backup/web35-100-20261026",
+    "deployment_run_id": 40244382070,
+    "deployment_status": "success",
+    "browser_suites_passed": 20,
+    "public_bytes_match": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "source_images_unchanged": true,
+    "all_requested_visual_fixes_verified": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "all_previous_backups_preserved": true
 }
