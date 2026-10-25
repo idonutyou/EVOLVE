@@ -3,7 +3,7 @@
   "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
   "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
   "progress": 90,
-  "status": "All implementation and tests complete. Full 340805645-byte project backup is persistently saved and all 1314 archive files were verified. Only the blocked GitHub upload/deployment remains.",
+  "status": "Implementation and final local tests complete. The full project is persistently backed up. GitHub online-v575 and main now contain the exact tested tree. Pages deployment workflow is running.",
   "source": {
     "path": "assets/6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531.png",
     "sha256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
@@ -19,7 +19,7 @@
     "Preserve maps, bosses, saves, current organ progression and home update timing"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "next": "After the user explicitly authorizes this character image/game code to idonutyou/EVOLVE, recheck current remote main, push saved online-v575 work, run the existing deployment workflow and verify the live build. Do not reimplement the rig.",
+  "next": "Monitor GitHub Actions run 40181733457 for release bae18a41b9bf972f56e0cb656addf691d6dc8851. Verify public version and actual source hashes after success. Save verified checkpoint100 before reporting completion. Preserve every earlier backup. No reimplementation and no repeated deployment approval needed.",
   "working_folder": "/workspace/scratch/006b0692260c/evolve-game",
   "tests": {
     "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
@@ -123,11 +123,13 @@
     "client_and_combat_model_checks_passed": true,
     "isolated_checkpoint_restore_verified": true,
     "physical_Galaxy_S23_plus_tested": false,
-    "deployment": "Not published; git push was rejected by automatic approval review."
+    "deployment": "GitHub backup and main upload verified; Pages deployment in progress."
   },
   "full_backup": {
     "filename": "EVOLVE_WEB32_FULL_BACKUP_090.zip",
     "library_file_id": "libfile_2334f6e9034c81918eed33ca560b7ef4",
     "saved": true
-  }
+  },
+  "remote_release": "bae18a41b9bf972f56e0cb656addf691d6dc8851",
+  "automatic_upload_and_deploy_authorized": true
 }
