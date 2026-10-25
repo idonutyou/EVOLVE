@@ -17,6 +17,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    const o={x:c.player.x,y:c.player.y},f=(d,angle=0)=>({...seed,x:o.x+Math.cos(angle)*d,y:o.y+Math.sin(angle)*d,hp:1e6,maxHp:1e6,type:'crawler',r:8,spd:0,burst:0,dashCd:999,shot:999,contactCd:999,dead:false,arrivalInvuln:false,arrivalTime:0,barrier:0,elite:false,finalBoss:false,prism:0,purify:0,contractArmor:0,eliteArmor:0});
    let angle=null;for(let i=0;i<64;i++){const v=i*Math.PI/32;const terrain=window.__EVOLVE_MAPS_V567__.test.context();if(!terrain.hit(o.x,o.y,o.x+Math.cos(v)*150,o.y+Math.sin(v)*150,10)&&[[45,v],[80,v],[110,v+.22]].every(([d,a])=>terrain.clear({x:o.x+Math.cos(a)*d,y:o.y+Math.sin(a)*d},10))){angle=v;break;}}if(angle===null)throw Error('No clear firing lane');
    const target=f(110,angle);c.enemies.splice(0,c.enemies.length,target);c.grid();for(const k of ['mouth','tail','wing','leg'])c.state[k]=0;c.state.arm=1;
+   q.reset(); // Isolate these stat deltas from the random opening ARM upgrade.
    window.__UPGRADE_FIXTURE__={seed,o,f,angle};
    const shot=()=>{c.bullets.length=0;c.player.shoot=0;c.fire(.001);return c.bullets.map(b=>({dmg:b.dmg,pierce:b.pierce,range:b.basicRangeV552,bounce:b.upgradeBouncesV593}));};
    const base=shot();q.apply('gun_count',1);q.apply('gun_pierce',2);q.apply('gun_bounce',0);q.apply('gun_range',3);q.apply('gun_haste',2);const enhanced=shot(),cooldown=c.player.shoot;

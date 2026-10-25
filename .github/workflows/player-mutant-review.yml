@@ -1,0 +1,49 @@
+name: Verify EVOLVE native character
+on:
+  push:
+    branches: [online-v575]
+    paths:
+      - 'web/player-mutant*'
+      - 'tools/*player_mutant*'
+      - 'dist/**'
+      - 'tests/player_mutant_browser.cjs'
+      - '.github/workflows/player-mutant-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: evolve-native-character-review
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify every cached asset and source syntax
+        run: |
+          python3 tools/verify_site.py --dist dist
+          node --check web/player-mutant-v599.js
+      - name: Prepare browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Check character, weapons, organs, maps and saves
+        run: |
+          node tests/player_mutant_browser.cjs
+          node tests/arm_items_browser.cjs
+          node tests/organ_skills_browser.cjs
+          node tests/browser_smoke.cjs
+      - name: Keep character and motion evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-native-character-review
+          path: test-results
+          if-no-files-found: ignore

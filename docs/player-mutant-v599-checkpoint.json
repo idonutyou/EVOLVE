@@ -1,0 +1,133 @@
+{
+  "version": "V575-WEB-32-ARMORED-MUTANT",
+  "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
+  "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
+  "progress": 90,
+  "status": "All implementation and tests complete. Full 340805645-byte project backup is persistently saved and all 1314 archive files were verified. Only the blocked GitHub upload/deployment remains.",
+  "source": {
+    "path": "assets/6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531.png",
+    "sha256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
+    "bytes": 2098944,
+    "width": 1254,
+    "height": 1254
+  },
+  "requirements": [
+    "Use the exact approved near-arm perspective render",
+    "Four walking legs with stance/swing and planted feet",
+    "Two forward shoulder arms retain current cannon/blade equipment",
+    "Short default tail, textured segmented growth and matching whip sweep",
+    "Preserve maps, bosses, saves, current organ progression and home update timing"
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "next": "After the user explicitly authorizes this character image/game code to idonutyou/EVOLVE, recheck current remote main, push saved online-v575 work, run the existing deployment workflow and verify the live build. Do not reimplement the rig.",
+  "working_folder": "/workspace/scratch/006b0692260c/evolve-game",
+  "tests": {
+    "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
+    "version": "V575-WEB-32-ARMORED-MUTANT",
+    "browser_suites": [
+      {
+        "suite": "player_mutant_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "organ_skills_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "home_map_miniatures_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "admin_combat_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "playfield_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "upgrade_cards_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "visual_clarity_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "horde_roles_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "movement_field_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "arm_items_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "original_player_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "player_combat_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "player_scorpion_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "admin_mode_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "browser_smoke.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "red_pulse_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "boss_cinematic_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      },
+      {
+        "suite": "attack_warnings_browser.cjs",
+        "passed": true,
+        "evidence": "Process exit code 0 confirmed in final test batch output."
+      }
+    ],
+    "browser_suites_passed": 18,
+    "site_assets_verified": 1037,
+    "image_files_verified": 1004,
+    "python_tests_passed": 6,
+    "client_and_combat_model_checks_passed": true,
+    "isolated_checkpoint_restore_verified": true,
+    "physical_Galaxy_S23_plus_tested": false,
+    "deployment": "Not published; git push was rejected by automatic approval review."
+  },
+  "full_backup": {
+    "filename": "EVOLVE_WEB32_FULL_BACKUP_090.zip",
+    "library_file_id": "libfile_2334f6e9034c81918eed33ca560b7ef4",
+    "saved": true
+  }
+}

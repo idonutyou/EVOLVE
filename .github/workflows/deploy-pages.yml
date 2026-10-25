@@ -98,6 +98,7 @@ jobs:
       - name: Verify mobile boot, maps, controls, saves and safe updates
         timeout-minutes: 10
         run: |
+          node tests/player_mutant_browser.cjs
           node tests/organ_skills_browser.cjs
           node tests/home_map_miniatures_browser.cjs
           node tests/admin_combat_browser.cjs

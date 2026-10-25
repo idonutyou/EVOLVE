@@ -1,0 +1,104 @@
+{
+  "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
+  "version": "V575-WEB-32-ARMORED-MUTANT",
+  "browser_suites": [
+    {
+      "suite": "player_mutant_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "organ_skills_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "home_map_miniatures_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "admin_combat_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "playfield_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "upgrade_cards_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "visual_clarity_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "horde_roles_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "movement_field_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "arm_items_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "original_player_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "player_combat_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "player_scorpion_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "admin_mode_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "browser_smoke.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "red_pulse_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "boss_cinematic_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    },
+    {
+      "suite": "attack_warnings_browser.cjs",
+      "passed": true,
+      "evidence": "Process exit code 0 confirmed in final test batch output."
+    }
+  ],
+  "browser_suites_passed": 18,
+  "site_assets_verified": 1037,
+  "image_files_verified": 1004,
+  "python_tests_passed": 6,
+  "client_and_combat_model_checks_passed": true,
+  "isolated_checkpoint_restore_verified": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "deployment": "Not published; git push was rejected by automatic approval review."
+}

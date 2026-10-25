@@ -1,0 +1,55 @@
+{
+  "working_folder": "/workspace/scratch/006b0692260c/evolve-game",
+  "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
+  "recovered_local_commit": "95ac1992bc5de4b375255ca56bde2de99b32a587",
+  "original_recovery_zip": {
+    "filename": "EVOLVE_WEB32_RECOVERED_95ac199.zip",
+    "library_file_id": "libfile_ae655461f8348191957e4201481d9ba7",
+    "confirmed_saved": true
+  },
+  "milestones": [
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB32_CHECKPOINT_050.zip",
+      "bytes": 2726808,
+      "sha256": "deb7fc15244cc505382e3c929c8cc0c4c5e97e813310e77e709a998935177a54",
+      "library_file_id": "libfile_9d4915aa133081918b32a4146a6f7977",
+      "confirmed_saved": true
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB32_CHECKPOINT_060.zip",
+      "bytes": 2739443,
+      "sha256": "923d7520375ad1c7fb3360eda4bd3cda796d960cd0f4be3ae58243fe99612883",
+      "library_file_id": "libfile_f3b978a7eb30819183e86f424afabb73",
+      "confirmed_saved": true
+    },
+    {
+      "stage": 70,
+      "filename": "EVOLVE_WEB32_CHECKPOINT_070.zip",
+      "bytes": 2737016,
+      "sha256": "cf43352619cc7038e8ac881e566e146b990c4db5226988bcc66e5e831bbb62c4",
+      "library_file_id": "libfile_565cf7322680819182da60641605cd0a",
+      "confirmed_saved": true
+    },
+    {
+      "stage": 80,
+      "filename": "EVOLVE_WEB32_CHECKPOINT_080.zip",
+      "bytes": 2755358,
+      "sha256": "2a505788edcca70bceaeaf2802afd20ad4463278f9c2919130ea2ce0dafe8832",
+      "library_file_id": "libfile_ea359df0cd608191a44e0014b8072327",
+      "confirmed_saved": true
+    }
+  ],
+  "remote_upload_confirmed": false,
+  "remote_block_reason": "Automatic approval review rejected git push because it did not accept prior authorization as explicit destination approval. Do not retry through another interface.",
+  "full_project_backup": {
+    "stage": 90,
+    "filename": "EVOLVE_WEB32_FULL_BACKUP_090.zip",
+    "bytes": 340805645,
+    "sha256": "2aead2bc85b606e8aac355e3e01163875eb8742d1065f476475a0a72df393b45",
+    "library_file_id": "libfile_2334f6e9034c81918eed33ca560b7ef4",
+    "confirmed_saved": true,
+    "archive_files_verified": 1314
+  }
+}
