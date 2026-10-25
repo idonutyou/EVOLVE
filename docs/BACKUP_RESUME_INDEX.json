@@ -84,21 +84,20 @@
     "completion_backup_branch": "backup/web32-100-20261025"
   },
   "publication": {
-    "success": true,
-    "url": "https://idonutyou.github.io/EVOLVE/",
-    "release_commit": "bae18a41b9bf972f56e0cb656addf691d6dc8851",
-    "run_id": 40181733457,
-    "run_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40181733457",
-    "native_review_passed": true,
+    "release_commit": "4b12583052e04195ef5c4bf11ae99711ab1c23b6",
+    "backup_verified": true,
+    "backup_branch": "backup/web33-090-20261025",
+    "completion_backup_branch": "backup/web33-100-20261025",
+    "deployment_run_id": 40203826282,
+    "deployment_status": "success",
     "browser_suites_passed": 18,
-    "live_version_and_files_match": true,
-    "live_browser_home_ready": true,
+    "native_review_run_id": 40203796385,
+    "native_review_passed": true,
+    "public_bytes_match": true,
     "live_browser_game_started": true,
     "live_browser_errors": [],
     "live_browser_failed_requests": [],
-    "source_bytes_unchanged": true,
-    "checked_at": "2026-10-25T09:54:03.430252+00:00",
-    "physical_Galaxy_S23_plus_tested": false
+    "source_images_unchanged": true
   },
   "preserve_all_previous_backups": true,
   "final_checkpoint": {
@@ -115,17 +114,24 @@
   "active_build": "873900b415e915e6cb71cd4e338d51994c817ff5e0ea1e164f0a5fa3f5de73ef",
   "active_resume_document": "docs/RESUME_WEB33_20261025_KO.md",
   "equipment_fit_WEB33": {
-    "progress": 90,
+    "progress": 100,
     "baseline": "917ac1cd209bf3eb05a8e90045c59046bb3585ac",
     "report": "docs/EQUIPMENT_FIT_V600.json",
     "publication": {
       "release_commit": "4b12583052e04195ef5c4bf11ae99711ab1c23b6",
       "backup_verified": true,
       "backup_branch": "backup/web33-090-20261025",
+      "completion_backup_branch": "backup/web33-100-20261025",
       "deployment_run_id": 40203826282,
-      "deployment_status": "in_progress",
+      "deployment_status": "success",
+      "browser_suites_passed": 18,
       "native_review_run_id": 40203796385,
-      "native_review_passed": true
+      "native_review_passed": true,
+      "public_bytes_match": true,
+      "live_browser_game_started": true,
+      "live_browser_errors": [],
+      "live_browser_failed_requests": [],
+      "source_images_unchanged": true
     },
     "milestones": [
       {
@@ -189,7 +195,45 @@
         "bytes": 826885,
         "sha256": "5133ba758100f46326f6c35eabb9827a7d3d7f4552db7f550f7dbec2316c5317",
         "confirmed_saved": true
+      },
+      {
+        "stage": 100,
+        "filename": "EVOLVE_WEB33_CHECKPOINT_100.zip",
+        "bytes": 833955,
+        "sha256": "a4338d08b8d954a3a4ab01bf26e00833445ef08096e621121f184f8fd679057a",
+        "library_file_id": "libfile_bcfb3de0a5708191924832568a4d921e",
+        "file_id": "file_00000000876c820d8ed5ef7a8f39ba2c",
+        "confirmed_saved": true,
+        "archive_files_verified": 21
       }
-    ]
+    ],
+    "complete": true
+  },
+  "previous_WEB32_publication": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "release_commit": "bae18a41b9bf972f56e0cb656addf691d6dc8851",
+    "run_id": 40181733457,
+    "run_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40181733457",
+    "native_review_passed": true,
+    "browser_suites_passed": 18,
+    "live_version_and_files_match": true,
+    "live_browser_home_ready": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "source_bytes_unchanged": true,
+    "checked_at": "2026-10-25T09:54:03.430252+00:00",
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "latest_checkpoint": {
+    "stage": 100,
+    "filename": "EVOLVE_WEB33_CHECKPOINT_100.zip",
+    "bytes": 833955,
+    "sha256": "a4338d08b8d954a3a4ab01bf26e00833445ef08096e621121f184f8fd679057a",
+    "library_file_id": "libfile_bcfb3de0a5708191924832568a4d921e",
+    "file_id": "file_00000000876c820d8ed5ef7a8f39ba2c",
+    "confirmed_saved": true,
+    "archive_files_verified": 21
   }
 }
