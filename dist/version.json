@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-32-ARMORED-MUTANT",
-  "build": "286c7e1bef3313f1393a08eda90e900223b6e38232115926672430142c0a78da",
-  "scriptBytes": 77694126,
+  "version": "V575-WEB-33-EQUIPMENT-FIT",
+  "build": "873900b415e915e6cb71cd4e338d51994c817ff5e0ea1e164f0a5fa3f5de73ef",
+  "scriptBytes": 77694832,
   "assets": 1037,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true

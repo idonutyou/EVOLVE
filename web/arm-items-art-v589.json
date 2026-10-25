@@ -4,7 +4,7 @@
   "items": {
     "cannon": {
       "source_sha256": "87a1281df5e3fc685b075cc89ef81762baef9060080ea22635a68172607de889",
-      "world_scale": 0.058,
+      "world_scale": 0.026,
       "left": {
         "path": "assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png",
         "sha256": "7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d",
@@ -99,7 +99,7 @@
     },
     "blades": {
       "source_sha256": "a59beb9f5fcd2e9035aa8ebd916b1a5f70e08090d1fe4f856e2106c339364188",
-      "world_scale": 0.09,
+      "world_scale": 0.032,
       "left": {
         "path": "assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png",
         "sha256": "73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b",

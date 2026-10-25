@@ -19,7 +19,7 @@ const ORGAN_SKILL_MODEL_V598=(()=>{
   if(!(level>0))return {enabled:false,organ,...profile};
   const prefix=organ==='shell'?'spike':organ==='tail'?'whip':'spit';
   const common={enabled:true,organ,...profile,damage:(organ==='shell'?19:organ==='tail'?28:24)*(1+n(prefix+'Damage'))};
-  if(organ==='tail')return {...common,radius:Math.min(230,82*(1+n('whipRange'))),arc:clamp((125+n('whipArc'))*Math.PI/180,.1,TAU),cooldown:Math.max(.22,1.48/(1+n('whipHaste'))),push:Math.min(400,82*(1+n('whipPush'))),duration:.42};
+  if(organ==='tail')return {...common,radius:Math.min(90,30*(1+n('whipRange'))+Math.min(12,Math.max(0,level-1))*.7),arc:clamp((125+n('whipArc'))*Math.PI/180,.1,TAU),cooldown:Math.max(.22,1.48/(1+n('whipHaste'))),push:Math.min(400,82*(1+n('whipPush'))),duration:.42};
   return {...common,count:clamp(1+Math.floor(n(prefix+'Count')),1,12),hits:clamp(1+Math.floor(n(prefix+'Pierce')),1,9),range:Math.min(1800,(organ==='shell'?300:275)*(1+n(prefix+'Range'))),speed:organ==='shell'?330:275,cooldown:Math.max(.14,(organ==='shell'?1.34:1.42)/(1+n(prefix+'Haste'))),turn:8};
  }
  function segmentHit(a,b,e,r=0){

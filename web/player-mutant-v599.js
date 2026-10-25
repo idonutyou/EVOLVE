@@ -108,7 +108,7 @@ function mutantDrawTailV599(g,pose,motion){
   g.save();g.translate(player.x,player.y);g.rotate(pose.rotation);g.scale(pose.facing*mutantScaleV599,mutantScaleV599);g.translate(-art.anchor[0],-art.anchor[1]);
   const r=mutantBodyPointV599(art.tailRoot,motion);g.translate(r[0],r[1]);g.rotate(Math.sin(m.clock*2)*(.018+m.blend*.025));g.translate(-art.tailRoot[0],-art.tailRoot[1]);mutantDrawPartV599(g,m.parts.tail);g.restore();m.tailLength=22;m.tailSegments=8;return;
  }
- const radius=organSpecV598('tail').radius||82,length=radius*(1+Math.min(12,Math.max(0,level-1))*.012);let curve=mutantTailCurveV599(root,pose,length);
+ const radius=organSpecV598('tail').radius||30,length=radius;let curve=mutantTailCurveV599(root,pose,length);
  if(whip){
   const p=clamp((whip.age-.055)/.285,0,1),angle=whip.aim-whip.s.arc/2+p*whip.s.arc,r=whip.s.radius;
   const attack=[root,{x:player.x+Math.cos(angle-.55)*r*.42,y:player.y+Math.sin(angle-.55)*r*.42},{x:player.x+Math.cos(angle-.25)*r*.82,y:player.y+Math.sin(angle-.25)*r*.82},{x:player.x+Math.cos(angle)*r,y:player.y+Math.sin(angle)*r}];
@@ -146,8 +146,8 @@ function mutantDrawV599(shadowOnly=false){
 function mutantPreviewV599(mode='bare',size=1536){
  const art=mutantArtV599,c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d'),unit=mutantBaseScaleV599,rect=art.full.rect;
  const points=[[rect[0]*unit,rect[1]*unit],[(rect[0]+rect[2])*unit,(rect[1]+rect[3])*unit]];
- if(mode!=='bare')for(const side of [0,1]){const key=side?'right':'left',spec=armItemsArtV589.items[mode],p=spec[key],angle=art.nativeFacing-p.native_angle,co=Math.cos(angle),si=Math.sin(angle),w=art.wrists[side];
-  for(const x of [0,p.width])for(const y of [0,p.height]){const dx=(x-p.pivot[0])*spec.world_scale,dy=(y-p.pivot[1])*spec.world_scale;points.push([w[0]*unit+dx*co-dy*si,w[1]*unit+dx*si+dy*co]);}
+ if(mode!=='bare')for(const side of [0,1]){const key=side?'right':'left',spec=armItemsArtV589.items[mode],p=spec[key],w=art.wrists[side];
+  for(const x of [0,p.width])for(const y of [0,p.height]){const d=armItemOffsetV600(mode,side,x,y,art.nativeFacing);points.push([w[0]*unit+d.x,w[1]*unit+d.y]);}
  }
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys),fit=Math.min(size*.86/(right-left),size*.86/(bottom-top),size/art.displaySize),ox=size/2-(left+right)/2*fit,oy=size/2-(top+bottom)/2*fit;
  g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.save();g.translate(ox,oy);g.scale(unit*fit,unit*fit);mutantDrawPartV599(g,mode==='bare'?mutantV599.parts.full:mutantV599.parts.armedFull);g.restore();
@@ -164,7 +164,7 @@ function mutantInspectV599(size=640,zoom=6){
   g.save();g.translate(mutantArtV599.anchor[0]+motion.dx,mutantArtV599.anchor[1]+motion.dy);g.rotate(motion.angle);g.translate(-mutantArtV599.anchor[0],-mutantArtV599.anchor[1]);mutantDrawPartV599(g,armItemModeV589()==='bare'?mutantV599.parts.body:mutantV599.parts.armedBody);g.restore();
   mutantArtV599.legs.forEach((leg,i)=>{if(!leg.far)mutantDrawLegV599(g,leg,i,pose,motion);});
  });
- const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,mode==='blades'?1+upgradeRunV593.bladeRange:1);}
+ const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),1,pose.facing);}
  return c;
 }
 function mutantRefreshV599(){

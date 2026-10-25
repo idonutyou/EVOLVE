@@ -13,6 +13,20 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   report.actor=await page.evaluate(async()=>{const r=window.__EVOLVE_PLAYER_MUTANT_V599__.read(),b=await(await fetch(r.source)).arrayBuffer();return {...r,downloadedBytes:b.byteLength,hash:Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',b))).map(n=>n.toString(16).padStart(2,'0')).join(''),previewWidth:document.getElementById('partsSpecimenImgV523').naturalWidth};});
   assert.equal(report.actor.sha256,'6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531');assert.equal(report.actor.hash,report.actor.sha256);assert.equal(report.actor.downloadedBytes,2098944);assert.equal(report.actor.previewWidth,1536);assert.equal(report.actor.feet.length,4);
   report.checks.push('Approved 1254px PNG is loaded byte-for-byte; new 1536px home preview is ready before Start; four independent walking legs');
+  const fit=await page.evaluate(()=>{
+   const api=window.__EVOLVE_PLAYER_MUTANT_V599__,arm=window.__EVOLVE_ARM_ITEMS_V589__,images=arm.test.images(),art=arm.test.art(),parts=api.test.parts(),original=CanvasRenderingContext2D.prototype.drawImage,rows=[];let records=[];
+   CanvasRenderingContext2D.prototype.drawImage=function(image,...args){
+    const m=this.getTransform(),w=args.length===2?image.width:args[2],h=args.length===2?image.height:args[3],x=args[0],y=args[1];
+    const point=(px,py)=>({x:m.a*(x+px*w/image.width)+m.c*(y+py*h/image.height)+m.e,y:m.b*(x+px*w/image.width)+m.d*(y+py*h/image.height)+m.f});
+    if(image===parts.armedFull.canvas)records.push({bodyWidth:Math.hypot(m.a*w,m.b*w)});
+    for(const mode of ['cannon','blades'])for(const side of ['left','right'])if(image===images[mode][side]){const spec=art.items[mode][side],p=point(...spec.pivot),tip=point(...spec.tip),edge=point(side==='left'?199:154,255),dx=tip.x-p.x,dy=tip.y-p.y;records.push({mode,side,length:Math.hypot(dx,dy),edgeSide:(dx*(edge.y-p.y)-dy*(edge.x-p.x))/Math.hypot(dx,dy)});}
+    return original.call(this,image,...args);
+   };
+   try{for(const mode of ['cannon','blades']){records=[];const c=api.test.preview(mode,384);const width=records.find(r=>r.bodyWidth)?.bodyWidth;rows.push({mode,bodyWidth:width,weapons:records.filter(r=>r.mode).map(r=>({...r,bodyRatio:r.length/width})),png:c.toDataURL().split(',')[1]});}}finally{CanvasRenderingContext2D.prototype.drawImage=original;}
+   return rows;
+  });
+  for(const row of fit){fs.writeFileSync(path.join(out,'equipment-fit-'+row.mode+'.png'),Buffer.from(row.png,'base64'));delete row.png;assert.equal(row.weapons.length,2);for(const weapon of row.weapons){assert.ok(weapon.bodyRatio<(row.mode==='blades'?.28:.16),JSON.stringify(weapon));if(row.mode==='blades')assert.ok(weapon.edgeSide>0,'Blade cutting edge points up: '+JSON.stringify(weapon));}}
+  report.equipmentFit=fit;report.checks.push('Actual preview drawing transforms keep both weapons in body proportion and both blade cutting edges on the lower side');
   report.previewBounds=await page.evaluate(()=>Object.fromEntries(['bare','cannon','blades'].map(mode=>{
    const c=window.__EVOLVE_PLAYER_MUTANT_V599__.test.preview(mode,384),pixels=c.getContext('2d').getImageData(0,0,384,384).data;let left=384,top=384,right=0,bottom=0;
    for(let y=0;y<384;y++)for(let x=0;x<384;x++)if(pixels[(y*384+x)*4+3]>20){left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);}return [mode,{left,top,right,bottom}];
@@ -44,7 +58,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   const tails=await page.evaluate(()=>{
    const c=window.__EVOLVE_ORGAN_SKILLS_V598__.test.context(),api=window.__EVOLVE_PLAYER_MUTANT_V599__;c.state.tail=1;c.stats.whipRange=0;const a=api.test.inspect(900,3).toDataURL().split(',')[1],r1=api.read();c.stats.whipRange=1;c.state.tail=6;const b=api.test.inspect(900,3).toDataURL().split(',')[1],r2=api.read();c.stats.whipRange=0;c.state.tail=0;return {a,b,r1,r2};
   });
-  fs.writeFileSync(path.join(out,'player-mutant-tail-base.png'),Buffer.from(tails.a,'base64'));fs.writeFileSync(path.join(out,'player-mutant-tail-upgraded.png'),Buffer.from(tails.b,'base64'));delete tails.a;delete tails.b;assert.ok(tails.r2.tailLength>tails.r1.tailLength);assert.ok(tails.r2.tailSegments>tails.r1.tailSegments);report.tail=tails;report.checks.push('Learned tail uses native textured armor; range upgrades increase visible physical length and segment count');
+  fs.writeFileSync(path.join(out,'player-mutant-tail-base.png'),Buffer.from(tails.a,'base64'));fs.writeFileSync(path.join(out,'player-mutant-tail-upgraded.png'),Buffer.from(tails.b,'base64'));delete tails.a;delete tails.b;assert.equal(tails.r1.tailLength,tails.r1.tailRange);assert.ok(tails.r1.tailLength<=32);assert.ok(tails.r2.tailLength>tails.r1.tailLength);assert.ok(tails.r2.tailSegments>tails.r1.tailSegments);report.tail=tails;report.checks.push('Learned tail uses native textured armor; range upgrades increase visible physical length and segment count');
   await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().draw());await page.screenshot({path:path.join(out,'player-mutant-battle-portrait.png')});await page.setViewportSize({width:852,height:393});await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().draw());await page.screenshot({path:path.join(out,'player-mutant-battle-landscape.png')});
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.failedRequests,[]);report.success=true;
  }catch(error){report.success=false;report.failure=error.stack||String(error);await page.screenshot({path:path.join(out,'player-mutant-failure.png')}).catch(()=>{});throw error;}

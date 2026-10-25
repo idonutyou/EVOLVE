@@ -11,3 +11,5 @@ const full=m.spec('tail',5,{whipArc:400});assert.equal(full.arc,Math.PI*2);asser
 assert.equal(m.spec('mouth',1,{},'fire_breath').mode,'breath');assert.equal(m.spec('mouth',0,{},'fire_breath').enabled,false);assert.equal(m.spec('mouth',1,{},'poison_spike').mode,'projectile','wrong-slot variants fall back to the organ default');
 assert.equal(m.spec('shell',99,{spikeCount:1e6}).count,12);
 console.log(JSON.stringify({ok:true,checks:['unlearned attacks disabled','swept projectile collision and off-path exclusion','single-contact homing spike and meaningful projectile growth','whip anticipation, actual swept arc and finite full-circle range','item profile/slot isolation and hard projectile bounds']}));
+
+const firstTail=m.spec('tail',1,{}),secondTail=m.spec('tail',2,{whipRange:.12});assert.equal(firstTail.radius,30);assert.ok(secondTail.radius>firstTail.radius&&secondTail.radius-firstTail.radius<5);assert.equal(m.spec('tail',999,{whipRange:999}).radius,90);

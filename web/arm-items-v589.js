@@ -21,7 +21,7 @@ function armCannonVolleyV589(a,target){
 function armShotOriginV589(a){
  const mode=armItemModeV589();if(mode!=='cannon')return {x:player.x+Math.cos(a)*18,y:player.y+Math.sin(a)*18};
  const p=armItemWorldPointV589(armItemsV589.side,player.look||0),art=armItemsArtV589.items.cannon;
- const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale;
+ const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale*upgradeBodyScaleV593();
  armItemsV589.shots++;return {x:p.x+Math.cos(a)*length,y:p.y+Math.sin(a)*length};
 }
 function armSlashAngleV589(attack,age=attack.age){
@@ -70,15 +70,26 @@ playerStepV586=function(dt){
   if(attack.age>=attack.life){if(!attack.targets.size)playerMotionV586.misses++;playerMotionV586.attack=null;}
  }else armBareStepV589(dt);
 };
-function armItemSpriteV589(g,mode,side,p,angle,scale=1,alpha=1){
+function armItemOffsetV600(mode,side,x,y,angle,scale=1,facing=1){
+ const spec=armItemsArtV589.items[mode],part=spec[side?'right':'left'],dx=x-part.pivot[0],dy=y-part.pivot[1],c=Math.cos(part.native_angle),s=Math.sin(part.native_angle);
+ const u=(dx*c+dy*s)*spec.world_scale*scale,v=(-dx*s+dy*c)*spec.world_scale*scale*(mode==='blades'?(side?1:-1)*facing:1),co=Math.cos(angle),si=Math.sin(angle);
+ return {x:u*co-v*si,y:u*si+v*co};
+}
+function armItemSpriteV589(g,mode,side,p,angle,scale=1,alpha=1,facing=1){
  const key=side?'right':'left',spec=armItemsArtV589.items[mode],part=spec[key],image=armItemsV589.images[mode]?.[key];if(!image)return;
  const size=spec.world_scale*scale;
- g.save();g.translate(p.x,p.y);g.rotate(angle-part.native_angle);g.globalAlpha*=alpha;
+ g.save();g.translate(p.x,p.y);g.rotate(angle);if(mode==='blades')g.scale(1,(side?1:-1)*facing);g.rotate(-part.native_angle);g.globalAlpha*=alpha;
  g.drawImage(image,-part.pivot[0]*size,-part.pivot[1]*size,part.width*size,part.height*size);g.restore();
 }
 function armItemAngleV589(side,a){
- const attack=playerMotionV586.attack;if(armItemModeV589()==='blades'&&attack?.kind==='blades'&&attack.side===side)return armSlashAngleV589(attack);
- const aim=playerWeaponAngleV590();return armItemModeV589()==='cannon'?aim:aim+(side?.20:-.20);
+ const mode=armItemModeV589();if(mode==='cannon')return playerWeaponAngleV590();
+ const rest=playerBodyAngleV590()+(side?.20:-.20),attack=playerMotionV586.attack;
+ if(mode==='blades'&&attack?.kind==='blades'&&attack.side===side){
+  const angle=armSlashAngleV589(attack);if(attack.age<=.30)return angle;
+  const t=clamp((attack.age-.30)/.10,0,1),ease=t*t*(3-2*t);
+  return angle+Math.atan2(Math.sin(rest-angle),Math.cos(rest-angle))*ease;
+ }
+ return rest;
 }
 function drawArmItemsV589(a,alpha){
  const mode=armItemModeV589(),attack=playerMotionV586.attack;
@@ -91,7 +102,7 @@ function drawArmItemsV589(a,alpha){
  for(const side of [1,0]){
   const p=armItemWorldPointV589(side,a),angle=armItemAngleV589(side,a);
   if(mode==='cannon'&&armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
-  armItemSpriteV589(ctx,mode,side,p,angle,mode==='blades'?1+upgradeRunV593.bladeRange:1,alpha);
+  armItemSpriteV589(ctx,mode,side,p,angle,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),alpha,playerMotionV586.facing);
  }
 }
 const armBareDrawV589=drawPlayer;

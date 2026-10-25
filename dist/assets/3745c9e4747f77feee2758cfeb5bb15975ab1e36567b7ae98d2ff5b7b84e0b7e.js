@@ -12469,7 +12469,7 @@ window.__EVOLVE_ORIGINAL_PLAYER_V588__={read:()=>({source:playerArtV586.path,sha
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_ORIGINAL_PLAYER_V588__.test={native:()=>playerNativePoseV588,source:()=>playerAtlasV586,art:()=>playerArtV586};
 
 // WEB-22: supplied cannon/blade ends, persistent ARM equipment and real combat.
-const armItemsArtV589={"source_pixels_preserved":true,"generative_redraw":false,"items":{"cannon":{"source_sha256":"87a1281df5e3fc685b075cc89ef81762baef9060080ea22635a68172607de889","world_scale":0.058,"left":{"path":"assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png","sha256":"7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d","bytes":221378,"width":369,"height":337,"source_box":[30,355,399,692],"pivot":[275,81],"tip":[56,229],"native_angle":2.547294225566907,"length":264.31988196123274},"right":{"path":"assets/e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59.png","sha256":"e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59","bytes":219908,"width":372,"height":339,"source_box":[1140,350,1512,689],"pivot":[90,86],"tip":[309,234],"native_angle":0.5942984280228865,"length":264.31988196123274},"icon":{"path":"assets/4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a.png","sha256":"4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a","bytes":448695,"width":765,"height":339},"left_polygon":[[0,350],[248,350],[326,410],[365,455],[398,510],[368,568],[345,620],[292,704],[0,704]]},"blades":{"source_sha256":"a59beb9f5fcd2e9035aa8ebd916b1a5f70e08090d1fe4f856e2106c339364188","world_scale":0.09,"left":{"path":"assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png","sha256":"73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b","bytes":150839,"width":354,"height":409,"source_box":[14,425,368,834],"pivot":[271,45],"tip":[6,396],"native_angle":2.2174806899565596,"length":439.80222827993947},"right":{"path":"assets/942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e.png","sha256":"942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e","bytes":143154,"width":354,"height":409,"source_box":[1168,425,1522,834],"pivot":[82,45],"tip":[347,396],"native_angle":0.9241119636332337,"length":439.80222827993947},"icon":{"path":"assets/7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef.png","sha256":"7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef","bytes":301033,"width":732,"height":409},"left_polygon":[[0,400],[220,400],[300,456],[400,526],[445,620],[445,860],[0,860]]}}};
+const armItemsArtV589={"source_pixels_preserved":true,"generative_redraw":false,"items":{"cannon":{"source_sha256":"87a1281df5e3fc685b075cc89ef81762baef9060080ea22635a68172607de889","world_scale":0.026,"left":{"path":"assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png","sha256":"7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d","bytes":221378,"width":369,"height":337,"source_box":[30,355,399,692],"pivot":[275,81],"tip":[56,229],"native_angle":2.547294225566907,"length":264.31988196123274},"right":{"path":"assets/e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59.png","sha256":"e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59","bytes":219908,"width":372,"height":339,"source_box":[1140,350,1512,689],"pivot":[90,86],"tip":[309,234],"native_angle":0.5942984280228865,"length":264.31988196123274},"icon":{"path":"assets/4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a.png","sha256":"4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a","bytes":448695,"width":765,"height":339},"left_polygon":[[0,350],[248,350],[326,410],[365,455],[398,510],[368,568],[345,620],[292,704],[0,704]]},"blades":{"source_sha256":"a59beb9f5fcd2e9035aa8ebd916b1a5f70e08090d1fe4f856e2106c339364188","world_scale":0.032,"left":{"path":"assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png","sha256":"73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b","bytes":150839,"width":354,"height":409,"source_box":[14,425,368,834],"pivot":[271,45],"tip":[6,396],"native_angle":2.2174806899565596,"length":439.80222827993947},"right":{"path":"assets/942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e.png","sha256":"942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e","bytes":143154,"width":354,"height":409,"source_box":[1168,425,1522,834],"pivot":[82,45],"tip":[347,396],"native_angle":0.9241119636332337,"length":439.80222827993947},"icon":{"path":"assets/7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef.png","sha256":"7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef","bytes":301033,"width":732,"height":409},"left_polygon":[[0,400],[220,400],[300,456],[400,526],[445,620],[445,860],[0,860]]}}};
 const armItemsV589={ready:false,frames:[],previews:{},images:{},volleys:0,shots:0,swings:0,contacts:0,side:0,aim:null,builds:0,lastMode:'bare'};
 const armItemIdsV589={arm_cannon:'cannon',arm_blades:'blades'};
 function armItemModeV589(){return armItemIdsV589[partsStateV523.worn.arm]||'bare';}
@@ -12491,7 +12491,7 @@ function armCannonVolleyV589(a,target){
 function armShotOriginV589(a){
  const mode=armItemModeV589();if(mode!=='cannon')return {x:player.x+Math.cos(a)*18,y:player.y+Math.sin(a)*18};
  const p=armItemWorldPointV589(armItemsV589.side,player.look||0),art=armItemsArtV589.items.cannon;
- const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale;
+ const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale*upgradeBodyScaleV593();
  armItemsV589.shots++;return {x:p.x+Math.cos(a)*length,y:p.y+Math.sin(a)*length};
 }
 function armSlashAngleV589(attack,age=attack.age){
@@ -12540,15 +12540,26 @@ playerStepV586=function(dt){
   if(attack.age>=attack.life){if(!attack.targets.size)playerMotionV586.misses++;playerMotionV586.attack=null;}
  }else armBareStepV589(dt);
 };
-function armItemSpriteV589(g,mode,side,p,angle,scale=1,alpha=1){
+function armItemOffsetV600(mode,side,x,y,angle,scale=1,facing=1){
+ const spec=armItemsArtV589.items[mode],part=spec[side?'right':'left'],dx=x-part.pivot[0],dy=y-part.pivot[1],c=Math.cos(part.native_angle),s=Math.sin(part.native_angle);
+ const u=(dx*c+dy*s)*spec.world_scale*scale,v=(-dx*s+dy*c)*spec.world_scale*scale*(mode==='blades'?(side?1:-1)*facing:1),co=Math.cos(angle),si=Math.sin(angle);
+ return {x:u*co-v*si,y:u*si+v*co};
+}
+function armItemSpriteV589(g,mode,side,p,angle,scale=1,alpha=1,facing=1){
  const key=side?'right':'left',spec=armItemsArtV589.items[mode],part=spec[key],image=armItemsV589.images[mode]?.[key];if(!image)return;
  const size=spec.world_scale*scale;
- g.save();g.translate(p.x,p.y);g.rotate(angle-part.native_angle);g.globalAlpha*=alpha;
+ g.save();g.translate(p.x,p.y);g.rotate(angle);if(mode==='blades')g.scale(1,(side?1:-1)*facing);g.rotate(-part.native_angle);g.globalAlpha*=alpha;
  g.drawImage(image,-part.pivot[0]*size,-part.pivot[1]*size,part.width*size,part.height*size);g.restore();
 }
 function armItemAngleV589(side,a){
- const attack=playerMotionV586.attack;if(armItemModeV589()==='blades'&&attack?.kind==='blades'&&attack.side===side)return armSlashAngleV589(attack);
- const aim=playerWeaponAngleV590();return armItemModeV589()==='cannon'?aim:aim+(side?.20:-.20);
+ const mode=armItemModeV589();if(mode==='cannon')return playerWeaponAngleV590();
+ const rest=playerBodyAngleV590()+(side?.20:-.20),attack=playerMotionV586.attack;
+ if(mode==='blades'&&attack?.kind==='blades'&&attack.side===side){
+  const angle=armSlashAngleV589(attack);if(attack.age<=.30)return angle;
+  const t=clamp((attack.age-.30)/.10,0,1),ease=t*t*(3-2*t);
+  return angle+Math.atan2(Math.sin(rest-angle),Math.cos(rest-angle))*ease;
+ }
+ return rest;
 }
 function drawArmItemsV589(a,alpha){
  const mode=armItemModeV589(),attack=playerMotionV586.attack;
@@ -12561,7 +12572,7 @@ function drawArmItemsV589(a,alpha){
  for(const side of [1,0]){
   const p=armItemWorldPointV589(side,a),angle=armItemAngleV589(side,a);
   if(mode==='cannon'&&armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
-  armItemSpriteV589(ctx,mode,side,p,angle,mode==='blades'?1+upgradeRunV593.bladeRange:1,alpha);
+  armItemSpriteV589(ctx,mode,side,p,angle,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),alpha,playerMotionV586.facing);
  }
 }
 const armBareDrawV589=drawPlayer;
@@ -13448,7 +13459,7 @@ const ORGAN_SKILL_MODEL_V598=(()=>{
   if(!(level>0))return {enabled:false,organ,...profile};
   const prefix=organ==='shell'?'spike':organ==='tail'?'whip':'spit';
   const common={enabled:true,organ,...profile,damage:(organ==='shell'?19:organ==='tail'?28:24)*(1+n(prefix+'Damage'))};
-  if(organ==='tail')return {...common,radius:Math.min(230,82*(1+n('whipRange'))),arc:clamp((125+n('whipArc'))*Math.PI/180,.1,TAU),cooldown:Math.max(.22,1.48/(1+n('whipHaste'))),push:Math.min(400,82*(1+n('whipPush'))),duration:.42};
+  if(organ==='tail')return {...common,radius:Math.min(90,30*(1+n('whipRange'))+Math.min(12,Math.max(0,level-1))*.7),arc:clamp((125+n('whipArc'))*Math.PI/180,.1,TAU),cooldown:Math.max(.22,1.48/(1+n('whipHaste'))),push:Math.min(400,82*(1+n('whipPush'))),duration:.42};
   return {...common,count:clamp(1+Math.floor(n(prefix+'Count')),1,12),hits:clamp(1+Math.floor(n(prefix+'Pierce')),1,9),range:Math.min(1800,(organ==='shell'?300:275)*(1+n(prefix+'Range'))),speed:organ==='shell'?330:275,cooldown:Math.max(.14,(organ==='shell'?1.34:1.42)/(1+n(prefix+'Haste'))),turn:8};
  }
  function segmentHit(a,b,e,r=0){
@@ -13473,7 +13484,7 @@ const organNamesV598={arm:['팔','ARM'],shell:['외피','SHELL'],tail:['꼬리',
 const organSlotsV598={shell:'skin',tail:'tail',mouth:'head'};
 const organDefaultsV598={shell:'spike',tail:'whip',mouth:'spit'};
 const organStatKeysV598=['spikeDamage','spikeCount','spikePierce','spikeHaste','spikeRange','whipDamage','whipHaste','whipRange','whipArc','whipPush','spitDamage','spitCount','spitPierce','spitHaste','spitRange'];
-const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:230/82-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
+const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:90/30-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
 const organRunV598={opening:false,openingChosen:false,projectiles:[],whips:[],breaths:[],dots:new Map(),stats:{},cooldowns:{},casts:{},hits:{},serial:0,art:new Map(),icons:new Map()};
 function organClearV598(){
  organRunV598.opening=organRunV598.openingChosen=false;organRunV598.projectiles.length=organRunV598.whips.length=organRunV598.breaths.length=0;organRunV598.dots.clear();
@@ -13787,7 +13798,7 @@ function mutantDrawTailV599(g,pose,motion){
   g.save();g.translate(player.x,player.y);g.rotate(pose.rotation);g.scale(pose.facing*mutantScaleV599,mutantScaleV599);g.translate(-art.anchor[0],-art.anchor[1]);
   const r=mutantBodyPointV599(art.tailRoot,motion);g.translate(r[0],r[1]);g.rotate(Math.sin(m.clock*2)*(.018+m.blend*.025));g.translate(-art.tailRoot[0],-art.tailRoot[1]);mutantDrawPartV599(g,m.parts.tail);g.restore();m.tailLength=22;m.tailSegments=8;return;
  }
- const radius=organSpecV598('tail').radius||82,length=radius*(1+Math.min(12,Math.max(0,level-1))*.012);let curve=mutantTailCurveV599(root,pose,length);
+ const radius=organSpecV598('tail').radius||30,length=radius;let curve=mutantTailCurveV599(root,pose,length);
  if(whip){
   const p=clamp((whip.age-.055)/.285,0,1),angle=whip.aim-whip.s.arc/2+p*whip.s.arc,r=whip.s.radius;
   const attack=[root,{x:player.x+Math.cos(angle-.55)*r*.42,y:player.y+Math.sin(angle-.55)*r*.42},{x:player.x+Math.cos(angle-.25)*r*.82,y:player.y+Math.sin(angle-.25)*r*.82},{x:player.x+Math.cos(angle)*r,y:player.y+Math.sin(angle)*r}];
@@ -13825,8 +13836,8 @@ function mutantDrawV599(shadowOnly=false){
 function mutantPreviewV599(mode='bare',size=1536){
  const art=mutantArtV599,c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d'),unit=mutantBaseScaleV599,rect=art.full.rect;
  const points=[[rect[0]*unit,rect[1]*unit],[(rect[0]+rect[2])*unit,(rect[1]+rect[3])*unit]];
- if(mode!=='bare')for(const side of [0,1]){const key=side?'right':'left',spec=armItemsArtV589.items[mode],p=spec[key],angle=art.nativeFacing-p.native_angle,co=Math.cos(angle),si=Math.sin(angle),w=art.wrists[side];
-  for(const x of [0,p.width])for(const y of [0,p.height]){const dx=(x-p.pivot[0])*spec.world_scale,dy=(y-p.pivot[1])*spec.world_scale;points.push([w[0]*unit+dx*co-dy*si,w[1]*unit+dx*si+dy*co]);}
+ if(mode!=='bare')for(const side of [0,1]){const key=side?'right':'left',spec=armItemsArtV589.items[mode],p=spec[key],w=art.wrists[side];
+  for(const x of [0,p.width])for(const y of [0,p.height]){const d=armItemOffsetV600(mode,side,x,y,art.nativeFacing);points.push([w[0]*unit+d.x,w[1]*unit+d.y]);}
  }
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys),fit=Math.min(size*.86/(right-left),size*.86/(bottom-top),size/art.displaySize),ox=size/2-(left+right)/2*fit,oy=size/2-(top+bottom)/2*fit;
  g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.save();g.translate(ox,oy);g.scale(unit*fit,unit*fit);mutantDrawPartV599(g,mode==='bare'?mutantV599.parts.full:mutantV599.parts.armedFull);g.restore();
@@ -13843,7 +13854,7 @@ function mutantInspectV599(size=640,zoom=6){
   g.save();g.translate(mutantArtV599.anchor[0]+motion.dx,mutantArtV599.anchor[1]+motion.dy);g.rotate(motion.angle);g.translate(-mutantArtV599.anchor[0],-mutantArtV599.anchor[1]);mutantDrawPartV599(g,armItemModeV589()==='bare'?mutantV599.parts.body:mutantV599.parts.armedBody);g.restore();
   mutantArtV599.legs.forEach((leg,i)=>{if(!leg.far)mutantDrawLegV599(g,leg,i,pose,motion);});
  });
- const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,mode==='blades'?1+upgradeRunV593.bladeRange:1);}
+ const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),1,pose.facing);}
  return c;
 }
 function mutantRefreshV599(){

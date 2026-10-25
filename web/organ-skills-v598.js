@@ -3,7 +3,7 @@ const organNamesV598={arm:['팔','ARM'],shell:['외피','SHELL'],tail:['꼬리',
 const organSlotsV598={shell:'skin',tail:'tail',mouth:'head'};
 const organDefaultsV598={shell:'spike',tail:'whip',mouth:'spit'};
 const organStatKeysV598=['spikeDamage','spikeCount','spikePierce','spikeHaste','spikeRange','whipDamage','whipHaste','whipRange','whipArc','whipPush','spitDamage','spitCount','spitPierce','spitHaste','spitRange'];
-const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:230/82-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
+const organStatCapsV598={spikeCount:11,spikePierce:8,spikeRange:5,spikeHaste:1.34/.14-1,whipRange:90/30-1,whipArc:235,whipPush:400/82-1,whipHaste:1.48/.22-1,spitCount:11,spitPierce:8,spitRange:1800/275-1,spitHaste:1.42/.14-1};
 const organRunV598={opening:false,openingChosen:false,projectiles:[],whips:[],breaths:[],dots:new Map(),stats:{},cooldowns:{},casts:{},hits:{},serial:0,art:new Map(),icons:new Map()};
 function organClearV598(){
  organRunV598.opening=organRunV598.openingChosen=false;organRunV598.projectiles.length=organRunV598.whips.length=organRunV598.breaths.length=0;organRunV598.dots.clear();
