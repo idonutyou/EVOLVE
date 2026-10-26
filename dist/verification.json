@@ -1798,6 +1798,8 @@
     "knockback_unchanged": true,
     "save_keys_unchanged": true,
     "images_unchanged": true,
-    "galaxy_s23_plus_tested": false
+    "galaxy_s23_plus_tested": false,
+    "asset_newline_sha_repair": true,
+    "publish_retry_reason": "first workflow rejected missing terminal LF in hashed observer asset; corrected byte-for-byte"
   }
 }
