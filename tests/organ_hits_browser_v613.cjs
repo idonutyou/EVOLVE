@@ -43,10 +43,14 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.screenshot({path:path.join(out,name+'-tail.png')});
   report.arc=await page.evaluate(()=>{
    const {ctx,e,api}=window.__ORGAN_HIT_FIXTURE_V613__.fresh(null,90),c=api.test.context();ctx.state.arm=1;ctx.grid();c.lightning.reset();
-   if(!c.lightning.castChain(true))throw Error('Strong lightning did not cast');for(let i=0;i<20&&e.hp===100000;i++)c.lightning.step(.01);ctx.draw();window.__LAST_ORGAN_HIT_V613__=e;
-   return {damage:100000-e.hp,lightningPose:c.lightning.pose(e),hold:c.lightning.holdEnemy(e),organPose:api.test.pose(e),feedback:api.read(),lightning:c.lightning.read()};
+   const castAvailable=c.lightning.castChain(true),lightningLocked=document.getElementById('ability').disabled;
+   if(castAvailable)throw Error('Unexpected lightning unlock: preserve the current equipment gate');
+   // Lightning equipment is currently locked. Exercise only its retained rendering compatibility.
+   e.arcShockV576={age:0,hold:.058,life:.32,a:window.__ORGAN_HIT_FIXTURE_V613__.angle,strong:true,mass:1,hp:1,wait:.13,vx:0,vy:0};
+   api.test.damage(e,80,'arc',window.__ORGAN_HIT_FIXTURE_V613__.angle);ctx.draw();window.__LAST_ORGAN_HIT_V613__=e;
+   return {fixture:true,castAvailable,lightningLocked,damage:100000-e.hp,lightningPose:c.lightning.pose(e),hold:c.lightning.holdEnemy(e),organPose:api.test.pose(e),feedback:api.read(),lightning:c.lightning.read()};
   });
-  assert.ok(report.arc.damage>0&&report.arc.feedback.arc>0&&report.arc.lightningPose);assert.equal(report.arc.organPose,null);assert.equal(report.arc.feedback.active,0);report.checks.push('Real lightning chain retains its own pose and hold without a second organ deformation');
+  assert.ok(report.arc.damage>0&&report.arc.feedback.arc>0&&report.arc.lightningPose);assert.equal(report.arc.castAvailable,false);assert.equal(report.arc.lightningLocked,true);assert.equal(report.arc.organPose,null);assert.equal(report.arc.feedback.active,0);report.checks.push('Lightning stays locked; an arc-damage QA fixture uses its retained pose without duplicate organ deformation');
   await page.screenshot({path:path.join(out,name+'-arc.png')});
   report.reduced=await page.evaluate(()=>{const api=window.__EVOLVE_ORGAN_HITS_V613__,c=api.test.context(),e=window.__LAST_ORGAN_HIT_V613__,meta=window.__EVOLVE_COMBAT_V596__.test.context().meta;const hold=c.lightning.holdEnemy(e);meta.feedback.reducedMotion=true;const pose=c.lightning.pose(e),sameHold=c.lightning.holdEnemy(e)===hold;api.test.damage(e,15,'spike',0);const organPose=api.test.pose(e);meta.feedback.reducedMotion=false;return {pose,organPose,sameHold};});
   assert.equal(report.reduced.pose,null);assert.equal(report.reduced.organPose,null);assert.equal(report.reduced.sameHold,true);

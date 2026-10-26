@@ -49,5 +49,10 @@
   "original_images": 1021,
   "image_hash_mismatches": 0,
   "browser_preflight": "pending GitHub Chrome runner",
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "lightning_live_status": "Locked by existing WEB20 equipment gate; not enabled by STEP06. Browser checks retained pose compatibility with a QA arc-damage fixture.",
+  "first_browser_preflight": {
+    "run_id": 40415859252,
+    "result": "failed test assumption: live lightning equipment is disabled; spike/whip/DOT passed"
+  }
 }
