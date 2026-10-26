@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-40-HOME-BALANCE",
   "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
-  "progress": 90,
+  "progress": 100,
   "backups": [
     {
       "stage": 10,
@@ -74,6 +74,28 @@
       "sha256": "721850a221c2fe27aaadbdb1bc1e1535988f7a2d4dc2bbdab5b19b23131b09c9",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_a207aeb70670819193d5803efb67622c&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_090.zip",
+      "library_file_id": "libfile_e36bcf12529c8191b80e49d9daad5fd3",
+      "bytes": 3524047,
+      "sha256": "fa3816cb802d60c6e520e62a44cbcecd25efd133ba951bed719f18d633e4367f",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_e36bcf12529c8191b80e49d9daad5fd3&account_id=personal"
+    },
+    {
+      "stage": 100,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_100.zip",
+      "library_file_id": "libfile_bd7ea8e00a688191b57489e679b990af",
+      "file_id": "file_000000000c5c820b91baa9ffaa016bc6",
+      "bytes": 3528021,
+      "sha256": "8c5457bf62862dfdce3a73a0c66c8d296d357f5ac1dabe8cce0f97e0ec498bad",
+      "confirmed_saved": true,
+      "remote_redownload_verified": true,
+      "archive_file_hashes_verified": 24,
+      "previous_checkpoints_retained": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_bd7ea8e00a688191b57489e679b990af&account_id=personal"
     }
   ],
   "requested": [
@@ -83,8 +105,8 @@
     "Match reference 3 crimson cracked material, orange glow and warm gold lettering inside the existing start frame"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Verified source uploaded to main; guarded GitHub Pages deployment is running and public verification remains pending",
-  "next": "Confirm the published build, run the live viewport and save checks, and preserve the final recovery archive",
+  "status": "Actual GitHub Pages deployment, 13 exact public file comparisons and all live browser checks passed; preserve every earlier checkpoint",
+  "next": "Complete; use the existing game URL and retain all recovery snapshots",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
   "current_release": {
     "version": "V575-WEB-40-HOME-BALANCE",
@@ -93,5 +115,7 @@
     "assets": 1048,
     "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
     "preloadResources": true
-  }
+  },
+  "final_backup_confirmed": true,
+  "published_source_commit": "631f772945e6effb3f1960a4c3078dbd45b31918"
 }
