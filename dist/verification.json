@@ -1816,15 +1816,16 @@
       "full_game_chromium": "pending",
       "physical_galaxy_s23_plus": "pending"
     },
-    "last_ci_failure": "Published verifier pinned stale attack_warnings.engine; real gameplay regression and live visual tests passed.",
+    "last_ci_failure": "Historical movement-field verifier required pre-V601 engine metadata; corrected 25 subsystem pointers.",
     "public_verifier_fix": "tools/verify_published_lettering_v584.py now selects hashed main engine from current live manifest.",
     "publication_verified": true,
-    "full_ci_status": "retest_pending",
+    "full_ci_status": "manifest-pointer-correction-retest-pending",
     "engine_metadata_migration": {
       "previous": "assets/f7232057c8a7780a0c21d05b66c678028083f019ba51fa9324f468ee50cbb5ca.js",
       "current": "assets/0b7abf3fbe44f27149f793dad0c200c95df00a5053318c3ad109d2eb3b54acaf.js",
       "updatedFields": 25,
-      "original_engine_preserved": true
+      "original_engine_preserved": true,
+      "verified_no_pre_v601_pointers": true
     }
   }
 }
