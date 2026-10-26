@@ -1,0 +1,56 @@
+{
+  "version": "V575-WEB-40-HOME-BALANCE",
+  "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
+  "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "recovered_checkpoint": {
+    "stage": 70,
+    "library_file_id": "libfile_7e2d530107d48191800bfced82532ebc",
+    "bytes": 3521308,
+    "sha256": "18b2fd5811c7fb723eeb4bc02976a5f4669e22b7061500960570e5462d890165",
+    "archive_and_all_internal_hashes_verified": true
+  },
+  "recovered_remote_commit": "e7a8b8904bd518ef836af47becd40b6fe0177e4c",
+  "remote_tree_matches_local_index": "808b59565d60696f1e4af73a3f15e7d410652d22",
+  "site_files_verified": 1048,
+  "original_image_hashes_preserved": 1008,
+  "engine_unchanged": true,
+  "python_tests_passed": 6,
+  "web_client_tests_passed": 1,
+  "fresh_browser_reports": {
+    "home-balance-browser.json": {
+      "success": true,
+      "checks": [
+        "Actual normal-progress stages 03 CLEAR, 04 available and 05 LOCKED keep identical stage/title/map/start coordinates across four viewport sizes and a simulated 34px system inset",
+        "The complete portrait composition has balanced top and bottom space, is raised off the navigation, and retains all original navigation heights/frames",
+        "The battle icon has no horizontal red rim; the start uses one uninterrupted reference-3 surface and warm gold lettering"
+      ],
+      "errors": [],
+      "state_count": 15
+    },
+    "home-hub-browser.json": {
+      "success": true,
+      "checks": [
+        "Five destinations use one wider selected cell with identical row heights; every touch target stays inside the viewport",
+        "Existing organism selection, equipment dialog and battle-memory archive remain reachable through the new navigation",
+        "The reference home fits small and tall phones and landscape, and the original battle-start control still starts a real run"
+      ],
+      "errors": [],
+      "state_count": 0
+    },
+    "visual-fit-browser.json": {
+      "success": true,
+      "checks": [
+        "All five states keep exactly one flat top and equal heights during width transitions; selected cells widen by more than 50 percent and fill the entire row without gaps",
+        "No cropped photo backgrounds or tall selected frames remain; five exact ROW 1 reference glyphs sit on one full-width straight rail",
+        "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+        "Actual body and both weapon render transforms are exactly 70 percent of WEB-35; collision radius is 7, repeated resets do not compound shrinkage, size upgrades still apply, and the 1536px parts preview remains intact",
+        "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+        "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+      ],
+      "errors": [],
+      "state_count": 0
+    }
+  },
+  "physical_Galaxy_S23_plus_tested": false
+}

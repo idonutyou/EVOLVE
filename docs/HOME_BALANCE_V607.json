@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-40-HOME-BALANCE",
   "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
-  "progress": 70,
+  "progress": 80,
   "backups": [
     {
       "stage": 10,
@@ -56,6 +56,15 @@
       "sha256": "18a8393b30a7d4819cdaa7dd97137fd0cce13723b8b18f5c417a761878b60ce3",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_82482deb171c8191adaaabbfad4297f9&account_id=personal"
+    },
+    {
+      "stage": 70,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_070.zip",
+      "library_file_id": "libfile_7e2d530107d48191800bfced82532ebc",
+      "bytes": 3521308,
+      "sha256": "18b2fd5811c7fb723eeb4bc02976a5f4669e22b7061500960570e5462d890165",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_7e2d530107d48191800bfced82532ebc&account_id=personal"
     }
   ],
   "requested": [
@@ -65,9 +74,9 @@
     "Match reference 3 crimson cracked material, orange glow and warm gold lettering inside the existing start frame"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Preserved the final tested source and generated material; original frame/engine/assets remain unchanged and the new material blob hash is confirmed remotely",
-  "next": "Upload the reviewed task delta to an immutable backup branch, compare every changed file, then publish",
-  "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+  "status": "Recovered and reverified the complete 70 percent delta; original images, engine, 15 layout states, menus, real battle start and character checks passed again",
+  "next": "Publish the verified build and confirm the actual GitHub Pages deployment",
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
   "current_release": {
     "version": "V575-WEB-40-HOME-BALANCE",
     "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
