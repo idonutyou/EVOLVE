@@ -1,0 +1,17 @@
+{
+  "step": 6,
+  "substep": 2,
+  "overall_progress": 70,
+  "status": "Implementation and local behavior checks complete; substep 3 regression/browser/publication waiting",
+  "baseline_commit": "95af335a3beda5c66110eb882baf027850bbf921",
+  "baseline_local_commit": "a62ae18ac26167dd6ee4591323984f7c8774ca2c",
+  "new_images_required": false,
+  "scope": [
+    "spike",
+    "tail",
+    "arc"
+  ],
+  "spit_excluded_from_this_step": true,
+  "published": false,
+  "physical_Galaxy_S23_plus_tested": false
+}
