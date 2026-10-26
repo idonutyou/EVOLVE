@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-43-DISPLAY-RECOVERY",
+  "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+  "checks": [
+    {
+      "path": "index.html",
+      "bytes": 259791,
+      "sha256": "f28c13483f6bfff4c75d45cca5adea4a36fa733561dde6fd6f734c77e9f0c1dd",
+      "matches": true
+    },
+    {
+      "path": "version.json",
+      "bytes": 287,
+      "sha256": "0965cf9217234f6363c07f6822eafa0fd88ad9882368854000475cd3020f590a",
+      "matches": true
+    },
+    {
+      "path": "asset-manifest.json",
+      "bytes": 205023,
+      "sha256": "df14a4a27cb7eeb0ce0ae1b408e2e3000aae7e419c80e739227cf548d81d91af",
+      "matches": true
+    },
+    {
+      "path": "assets/f7232057c8a7780a0c21d05b66c678028083f019ba51fa9324f468ee50cbb5ca.js",
+      "bytes": 1656857,
+      "sha256": "f7232057c8a7780a0c21d05b66c678028083f019ba51fa9324f468ee50cbb5ca",
+      "matches": true
+    },
+    {
+      "path": "assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js",
+      "bytes": 3906,
+      "sha256": "a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892",
+      "matches": true
+    },
+    {
+      "path": "assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css",
+      "bytes": 2635,
+      "sha256": "e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9",
+      "matches": true
+    },
+    {
+      "path": "assets/80ffb27617fb1bce612a498929fd79d4eb91a645fe2bd9d8c09ac20aa2d227ff.js",
+      "bytes": 6568,
+      "sha256": "80ffb27617fb1bce612a498929fd79d4eb91a645fe2bd9d8c09ac20aa2d227ff",
+      "matches": true
+    },
+    {
+      "path": "assets/824fee1da2355c2bc28fba5fedcbaa36b9e9e2bf160ff80372e9216ed45db73c.css",
+      "bytes": 601,
+      "sha256": "824fee1da2355c2bc28fba5fedcbaa36b9e9e2bf160ff80372e9216ed45db73c",
+      "matches": true
+    },
+    {
+      "path": "assets/800d3a3b2a256d0b61d72dc7592bddfc361ab1ce33e8384b74470e4e78efc0ca.js",
+      "bytes": 7686,
+      "sha256": "800d3a3b2a256d0b61d72dc7592bddfc361ab1ce33e8384b74470e4e78efc0ca",
+      "matches": true
+    }
+  ],
+  "stats_and_effects_unchanged": true,
+  "engine_change": "Rendering recovery and fixed combat viewport only",
+  "physical_Galaxy_S23_plus_tested": false
+}

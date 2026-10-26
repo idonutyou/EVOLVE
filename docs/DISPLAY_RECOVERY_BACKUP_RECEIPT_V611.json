@@ -1,0 +1,13 @@
+{
+  "stage": 100,
+  "filename": "EVOLVE_WEB43_CHECKPOINT_100.zip",
+  "bytes": 883410,
+  "sha256": "4ce90dad0a4bac150f98275fca65ff1af628f4205ebb4a79d39ea2bed7b998ce",
+  "library_file_id": "libfile_8e0408f9f8ac81918b5451e5c97fb3a2",
+  "file_id": "file_00000000b58c820ba7681bbf9ca22fbd",
+  "confirmed_saved": true,
+  "download_and_all_file_hashes_reverified": true,
+  "archive_files_verified": 38,
+  "url": "https://chatgpt.com/library?file_id=libfile_8e0408f9f8ac81918b5451e5c97fb3a2&account_id=personal",
+  "completion_backup_branch": "backup/web43-100-20261026"
+}
