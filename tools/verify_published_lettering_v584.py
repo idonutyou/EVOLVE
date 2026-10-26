@@ -39,7 +39,10 @@ def main():
             time.sleep(5)
     live_manifest = fetch('asset-manifest.json')
     assert live_manifest == (args.dist / 'asset-manifest.json').read_bytes(), 'Published asset manifest differs'
-    engine = report['attack_warnings']['engine']
+    entries = json.loads(live_manifest)
+    primary_engines = [entry for entry in entries if entry.get('kind') == 'game-code' and entry.get('bytes', 0) > 100_000]
+    assert len(primary_engines) == 1, 'Expected one verified main game engine'
+    engine = primary_engines[0]['path']
     live_engine = fetch(engine)
     engine_sha = hashlib.sha256(live_engine).hexdigest()
     assert engine_sha == Path(engine).stem, 'Published engine bytes differ'
