@@ -141,15 +141,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Deploy GitHub Pages
         id: pages
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
-          EVOLVE_TEST_BASE_URL="${{ steps.pages.outputs.page_url }}" node tests/home_hub_browser.cjs
-          EVOLVE_TEST_BASE_URL="${{ steps.pages.outputs.page_url }}" node tests/visual_fit_browser.cjs
-          EVOLVE_TEST_BASE_URL="${{ steps.pages.outputs.page_url }}" node tests/fullscreen_browser.cjs
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/fullscreen_browser.cjs --report test-results/fullscreen-live-browser.json
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
           python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
       - name: Retain publication evidence

@@ -972,5 +972,22 @@
       }
     ],
     "complete": true
+  },
+  "icons_fullscreen_WEB39": {
+    "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+    "version": "V575-WEB-39-ICONS-FULLSCREEN",
+    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+    "baseline": "caa0430a13595695ce896aac22a5732bb39eb2ef",
+    "progress": 90,
+    "report": "docs/ICONS_FULLSCREEN_V606.json",
+    "release_document": "docs/ICONS_FULLSCREEN_RELEASE_V606.md",
+    "release_commit": "e43313643277fef53297072f8677bbd072d1d0b6",
+    "backup_branch": "backup/web39-090-fix1-20261026",
+    "publication_run_id": 40258519662,
+    "all_independent_live_checks_passed": true,
+    "original_game_engine_unchanged": true,
+    "original_images_unchanged": 1005,
+    "physical_Galaxy_S23_plus_tested": false,
+    "all_previous_snapshots_retained": true
   }
 }

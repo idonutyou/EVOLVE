@@ -1,0 +1,130 @@
+{
+  "source": "https://idonutyou.github.io/EVOLVE/",
+  "checks": [
+    "Chromium accepts scoped fullscreen manifest and all install icons decode at their declared sizes",
+    "Real fullscreen entry fills the viewport; exit preserves page and saved data"
+  ],
+  "errors": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "manifest": {
+    "url": "https://idonutyou.github.io/EVOLVE/manifest.webmanifest",
+    "data": {
+      "id": "./",
+      "name": "EVOLVE",
+      "short_name": "EVOLVE",
+      "description": "EVOLVE 생존 · 진화 액션",
+      "lang": "ko",
+      "start_url": "./",
+      "scope": "./",
+      "display": "fullscreen",
+      "display_override": [
+        "fullscreen",
+        "standalone"
+      ],
+      "orientation": "any",
+      "background_color": "#05070a",
+      "theme_color": "#05070a",
+      "prefer_related_applications": false,
+      "icons": [
+        {
+          "src": "assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ]
+    }
+  },
+  "chromiumManifest": {
+    "url": "https://idonutyou.github.io/EVOLVE/manifest.webmanifest",
+    "errors": [],
+    "data": "{\n  \"id\": \"./\",\n  \"name\": \"EVOLVE\",\n  \"short_name\": \"EVOLVE\",\n  \"description\": \"EVOLVE 생존 · 진화 액션\",\n  \"lang\": \"ko\",\n  \"start_url\": \"./\",\n  \"scope\": \"./\",\n  \"display\": \"fullscreen\",\n  \"display_override\": [\n    \"fullscreen\",\n    \"standalone\"\n  ],\n  \"orientation\": \"any\",\n  \"background_color\": \"#05070a\",\n  \"theme_color\": \"#05070a\",\n  \"prefer_related_applications\": false,\n  \"icons\": [\n    {\n      \"src\": \"assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"maskable\"\n    }\n  ]\n}\n",
+    "parsed": {
+      "scope": "https://idonutyou.github.io/EVOLVE/"
+    },
+    "manifest": {
+      "backgroundColor": "rgba(5,7,10,1)",
+      "description": "EVOLVE 생존 · 진화 액션",
+      "display": "kFullscreen",
+      "displayOverrides": [
+        "kFullscreen",
+        "kStandalone"
+      ],
+      "icons": [
+        {
+          "url": "https://idonutyou.github.io/EVOLVE/assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "url": "https://idonutyou.github.io/EVOLVE/assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        },
+        {
+          "url": "https://idonutyou.github.io/EVOLVE/assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ],
+      "id": "https://idonutyou.github.io/",
+      "name": "EVOLVE",
+      "orientation": "ANY",
+      "preferRelatedApplications": false,
+      "scope": "https://idonutyou.github.io/EVOLVE/",
+      "startUrl": "https://idonutyou.github.io/EVOLVE/",
+      "themeColor": "rgba(5,7,10,1)"
+    }
+  },
+  "glyphs": [
+    {
+      "key": "shop",
+      "row": "1",
+      "images": 1,
+      "window": "0 0 87 82"
+    },
+    {
+      "key": "parts",
+      "row": "1",
+      "images": 1,
+      "window": "0 0 83 87"
+    },
+    {
+      "key": "battle",
+      "row": "1",
+      "images": 1,
+      "window": "0 0 122 97"
+    },
+    {
+      "key": "challenge",
+      "row": "1",
+      "images": 1,
+      "window": "0 0 93 85"
+    },
+    {
+      "key": "codex",
+      "row": "1",
+      "images": 1,
+      "window": "0 0 97 82"
+    }
+  ],
+  "fit": {
+    "width": 393,
+    "height": 852,
+    "viewportWidth": 393,
+    "viewportHeight": 852
+  },
+  "success": true
+}

@@ -18,5 +18,34 @@
     "reason": "Display-only assets were initially marked as web-shell; the existing guard correctly requires exactly one lifecycle shell",
     "fix": "Display scripts now use presentation-code; original lifecycle shell remains unchanged",
     "local_exact_lifecycle_guard_passed": true
+  },
+  "public_verification_retry": {
+    "run_id": 40258519662,
+    "job_id": 121365583884,
+    "reason": "First GitHub-hosted live check stopped with the original loader at 99 percent after a transient resource transfer; no page errors were recorded",
+    "published_assets_exact_bytes_match": 11,
+    "independent_live_fullscreen_check_passed": true,
+    "independent_live_fullscreen_errors": [],
+    "retry_started": true
+  },
+  "independent_public_home": {
+    "success": true,
+    "menu_states": 5,
+    "viewports": 4,
+    "original_game_started": true,
+    "page_errors": [],
+    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d"
+  },
+  "independent_public_checks_complete": {
+    "home": true,
+    "navigation_20_viewport_states": true,
+    "start_contour": true,
+    "original_character_and_equipment_scale": true,
+    "calm_gait": true,
+    "fullscreen_enter_exit": true,
+    "manifest_icons_and_scope": true,
+    "save_preserved": true,
+    "new_public_files_exact_bytes": 11,
+    "page_errors": []
   }
 }

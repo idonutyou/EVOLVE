@@ -1,0 +1,564 @@
+{
+  "checks": [
+    "Five destinations use one wider selected cell with identical row heights; every touch target stays inside the viewport",
+    "Existing organism selection, equipment dialog and battle-memory archive remain reachable through the new navigation",
+    "The reference home fits small and tall phones and landscape, and the original battle-start control still starts a real run"
+  ],
+  "layouts": [
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "start": {
+        "x": 14,
+        "y": 404,
+        "width": 292,
+        "height": 58,
+        "right": 306,
+        "bottom": 462
+      },
+      "nav": {
+        "x": 0,
+        "y": 480,
+        "width": 320,
+        "height": 88,
+        "right": 320,
+        "bottom": 568
+      },
+      "hero": {
+        "x": 14,
+        "y": 161,
+        "width": 292,
+        "height": 235,
+        "right": 306,
+        "bottom": 396
+      },
+      "contentHeight": 424,
+      "scrollHeight": 424
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 600
+      },
+      "start": {
+        "x": 14,
+        "y": 433.625,
+        "width": 365,
+        "height": 58,
+        "right": 379,
+        "bottom": 491.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 509.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 600
+      },
+      "hero": {
+        "x": 14,
+        "y": 161,
+        "width": 365,
+        "height": 264.625,
+        "right": 379,
+        "bottom": 425.625
+      },
+      "contentHeight": 454,
+      "scrollHeight": 454
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "start": {
+        "x": 14,
+        "y": 676.53125,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 738.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "hero": {
+        "x": 14,
+        "y": 229.109375,
+        "width": 365,
+        "height": 425.421875,
+        "right": 379,
+        "bottom": 654.53125
+      },
+      "contentHeight": 706,
+      "scrollHeight": 706
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "start": {
+        "x": 25,
+        "y": 256,
+        "width": 332.34375,
+        "height": 53,
+        "right": 357.34375,
+        "bottom": 309
+      },
+      "nav": {
+        "x": 1,
+        "y": 323,
+        "width": 850,
+        "height": 70,
+        "right": 851,
+        "bottom": 393
+      },
+      "hero": {
+        "x": 377.34375,
+        "y": 61,
+        "width": 449.65625,
+        "height": 253,
+        "right": 827,
+        "bottom": 314
+      },
+      "contentHeight": 274,
+      "scrollHeight": 274
+    }
+  ],
+  "navigation": [
+    {
+      "state": {
+        "version": 601,
+        "page": "shop",
+        "subpage": "shop",
+        "ready": true,
+        "order": [
+          "shop",
+          "parts",
+          "battle",
+          "challenge",
+          "codex"
+        ],
+        "selected": [
+          "shop"
+        ],
+        "originalArtworkBytesPreserved": true,
+        "physical_Galaxy_S23_plus_tested": false
+      },
+      "buttons": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "pressed": "true",
+          "current": "page",
+          "x": 0,
+          "y": 509.625,
+          "width": 109.5625,
+          "height": 90.375,
+          "right": 109.5625,
+          "bottom": 600
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 109.5625,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 180.671875,
+          "bottom": 600
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 180.671875,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 251.78125,
+          "bottom": 600
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 251.78125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 322.890625,
+          "bottom": 600
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 322.890625,
+          "y": 509.625,
+          "width": 70.109375,
+          "height": 90.375,
+          "right": 393,
+          "bottom": 600
+        }
+      ]
+    },
+    {
+      "state": {
+        "version": 601,
+        "page": "parts",
+        "subpage": "parts",
+        "ready": true,
+        "order": [
+          "shop",
+          "parts",
+          "battle",
+          "challenge",
+          "codex"
+        ],
+        "selected": [
+          "parts"
+        ],
+        "originalArtworkBytesPreserved": true,
+        "physical_Galaxy_S23_plus_tested": false
+      },
+      "buttons": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 0,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 71.109375,
+          "bottom": 600
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "pressed": "true",
+          "current": "page",
+          "x": 71.109375,
+          "y": 509.625,
+          "width": 109.5625,
+          "height": 90.375,
+          "right": 180.671875,
+          "bottom": 600
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 180.671875,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 251.78125,
+          "bottom": 600
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 251.78125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 322.890625,
+          "bottom": 600
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 322.890625,
+          "y": 509.625,
+          "width": 70.109375,
+          "height": 90.375,
+          "right": 393,
+          "bottom": 600
+        }
+      ]
+    },
+    {
+      "state": {
+        "version": 601,
+        "page": "battle",
+        "subpage": "battle",
+        "ready": true,
+        "order": [
+          "shop",
+          "parts",
+          "battle",
+          "challenge",
+          "codex"
+        ],
+        "selected": [
+          "battle"
+        ],
+        "originalArtworkBytesPreserved": true,
+        "physical_Galaxy_S23_plus_tested": false
+      },
+      "buttons": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 0,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 71.109375,
+          "bottom": 600
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 71.109375,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 142.21875,
+          "bottom": 600
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "pressed": "true",
+          "current": "page",
+          "x": 142.21875,
+          "y": 509.625,
+          "width": 109.5625,
+          "height": 90.375,
+          "right": 251.78125,
+          "bottom": 600
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 251.78125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 322.890625,
+          "bottom": 600
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 322.890625,
+          "y": 509.625,
+          "width": 70.109375,
+          "height": 90.375,
+          "right": 393,
+          "bottom": 600
+        }
+      ]
+    },
+    {
+      "state": {
+        "version": 601,
+        "page": "challenge",
+        "subpage": "challenge",
+        "ready": true,
+        "order": [
+          "shop",
+          "parts",
+          "battle",
+          "challenge",
+          "codex"
+        ],
+        "selected": [
+          "challenge"
+        ],
+        "originalArtworkBytesPreserved": true,
+        "physical_Galaxy_S23_plus_tested": false
+      },
+      "buttons": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 0,
+          "y": 509.625,
+          "width": 71.09375,
+          "height": 90.375,
+          "right": 71.09375,
+          "bottom": 600
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 71.09375,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 142.203125,
+          "bottom": 600
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 142.203125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 213.3125,
+          "bottom": 600
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "pressed": "true",
+          "current": "page",
+          "x": 213.3125,
+          "y": 509.625,
+          "width": 109.578125,
+          "height": 90.375,
+          "right": 322.890625,
+          "bottom": 600
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 322.890625,
+          "y": 509.625,
+          "width": 70.109375,
+          "height": 90.375,
+          "right": 393,
+          "bottom": 600
+        }
+      ]
+    },
+    {
+      "state": {
+        "version": 601,
+        "page": "codex",
+        "subpage": "codex",
+        "ready": true,
+        "order": [
+          "shop",
+          "parts",
+          "battle",
+          "challenge",
+          "codex"
+        ],
+        "selected": [
+          "codex"
+        ],
+        "originalArtworkBytesPreserved": true,
+        "physical_Galaxy_S23_plus_tested": false
+      },
+      "buttons": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 0,
+          "y": 509.625,
+          "width": 71.09375,
+          "height": 90.375,
+          "right": 71.09375,
+          "bottom": 600
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 71.09375,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 142.203125,
+          "bottom": 600
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 142.203125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 213.3125,
+          "bottom": 600
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "pressed": "false",
+          "current": null,
+          "x": 213.3125,
+          "y": 509.625,
+          "width": 71.109375,
+          "height": 90.375,
+          "right": 284.421875,
+          "bottom": 600
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "pressed": "true",
+          "current": "page",
+          "x": 284.421875,
+          "y": 509.625,
+          "width": 108.578125,
+          "height": 90.375,
+          "right": 393,
+          "bottom": 600
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "source": "https://idonutyou.github.io/EVOLVE/",
+  "runtime_proxy_used": true,
+  "runtime_proxy_certificate_override": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "release": {
+    "version": "V575-WEB-39-ICONS-FULLSCREEN",
+    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+    "scriptBytes": 77707057,
+    "preloadResources": true
+  },
+  "visibleCharacters": "상점모은로생명체를영구강화하세요유전연소스테이지위협사클리어정자보량포최대력식피해동속도개시금기억받는다뽑부순등급름감염설투작챌린고가능잠김발견원변격팔관산성입와둔근접광역절단알수없음조우거나진면됩니융합물군집압박좌웨브숙적예",
+  "shopText": "상점\n\n모은 DNA로 생명체를 영구 강화하세요.\n\n유전체 연구소\n스테이지 1 · 위협 +0% · 사이클 1 · 클리어 0 · 정점 유전자 0\nDNA 보유량 0\n세포 DENSITY · Lv.0\n최대 체력 +5% · 25 DNA\n포식자 GENES · Lv.0\n피해량 +4% · 30 DNA\nABSORPTION · Lv.0\nPICKUP +10 · 20 DNA\nMOTOR NERVES · Lv.0\n이동 속도 +3% · 스테이지 1개 클리어 시 해금\nCARAPACE 기억 · Lv.0\n받는 피해 -3% · 스테이지 2개 클리어 시 해금\nRECOMBINATION · Lv.0\nSTART 다시 뽑기 +1 · 스테이지 3개 클리어 시 해금",
+  "success": true
+}
