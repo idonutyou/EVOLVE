@@ -1,0 +1,79 @@
+{
+  "version": "V575-WEB-40-HOME-BALANCE",
+  "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
+  "progress": 70,
+  "backups": [
+    {
+      "stage": 10,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_f94d257700ec81919501257bb6089137",
+      "bytes": 3596,
+      "sha256": "67cab3718237fca56158fd42647e2280acc31388d4a2733a21eb7a72ede13fa5",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_f94d257700ec81919501257bb6089137&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_d5fa4f5fbcd88191ad3356c01084b4d7",
+      "bytes": 1676428,
+      "sha256": "ad695c9e40479512b97a30a112b818f117a695921c0e758ab0de09884aee589d",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_d5fa4f5fbcd88191ad3356c01084b4d7&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_d84810e027208191af48ebfc9abeedb1",
+      "bytes": 1678863,
+      "sha256": "1e875241006ad05b5d049ffa0dfbb3805d398420d629dfb91fd61ce6930307c1",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_d84810e027208191af48ebfc9abeedb1&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_ae57172e05348191953965f41f679eeb",
+      "bytes": 1680619,
+      "sha256": "ebb9e96999d67affa45c6352fca5b40c4f950eaea6e57af926388d6bb1c817f3",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_ae57172e05348191953965f41f679eeb&account_id=personal"
+    },
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_8f405678a4c48191b42e45bd3b83a064",
+      "bytes": 3513280,
+      "sha256": "683512fcee041a7dc1b84287300e0de4b540267e421575750a12578c8f619230",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_8f405678a4c48191b42e45bd3b83a064&account_id=personal"
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_82482deb171c8191adaaabbfad4297f9",
+      "bytes": 3520239,
+      "sha256": "18a8393b30a7d4819cdaa7dd97137fd0cce13723b8b18f5c417a761878b60ce3",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_82482deb171c8191adaaabbfad4297f9&account_id=personal"
+    }
+  ],
+  "requested": [
+    "Raise and center the complete stage/title/map/start composition in available home content",
+    "Keep stage and map-title coordinates stable with empty, CLEAR or LOCKED status below",
+    "Remove the red line above the battle glyph",
+    "Match reference 3 crimson cracked material, orange glow and warm gold lettering inside the existing start frame"
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "status": "Preserved the final tested source and generated material; original frame/engine/assets remain unchanged and the new material blob hash is confirmed remotely",
+  "next": "Upload the reviewed task delta to an immutable backup branch, compare every changed file, then publish",
+  "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+  "current_release": {
+    "version": "V575-WEB-40-HOME-BALANCE",
+    "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
+    "scriptBytes": 77707057,
+    "assets": 1048,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  }
+}

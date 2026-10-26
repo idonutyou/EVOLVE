@@ -104,6 +104,7 @@ jobs:
           node tests/home_map_miniatures_browser.cjs
           node tests/home_hub_browser.cjs
           node tests/visual_fit_browser.cjs
+          node tests/home_balance_browser.cjs
           node tests/fullscreen_browser.cjs
           node tests/admin_combat_browser.cjs
           node tests/playfield_browser.cjs
@@ -152,6 +153,7 @@ jobs:
         run: |
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/fullscreen_browser.cjs --report test-results/fullscreen-live-browser.json
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
           python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
@@ -163,6 +165,7 @@ jobs:
           path: |
             test-results/home-hub-live-browser.json
             test-results/visual-fit-live-browser.json
+            test-results/home-balance-live-browser.json
             test-results/fullscreen-live-browser.json
             test-results/visual-fit-*.png
             test-results/home-hub-*.png

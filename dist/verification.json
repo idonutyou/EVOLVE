@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-39-ICONS-FULLSCREEN",
+  "version": "V575-WEB-40-HOME-BALANCE",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 259048,
-  "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+  "index_bytes": 259151,
+  "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
   "image_assets": 1005,
-  "cached_files": 1046,
-  "cached_bytes": 374084862,
+  "cached_files": 1048,
+  "cached_bytes": 375890673,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1476,9 +1476,17 @@
       "icon_reference_row": 1,
       "start_material_reference_row": 5,
       "source_bytes_unchanged": true,
-      "path": "assets/0cdb7abf01c2796bbe97652184777e8939b337308dd3c0b5fc78f5bf99624eb8.png"
+      "path": "assets/0cdb7abf01c2796bbe97652184777e8939b337308dd3c0b5fc78f5bf99624eb8.png",
+      "material": {
+        "source": "art/home-balance-v607/start-material.png",
+        "sha256": "e74daffae533812ff998b2c97abd61df6b32fd5f5cfc81fedb1b93ccbfdbceeb",
+        "reference": "upload/03-1000027706.jpg",
+        "reference_material_row": 3,
+        "source_bytes_unchanged": true,
+        "path": "assets/e74daffae533812ff998b2c97abd61df6b32fd5f5cfc81fedb1b93ccbfdbceeb.png"
+      }
     },
-    "controls_script": "assets/f4b7841cb6559e5298775d95fcea161528b0ea91a0490fe5fe2f653adb5c287b.js",
+    "controls_script": "assets/3a31f34064ed881d37688ccdaa130f5b1b1cf107c2857a871eaa8ece462f0fe3.js",
     "navigation_frames_labels_and_layout_unchanged": true,
     "reference_icon_row": 1,
     "start_inner_material_row": 5,
@@ -1487,6 +1495,27 @@
     "fullscreen_script": "assets/4270f5083599bed77de7172667f1e52b4d1e3d3d0b231558550edce242c605ef.js",
     "fullscreen_style": "assets/64793a75acc3ddf22781a477da23243c13022df6fe6f7f59b1aba2a62b15fc51.css",
     "save_keys_and_update_timing_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "home_balance_v607": {
+    "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
+    "stylesheet": "assets/584abed07b4f76d4debba6e0f887dfcbbb331c29c70da2a9306f9b8729bd2be1.css",
+    "material": {
+      "source": "art/home-balance-v607/start-material.png",
+      "sha256": "e74daffae533812ff998b2c97abd61df6b32fd5f5cfc81fedb1b93ccbfdbceeb",
+      "reference": "upload/03-1000027706.jpg",
+      "reference_material_row": 3,
+      "source_bytes_unchanged": true,
+      "path": "assets/e74daffae533812ff998b2c97abd61df6b32fd5f5cfc81fedb1b93ccbfdbceeb.png"
+    },
+    "controls_script": "assets/3a31f34064ed881d37688ccdaa130f5b1b1cf107c2857a871eaa8ece462f0fe3.js",
+    "stable_heading_status_slots": true,
+    "balanced_portrait_composition": true,
+    "battle_red_rim_removed": true,
+    "warm_gold_start_label": "#ffe0a0",
+    "start_outer_frame_preserved": true,
+    "original_engine_preserved": true,
+    "save_keys_and_fullscreen_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

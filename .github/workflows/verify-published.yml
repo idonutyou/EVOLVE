@@ -28,6 +28,7 @@ jobs:
         run: |
           python3 tools/retry_public_browser.py --url https://idonutyou.github.io/EVOLVE/ --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
           python3 tools/retry_public_browser.py --url https://idonutyou.github.io/EVOLVE/ --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
+          python3 tools/retry_public_browser.py --url https://idonutyou.github.io/EVOLVE/ --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
           python3 tools/retry_public_browser.py --url https://idonutyou.github.io/EVOLVE/ --script tests/fullscreen_browser.cjs --report test-results/fullscreen-live-browser.json
       - name: Retain exact public verification evidence
         if: always()

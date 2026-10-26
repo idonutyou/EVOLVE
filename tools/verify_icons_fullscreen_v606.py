@@ -7,6 +7,8 @@ def main():
  p=argparse.ArgumentParser();p.add_argument('--url',default='https://idonutyou.github.io/EVOLVE/');p.add_argument('--dist',type=Path,default=Path('dist'));p.add_argument('--output',type=Path,default=Path('test-results/icons-fullscreen-live-bytes.json'));a=p.parse_args()
  base=a.url.rstrip('/')+'/';version=json.loads((a.dist/'version.json').read_text());verification=json.loads((a.dist/'verification.json').read_text());feature=verification['icons_fullscreen_v606'];manifest=json.loads((a.dist/'manifest.webmanifest').read_text());checks=[]
  paths=['index.html','version.json','manifest.webmanifest','asset-manifest.json',feature['reference']['path'],feature['controls_script'],feature['fullscreen_script'],feature['fullscreen_style'],feature['stylesheet'],*[i['src'] for i in manifest['icons']]]
+ extra=verification.get('home_balance_v607')
+ if extra:paths.extend([extra['stylesheet'],extra['material']['path']])
  for name in dict.fromkeys(paths):
   req=urllib.request.Request(base+name+'?verify='+str(time.time_ns()),headers={'Cache-Control':'no-cache','User-Agent':'EVOLVE-release-verification'})
   with urllib.request.urlopen(req,timeout=45) as response:remote=response.read();mime=response.headers.get_content_type();status=response.status

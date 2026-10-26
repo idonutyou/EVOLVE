@@ -1,0 +1,999 @@
+{
+  "physical_Galaxy_S23_plus_tested": false,
+  "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
+  "reports": {
+    "home-balance-browser.json": {
+      "success": true,
+      "checks": [
+        "Actual normal-progress stages 03 CLEAR, 04 available and 05 LOCKED keep identical stage/title/map/start coordinates across four viewport sizes and a simulated 34px system inset",
+        "The complete portrait composition has balanced top and bottom space, is raised off the navigation, and retains all original navigation heights/frames",
+        "The battle icon has no horizontal red rim; the start uses one uninterrupted reference-3 surface and warm gold lettering"
+      ]
+    },
+    "home-hub-browser.json": {
+      "success": true,
+      "checks": [
+        "Five destinations use one wider selected cell with identical row heights; every touch target stays inside the viewport",
+        "Existing organism selection, equipment dialog and battle-memory archive remain reachable through the new navigation",
+        "The reference home fits small and tall phones and landscape, and the original battle-start control still starts a real run"
+      ]
+    },
+    "visual-fit-browser.json": {
+      "success": true,
+      "checks": [
+        "All five states keep exactly one flat top and equal heights during width transitions; selected cells widen by more than 50 percent and fill the entire row without gaps",
+        "No cropped photo backgrounds or tall selected frames remain; five exact ROW 1 reference glyphs sit on one full-width straight rail",
+        "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+        "Actual body and both weapon render transforms are exactly 70 percent of WEB-35; collision radius is 7, repeated resets do not compound shrinkage, size upgrades still apply, and the 1536px parts preview remains intact",
+        "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+        "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+      ]
+    }
+  },
+  "status_states": 15,
+  "battle_icon_pixels": {
+    "longestRedRunAboveClaws": 1
+  },
+  "measured_states": [
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 0,
+      "stage": "03",
+      "status": "클리어",
+      "stageRect": {
+        "x": 74,
+        "y": 98.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 114.375
+      },
+      "title": {
+        "x": 74,
+        "y": 122.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 152.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 160.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 178.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 208.375,
+        "width": 365,
+        "height": 415.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 705.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 0,
+      "stage": "04",
+      "status": "",
+      "stageRect": {
+        "x": 74,
+        "y": 98.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 114.375
+      },
+      "title": {
+        "x": 74,
+        "y": 122.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 152.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 160.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 178.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 208.375,
+        "width": 365,
+        "height": 415.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 705.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 0,
+      "stage": "05",
+      "status": "잠김",
+      "stageRect": {
+        "x": 74,
+        "y": 98.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 114.375
+      },
+      "title": {
+        "x": 74,
+        "y": 122.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 152.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 160.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 178.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 208.375,
+        "width": 365,
+        "height": 415.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 705.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(210, 195, 188)"
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 34,
+      "stage": "03",
+      "status": "클리어",
+      "stageRect": {
+        "x": 74,
+        "y": 132.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 148.375
+      },
+      "title": {
+        "x": 74,
+        "y": 156.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 186.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 194.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 212.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 242.375,
+        "width": 365,
+        "height": 381.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 90,
+        "width": 393,
+        "height": 671.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 34,
+      "stage": "04",
+      "status": "",
+      "stageRect": {
+        "x": 74,
+        "y": 132.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 148.375
+      },
+      "title": {
+        "x": 74,
+        "y": 156.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 186.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 194.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 212.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 242.375,
+        "width": 365,
+        "height": 381.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 90,
+        "width": 393,
+        "height": 671.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 852,
+      "safe": 34,
+      "stage": "05",
+      "status": "잠김",
+      "stageRect": {
+        "x": 74,
+        "y": 132.375,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 148.375
+      },
+      "title": {
+        "x": 74,
+        "y": 156.046875,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 186.6875
+      },
+      "state": {
+        "x": 74,
+        "y": 194.375,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 212.375
+      },
+      "hero": {
+        "x": 14,
+        "y": 242.375,
+        "width": 365,
+        "height": 381.78125,
+        "right": 379,
+        "bottom": 624.15625
+      },
+      "start": {
+        "x": 14,
+        "y": 644.15625,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 706.25
+      },
+      "content": {
+        "x": 0,
+        "y": 90,
+        "width": 393,
+        "height": 671.625,
+        "right": 393,
+        "bottom": 761.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 761.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 852
+      },
+      "color": "rgb(210, 195, 188)"
+    },
+    {
+      "width": 393,
+      "height": 731,
+      "safe": 0,
+      "stage": "03",
+      "status": "클리어",
+      "stageRect": {
+        "x": 74,
+        "y": 93.765625,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 109.765625
+      },
+      "title": {
+        "x": 74,
+        "y": 117.4375,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 148.078125
+      },
+      "state": {
+        "x": 74,
+        "y": 155.765625,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 173.765625
+      },
+      "hero": {
+        "x": 14,
+        "y": 202.03125,
+        "width": 365,
+        "height": 310.734375,
+        "right": 379,
+        "bottom": 512.765625
+      },
+      "start": {
+        "x": 14,
+        "y": 531.03125,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 593.125
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 584.625,
+        "right": 393,
+        "bottom": 640.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 640.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 731
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 731,
+      "safe": 0,
+      "stage": "04",
+      "status": "",
+      "stageRect": {
+        "x": 74,
+        "y": 93.765625,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 109.765625
+      },
+      "title": {
+        "x": 74,
+        "y": 117.4375,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 148.078125
+      },
+      "state": {
+        "x": 74,
+        "y": 155.765625,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 173.765625
+      },
+      "hero": {
+        "x": 14,
+        "y": 202.03125,
+        "width": 365,
+        "height": 310.734375,
+        "right": 379,
+        "bottom": 512.765625
+      },
+      "start": {
+        "x": 14,
+        "y": 531.03125,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 593.125
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 584.625,
+        "right": 393,
+        "bottom": 640.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 640.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 731
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 393,
+      "height": 731,
+      "safe": 0,
+      "stage": "05",
+      "status": "잠김",
+      "stageRect": {
+        "x": 74,
+        "y": 93.765625,
+        "width": 245,
+        "height": 16,
+        "right": 319,
+        "bottom": 109.765625
+      },
+      "title": {
+        "x": 74,
+        "y": 117.4375,
+        "width": 245,
+        "height": 30.640625,
+        "right": 319,
+        "bottom": 148.078125
+      },
+      "state": {
+        "x": 74,
+        "y": 155.765625,
+        "width": 245,
+        "height": 18,
+        "right": 319,
+        "bottom": 173.765625
+      },
+      "hero": {
+        "x": 14,
+        "y": 202.03125,
+        "width": 365,
+        "height": 310.734375,
+        "right": 379,
+        "bottom": 512.765625
+      },
+      "start": {
+        "x": 14,
+        "y": 531.03125,
+        "width": 365,
+        "height": 62.09375,
+        "right": 379,
+        "bottom": 593.125
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 393,
+        "height": 584.625,
+        "right": 393,
+        "bottom": 640.625
+      },
+      "nav": {
+        "x": 0,
+        "y": 640.625,
+        "width": 393,
+        "height": 90.375,
+        "right": 393,
+        "bottom": 731
+      },
+      "color": "rgb(210, 195, 188)"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "safe": 0,
+      "stage": "03",
+      "status": "클리어",
+      "stageRect": {
+        "x": 74,
+        "y": 87.578125,
+        "width": 172,
+        "height": 16,
+        "right": 246,
+        "bottom": 103.578125
+      },
+      "title": {
+        "x": 74,
+        "y": 112.28125,
+        "width": 172,
+        "height": 28.59375,
+        "right": 246,
+        "bottom": 140.875
+      },
+      "state": {
+        "x": 74,
+        "y": 149.578125,
+        "width": 172,
+        "height": 18,
+        "right": 246,
+        "bottom": 167.578125
+      },
+      "hero": {
+        "x": 14,
+        "y": 191.765625,
+        "width": 292,
+        "height": 179.140625,
+        "right": 306,
+        "bottom": 370.90625
+      },
+      "start": {
+        "x": 14,
+        "y": 385.09375,
+        "width": 292,
+        "height": 58,
+        "right": 306,
+        "bottom": 443.09375
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 320,
+        "height": 424,
+        "right": 320,
+        "bottom": 480
+      },
+      "nav": {
+        "x": 0,
+        "y": 480,
+        "width": 320,
+        "height": 88,
+        "right": 320,
+        "bottom": 568
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "safe": 0,
+      "stage": "04",
+      "status": "",
+      "stageRect": {
+        "x": 74,
+        "y": 87.578125,
+        "width": 172,
+        "height": 16,
+        "right": 246,
+        "bottom": 103.578125
+      },
+      "title": {
+        "x": 74,
+        "y": 112.28125,
+        "width": 172,
+        "height": 28.59375,
+        "right": 246,
+        "bottom": 140.875
+      },
+      "state": {
+        "x": 74,
+        "y": 149.578125,
+        "width": 172,
+        "height": 18,
+        "right": 246,
+        "bottom": 167.578125
+      },
+      "hero": {
+        "x": 14,
+        "y": 191.765625,
+        "width": 292,
+        "height": 179.140625,
+        "right": 306,
+        "bottom": 370.90625
+      },
+      "start": {
+        "x": 14,
+        "y": 385.09375,
+        "width": 292,
+        "height": 58,
+        "right": 306,
+        "bottom": 443.09375
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 320,
+        "height": 424,
+        "right": 320,
+        "bottom": 480
+      },
+      "nav": {
+        "x": 0,
+        "y": 480,
+        "width": 320,
+        "height": 88,
+        "right": 320,
+        "bottom": 568
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "safe": 0,
+      "stage": "05",
+      "status": "잠김",
+      "stageRect": {
+        "x": 74,
+        "y": 87.578125,
+        "width": 172,
+        "height": 16,
+        "right": 246,
+        "bottom": 103.578125
+      },
+      "title": {
+        "x": 74,
+        "y": 112.28125,
+        "width": 172,
+        "height": 28.59375,
+        "right": 246,
+        "bottom": 140.875
+      },
+      "state": {
+        "x": 74,
+        "y": 149.578125,
+        "width": 172,
+        "height": 18,
+        "right": 246,
+        "bottom": 167.578125
+      },
+      "hero": {
+        "x": 14,
+        "y": 191.765625,
+        "width": 292,
+        "height": 179.140625,
+        "right": 306,
+        "bottom": 370.90625
+      },
+      "start": {
+        "x": 14,
+        "y": 385.09375,
+        "width": 292,
+        "height": 58,
+        "right": 306,
+        "bottom": 443.09375
+      },
+      "content": {
+        "x": 0,
+        "y": 56,
+        "width": 320,
+        "height": 424,
+        "right": 320,
+        "bottom": 480
+      },
+      "nav": {
+        "x": 0,
+        "y": 480,
+        "width": 320,
+        "height": 88,
+        "right": 320,
+        "bottom": 568
+      },
+      "color": "rgb(210, 195, 188)"
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "safe": 0,
+      "stage": "03",
+      "status": "클리어",
+      "stageRect": {
+        "x": 85,
+        "y": 118.5,
+        "width": 212.34375,
+        "height": 16,
+        "right": 297.34375,
+        "bottom": 134.5
+      },
+      "title": {
+        "x": 85,
+        "y": 143.203125,
+        "width": 212.34375,
+        "height": 28.59375,
+        "right": 297.34375,
+        "bottom": 171.796875
+      },
+      "state": {
+        "x": 85,
+        "y": 180.5,
+        "width": 212.34375,
+        "height": 18,
+        "right": 297.34375,
+        "bottom": 198.5
+      },
+      "hero": {
+        "x": 377.34375,
+        "y": 61,
+        "width": 449.65625,
+        "height": 253,
+        "right": 827,
+        "bottom": 314
+      },
+      "start": {
+        "x": 25,
+        "y": 256,
+        "width": 332.34375,
+        "height": 53,
+        "right": 357.34375,
+        "bottom": 309
+      },
+      "content": {
+        "x": 1,
+        "y": 49,
+        "width": 850,
+        "height": 274,
+        "right": 851,
+        "bottom": 323
+      },
+      "nav": {
+        "x": 1,
+        "y": 323,
+        "width": 850,
+        "height": 70,
+        "right": 851,
+        "bottom": 393
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "safe": 0,
+      "stage": "04",
+      "status": "",
+      "stageRect": {
+        "x": 85,
+        "y": 118.5,
+        "width": 212.34375,
+        "height": 16,
+        "right": 297.34375,
+        "bottom": 134.5
+      },
+      "title": {
+        "x": 85,
+        "y": 143.203125,
+        "width": 212.34375,
+        "height": 28.59375,
+        "right": 297.34375,
+        "bottom": 171.796875
+      },
+      "state": {
+        "x": 85,
+        "y": 180.5,
+        "width": 212.34375,
+        "height": 18,
+        "right": 297.34375,
+        "bottom": 198.5
+      },
+      "hero": {
+        "x": 377.34375,
+        "y": 61,
+        "width": 449.65625,
+        "height": 253,
+        "right": 827,
+        "bottom": 314
+      },
+      "start": {
+        "x": 25,
+        "y": 256,
+        "width": 332.34375,
+        "height": 53,
+        "right": 357.34375,
+        "bottom": 309
+      },
+      "content": {
+        "x": 1,
+        "y": 49,
+        "width": 850,
+        "height": 274,
+        "right": 851,
+        "bottom": 323
+      },
+      "nav": {
+        "x": 1,
+        "y": 323,
+        "width": 850,
+        "height": 70,
+        "right": 851,
+        "bottom": 393
+      },
+      "color": "rgb(255, 224, 160)"
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "safe": 0,
+      "stage": "05",
+      "status": "잠김",
+      "stageRect": {
+        "x": 85,
+        "y": 118.5,
+        "width": 212.34375,
+        "height": 16,
+        "right": 297.34375,
+        "bottom": 134.5
+      },
+      "title": {
+        "x": 85,
+        "y": 143.203125,
+        "width": 212.34375,
+        "height": 28.59375,
+        "right": 297.34375,
+        "bottom": 171.796875
+      },
+      "state": {
+        "x": 85,
+        "y": 180.5,
+        "width": 212.34375,
+        "height": 18,
+        "right": 297.34375,
+        "bottom": 198.5
+      },
+      "hero": {
+        "x": 377.34375,
+        "y": 61,
+        "width": 449.65625,
+        "height": 253,
+        "right": 827,
+        "bottom": 314
+      },
+      "start": {
+        "x": 25,
+        "y": 256,
+        "width": 332.34375,
+        "height": 53,
+        "right": 357.34375,
+        "bottom": 309
+      },
+      "content": {
+        "x": 1,
+        "y": 49,
+        "width": 850,
+        "height": 274,
+        "right": 851,
+        "bottom": 323
+      },
+      "nav": {
+        "x": 1,
+        "y": 323,
+        "width": 850,
+        "height": 70,
+        "right": 851,
+        "bottom": 393
+      },
+      "color": "rgb(210, 195, 188)"
+    }
+  ]
+}
