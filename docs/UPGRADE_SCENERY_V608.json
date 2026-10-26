@@ -74,6 +74,15 @@
       "sha256": "2912068701a3ad611fe0ec0512c85e2682637a38a0722ce3784cf3f1c0d8fcb9",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_6fb3b21af8408191aeeed6c6329f5118&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090.zip",
+      "library_file_id": "libfile_57d65ff5b0ec8191802bc0a9c6dd09ab",
+      "bytes": 198350,
+      "sha256": "fc9fefde127b1d5017999b27d03915f84179862960948ab0ca9d07c7a527bfea",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_57d65ff5b0ec8191802bc0a9c6dd09ab&account_id=personal"
     }
   ],
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
@@ -98,11 +107,11 @@
   "existing_clean_art": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
   "implementation": "Add a presentation-only module and stylesheet; reuse original art bytes with feathered canvas contours; do not change the game engine or choice logic",
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Uploaded the verified release to main and retained its publication workflow reference; waiting for guarded deployment and real public UI checks",
-  "next": "Confirm the actual online version, live upgrade and reroll behavior, then preserve the 100 percent recovery archive",
+  "status": "CSS fixture and decoration touch fixes verified locally; all earlier snapshots retained",
+  "next": "Publish corrected source, finish full guarded CI and verify actual Pages build",
   "current_release": {
     "version": "V575-WEB-41-UPGRADE-SCENERY",
-    "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
+    "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
     "scriptBytes": 77707057,
     "assets": 1050,
     "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",

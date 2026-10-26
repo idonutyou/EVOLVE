@@ -1,26 +1,16 @@
 {
   "version": "V575-WEB-41-UPGRADE-SCENERY",
-  "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
+  "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
   "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
-  "source_publish_commit": "7f8cc025006b8dd90b1b0ac407c38e0d32e04cb6",
-  "status": "Verified source on main; guarded publication and live UI verification running",
+  "source_publish_commit": null,
+  "status": "Corrected source ready after local regression checks; a fresh guarded publication is required",
   "url": "https://idonutyou.github.io/EVOLVE/",
-  "workflows": [
-    {
-      "id": 40284960344,
-      "name": "Verify EVOLVE migration tools",
-      "status": "queued",
-      "conclusion": null,
-      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40284960344"
-    },
-    {
-      "id": 40284960505,
-      "name": "Publish EVOLVE Web",
-      "status": "queued",
-      "conclusion": null,
-      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40284960505"
-    }
-  ],
+  "workflows": [],
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "previous_failed_run": {
+    "id": 40284960505,
+    "reason": "Legacy local fixture CSS MIME type blocked card clicks",
+    "resolved_locally": true
+  }
 }

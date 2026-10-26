@@ -1,6 +1,6 @@
 {
   "version": "V575-WEB-41-UPGRADE-SCENERY",
-  "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
+  "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
   "status": "Local visual inspection and functional checks passed",
   "reports": {
     "upgrade-scenery-browser.json": {
@@ -38,6 +38,18 @@
         "the decorated portrait and landscape selectors leave the battlefield visible while real card selection still works",
         "purge radius grows 65%; warning is harmless and subsequent visible rendered field damages inside the same radius",
         "second startup reuses every cached asset with zero asset network bytes and administrator mode remains nonpersistent"
+      ],
+      "errors": []
+    },
+    "player-mutant-browser.json": {
+      "passed": true,
+      "checks": [
+        "Approved 1254px PNG is loaded byte-for-byte; new 1536px home preview is ready before Start; four independent walking legs",
+        "Actual preview drawing transforms keep both weapons in body proportion and both blade cutting edges on the lower side",
+        "Both complete weapons, all feet and the tail fit within the parts preview with transparent margins",
+        "Continuous lift/stance gait, smooth stop, independent foot states and zero per-frame bitmap rebuilds",
+        "Actual rendered creature grows and shrinks with size cards, together with its collision radius",
+        "Learned tail uses native textured armor; range upgrades increase visible physical length and segment count"
       ],
       "errors": []
     }
@@ -329,5 +341,14 @@
   "web_client_tests_passed": 1,
   "original_images_preserved": 1009,
   "engine_unchanged": true,
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "correction": {
+    "issue": "Legacy test servers sent CSS as application/octet-stream, preventing layout and leaving a decorative canvas over cards",
+    "fix": "All affected local browser fixtures serve text/css; both decorative canvases also ignore pointer events inline",
+    "retained_guards": true,
+    "rerun_passed": [
+      "player_mutant_browser.cjs",
+      "upgrade_scenery_browser.cjs"
+    ]
+  }
 }

@@ -80,9 +80,9 @@
     panel=document.getElementById('levelPanel');head=panel?.querySelector('.levelHead');
     if(!panel||!head)throw Error('Upgrade presentation target is missing');
     panel.classList.add('upgradeSceneryV608');
-    header=canvas(864,446);header.className='upgradeSceneryHeaderV608';header.setAttribute('aria-hidden','true');head.prepend(header);
+    header=canvas(864,446);header.className='upgradeSceneryHeaderV608';header.style.pointerEvents='none';header.setAttribute('aria-hidden','true');head.prepend(header);
     const footer=document.createElement('div');footer.className='upgradeFooterV608';
-    footerCanvas=canvas(864,318);footerCanvas.className='upgradeSceneryFooterV608';footerCanvas.setAttribute('aria-hidden','true');footer.append(footerCanvas);
+    footerCanvas=canvas(864,318);footerCanvas.className='upgradeSceneryFooterV608';footerCanvas.style.pointerEvents='none';footerCanvas.setAttribute('aria-hidden','true');footer.append(footerCanvas);
     const reroll=document.getElementById('rerollRow');panel.append(footer);if(reroll)footer.append(reroll);
     const observer=new MutationObserver(sync);
     observer.observe(document.getElementById('levelOverlay'),{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['data-upgrade-language','style']});
