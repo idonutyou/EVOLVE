@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-37-FLAT-NAVIGATION",
+  "version": "V575-WEB-39-ICONS-FULLSCREEN",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 258379,
-  "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+  "index_bytes": 259048,
+  "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
   "image_assets": 1005,
-  "cached_files": 1040,
-  "cached_bytes": 373642962,
+  "cached_files": 1046,
+  "cached_bytes": 374084862,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1424,6 +1424,69 @@
     "integrated_vector_glyphs": true,
     "bitmap_glyph_tiles_removed": true,
     "character_and_combat_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "icons_fullscreen_v606": {
+    "baseline": "caa0430a13595695ce896aac22a5732bb39eb2ef",
+    "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+    "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
+    "reference": {
+      "source": "art/home-controls-v606/reference.png",
+      "sha256": "0cdb7abf01c2796bbe97652184777e8939b337308dd3c0b5fc78f5bf99624eb8",
+      "width": 1536,
+      "height": 1024,
+      "icons": {
+        "shop": [
+          182,
+          43,
+          87,
+          82
+        ],
+        "parts": [
+          425,
+          39,
+          83,
+          87
+        ],
+        "battle": [
+          708,
+          31,
+          122,
+          97
+        ],
+        "challenge": [
+          1025,
+          40,
+          93,
+          85
+        ],
+        "codex": [
+          1283,
+          42,
+          97,
+          82
+        ]
+      },
+      "startMaterial": [
+        637,
+        842,
+        76,
+        126
+      ],
+      "icon_reference_row": 1,
+      "start_material_reference_row": 5,
+      "source_bytes_unchanged": true,
+      "path": "assets/0cdb7abf01c2796bbe97652184777e8939b337308dd3c0b5fc78f5bf99624eb8.png"
+    },
+    "controls_script": "assets/f4b7841cb6559e5298775d95fcea161528b0ea91a0490fe5fe2f653adb5c287b.js",
+    "navigation_frames_labels_and_layout_unchanged": true,
+    "reference_icon_row": 1,
+    "start_inner_material_row": 5,
+    "start_frame_unchanged": true,
+    "fullscreen_manifest": "manifest.webmanifest",
+    "fullscreen_script": "assets/4270f5083599bed77de7172667f1e52b4d1e3d3d0b231558550edce242c605ef.js",
+    "fullscreen_style": "assets/64793a75acc3ddf22781a477da23243c13022df6fe6f7f59b1aba2a62b15fc51.css",
+    "save_keys_and_update_timing_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

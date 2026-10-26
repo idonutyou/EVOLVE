@@ -1,0 +1,47 @@
+{
+  "source": "art/home-controls-v606/reference.png",
+  "sha256": "0cdb7abf01c2796bbe97652184777e8939b337308dd3c0b5fc78f5bf99624eb8",
+  "width": 1536,
+  "height": 1024,
+  "icons": {
+    "shop": [
+      182,
+      43,
+      87,
+      82
+    ],
+    "parts": [
+      425,
+      39,
+      83,
+      87
+    ],
+    "battle": [
+      708,
+      31,
+      122,
+      97
+    ],
+    "challenge": [
+      1025,
+      40,
+      93,
+      85
+    ],
+    "codex": [
+      1283,
+      42,
+      97,
+      82
+    ]
+  },
+  "startMaterial": [
+    637,
+    842,
+    76,
+    126
+  ],
+  "icon_reference_row": 1,
+  "start_material_reference_row": 5,
+  "source_bytes_unchanged": true
+}

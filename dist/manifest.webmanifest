@@ -1,0 +1,38 @@
+{
+  "id": "./",
+  "name": "EVOLVE",
+  "short_name": "EVOLVE",
+  "description": "EVOLVE 생존 · 진화 액션",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "any",
+  "background_color": "#05070a",
+  "theme_color": "#05070a",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

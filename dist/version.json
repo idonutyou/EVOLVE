@@ -1,8 +1,8 @@
 {
-  "version": "V575-WEB-37-FLAT-NAVIGATION",
-  "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+  "version": "V575-WEB-39-ICONS-FULLSCREEN",
+  "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
   "scriptBytes": 77707057,
-  "assets": 1040,
+  "assets": 1046,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true
 }

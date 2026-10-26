@@ -1,0 +1,27 @@
+{
+  "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+  "reports": {
+    "visual-fit-browser.json": {
+      "success": true,
+      "checks": [
+        "All five states keep exactly one flat top and equal heights during width transitions; selected cells widen by more than 50 percent and fill the entire row without gaps",
+        "No cropped photo backgrounds or tall selected frames remain; five exact ROW 1 reference glyphs sit on one full-width straight rail",
+        "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+        "Actual body and both weapon render transforms are exactly 70 percent of WEB-35; collision radius is 7, repeated resets do not compound shrinkage, size upgrades still apply, and the 1536px parts preview remains intact",
+        "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+        "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+      ],
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "fullscreen-browser.json": {
+      "success": true,
+      "checks": [
+        "Chromium accepts scoped fullscreen manifest and all install icons decode at their declared sizes",
+        "Real fullscreen entry fills the viewport; exit preserves page and saved data"
+      ],
+      "physical_Galaxy_S23_plus_tested": false
+    }
+  },
+  "original_engine_and_navigation_stylesheet_identical": true,
+  "original_images_unchanged": 1005
+}

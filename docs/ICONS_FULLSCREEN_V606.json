@@ -1,0 +1,79 @@
+{
+  "version": "V575-WEB-39-ICONS-FULLSCREEN",
+  "baseline": "caa0430a13595695ce896aac22a5732bb39eb2ef",
+  "progress": 70,
+  "requested": [
+    "Keep the current bottom navigation frames, labels, dimensions and width-only selected state exactly",
+    "Replace only the five glyphs with the exact icons from the first reference image ROW 1",
+    "Keep the START button contour and outer frame exactly; replace only its interior with the ROW 5 BATTLE red cracked glowing material",
+    "Add installable fullscreen PWA and browser fullscreen access; preserve all save keys and safe manual updates"
+  ],
+  "backups": [
+    {
+      "stage": 10,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_213273c620f881919b84cb2fcbd54496",
+      "bytes": 6521,
+      "sha256": "f6569fda9e2e87cb5eb3c30e716fe6215e710b4d3238db50773c86dce624cab3",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_213273c620f881919b84cb2fcbd54496&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_4fa720a6175c81918f329ec78f8d459a",
+      "bytes": 7246,
+      "sha256": "f318642b9c6b7ace6805eb152a086356e3705d936a3f95ad9728e221855660e3",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_4fa720a6175c81918f329ec78f8d459a&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_28ae336e755081919f02b0f15cd506a0",
+      "bytes": 413703,
+      "sha256": "d25f966ba467616a72d5ef8b27d85ad6e1085ac96887f835be326986caaaeb88",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_28ae336e755081919f02b0f15cd506a0&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_551678adc80c8191baeca9cb4ac2a425",
+      "bytes": 414357,
+      "sha256": "f2fe0bf053ba0dcd9ef75475e09218926059cb3166ed802b42196a4e432238e9",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_551678adc80c8191baeca9cb4ac2a425&account_id=personal"
+    },
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_4ec4851639248191bd754d5537c23ca2",
+      "bytes": 417105,
+      "sha256": "c1670568cd68e4bc53058501f8918ac9b3c1038614d72c8946dab4a0023b5c05",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_4ec4851639248191bd754d5537c23ca2&account_id=personal"
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_7d31038900d08191b3f86c86f23f3074",
+      "bytes": 1691424,
+      "sha256": "892ae31e83b05632e092ed17002859b4131deb2374ba81dcd085c0831d314648",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_7d31038900d08191b3f86c86f23f3074&account_id=personal"
+    }
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "status": "Rendered navigation/character checks and real fullscreen entry/exit passed; entire original game engine, navigation CSS and all 1005 original images identical",
+  "next": "Upload only the reviewed task-specific changed files to verified idonutyou/EVOLVE, then confirm remote hashes and deploy",
+  "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+  "current_release": {
+    "version": "V575-WEB-39-ICONS-FULLSCREEN",
+    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+    "scriptBytes": 77707057,
+    "assets": 1046,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  }
+}
