@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-41-UPGRADE-SCENERY",
   "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
-  "progress": 70,
+  "progress": 80,
   "backups": [
     {
       "stage": 10,
@@ -56,6 +56,15 @@
       "sha256": "fdce7d05bd7a66d71a5a247ac06215f1f6843851cc19734d8c9b90989a9827d4",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_2f87791e05608191ac3b099eac0e8cd7&account_id=personal"
+    },
+    {
+      "stage": 70,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_070.zip",
+      "library_file_id": "libfile_8e2249e2361c8191b9b7c965b24259c3",
+      "bytes": 196834,
+      "sha256": "d12d1b154e397a9209e46f79fe86e8a3ecccab05a34b246f22924aff2b5c6da6",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_8e2249e2361c8191b9b7c965b24259c3&account_id=personal"
     }
   ],
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
@@ -80,8 +89,8 @@
   "existing_clean_art": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
   "implementation": "Add a presentation-only module and stylesheet; reuse original art bytes with feathered canvas contours; do not change the game engine or choice logic",
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Preserved the final reviewed UI and regression results; deployment now checks the new screen and compares the live reference, presentation and engine bytes",
-  "next": "Upload the reviewed delta and verify the complete remote source tree before publication",
+  "status": "Uploaded all reviewed source files to an immutable remote backup; complete local and remote Git trees match exactly",
+  "next": "Promote the verified build to main and wait for guarded publication and actual online verification",
   "current_release": {
     "version": "V575-WEB-41-UPGRADE-SCENERY",
     "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
