@@ -11,7 +11,7 @@ def main():
  dist=ROOT/'dist';manifest=json.loads(old('dist/asset-manifest.json'));baseline=list(manifest);report=json.loads(old('dist/verification.json'));version=json.loads(old('dist/version.json'));config_art=json.loads((ROOT/'web/organ-card-art-v610.json').read_text())
  previous=json.loads((dist/'asset-manifest.json').read_text())
  for card in config_art['cards']:
-  raw=(ROOT.parent/'upload'/card['upload']).read_bytes();assert hashlib.sha256(raw).hexdigest()==card['sha256'];assert len(raw)==card['bytes'];(dist/card['path']).write_bytes(raw);manifest.append({'path':card['path'],'sha256':card['sha256'],'bytes':len(raw),'kind':'image'})
+  supplied=ROOT.parent/'upload'/card['upload'];source=supplied if supplied.exists() else dist/card['path'];raw=source.read_bytes();assert hashlib.sha256(raw).hexdigest()==card['sha256'];assert len(raw)==card['bytes'];(dist/card['path']).write_bytes(raw);manifest.append({'path':card['path'],'sha256':card['sha256'],'bytes':len(raw),'kind':'image'})
  def add(raw,ext,kind):
   sha=hashlib.sha256(raw).hexdigest();path='assets/'+sha+'.'+ext;(dist/path).write_bytes(raw);manifest.append({'path':path,'sha256':sha,'bytes':len(raw),'kind':kind});return path
  source=(ROOT/'web/organ-card-art-v610.js').read_text();assert source.count('__ORGAN_CARD_ART_V610__')==1;js=source.replace('__ORGAN_CARD_ART_V610__',json.dumps(config_art,separators=(',',':'),ensure_ascii=False)).encode();css=(ROOT/'web/organ-card-art-v610.css').read_bytes();script=add(js,'js','presentation-code');style=add(css,'css','style')

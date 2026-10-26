@@ -1,0 +1,108 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-42-ORGAN-CARD-ART",
+  "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
+  "checks": [
+    {
+      "path": "index.html",
+      "bytes": 259577,
+      "sha256": "f2751fb09f59c4c3224883aa7e2665eea5cf82c6aad3d4784dc2b0f05106ccf5",
+      "matches": true
+    },
+    {
+      "path": "version.json",
+      "bytes": 285,
+      "sha256": "a74b1c5fa507bd91905fcfc5ca52f9c5168f006932683d43e1caffba329f05d6",
+      "matches": true
+    },
+    {
+      "path": "asset-manifest.json",
+      "bytes": 204631,
+      "sha256": "1a896ce7b06e915dd5ed83558dd25f0515f468a9dfccc0120c7b5525150a8ff5",
+      "matches": true
+    },
+    {
+      "path": "assets/3eaea685fbcf6af390ce4790cae093de4b0f596748d928a2f9a919d88fe4fc41.js",
+      "bytes": 6767,
+      "sha256": "3eaea685fbcf6af390ce4790cae093de4b0f596748d928a2f9a919d88fe4fc41",
+      "matches": true
+    },
+    {
+      "path": "assets/b7c9a34f2bc3ecdbaf5d1d1f11ce13659097bd50c5a6658c249a297dc4063723.css",
+      "bytes": 1567,
+      "sha256": "b7c9a34f2bc3ecdbaf5d1d1f11ce13659097bd50c5a6658c249a297dc4063723",
+      "matches": true
+    },
+    {
+      "path": "assets/0d81a51db37e67db329d82f01aaad4b01ce257ab2b0b3f350e1b4e6dca93fdc6.js",
+      "bytes": 1655000,
+      "sha256": "0d81a51db37e67db329d82f01aaad4b01ce257ab2b0b3f350e1b4e6dca93fdc6",
+      "matches": true
+    },
+    {
+      "path": "assets/4919c511ffa0d272d04074aa59381f8eedc5e3d2577620433beb2c7a0ae5026f.png",
+      "bytes": 218931,
+      "sha256": "4919c511ffa0d272d04074aa59381f8eedc5e3d2577620433beb2c7a0ae5026f",
+      "matches": true
+    },
+    {
+      "path": "assets/c780af5660f695115005750a3648fc746c5e87683ccfd87a08fe7391ca24f489.png",
+      "bytes": 288273,
+      "sha256": "c780af5660f695115005750a3648fc746c5e87683ccfd87a08fe7391ca24f489",
+      "matches": true
+    },
+    {
+      "path": "assets/fbe09aa300e0d3d8d92df6ea323efeec743ee524615f5c7e6152c7430f18fc76.png",
+      "bytes": 350399,
+      "sha256": "fbe09aa300e0d3d8d92df6ea323efeec743ee524615f5c7e6152c7430f18fc76",
+      "matches": true
+    },
+    {
+      "path": "assets/be9f9a7f68c07f5b1fb71bc0a749b66290199e2db5de327f28e5e834a524eaa8.png",
+      "bytes": 309937,
+      "sha256": "be9f9a7f68c07f5b1fb71bc0a749b66290199e2db5de327f28e5e834a524eaa8",
+      "matches": true
+    },
+    {
+      "path": "assets/8f4bcecaf0aa45c787bacb0ec42a13c1aef507807d2dc3ce0fc9014af775f838.png",
+      "bytes": 441934,
+      "sha256": "8f4bcecaf0aa45c787bacb0ec42a13c1aef507807d2dc3ce0fc9014af775f838",
+      "matches": true
+    },
+    {
+      "path": "assets/36d03eb365b3330e44dfbe7a7526d33fe655b3b291d54458843178703697113a.png",
+      "bytes": 190423,
+      "sha256": "36d03eb365b3330e44dfbe7a7526d33fe655b3b291d54458843178703697113a",
+      "matches": true
+    },
+    {
+      "path": "assets/74d74af58070ec832f9c58150cb3e5f278231ea8c85935ae8cae1ffccf28f4d7.png",
+      "bytes": 273670,
+      "sha256": "74d74af58070ec832f9c58150cb3e5f278231ea8c85935ae8cae1ffccf28f4d7",
+      "matches": true
+    },
+    {
+      "path": "assets/18d100e966f7cd0b037294eecbf3faa539135b67d6ff7656eea0e152de0511cf.png",
+      "bytes": 308982,
+      "sha256": "18d100e966f7cd0b037294eecbf3faa539135b67d6ff7656eea0e152de0511cf",
+      "matches": true
+    },
+    {
+      "path": "assets/9b48e108934f85477bea9915ca6673968650241762f9d4448654535e9e3c7806.png",
+      "bytes": 277081,
+      "sha256": "9b48e108934f85477bea9915ca6673968650241762f9d4448654535e9e3c7806",
+      "matches": true
+    },
+    {
+      "path": "assets/98ed19a788044eab015805351f8f3fedc0a736b71ce71b6c18b096ef7d11b965.png",
+      "bytes": 400347,
+      "sha256": "98ed19a788044eab015805351f8f3fedc0a736b71ce71b6c18b096ef7d11b965",
+      "matches": true
+    }
+  ],
+  "original_supplied_pngs_exact": 10,
+  "engine_unchanged": true,
+  "stats_and_effects_unchanged": true,
+  "physical_Galaxy_S23_plus_tested": false
+}

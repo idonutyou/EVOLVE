@@ -1,25 +1,40 @@
 {
+  "success": true,
+  "status": "Published and verified on the actual public game website",
+  "url": "https://idonutyou.github.io/EVOLVE/",
   "version": "V575-WEB-42-ORGAN-CARD-ART",
   "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
   "baseline": "449773f580453ed46e0f37502e0ac00e1c44a298",
   "source_publish_commit": "97f20ac7f19ca2740d8c110e4ead26ff2b680cfa",
   "source_tree": "3c2eca4d6f30a6dcd2fb8a24822435b40c9d5557",
-  "status": "Guarded publication and actual public verification running",
-  "url": "https://idonutyou.github.io/EVOLVE/",
-  "workflows": [
-    {
-      "id": 40304898327,
-      "name": "Verify EVOLVE migration tools"
-    },
-    {
-      "id": 40304898306,
-      "name": "Publish EVOLVE Web"
-    }
-  ],
-  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "source_tree_verified_exact": true,
+  "deployment_run_id": 40304898306,
+  "deployment_job_id": 121511590510,
+  "deployment_status": "success",
+  "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40304898306",
+  "migration_run_id": 40304898327,
+  "migration_status": "success",
+  "browser_suites_passed": 24,
+  "public_browser_suites_passed": 6,
+  "actual_public_files_matched": 16,
+  "original_supplied_pngs_exact": 10,
+  "baseline_assets_unchanged": 1050,
+  "baseline_images_unchanged": 1009,
   "engine_unchanged": true,
+  "engine": "assets/0d81a51db37e67db329d82f01aaad4b01ce257ab2b0b3f350e1b4e6dca93fdc6.js",
+  "engine_sha256": "0d81a51db37e67db329d82f01aaad4b01ce257ab2b0b3f350e1b4e6dca93fdc6",
   "stats_and_effects_unchanged": true,
-  "supplied_original_pngs": 10,
-  "baseline_assets_preserved": 1050,
-  "physical_Galaxy_S23_plus_tested": false
+  "names_levels_effects_from_original_engine": true,
+  "actual_clicks_learn_and_apply_original_deltas": true,
+  "only_whip_and_spike_card_display_changed": true,
+  "english_and_mobile_landscape_verified": true,
+  "save_keys_unchanged": true,
+  "saved_DNA_preserved": true,
+  "decoded_source_image_cache_limit": 3,
+  "rebuild_uses_persisted_PNGs_when_upload_folder_is_absent": true,
+  "live_browser_report": "docs/ORGAN_CARD_ART_LIVE_BROWSER_V610.json",
+  "live_bytes_report": "docs/ORGAN_CARD_ART_LIVE_BYTES_V610.json",
+  "publication_artifact_id": 12642612043,
+  "physical_Galaxy_S23_plus_tested": false,
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve"
 }
