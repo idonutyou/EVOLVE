@@ -1,0 +1,53 @@
+/* Preserve the live battlefield and the existing three card frames. */
+#levelPanel.upgradeSceneryV608{gap:0!important;background:none!important}
+#levelPanel.upgradeSceneryV608 .levelHead{position:relative!important;inset:auto!important;width:100%!important;height:clamp(112px,22dvh,202px)!important;flex:none!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
+#levelPanel.upgradeSceneryV608 .levelHead::before,#levelPanel.upgradeSceneryV608 .levelHead::after{display:none!important}
+#levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:fill;pointer-events:none!important;filter:drop-shadow(0 0 4px #f5252338)}
+#levelPanel.upgradeSceneryV608 #levelContext{display:none!important}
+#levelPanel.upgradeSceneryV608 #cards{background:#020106!important}
+#levelPanel.upgradeSceneryV608 .upgradeFooterV608{position:relative;width:100%;height:clamp(72px,12.5dvh,118px);flex:none;isolation:isolate}
+#levelPanel.upgradeSceneryV608 .upgradeSceneryFooterV608{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;pointer-events:none!important;object-fit:fill;filter:drop-shadow(0 0 5px #e8272826)}
+#levelPanel.upgradeSceneryV608 #rerollRow{position:absolute!important;left:50%!important;right:auto!important;top:30%!important;bottom:auto!important;transform:translateX(-50%);align-self:auto!important;justify-content:center!important;width:max-content!important;z-index:2}
+#levelPanel.upgradeSceneryV608 #rerollBtn{position:relative!important;display:grid!important;grid-template-columns:22px 1fr 29px!important;align-items:center!important;gap:10px!important;width:clamp(178px,54cqw,224px)!important;height:48px!important;min-height:48px!important;padding:0 15px!important;margin:0!important;border:1px solid #b565548f!important;border-radius:0!important;clip-path:polygon(11px 0,calc(100% - 11px) 0,100% 11px,100% calc(100% - 11px),calc(100% - 11px) 100%,11px 100%,0 calc(100% - 11px),0 11px)!important;background:linear-gradient(180deg,#552a2f 0%,#30151d 18%,#150b12 58%,#31151e 100%)!important;box-shadow:inset 0 0 0 3px #100a0f,inset 0 0 0 4px #dba07a33,0 3px 16px #020104b3!important;color:#f4ddcd!important;font:650 15px/1.1 'EVOLVE Upgrade Sans',system-ui,sans-serif!important;letter-spacing:.025em!important;text-shadow:0 2px 2px #000!important;cursor:pointer}
+#levelPanel.upgradeSceneryV608 #rerollBtn::before{content:'';position:absolute;inset:6px 16px auto;height:1px;background:linear-gradient(90deg,transparent,#f7ba8d8c,transparent);pointer-events:none}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollIconV608{display:block;width:22px;height:22px;color:#e8a491;filter:drop-shadow(0 0 3px #ff363c44)}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollLabelV608{font:inherit!important;color:inherit!important;white-space:nowrap}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollCountV608{display:flex;align-items:center;justify-content:center;width:29px;height:26px;border-left:1px solid #a06e6259;color:#ffe0b3;font:650 14px/1 'EVOLVE Upgrade Sans',system-ui,sans-serif;font-variant-numeric:tabular-nums}
+#levelPanel.upgradeSceneryV608 #rerollBtn:focus-visible{outline:2px solid #ffe4c4!important;outline-offset:3px!important;filter:brightness(1.2)}
+#levelPanel.upgradeSceneryV608 #rerollBtn:active{filter:brightness(1.2);translate:0 1px}
+#levelPanel.upgradeSceneryV608 #rerollBtn:disabled{opacity:.42;cursor:default;filter:saturate(.35)}
+#levelPanel.upgradeSceneryV608[data-upgrade-scenery-ready='true'][data-upgrade-language='ko'] .levelHead h2,
+#levelPanel.upgradeSceneryV608[data-upgrade-scenery-ready='true'][data-upgrade-language='ko'] .levelHead p{position:absolute!important;width:1px!important;height:1px!important;clip-path:inset(50%)!important;overflow:hidden!important;white-space:nowrap!important}
+#levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead h2{position:absolute!important;top:54%!important;left:19%!important;right:19%!important;width:auto!important;height:auto!important;clip-path:none!important;overflow:visible!important;font-size:clamp(22px,7.4cqw,36px)!important;line-height:1.2!important;letter-spacing:.045em!important}
+#levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead p{position:absolute!important;top:77%!important;left:19%!important;right:19%!important;width:auto!important;height:auto!important;clip-path:none!important;overflow:visible!important;font-size:clamp(9px,3cqw,14px)!important;line-height:1.25!important;letter-spacing:.04em!important}
+@media(orientation:portrait) and (max-height:640px){
+ #levelPanel.upgradeSceneryV608 .levelHead{height:98px!important}
+ #levelPanel.upgradeSceneryV608 #cards{height:clamp(220px,40dvh,250px)!important}
+ #levelPanel.upgradeSceneryV608 .upgradeFooterV608{height:70px}
+}
+@media(orientation:landscape){
+ #levelPanel.upgradeSceneryV608{width:min(82vw,800px)!important}
+ #levelPanel.upgradeSceneryV608 .levelHead{width:min(56%,350px)!important;height:78px!important}
+ #levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{object-fit:cover;object-position:center 90%}
+ #levelPanel.upgradeSceneryV608 #cards{height:calc(100dvh - 146px)!important;min-height:155px!important}
+ #levelPanel.upgradeSceneryV608 .upgradeFooterV608{height:54px}
+ #levelPanel.upgradeSceneryV608 #rerollRow{top:50%!important}
+ #levelPanel.upgradeSceneryV608 #rerollBtn{height:42px!important;min-height:42px!important;width:190px!important;font-size:13px!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead h2{top:16%!important;font-size:23px!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead p{top:61%!important;font-size:10px!important}
+}
+
+/* Use the same blue image frame as the level-up plaque, with safe outer margins. */
+#levelPanel.upgradeSceneryV608 #rerollRow{top:50%!important;transform:translate(-50%,-50%)!important}
+#levelPanel.upgradeSceneryV608 #rerollBtn{grid-template-columns:18px 1fr 20px!important;gap:6px!important;width:clamp(194px,58cqw,240px)!important;height:58px!important;min-height:58px!important;padding:0 20px 3px!important;border:0!important;clip-path:none!important;overflow:visible!important;background:var(--upgrade-reroll-frame) center/100% 100% no-repeat!important;box-shadow:none!important;color:#e8f5ff!important;font-size:14px!important;letter-spacing:0!important;text-shadow:0 0 7px #82d7ff66,0 2px 2px #000!important;filter:drop-shadow(0 2px 5px #0009)}
+#levelPanel.upgradeSceneryV608 #rerollBtn::before{display:none!important}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollIconV608{width:18px;height:18px;color:#a8e3ff;filter:none}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollCountV608{width:20px;height:23px;color:#d8f2ff;border-color:#82bddf55;font-size:13px}
+@media(orientation:landscape){#levelPanel.upgradeSceneryV608 #rerollBtn{height:48px!important;min-height:48px!important;width:194px!important;font-size:13px!important}}
+@media(orientation:landscape){
+ #levelPanel.upgradeSceneryV608 .levelHead{height:96px!important}
+ #levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{object-fit:contain;object-position:center}
+ #levelPanel.upgradeSceneryV608 #cards{height:calc(100dvh - 164px)!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead h2{top:54%!important;font-size:17px!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead p{top:77%!important;font-size:8px!important}
+}

@@ -1,0 +1,53 @@
+{
+  "success": true,
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "version": "V575-WEB-41-UPGRADE-SCENERY",
+  "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
+  "checks": [
+    {
+      "path": "index.html",
+      "bytes": 259366,
+      "sha256": "4484385ffe030d8b044cae068e80ad1c8588110de86f860679936598966e15fb",
+      "matches": true
+    },
+    {
+      "path": "version.json",
+      "bytes": 286,
+      "sha256": "e1707978f947632fe237a7b30592299f07929fee240c8bee5f34601dafde667a",
+      "matches": true
+    },
+    {
+      "path": "asset-manifest.json",
+      "bytes": 202308,
+      "sha256": "e683bd45e1b7c50c3a874ca0bad9ee94cb56d100f27a7e93ade3a4caa59784f5",
+      "matches": true
+    },
+    {
+      "path": "assets/54ff5e7ed44ffa0ad054eb0cbf36ffe344c243f043c54667982b86cae8242cbc.js",
+      "bytes": 6954,
+      "sha256": "54ff5e7ed44ffa0ad054eb0cbf36ffe344c243f043c54667982b86cae8242cbc",
+      "matches": true
+    },
+    {
+      "path": "assets/b6b74f16e531d43c714dc925d205d7f75424625770eadd2ea0daafdcd5458224.css",
+      "bytes": 5826,
+      "sha256": "b6b74f16e531d43c714dc925d205d7f75424625770eadd2ea0daafdcd5458224",
+      "matches": true
+    },
+    {
+      "path": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+      "bytes": 302370,
+      "sha256": "a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c",
+      "matches": true
+    },
+    {
+      "path": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "bytes": 1653811,
+      "sha256": "2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2",
+      "matches": true
+    }
+  ],
+  "engine_unchanged": true,
+  "reference_bytes_unchanged": true,
+  "physical_Galaxy_S23_plus_tested": false
+}

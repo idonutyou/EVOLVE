@@ -30,9 +30,9 @@ def main():
         expected = (args.dist / name).read_bytes()
         assert actual == expected, name
         checks.append({'path': name, 'bytes': len(actual), 'sha256': hashlib.sha256(actual).hexdigest(), 'matches': True})
-    assert feature['engine_unchanged'] and feature['original_image_bytes_unchanged']
+    assert feature['gameplay_unchanged'] and feature['viewport_repaint_only'] and feature['original_image_bytes_unchanged']
     report = {'success': True, 'url': base, 'version': version['version'], 'build': version['build'],
-              'checks': checks, 'engine_unchanged': True, 'reference_bytes_unchanged': True,
+              'checks': checks, 'gameplay_unchanged': True, 'engine_change': 'viewport repaint only', 'reference_bytes_unchanged': True,
               'physical_Galaxy_S23_plus_tested': False}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n')

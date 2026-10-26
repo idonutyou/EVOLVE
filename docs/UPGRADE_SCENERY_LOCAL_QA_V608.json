@@ -1,12 +1,13 @@
 {
   "version": "V575-WEB-41-UPGRADE-SCENERY",
-  "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
+  "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
   "status": "Local visual inspection and functional checks passed",
   "reports": {
     "upgrade-scenery-browser.json": {
       "passed": true,
       "checks": [
         "Real opening choices show the exact LEVEL UP / choose-one title, keep the HUD level and original organ levels, and remove the duplicate popup level; the real reroll click consumes exactly one reroll without applying a skill",
+        "Viewport and system-bar resize events repaint the actual paused game canvas without advancing time; contour interiors are opaque, outside corners remain transparent, and the image-based blue reroll frame retains transparent safe margins",
         "Five phone and landscape layouts keep the reroll centered below the cards, retain the visible unblurred battlefield, and display red reference ornament with transparent outer corners and an opaque readable title plaque",
         "The actual opening and later upgrade choices still resume the run; Korean/English changes settle without repeated canvas rebuilds and saved DNA survives returning home"
       ],
@@ -60,6 +61,14 @@
         "swords have a real windup and swept melee arc, hit multiple enemies inside the swing once each, alternate upper limbs and leave rear/distant enemies untouched without emitting bullets",
         "escaped targets are missed; an actual map obstruction blocks blade damage; aiming and drawing preserve both pose caches without rebuilding meshes",
         "switching the existing single ARM slot replaces the weapon, both choices persist after reload, removal persists and restores bare stabs, and lightning/admin remain locked"
+      ],
+      "errors": []
+    },
+    "fullscreen-browser.json": {
+      "passed": true,
+      "checks": [
+        "Chromium accepts scoped fullscreen manifest and all install icons decode at their declared sizes",
+        "Real fullscreen entry fills the viewport; exit preserves page and saved data"
       ],
       "errors": []
     }
@@ -125,12 +134,12 @@
         "bottom": 743.359375
       },
       "reroll": {
-        "x": 93.6328125,
-        "y": 668.796875,
-        "width": 205.734375,
-        "height": 48,
-        "right": 299.3671875,
-        "bottom": 716.796875
+        "x": 86.015625,
+        "y": 661.109375,
+        "width": 220.96875,
+        "height": 58,
+        "right": 306.984375,
+        "bottom": 719.109375
       },
       "overlay": "rgba(2, 4, 7, 0.16)",
       "backdrop": "none",
@@ -175,12 +184,12 @@
         "bottom": 637.78125
       },
       "reroll": {
-        "x": 93.6328125,
-        "y": 573.8125,
-        "width": 205.734375,
-        "height": 48,
-        "right": 299.3671875,
-        "bottom": 621.8125
+        "x": 86.015625,
+        "y": 563.09375,
+        "width": 220.96875,
+        "height": 58,
+        "right": 306.984375,
+        "bottom": 621.09375
       },
       "overlay": "rgba(2, 4, 7, 0.16)",
       "backdrop": "none",
@@ -225,12 +234,12 @@
         "bottom": 481.59375
       },
       "reroll": {
-        "x": 71,
-        "y": 432.59375,
-        "width": 178,
-        "height": 48,
-        "right": 249,
-        "bottom": 480.59375
+        "x": 63,
+        "y": 417.59375,
+        "width": 194,
+        "height": 58,
+        "right": 257,
+        "bottom": 475.59375
       },
       "overlay": "rgba(2, 4, 7, 0.16)",
       "backdrop": "none",
@@ -254,15 +263,15 @@
         "x": 251,
         "y": 7,
         "width": 350,
-        "height": 78,
+        "height": 96,
         "right": 601,
-        "bottom": 85
+        "bottom": 103
       },
       "cards": {
         "x": 76.6875,
-        "y": 85,
+        "y": 103,
         "width": 698.625,
-        "height": 247,
+        "height": 229,
         "right": 775.3125,
         "bottom": 332
       },
@@ -275,12 +284,12 @@
         "bottom": 386
       },
       "reroll": {
-        "x": 331,
-        "y": 336.3125,
-        "width": 190,
-        "height": 42,
-        "right": 521,
-        "bottom": 378.3125
+        "x": 329,
+        "y": 335,
+        "width": 194,
+        "height": 48,
+        "right": 523,
+        "bottom": 383
       },
       "overlay": "rgba(2, 4, 7, 0.16)",
       "backdrop": "none",
@@ -304,15 +313,15 @@
         "x": 282.484375,
         "y": 7,
         "width": 350,
-        "height": 78,
+        "height": 96,
         "right": 632.484375,
-        "bottom": 85
+        "bottom": 103
       },
       "cards": {
         "x": 82.34375,
-        "y": 85,
+        "y": 103,
         "width": 750.296875,
-        "height": 266,
+        "height": 248,
         "right": 832.640625,
         "bottom": 351
       },
@@ -325,12 +334,12 @@
         "bottom": 405
       },
       "reroll": {
-        "x": 362.484375,
-        "y": 355.3125,
-        "width": 190,
-        "height": 42,
-        "right": 552.484375,
-        "bottom": 397.3125
+        "x": 360.484375,
+        "y": 354,
+        "width": 194,
+        "height": 48,
+        "right": 554.484375,
+        "bottom": 402
       },
       "overlay": "rgba(2, 4, 7, 0.16)",
       "backdrop": "none",
@@ -342,15 +351,19 @@
   ],
   "material": {
     "crestRed": 9851,
-    "footerRed": 19542,
+    "footerRed": 19520,
     "cornerPixels": 0,
     "plaqueAlpha": 255,
+    "crestInteriorAlpha": 255,
+    "footerInteriorAlpha": 255,
+    "cardBand": "rgb(2, 1, 6)",
+    "rerollClip": "none",
     "paints": 2
   },
   "python_tests_passed": 6,
   "web_client_tests_passed": 1,
   "original_images_preserved": 1009,
-  "engine_unchanged": true,
+  "engine_unchanged": false,
   "physical_Galaxy_S23_plus_tested": false,
   "correction": {
     "issue": "Legacy test servers sent CSS as application/octet-stream, preventing layout and leaving a decorative canvas over cards",
@@ -363,5 +376,180 @@
     "second_issue": "Legacy ARM fixture assumed baseline projectile count after selecting a random real opening upgrade",
     "second_fix": "Reset temporary run bonuses inside the cannon and blade measurement fixtures after exercising the real opening selection",
     "game_files_changed_for_second_fix": false
+  },
+  "remaining_legacy_suites": {
+    "completed_processes": 8,
+    "all_exit_codes_zero": true,
+    "reports": [
+      {
+        "report": "original-player-browser.json",
+        "checks": [
+          "the actual supplied 1536px original PNG is used byte-for-byte; no generative redraw; detailed 1536px parts preview and the existing 20-frame game cache allocation",
+          "actual pixel patches of both forelimbs translate forward 60/40 source pixels and the core moves back 24/18; unchanged body texture matches the supplied image; all twenty native poses are distinct",
+          "normal level-one play uses the same original creature, movement poses remain cached during real rendering, administrator UI stays hidden and future lightning stays disabled"
+        ],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "player-combat-browser.json",
+        "checks": [
+          "obsolete five-weapon start screen removed; organ combat is covered by organ_skills_browser.cjs",
+          "actual level-up generator offers individual stat and equipment cards without lightning; equipped ARM remains usable and learned organ attacks use the new progression",
+          "lightning button is dimmed and disabled; keyboard activation and future lightning cast are locked",
+          "eight actual renderer directions and 721 aim samples stay upright and away from vertical; left and right poses are pixel mirrors with broad tilt and no frame rebuilding"
+        ],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "player-scorpion-browser.json",
+        "checks": [
+          "fresh equipment is empty, default scorpion is retained in the parts preview, normal stage one and prior DNA/origin are preserved",
+          "all twenty cached poses are distinct and prepared once from the unchanged original artwork",
+          "normal level-one battle spawns enemies and the new organism walks through actual movement updates",
+          "left upper-limb anticipation causes no early damage; impact damages only its close target; nearby and distant enemies receive no chain or area damage",
+          "the next actual automatic stab uses the other upper limb and its separately painted impact frame",
+          "a target escaping range or crossing behind during the windup is missed; distant enemies do not trigger ranged attacks",
+          "painted walk frames visibly change in the actual renderer, damage uses a recoil pose, and drawing never rebuilds the frame cache",
+          "saved cannon equipment uses the painted player and original projectiles without unlocking future lightning combat",
+          "equipped and removed selections survive reload; removal restores bare stabs and administrator tools remain hidden"
+        ],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "admin-mode-browser.json",
+        "checks": [
+          "normal defaults ignore old test stage, map and disabled natural-spawn preference without erasing them",
+          "real normal battle starts at stage 1 and character level 1 with natural enemies and no administrator controls",
+          "actual stage-one timer completion unlocks stage two in normal progress",
+          "ordinary codex still opens; four presses stay normal; another tab resets the count; fifth consecutive real press enables admin",
+          "admin test stage/map and collision editor work; exiting restores normal campaign without advancing its progress",
+          "reload hides admin again, earned progress persists, and landscape stays clean"
+        ],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "browser-smoke.json",
+        "checks": [
+          "boot and prior-version save migration",
+          "mobile movement, pause and resume",
+          "ordinary damage restored and saved catalog equipment cannot unlock future lightning",
+          "all nine painted appearances use distinct painted walk/action frames; all six original appearances render changing GPU and Canvas frames; no per-frame texture rebuild",
+          "update waits for home without interrupting combat",
+          "facility1: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "hub: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "underpass actual tool, undo/redo, JSON roundtrip, saved walkable field, foreground occlusion and cached drawing",
+          "biolab: approved default without storage, old empty saves/drafts, actual reset button and identical applied collision field",
+          "all five maps load",
+          "reload preserves save",
+          "landscape layout"
+        ],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "red-pulse-browser.json",
+        "checks": [],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "boss-cinematic-browser.json",
+        "checks": [],
+        "errors": [],
+        "passed": true
+      },
+      {
+        "report": "attack-warnings-browser.json",
+        "checks": [],
+        "errors": [],
+        "passed": true
+      }
+    ]
+  },
+  "engine_change": "Only a viewport event repaint hook; baseline gameplay bytes are otherwise exact",
+  "viewport_pixels": [
+    {
+      "samples": 364,
+      "opaque": 364,
+      "lit": 364,
+      "repaint": {
+        "redraws": 0,
+        "width": 393,
+        "height": 852,
+        "pausedFrameReady": false,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 312,
+      "opaque": 312,
+      "lit": 312,
+      "repaint": {
+        "redraws": 2,
+        "width": 393,
+        "height": 731,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 180,
+      "opaque": 180,
+      "lit": 180,
+      "repaint": {
+        "redraws": 4,
+        "width": 320,
+        "height": 568,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 91,
+      "opaque": 91,
+      "lit": 91,
+      "repaint": {
+        "redraws": 6,
+        "width": 227.9375,
+        "height": 393,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 104,
+      "opaque": 104,
+      "lit": 104,
+      "repaint": {
+        "redraws": 8,
+        "width": 238.953125,
+        "height": 412,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    }
+  ],
+  "blue_frame": {
+    "blue": 1672,
+    "outer": 0,
+    "width": 664,
+    "height": 215
+  },
+  "navigation_bar_fix": {
+    "root_cause": "Resize clears the game canvas while the paused-frame cache suppresses future draws",
+    "fix": "Coalesced viewport, visualViewport, ResizeObserver, fullscreen and visibility repaint without advancing simulation",
+    "opaque_inside_contour": true,
+    "blue_reference_reroll_frame": true,
+    "frame_safe_margins_verified": true,
+    "physical_Galaxy_S23_plus_tested": false
   }
 }

@@ -86,6 +86,15 @@
     },
     {
       "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX2.zip",
+      "library_file_id": "libfile_e6dd70fe56148191a02eb98360e442af",
+      "bytes": 253942,
+      "sha256": "511b764013a85dbd6274bbb73d6261ef070447a79d681532355de796ec9d8afd",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_e6dd70fe56148191a02eb98360e442af&account_id=personal"
+    },
+    {
+      "stage": 90,
       "filename": "EVOLVE_WEB41_CHECKPOINT_090.zip",
       "library_file_id": "libfile_57d65ff5b0ec8191802bc0a9c6dd09ab",
       "bytes": 198350,
@@ -116,14 +125,26 @@
   "existing_clean_art": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
   "implementation": "Add a presentation-only module and stylesheet; reuse original art bytes with feathered canvas contours; do not change the game engine or choice logic",
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Real opening flow retained; random upgrade bonuses isolated in legacy weapon measurements",
-  "next": "Rerun guarded publication and confirm the real Pages screen",
+  "status": "System-bar resize repaint, opaque contour interiors and unclipped blue reroll frame verified",
+  "next": "Publish this revision and verify the real Pages build and system-bar resize regression",
   "current_release": {
     "version": "V575-WEB-41-UPGRADE-SCENERY",
-    "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
-    "scriptBytes": 77707057,
+    "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+    "scriptBytes": 77708246,
     "assets": 1050,
     "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
     "preloadResources": true
+  },
+  "additional_user_request": {
+    "reported": "2026-10-26",
+    "references": [
+      "01-1000027711.jpg",
+      "02-1000027713.jpg"
+    ],
+    "fixes": [
+      "Keep the paused battlefield after system bars change viewport size",
+      "Opaque interior within the red contour; battlefield outside only",
+      "Reroll uses the level-up blue image frame with no clipped edges"
+    ]
   }
 }

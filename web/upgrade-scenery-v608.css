@@ -4,6 +4,7 @@
 #levelPanel.upgradeSceneryV608 .levelHead::before,#levelPanel.upgradeSceneryV608 .levelHead::after{display:none!important}
 #levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:fill;pointer-events:none!important;filter:drop-shadow(0 0 4px #f5252338)}
 #levelPanel.upgradeSceneryV608 #levelContext{display:none!important}
+#levelPanel.upgradeSceneryV608 #cards{background:#020106!important}
 #levelPanel.upgradeSceneryV608 .upgradeFooterV608{position:relative;width:100%;height:clamp(72px,12.5dvh,118px);flex:none;isolation:isolate}
 #levelPanel.upgradeSceneryV608 .upgradeSceneryFooterV608{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;pointer-events:none!important;object-fit:fill;filter:drop-shadow(0 0 5px #e8272826)}
 #levelPanel.upgradeSceneryV608 #rerollRow{position:absolute!important;left:50%!important;right:auto!important;top:30%!important;bottom:auto!important;transform:translateX(-50%);align-self:auto!important;justify-content:center!important;width:max-content!important;z-index:2}
@@ -30,8 +31,23 @@
  #levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{object-fit:cover;object-position:center 90%}
  #levelPanel.upgradeSceneryV608 #cards{height:calc(100dvh - 146px)!important;min-height:155px!important}
  #levelPanel.upgradeSceneryV608 .upgradeFooterV608{height:54px}
- #levelPanel.upgradeSceneryV608 #rerollRow{top:8%!important}
+ #levelPanel.upgradeSceneryV608 #rerollRow{top:50%!important}
  #levelPanel.upgradeSceneryV608 #rerollBtn{height:42px!important;min-height:42px!important;width:190px!important;font-size:13px!important}
  #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead h2{top:16%!important;font-size:23px!important}
  #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead p{top:61%!important;font-size:10px!important}
+}
+
+/* Use the same blue image frame as the level-up plaque, with safe outer margins. */
+#levelPanel.upgradeSceneryV608 #rerollRow{top:50%!important;transform:translate(-50%,-50%)!important}
+#levelPanel.upgradeSceneryV608 #rerollBtn{grid-template-columns:18px 1fr 20px!important;gap:6px!important;width:clamp(194px,58cqw,240px)!important;height:58px!important;min-height:58px!important;padding:0 20px 3px!important;border:0!important;clip-path:none!important;overflow:visible!important;background:var(--upgrade-reroll-frame) center/100% 100% no-repeat!important;box-shadow:none!important;color:#e8f5ff!important;font-size:14px!important;letter-spacing:0!important;text-shadow:0 0 7px #82d7ff66,0 2px 2px #000!important;filter:drop-shadow(0 2px 5px #0009)}
+#levelPanel.upgradeSceneryV608 #rerollBtn::before{display:none!important}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollIconV608{width:18px;height:18px;color:#a8e3ff;filter:none}
+#levelPanel.upgradeSceneryV608 #rerollBtn .upgradeRerollCountV608{width:20px;height:23px;color:#d8f2ff;border-color:#82bddf55;font-size:13px}
+@media(orientation:landscape){#levelPanel.upgradeSceneryV608 #rerollBtn{height:48px!important;min-height:48px!important;width:194px!important;font-size:13px!important}}
+@media(orientation:landscape){
+ #levelPanel.upgradeSceneryV608 .levelHead{height:96px!important}
+ #levelPanel.upgradeSceneryV608 .upgradeSceneryHeaderV608{object-fit:contain;object-position:center}
+ #levelPanel.upgradeSceneryV608 #cards{height:calc(100dvh - 164px)!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead h2{top:54%!important;font-size:17px!important}
+ #levelPanel.upgradeSceneryV608[data-upgrade-language='en'] .levelHead p{top:77%!important;font-size:8px!important}
 }

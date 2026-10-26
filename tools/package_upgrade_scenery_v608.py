@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Add WEB-41 presentation around the unchanged WEB-40 game and image bytes."""
+"""Build the requested upgrade UI and a viewport-only paused repaint fix."""
 import hashlib
 import json
 import re
@@ -32,13 +32,25 @@ def main():
         manifest.append({'path': name, 'sha256': sha, 'bytes': len(raw), 'kind': kind})
         return name
 
+    base_engine = report['home_hub_v601']['engine']
+    base_code = old('dist/' + base_engine)
+    anchor = b'let frozenFrameDrawnV438=false,pausedDrawsSkippedV438=0;'
+    assert base_code.count(anchor) == 1
+    viewport_hook = (ROOT / 'web/viewport-redraw-v609.js').read_bytes()
+    engine_code = base_code.replace(anchor, anchor + b'\n' + viewport_hook, 1)
+    engine_kind = next(e['kind'] for e in manifest if e['path'] == base_engine)
+    manifest = [e for e in manifest if e['path'] != base_engine]
+    engine = add(engine_code, 'js', engine_kind)
+    report = json.loads(json.dumps(report).replace(base_engine, engine))
+    version['scriptBytes'] += len(engine_code) - len(base_code)
+
     source = (ROOT / 'web/upgrade-scenery-v608.js').read_text()
     assert source.count('__UPGRADE_SCENERY_ART_V608__') == 1
     js = source.replace('__UPGRADE_SCENERY_ART_V608__', json.dumps(reference, separators=(',', ':'))).encode()
     css = (ROOT / 'web/upgrade-scenery-v608.css').read_bytes()
     script = add(js, 'js', 'presentation-code')
     style = add(css, 'css', 'style')
-    html = old('dist/index.html').decode()
+    html = old('dist/index.html').decode().replace(base_engine, engine)
     html = html.replace('</head>', '<link rel="stylesheet" href="' + style + '">\n<script defer src="' + script + '"></script>\n</head>')
     build = hashlib.sha256(version['build'].encode() + js + css + html.encode()).hexdigest()
     config = {'version': VERSION, 'build': build, 'scriptBytes': version['scriptBytes'], 'preloadResources': True}
@@ -53,7 +65,11 @@ def main():
     report['upgrade_scenery_v608'] = {
         'baseline': BASE, 'script': script, 'stylesheet': style,
         'reference': reference, 'original_image_bytes_unchanged': True,
-        'engine_unchanged': True, 'partial_reference_contours': True,
+        'engine_unchanged': False, 'engine_baseline': base_engine,
+        'engine_change': 'Only the viewport event repaint hook; no simulation or combat changes',
+        'gameplay_unchanged': True, 'viewport_repaint_only': True,
+        'opaque_contour_interior': True, 'blue_reference_reroll_frame': True,
+        'partial_reference_contours': True,
         'paused_battlefield_visible': True, 'exact_korean_reference_header': True,
         'duplicate_player_level_hidden': True, 'original_skill_levels_retained': True,
         'reroll_centered': True, 'reroll_handler_and_rules_unchanged': True,
@@ -67,9 +83,8 @@ def main():
     images = [e for e in json.loads(old('dist/asset-manifest.json')) if e['kind'] == 'image']
     for e in images:
         assert hashlib.sha256((dist / e['path']).read_bytes()).hexdigest() == e['sha256'], e['path']
-    engine = report['home_hub_v601']['engine']
-    assert (dist / engine).read_bytes() == old('dist/' + engine)
-    print(json.dumps(config | {'script': script, 'stylesheet': style, 'original_images_preserved': len(images), 'engine_unchanged': True}))
+    assert engine_code.replace(anchor + b'\n' + viewport_hook, anchor, 1) == base_code
+    print(json.dumps(config | {'script': script, 'stylesheet': style, 'original_images_preserved': len(images), 'engine_change': 'viewport repaint only'}))
 
 if __name__ == '__main__':
     main()

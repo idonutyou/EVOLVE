@@ -1,9 +1,9 @@
 {
   "version": "V575-WEB-41-UPGRADE-SCENERY",
-  "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
+  "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
   "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
   "source_publish_commit": null,
-  "status": "ARM fixture isolation verified; remaining legacy browser guards running before republish",
+  "status": "User-reported system-bar resize fix and refined opaque/blue UI passed targeted tests; awaiting guarded republish",
   "url": "https://idonutyou.github.io/EVOLVE/",
   "workflows": [],
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
@@ -18,5 +18,12 @@
     "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
     "upgrade_ui_suite_passed": true,
     "resolved_locally": true
+  },
+  "previous_successful_publication": {
+    "commit": "8f9e93cde845dc0451121de80423d20a61a98166",
+    "run_id": 40290979172,
+    "conclusion": "success",
+    "public_browser_proof": "docs/UPGRADE_SCENERY_PREVIOUS_LIVE_V608.json",
+    "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a"
   }
 }

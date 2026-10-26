@@ -11,14 +11,10 @@
   function headerArt(language) {
     const c=canvas(864,446),g=c.getContext('2d',{willReadFrequently:true});
     g.drawImage(original,0,0,864,446,0,0,864,446);
-    const plate=canvas(864,446),p=plate.getContext('2d');
-    p.fill(new Path2D('M114 277L177 215H687L750 277V338L695 388H586L571 405H290L275 388H169L114 336Z'));
-    const platePixels=p.getImageData(0,0,864,446).data;
     const pixels=g.getImageData(0,0,864,446),rgba=pixels.data;
     for(let y=0;y<446;y++)for(let x=0;x<864;x++) {
-      const i=(y*864+x)*4,m=Math.max(rgba[i],rgba[i+1],rgba[i+2]);
-      const alpha=platePixels[i+3]?1:smooth((m-7)/72);
-      rgba[i+3]=Math.round(255*alpha*smooth(y/18)*smooth((445-y)/12));
+      const i=(y*864+x)*4;
+      rgba[i+3]=Math.round(255*smooth(y/18)*smooth((445-y)/12));
     }
     g.putImageData(pixels,0,0);
     const mask=canvas(864,446),m=mask.getContext('2d');
@@ -34,8 +30,8 @@
     g.drawImage(original,0,1218,864,318,0,0,864,318);
     const pixels=g.getImageData(0,0,864,318),rgba=pixels.data;
     for(let y=0;y<318;y++)for(let x=0;x<864;x++) {
-      const i=(y*864+x)*4,m=Math.max(rgba[i],rgba[i+1],rgba[i+2]);
-      rgba[i+3]=Math.round(255*smooth((m-7)/86)*smooth((317-y)/16));
+      const i=(y*864+x)*4;
+      rgba[i+3]=Math.round(255*smooth((317-y)/16));
     }
     g.putImageData(pixels,0,0);
     const mask=canvas(864,318),m=mask.getContext('2d');
@@ -56,6 +52,16 @@
     button.dataset.rerollRemainingV608=remaining;button.dataset.rerollPresentationV608=key;
     button.setAttribute('data-i18n-ignore','');
     button.setAttribute('aria-label',language==='en'?`Reroll, ${remaining} remaining`:`다시 뽑기, 남은 ${remaining}회`);
+  }
+
+  function rerollFrame() {
+    const c=canvas(664,215),g=c.getContext('2d');
+    g.drawImage(original,100,210,664,215,0,0,664,215);
+    const fill=g.createLinearGradient(0,28,0,174);fill.addColorStop(0,'#07121b');fill.addColorStop(1,'#03080f');
+    g.fillStyle=fill;g.fillRect(120,28,424,146);
+    g.globalCompositeOperation='destination-in';
+    g.fillStyle='#fff';g.fill(new Path2D('M14 67L77 5H587L650 67V128L595 178H486L471 195H190L175 178H69L14 126Z'));
+    return c.toDataURL();
   }
 
   function sync() {
@@ -90,11 +96,12 @@
     original=await new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>reject(Error('Upgrade reference image could not load'));image.src=reference.path;});
     if(original.naturalWidth!==864||original.naturalHeight!==1536)throw Error('Unexpected upgrade reference dimensions');
     footerCanvas.getContext('2d').drawImage(lowerArt(),0,0);state.paints++;
+    document.getElementById('rerollBtn').style.setProperty('--upgrade-reroll-frame',`url("${rerollFrame()}")`);
     state.ready=true;panel.dataset.upgradeSceneryReady='true';sync();return true;
   }
   const ready=new Promise(resolve=>{
     const start=()=>install().then(resolve).catch(error=>{state.failures.push(error.message);resolve(false);});
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
   });
-  window.__EVOLVE_UPGRADE_SCENERY_V608__={ready,read:()=>({...state,reference:reference.path,engineUnchanged:true,physical_Galaxy_S23_plus_tested:false})};
+  window.__EVOLVE_UPGRADE_SCENERY_V608__={ready,read:()=>({...state,reference:reference.path,opaqueContourInterior:true,viewportRedrawOnly:true,physical_Galaxy_S23_plus_tested:false})};
 })();
