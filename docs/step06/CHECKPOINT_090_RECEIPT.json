@@ -1,0 +1,18 @@
+{
+  "step": 6,
+  "progress": 90,
+  "checkpoint_type": "whole-git-repository-branch",
+  "remote_backup_branch": "backup/step06-090-20261027",
+  "remote_backup_commit": "17be192951ad11c2141b62733cf260e0a223eb3f",
+  "remote_ref_and_main_compared": true,
+  "version_blob_sha": "3d55f731006d19fdfd5b81602727da2e5cc55689",
+  "version": "V575-STEP06-ORGAN-HITS-V613",
+  "build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
+  "full_browser_regression_from_run_40416935849_passed": true,
+  "first_deploy_attempt_failed_http_500": true,
+  "rerun_attempt": 2,
+  "public_site_version_verified": false,
+  "status": "remote checkpoint saved; 90% publication milestone pending successful live Pages",
+  "previous_backups_preserved": true,
+  "physical_Galaxy_S23_plus_tested": false
+}
