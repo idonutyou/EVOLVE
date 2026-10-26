@@ -1,0 +1,22 @@
+{
+  "step": 2,
+  "progress": 80,
+  "full_tree_parity": {
+    "remote_dist_assets": 1084,
+    "restored_dist_assets": 1078,
+    "active_manifest_assets": 1064,
+    "active_manifest_verified": 1064,
+    "remote_historical_nonmanifest_files": 20,
+    "local_historical_nonmanifest_files": 14,
+    "local_only_historical_files": 2,
+    "remote_only_historical_files": 8,
+    "remote_dist_tree_sha": "7f1c90e08d7e4b83be0b80174c122f0f60ef8a6b",
+    "reconstructed_dist_tree_sha": "a9e62aa341c014192665b0b611ea2af7904d358a",
+    "exact_full_git_tree": false
+  },
+  "note": "The runnable WEB43 build is fully restored: all active asset-manifest resources are present and have matching SHA-256. Some unreferenced historical JS/CSS files differ from the latest GitHub repo; do not claim full source tree identity.",
+  "fixed_main": "4f4c20fc5522449d8ba0aaf80e0d7390878bca3f",
+  "existing_full_backup": "EVOLVE_WEB32_FULL_BACKUP_090.zip",
+  "immutable_chain": "WEB32 checkpoint 100 and WEB33-37, WEB39-43 checkpoint 100",
+  "browser_validation": "unavailable: Chromium navigation blocked by administrator, not interpreted as restored-game defect"
+}
