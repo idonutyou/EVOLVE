@@ -1,0 +1,34 @@
+{
+  "version": "V575-WEB-37-FLAT-NAVIGATION",
+  "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+  "local_browser_suites": [
+    {
+      "suite": "visual-fit",
+      "success": true,
+      "checks": [
+        "All five states keep exactly one flat top and equal heights during width transitions; selected cells widen by more than 50 percent and fill the entire row without gaps",
+        "No cropped photo backgrounds or tall selected frames remain; five integrated vector glyphs sit on one full-width straight rail",
+        "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+        "Actual body and both weapon render transforms are exactly 70 percent of WEB-35; collision radius is 7, repeated resets do not compound shrinkage, size upgrades still apply, and the 1536px parts preview remains intact",
+        "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+        "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+      ]
+    },
+    {
+      "suite": "home-hub",
+      "success": true,
+      "checks": [
+        "Five destinations use one wider selected cell with identical row heights; every touch target stays inside the viewport",
+        "Existing organism selection, equipment dialog and battle-memory archive remain reachable through the new navigation",
+        "The reference home fits small and tall phones and landscape, and the original battle-start control still starts a real run"
+      ]
+    }
+  ],
+  "unit_checks": {
+    "packaging": 6,
+    "web_client": 1
+  },
+  "original_image_hashes_preserved": 1005,
+  "full_publication_ci": "pending",
+  "physical_Galaxy_S23_plus_tested": false
+}

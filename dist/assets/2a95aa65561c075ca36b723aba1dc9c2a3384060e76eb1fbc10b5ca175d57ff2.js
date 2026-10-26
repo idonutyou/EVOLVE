@@ -13896,16 +13896,15 @@ const homeHubArtV601={"path":"assets/20de2058e13b39666018142d7ab8b0997dd72473cf5
 let homeHubInstalledV601=false;
 const homeHubTabsV601=[['homeShopTabV601','shop','SHOP','상점'],['homeLabTab','parts','PARTS','파츠'],['homeBattleTabV522','battle','BATTLE','전투'],['memoryBtn','challenge','CHALLENGE','챌린지'],['codexBtn','codex','CODEX','도감']];
 function homeHubSVGNodeV601(markup){const template=document.createElement('template');template.innerHTML=markup;return template.content.firstElementChild;}
-function homeHubFrameV601(id,selected=false){
- const view=selected?'252 154 207 183':'145 171 136 166',hole=selected?'292 169 127 130':'168 203 91 101';
- const [x,y,w,h]=hole.split(' ');
- const outline=selected?'M306 154H406L431 174V275L455 296V308L432 332H279L255 309V296L280 275V176Z':'M178 174H250L279 197V316L258 336H165L146 317V207Z';
- return homeHubSVGNodeV601(`<svg class="hubPlateV601 ${selected?'hubPlateSelectedV601':'hubPlateRestV601'}" viewBox="${view}" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="711" height="340"><path d="${outline}" fill="white"/><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="black"/></mask></defs><image href="${homeHubArtV601.path}" width="711" height="340" mask="url(#${id})"/></svg>`);
-}
 function homeHubGlyphV601(key){
- const boxes={shop:'48 202 65 65',parts:'180 202 65 65',challenge:'464 201 65 65',codex:'599 202 66 65'};
- if(key!=='battle')return homeHubSVGNodeV601(`<svg class="hubGlyphV601" viewBox="${boxes[key]}" aria-hidden="true" focusable="false"><image href="${homeHubArtV601.path}" width="711" height="340"/></svg>`);
- return homeHubSVGNodeV601('<svg class="hubGlyphV601 hubBattleGlyphV603" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><linearGradient id="hubClawGoldV601" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fff0c2"/><stop offset=".52" stop-color="#e8bb79"/><stop offset="1" stop-color="#aa663c"/></linearGradient></defs><g fill="url(#hubClawGoldV601)"><path d="M30 7C23 18 16 33 8 53L19 44C23 30 29 17 36 5Z"/><path d="M44 5C36 18 29 35 22 60L34 48C38 32 44 17 51 4Z"/><path d="M58 13C50 26 43 41 37 60L48 49C52 36 57 24 62 13Z"/></g><g fill="none" stroke="#fff4cf" stroke-width=".65" opacity=".65"><path d="M30 9C23 21 17 35 11 48M44 8C36 22 30 38 25 54M58 16C50 30 44 44 40 55"/></g></svg>');
+ const glyphs={
+  shop:'<path d="M12 29h40v27H12Z" fill="none"/><path d="m10 16 5-8h34l5 8v10c-4 5-10 5-14 0-4 5-12 5-16 0-4 5-10 5-14 0Z"/><path d="M19 9v16m13-16v18M45 9v16" stroke="#6c4933" stroke-width="2"/><path d="M20 39h10v17H20Zm18-2h9v9h-9Z" fill="#181719" stroke="none"/><path d="M9 56h46"/>',
+  parts:'<path d="m32 5 23 13v28L32 59 9 46V18Z" fill="none" stroke-width="3"/><path d="m32 16 14 8v16l-14 8-14-8V24Z"/><path d="m18 24 14 8 14-8M32 32v16" fill="none" stroke="#7c553c" stroke-width="2.2"/>',
+  challenge:'<path d="M15 8h34v22c0 13-9 19-17 23-8-4-17-10-17-23Z" fill="none" stroke-width="3"/><path d="M15 15H7v12c0 8 4 12 12 13m30-25h8v12c0 8-4 12-12 13M32 53v7m-12 0h24" fill="none" stroke-width="3"/><path d="m32 18 4.2 8.5 9.4 1.4-6.8 6.6 1.6 9.3-8.4-4.4-8.4 4.4 1.6-9.3-6.8-6.6 9.4-1.4Z" stroke="none"/>',
+  codex:'<path d="M32 15C24 9 16 7 6 8v43c10-1 18 1 26 6 8-5 16-7 26-6V8c-10-1-18 1-26 7Z" fill="none" stroke-width="3"/><path d="M32 15v42M13 19c5 0 9 1 13 3m-13 7c5 0 9 1 13 3m-13 7c5 0 9 1 13 3m12-20c4-2 8-3 13-3m-13 13c4-2 8-3 13-3m-13 13c4-2 8-3 13-3" fill="none"/>',
+  battle:'<path d="M30 7C23 18 16 33 8 53L19 44C23 30 29 17 36 5Zm14-2C36 18 29 35 22 60l12-12C38 32 44 17 51 4Zm14 8C50 26 43 41 37 60l11-11c4-13 9-25 14-36Z" stroke="none"/>'
+ };
+ return homeHubSVGNodeV601(`<svg class="hubGlyphV601 hubGlyphFlatV604" data-glyph="${key}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><defs><linearGradient id="hubGoldV604_${key}" x1="0" y1="0" x2=".5" y2="1"><stop stop-color="#f5ddb5"/><stop offset=".55" stop-color="#d1aa79"/><stop offset="1" stop-color="#9f714e"/></linearGradient></defs><g fill="url(#hubGoldV604_${key})" stroke="url(#hubGoldV604_${key})" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">${glyphs[key]}</g></svg>`);
 }
 function installHomeHubArtworkV601(){
  app.classList.add('homeHubShellV601');
@@ -13913,7 +13912,7 @@ function installHomeHubArtworkV601(){
  const shop=document.createElement('button');shop.id='homeShopTabV601';shop.type='button';shop.className='homeNavV522';shop.innerHTML='<span id="homeShopLabelV601">SHOP</span>';
  const organism=$('homeSpecimenTab'),tools=document.createElement('div');tools.className='hubPartsToolsV601';organism.className='hubSubButtonV601';tools.appendChild(organism);$('homePartsViewV523').prepend(tools);
  const nav=$('homeTabs');nav.classList.add('homeHubNavV601');nav.replaceChildren(...homeHubTabsV601.map(([id])=>id==='homeShopTabV601'?shop:$(id)));
- for(const [id,key]of homeHubTabsV601){const button=$(id),label=button.querySelector('span');label.classList.add('hubNavLabelV601');const fill=document.createElement('span');fill.className='hubPlateFillV601';fill.setAttribute('aria-hidden','true');const activeFill=document.createElement('span');activeFill.className='hubActiveFillV603';activeFill.setAttribute('aria-hidden','true');button.replaceChildren(fill,activeFill,homeHubFrameV601('hubPlateRest_'+key),homeHubFrameV601('hubPlateActive_'+key,true),homeHubGlyphV601(key),label);}
+ for(const [id,key]of homeHubTabsV601){const button=$(id),label=button.querySelector('span');label.classList.add('hubNavLabelV601');button.replaceChildren(homeHubGlyphV601(key),label);}
  const contour='M60 9H165L177 16H534L547 9H651L680 38V102L652 130H62L32 102V39Z';
  const frame=homeHubSVGNodeV601(`<svg class="hubStartFrameV601" viewBox="24 0 663 138" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><clipPath id="hubStartContourV602" clipPathUnits="userSpaceOnUse"><path d="${contour}"/></clipPath><linearGradient id="hubStartFillV602" x2=".2" y2="1"><stop stop-color="#8b3325"/><stop offset=".53" stop-color="#6c2529"/><stop offset="1" stop-color="#3b161d"/></linearGradient><filter id="hubStartSoftEraseV601" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="9"/></filter><mask id="hubStartMaskV601" maskUnits="userSpaceOnUse" x="0" y="0" width="711" height="138"><rect width="711" height="138" fill="white"/><rect x="222" y="34" width="275" height="70" fill="black" filter="url(#hubStartSoftEraseV601)"/></mask></defs><path d="${contour}" fill="url(#hubStartFillV602)"/><image href="${homeHubArtV601.path}" width="711" height="340" mask="url(#hubStartMaskV601)" clip-path="url(#hubStartContourV602)"/></svg>`);
  $('start').parentElement.prepend(frame);
