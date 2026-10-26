@@ -1,0 +1,44 @@
+name: Verify STEP06 organ hit candidate
+on:
+  push:
+    branches: [step06-organ-hits-v613-20261027]
+    paths:
+      - 'dist/**'
+      - 'web/organ-hit-*-v613.js'
+      - 'tests/organ_hits*v613*.cjs'
+      - 'tests/weapon_hits_browser_v612.cjs'
+      - '.github/workflows/verify-step06.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify candidate assets and behavioral parity
+        run: |
+          python3 tools/verify_site.py --dist dist
+          node --test tests/organ_hits_v613.test.cjs tests/weapon_hits_v612.test.cjs
+      - name: Prepare browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Verify actual organ and weapon contacts in mobile browser
+        run: |
+          node tests/organ_hits_browser_v613.cjs
+          node tests/weapon_hits_browser_v612.cjs
+      - name: Retain candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: step06-candidate-verification
+          path: test-results
+          if-no-files-found: ignore

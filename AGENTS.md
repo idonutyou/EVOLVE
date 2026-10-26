@@ -22,5 +22,10 @@
   Preserve earlier snapshots. If a remote write is blocked, save the recovery
   archive through the authorized file workflow and state which write is blocked.
 - Distinguish automated mobile viewport checks from physical Galaxy S23+ testing.
+- Split each roadmap STEP into three separately requested substeps: design
+  (10-30%), implementation and local checks (40-70%), then regression,
+  browser verification and public deployment (80-100%). Stop after the current
+  substep and save its recovery point; do not continue into the next substep
+  until the user asks. Keep every 10% remote checkpoint and verification.
 
 - User-approved map rules and the saved-JSON fast update procedure are in docs/MAP_UPDATE_RULES_KO.md. Read that file before map work. When a supplied save is already deployed byte-for-byte/equivalent, verify the live build and report completion without redoing the patch.

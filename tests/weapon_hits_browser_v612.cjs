@@ -13,7 +13,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
  try{
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   const u=new URL(base);u.searchParams.set('evolveQA','1');await page.goto(u.href,{waitUntil:'domcontentloaded',timeout:180000});await ready();
-  report.version=await page.evaluate(()=>window.EVOLVE_WEB_CONFIG);assert.match(report.version.version,/STEP05/);
+  report.version=await page.evaluate(()=>window.EVOLVE_WEB_CONFIG);const expected=JSON.parse(fs.readFileSync(path.join(dist,'version.json'),'utf8'));assert.equal(report.version.version,expected.version);assert.equal(report.version.build,expected.build);
   await equip('arm_cannon');await start();
   report.gun=await page.evaluate(()=>{
    window.__EVOLVE_UPGRADE_CARDS_V593__.test.reset();const c=window.__EVOLVE_MAPS_V567__.test.context(),p=window.__EVOLVE_PLAYER_COMBAT_V587__,api=window.__EVOLVE_WEAPON_HITS_V612__;
