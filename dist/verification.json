@@ -1807,7 +1807,14 @@
     "physical_Galaxy_S23_plus_tested": false,
     "previous_browser_boot_failure_fixed_by_v601": true,
     "checkpoint": "STEP04 V601 pre-publication byte-check repaired",
-    "release_state": "staged",
-    "last_browser_run_failure": "V600 missing lexical hurtEnemy; replaced in V601"
+    "release_state": "candidate_ready_for_github_actions",
+    "last_browser_run_failure": "V600 missing lexical hurtEnemy; replaced in V601",
+    "tests": {
+      "unit": "pass",
+      "remote_manifest": "pass",
+      "global_lexical_wrapper": "pass",
+      "full_game_chromium": "pending",
+      "physical_galaxy_s23_plus": "pending"
+    }
   }
 }
