@@ -1,0 +1,41 @@
+{
+  "step": 2,
+  "progress": 90,
+  "state": "recoverable; final sign-off pending",
+  "baseline_commit": "4f4c20fc5522449d8ba0aaf80e0d7390878bca3f",
+  "source": "V575-WEB-43-DISPLAY-RECOVERY",
+  "existing_full_backup": {
+    "filename": "EVOLVE_WEB32_FULL_BACKUP_090.zip",
+    "bytes": 340805645,
+    "sha256": "2aead2bc85b606e8aac355e3e01163875eb8742d1065f476475a0a72df393b45",
+    "library_file_id": "libfile_2334f6e9034c81918eed33ca560b7ef4"
+  },
+  "existing_final_delta": {
+    "filename": "EVOLVE_WEB43_CHECKPOINT_100.zip",
+    "bytes": 883410,
+    "sha256": "4ce90dad0a4bac150f98275fca65ff1af628f4205ebb4a79d39ea2bed7b998ce",
+    "library_file_id": "libfile_8e0408f9f8ac81918b5451e5c97fb3a2"
+  },
+  "restored_runtime": {
+    "active_assets": 1064,
+    "verified_hashes": 1064,
+    "missing": 0,
+    "mismatched": 0,
+    "unit_tests_passed": 9,
+    "unit_tests_failed": 0
+  },
+  "git_restore": {
+    "backup_branch": "backup/step02-restoration-audit-20261026",
+    "dist_tree_sha": "7f1c90e08d7e4b83be0b80174c122f0f60ef8a6b",
+    "dist_assets_tree_sha": "de0711ee5e4931663c73e5d46d11a7679d0897b1",
+    "matches_main": true
+  },
+  "caveats": [
+    "Offline archive-chain restore does NOT reproduce every historical unreferenced JS/CSS exactly; source checkout of the pinned GitHub branch does.",
+    "Fresh Chromium browser smoke on restored copy blocked by administrator, not tested.",
+    "Prior production WEB43 validation ran 25 browser suites and 7 public browser checks; those are preexisting evidence, not a new restored-copy browser pass.",
+    "Real Galaxy S23+ testing unavailable."
+  ],
+  "changes_to_public_game": false,
+  "restore_script": "tools/roadmap_step02_restore.py"
+}
