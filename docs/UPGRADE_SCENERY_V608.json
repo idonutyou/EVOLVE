@@ -1,0 +1,93 @@
+{
+  "version": "V575-WEB-41-UPGRADE-SCENERY",
+  "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+  "progress": 70,
+  "backups": [
+    {
+      "stage": 10,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_3e5aa53954f481918dc3c6c8fffe9ce1",
+      "bytes": 3942,
+      "sha256": "1b1b0b8207173b57d6665d71b02eab513335ae231c62616d6e466c6d2f3e989b",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_3e5aa53954f481918dc3c6c8fffe9ce1&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_fd6c6e9fc014819190343d3dc3078749",
+      "bytes": 7191,
+      "sha256": "b556d61144d7856f24759d9133e921d25039645c87648d39fd9f8d5390d9be55",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_fd6c6e9fc014819190343d3dc3078749&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_3495974959e48191b4c678a4ef5b7fed",
+      "bytes": 7809,
+      "sha256": "68ba7c579e2a82e5c9ca5af64a05d9c3e7e12918029d673845e32a03c2bb7219",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_3495974959e48191b4c678a4ef5b7fed&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_d679672640808191886e1ba9e492e4ba",
+      "bytes": 9129,
+      "sha256": "d7f5f012ea6c19804094f73e08e4237a68f4782f155ebb5e811e4898ca70dc84",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_d679672640808191886e1ba9e492e4ba&account_id=personal"
+    },
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_91f07badfad88191944b36caf50f24b8",
+      "bytes": 171888,
+      "sha256": "167e9318688d2789bcbf06771c6bd0bac491bf2cd264d8301559b0e799f919b9",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_91f07badfad88191944b36caf50f24b8&account_id=personal"
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_2f87791e05608191ac3b099eac0e8cd7",
+      "bytes": 192898,
+      "sha256": "fdce7d05bd7a66d71a5a247ac06215f1f6843851cc19734d8c9b90989a9827d4",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_2f87791e05608191ac3b099eac0e8cd7&account_id=personal"
+    }
+  ],
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "requested": [
+    "Restore the reference organic red crest, exact LEVEL UP / choose one header plaque and lower ornament inside the marked contour",
+    "Keep the paused gameplay visible around the artwork and cards",
+    "Hide only the duplicate player level in the upgrade popup; retain the HUD and per-skill level information",
+    "Center and redesign the existing reroll control, preserving its actual remaining count and behavior"
+  ],
+  "references": [
+    {
+      "path": "/workspace/scratch/25bc994140e8/upload/01-1000027709.jpg",
+      "sha256": "14ca28fdb625c39aba374d456abd4e96f1a1dc30171aaa6390c54dbb02ab7d2a",
+      "bytes": 215016
+    },
+    {
+      "path": "/workspace/scratch/25bc994140e8/upload/02-1000027581.jpg",
+      "sha256": "1fac8ec6aff48aed3471568af89773476b6ba63546bb10d85b1e50f5e3999cb3",
+      "bytes": 239160
+    }
+  ],
+  "existing_clean_art": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+  "implementation": "Add a presentation-only module and stylesheet; reuse original art bytes with feathered canvas contours; do not change the game engine or choice logic",
+  "physical_Galaxy_S23_plus_tested": false,
+  "status": "Preserved the final reviewed UI and regression results; deployment now checks the new screen and compares the live reference, presentation and engine bytes",
+  "next": "Upload the reviewed delta and verify the complete remote source tree before publication",
+  "current_release": {
+    "version": "V575-WEB-41-UPGRADE-SCENERY",
+    "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
+    "scriptBytes": 77707057,
+    "assets": 1050,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  }
+}

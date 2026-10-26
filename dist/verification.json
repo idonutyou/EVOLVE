@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-40-HOME-BALANCE",
+  "version": "V575-WEB-41-UPGRADE-SCENERY",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 259151,
-  "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
+  "index_bytes": 259366,
+  "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
   "image_assets": 1005,
-  "cached_files": 1048,
-  "cached_bytes": 375890673,
+  "cached_files": 1050,
+  "cached_bytes": 375903379,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1038,7 +1038,7 @@
       "subset": "Reference upgrade card and monster UI, including 팔 and 발"
     },
     "reference_background_and_frames": true,
-    "level_visible": true,
+    "level_visible": false,
     "part_labels": {
       "gun": "팔",
       "blade": "팔",
@@ -1076,7 +1076,8 @@
     "attack_warnings_damage_and_hp_behavior_preserved": true,
     "existing_image_bytes_unchanged": 995,
     "new_image_assets": 1,
-    "physical_Galaxy_S23_plus_tested": false
+    "physical_Galaxy_S23_plus_tested": false,
+    "level_display": "Original top-left combat HUD only"
   },
   "playfield_v595": {
     "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
@@ -1516,6 +1517,77 @@
     "start_outer_frame_preserved": true,
     "original_engine_preserved": true,
     "save_keys_and_fullscreen_unchanged": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "upgrade_scenery_v608": {
+    "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+    "script": "assets/91a7ea0b01f6ee2dcaef15892d01ad47f8c8c899eee41f92b16fa77090f700de.js",
+    "stylesheet": "assets/b6b74f16e531d43c714dc925d205d7f75424625770eadd2ea0daafdcd5458224.css",
+    "reference": {
+      "path": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+      "sha256": "a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c",
+      "bytes": 302370,
+      "width": 864,
+      "height": 1536,
+      "source": "1000027564.png",
+      "original_bytes_preserved": true,
+      "header": [
+        0,
+        0,
+        864,
+        446
+      ],
+      "frames": {
+        "rare": [
+          14,
+          438,
+          278,
+          777
+        ],
+        "epic": [
+          295,
+          438,
+          276,
+          777
+        ],
+        "legendary": [
+          576,
+          438,
+          278,
+          777
+        ]
+      },
+      "icons": {
+        "arm": [
+          96,
+          1088,
+          54,
+          57
+        ],
+        "feet": [
+          369,
+          1087,
+          57,
+          61
+        ],
+        "shell": [
+          652,
+          1085,
+          52,
+          63
+        ]
+      }
+    },
+    "original_image_bytes_unchanged": true,
+    "engine_unchanged": true,
+    "partial_reference_contours": true,
+    "paused_battlefield_visible": true,
+    "exact_korean_reference_header": true,
+    "duplicate_player_level_hidden": true,
+    "original_skill_levels_retained": true,
+    "reroll_centered": true,
+    "reroll_handler_and_rules_unchanged": true,
+    "save_keys_unchanged": true,
     "physical_Galaxy_S23_plus_tested": false
   }
 }

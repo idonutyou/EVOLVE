@@ -38,12 +38,12 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.ok(await page.locator('#tmSummonBossV573').count());report.checks.push('all 19 ordinary/new/variant/elite specimens spawn with writable coordinates and no stale entry route; crawler and alpha move; phase-specific boss controls remain separate');
   console.log('CATALOG READY');await page.evaluate(()=>{const q=window.__EVOLVE_UPGRADE_CARDS_V593__.test,c=q.context();q.equip('cannon');c.draw();q.offer([['gun_count',1],['light',4],['giant',3]]);});
   await page.evaluate(()=>document.fonts.ready);
-  report.selector=await page.evaluate(()=>{const p=document.getElementById('levelPanel'),r=p.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,viewport:innerHeight,background:getComputedStyle(document.getElementById('levelOverlay')).backgroundColor,head:getComputedStyle(p.querySelector('h2')).clipPath,backgrounds:[...p.querySelectorAll('.upgradeReferenceBgV594')].map(c=>getComputedStyle(c).display)};});
-  assert.ok(report.selector.h<report.selector.viewport*.61,JSON.stringify(report.selector));assert.equal(report.selector.head,'none');assert.ok(report.selector.backgrounds.every(x=>x==='none'));
+  report.selector=await page.evaluate(()=>{const p=document.getElementById('levelPanel'),r=p.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,viewport:innerHeight,background:getComputedStyle(document.getElementById('levelOverlay')).backgroundColor,head:getComputedStyle(p.querySelector('h2')).clipPath,sceneryReady:window.__EVOLVE_UPGRADE_SCENERY_V608__?.read().ready,backgrounds:[...p.querySelectorAll('.upgradeReferenceBgV594')].map(c=>getComputedStyle(c).display)};});
+  assert.ok(report.selector.h<report.selector.viewport*.84,JSON.stringify(report.selector));assert.equal(report.selector.sceneryReady,true);assert.ok(report.selector.backgrounds.every(x=>x==='none'));
   await page.screenshot({path:path.join(out,'web28-compact-upgrades.png')});
   await page.setViewportSize({width:852,height:393});await page.screenshot({path:path.join(out,'web28-compact-upgrades-landscape.png')});
   const landscape=await page.locator('#levelPanel').boundingBox();assert.ok(landscape.y>=0&&landscape.y+landscape.height<=393.1,JSON.stringify(landscape));
-  await page.setViewportSize({width:393,height:852});await page.waitForTimeout(300);await page.locator('#cards .card').first().click();report.checks.push('compact portrait and landscape selectors leave the battlefield visible while real card selection still works');
+  await page.setViewportSize({width:393,height:852});await page.waitForTimeout(300);await page.locator('#cards .card').first().click();report.checks.push('the decorated portrait and landscape selectors leave the battlefield visible while real card selection still works');
   report.ground=await page.evaluate(()=>{
    const q=window.__EVOLVE_STARTUP_V595__.test,c=window.__EVOLVE_UPGRADE_CARDS_V593__.test.context(),h=window.__EVOLVE_ATTACK_WARNINGS_V582__.test.context();
    c.enemies.length=0;h.biomeHazards.length=0;h.purges.length=0;c.player.hp=c.player.maxHp=1000;c.player.inv=0;
