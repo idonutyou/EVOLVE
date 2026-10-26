@@ -2,7 +2,7 @@
   "task": "Replace whip and spike level-up card artwork using the 10 exact supplied PNGs",
   "baseline": "449773f580453ed46e0f37502e0ac00e1c44a298",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
-  "progress": 70,
+  "progress": 80,
   "complete": false,
   "stats_and_effects_unchanged": true,
   "engine_unchanged": true,
@@ -142,6 +142,15 @@
       "sha256": "3b0698ba9793acbc4d3a90212c62a2f581efc9a84c61fc90475a8fe97a1a935d",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_190470d023c881918aebeca802486567&account_id=personal"
+    },
+    {
+      "stage": 70,
+      "filename": "EVOLVE_WEB42_CHECKPOINT_070.zip",
+      "library_file_id": "libfile_5009051d32348191a9db1f62c6d14725",
+      "bytes": 3245844,
+      "sha256": "147944d812ff908c3300df55226c7a3fec51f453e0eb5047fd44280e6ba58d81",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_5009051d32348191a9db1f62c6d14725&account_id=personal"
     }
   ],
   "remaining": [
@@ -150,8 +159,8 @@
     "Verify actual selections and all old image/engine bytes",
     "Deploy and confirm the real public version"
   ],
-  "status": "Reviewed source and ten exact image assets ready for immutable GitHub checkpoint",
-  "next": "Confirm remote tree hashes and publish the reviewed version",
+  "status": "Exact source and original PNG blobs confirmed on GitHub; ready for guarded publication",
+  "next": "Start full deployment and public browser verification",
   "current_release": {
     "version": "V575-WEB-42-ORGAN-CARD-ART",
     "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
