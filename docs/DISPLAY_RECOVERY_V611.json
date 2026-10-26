@@ -1,0 +1,83 @@
+{
+  "baseline": "9cb02fe7ec2e21ea23b32d74febdeb2f82ed5e9d",
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "progress": 70,
+  "complete": false,
+  "requests": [
+    "Reduce spike and whip illustration size and intensity to match existing cards",
+    "Repair the complete blue reroll frame",
+    "Recover all graphics after returning from another app",
+    "Keep the combat viewport fixed when transient system bars appear"
+  ],
+  "references": [
+    "01-1000027720.jpg",
+    "02-1000027722.jpg"
+  ],
+  "current_release": {
+    "version": "V575-WEB-43-DISPLAY-RECOVERY",
+    "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+    "scriptBytes": 77710103,
+    "assets": 1064,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  },
+  "backups": [
+    {
+      "stage": 10,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_9e6b82dc4b008191ad9a2a012403939c",
+      "bytes": 3625,
+      "sha256": "919121505fc9e21450b21575630624ef63b9ded1cd4bc85c6d0fcac0d8268e96",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_9e6b82dc4b008191ad9a2a012403939c&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_aee7021d52d08191a8c18e39bf105f98",
+      "bytes": 6199,
+      "sha256": "0f920ec3b46b87bc557f65607a4c5429d7bba3ab3111c7d07f8c56ab4e56164b",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_aee7021d52d08191a8c18e39bf105f98&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_1a52fc9bbacc819188b0f204db625630",
+      "bytes": 13486,
+      "sha256": "f6d11946f39bb5919c4b4017cab01051cb556bb98bd7099a6badbb64bca5fd64",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_1a52fc9bbacc819188b0f204db625630&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_a076a36f204c81919c53577d85a6c669",
+      "bytes": 823444,
+      "sha256": "0d9586b8bc8448d997b8f2047e6291786abf460ea6035617d3f471c4ad0f98df",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_a076a36f204c81919c53577d85a6c669&account_id=personal"
+    },
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_f5208919ee848191b5702707ea5c5564",
+      "bytes": 841537,
+      "sha256": "259be904beb61503ca5de6dba27ffa998d4cdc343f766e5b6f82721ca6b87268",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_f5208919ee848191b5702707ea5c5564&account_id=personal"
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_4c95f9f7ead88191ab1ae38ab02a8606",
+      "bytes": 855424,
+      "sha256": "93f554586a6b3448f4be3f53a213cb80b9f31adc415b24c93af868b0853304aa",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_4c95f9f7ead88191ab1ae38ab02a8606&account_id=personal"
+    }
+  ],
+  "stats_and_effects_unchanged": true,
+  "status": "Reviewed deployable source with all existing guards and new live recovery checks retained",
+  "next": "Upload this exact tree to a preserved GitHub branch and deploy"
+}

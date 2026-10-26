@@ -1,0 +1,3168 @@
+{
+  "version": {
+    "version": "V575-WEB-43-DISPLAY-RECOVERY",
+    "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+    "scriptBytes": 77710103,
+    "assets": 1064,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  },
+  "automated_mobile_viewport_only": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "reports": {
+    "display-recovery": {
+      "source": "local",
+      "checks": [
+        "Whip/spike artwork uses the same original rarity frames as the gun card, smaller picture bounds and reduced glow; original live effects remain intact",
+        "Top/bottom transient viewport bars do not resize or move the game, cards or selection panel; simulation time and upgrades remain unchanged",
+        "After deliberately clearing all UI/main canvas buffers and actor part caches, visibility return, BFCache pageshow and context restoration recover the world and every UI image without rerolling, advancing time or changing stats",
+        "Genuine orientation changes still fit the new screen, returning home releases the combat lock, and saved DNA is preserved"
+      ],
+      "bars": [
+        {
+          "availableHeight": 780,
+          "gameHeight": 852,
+          "panel": {
+            "x": 6,
+            "y": 108.625,
+            "w": 381,
+            "h": 634.734375
+          }
+        },
+        {
+          "availableHeight": 731,
+          "gameHeight": 852,
+          "panel": {
+            "x": 6,
+            "y": 108.625,
+            "w": 381,
+            "h": 634.734375
+          }
+        },
+        {
+          "availableHeight": 852,
+          "gameHeight": 852,
+          "panel": {
+            "x": 6,
+            "y": 108.625,
+            "w": 381,
+            "h": 634.734375
+          }
+        }
+      ],
+      "recovery": [
+        {
+          "event": "visibility",
+          "viewport": {
+            "redraws": 6,
+            "recoveries": 1,
+            "width": 393,
+            "height": 852,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "pixels": {
+            "opaque": 364,
+            "lit": 364,
+            "samples": 364
+          },
+          "images": [
+            {
+              "role": "upgradeSceneryHeaderV608",
+              "visible": 229993,
+              "source": 688658
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 25851,
+              "source": 128738
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 1045,
+              "source": 2354
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 4878,
+              "source": 21446
+            },
+            {
+              "role": "supplied",
+              "visible": 79050,
+              "source": 1031818
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 146,
+              "source": 1442
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 1411,
+              "source": 16706
+            },
+            {
+              "role": "supplied",
+              "visible": 80627,
+              "source": 1117130
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 156,
+              "source": 1706
+            },
+            {
+              "role": "upgradeSceneryFooterV608",
+              "visible": 204125,
+              "source": 649458
+            }
+          ]
+        },
+        {
+          "event": "pageshow",
+          "viewport": {
+            "redraws": 9,
+            "recoveries": 2,
+            "width": 393,
+            "height": 852,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "pixels": {
+            "opaque": 364,
+            "lit": 364,
+            "samples": 364
+          },
+          "images": [
+            {
+              "role": "upgradeSceneryHeaderV608",
+              "visible": 229993,
+              "source": 688658
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 25851,
+              "source": 128738
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 1045,
+              "source": 2354
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 4878,
+              "source": 21446
+            },
+            {
+              "role": "supplied",
+              "visible": 79050,
+              "source": 1031818
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 146,
+              "source": 1442
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 1411,
+              "source": 16706
+            },
+            {
+              "role": "supplied",
+              "visible": 80627,
+              "source": 1117130
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 156,
+              "source": 1706
+            },
+            {
+              "role": "upgradeSceneryFooterV608",
+              "visible": 204125,
+              "source": 649458
+            }
+          ]
+        },
+        {
+          "event": "contextrestored",
+          "viewport": {
+            "redraws": 12,
+            "recoveries": 3,
+            "width": 393,
+            "height": 852,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "pixels": {
+            "opaque": 364,
+            "lit": 364,
+            "samples": 364
+          },
+          "images": [
+            {
+              "role": "upgradeSceneryHeaderV608",
+              "visible": 229993,
+              "source": 688658
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 25851,
+              "source": 128738
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 1045,
+              "source": 2354
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 4878,
+              "source": 21446
+            },
+            {
+              "role": "supplied",
+              "visible": 79050,
+              "source": 1031818
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 146,
+              "source": 1442
+            },
+            {
+              "role": "upgradeFrameV594",
+              "visible": 70406,
+              "source": 173570
+            },
+            {
+              "role": "upgradeSpriteV593",
+              "visible": 1411,
+              "source": 16706
+            },
+            {
+              "role": "supplied",
+              "visible": 80627,
+              "source": 1117130
+            },
+            {
+              "role": "upgradePartIconV594",
+              "visible": 156,
+              "source": 1706
+            },
+            {
+              "role": "upgradeSceneryFooterV608",
+              "visible": 204125,
+              "source": 649458
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "build": {
+        "version": "V575-WEB-43-DISPLAY-RECOVERY",
+        "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+        "scriptBytes": 77710103,
+        "preloadResources": true
+      },
+      "normalized": [
+        {
+          "w": 78.375,
+          "h": 100.59375,
+          "containerW": 108.859375,
+          "containerH": 139.71875,
+          "centerError": 0.0078125,
+          "filter": "brightness(0.9) saturate(0.75)"
+        },
+        {
+          "w": 78.359375,
+          "h": 100.59375,
+          "containerW": 108.84375,
+          "containerH": 139.71875,
+          "centerError": 0.0078125,
+          "filter": "brightness(0.9) saturate(0.75)"
+        }
+      ],
+      "textPaint": [
+        {
+          "text": "다중 사격",
+          "actual": 306,
+          "expected": 328,
+          "ratio": 0.9329268292682927
+        },
+        {
+          "text": "가시",
+          "actual": 140,
+          "expected": 144,
+          "ratio": 0.9722222222222222
+        },
+        {
+          "text": "채찍",
+          "actual": 187,
+          "expected": 195,
+          "ratio": 0.958974358974359
+        },
+        {
+          "text": "다시 뽑기",
+          "actual": 189,
+          "expected": 200,
+          "ratio": 0.945
+        }
+      ],
+      "restoredTextPaint": [
+        {
+          "text": "다중 사격",
+          "actual": 306,
+          "expected": 328,
+          "ratio": 0.9329268292682927
+        },
+        {
+          "text": "가시",
+          "actual": 140,
+          "expected": 144,
+          "ratio": 0.9722222222222222
+        },
+        {
+          "text": "채찍",
+          "actual": 187,
+          "expected": 195,
+          "ratio": 0.958974358974359
+        },
+        {
+          "text": "다시 뽑기",
+          "actual": 189,
+          "expected": 200,
+          "ratio": 0.945
+        }
+      ],
+      "success": true
+    },
+    "organ-card-art": {
+      "checks": [
+        "All ten supplied PNGs load byte-for-byte with the exact original dimensions and correct whip/spike rarity mapping",
+        "Every rarity shows the original live learn/upgrade names and effect text; baked example words are masked, unrelated cards retain their artwork, and rendering never applies a stat",
+        "Actual supplied-image card clicks learn spikes and whip and apply the exact existing count/range deltas; original choice handlers remain active",
+        "English labels and phone/landscape layouts remain usable, decoded source cache stays bounded to three images, and returning home preserves saved DNA"
+      ],
+      "sources": [
+        {
+          "upload": "01-1000027658.png",
+          "organ": "tail",
+          "tier": 0,
+          "bytes": 218931,
+          "sha256": "4919c511ffa0d272d04074aa59381f8eedc5e3d2577620433beb2c7a0ae5026f"
+        },
+        {
+          "upload": "02-1000027657.png",
+          "organ": "tail",
+          "tier": 1,
+          "bytes": 288273,
+          "sha256": "c780af5660f695115005750a3648fc746c5e87683ccfd87a08fe7391ca24f489"
+        },
+        {
+          "upload": "03-1000027653.png",
+          "organ": "tail",
+          "tier": 2,
+          "bytes": 350399,
+          "sha256": "fbe09aa300e0d3d8d92df6ea323efeec743ee524615f5c7e6152c7430f18fc76"
+        },
+        {
+          "upload": "04-1000027652.png",
+          "organ": "tail",
+          "tier": 3,
+          "bytes": 309937,
+          "sha256": "be9f9a7f68c07f5b1fb71bc0a749b66290199e2db5de327f28e5e834a524eaa8"
+        },
+        {
+          "upload": "05-1000027654.png",
+          "organ": "tail",
+          "tier": 4,
+          "bytes": 441934,
+          "sha256": "8f4bcecaf0aa45c787bacb0ec42a13c1aef507807d2dc3ce0fc9014af775f838"
+        },
+        {
+          "upload": "06-1000027651.png",
+          "organ": "shell",
+          "tier": 0,
+          "bytes": 190423,
+          "sha256": "36d03eb365b3330e44dfbe7a7526d33fe655b3b291d54458843178703697113a"
+        },
+        {
+          "upload": "07-1000027659.png",
+          "organ": "shell",
+          "tier": 1,
+          "bytes": 273670,
+          "sha256": "74d74af58070ec832f9c58150cb3e5f278231ea8c85935ae8cae1ffccf28f4d7"
+        },
+        {
+          "upload": "08-1000027660.png",
+          "organ": "shell",
+          "tier": 2,
+          "bytes": 308982,
+          "sha256": "18d100e966f7cd0b037294eecbf3faa539135b67d6ff7656eea0e152de0511cf"
+        },
+        {
+          "upload": "09-1000027655.png",
+          "organ": "shell",
+          "tier": 3,
+          "bytes": 277081,
+          "sha256": "9b48e108934f85477bea9915ca6673968650241762f9d4448654535e9e3c7806"
+        },
+        {
+          "upload": "10-1000027656.png",
+          "organ": "shell",
+          "tier": 4,
+          "bytes": 400347,
+          "sha256": "98ed19a788044eab015805351f8f3fedc0a736b71ce71b6c18b096ef7d11b965"
+        }
+      ],
+      "tiers": [
+        {
+          "tier": 0,
+          "cards": [
+            {
+              "kind": "shell_learn",
+              "source": "assets/36d03eb365b3330e44dfbe7a7526d33fe655b3b291d54458843178703697113a.png",
+              "upload": "06-1000027651.png",
+              "text": "Lv.0 → Lv.1\n유도 가시 1개",
+              "live": "Lv.0 → Lv.1\n유도 가시 1개",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "tail_learn",
+              "source": "assets/4919c511ffa0d272d04074aa59381f8eedc5e3d2577620433beb2c7a0ae5026f.png",
+              "upload": "01-1000027658.png",
+              "text": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "live": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "gun_count",
+              "text": "탄수 +1",
+              "live": "탄수 +1"
+            }
+          ]
+        },
+        {
+          "tier": 1,
+          "cards": [
+            {
+              "kind": "shell_learn",
+              "source": "assets/74d74af58070ec832f9c58150cb3e5f278231ea8c85935ae8cae1ffccf28f4d7.png",
+              "upload": "07-1000027659.png",
+              "text": "Lv.0 → Lv.1\n유도 가시 1개",
+              "live": "Lv.0 → Lv.1\n유도 가시 1개",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "tail_learn",
+              "source": "assets/c780af5660f695115005750a3648fc746c5e87683ccfd87a08fe7391ca24f489.png",
+              "upload": "02-1000027657.png",
+              "text": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "live": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "gun_count",
+              "text": "탄수 +1",
+              "live": "탄수 +1"
+            }
+          ]
+        },
+        {
+          "tier": 2,
+          "cards": [
+            {
+              "kind": "shell_learn",
+              "source": "assets/18d100e966f7cd0b037294eecbf3faa539135b67d6ff7656eea0e152de0511cf.png",
+              "upload": "08-1000027660.png",
+              "text": "Lv.0 → Lv.1\n유도 가시 1개",
+              "live": "Lv.0 → Lv.1\n유도 가시 1개",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "tail_learn",
+              "source": "assets/fbe09aa300e0d3d8d92df6ea323efeec743ee524615f5c7e6152c7430f18fc76.png",
+              "upload": "03-1000027653.png",
+              "text": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "live": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "gun_count",
+              "text": "탄수 +1",
+              "live": "탄수 +1"
+            }
+          ]
+        },
+        {
+          "tier": 3,
+          "cards": [
+            {
+              "kind": "shell_learn",
+              "source": "assets/9b48e108934f85477bea9915ca6673968650241762f9d4448654535e9e3c7806.png",
+              "upload": "09-1000027655.png",
+              "text": "Lv.0 → Lv.1\n유도 가시 1개",
+              "live": "Lv.0 → Lv.1\n유도 가시 1개",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "tail_learn",
+              "source": "assets/be9f9a7f68c07f5b1fb71bc0a749b66290199e2db5de327f28e5e834a524eaa8.png",
+              "upload": "04-1000027652.png",
+              "text": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "live": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "gun_count",
+              "text": "탄수 +1",
+              "live": "탄수 +1"
+            }
+          ]
+        },
+        {
+          "tier": 4,
+          "cards": [
+            {
+              "kind": "shell_learn",
+              "source": "assets/98ed19a788044eab015805351f8f3fedc0a736b71ce71b6c18b096ef7d11b965.png",
+              "upload": "10-1000027656.png",
+              "text": "Lv.0 → Lv.1\n유도 가시 1개",
+              "live": "Lv.0 → Lv.1\n유도 가시 1개",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "tail_learn",
+              "source": "assets/8f4bcecaf0aa45c787bacb0ec42a13c1aef507807d2dc3ce0fc9014af775f838.png",
+              "upload": "05-1000027654.png",
+              "text": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "live": "Lv.0 → Lv.1\n휩쓸기 · 밀치기",
+              "imageType": "IMG"
+            },
+            {
+              "kind": "gun_count",
+              "text": "탄수 +1",
+              "live": "탄수 +1"
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "source": "local",
+      "physical_Galaxy_S23_plus_tested": false,
+      "build": {
+        "version": "V575-WEB-43-DISPLAY-RECOVERY",
+        "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+        "scriptBytes": 77710103,
+        "preloadResources": true
+      },
+      "success": true
+    },
+    "upgrade-scenery": {
+      "checks": [
+        "Real opening choices show the exact LEVEL UP / choose-one title, keep the HUD level and original organ levels, and remove the duplicate popup level; the real reroll click consumes exactly one reroll without applying a skill",
+        "Viewport and system-bar resize events repaint the actual paused game canvas without advancing time; contour interiors are opaque, outside corners remain transparent, and the image-based blue reroll frame retains transparent safe margins",
+        "Five phone and landscape layouts keep the reroll centered below the cards, retain the visible unblurred battlefield, and display red reference ornament with transparent outer corners and an opaque readable title plaque",
+        "The actual opening and later upgrade choices still resume the run; Korean/English changes settle without repeated canvas rebuilds and saved DNA survives returning home"
+      ],
+      "layouts": [
+        {
+          "width": 393,
+          "height": 852,
+          "panel": {
+            "x": 6,
+            "y": 108.625,
+            "width": 381,
+            "height": 634.734375,
+            "right": 387,
+            "bottom": 743.359375
+          },
+          "header": {
+            "x": 6,
+            "y": 108.625,
+            "width": 381,
+            "height": 187.4375,
+            "right": 387,
+            "bottom": 296.0625
+          },
+          "cards": {
+            "x": 6,
+            "y": 296.0625,
+            "width": 381,
+            "height": 340.796875,
+            "right": 387,
+            "bottom": 636.859375
+          },
+          "footer": {
+            "x": 6,
+            "y": 636.859375,
+            "width": 381,
+            "height": 106.5,
+            "right": 387,
+            "bottom": 743.359375
+          },
+          "reroll": {
+            "x": 86.015625,
+            "y": 661.109375,
+            "width": 220.96875,
+            "height": 58,
+            "right": 306.984375,
+            "bottom": 719.109375
+          },
+          "overlay": "rgba(2, 4, 7, 0.16)",
+          "backdrop": "none",
+          "oldBackgrounds": [
+            "none",
+            "none"
+          ]
+        },
+        {
+          "width": 393,
+          "height": 731,
+          "panel": {
+            "x": 6,
+            "y": 93.203125,
+            "width": 381,
+            "height": 544.578125,
+            "right": 387,
+            "bottom": 637.78125
+          },
+          "header": {
+            "x": 6,
+            "y": 93.203125,
+            "width": 381,
+            "height": 160.8125,
+            "right": 387,
+            "bottom": 254.015625
+          },
+          "cards": {
+            "x": 6,
+            "y": 254.015625,
+            "width": 381,
+            "height": 292.390625,
+            "right": 387,
+            "bottom": 546.40625
+          },
+          "footer": {
+            "x": 6,
+            "y": 546.40625,
+            "width": 381,
+            "height": 91.375,
+            "right": 387,
+            "bottom": 637.78125
+          },
+          "reroll": {
+            "x": 86.015625,
+            "y": 563.09375,
+            "width": 220.96875,
+            "height": 58,
+            "right": 306.984375,
+            "bottom": 621.09375
+          },
+          "overlay": "rgba(2, 4, 7, 0.16)",
+          "backdrop": "none",
+          "oldBackgrounds": [
+            "none",
+            "none"
+          ]
+        },
+        {
+          "width": 320,
+          "height": 568,
+          "panel": {
+            "x": 6,
+            "y": 86.40625,
+            "width": 308,
+            "height": 395.1875,
+            "right": 314,
+            "bottom": 481.59375
+          },
+          "header": {
+            "x": 6,
+            "y": 86.40625,
+            "width": 308,
+            "height": 98,
+            "right": 314,
+            "bottom": 184.40625
+          },
+          "cards": {
+            "x": 6,
+            "y": 184.40625,
+            "width": 308,
+            "height": 227.1875,
+            "right": 314,
+            "bottom": 411.59375
+          },
+          "footer": {
+            "x": 6,
+            "y": 411.59375,
+            "width": 308,
+            "height": 70,
+            "right": 314,
+            "bottom": 481.59375
+          },
+          "reroll": {
+            "x": 63,
+            "y": 417.59375,
+            "width": 194,
+            "height": 58,
+            "right": 257,
+            "bottom": 475.59375
+          },
+          "overlay": "rgba(2, 4, 7, 0.16)",
+          "backdrop": "none",
+          "oldBackgrounds": [
+            "none",
+            "none"
+          ]
+        },
+        {
+          "width": 852,
+          "height": 393,
+          "panel": {
+            "x": 76.6875,
+            "y": 7,
+            "width": 698.625,
+            "height": 379,
+            "right": 775.3125,
+            "bottom": 386
+          },
+          "header": {
+            "x": 251,
+            "y": 7,
+            "width": 350,
+            "height": 96,
+            "right": 601,
+            "bottom": 103
+          },
+          "cards": {
+            "x": 76.6875,
+            "y": 103,
+            "width": 698.625,
+            "height": 229,
+            "right": 775.3125,
+            "bottom": 332
+          },
+          "footer": {
+            "x": 76.6875,
+            "y": 332,
+            "width": 698.625,
+            "height": 54,
+            "right": 775.3125,
+            "bottom": 386
+          },
+          "reroll": {
+            "x": 329,
+            "y": 335,
+            "width": 194,
+            "height": 48,
+            "right": 523,
+            "bottom": 383
+          },
+          "overlay": "rgba(2, 4, 7, 0.16)",
+          "backdrop": "none",
+          "oldBackgrounds": [
+            "none",
+            "none"
+          ]
+        },
+        {
+          "width": 915,
+          "height": 412,
+          "panel": {
+            "x": 82.34375,
+            "y": 7,
+            "width": 750.296875,
+            "height": 398,
+            "right": 832.640625,
+            "bottom": 405
+          },
+          "header": {
+            "x": 282.484375,
+            "y": 7,
+            "width": 350,
+            "height": 96,
+            "right": 632.484375,
+            "bottom": 103
+          },
+          "cards": {
+            "x": 82.34375,
+            "y": 103,
+            "width": 750.296875,
+            "height": 248,
+            "right": 832.640625,
+            "bottom": 351
+          },
+          "footer": {
+            "x": 82.34375,
+            "y": 351,
+            "width": 750.296875,
+            "height": 54,
+            "right": 832.640625,
+            "bottom": 405
+          },
+          "reroll": {
+            "x": 360.484375,
+            "y": 354,
+            "width": 194,
+            "height": 48,
+            "right": 554.484375,
+            "bottom": 402
+          },
+          "overlay": "rgba(2, 4, 7, 0.16)",
+          "backdrop": "none",
+          "oldBackgrounds": [
+            "none",
+            "none"
+          ]
+        }
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "source": "local",
+      "physical_Galaxy_S23_plus_tested": false,
+      "build": {
+        "version": "V575-WEB-43-DISPLAY-RECOVERY",
+        "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+        "scriptBytes": 77710103,
+        "preloadResources": true
+      },
+      "opening": {
+        "heading": "레벨 업",
+        "subtitle": "강화 1개 선택",
+        "levelDisplay": "none",
+        "organs": {
+          "arm": 1,
+          "shell": 0,
+          "tail": 0,
+          "mouth": 0
+        },
+        "playerLevel": 1,
+        "remaining": 2,
+        "hudLevel": true
+      },
+      "afterReroll": {
+        "remaining": 1,
+        "cards": 3,
+        "organs": {
+          "arm": 1,
+          "shell": 0,
+          "tail": 0,
+          "mouth": 0
+        }
+      },
+      "viewportPixels": [
+        {
+          "samples": 364,
+          "opaque": 364,
+          "lit": 364,
+          "repaint": {
+            "redraws": 0,
+            "recoveries": 0,
+            "width": 393,
+            "height": 852,
+            "pausedFrameReady": false,
+            "simulationUnchanged": true
+          },
+          "clock": 0
+        },
+        {
+          "samples": 312,
+          "opaque": 312,
+          "lit": 312,
+          "repaint": {
+            "redraws": 2,
+            "recoveries": 0,
+            "width": 393,
+            "height": 731,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "clock": 0
+        },
+        {
+          "samples": 180,
+          "opaque": 180,
+          "lit": 180,
+          "repaint": {
+            "redraws": 4,
+            "recoveries": 0,
+            "width": 320,
+            "height": 568,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "clock": 0
+        },
+        {
+          "samples": 91,
+          "opaque": 91,
+          "lit": 91,
+          "repaint": {
+            "redraws": 6,
+            "recoveries": 0,
+            "width": 227.9375,
+            "height": 393,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "clock": 0
+        },
+        {
+          "samples": 104,
+          "opaque": 104,
+          "lit": 104,
+          "repaint": {
+            "redraws": 8,
+            "recoveries": 0,
+            "width": 238.953125,
+            "height": 412,
+            "pausedFrameReady": true,
+            "simulationUnchanged": true
+          },
+          "clock": 0
+        }
+      ],
+      "material": {
+        "crestRed": 9851,
+        "footerRed": 19520,
+        "cornerPixels": 0,
+        "plaqueAlpha": 255,
+        "crestInteriorAlpha": 255,
+        "footerInteriorAlpha": 255,
+        "cardBand": "rgb(2, 1, 6)",
+        "rerollClip": "none",
+        "paints": 2
+      },
+      "blueFrame": {
+        "blue": 4078,
+        "outer": 0,
+        "width": 664,
+        "height": 215
+      },
+      "success": true
+    },
+    "upgrade-cards": {
+      "checks": [
+        "17 simple stat cards have 1–2 effect lines; rarity increments, five independent rarity boundaries, and +1/+2/+3/+4/+5 counts agree with actual stats",
+        "real cannon volleys gain two projectiles, three pierces, a bounce and 30% range; damage rises by exactly 20%; body radius and visible size follow size cards; every level needs 12 XP",
+        "an actual projectile pierces two different enemies, then ricochets to a third without repeatedly hitting the same enemy",
+        "a projectile already in flight keeps gun damage after changing to blades and cannot gain blade crit or bleeding",
+        "300 real choice rolls per equipment mode offer only the current gun/blade and existing body stats; no acquisition or equipment-changing card remains",
+        "blade crit caps at 100% and stops being offered; a real hit applies 15 bleed over 3 seconds; faster swings advance the real attack; regeneration heals once each five gameplay seconds",
+        "real card clicks advance levels 2/10/100/1000 and preserve all three upgrades earned from 36 XP",
+        "all 25 rarity icons have transparent safe margins with no opaque rectangular edges; real supplied frame pixels match exactly; duplicate popup level is hidden while foot label remains 발",
+        "ordinary, elite affixes, nemesis, zone elite and boss render paths produce no body glyph/ring/target/stun geometry; actual GPU body pass emits no status FX instances",
+        "every ordinary appearance, elite and all seven boss images can be selected; exact selected ordinary/elite monsters spawn on clear terrain even in stage one with natural spawning disabled; admin guard works",
+        "previous run bonuses reset before the one real opening upgrade, while saved ARM equipment remains intact"
+      ],
+      "errors": [],
+      "failedRequests": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "build": {
+        "version": "V575-WEB-43-DISPLAY-RECOVERY",
+        "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+        "scriptBytes": 77710103,
+        "preloadResources": true
+      },
+      "cards": {
+        "base": [
+          {
+            "dmg": 13.200000000000001,
+            "pierce": 1,
+            "range": 196.5,
+            "bounce": 0
+          }
+        ],
+        "enhanced": [
+          {
+            "dmg": 13.200000000000001,
+            "pierce": 4,
+            "range": 255.45000000000002,
+            "bounce": 1
+          },
+          {
+            "dmg": 13.200000000000001,
+            "pierce": 4,
+            "range": 255.45000000000002,
+            "bounce": 1
+          },
+          {
+            "dmg": 13.200000000000001,
+            "pierce": 4,
+            "range": 255.45000000000002,
+            "bounce": 1
+          }
+        ],
+        "cooldown": 0.6541666666666667,
+        "baseDamage": 100,
+        "boostedDamage": 120,
+        "health": 85,
+        "large": 1.05,
+        "largeRadius": 7.3500000000000005,
+        "light": 0.95,
+        "lightRadius": 6.6499999999999995,
+        "speed": 0.1,
+        "defs": [
+          {
+            "id": "gun_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "gun_count",
+            "lines": [
+              [
+                "탄수 +1"
+              ],
+              [
+                "탄수 +2"
+              ],
+              [
+                "탄수 +3"
+              ],
+              [
+                "탄수 +4"
+              ],
+              [
+                "탄수 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "gun_haste",
+            "lines": [
+              [
+                "연사 속도 +10%"
+              ],
+              [
+                "연사 속도 +15%"
+              ],
+              [
+                "연사 속도 +20%"
+              ],
+              [
+                "연사 속도 +30%"
+              ],
+              [
+                "연사 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "gun_pierce",
+            "lines": [
+              [
+                "관통 +1"
+              ],
+              [
+                "관통 +2"
+              ],
+              [
+                "관통 +3"
+              ],
+              [
+                "관통 +4"
+              ],
+              [
+                "관통 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "gun_range",
+            "lines": [
+              [
+                "사거리 +10%"
+              ],
+              [
+                "사거리 +15%"
+              ],
+              [
+                "사거리 +20%"
+              ],
+              [
+                "사거리 +30%"
+              ],
+              [
+                "사거리 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "gun_bounce",
+            "lines": [
+              [
+                "튕김 +1"
+              ],
+              [
+                "튕김 +2"
+              ],
+              [
+                "튕김 +3"
+              ],
+              [
+                "튕김 +4"
+              ],
+              [
+                "튕김 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "blade_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "blade_haste",
+            "lines": [
+              [
+                "공격 속도 +10%"
+              ],
+              [
+                "공격 속도 +15%"
+              ],
+              [
+                "공격 속도 +20%"
+              ],
+              [
+                "공격 속도 +30%"
+              ],
+              [
+                "공격 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "blade_range",
+            "lines": [
+              [
+                "범위 +10%"
+              ],
+              [
+                "범위 +15%"
+              ],
+              [
+                "범위 +20%"
+              ],
+              [
+                "범위 +30%"
+              ],
+              [
+                "범위 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "blade_crit",
+            "lines": [
+              [
+                "치명타 확률 +10%p"
+              ],
+              [
+                "치명타 확률 +15%p"
+              ],
+              [
+                "치명타 확률 +20%p"
+              ],
+              [
+                "치명타 확률 +30%p"
+              ],
+              [
+                "치명타 확률 +50%p"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "blade_bleed",
+            "lines": [
+              [
+                "3초간 출혈 +15"
+              ],
+              [
+                "3초간 출혈 +22.5"
+              ],
+              [
+                "3초간 출혈 +30"
+              ],
+              [
+                "3초간 출혈 +45"
+              ],
+              [
+                "3초간 출혈 +75"
+              ]
+            ],
+            "values": [
+              15,
+              22.5,
+              30,
+              45,
+              75
+            ]
+          },
+          {
+            "id": "move",
+            "lines": [
+              [
+                "이동 속도 +5%"
+              ],
+              [
+                "이동 속도 +7.5%"
+              ],
+              [
+                "이동 속도 +10%"
+              ],
+              [
+                "이동 속도 +15%"
+              ],
+              [
+                "이동 속도 +25%"
+              ]
+            ],
+            "values": [
+              0.05,
+              0.07500000000000001,
+              0.1,
+              0.15000000000000002,
+              0.25
+            ]
+          },
+          {
+            "id": "light",
+            "lines": [
+              [
+                "이동 속도 +5%",
+                "크기 −5%"
+              ],
+              [
+                "이동 속도 +7.5%",
+                "크기 −7.5%"
+              ],
+              [
+                "이동 속도 +10%",
+                "크기 −10%"
+              ],
+              [
+                "이동 속도 +15%",
+                "크기 −15%"
+              ],
+              [
+                "이동 속도 +25%",
+                "크기 −25%"
+              ]
+            ],
+            "values": [
+              0.05,
+              0.07500000000000001,
+              0.1,
+              0.15000000000000002,
+              0.25
+            ]
+          },
+          {
+            "id": "health",
+            "lines": [
+              [
+                "체력 +10"
+              ],
+              [
+                "체력 +15"
+              ],
+              [
+                "체력 +20"
+              ],
+              [
+                "체력 +30"
+              ],
+              [
+                "체력 +50"
+              ]
+            ],
+            "values": [
+              10,
+              15,
+              20,
+              30,
+              50
+            ]
+          },
+          {
+            "id": "giant",
+            "lines": [
+              [
+                "체력 +25",
+                "크기 +5%"
+              ],
+              [
+                "체력 +37.5",
+                "크기 +5%"
+              ],
+              [
+                "체력 +50",
+                "크기 +5%"
+              ],
+              [
+                "체력 +75",
+                "크기 +5%"
+              ],
+              [
+                "체력 +125",
+                "크기 +5%"
+              ]
+            ],
+            "values": [
+              25,
+              37.5,
+              50,
+              75,
+              125
+            ]
+          },
+          {
+            "id": "armor",
+            "lines": [
+              [
+                "방어력 +1"
+              ],
+              [
+                "방어력 +1.5"
+              ],
+              [
+                "방어력 +2"
+              ],
+              [
+                "방어력 +3"
+              ],
+              [
+                "방어력 +5"
+              ]
+            ],
+            "values": [
+              1,
+              1.5,
+              2,
+              3,
+              5
+            ]
+          },
+          {
+            "id": "regen",
+            "lines": [
+              [
+                "5초마다 체력 +1"
+              ],
+              [
+                "5초마다 체력 +1.5"
+              ],
+              [
+                "5초마다 체력 +2"
+              ],
+              [
+                "5초마다 체력 +3"
+              ],
+              [
+                "5초마다 체력 +5"
+              ]
+            ],
+            "values": [
+              1,
+              1.5,
+              2,
+              3,
+              5
+            ]
+          },
+          {
+            "id": "shell_learn",
+            "lines": [
+              [
+                "Lv.0 → Lv.1",
+                "유도 가시 1개"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "유도 가시 1개"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "유도 가시 1개"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "유도 가시 1개"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "유도 가시 1개"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "tail_learn",
+            "lines": [
+              [
+                "Lv.0 → Lv.1",
+                "휩쓸기 · 밀치기"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "휩쓸기 · 밀치기"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "휩쓸기 · 밀치기"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "휩쓸기 · 밀치기"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "휩쓸기 · 밀치기"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "mouth_learn",
+            "lines": [
+              [
+                "Lv.0 → Lv.1",
+                "침 1개 발사"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "침 1개 발사"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "침 1개 발사"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "침 1개 발사"
+              ],
+              [
+                "Lv.0 → Lv.1",
+                "침 1개 발사"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "spike_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "spike_count",
+            "lines": [
+              [
+                "발사 수 +1"
+              ],
+              [
+                "발사 수 +2"
+              ],
+              [
+                "발사 수 +3"
+              ],
+              [
+                "발사 수 +4"
+              ],
+              [
+                "발사 수 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "spike_pierce",
+            "lines": [
+              [
+                "관통 +1"
+              ],
+              [
+                "관통 +2"
+              ],
+              [
+                "관통 +3"
+              ],
+              [
+                "관통 +4"
+              ],
+              [
+                "관통 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "spike_haste",
+            "lines": [
+              [
+                "발사 속도 +10%"
+              ],
+              [
+                "발사 속도 +15%"
+              ],
+              [
+                "발사 속도 +20%"
+              ],
+              [
+                "발사 속도 +30%"
+              ],
+              [
+                "발사 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "spike_range",
+            "lines": [
+              [
+                "사거리 +12%"
+              ],
+              [
+                "사거리 +18%"
+              ],
+              [
+                "사거리 +24%"
+              ],
+              [
+                "사거리 +36%"
+              ],
+              [
+                "사거리 +60%"
+              ]
+            ],
+            "values": [
+              0.12,
+              0.18,
+              0.24,
+              0.36,
+              0.6
+            ]
+          },
+          {
+            "id": "whip_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "whip_haste",
+            "lines": [
+              [
+                "공격 속도 +10%"
+              ],
+              [
+                "공격 속도 +15%"
+              ],
+              [
+                "공격 속도 +20%"
+              ],
+              [
+                "공격 속도 +30%"
+              ],
+              [
+                "공격 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "whip_range",
+            "lines": [
+              [
+                "범위 +12%"
+              ],
+              [
+                "범위 +18%"
+              ],
+              [
+                "범위 +24%"
+              ],
+              [
+                "범위 +36%"
+              ],
+              [
+                "범위 +60%"
+              ]
+            ],
+            "values": [
+              0.12,
+              0.18,
+              0.24,
+              0.36,
+              0.6
+            ]
+          },
+          {
+            "id": "whip_arc",
+            "lines": [
+              [
+                "공격 각도 +30°"
+              ],
+              [
+                "공격 각도 +45°"
+              ],
+              [
+                "공격 각도 +60°"
+              ],
+              [
+                "공격 각도 +90°"
+              ],
+              [
+                "공격 각도 +150°"
+              ]
+            ],
+            "values": [
+              30,
+              45,
+              60,
+              90,
+              150
+            ]
+          },
+          {
+            "id": "whip_push",
+            "lines": [
+              [
+                "밀치기 +15%"
+              ],
+              [
+                "밀치기 +22.5%"
+              ],
+              [
+                "밀치기 +30%"
+              ],
+              [
+                "밀치기 +45%"
+              ],
+              [
+                "밀치기 +75%"
+              ]
+            ],
+            "values": [
+              0.15,
+              0.22499999999999998,
+              0.3,
+              0.44999999999999996,
+              0.75
+            ]
+          },
+          {
+            "id": "spit_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "spit_count",
+            "lines": [
+              [
+                "발사 수 +1"
+              ],
+              [
+                "발사 수 +2"
+              ],
+              [
+                "발사 수 +3"
+              ],
+              [
+                "발사 수 +4"
+              ],
+              [
+                "발사 수 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "spit_pierce",
+            "lines": [
+              [
+                "관통 +1"
+              ],
+              [
+                "관통 +2"
+              ],
+              [
+                "관통 +3"
+              ],
+              [
+                "관통 +4"
+              ],
+              [
+                "관통 +5"
+              ]
+            ],
+            "values": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          {
+            "id": "spit_haste",
+            "lines": [
+              [
+                "발사 속도 +10%"
+              ],
+              [
+                "발사 속도 +15%"
+              ],
+              [
+                "발사 속도 +20%"
+              ],
+              [
+                "발사 속도 +30%"
+              ],
+              [
+                "발사 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "spit_range",
+            "lines": [
+              [
+                "사거리 +12%"
+              ],
+              [
+                "사거리 +18%"
+              ],
+              [
+                "사거리 +24%"
+              ],
+              [
+                "사거리 +36%"
+              ],
+              [
+                "사거리 +60%"
+              ]
+            ],
+            "values": [
+              0.12,
+              0.18,
+              0.24,
+              0.36,
+              0.6
+            ]
+          },
+          {
+            "id": "bare_damage",
+            "lines": [
+              [
+                "공격력 +10%"
+              ],
+              [
+                "공격력 +15%"
+              ],
+              [
+                "공격력 +20%"
+              ],
+              [
+                "공격력 +30%"
+              ],
+              [
+                "공격력 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "bare_haste",
+            "lines": [
+              [
+                "공격 속도 +10%"
+              ],
+              [
+                "공격 속도 +15%"
+              ],
+              [
+                "공격 속도 +20%"
+              ],
+              [
+                "공격 속도 +30%"
+              ],
+              [
+                "공격 속도 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          },
+          {
+            "id": "bare_range",
+            "lines": [
+              [
+                "범위 +10%"
+              ],
+              [
+                "범위 +15%"
+              ],
+              [
+                "범위 +20%"
+              ],
+              [
+                "범위 +30%"
+              ],
+              [
+                "범위 +50%"
+              ]
+            ],
+            "values": [
+              0.1,
+              0.15000000000000002,
+              0.2,
+              0.30000000000000004,
+              0.5
+            ]
+          }
+        ],
+        "rolls": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          2,
+          3,
+          3,
+          4,
+          4
+        ],
+        "rarities": [
+          {
+            "id": "common",
+            "ko": "커먼",
+            "en": "COMMON",
+            "color": "#bec5ce",
+            "mult": 1,
+            "count": 1,
+            "chance": 0.6
+          },
+          {
+            "id": "rare",
+            "ko": "레어",
+            "en": "RARE",
+            "color": "#46ceff",
+            "mult": 1.5,
+            "count": 2,
+            "chance": 0.27
+          },
+          {
+            "id": "epic",
+            "ko": "에픽",
+            "en": "EPIC",
+            "color": "#c578ff",
+            "mult": 2,
+            "count": 3,
+            "chance": 0.1
+          },
+          {
+            "id": "legendary",
+            "ko": "전설",
+            "en": "LEGENDARY",
+            "color": "#ffe16b",
+            "mult": 3,
+            "count": 4,
+            "chance": 0.027
+          },
+          {
+            "id": "mythic",
+            "ko": "신화",
+            "en": "MYTHIC",
+            "color": "#ff913d",
+            "mult": 5,
+            "count": 5,
+            "chance": 0.003
+          }
+        ],
+        "needs": [
+          12,
+          12,
+          12,
+          12,
+          12,
+          12
+        ]
+      },
+      "pierceBounce": {
+        "damage": [
+          13.199999999953434,
+          13.199999999953434,
+          13.199999999953434
+        ],
+        "distinct": 3,
+        "bouncesLeft": 0,
+        "points": 29
+      },
+      "weaponSwitch": {
+        "expected": 15.84,
+        "actual": 15.839999999967404,
+        "bleeding": 0,
+        "mode": "blades"
+      },
+      "equipmentPools": [
+        {
+          "mode": "cannon",
+          "pool": [
+            {
+              "id": "gun_damage",
+              "group": "gun"
+            },
+            {
+              "id": "gun_count",
+              "group": "gun"
+            },
+            {
+              "id": "gun_haste",
+              "group": "gun"
+            },
+            {
+              "id": "gun_pierce",
+              "group": "gun"
+            },
+            {
+              "id": "gun_range",
+              "group": "gun"
+            },
+            {
+              "id": "gun_bounce",
+              "group": "gun"
+            },
+            {
+              "id": "move",
+              "group": "legs"
+            },
+            {
+              "id": "light",
+              "group": "legs"
+            },
+            {
+              "id": "health",
+              "group": "shell"
+            },
+            {
+              "id": "giant",
+              "group": "shell"
+            },
+            {
+              "id": "armor",
+              "group": "shell"
+            },
+            {
+              "id": "regen",
+              "group": "shell"
+            },
+            {
+              "id": "shell_learn",
+              "group": "shell"
+            },
+            {
+              "id": "tail_learn",
+              "group": "tail"
+            },
+            {
+              "id": "mouth_learn",
+              "group": "mouth"
+            }
+          ],
+          "seen": [
+            "mouth_learn",
+            "shell_learn",
+            "light",
+            "tail_learn",
+            "move",
+            "gun_range",
+            "armor",
+            "regen",
+            "gun_count",
+            "giant",
+            "gun_damage",
+            "gun_bounce",
+            "gun_pierce",
+            "gun_haste",
+            "health"
+          ],
+          "after": "cannon"
+        },
+        {
+          "mode": "blades",
+          "pool": [
+            {
+              "id": "blade_damage",
+              "group": "blade"
+            },
+            {
+              "id": "blade_haste",
+              "group": "blade"
+            },
+            {
+              "id": "blade_range",
+              "group": "blade"
+            },
+            {
+              "id": "blade_bleed",
+              "group": "blade"
+            },
+            {
+              "id": "move",
+              "group": "legs"
+            },
+            {
+              "id": "light",
+              "group": "legs"
+            },
+            {
+              "id": "health",
+              "group": "shell"
+            },
+            {
+              "id": "giant",
+              "group": "shell"
+            },
+            {
+              "id": "armor",
+              "group": "shell"
+            },
+            {
+              "id": "regen",
+              "group": "shell"
+            },
+            {
+              "id": "shell_learn",
+              "group": "shell"
+            },
+            {
+              "id": "tail_learn",
+              "group": "tail"
+            },
+            {
+              "id": "mouth_learn",
+              "group": "mouth"
+            }
+          ],
+          "seen": [
+            "blade_haste",
+            "regen",
+            "tail_learn",
+            "light",
+            "shell_learn",
+            "blade_range",
+            "blade_bleed",
+            "mouth_learn",
+            "move",
+            "blade_damage",
+            "giant",
+            "armor",
+            "health"
+          ],
+          "after": "blades"
+        },
+        {
+          "mode": "bare",
+          "pool": [
+            {
+              "id": "move",
+              "group": "legs"
+            },
+            {
+              "id": "light",
+              "group": "legs"
+            },
+            {
+              "id": "health",
+              "group": "shell"
+            },
+            {
+              "id": "giant",
+              "group": "shell"
+            },
+            {
+              "id": "armor",
+              "group": "shell"
+            },
+            {
+              "id": "regen",
+              "group": "shell"
+            },
+            {
+              "id": "shell_learn",
+              "group": "shell"
+            },
+            {
+              "id": "tail_learn",
+              "group": "tail"
+            },
+            {
+              "id": "mouth_learn",
+              "group": "mouth"
+            },
+            {
+              "id": "bare_damage",
+              "group": "bare"
+            },
+            {
+              "id": "bare_haste",
+              "group": "bare"
+            },
+            {
+              "id": "bare_range",
+              "group": "bare"
+            }
+          ],
+          "seen": [
+            "health",
+            "bare_haste",
+            "tail_learn",
+            "armor",
+            "light",
+            "shell_learn",
+            "bare_damage",
+            "move",
+            "bare_range",
+            "mouth_learn",
+            "giant",
+            "regen"
+          ],
+          "after": "bare"
+        }
+      ],
+      "blade": {
+        "critical": 200,
+        "bleed": 15,
+        "cast": true,
+        "damage": 215,
+        "age": 0.24,
+        "bullets": 0,
+        "regen": 1,
+        "crit": 1,
+        "critStillOffered": false
+      },
+      "armor": {
+        "baseline": 10,
+        "protectedDamage": 8
+      },
+      "levels": [
+        {
+          "level": 2,
+          "need": 12,
+          "xp": 0,
+          "choosing": false
+        },
+        {
+          "level": 10,
+          "need": 12,
+          "xp": 0,
+          "choosing": false
+        },
+        {
+          "level": 100,
+          "need": 12,
+          "xp": 0,
+          "choosing": false
+        },
+        {
+          "level": 1000,
+          "need": 12,
+          "xp": 0,
+          "choosing": false
+        }
+      ],
+      "portrait": [
+        {
+          "rarity": "rare",
+          "x": 6,
+          "y": 296.0625,
+          "w": 123.65625,
+          "h": 340.796875,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        },
+        {
+          "rarity": "epic",
+          "x": 134.65625,
+          "y": 296.0625,
+          "w": 123.671875,
+          "h": 340.796875,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        },
+        {
+          "rarity": "legendary",
+          "x": 263.328125,
+          "y": 296.0625,
+          "w": 123.65625,
+          "h": 340.796875,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        }
+      ],
+      "landscape": [
+        {
+          "rarity": "common",
+          "x": 76.6875,
+          "y": 103,
+          "w": 226.875,
+          "h": 229,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        },
+        {
+          "rarity": "mythic",
+          "x": 312.5625,
+          "y": 103,
+          "w": 226.875,
+          "h": 229,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        },
+        {
+          "rarity": "legendary",
+          "x": 548.4375,
+          "y": 103,
+          "w": 226.875,
+          "h": 229,
+          "statsWithin": true,
+          "partWithin": true,
+          "buttonText": false,
+          "font": "\"EVOLVE Upgrade Sans\", \"Noto Sans KR\", system-ui, sans-serif"
+        }
+      ],
+      "referenceEnglish": {
+        "language": "ko",
+        "heading": "LEVEL UP",
+        "parts": [
+          "ARM",
+          "FEET",
+          "SHELL"
+        ],
+        "headingVisible": true
+      },
+      "skin": {
+        "read": {
+          "ready": true,
+          "reference": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+          "sourceBytesPreserved": true,
+          "originalItemAtlasUnchanged": true,
+          "transparentItemPadding": 64,
+          "artCache": 25,
+          "frameBuilds": 5,
+          "failures": [],
+          "equippingCards": false,
+          "physical_Galaxy_S23_plus_tested": false
+        },
+        "metrics": [
+          {
+            "row": 0,
+            "tier": 0,
+            "edges": 0,
+            "visible": 25602,
+            "width": 363,
+            "height": 305
+          },
+          {
+            "row": 0,
+            "tier": 1,
+            "edges": 0,
+            "visible": 33206,
+            "width": 358,
+            "height": 290
+          },
+          {
+            "row": 0,
+            "tier": 2,
+            "edges": 0,
+            "visible": 37877,
+            "width": 357,
+            "height": 288
+          },
+          {
+            "row": 0,
+            "tier": 3,
+            "edges": 0,
+            "visible": 45256,
+            "width": 359,
+            "height": 296
+          },
+          {
+            "row": 0,
+            "tier": 4,
+            "edges": 0,
+            "visible": 57786,
+            "width": 360,
+            "height": 314
+          },
+          {
+            "row": 1,
+            "tier": 0,
+            "edges": 0,
+            "visible": 19315,
+            "width": 362,
+            "height": 326
+          },
+          {
+            "row": 1,
+            "tier": 1,
+            "edges": 0,
+            "visible": 27013,
+            "width": 368,
+            "height": 328
+          },
+          {
+            "row": 1,
+            "tier": 2,
+            "edges": 0,
+            "visible": 33120,
+            "width": 367,
+            "height": 338
+          },
+          {
+            "row": 1,
+            "tier": 3,
+            "edges": 0,
+            "visible": 38763,
+            "width": 361,
+            "height": 338
+          },
+          {
+            "row": 1,
+            "tier": 4,
+            "edges": 0,
+            "visible": 55709,
+            "width": 364,
+            "height": 346
+          },
+          {
+            "row": 2,
+            "tier": 0,
+            "edges": 0,
+            "visible": 28340,
+            "width": 298,
+            "height": 409
+          },
+          {
+            "row": 2,
+            "tier": 1,
+            "edges": 0,
+            "visible": 37207,
+            "width": 280,
+            "height": 404
+          },
+          {
+            "row": 2,
+            "tier": 2,
+            "edges": 0,
+            "visible": 42908,
+            "width": 284,
+            "height": 404
+          },
+          {
+            "row": 2,
+            "tier": 3,
+            "edges": 0,
+            "visible": 50969,
+            "width": 286,
+            "height": 404
+          },
+          {
+            "row": 2,
+            "tier": 4,
+            "edges": 0,
+            "visible": 66284,
+            "width": 317,
+            "height": 406
+          },
+          {
+            "row": 3,
+            "tier": 0,
+            "edges": 0,
+            "visible": 36731,
+            "width": 369,
+            "height": 369
+          },
+          {
+            "row": 3,
+            "tier": 1,
+            "edges": 0,
+            "visible": 47642,
+            "width": 375,
+            "height": 372
+          },
+          {
+            "row": 3,
+            "tier": 2,
+            "edges": 0,
+            "visible": 56131,
+            "width": 378,
+            "height": 373
+          },
+          {
+            "row": 3,
+            "tier": 3,
+            "edges": 0,
+            "visible": 60585,
+            "width": 357,
+            "height": 375
+          },
+          {
+            "row": 3,
+            "tier": 4,
+            "edges": 0,
+            "visible": 79537,
+            "width": 370,
+            "height": 376
+          },
+          {
+            "row": 4,
+            "tier": 0,
+            "edges": 0,
+            "visible": 27866,
+            "width": 312,
+            "height": 372
+          },
+          {
+            "row": 4,
+            "tier": 1,
+            "edges": 0,
+            "visible": 36003,
+            "width": 302,
+            "height": 369
+          },
+          {
+            "row": 4,
+            "tier": 2,
+            "edges": 0,
+            "visible": 43302,
+            "width": 310,
+            "height": 372
+          },
+          {
+            "row": 4,
+            "tier": 3,
+            "edges": 0,
+            "visible": 48719,
+            "width": 309,
+            "height": 371
+          },
+          {
+            "row": 4,
+            "tier": 4,
+            "edges": 0,
+            "visible": 73435,
+            "width": 355,
+            "height": 385
+          }
+        ],
+        "referenceFramePixels": {
+          "checked": 858,
+          "different": 0
+        },
+        "level": "Lv. 95",
+        "levelVisible": false,
+        "parts": [
+          "외피",
+          "발",
+          "외피"
+        ],
+        "panelRadius": "0px"
+      },
+      "monsterMarks": {
+        "results": [
+          {
+            "type": "crawler",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "crawler",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "warden",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "warden",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "symbiote",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "symbiote",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": true,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": false,
+            "finalBoss": false,
+            "gpu": true,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": false,
+            "finalBoss": true,
+            "gpu": false,
+            "geometry": 0
+          },
+          {
+            "type": "brute",
+            "elite": false,
+            "finalBoss": true,
+            "gpu": true,
+            "geometry": 0
+          }
+        ],
+        "fx": {
+          "fx": [],
+          "body": 4,
+          "ready": true
+        }
+      },
+      "catalog": [
+        {
+          "id": "crawler",
+          "type": "crawler",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "runner",
+          "type": "runner",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "brute",
+          "type": "brute",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "spitter",
+          "type": "spitter",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "warden",
+          "type": "warden",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "froststalker",
+          "type": "froststalker",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "symbiote",
+          "type": "symbiote",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "embermaw",
+          "type": "embermaw",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "ripper",
+          "type": "ripper",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "mauler",
+          "type": "mauler",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "bileback",
+          "type": "bileback",
+          "legacy": false,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "legacy_crawler",
+          "type": "crawler",
+          "legacy": true,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "legacy_warden",
+          "type": "warden",
+          "legacy": true,
+          "elite": false,
+          "clear": true
+        },
+        {
+          "id": "alpha",
+          "type": "brute",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        },
+        {
+          "id": "sentinel",
+          "type": "spitter",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        },
+        {
+          "id": "hunter",
+          "type": "runner",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        },
+        {
+          "id": "omega",
+          "type": "brute",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        },
+        {
+          "id": "nemesis_brute",
+          "type": "brute",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        },
+        {
+          "id": "nemesis_spitter",
+          "type": "spitter",
+          "legacy": false,
+          "elite": true,
+          "clear": true
+        }
+      ],
+      "success": true
+    },
+    "fullscreen": {
+      "source": "local",
+      "checks": [
+        "Chromium accepts scoped fullscreen manifest and all install icons decode at their declared sizes",
+        "Real fullscreen entry fills the viewport; exit preserves page and saved data"
+      ],
+      "errors": [],
+      "physical_Galaxy_S23_plus_tested": false,
+      "manifest": {
+        "url": "http://127.0.0.1:39561/manifest.webmanifest",
+        "data": {
+          "id": "./",
+          "name": "EVOLVE",
+          "short_name": "EVOLVE",
+          "description": "EVOLVE 생존 · 진화 액션",
+          "lang": "ko",
+          "start_url": "./",
+          "scope": "./",
+          "display": "fullscreen",
+          "display_override": [
+            "fullscreen",
+            "standalone"
+          ],
+          "orientation": "any",
+          "background_color": "#05070a",
+          "theme_color": "#05070a",
+          "prefer_related_applications": false,
+          "icons": [
+            {
+              "src": "assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png",
+              "sizes": "192x192",
+              "type": "image/png",
+              "purpose": "any"
+            },
+            {
+              "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+              "sizes": "512x512",
+              "type": "image/png",
+              "purpose": "any"
+            },
+            {
+              "src": "assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+              "sizes": "512x512",
+              "type": "image/png",
+              "purpose": "maskable"
+            }
+          ]
+        }
+      },
+      "chromiumManifest": {
+        "url": "http://127.0.0.1:39561/manifest.webmanifest",
+        "errors": [],
+        "data": "{\n  \"id\": \"./\",\n  \"name\": \"EVOLVE\",\n  \"short_name\": \"EVOLVE\",\n  \"description\": \"EVOLVE 생존 · 진화 액션\",\n  \"lang\": \"ko\",\n  \"start_url\": \"./\",\n  \"scope\": \"./\",\n  \"display\": \"fullscreen\",\n  \"display_override\": [\n    \"fullscreen\",\n    \"standalone\"\n  ],\n  \"orientation\": \"any\",\n  \"background_color\": \"#05070a\",\n  \"theme_color\": \"#05070a\",\n  \"prefer_related_applications\": false,\n  \"icons\": [\n    {\n      \"src\": \"assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any\"\n    },\n    {\n      \"src\": \"assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"maskable\"\n    }\n  ]\n}\n",
+        "parsed": {
+          "scope": "http://127.0.0.1:39561/"
+        },
+        "manifest": {
+          "backgroundColor": "rgba(5,7,10,1)",
+          "description": "EVOLVE 생존 · 진화 액션",
+          "display": "kFullscreen",
+          "displayOverrides": [
+            "kFullscreen",
+            "kStandalone"
+          ],
+          "icons": [
+            {
+              "url": "http://127.0.0.1:39561/assets/bd4ca1d4a8211480c35364279227fc3264a5c1791c6bcdd46ff0118c11295cfa.png",
+              "sizes": "192x192",
+              "type": "image/png"
+            },
+            {
+              "url": "http://127.0.0.1:39561/assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+              "sizes": "512x512",
+              "type": "image/png"
+            },
+            {
+              "url": "http://127.0.0.1:39561/assets/f380a3e09bd46db1bf8c328332486f9efddfe990a5fceead62db6fd9dd08c6eb.png",
+              "sizes": "512x512",
+              "type": "image/png"
+            }
+          ],
+          "id": "http://127.0.0.1:39561/",
+          "name": "EVOLVE",
+          "orientation": "ANY",
+          "preferRelatedApplications": false,
+          "scope": "http://127.0.0.1:39561/",
+          "startUrl": "http://127.0.0.1:39561/",
+          "themeColor": "rgba(5,7,10,1)"
+        }
+      },
+      "glyphs": [
+        {
+          "key": "shop",
+          "row": "1",
+          "images": 1,
+          "window": "0 0 87 82"
+        },
+        {
+          "key": "parts",
+          "row": "1",
+          "images": 1,
+          "window": "0 0 83 87"
+        },
+        {
+          "key": "battle",
+          "row": "1",
+          "images": 1,
+          "window": "0 0 122 97"
+        },
+        {
+          "key": "challenge",
+          "row": "1",
+          "images": 1,
+          "window": "0 0 93 85"
+        },
+        {
+          "key": "codex",
+          "row": "1",
+          "images": 1,
+          "window": "0 0 97 82"
+        }
+      ],
+      "fit": {
+        "width": 393,
+        "height": 852,
+        "viewportWidth": 393,
+        "viewportHeight": 852
+      },
+      "success": true
+    }
+  }
+}

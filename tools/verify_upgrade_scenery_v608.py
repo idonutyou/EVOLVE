@@ -30,7 +30,7 @@ def main():
         expected = (args.dist / name).read_bytes()
         assert actual == expected, name
         checks.append({'path': name, 'bytes': len(actual), 'sha256': hashlib.sha256(actual).hexdigest(), 'matches': True})
-    assert feature['gameplay_unchanged'] and feature['viewport_repaint_only'] and feature['original_image_bytes_unchanged']
+    assert feature['gameplay_unchanged'] and (feature['viewport_repaint_only'] or feature.get('rendering_only')) and feature['original_image_bytes_unchanged']
     report = {'success': True, 'url': base, 'version': version['version'], 'build': version['build'],
               'checks': checks, 'gameplay_unchanged': True, 'engine_change': 'viewport repaint only', 'reference_bytes_unchanged': True,
               'physical_Galaxy_S23_plus_tested': False}

@@ -16,6 +16,8 @@ on:
       - "tests/upgrade_scenery_browser.cjs"
       - "tests/arm_items_browser.cjs"
       - "tests/organ_card_art_browser.cjs"
+      - "tests/display_recovery_browser.cjs"
+      - "tools/verify_display_recovery_v611.py"
       - "tools/verify_organ_card_art_v610.py"
       - "tools/verify_upgrade_scenery_v608.py"
       - "tests/attack_warnings_browser.cjs"
@@ -116,6 +118,7 @@ jobs:
           node tests/upgrade_cards_browser.cjs
           node tests/upgrade_scenery_browser.cjs
           node tests/organ_card_art_browser.cjs
+          node tests/display_recovery_browser.cjs
           node tests/visual_clarity_browser.cjs
           node tests/horde_roles_browser.cjs
           node tests/movement_field_browser.cjs
@@ -165,6 +168,8 @@ jobs:
           python3 tools/verify_upgrade_scenery_v608.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/upgrade-scenery-live-bytes.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_card_art_browser.cjs --report test-results/organ-card-art-live-browser.json
           python3 tools/verify_organ_card_art_v610.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/organ-card-art-live-bytes.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/display_recovery_browser.cjs --report test-results/display-recovery-live-browser.json
+          python3 tools/verify_display_recovery_v611.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/display-recovery-live-bytes.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/fullscreen_browser.cjs --report test-results/fullscreen-live-browser.json
           python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
           python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
@@ -181,6 +186,9 @@ jobs:
             test-results/upgrade-scenery-live-bytes.json
             test-results/organ-card-art-live-browser.json
             test-results/organ-card-art-live-bytes.json
+            test-results/display-recovery-live-browser.json
+            test-results/display-recovery-live-bytes.json
+            test-results/display-recovery-*.png
             test-results/organ-card-art-*.png
             test-results/upgrade-scenery-*.png
             test-results/fullscreen-live-browser.json

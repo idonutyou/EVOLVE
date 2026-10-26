@@ -15,29 +15,24 @@
   return organ?cardsByKey.get(organ+':'+button.dataset.artTier):null;
  }
  function paint(im,meta){
-  const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext('2d');g.drawImage(im,0,0);
-  const pixels=g.getImageData(0,0,c.width,c.height),p=pixels.data;
-  for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++){
-   if(x>=45&&x<c.width-45&&y>=50&&y<1465)continue;
-   const i=(y*c.width+x)*4;p[i+3]=Math.round(p[i+3]*Math.max(0,Math.min(1,(Math.max(p[i],p[i+1],p[i+2])-4)/28)));
+  const x=120,y=245,w=681,h=meta.text_top-y-22,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,x,y,w,h,0,0,w,h);
+  const pixels=g.getImageData(0,0,w,h),p=pixels.data;
+  for(let yy=0;yy<h;yy++)for(let xx=0;xx<w;xx++){
+   const i=(yy*w+xx)*4,r=p[i],green=p[i+1],blue=p[i+2],high=Math.max(r,green,blue),low=Math.min(r,green,blue);
+   const material=low/Math.max(1,high)>.40||(r>green*2.5&&r>blue*1.08&&blue>r*.12);
+   const edge=Math.min(1,xx/14,(w-1-xx)/14,yy/12,(h-1-yy)/12);
+   p[i+3]=Math.round(255*Math.max(0,Math.min(1,(high-22)/80))*(material?1:.18)*Math.max(0,edge));
   }
-  g.putImageData(pixels,0,0);
-  // Remove example words from the display layer so the original live DOM remains authoritative.
-  // The source PNG on disk and its rarity-specific frame/illustration are unchanged.
-  g.globalCompositeOperation='destination-out';g.fillRect(350,115,240,110);
-  g.fillRect(110,meta.text_top,701,1370-meta.text_top);
-  g.globalCompositeOperation='source-over';return c;
+  g.putImageData(pixels,0,0);const url=c.toDataURL();c.width=c.height=1;return url;
  }
  async function decorate(button,meta){
   if(painted.get(button)===meta.path)return;painted.set(button,meta.path);state.pending++;
   try{
    const im=await load(meta);if(!button.isConnected)return;
    if(im.naturalWidth!==meta.width||im.naturalHeight!==meta.height)throw Error('Unexpected supplied card dimensions');
-   const c=paint(im,meta);c.className='upgradeSuppliedCardV610';c.setAttribute('aria-hidden','true');c.style.pointerEvents='none';button.prepend(c);
-   const position=y=>(y/1536*1.095-.035)*100+'%';
-   button.style.setProperty('--supplied-name-top',position(meta.text_top));
-   button.style.setProperty('--supplied-stats-top',position(meta.rule_y));
-   button.style.setProperty('--supplied-part-top',position(meta.part_y-65));
+   const image=new Image();image.className='upgradeSuppliedArtV611';image.alt='';image.draggable=false;image.src=paint(im,meta);await image.decode();
+   if(!button.isConnected)return;button.querySelector('.upgradeArtV593').append(image);
+   button.dataset.suppliedArtCropV611=JSON.stringify([120,245,681,meta.text_top-267]);
    button.dataset.suppliedCardV610=meta.upload;button.dataset.suppliedCardSourceV610=meta.path;button.classList.add('suppliedOrganCardV610');state.paints++;
   }catch(error){state.failures.push(error.message);painted.delete(button);}
   finally{state.pending--;}
@@ -49,5 +44,5 @@
   state.ready=true;sync();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
- window.__EVOLVE_ORGAN_CARD_ART_V610__={read:()=>({...state,decodedCache:cache.size,sourceImages:10,engineUnchanged:true,statsUnchanged:true})};
+ window.__EVOLVE_ORGAN_CARD_ART_V610__={read:()=>({...state,decodedCache:cache.size,sourceImages:10,statsUnchanged:true,normalizedArt:true})};
 })();
