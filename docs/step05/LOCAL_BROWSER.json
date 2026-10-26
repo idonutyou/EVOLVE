@@ -1,0 +1,144 @@
+{
+  "live": false,
+  "checks": [
+    "A real fired projectile activates the shared hit event, textured atlas and brief body reaction",
+    "A real blade swing produces its own cut atlas and pose, with no gun projectile",
+    "Portrait, landscape, reduced motion, home reset and equipment persistence passed"
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "version": {
+    "version": "V575-STEP05-GUN-BLADE-V612",
+    "build": "6114072144a06d29739ad46824e7cca891c29b0182d2a1b7cc76de08211fde13",
+    "scriptBytes": 77722120,
+    "preloadResources": true
+  },
+  "gun": {
+    "damage": 13.200000000000728,
+    "pose": {
+      "sx": 0.9589442961699933,
+      "sy": 1.0230850139538041,
+      "rot": 0.016227376381902043,
+      "bob": 0.049742517901012216,
+      "weapon": "gun",
+      "heavy": false
+    },
+    "feedback": {
+      "version": "STEP05-V612",
+      "gun": 1,
+      "blade": 0,
+      "normal": 1,
+      "heavy": 0,
+      "coalesced": 0,
+      "dropped": 0,
+      "drawn": 1,
+      "peak": 1,
+      "active": 1,
+      "poses": 1,
+      "imageReady": {
+        "gun": true,
+        "blade": true
+      },
+      "errors": [],
+      "affectsDamage": false,
+      "affectsAttackTiming": false,
+      "physical_Galaxy_S23_plus_tested": false,
+      "connected": true
+    },
+    "events": {
+      "ready": true,
+      "qa": true,
+      "listenerCount": 1,
+      "attempts": 1,
+      "hits": 1,
+      "shields": 0,
+      "kills": 0,
+      "byKind": {
+        "arm": 1
+      }
+    }
+  },
+  "heavy": {
+    "version": "STEP05-V612",
+    "gun": 2,
+    "blade": 0,
+    "normal": 1,
+    "heavy": 1,
+    "coalesced": 0,
+    "dropped": 0,
+    "drawn": 2,
+    "peak": 2,
+    "active": 2,
+    "poses": 1,
+    "imageReady": {
+      "gun": true,
+      "blade": true
+    },
+    "errors": [],
+    "affectsDamage": false,
+    "affectsAttackTiming": false,
+    "physical_Galaxy_S23_plus_tested": false,
+    "connected": true
+  },
+  "blade": {
+    "damage": 29,
+    "pose": {
+      "sx": 0.9673312571063319,
+      "sy": 1.0199300350144045,
+      "rot": 0.03565637149469742,
+      "bob": 0,
+      "weapon": "blade",
+      "heavy": false
+    },
+    "feedback": {
+      "version": "STEP05-V612",
+      "gun": 0,
+      "blade": 1,
+      "normal": 1,
+      "heavy": 0,
+      "coalesced": 0,
+      "dropped": 0,
+      "drawn": 1,
+      "peak": 1,
+      "active": 1,
+      "poses": 1,
+      "imageReady": {
+        "gun": true,
+        "blade": true
+      },
+      "errors": [],
+      "affectsDamage": false,
+      "affectsAttackTiming": false,
+      "physical_Galaxy_S23_plus_tested": false,
+      "connected": true
+    },
+    "bullets": 0
+  },
+  "reduced": {
+    "pose": null,
+    "feedback": {
+      "version": "STEP05-V612",
+      "gun": 0,
+      "blade": 1,
+      "normal": 1,
+      "heavy": 0,
+      "coalesced": 1,
+      "dropped": 0,
+      "drawn": 0,
+      "peak": 1,
+      "active": 0,
+      "poses": 0,
+      "imageReady": {
+        "gun": true,
+        "blade": true
+      },
+      "errors": [],
+      "affectsDamage": false,
+      "affectsAttackTiming": false,
+      "physical_Galaxy_S23_plus_tested": false,
+      "connected": true
+    }
+  },
+  "success": true
+}

@@ -15,6 +15,8 @@ on:
       - "tests/visual_fit_browser.cjs"
       - "tests/upgrade_scenery_browser.cjs"
       - "tests/arm_items_browser.cjs"
+      - "tests/weapon_hits_v612.test.cjs"
+      - "tests/weapon_hits_browser_v612.cjs"
       - "tests/organ_card_art_browser.cjs"
       - "tests/display_recovery_browser.cjs"
       - "tools/verify_display_recovery_v611.py"
@@ -93,6 +95,7 @@ jobs:
           node tests/visual_clarity.test.cjs
           node tests/boss_cinematic.test.cjs
           node tests/organ_skills.test.cjs
+          node --test tests/weapon_hits_v612.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
@@ -123,6 +126,7 @@ jobs:
           node tests/horde_roles_browser.cjs
           node tests/movement_field_browser.cjs
           node tests/arm_items_browser.cjs
+          node tests/weapon_hits_browser_v612.cjs
           node tests/original_player_browser.cjs
           node tests/player_combat_browser.cjs
           node tests/player_scorpion_browser.cjs
@@ -161,6 +165,7 @@ jobs:
 
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
@@ -180,6 +185,8 @@ jobs:
           name: evolve-publication-verification
           path: |
             test-results/home-hub-live-browser.json
+            test-results/weapon-hits-live.json
+            test-results/weapon-hits-live-*.png
             test-results/visual-fit-live-browser.json
             test-results/home-balance-live-browser.json
             test-results/upgrade-scenery-live-browser.json
