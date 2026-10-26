@@ -1,0 +1,14 @@
+#levelPanel #cards .suppliedOrganCardV610::before{background:#020205!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeFrameV594,#levelPanel #cards .suppliedOrganCardV610>.upgradeArtV593{visibility:hidden!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeSuppliedCardV610{position:absolute!important;inset:-3.5% auto auto -5.2%!important;width:110.4%!important;height:109.5%!important;pointer-events:none!important;z-index:1!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeRarityV593{top:4%!important;height:9.8%!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeRarityV593::before,#levelPanel #cards .suppliedOrganCardV610>.upgradeRarityV593::after{display:none!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeNameV593{top:var(--supplied-name-top)!important;height:7.8%!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradeStatsV593{top:var(--supplied-stats-top)!important;height:13%!important;padding-top:1.8cqw!important}
+#levelPanel #cards .suppliedOrganCardV610>.upgradePartV593{top:var(--supplied-part-top)!important;bottom:auto!important;height:9.3%!important}
+@media(orientation:landscape){
+ #levelPanel #cards .suppliedOrganCardV610>.upgradeRarityV593{font-size:12px!important}
+ #levelPanel #cards .suppliedOrganCardV610>.upgradeNameV593{font-size:16px!important}
+ #levelPanel #cards .suppliedOrganCardV610>.upgradeStatsV593{padding-top:4px!important;font-size:11px!important;line-height:1.5!important}
+ #levelPanel #cards .suppliedOrganCardV610>.upgradePartV593{font-size:11px!important}
+}

@@ -1,8 +1,8 @@
 {
-  "version": "V575-WEB-41-UPGRADE-SCENERY",
-  "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+  "version": "V575-WEB-42-ORGAN-CARD-ART",
+  "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
   "scriptBytes": 77708246,
-  "assets": 1050,
+  "assets": 1062,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true
 }
