@@ -5,5 +5,18 @@
   "tree": "d2efcbd4bc797e4ce8701cd1833a356f98fcdc39",
   "verified_changed_files": 29,
   "all_changed_file_bytes_match": true,
-  "original_engine_unchanged": true
+  "original_engine_unchanged": true,
+  "release_commit": "cfd88dbbb578a5909745ebabf676950b994b56bb",
+  "release_tree": "1102250e0dafa5fabcfed8bdc3ca29dc52d558f1",
+  "release_files_verified": 30,
+  "main_verified": true,
+  "immutable_backup_branch": "backup/web39-090-20261026",
+  "deployment_status": "queued",
+  "initial_deployment_failure": {
+    "run_id": 40258204335,
+    "step": "Repair online-shell startup order",
+    "reason": "Display-only assets were initially marked as web-shell; the existing guard correctly requires exactly one lifecycle shell",
+    "fix": "Display scripts now use presentation-code; original lifecycle shell remains unchanged",
+    "local_exact_lifecycle_guard_passed": true
+  }
 }
