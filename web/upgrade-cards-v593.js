@@ -8,6 +8,8 @@ const UPGRADE_RARITIES_V593=Object.freeze([
 ]);
 const upgradeArtV593=JSON.parse('__UPGRADE_ART__');
 const upgradeRunV593={};
+const playerStartScaleV603=.7;
+const upgradeBaseBodyV603=Object.freeze({radius:player.r||10,size:playerArtV586.displaySize});
 const upgradeBleedsV593=new Map();
 let upgradeSpawnPermissionV593=false;
 const upgradeTextV593=(ko,en)=>homeTextV522(en,ko);
@@ -16,11 +18,12 @@ const upgradePercentV593=n=>upgradeNumberV593(n*100)+'%';
 function upgradeResetV593(){
  Object.assign(upgradeRunV593,{gunDamage:0,gunHaste:0,gunCount:0,gunPierce:0,gunRange:0,gunBounce:0,
   bladeDamage:0,bladeHaste:0,bladeRange:0,bladeCrit:0,bladeBleed:0,moveSpeed:0,size:0,armor:0,regen:0,regenClock:0,
-  baseSpeed:player.speed||132,baseRadius:player.r||10,baseSize:playerArtV586.displaySize,selected:0,mode:null,highest:{},taken:{}});
- upgradeBleedsV593.clear();
+  baseSpeed:player.speed||132,baseRadius:upgradeBaseBodyV603.radius*playerStartScaleV603,baseSize:upgradeBaseBodyV603.size*playerStartScaleV603,selected:0,mode:null,highest:{},taken:{}});
+ upgradeBleedsV593.clear();player.r=upgradeRunV593.baseRadius;playerArtV586.displaySize=upgradeRunV593.baseSize;
 }
 upgradeResetV593();
 function upgradeBodyScaleV593(){return clamp(1+upgradeRunV593.size,.35,2);}
+function playerWorldScaleV603(){return playerStartScaleV603*upgradeBodyScaleV593();}
 function upgradeBladeRateV593(){return 1+upgradeRunV593.bladeHaste;}
 function upgradeGunRateV593(){return 1+upgradeRunV593.gunHaste;}
 function upgradeGunRangeV593(){return playerBasicRangeV552()*(1+upgradeRunV593.gunRange);}

@@ -3,7 +3,7 @@ const mutantArtV599=__MUTANT_ART_V599__;
 const mutantV599={ready:false,image:new Image(),parts:{},clock:0,distance:0,x:0,y:0,moving:false,speed:0,vx:0,vy:0,blend:0,feet:[],renders:0,builds:0,deadAt:0,lastFacing:1,lastRotation:0,tailLength:0,tailSegments:0,previews:{}};
 const mutantBaseScaleV599=mutantArtV599.sourceScale*mutantArtV599.displaySize/mutantArtV599.surface;
 const mutantGaitV602=Object.freeze({stride:40,stance:.38,liftNear:.85,liftFar:.55,roll:.045});
-let mutantScaleV599=mutantBaseScaleV599;
+let mutantScaleV599=mutantBaseScaleV599*playerStartScaleV603;
 const mutantClampV599=(n,a,b)=>Math.max(a,Math.min(b,n));
 const mutantMixV599=(a,b,t)=>a+(b-a)*t;
 function mutantFacingV599(a,previous=1){
@@ -38,7 +38,7 @@ function mutantBuildPartV599(spec){
 }
 function mutantDrawPartV599(g,part){const r=part.spec.rect;g.drawImage(part.canvas,r[0],r[1]);}
 function mutantSyncSizeV599(){
- const scale=mutantBaseScaleV599*upgradeBodyScaleV593();if(Math.abs(scale-mutantScaleV599)<1e-8)return;
+ const scale=mutantBaseScaleV599*playerWorldScaleV603();if(Math.abs(scale-mutantScaleV599)<1e-8)return;
  mutantScaleV599=scale;if(mutantV599.ready)mutantInitFeetV599();
 }
 function mutantWeaponBodyV599(part){
@@ -63,20 +63,22 @@ function mutantStepV599(dt){
  if(!m.feet.length||d>Math.max(38,(player.speed||132)*dt*5)||pose.facing!==m.lastFacing||Math.abs(pose.rotation-m.lastRotation)>1.2){mutantInitFeetV599();return;}
  m.moving=d>.008;m.speed=mutantMixV599(m.speed,d/dt,1-Math.exp(-dt*12));m.blend=mutantMixV599(m.blend,m.moving?1:0,1-Math.exp(-dt*12));
  if(m.moving){m.distance+=d;m.vx=dx/dt;m.vy=dy/dt;}
- // Predict one half-step from the current displacement. Smoothed speed starts
+ // Predict only the remaining swing time, including legs starting mid-cycle.
+ // Smoothed speed starts
  // near zero; using it here sent the first landing 40+ world pixels ahead.
- const period=mutantGaitV602.stride/Math.max(20,d/dt);
+ // Shorter legs plant for less of the same slow stride, preserving foot contact.
+ const stance=mutantGaitV602.stance*Math.min(1,playerWorldScaleV603()),period=mutantGaitV602.stride/Math.max(20,d/dt);
  mutantArtV599.legs.forEach((leg,i)=>{
   const f=m.feet[i],q=(m.distance/mutantGaitV602.stride+leg.phase)%1;
   if(!m.moving){
    const p=mutantSourceWorldV599(leg.ankle,pose),k=1-Math.exp(-dt*13);f.world.x=mutantMixV599(f.world.x,p.x,k);f.world.y=mutantMixV599(f.world.y,p.y,k);f.ground={...f.world};f.anchor={...f.world};f.mode='idle';f.lift=0;f.roll=0;return;
   }
-  if(q<mutantGaitV602.stance){
-   if(f.mode!=='stance'){const p=f.mode==='swing'?{...f.to}:mutantLandingV599(leg,pose);f.anchor=p;f.mode='stance';}
+  if(q<stance){
+   if(f.mode!=='stance'){const p=f.mode==='swing'?{...f.to}:mutantLandingV599(leg,pose,period*Math.max(0,stance-q)*.5);f.anchor=p;f.mode='stance';}
    f.world={...f.anchor};f.ground={...f.anchor};f.lift=0;f.roll=0;
   }else{
-   if(f.mode!=='swing'){f.from={...f.world};f.to=mutantLandingV599(leg,pose,period*(1-mutantGaitV602.stance)*.96);f.mode='swing';}
-   const u=(q-mutantGaitV602.stance)/(1-mutantGaitV602.stance),e=u*u*(3-2*u);f.ground={x:mutantMixV599(f.from.x,f.to.x,e),y:mutantMixV599(f.from.y,f.to.y,e)};
+   if(f.mode!=='swing'){f.from={...f.world};f.to=mutantLandingV599(leg,pose,period*(1-q)*.96);f.mode='swing';}
+   const u=(q-stance)/(1-stance),e=u*u*(3-2*u);f.ground={x:mutantMixV599(f.from.x,f.to.x,e),y:mutantMixV599(f.from.y,f.to.y,e)};
    f.lift=Math.sin(Math.PI*u)*(leg.far?mutantGaitV602.liftFar:mutantGaitV602.liftNear)*m.blend;f.roll=Math.sin(Math.PI*u)*mutantGaitV602.roll;f.world={x:f.ground.x,y:f.ground.y-f.lift};
   }
  });
@@ -108,9 +110,9 @@ function mutantDrawTailV599(g,pose,motion){
  const m=mutantV599,art=mutantArtV599,root=mutantSourceWorldV599(mutantBodyPointV599(art.tailRoot,motion),pose),level=state.tail||0,whip=organRunV598.whips[organRunV598.whips.length-1];
  if(!level&&!whip){
   g.save();g.translate(player.x,player.y);g.rotate(pose.rotation);g.scale(pose.facing*mutantScaleV599,mutantScaleV599);g.translate(-art.anchor[0],-art.anchor[1]);
-  const r=mutantBodyPointV599(art.tailRoot,motion);g.translate(r[0],r[1]);g.rotate(Math.sin(m.clock*2)*(.018+m.blend*.025));g.translate(-art.tailRoot[0],-art.tailRoot[1]);mutantDrawPartV599(g,m.parts.tail);g.restore();m.tailLength=22;m.tailSegments=8;return;
+  const r=mutantBodyPointV599(art.tailRoot,motion);g.translate(r[0],r[1]);g.rotate(Math.sin(m.clock*2)*(.018+m.blend*.025));g.translate(-art.tailRoot[0],-art.tailRoot[1]);mutantDrawPartV599(g,m.parts.tail);g.restore();m.tailLength=22*playerWorldScaleV603();m.tailSegments=8;return;
  }
- const radius=organSpecV598('tail').radius||30,length=radius;let curve=mutantTailCurveV599(root,pose,length);
+ const radius=organSpecV598('tail').radius||30,length=radius*playerStartScaleV603;let curve=mutantTailCurveV599(root,pose,length);
  if(whip){
   const p=clamp((whip.age-.055)/.285,0,1),angle=whip.aim-whip.s.arc/2+p*whip.s.arc,r=whip.s.radius;
   const attack=[root,{x:player.x+Math.cos(angle-.55)*r*.42,y:player.y+Math.sin(angle-.55)*r*.42},{x:player.x+Math.cos(angle-.25)*r*.82,y:player.y+Math.sin(angle-.25)*r*.82},{x:player.x+Math.cos(angle)*r,y:player.y+Math.sin(angle)*r}];
@@ -119,7 +121,7 @@ function mutantDrawTailV599(g,pose,motion){
  }
  const sample=[];let total=0;for(let i=0;i<=32;i++){const p=mutantBezierV599(curve,i/32);if(i)total+=Math.hypot(p.x-sample[i-1].x,p.y-sample[i-1].y);sample.push(p);}
  const count=clamp(Math.ceil(total/5),9,54),nodes=Array.from({length:count+1},(_,i)=>mutantBezierV599(curve,i/count));
- g.save();g.strokeStyle='#522b34';g.lineWidth=3.3;g.lineCap='round';g.beginPath();g.moveTo(root.x,root.y);g.bezierCurveTo(curve[1].x,curve[1].y,curve[2].x,curve[2].y,curve[3].x,curve[3].y);g.stroke();
+ g.save();g.strokeStyle='#522b34';g.lineWidth=3.3*playerWorldScaleV603();g.lineCap='round';g.beginPath();g.moveTo(root.x,root.y);g.bezierCurveTo(curve[1].x,curve[1].y,curve[2].x,curve[2].y,curve[3].x,curve[3].y);g.stroke();
  for(let i=count-1;i>=0;i--){const index=i===count-1?7:i===0?0:1+i%6,part=m.parts.tailParts[index],a=nodes[i],b=nodes[i+1],dx=b.x-a.x,dy=b.y-a.y;
   mutantDrawBoneV599(g,part,[a.x-dx*.10,a.y-dy*.10],[b.x+dx*.10,b.y+dy*.10],mutantScaleV599*(1.15-i/count*.25));
  }g.restore();m.tailLength=length;m.tailSegments=count;
@@ -130,10 +132,10 @@ function mutantDrawV599(shadowOnly=false){
  mutantSyncSizeV599();
  const pose=mutantPoseV599(),motion=mutantBodyMotionV599();playerMotionV586.facing=pose.facing;
  if(shadowOnly){
-  ctx.save();ctx.globalAlpha=.26;ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(player.x,player.y+7,20,8,pose.rotation,0,TAU);ctx.fill();
+  ctx.save();ctx.globalAlpha=.26;ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(player.x,player.y+7*playerWorldScaleV603(),20*playerWorldScaleV603(),8*playerWorldScaleV603(),pose.rotation,0,TAU);ctx.fill();
   for(const f of m.feet){ctx.globalAlpha=.2*(1-f.lift/4);ctx.beginPath();ctx.ellipse(f.ground.x,f.ground.y+1,3.1,1.2,0,0,TAU);ctx.fill();}ctx.restore();return;
  }
- drawPlayerGroundV165(46,playerBodyAngleV590());drawEvoDominanceAura(46);
+ drawPlayerGroundV165(46*playerWorldScaleV603(),playerBodyAngleV590());drawEvoDominanceAura(46*playerWorldScaleV603());
  const blink=(player.hurtBlink||0)>0&&Math.floor((.5-player.hurtBlink)/.0625)%2===0?.38:1;ctx.save();ctx.globalAlpha*=blink;mutantDrawTailV599(ctx,pose,motion);
  mutantWithSourceTransformV599(ctx,pose,()=>{
   mutantArtV599.legs.forEach((leg,i)=>{if(leg.far)mutantDrawLegV599(ctx,leg,i,pose,motion);});
@@ -141,8 +143,8 @@ function mutantDrawV599(shadowOnly=false){
   mutantArtV599.legs.forEach((leg,i)=>{if(!leg.far)mutantDrawLegV599(ctx,leg,i,pose,motion);});
  });ctx.restore();
  if(armItemModeV589()!=='bare'&&armItemsV589.ready)drawArmItemsV589(playerBodyAngleV590(),blink);
- if(frenzy>0)stamp('vfx/core_ring',player.x,player.y,64,t*.3,.25);
- if(player.inv>0||(player.shieldHP||0)>0){ctx.save();ctx.strokeStyle='#b4e9ff';ctx.globalAlpha=.56;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(player.x,player.y,22,0,TAU);ctx.stroke();ctx.restore();}
+ if(frenzy>0)stamp('vfx/core_ring',player.x,player.y,64*playerWorldScaleV603(),t*.3,.25);
+ if(player.inv>0||(player.shieldHP||0)>0){ctx.save();ctx.strokeStyle='#b4e9ff';ctx.globalAlpha=.56;ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(player.x,player.y,22*playerWorldScaleV603(),0,TAU);ctx.stroke();ctx.restore();}
  drawOrganAttacksV598();m.renders++;
 }
 function mutantPreviewV599(mode='bare',size=1536){
@@ -166,7 +168,7 @@ function mutantInspectV599(size=640,zoom=6){
   g.save();g.translate(mutantArtV599.anchor[0]+motion.dx,mutantArtV599.anchor[1]+motion.dy);g.rotate(motion.angle);g.translate(-mutantArtV599.anchor[0],-mutantArtV599.anchor[1]);mutantDrawPartV599(g,armItemModeV589()==='bare'?mutantV599.parts.body:mutantV599.parts.armedBody);g.restore();
   mutantArtV599.legs.forEach((leg,i)=>{if(!leg.far)mutantDrawLegV599(g,leg,i,pose,motion);});
  });
- const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),1,pose.facing);}
+ const mode=armItemModeV589();if(mode!=='bare')for(const side of [1,0]){const p=armItemWorldPointV589(side),a=armItemAngleV589(side,player.look||0);armItemSpriteV589(g,mode,side,p,a,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*playerWorldScaleV603(),1,pose.facing);}
  return c;
 }
 function mutantRefreshV599(){
@@ -190,5 +192,5 @@ const mutantReadyV599=Promise.all([mutantImageReadyV599,armItemsReadyV589]).then
  for(const mode of ['bare','cannon','blades']){const c=mutantPreviewV599(mode);m.previews[mode]=c.toDataURL('image/png');c.width=c.height=1;if(mode!=='bare')armItemsV589.previews[mode]=m.previews[mode];}
  m.ready=true;mutantInitFeetV599();mutantRefreshV599();refreshEvolveHomeV522();return true;
 });
-window.__EVOLVE_PLAYER_MUTANT_V599__={ready:mutantReadyV599,read:()=>({version:599,character:'approved-armored-mutant',ready:mutantV599.ready,source:mutantArtV599.path,sha256:mutantArtV599.sha256,sourceBytes:mutantArtV599.bytes,sourceWidth:mutantArtV599.width,sourceHeight:mutantArtV599.height,sourceUnchanged:true,displaySize:mutantArtV599.displaySize,partBuilds:mutantV599.builds,renders:mutantV599.renders,moving:mutantV599.moving,distance:mutantV599.distance,tailLength:mutantV599.tailLength,tailSegments:mutantV599.tailSegments,tailRange:organSpecV598('tail').radius||0,feet:mutantV599.feet.map(f=>({mode:f.mode,world:f.actual||f.world,anchor:f.anchor,lift:f.lift,stanceError:f.stanceError})),physical_Galaxy_S23_plus_tested:false})};
+window.__EVOLVE_PLAYER_MUTANT_V599__={ready:mutantReadyV599,read:()=>({version:599,character:'approved-armored-mutant',ready:mutantV599.ready,source:mutantArtV599.path,sha256:mutantArtV599.sha256,sourceBytes:mutantArtV599.bytes,sourceWidth:mutantArtV599.width,sourceHeight:mutantArtV599.height,sourceUnchanged:true,displaySize:mutantArtV599.displaySize,initialGameScale:playerStartScaleV603,worldScale:playerWorldScaleV603(),partBuilds:mutantV599.builds,renders:mutantV599.renders,moving:mutantV599.moving,distance:mutantV599.distance,tailLength:mutantV599.tailLength,tailSegments:mutantV599.tailSegments,tailRange:organSpecV598('tail').radius||0,feet:mutantV599.feet.map(f=>({mode:f.mode,world:f.actual||f.world,anchor:f.anchor,lift:f.lift,stanceError:f.stanceError})),physical_Galaxy_S23_plus_tested:false})};
 if(new URLSearchParams(location.search).get('evolveQA')==='1')window.__EVOLVE_PLAYER_MUTANT_V599__.test={tailCurve:mutantTailCurveV599,gaitProfile:()=>mutantGaitV602,art:()=>mutantArtV599,image:()=>mutantV599.image,parts:()=>mutantV599.parts,rig:()=>mutantV599,reset:mutantInitFeetV599,step:mutantStepV599,draw:mutantDrawV599,preview:mutantPreviewV599,pose:mutantFacingV599,point:mutantSourceWorldV599,inspect:mutantInspectV599};

@@ -1,7 +1,7 @@
 {
-  "version": "V575-WEB-35-VISUAL-FIT",
-  "build": "120c6ab87c9bcd69fa497bc07b6dfdee79102628a1d43b36aac3042032effa87",
-  "scriptBytes": 77706482,
+  "version": "V575-WEB-36-NAVIGATION-SCALE",
+  "build": "d0575255b41e2e2e31ee0a82b7c84fc8145fe580de6aca6dc678ba16a680bd49",
+  "scriptBytes": 77707446,
   "assets": 1040,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true

@@ -1,0 +1,80 @@
+{
+  "baseline": "5f383e8183d9b857dbce688bb5b289316a7659a2",
+  "version": "V575-WEB-36-NAVIGATION-SCALE",
+  "progress": 70,
+  "requested": [
+    "Join all five bottom buttons and fill selected-button side gaps",
+    "Move selected icon and text upward; remove top arrow",
+    "Refine battle claw glyph",
+    "Unify bottom navigation background with page",
+    "Set in-game initial character and equipment size to 70%"
+  ],
+  "backups": [
+    {
+      "stage": 10,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_c7e9be08f6cc819184445f6cb5406098",
+      "bytes": 3465,
+      "sha256": "06b6b0bba8350999e9d16b1ee9bc1f635804616a4ec711412b3e09b9e69d437e",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_c7e9be08f6cc819184445f6cb5406098&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_f5da43122bd081918dc50e0745136b8b",
+      "bytes": 797670,
+      "sha256": "7eb6aa3ce36bfbb2e818a0ee1a0afcf8f12b7c96b5fa6140967fa321098011f4",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_f5da43122bd081918dc50e0745136b8b&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_f0415ca8fc108191ac6137964a7a0f16",
+      "bytes": 797754,
+      "sha256": "3e28727083f649875d1a0417c7202d6740194e90487481ab32590418f07ba688",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_f0415ca8fc108191ac6137964a7a0f16&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_a83648d57250819186da137dc03956a8",
+      "bytes": 797847,
+      "sha256": "5de3e26a03cb20002cbd579f266d4072601e424fb7383b88b1df11df4de6127c",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_a83648d57250819186da137dc03956a8&account_id=personal"
+    },
+    {
+      "stage": 50,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_1031eec5293c8191979b383a30f2cbf8",
+      "bytes": 818606,
+      "sha256": "64a83307282eaf21682ef729e8bd3bf7fd168701f6d55bf2c1b4f44b2e70d85c",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_1031eec5293c8191979b383a30f2cbf8&account_id=personal"
+    },
+    {
+      "stage": 60,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_9c0d38b521c481918d9e4934cfb8018b",
+      "bytes": 830021,
+      "sha256": "dd5da6021caabc16191b34125904e44e8dfb0c7dab4e2853d8e5a0755c4d2a3c",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_9c0d38b521c481918d9e4934cfb8018b&account_id=personal"
+    }
+  ],
+  "physical_Galaxy_S23_plus_tested": false,
+  "status": "Packaged WEB-36 with unchanged hashes for all 1005 source images; expanded browser regressions running",
+  "next": "Complete browser checks, preserve remote checkpoint and prepare guarded release",
+  "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+  "current_release": {
+    "version": "V575-WEB-36-NAVIGATION-SCALE",
+    "build": "d0575255b41e2e2e31ee0a82b7c84fc8145fe580de6aca6dc678ba16a680bd49",
+    "scriptBytes": 77707446,
+    "assets": 1040,
+    "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
+    "preloadResources": true
+  }
+}

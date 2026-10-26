@@ -21,7 +21,7 @@ function armCannonVolleyV589(a,target){
 function armShotOriginV589(a){
  const mode=armItemModeV589();if(mode!=='cannon')return {x:player.x+Math.cos(a)*18,y:player.y+Math.sin(a)*18};
  const p=armItemWorldPointV589(armItemsV589.side,player.look||0),art=armItemsArtV589.items.cannon;
- const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale*upgradeBodyScaleV593();
+ const side=armItemsV589.side?'right':'left',length=art[side].length*art.world_scale*playerWorldScaleV603();
  armItemsV589.shots++;return {x:p.x+Math.cos(a)*length,y:p.y+Math.sin(a)*length};
 }
 function armSlashAngleV589(attack,age=attack.age){
@@ -105,7 +105,7 @@ function drawArmItemsV589(a,alpha){
  for(const side of [1,0]){
   const p=armItemWorldPointV589(side,a),angle=armItemAngleV589(side,a);
   if(mode==='cannon'&&armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
-  armItemSpriteV589(ctx,mode,side,p,angle,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*upgradeBodyScaleV593(),alpha,playerMotionV586.facing);
+  armItemSpriteV589(ctx,mode,side,p,angle,(mode==='blades'?1+upgradeRunV593.bladeRange:1)*playerWorldScaleV603(),alpha,playerMotionV586.facing);
  }
 }
 const armBareDrawV589=drawPlayer;
