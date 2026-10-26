@@ -1815,6 +1815,10 @@
       "global_lexical_wrapper": "pass",
       "full_game_chromium": "pending",
       "physical_galaxy_s23_plus": "pending"
-    }
+    },
+    "last_ci_failure": "Published verifier pinned stale attack_warnings.engine; real gameplay regression and live visual tests passed.",
+    "public_verifier_fix": "tools/verify_published_lettering_v584.py now selects hashed main engine from current live manifest.",
+    "publication_verified": true,
+    "full_ci_status": "retest_pending"
   }
 }
