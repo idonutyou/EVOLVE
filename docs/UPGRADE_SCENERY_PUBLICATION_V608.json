@@ -1,0 +1,26 @@
+{
+  "version": "V575-WEB-41-UPGRADE-SCENERY",
+  "build": "5ba85dfd5b701d7cd719cfe9d05f7eea1267c03907a659fdc9dcbca3edab6973",
+  "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+  "source_publish_commit": "7f8cc025006b8dd90b1b0ac407c38e0d32e04cb6",
+  "status": "Verified source on main; guarded publication and live UI verification running",
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "workflows": [
+    {
+      "id": 40284960344,
+      "name": "Verify EVOLVE migration tools",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40284960344"
+    },
+    {
+      "id": 40284960505,
+      "name": "Publish EVOLVE Web",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40284960505"
+    }
+  ],
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "physical_Galaxy_S23_plus_tested": false
+}
