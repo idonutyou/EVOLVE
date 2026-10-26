@@ -1,0 +1,41 @@
+{
+  "step": 6,
+  "progress": 100,
+  "status": "complete",
+  "completed_date_kst": "2026-10-27",
+  "backup_type": "GitHub full repository immutable commit pinned by recovery branch; not a ZIP archive",
+  "recovery_branch": "backup/step06-100-20261027",
+  "recovery_commit": "e2bf0bf82ef8fdad6956e67eb39f9ee1cb6f3f73",
+  "remote_ref_verified": true,
+  "remote_version_and_report_blob_retrieved": true,
+  "snapshot_file_count": 1645,
+  "snapshot_logical_total_bytes": 706221576,
+  "snapshot_dist_file_count": 1101,
+  "snapshot_dist_logical_bytes": 397424303,
+  "version": "V575-STEP06-ORGAN-HITS-V613",
+  "build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
+  "engine_path": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+  "engine_sha256": "abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255",
+  "original_images_preserved": 1021,
+  "new_images_generated": 0,
+  "candidate_ci_run": 40416120151,
+  "pages_ci_run": 40416935849,
+  "pages_ci_attempt": 2,
+  "pages_ci_conclusion": "success",
+  "live_browser_regression_success": true,
+  "live_version_verified": true,
+  "live_manifest_and_engine_hash_verified": true,
+  "live_public_artifact_id": 12696297517,
+  "backup_80": {
+    "branch": "backup/step06-080-20261027",
+    "sha": "586187ef08751d0bfafc7e3cd44c7be75db30679"
+  },
+  "backup_90": {
+    "branch": "backup/step06-090-20261027",
+    "sha": "17be192951ad11c2141b62733cf260e0a223eb3f"
+  },
+  "backups_10_through_70_preserved": true,
+  "all_snapshots_retained": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "next_step": 7
+}
