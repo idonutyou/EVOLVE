@@ -1,0 +1,22 @@
+{
+  "step": 2,
+  "progress": 70,
+  "baseline": "4f4c20fc5522449d8ba0aaf80e0d7390878bca3f",
+  "restore": "WEB32 FULL_090 -> WEB32 CHECKPOINT_100 -> WEB33/34/35/36/37/39/40/41/42/43 CHECKPOINT_100",
+  "assets": {
+    "expected": 1064,
+    "present": 1064,
+    "sha256_mismatch": 0,
+    "missing": 0,
+    "total_bytes": 378982752
+  },
+  "restore_files": 1494,
+  "git_blob_checks": 7,
+  "unit_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "limitation": "Browser smoke attempted but Chromium navigation blocked by administrator (ERR_BLOCKED_BY_ADMINISTRATOR even for data URLs). Cannot claim runtime browser verification in this environment.",
+  "source_archives": "All 12 archives' CRC and RECOVERY.json per-file checksums verified. Original archives retained unchanged.",
+  "main_changed": false
+}
