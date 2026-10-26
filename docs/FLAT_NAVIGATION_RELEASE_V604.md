@@ -21,3 +21,11 @@
 실물 Galaxy S23+ 검사는 수행하지 않았다. 자동 뷰포트 검사를 실제 기기 검사로 표현하지 않는다.
 
 모든 이전 백업을 보존한다. 임시 폴더가 없어지면 현재 main과 `docs/BACKUP_RESUME_INDEX.json`, 최신 WEB-37 체크포인트를 확인한다.
+
+전체 브라우저 20종, 실제 공개 주소의 메뉴·시작·크기·꼬리·칼·보행 검사, 공개 파일 바이트 검사를 모두 통과했다.
+
+배포 커밋: `6a581a5afc3db9fb1a751d75074264b7c6064329`
+
+배포 기록: https://github.com/idonutyou/EVOLVE/actions/runs/40250922035
+
+최종 복구본: `EVOLVE_WEB37_CHECKPOINT_100.zip` · 849948 bytes · `libfile_43c9c1e838088191be4fbeec76a19e1a`. 재다운로드 후 ZIP과 내부 19개 파일의 SHA-256을 확인했다. 이전 백업은 모두 보존했다.

@@ -1,0 +1,676 @@
+{
+  "publication": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "release_commit": "6a581a5afc3db9fb1a751d75074264b7c6064329",
+    "release_tree": "5e1f3213326b923c9e59ceba730611f8e19f490b",
+    "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+    "backup_verified": true,
+    "backup_branch": "backup/web37-090-20261026",
+    "completion_backup_branch": "backup/web37-100-20261026",
+    "deployment_run_id": 40250922035,
+    "deployment_status": "success",
+    "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40250922035",
+    "browser_suites_passed": 20,
+    "public_bytes_match": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "navigation_states_verified": 20,
+    "equal_height_all_buttons": true,
+    "horizontal_only_selection": true,
+    "selected_cell_fills_full_width": true,
+    "bitmap_icon_tiles_removed": true,
+    "initial_character_scale_verified": 0.7,
+    "source_images_unchanged": 1005,
+    "all_requested_visual_fixes_verified": true,
+    "physical_Galaxy_S23_plus_tested": false
+  },
+  "home": {
+    "checks": [
+      "Five destinations use one wider selected cell with identical row heights; every touch target stays inside the viewport",
+      "Existing organism selection, equipment dialog and battle-memory archive remain reachable through the new navigation",
+      "The reference home fits small and tall phones and landscape, and the original battle-start control still starts a real run"
+    ],
+    "errors": [],
+    "failedRequests": [],
+    "source": "https://idonutyou.github.io/EVOLVE/",
+    "runtime_proxy_used": false,
+    "runtime_proxy_certificate_override": false,
+    "physical_Galaxy_S23_plus_tested": false,
+    "release": {
+      "version": "V575-WEB-37-FLAT-NAVIGATION",
+      "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+      "scriptBytes": 77707057,
+      "preloadResources": true
+    },
+    "success": true
+  },
+  "bytes": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "version": "V575-WEB-37-FLAT-NAVIGATION",
+    "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+    "version_matches": true,
+    "manifest_matches": true,
+    "entry_matches": true,
+    "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+    "engine_sha256": "2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2",
+    "engine_matches": true,
+    "artwork": {
+      "lettering": {
+        "path": "assets/45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936.png",
+        "sha256": "45b51defc7e12446293b3807e9dbdd2e9cee4f4a3bc347efc6a9cfff387d5936",
+        "bytes": 1060193,
+        "matches": true
+      },
+      "crest_digits": {
+        "path": "assets/0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8.png",
+        "sha256": "0002a1689ed19770e46d6644774a0227971dbddf37b6ac02829138d9dea381c8",
+        "bytes": 1586575,
+        "matches": true
+      },
+      "bio_regeneration": {
+        "path": "assets/50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f.png",
+        "sha256": "50af8a69034ef61fe634a34d2280ebad617a3d2325048f72082c5be284f7912f",
+        "bytes": 1677374,
+        "matches": true
+      },
+      "korean_labels": {
+        "path": "assets/a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40.png",
+        "sha256": "a7f4fb8b1f535cff1f378a30d5a1fa84c9f698242957bb62ff7fc722a641bc40",
+        "bytes": 1663416,
+        "matches": true
+      }
+    },
+    "boss_names_English_in_both_locales": true,
+    "Korean_labels": [
+      "warning_ko",
+      "breach_ko",
+      "phase_ko",
+      "subtitle_ko"
+    ],
+    "physical_Galaxy_S23_plus_tested": false,
+    "administrator_mode": {
+      "early_style_matches": true,
+      "engine_gate_matches": true,
+      "default_enabled": false,
+      "unlock_presses": 5,
+      "normal_start_stage": 1,
+      "normal_start_level": 1
+    },
+    "player_scorpion": {
+      "atlas": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
+      "sha256": "40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9",
+      "bytes": 343244,
+      "matches": true,
+      "painted_frames": 1,
+      "unarmed_default": true,
+      "existing_saved_equipment_preserved": true,
+      "attack": "alternating upper-limb contact stabs"
+    },
+    "player_combat": {
+      "integration_matches": true,
+      "classic_weapons_restored": true,
+      "lightning_locked": true,
+      "facing_mirrored_and_upright": true,
+      "existing_image_bytes_unchanged": 987
+    },
+    "original_player": {
+      "source_matches": true,
+      "source_bytes_unchanged": true,
+      "generative_redraw": false,
+      "anatomy_offsets": {
+        "near_arm": [
+          60,
+          40
+        ],
+        "far_arm": [
+          60,
+          40
+        ],
+        "core": [
+          -24,
+          -18
+        ]
+      },
+      "cached_poses": 20,
+      "home_preview_surface": 1536
+    },
+    "arm_items": {
+      "integration_matches": true,
+      "cannon_dispatch_matches": true,
+      "original_source_pixels_preserved": true,
+      "equipment_ids_preserved": true,
+      "artwork": {
+        "cannon": {
+          "left": {
+            "path": "assets/7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d.png",
+            "sha256": "7c551e37c637a7b33a26a527a62c0e38029a76d9313b89f9b15424e530f9f72d",
+            "bytes": 221378,
+            "matches": true
+          },
+          "right": {
+            "path": "assets/e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59.png",
+            "sha256": "e5086bfa01e9756edbd6b0d3f040a6c4e3fe0027ed4a0831b49ae5cef6bbfe59",
+            "bytes": 219908,
+            "matches": true
+          },
+          "icon": {
+            "path": "assets/4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a.png",
+            "sha256": "4c9dbc1b041e98a85e6d32315f9dadaf82fb1349f4cd216a5120ae9b4f5a517a",
+            "bytes": 448695,
+            "matches": true
+          }
+        },
+        "blades": {
+          "left": {
+            "path": "assets/73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b.png",
+            "sha256": "73e032ff2ef2355ce9db367c2e7d2aadef8d5502091b5884445f67c89eebef4b",
+            "bytes": 150839,
+            "matches": true
+          },
+          "right": {
+            "path": "assets/942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e.png",
+            "sha256": "942f23a8a3d26188a66d9fb0f5fbd3e6bc1f42dcecd154e695d5524c3f92353e",
+            "bytes": 143154,
+            "matches": true
+          },
+          "icon": {
+            "path": "assets/7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef.png",
+            "sha256": "7e6107eb1496caa2e92212490de00437a888829a9d12a1060073ece5e5505aef",
+            "bytes": 301033,
+            "matches": true
+          }
+        }
+      }
+    }
+  },
+  "movement": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "version": "V575-WEB-37-FLAT-NAVIGATION",
+    "build": "7199bb1b892a49cd127fdedd7bfbd615bcfd4091a6744d753042261b78d7e5ed",
+    "version_matches": true,
+    "manifest_matches": true,
+    "engine_matches": true,
+    "entry_matches": true,
+    "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+    "engine_sha256": "2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2",
+    "movement_field": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
+      "source": "web/movement-field-v590.js",
+      "body_follows_actual_movement_only": true,
+      "weapon_aim_hold_seconds": 2,
+      "dash_follows_actual_displacement_without_shortening_aim_hold": true,
+      "weapon_returns_to_movement_after_hold": true,
+      "pause_freezes_hold": true,
+      "existing_upright_mirror_limits_preserved": true,
+      "field_respawn_seconds": 60,
+      "field_spread_seconds": 1.56,
+      "field_stroke_width": 12,
+      "field_uses_reachable_player_foot_component": true,
+      "field_uses_entire_map": true,
+      "no_invalid_spawn_fallback": true,
+      "one_active_device": true,
+      "existing_image_bytes_unchanged": 994,
+      "new_image_assets": 0,
+      "maps_bosses_save_keys_and_other_attacks_unchanged": true,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "horde_roles": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
+      "ordinary_movement_multiplier": 0.5,
+      "ordinary_spawn_multiplier": 1.95,
+      "existing_population_hard_limit_preserved": true,
+      "major_encounter_behavior_preserved": false,
+      "roles": {
+        "crawler": "melee",
+        "brute": "melee",
+        "runner": "charge",
+        "embermaw": "charge",
+        "spitter": "ranged",
+        "froststalker": "ranged",
+        "warden": "support",
+        "symbiote": "support"
+      },
+      "ranged_and_support_contact_damage": true,
+      "charge_damage_requires_burst": false,
+      "ordinary_spitter_ground_pools": false,
+      "ordinary_frost_beam": false,
+      "ordinary_charge_magma_trails": false,
+      "ordinary_attack_warnings": false,
+      "boss_attack_warnings_preserved": true,
+      "stage_level_cap": null,
+      "xp_overflow_preserved": true,
+      "field_speed_multiplier": 0.5,
+      "field_spread_seconds": 1.56,
+      "field_life_seconds": 2.36,
+      "field_charge_and_respawn_seconds_unchanged": [
+        3,
+        60
+      ],
+      "existing_image_bytes_unchanged": 994,
+      "new_image_assets": 0,
+      "maps_save_keys_and_player_attacks_unchanged": true,
+      "physical_Galaxy_S23_plus_tested": false,
+      "additional_web26_population_multiplier": 1.3,
+      "midbosses_rebalanced_by_request": true
+    },
+    "visual_clarity": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
+      "wave_and_spawn_decoration_rings_removed": true,
+      "cpu_and_gpu_paths_updated": true,
+      "all_ordinary_health_bars_on_hit_only": true,
+      "health_display_seconds": 1.2,
+      "health_uses_rendered_sprite_bounds": true,
+      "health_after_foreground": true,
+      "boss_hud_preserved": true,
+      "venom_parallel_volley_one_outer_warning": true,
+      "venom_radial_volley_one_warning": true,
+      "warning_tape_lettering_shared_canvas_transform": true,
+      "warning_tape_speed_px_per_second": 40,
+      "previous_warning_speed_px_per_second": 27,
+      "warning_tape_material": "cached weathered oxide steel",
+      "subtitle_removed": true,
+      "original_painted_lettering_preserved": true,
+      "existing_image_bytes_unchanged": 994,
+      "new_image_assets": 0,
+      "maps_saves_attacks_projectiles_and_damage_unchanged": true,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "upgrade_cards": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
+      "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
+      "independent_stat_cards": 17,
+      "choices_per_level": 3,
+      "max_effects_per_card": 2,
+      "rarity_probabilities": [
+        0.6,
+        0.27,
+        0.1,
+        0.027,
+        0.003
+      ],
+      "rarity_increment_multipliers": [
+        1,
+        1.5,
+        2,
+        3,
+        5
+      ],
+      "count_increments": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "experience_per_level": 12,
+      "level_cap": null,
+      "additional_ordinary_quantity_multiplier": 1.3,
+      "old_movement_and_attack_roles_preserved": true,
+      "rarity_art": {
+        "path": "assets/a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed.png",
+        "sha256": "a1d84b75e87115e54f55950bb61298f68e4f8651849cbe58876b0af7bfecc3ed",
+        "bytes": 2216425,
+        "width": 1254,
+        "height": 1254,
+        "columns": 5,
+        "rows": 5,
+        "generated": true,
+        "rare_reference": "1000027564.png",
+        "row_order": [
+          "gun",
+          "blade",
+          "legs",
+          "shell",
+          "core"
+        ],
+        "column_order": [
+          "common",
+          "rare",
+          "epic",
+          "legendary",
+          "mythic"
+        ],
+        "original_generated_bytes_preserved": true,
+        "design_progression": [
+          "simple rugged",
+          "tidy functional",
+          "refined premium",
+          "noble masterwork",
+          "sacred regal"
+        ],
+        "glow_progression": [
+          0,
+          0.1,
+          0.3,
+          0.6,
+          1
+        ],
+        "rarity_glow_colors": [
+          "neutral",
+          "blue",
+          "purple",
+          "golden yellow",
+          "bright orange"
+        ],
+        "decorative_spike_escalation": false,
+        "mythic_animated_radiance": true,
+        "approved_shape_reference": "exec-bc1c2f5f-997d-4b60-bc0e-77c1eaa54e70.png",
+        "user_approved_shapes_unchanged": true,
+        "glow_increase_steps": 2,
+        "row_bounds": [
+          [
+            0,
+            240
+          ],
+          [
+            240,
+            445
+          ],
+          [
+            445,
+            718
+          ],
+          [
+            718,
+            960
+          ],
+          [
+            960,
+            1254
+          ]
+        ],
+        "regions_recorded_without_modifying_image_bytes": true
+      },
+      "font": {
+        "path": "assets/7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9.woff",
+        "sha256": "7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9",
+        "bytes": 84532,
+        "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+        "license": "SIL Open Font License 1.1",
+        "family": "EVOLVE Upgrade Sans",
+        "subset": "Reference upgrade card and monster UI, including 팔 and 발"
+      },
+      "art_reference_tier": "rare",
+      "monster_catalog": true,
+      "monster_catalog_entries": 23,
+      "upgrades_reset_each_run": true,
+      "home_equipment_and_save_keys_preserved": true,
+      "existing_image_bytes_unchanged": 994,
+      "new_image_assets": 1,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "upgrade_reference": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "baseline_commit": "79ea7d94d753f67fd59b491a40ddecd1041b711e",
+      "reference": {
+        "path": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
+        "sha256": "a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c",
+        "bytes": 302370,
+        "width": 864,
+        "height": 1536,
+        "source": "1000027564.png",
+        "original_bytes_preserved": true,
+        "header": [
+          0,
+          0,
+          864,
+          446
+        ],
+        "frames": {
+          "rare": [
+            14,
+            438,
+            278,
+            777
+          ],
+          "epic": [
+            295,
+            438,
+            276,
+            777
+          ],
+          "legendary": [
+            576,
+            438,
+            278,
+            777
+          ]
+        },
+        "icons": {
+          "arm": [
+            96,
+            1088,
+            54,
+            57
+          ],
+          "feet": [
+            369,
+            1087,
+            57,
+            61
+          ],
+          "shell": [
+            652,
+            1085,
+            52,
+            63
+          ]
+        }
+      },
+      "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
+      "font": {
+        "path": "assets/7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9.woff",
+        "sha256": "7ee982eda2922342c004317aa26e52bfb210f9a1a3bd786b03124772cef063b9",
+        "bytes": 84532,
+        "source": "https://github.com/google/fonts/tree/main/ofl/notosanskr",
+        "license": "SIL Open Font License 1.1",
+        "family": "EVOLVE Upgrade Sans",
+        "subset": "Reference upgrade card and monster UI, including 팔 and 발"
+      },
+      "reference_background_and_frames": true,
+      "level_visible": true,
+      "part_labels": {
+        "gun": "팔",
+        "blade": "팔",
+        "legs": "발",
+        "shell": "외피"
+      },
+      "weapon_equipping_cards_removed": true,
+      "only_current_equipped_weapon_stats": true,
+      "generic_existing_body_upgrades_retained": true,
+      "item_art_alpha_margin": 64,
+      "item_silhouette_glow": true,
+      "item_source_region_extension": 20,
+      "item_art_original_bytes_unchanged": true,
+      "monster_body_marker_paths_removed": [
+        "elite-affix-ring",
+        "regeneration-ring",
+        "nemesis-ring",
+        "nemesis-adaptation-ring",
+        "apex-rings",
+        "boss-resistance-ring",
+        "exposure-ring",
+        "elite-body-triangles",
+        "shield-circle",
+        "zone-elite-ring",
+        "stun-symbols",
+        "target-ring",
+        "support-aura",
+        "gpu-warden-aura",
+        "gpu-symbiote-aura",
+        "gpu-shield",
+        "gpu-priority-badge"
+      ],
+      "all_monster_types_including_elites_and_bosses": true,
+      "both_cpu_and_gpu": true,
+      "attack_warnings_damage_and_hp_behavior_preserved": true,
+      "existing_image_bytes_unchanged": 995,
+      "new_image_assets": 1,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "playfield_v595": {
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
+      "shell": "assets/c3dfb005a76a08fd3b04148811a22da679d856ce473429833f61992abc747901.js",
+      "ground_art": {
+        "path": "assets/4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697.png",
+        "sha256": "4d102be9ed3bccf6859fad9e9e31ce160716c7e32c2435e2e2488ea6148df697",
+        "bytes": 2487966,
+        "kind": "image"
+      },
+      "compact_transparent_selector": true,
+      "prepared_map_reused": true,
+      "gate_accessor_and_route_release": true,
+      "bosses_only_in_phase_controls": true,
+      "catalog_entries": 19,
+      "download_bytes_and_eta": true,
+      "cache_reused": true,
+      "existing_image_bytes_unchanged": 996,
+      "physical_Galaxy_S23_plus_tested": false,
+      "local_verification": {
+        "playfield_browser": [
+          "actual streamed asset bytes, percentage and remaining time are visible before game startup; all downloads finish before loader removal",
+          "four repeated preparations of the active map reuse the existing collision field without any new preparation",
+          "all 16 ordinary/variant/elite specimens spawn with writable coordinates and no stale entry route; crawler and alpha move; phase-specific boss controls remain separate",
+          "compact portrait and landscape selectors leave the battlefield visible while real card selection still works",
+          "purge radius grows 65%; warning is harmless and subsequent visible rendered field damages inside the same radius",
+          "second startup reuses every cached asset with zero asset network bytes and administrator mode remains nonpersistent"
+        ],
+        "errors": [],
+        "map_repeat_ms": 0.10000000009313226,
+        "second_boot_network_asset_bytes": 0,
+        "all_catalog_entries": 16,
+        "existing_upgrade_suite": true,
+        "python_tests": 6,
+        "web_client_test": true,
+        "physical_Galaxy_S23_plus_tested": false
+      }
+    },
+    "home_map_miniatures_v597": {
+      "baseline": "f336a949c51a9dedc74c48c031c8c594f0a5b59f",
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "stylesheet": "assets/995e212aa7a769aace0e8f5e3974ad1599b7c84c0e5cbeaaf2b245638c7aef68.css",
+      "art": {
+        "infected": {
+          "id": "infected",
+          "ko": "감염 시설",
+          "en": "INFECTED FACILITY",
+          "accent": "#954a40",
+          "path": "assets/0bac4ff84e93141d62bc5de185dc551903b97932c2498a6a1c5f98328b083c1e.jpg",
+          "sha256": "0bac4ff84e93141d62bc5de185dc551903b97932c2498a6a1c5f98328b083c1e",
+          "bytes": 368388,
+          "width": 1536,
+          "height": 1536,
+          "opaque": true
+        },
+        "facility1": {
+          "id": "facility1",
+          "ko": "독성 화학공장",
+          "en": "TOXIC CHEMICAL PLANT",
+          "accent": "#809b44",
+          "path": "assets/f612088e5d4f8ca6aac71f7524a8e0578c32f9f5a28ef3d1c01ecec3c5f59623.png",
+          "sha256": "f612088e5d4f8ca6aac71f7524a8e0578c32f9f5a28ef3d1c01ecec3c5f59623",
+          "bytes": 2138030,
+          "width": 1254,
+          "height": 1254,
+          "opaque": false
+        },
+        "facility2": {
+          "id": "facility2",
+          "ko": "핵폐기물 처리시설",
+          "en": "NUCLEAR WASTE PROCESSING",
+          "accent": "#a39641",
+          "path": "assets/9a6db074715465310eb3007921c0cef3ae90c074f7bdef5efef2bdbce6ece4a1.png",
+          "sha256": "9a6db074715465310eb3007921c0cef3ae90c074f7bdef5efef2bdbce6ece4a1",
+          "bytes": 2295405,
+          "width": 1254,
+          "height": 1254,
+          "opaque": false
+        },
+        "hub": {
+          "id": "hub",
+          "ko": "방사성 폐기물 중앙 광장",
+          "en": "RADIOACTIVE WASTE PLAZA",
+          "accent": "#87984a",
+          "path": "assets/16bc0bbdb26dbcfce1a7bf2c49daa2af3f810360ccded97556b671093d341a47.png",
+          "sha256": "16bc0bbdb26dbcfce1a7bf2c49daa2af3f810360ccded97556b671093d341a47",
+          "bytes": 2168805,
+          "width": 1254,
+          "height": 1254,
+          "opaque": false
+        },
+        "biolab": {
+          "id": "biolab",
+          "ko": "격리 배양시설",
+          "en": "QUARANTINE CULTIVATION LAB",
+          "accent": "#9d6556",
+          "path": "assets/dada1b22904d7ef0c359e3fb0e95035acf7c4023a58c6b0cf17ebb8cbef4bb7c.png",
+          "sha256": "dada1b22904d7ef0c359e3fb0e95035acf7c4023a58c6b0cf17ebb8cbef4bb7c",
+          "bytes": 2124792,
+          "width": 1254,
+          "height": 1254,
+          "opaque": false
+        },
+        "red_biolab": {
+          "id": "red_biolab",
+          "ko": "적색 배양공장",
+          "en": "RED CULTIVATION FACTORY",
+          "accent": "#aa3e3a",
+          "path": "assets/36143edcead4d1421a7115b6ff7506b2d768e4235379e895de3e1362ede1cc9b.png",
+          "sha256": "36143edcead4d1421a7115b6ff7506b2d768e4235379e895de3e1362ede1cc9b",
+          "bytes": 2331267,
+          "width": 1254,
+          "height": 1254,
+          "opaque": false
+        }
+      },
+      "font": {
+        "path": "assets/31cd3ffeaf0d4a01f9184a7148443f2d5c3858f5ba92b6936bf65ee9b6a2543f.woff",
+        "sha256": "31cd3ffeaf0d4a01f9184a7148443f2d5c3858f5ba92b6936bf65ee9b6a2543f",
+        "bytes": 13484
+      },
+      "stage_mapping_unchanged": true,
+      "original_image_bytes_unchanged": 997,
+      "recovered_reference_unchanged": true,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "organ_skills_v598": {
+      "baseline": "169505e96c4331a2072219e674862f51632e06a6",
+      "engine": "assets/2a95aa65561c075ca36b723aba1dc9c2a3384060e76eb1fbc10b5ca175d57ff2.js",
+      "stylesheet": "assets/5583101b6a241c1a93c6041e0fc5efccdb27f8c5dad4467f9fbab193964eb143.css",
+      "font": {
+        "path": "assets/530d4b5110222e68544c56c2b418bcd95e1fe08c900f50c98f63270e5237b479.woff",
+        "sha256": "530d4b5110222e68544c56c2b418bcd95e1fe08c900f50c98f63270e5237b479",
+        "bytes": 26304
+      },
+      "opening_choices": 3,
+      "arm_initial_level": 1,
+      "other_organs_initial_level": 0,
+      "weapon_selection_removed": true,
+      "organs": [
+        "arm",
+        "shell",
+        "tail",
+        "mouth"
+      ],
+      "variant_slots": {
+        "arm": "arm",
+        "shell": "skin",
+        "tail": "tail",
+        "mouth": "head"
+      },
+      "projectile_limit": 180,
+      "original_image_bytes_unchanged": 1003,
+      "physical_Galaxy_S23_plus_tested": false
+    },
+    "physical_Galaxy_S23_plus_tested": false
+  }
+}
