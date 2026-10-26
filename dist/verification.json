@@ -6,7 +6,7 @@
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 259936,
+  "index_bytes": 259955,
   "build": "b2ca85148f88085d42782aefe1c1b022331e4980f6f805edb872fbaa678d7f8e",
   "image_assets": 1005,
   "cached_files": 1065,
@@ -1805,6 +1805,9 @@
     "existing_engine_body_unchanged": true,
     "performance": "zero before/after snapshots when no listeners and QA disabled",
     "physical_Galaxy_S23_plus_tested": false,
-    "previous_browser_boot_failure_fixed_by_v601": true
+    "previous_browser_boot_failure_fixed_by_v601": true,
+    "checkpoint": "STEP04 V601 pre-publication byte-check repaired",
+    "release_state": "staged",
+    "last_browser_run_failure": "V600 missing lexical hurtEnemy; replaced in V601"
   }
 }
