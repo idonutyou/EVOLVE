@@ -67,7 +67,7 @@ function mutantStepV599(dt){
  // Smoothed speed starts
  // near zero; using it here sent the first landing 40+ world pixels ahead.
  // Shorter legs plant for less of the same slow stride, preserving foot contact.
- const stance=mutantGaitV602.stance*Math.min(1,playerWorldScaleV603()),period=mutantGaitV602.stride/Math.max(20,d/dt);
+ const stance=mutantGaitV602.stance*Math.min(1,Math.pow(playerWorldScaleV603(),1.5)),period=mutantGaitV602.stride/Math.max(20,d/dt);
  mutantArtV599.legs.forEach((leg,i)=>{
   const f=m.feet[i],q=(m.distance/mutantGaitV602.stride+leg.phase)%1;
   if(!m.moving){

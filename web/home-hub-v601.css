@@ -32,11 +32,11 @@ __HOME_HUB_FONTS_V601__
 #poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522{margin:0!important;padding:8px 0 25px!important;border:0!important;background:transparent!important;box-shadow:none!important}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .homeNavV522.active{flex-grow:1.2;height:calc(var(--hub-nav) - 6px)!important;padding-bottom:33px!important;color:#fff0c9!important;background:transparent!important;border:0!important;box-shadow:none!important;z-index:3}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 #homeBattleTabV522.active{padding-bottom:33px!important}
-#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateFillV601{position:absolute;inset:auto 0 0;height:var(--hub-plate-height);background:linear-gradient(180deg,#111619 0 7%,#343a3c 8%,#171d20 10%,#0d1216 30%,#0d1216 81%,#3b4446 83%,#161c1f 86%,#0a0d10 100%);z-index:-2;pointer-events:none}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateFillV601{position:absolute;inset:auto 0 0;height:var(--hub-plate-height);background:linear-gradient(180deg,#111619 0 7%,#343a3c 8%,#171d20 10%,#0d1216 30%,#0d1216 81%,#3b4446 83%,#161c1f 86%,#0a0d10 100%);z-index:-3;pointer-events:none}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .hubActiveFillV603{display:none;position:absolute;inset:2% 3% 7%;clip-path:polygon(22% 0,78% 0,91% 11%,91% 73%,100% 86%,86% 100%,14% 100%,0 86%,9% 73%,9% 11%);background:radial-gradient(ellipse at 50% 23%,#9c432c60,transparent 64%),linear-gradient(150deg,#30201f,#1e1318 70%,#1b1418);z-index:-1;pointer-events:none}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubActiveFillV603{display:block}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateV601{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none;z-index:-1;fill:none;stroke:none;overflow:visible}
-#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateRestV601{top:auto;bottom:0;height:var(--hub-plate-height)}
+#poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateRestV601{top:auto;bottom:0;height:var(--hub-plate-height);z-index:-2}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .hubPlateSelectedV601{display:none;inset:0;width:100%;height:100%}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubPlateRestV601{display:block;top:auto;bottom:0;height:var(--hub-plate-height)}
 #poster.homeHubV601 #homeTabs.homeHubNavV601 .active .hubPlateSelectedV601{display:block;filter:drop-shadow(0 -3px 5px #ff541d35)}

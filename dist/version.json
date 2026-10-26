@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-36-NAVIGATION-SCALE",
-  "build": "d0575255b41e2e2e31ee0a82b7c84fc8145fe580de6aca6dc678ba16a680bd49",
-  "scriptBytes": 77707446,
+  "build": "81349a4856a289a7c3286fbc03b14558c3ecae04e30550ccf5e926d46186fda9",
+  "scriptBytes": 77707460,
   "assets": 1040,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true

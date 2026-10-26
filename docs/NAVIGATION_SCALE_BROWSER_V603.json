@@ -1,0 +1,5911 @@
+{
+  "source": "local",
+  "checks": [
+    "All five navigation states have a continuous filled rail, including both sides of the selected plate, and raised uncropped labels during transitions on four viewports",
+    "Transparent navigation backing exposes the same home background with no separate blue strip or shadow",
+    "Rendered start-button corners are fully transparent, with an opaque red center and no rectangular CSS background",
+    "Selected frame omits the old arrow above its glyph",
+    "Actual body and both weapon render transforms are exactly 70 percent of WEB-35; collision radius is 7, repeated resets do not compound shrinkage, size upgrades still apply, and the 1536px parts preview remains intact",
+    "Actual left/right world renders keep both blade tips and cutting edges downward and the learned resting tail raised symmetrically",
+    "Four seconds of running uses 12–14 calm foot cycles, subpixel foot lift, planted contact, unchanged travel distance and no bitmap rebuilds"
+  ],
+  "navigation": [
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 8,
+            "y": 457.875,
+            "right": 77.15625,
+            "bottom": 562,
+            "width": 69.15625,
+            "height": 104.125
+          },
+          "frame": {
+            "x": 8,
+            "y": 457.875,
+            "right": 77.15625,
+            "bottom": 562,
+            "width": 69.15625,
+            "height": 104.125
+          },
+          "glyph": {
+            "x": 23.5,
+            "y": 470.46875,
+            "right": 61.640625,
+            "bottom": 508.609375,
+            "width": 38.140625,
+            "height": 38.140625
+          },
+          "label": {
+            "x": 31.578125,
+            "y": 514.609375,
+            "right": 53.578125,
+            "bottom": 529,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 8,
+            "y": 478,
+            "right": 77.15625,
+            "bottom": 562,
+            "width": 69.15625,
+            "height": 84
+          },
+          "rest": {
+            "x": 8,
+            "y": 478,
+            "right": 77.15625,
+            "bottom": 562,
+            "width": 69.15625,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 77.15625,
+            "y": 478,
+            "right": 135.625,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 77.15625,
+            "y": 478,
+            "right": 135.625,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 91.890625,
+            "y": 490,
+            "right": 120.890625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 97.390625,
+            "y": 525,
+            "right": 115.390625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 77.15625,
+            "y": 478,
+            "right": 135.625,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 77.15625,
+            "y": 478,
+            "right": 135.625,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 135.625,
+            "y": 476.140625,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 59.453125,
+            "height": 85.859375
+          },
+          "frame": {
+            "x": 135.625,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 59.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 150.421875,
+            "y": 489.15625,
+            "right": 180.265625,
+            "bottom": 519,
+            "width": 29.84375,
+            "height": 29.84375
+          },
+          "label": {
+            "x": 156.34375,
+            "y": 525,
+            "right": 174.34375,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 135.625,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 59.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 135.625,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 59.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 209.796875,
+            "y": 490,
+            "right": 238.796875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 210.796875,
+            "y": 525,
+            "right": 237.796875,
+            "bottom": 537,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 268.265625,
+            "y": 490,
+            "right": 297.265625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 273.765625,
+            "y": 525,
+            "right": 291.765625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 472.796875,
+            "right": 69.21875,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 89.203125
+          },
+          "frame": {
+            "x": 8,
+            "y": 478,
+            "right": 69.21875,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 22.921875,
+            "y": 487.640625,
+            "right": 54.28125,
+            "bottom": 519,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 29.609375,
+            "y": 525,
+            "right": 47.609375,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 8,
+            "y": 478,
+            "right": 69.21875,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "rest": {
+            "x": 8,
+            "y": 478,
+            "right": 69.21875,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 69.21875,
+            "y": 461.21875,
+            "right": 136.609375,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "frame": {
+            "x": 69.21875,
+            "y": 461.21875,
+            "right": 136.609375,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "glyph": {
+            "x": 84.59375,
+            "y": 471.984375,
+            "right": 121.21875,
+            "bottom": 508.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 91.90625,
+            "y": 514.609375,
+            "right": 113.90625,
+            "bottom": 529,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 69.21875,
+            "y": 478,
+            "right": 136.609375,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "rest": {
+            "x": 69.21875,
+            "y": 478,
+            "right": 136.609375,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 136.609375,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 136.609375,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 151.34375,
+            "y": 490,
+            "right": 180.34375,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 156.84375,
+            "y": 525,
+            "right": 174.84375,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 136.609375,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 136.609375,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 209.796875,
+            "y": 490,
+            "right": 238.796875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 210.796875,
+            "y": 525,
+            "right": 237.796875,
+            "bottom": 537,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 268.265625,
+            "y": 490,
+            "right": 297.265625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 273.765625,
+            "y": 525,
+            "right": 291.765625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 22.71875,
+            "y": 490,
+            "right": 51.71875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 28.21875,
+            "y": 525,
+            "right": 46.21875,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 66.453125,
+            "y": 472.796875,
+            "right": 127.6875,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 89.203125
+          },
+          "frame": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 127.6875,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "glyph": {
+            "x": 81.390625,
+            "y": 487.640625,
+            "right": 112.75,
+            "bottom": 519,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 88.0625,
+            "y": 525,
+            "right": 106.0625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 127.6875,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "rest": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 127.6875,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 127.6875,
+            "y": 461.21875,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "frame": {
+            "x": 127.6875,
+            "y": 461.21875,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "glyph": {
+            "x": 143.0625,
+            "y": 471.984375,
+            "right": 179.6875,
+            "bottom": 508.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 150.375,
+            "y": 514.609375,
+            "right": 172.375,
+            "bottom": 529,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 127.6875,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "rest": {
+            "x": 127.6875,
+            "y": 478,
+            "right": 195.078125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 209.796875,
+            "y": 490,
+            "right": 238.796875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 210.796875,
+            "y": 525,
+            "right": 237.796875,
+            "bottom": 537,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 195.078125,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 268.265625,
+            "y": 490,
+            "right": 297.265625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 273.765625,
+            "y": 525,
+            "right": 291.765625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 22.71875,
+            "y": 490,
+            "right": 51.71875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 28.21875,
+            "y": 525,
+            "right": 46.21875,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 81.1875,
+            "y": 490,
+            "right": 110.1875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 86.6875,
+            "y": 525,
+            "right": 104.6875,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 124.921875,
+            "y": 472.8125,
+            "right": 186.140625,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 89.1875
+          },
+          "frame": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 186.140625,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 139.84375,
+            "y": 487.640625,
+            "right": 171.203125,
+            "bottom": 519,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 146.53125,
+            "y": 525,
+            "right": 164.53125,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 186.140625,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "rest": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 186.140625,
+            "bottom": 562,
+            "width": 61.21875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 186.140625,
+            "y": 461.203125,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.796875
+          },
+          "frame": {
+            "x": 186.140625,
+            "y": 461.203125,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.796875
+          },
+          "glyph": {
+            "x": 201.515625,
+            "y": 471.984375,
+            "right": 238.140625,
+            "bottom": 508.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 203.328125,
+            "y": 514.609375,
+            "right": 236.328125,
+            "bottom": 529,
+            "width": 33,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 186.140625,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "rest": {
+            "x": 186.140625,
+            "y": 478,
+            "right": 253.53125,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 268.265625,
+            "y": 490,
+            "right": 297.265625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 273.765625,
+            "y": 525,
+            "right": 291.765625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 253.53125,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 320,
+        "height": 568
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 22.71875,
+            "y": 490,
+            "right": 51.71875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 28.21875,
+            "y": 525,
+            "right": 46.21875,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 8,
+            "y": 478,
+            "right": 66.453125,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "frame": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "glyph": {
+            "x": 81.1875,
+            "y": 490,
+            "right": 110.1875,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 86.6875,
+            "y": 525,
+            "right": 104.6875,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "rest": {
+            "x": 66.453125,
+            "y": 478,
+            "right": 124.921875,
+            "bottom": 562,
+            "width": 58.46875,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 183.375,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "frame": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 183.375,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "glyph": {
+            "x": 139.640625,
+            "y": 490,
+            "right": 168.640625,
+            "bottom": 519,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 145.140625,
+            "y": 525,
+            "right": 163.140625,
+            "bottom": 537,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 183.375,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "rest": {
+            "x": 124.921875,
+            "y": 478,
+            "right": 183.375,
+            "bottom": 562,
+            "width": 58.453125,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 183.375,
+            "y": 472.796875,
+            "right": 244.609375,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 89.203125
+          },
+          "frame": {
+            "x": 183.375,
+            "y": 478,
+            "right": 244.609375,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "glyph": {
+            "x": 198.3125,
+            "y": 487.640625,
+            "right": 229.671875,
+            "bottom": 519,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 200.484375,
+            "y": 525,
+            "right": 227.484375,
+            "bottom": 537,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 183.375,
+            "y": 478,
+            "right": 244.609375,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "rest": {
+            "x": 183.375,
+            "y": 478,
+            "right": 244.609375,
+            "bottom": 562,
+            "width": 61.234375,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 244.609375,
+            "y": 461.21875,
+            "right": 312,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "frame": {
+            "x": 244.609375,
+            "y": 461.21875,
+            "right": 312,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 100.78125
+          },
+          "glyph": {
+            "x": 259.984375,
+            "y": 471.984375,
+            "right": 296.609375,
+            "bottom": 508.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 267.296875,
+            "y": 514.609375,
+            "right": 289.296875,
+            "bottom": 529,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 244.609375,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "rest": {
+            "x": 244.609375,
+            "y": 478,
+            "right": 312,
+            "bottom": 562,
+            "width": 67.390625,
+            "height": 84
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 8,
+            "y": 622.25,
+            "right": 91.5625,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 8,
+            "y": 622.25,
+            "right": 91.5625,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 31.46875,
+            "y": 634.984375,
+            "right": 68.09375,
+            "bottom": 671.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 38.78125,
+            "y": 677.609375,
+            "right": 60.78125,
+            "bottom": 692,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 91.5625,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 91.5625,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 91.5625,
+            "y": 639.03125,
+            "right": 164.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 91.5625,
+            "y": 639.03125,
+            "right": 164.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 113.3125,
+            "y": 651.8125,
+            "right": 142.3125,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 117.8125,
+            "y": 686.8125,
+            "right": 137.8125,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 91.5625,
+            "y": 639.03125,
+            "right": 164.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 91.5625,
+            "y": 639.03125,
+            "right": 164.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 164.0625,
+            "y": 639.03125,
+            "right": 236.5625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 164.0625,
+            "y": 639.03125,
+            "right": 236.5625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 185.8125,
+            "y": 651.8125,
+            "right": 214.8125,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 190.3125,
+            "y": 686.8125,
+            "right": 210.3125,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 164.0625,
+            "y": 639.03125,
+            "right": 236.5625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 164.0625,
+            "y": 639.03125,
+            "right": 236.5625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 236.5625,
+            "y": 639.03125,
+            "right": 309.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 236.5625,
+            "y": 639.03125,
+            "right": 309.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 258.3125,
+            "y": 651.8125,
+            "right": 287.3125,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 257.8125,
+            "y": 686.8125,
+            "right": 287.8125,
+            "bottom": 700,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 236.5625,
+            "y": 639.03125,
+            "right": 309.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 236.5625,
+            "y": 639.03125,
+            "right": 309.0625,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 309.0625,
+            "y": 633.828125,
+            "right": 385,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 309.0625,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 331.34375,
+            "y": 649.453125,
+            "right": 362.703125,
+            "bottom": 680.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 337.03125,
+            "y": 686.8125,
+            "right": 357.03125,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 309.0625,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 309.0625,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 633.828125,
+            "right": 83.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 83.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 30.28125,
+            "y": 649.453125,
+            "right": 61.640625,
+            "bottom": 680.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 35.96875,
+            "y": 686.8125,
+            "right": 55.96875,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 83.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 83.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 83.9375,
+            "y": 622.25,
+            "right": 167.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 83.9375,
+            "y": 622.25,
+            "right": 167.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 107.40625,
+            "y": 634.984375,
+            "right": 144.03125,
+            "bottom": 671.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 114.71875,
+            "y": 677.609375,
+            "right": 136.71875,
+            "bottom": 692,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 83.9375,
+            "y": 639.03125,
+            "right": 167.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 83.9375,
+            "y": 639.03125,
+            "right": 167.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 167.5,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 167.5,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 189.25,
+            "y": 651.8125,
+            "right": 218.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 193.75,
+            "y": 686.8125,
+            "right": 213.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 167.5,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 167.5,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 261.75,
+            "y": 651.8125,
+            "right": 290.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 261.25,
+            "y": 686.8125,
+            "right": 291.25,
+            "bottom": 700,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 651.8125,
+            "right": 363.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 686.8125,
+            "right": 358.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 651.8125,
+            "right": 58.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 686.8125,
+            "right": 54.25,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 633.828125,
+            "right": 156.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 156.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.78125,
+            "y": 649.453125,
+            "right": 134.140625,
+            "bottom": 680.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 108.46875,
+            "y": 686.8125,
+            "right": 128.46875,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 156.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 156.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 156.4375,
+            "y": 622.25,
+            "right": 240,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 156.4375,
+            "y": 622.25,
+            "right": 240,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 179.90625,
+            "y": 634.984375,
+            "right": 216.53125,
+            "bottom": 671.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 187.21875,
+            "y": 677.609375,
+            "right": 209.21875,
+            "bottom": 692,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 156.4375,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 156.4375,
+            "y": 639.03125,
+            "right": 240,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 261.75,
+            "y": 651.8125,
+            "right": 290.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 261.25,
+            "y": 686.8125,
+            "right": 291.25,
+            "bottom": 700,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 240,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 651.8125,
+            "right": 363.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 686.8125,
+            "right": 358.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 651.8125,
+            "right": 58.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 686.8125,
+            "right": 54.25,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.25,
+            "y": 651.8125,
+            "right": 131.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 106.75,
+            "y": 686.8125,
+            "right": 126.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153,
+            "y": 633.828125,
+            "right": 228.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 228.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 175.28125,
+            "y": 649.453125,
+            "right": 206.640625,
+            "bottom": 680.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 180.96875,
+            "y": 686.8125,
+            "right": 200.96875,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 228.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 228.9375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 228.9375,
+            "y": 622.25,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 228.9375,
+            "y": 622.25,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 252.40625,
+            "y": 634.984375,
+            "right": 289.03125,
+            "bottom": 671.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 254.21875,
+            "y": 677.609375,
+            "right": 287.21875,
+            "bottom": 692,
+            "width": 33,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 228.9375,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 228.9375,
+            "y": 639.03125,
+            "right": 312.5,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 651.8125,
+            "right": 363.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 686.8125,
+            "right": 358.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 731
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 651.8125,
+            "right": 58.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 686.8125,
+            "right": 54.25,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 639.03125,
+            "right": 80.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.25,
+            "y": 651.8125,
+            "right": 131.25,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 106.75,
+            "y": 686.8125,
+            "right": 126.75,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 639.03125,
+            "right": 153,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 225.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 225.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 174.75,
+            "y": 651.8125,
+            "right": 203.75,
+            "bottom": 680.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 179.25,
+            "y": 686.8125,
+            "right": 199.25,
+            "bottom": 700,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 225.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 153,
+            "y": 639.03125,
+            "right": 225.5,
+            "bottom": 725,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 225.5,
+            "y": 633.828125,
+            "right": 301.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 225.5,
+            "y": 639.03125,
+            "right": 301.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 247.78125,
+            "y": 649.453125,
+            "right": 279.140625,
+            "bottom": 680.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 248.46875,
+            "y": 686.8125,
+            "right": 278.46875,
+            "bottom": 700,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 225.5,
+            "y": 639.03125,
+            "right": 301.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 225.5,
+            "y": 639.03125,
+            "right": 301.4375,
+            "bottom": 725,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 301.4375,
+            "y": 622.25,
+            "right": 385,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 301.4375,
+            "y": 622.25,
+            "right": 385,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 324.90625,
+            "y": 634.984375,
+            "right": 361.53125,
+            "bottom": 671.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 332.21875,
+            "y": 677.609375,
+            "right": 354.21875,
+            "bottom": 692,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 301.4375,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 301.4375,
+            "y": 639.03125,
+            "right": 385,
+            "bottom": 725,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 8,
+            "y": 743.234375,
+            "right": 91.578125,
+            "bottom": 846,
+            "width": 83.578125,
+            "height": 102.765625
+          },
+          "frame": {
+            "x": 8,
+            "y": 743.234375,
+            "right": 91.578125,
+            "bottom": 846,
+            "width": 83.578125,
+            "height": 102.765625
+          },
+          "glyph": {
+            "x": 31.46875,
+            "y": 755.984375,
+            "right": 68.09375,
+            "bottom": 792.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 38.78125,
+            "y": 798.609375,
+            "right": 60.78125,
+            "bottom": 813,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 91.578125,
+            "bottom": 846,
+            "width": 83.578125,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 91.578125,
+            "bottom": 846,
+            "width": 83.578125,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 91.578125,
+            "y": 760.03125,
+            "right": 164.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 91.578125,
+            "y": 760.03125,
+            "right": 164.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 113.328125,
+            "y": 772.8125,
+            "right": 142.328125,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 117.828125,
+            "y": 807.8125,
+            "right": 137.828125,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 91.578125,
+            "y": 760.03125,
+            "right": 164.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 91.578125,
+            "y": 760.03125,
+            "right": 164.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 164.078125,
+            "y": 760.03125,
+            "right": 236.578125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 164.078125,
+            "y": 760.03125,
+            "right": 236.578125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 185.828125,
+            "y": 772.8125,
+            "right": 214.828125,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 190.328125,
+            "y": 807.8125,
+            "right": 210.328125,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 164.078125,
+            "y": 760.03125,
+            "right": 236.578125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 164.078125,
+            "y": 760.03125,
+            "right": 236.578125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 236.578125,
+            "y": 760.03125,
+            "right": 309.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 236.578125,
+            "y": 760.03125,
+            "right": 309.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 258.328125,
+            "y": 772.8125,
+            "right": 287.328125,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 257.828125,
+            "y": 807.8125,
+            "right": 287.828125,
+            "bottom": 821,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 236.578125,
+            "y": 760.03125,
+            "right": 309.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 236.578125,
+            "y": 760.03125,
+            "right": 309.078125,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 309.078125,
+            "y": 754.84375,
+            "right": 385,
+            "bottom": 846,
+            "width": 75.921875,
+            "height": 91.15625
+          },
+          "frame": {
+            "x": 309.078125,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 75.921875,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 331.359375,
+            "y": 770.453125,
+            "right": 362.71875,
+            "bottom": 801.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 337.03125,
+            "y": 807.8125,
+            "right": 357.03125,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 309.078125,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 75.921875,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 309.078125,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 75.921875,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 754.8125,
+            "right": 83.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 91.1875
+          },
+          "frame": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 83.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 30.28125,
+            "y": 770.453125,
+            "right": 61.640625,
+            "bottom": 801.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 35.96875,
+            "y": 807.8125,
+            "right": 55.96875,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 83.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 83.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 83.9375,
+            "y": 743.25,
+            "right": 167.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 83.9375,
+            "y": 743.25,
+            "right": 167.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 107.40625,
+            "y": 755.984375,
+            "right": 144.03125,
+            "bottom": 792.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 114.71875,
+            "y": 798.609375,
+            "right": 136.71875,
+            "bottom": 813,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 83.9375,
+            "y": 760.03125,
+            "right": 167.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 83.9375,
+            "y": 760.03125,
+            "right": 167.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 167.5,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 167.5,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 189.25,
+            "y": 772.8125,
+            "right": 218.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 193.75,
+            "y": 807.8125,
+            "right": 213.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 167.5,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 167.5,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 261.75,
+            "y": 772.8125,
+            "right": 290.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 261.25,
+            "y": 807.8125,
+            "right": 291.25,
+            "bottom": 821,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 772.8125,
+            "right": 363.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 807.8125,
+            "right": 358.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 772.8125,
+            "right": 58.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 807.8125,
+            "right": 54.25,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 754.828125,
+            "right": 156.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 156.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.78125,
+            "y": 770.453125,
+            "right": 134.140625,
+            "bottom": 801.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 108.46875,
+            "y": 807.8125,
+            "right": 128.46875,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 156.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 156.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 156.4375,
+            "y": 743.25,
+            "right": 240,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 156.4375,
+            "y": 743.25,
+            "right": 240,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 179.90625,
+            "y": 755.984375,
+            "right": 216.53125,
+            "bottom": 792.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 187.21875,
+            "y": 798.609375,
+            "right": 209.21875,
+            "bottom": 813,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 156.4375,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 156.4375,
+            "y": 760.03125,
+            "right": 240,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 261.75,
+            "y": 772.8125,
+            "right": 290.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 261.25,
+            "y": 807.8125,
+            "right": 291.25,
+            "bottom": 821,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 240,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 772.8125,
+            "right": 363.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 807.8125,
+            "right": 358.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 772.8125,
+            "right": 58.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 807.8125,
+            "right": 54.25,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.25,
+            "y": 772.8125,
+            "right": 131.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 106.75,
+            "y": 807.8125,
+            "right": 126.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153,
+            "y": 754.828125,
+            "right": 228.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 228.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 175.28125,
+            "y": 770.453125,
+            "right": 206.640625,
+            "bottom": 801.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 180.96875,
+            "y": 807.8125,
+            "right": 200.96875,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 228.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 228.9375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 228.9375,
+            "y": 743.25,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 228.9375,
+            "y": 743.25,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 252.40625,
+            "y": 755.984375,
+            "right": 289.03125,
+            "bottom": 792.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 254.21875,
+            "y": 798.609375,
+            "right": 287.21875,
+            "bottom": 813,
+            "width": 33,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 228.9375,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 228.9375,
+            "y": 760.03125,
+            "right": 312.5,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 334.25,
+            "y": 772.8125,
+            "right": 363.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 338.75,
+            "y": 807.8125,
+            "right": 358.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 312.5,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 393,
+        "height": 852
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 29.75,
+            "y": 772.8125,
+            "right": 58.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 34.25,
+            "y": 807.8125,
+            "right": 54.25,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 8,
+            "y": 760.03125,
+            "right": 80.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 102.25,
+            "y": 772.8125,
+            "right": 131.25,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 106.75,
+            "y": 807.8125,
+            "right": 126.75,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 80.5,
+            "y": 760.03125,
+            "right": 153,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 225.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "frame": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 225.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 174.75,
+            "y": 772.8125,
+            "right": 203.75,
+            "bottom": 801.8125,
+            "width": 29,
+            "height": 29
+          },
+          "label": {
+            "x": 179.25,
+            "y": 807.8125,
+            "right": 199.25,
+            "bottom": 821,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 225.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 153,
+            "y": 760.03125,
+            "right": 225.5,
+            "bottom": 846,
+            "width": 72.5,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 225.5,
+            "y": 754.828125,
+            "right": 301.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 91.171875
+          },
+          "frame": {
+            "x": 225.5,
+            "y": 760.03125,
+            "right": 301.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "glyph": {
+            "x": 247.78125,
+            "y": 770.453125,
+            "right": 279.140625,
+            "bottom": 801.8125,
+            "width": 31.359375,
+            "height": 31.359375
+          },
+          "label": {
+            "x": 248.46875,
+            "y": 807.8125,
+            "right": 278.46875,
+            "bottom": 821,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 225.5,
+            "y": 760.03125,
+            "right": 301.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 225.5,
+            "y": 760.03125,
+            "right": 301.4375,
+            "bottom": 846,
+            "width": 75.9375,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 301.4375,
+            "y": 743.25,
+            "right": 385,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "frame": {
+            "x": 301.4375,
+            "y": 743.25,
+            "right": 385,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 102.75
+          },
+          "glyph": {
+            "x": 324.90625,
+            "y": 755.984375,
+            "right": 361.53125,
+            "bottom": 792.609375,
+            "width": 36.625,
+            "height": 36.625
+          },
+          "label": {
+            "x": 332.21875,
+            "y": 798.609375,
+            "right": 354.21875,
+            "bottom": 813,
+            "width": 22,
+            "height": 14.390625
+          },
+          "fill": {
+            "x": 301.4375,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "rest": {
+            "x": 301.4375,
+            "y": 760.03125,
+            "right": 385,
+            "bottom": 846,
+            "width": 83.5625,
+            "height": 85.96875
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeShopTabV601",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": true,
+          "button": {
+            "x": 7,
+            "y": 306.234375,
+            "right": 191.84375,
+            "bottom": 387,
+            "width": 184.84375,
+            "height": 80.765625
+          },
+          "frame": {
+            "x": 7,
+            "y": 306.234375,
+            "right": 191.84375,
+            "bottom": 387,
+            "width": 184.84375,
+            "height": 80.765625
+          },
+          "glyph": {
+            "x": 84.484375,
+            "y": 314.953125,
+            "right": 114.34375,
+            "bottom": 344.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 89.421875,
+            "y": 348.8125,
+            "right": 109.421875,
+            "bottom": 362,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 7,
+            "y": 323,
+            "right": 191.84375,
+            "bottom": 387,
+            "width": 184.84375,
+            "height": 64
+          },
+          "rest": {
+            "x": 7,
+            "y": 323,
+            "right": 191.84375,
+            "bottom": 387,
+            "width": 184.84375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 191.84375,
+            "y": 323,
+            "right": 352.234375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 191.84375,
+            "y": 323,
+            "right": 352.234375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 260.53125,
+            "y": 329,
+            "right": 283.53125,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 263.03125,
+            "y": 356,
+            "right": 281.03125,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 191.84375,
+            "y": 323,
+            "right": 352.234375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 191.84375,
+            "y": 323,
+            "right": 352.234375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 352.234375,
+            "y": 323,
+            "right": 512.609375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 352.234375,
+            "y": 323,
+            "right": 512.609375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 420.921875,
+            "y": 329,
+            "right": 443.921875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 423.421875,
+            "y": 356,
+            "right": 441.421875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 352.234375,
+            "y": 323,
+            "right": 512.609375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "rest": {
+            "x": 352.234375,
+            "y": 323,
+            "right": 512.609375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 512.609375,
+            "y": 323,
+            "right": 673,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 512.609375,
+            "y": 323,
+            "right": 673,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 581.296875,
+            "y": 329,
+            "right": 604.296875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 579.296875,
+            "y": 356,
+            "right": 606.296875,
+            "bottom": 368,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 512.609375,
+            "y": 323,
+            "right": 673,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 512.609375,
+            "y": 323,
+            "right": 673,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 673,
+            "y": 317.78125,
+            "right": 841,
+            "bottom": 387,
+            "width": 168,
+            "height": 69.21875
+          },
+          "frame": {
+            "x": 673,
+            "y": 323,
+            "right": 841,
+            "bottom": 387,
+            "width": 168,
+            "height": 64
+          },
+          "glyph": {
+            "x": 744.4375,
+            "y": 326.875,
+            "right": 769.5625,
+            "bottom": 352,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 748,
+            "y": 356,
+            "right": 766,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 673,
+            "y": 323,
+            "right": 841,
+            "bottom": 387,
+            "width": 168,
+            "height": 64
+          },
+          "rest": {
+            "x": 673,
+            "y": 323,
+            "right": 841,
+            "bottom": 387,
+            "width": 168,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeLabTab",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 9,
+            "y": 317.796875,
+            "right": 176.96875,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 69.203125
+          },
+          "frame": {
+            "x": 9,
+            "y": 323,
+            "right": 176.96875,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "glyph": {
+            "x": 80.421875,
+            "y": 326.875,
+            "right": 105.546875,
+            "bottom": 352,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 83.984375,
+            "y": 356,
+            "right": 101.984375,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 9,
+            "y": 323,
+            "right": 176.96875,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "rest": {
+            "x": 9,
+            "y": 323,
+            "right": 176.96875,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": true,
+          "button": {
+            "x": 176.96875,
+            "y": 306.21875,
+            "right": 361.84375,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 80.78125
+          },
+          "frame": {
+            "x": 176.96875,
+            "y": 306.21875,
+            "right": 361.84375,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 80.78125
+          },
+          "glyph": {
+            "x": 254.46875,
+            "y": 314.953125,
+            "right": 284.328125,
+            "bottom": 344.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 259.40625,
+            "y": 348.8125,
+            "right": 279.40625,
+            "bottom": 362,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 176.96875,
+            "y": 323,
+            "right": 361.84375,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 64
+          },
+          "rest": {
+            "x": 176.96875,
+            "y": 323,
+            "right": 361.84375,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 361.84375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 361.84375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 430.53125,
+            "y": 329,
+            "right": 453.53125,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 433.03125,
+            "y": 356,
+            "right": 451.03125,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 361.84375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "rest": {
+            "x": 361.84375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 590.90625,
+            "y": 329,
+            "right": 613.90625,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 588.90625,
+            "y": 356,
+            "right": 615.90625,
+            "bottom": 368,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 751.296875,
+            "y": 329,
+            "right": 774.296875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 753.796875,
+            "y": 356,
+            "right": 771.796875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "homeBattleTabV522",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 77.6875,
+            "y": 329,
+            "right": 100.6875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 80.1875,
+            "y": 356,
+            "right": 98.1875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "rest": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 169.375,
+            "y": 317.8125,
+            "right": 337.34375,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 69.1875
+          },
+          "frame": {
+            "x": 169.375,
+            "y": 323,
+            "right": 337.34375,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "glyph": {
+            "x": 240.796875,
+            "y": 326.875,
+            "right": 265.921875,
+            "bottom": 352,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 244.359375,
+            "y": 356,
+            "right": 262.359375,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 169.375,
+            "y": 323,
+            "right": 337.34375,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "rest": {
+            "x": 169.375,
+            "y": 323,
+            "right": 337.34375,
+            "bottom": 387,
+            "width": 167.96875,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": true,
+          "button": {
+            "x": 337.34375,
+            "y": 306.203125,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 80.796875
+          },
+          "frame": {
+            "x": 337.34375,
+            "y": 306.203125,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 80.796875
+          },
+          "glyph": {
+            "x": 414.84375,
+            "y": 314.953125,
+            "right": 444.703125,
+            "bottom": 344.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 419.78125,
+            "y": 348.8125,
+            "right": 439.78125,
+            "bottom": 362,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 337.34375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 64
+          },
+          "rest": {
+            "x": 337.34375,
+            "y": 323,
+            "right": 522.21875,
+            "bottom": 387,
+            "width": 184.875,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 590.90625,
+            "y": 329,
+            "right": 613.90625,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 588.90625,
+            "y": 356,
+            "right": 615.90625,
+            "bottom": 368,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 522.21875,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 751.296875,
+            "y": 329,
+            "right": 774.296875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 753.796875,
+            "y": 356,
+            "right": 771.796875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "memoryBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 77.6875,
+            "y": 329,
+            "right": 100.6875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 80.1875,
+            "y": 356,
+            "right": 98.1875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "rest": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 238.0625,
+            "y": 329,
+            "right": 261.0625,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 240.5625,
+            "y": 356,
+            "right": 258.5625,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 329.765625,
+            "y": 317.796875,
+            "right": 497.75,
+            "bottom": 387,
+            "width": 167.984375,
+            "height": 69.203125
+          },
+          "frame": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 497.75,
+            "bottom": 387,
+            "width": 167.984375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 401.1875,
+            "y": 326.875,
+            "right": 426.3125,
+            "bottom": 352,
+            "width": 25.125,
+            "height": 25.125
+          },
+          "label": {
+            "x": 404.75,
+            "y": 356,
+            "right": 422.75,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 497.75,
+            "bottom": 387,
+            "width": 167.984375,
+            "height": 64
+          },
+          "rest": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 497.75,
+            "bottom": 387,
+            "width": 167.984375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": true,
+          "button": {
+            "x": 497.75,
+            "y": 306.21875,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 184.859375,
+            "height": 80.78125
+          },
+          "frame": {
+            "x": 497.75,
+            "y": 306.21875,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 184.859375,
+            "height": 80.78125
+          },
+          "glyph": {
+            "x": 575.25,
+            "y": 314.953125,
+            "right": 605.109375,
+            "bottom": 344.8125,
+            "width": 29.859375,
+            "height": 29.859375
+          },
+          "label": {
+            "x": 575.171875,
+            "y": 348.8125,
+            "right": 605.171875,
+            "bottom": 362,
+            "width": 30,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 497.75,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 184.859375,
+            "height": 64
+          },
+          "rest": {
+            "x": 497.75,
+            "y": 323,
+            "right": 682.609375,
+            "bottom": 387,
+            "width": 184.859375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": false,
+          "button": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 751.296875,
+            "y": 329,
+            "right": 774.296875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 753.796875,
+            "y": 356,
+            "right": 771.796875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 682.609375,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    },
+    {
+      "size": {
+        "width": 852,
+        "height": 393
+      },
+      "selected": "codexBtn",
+      "metrics": [
+        {
+          "id": "homeShopTabV601",
+          "active": false,
+          "button": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "frame": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 77.6875,
+            "y": 329,
+            "right": 100.6875,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 80.1875,
+            "y": 356,
+            "right": 98.1875,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "rest": {
+            "x": 9,
+            "y": 323,
+            "right": 169.375,
+            "bottom": 387,
+            "width": 160.375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeLabTab",
+          "active": false,
+          "button": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 238.0625,
+            "y": 329,
+            "right": 261.0625,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 240.5625,
+            "y": 356,
+            "right": 258.5625,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 169.375,
+            "y": 323,
+            "right": 329.765625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "homeBattleTabV522",
+          "active": false,
+          "button": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 490.15625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "frame": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 490.15625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "glyph": {
+            "x": 398.453125,
+            "y": 329,
+            "right": 421.453125,
+            "bottom": 352,
+            "width": 23,
+            "height": 23
+          },
+          "label": {
+            "x": 400.953125,
+            "y": 356,
+            "right": 418.953125,
+            "bottom": 368,
+            "width": 18,
+            "height": 12
+          },
+          "fill": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 490.15625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "rest": {
+            "x": 329.765625,
+            "y": 323,
+            "right": 490.15625,
+            "bottom": 387,
+            "width": 160.390625,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "memoryBtn",
+          "active": false,
+          "button": {
+            "x": 490.15625,
+            "y": 319.765625,
+            "right": 655.265625,
+            "bottom": 387,
+            "width": 165.109375,
+            "height": 67.234375
+          },
+          "frame": {
+            "x": 490.15625,
+            "y": 323,
+            "right": 655.265625,
+            "bottom": 387,
+            "width": 165.109375,
+            "height": 64
+          },
+          "glyph": {
+            "x": 560.546875,
+            "y": 327.6875,
+            "right": 584.859375,
+            "bottom": 352,
+            "width": 24.3125,
+            "height": 24.3125
+          },
+          "label": {
+            "x": 559.203125,
+            "y": 356,
+            "right": 586.203125,
+            "bottom": 368,
+            "width": 27,
+            "height": 12
+          },
+          "fill": {
+            "x": 490.15625,
+            "y": 323,
+            "right": 655.265625,
+            "bottom": 387,
+            "width": 165.109375,
+            "height": 64
+          },
+          "rest": {
+            "x": 490.15625,
+            "y": 323,
+            "right": 655.265625,
+            "bottom": 387,
+            "width": 165.109375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        },
+        {
+          "id": "codexBtn",
+          "active": true,
+          "button": {
+            "x": 655.265625,
+            "y": 304.25,
+            "right": 843,
+            "bottom": 387,
+            "width": 187.734375,
+            "height": 82.75
+          },
+          "frame": {
+            "x": 655.265625,
+            "y": 304.25,
+            "right": 843,
+            "bottom": 387,
+            "width": 187.734375,
+            "height": 82.75
+          },
+          "glyph": {
+            "x": 733.796875,
+            "y": 314.140625,
+            "right": 764.46875,
+            "bottom": 344.8125,
+            "width": 30.671875,
+            "height": 30.671875
+          },
+          "label": {
+            "x": 739.125,
+            "y": 348.8125,
+            "right": 759.125,
+            "bottom": 362,
+            "width": 20,
+            "height": 13.1875
+          },
+          "fill": {
+            "x": 655.265625,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 187.734375,
+            "height": 64
+          },
+          "rest": {
+            "x": 655.265625,
+            "y": 323,
+            "right": 843,
+            "bottom": 387,
+            "width": 187.734375,
+            "height": 64
+          },
+          "fillBackground": "linear-gradient(rgb(17, 22, 25) 0px, rgb(17, 22, 25) 7%, rgb(52, 58, 60) 8%, rgb(23, 29, 32) 10%, rgb(13, 18, 22) 30%, rgb(13, 18, 22) 81%, rgb(59, 68, 70) 83%, rgb(22, 28, 31) 86%, rgb(10, 13, 16) 100%)",
+          "restZ": -2,
+          "activeFillZ": -1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "physical_Galaxy_S23_plus_tested": false,
+  "release": {
+    "version": "V575-WEB-36-NAVIGATION-SCALE",
+    "build": "81349a4856a289a7c3286fbc03b14558c3ecae04e30550ccf5e926d46186fda9",
+    "scriptBytes": 77707460,
+    "preloadResources": true
+  },
+  "navigationBackground": {
+    "color": "rgba(0, 0, 0, 0)",
+    "image": "none",
+    "shadow": "none",
+    "border": "0px"
+  },
+  "startContour": {
+    "corners": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "center": [
+      103,
+      35,
+      40,
+      255
+    ],
+    "background": "none",
+    "shadow": "none"
+  },
+  "selectedArrow": {
+    "viewBox": "252 154 207 183",
+    "oldArrowAlpha": 0
+  },
+  "initialScale": {
+    "rows": [
+      {
+        "mode": "bare",
+        "weapons": [],
+        "bodyWorldWidth": 35.678432527929544,
+        "bodyRatio": 0.7000000250725901,
+        "radius": 7,
+        "speed": 132
+      },
+      {
+        "mode": "blades",
+        "weapons": [
+          {
+            "mode": "blades",
+            "side": "right",
+            "ratio": 0.7000000000000001
+          },
+          {
+            "mode": "blades",
+            "side": "left",
+            "ratio": 0.6999999999999998
+          }
+        ],
+        "bodyWorldWidth": 35.678432527929544,
+        "bodyRatio": 0.7000000250725901,
+        "radius": 7,
+        "speed": 132
+      },
+      {
+        "mode": "cannon",
+        "weapons": [
+          {
+            "mode": "cannon",
+            "side": "right",
+            "ratio": 0.7
+          },
+          {
+            "mode": "cannon",
+            "side": "left",
+            "ratio": 0.7000000000000001
+          }
+        ],
+        "bodyWorldWidth": 35.678432527929544,
+        "bodyRatio": 0.7000000250725901,
+        "radius": 7,
+        "speed": 132
+      }
+    ],
+    "radii": [
+      7,
+      7,
+      7
+    ],
+    "giant": {
+      "radius": 7.3500000000000005,
+      "world": 0.735,
+      "upgrade": 1.05
+    },
+    "light": {
+      "radius": 6.6499999999999995,
+      "world": 0.6649999999999999,
+      "upgrade": 0.95
+    },
+    "previewNaturalWidth": 1536
+  },
+  "character": [
+    {
+      "direction": 1,
+      "blades": [
+        {
+          "side": "right",
+          "p": {
+            "x": 419.7474365234375,
+            "y": 268.43603515625
+          },
+          "tip": {
+            "x": 472.17719149135917,
+            "y": 295.7315341508405
+          },
+          "cuttingSide": 3.9946973594725033,
+          "spineSide": -9.28327083736658
+        },
+        {
+          "side": "left",
+          "p": {
+            "x": 384.3289794921875,
+            "y": 290.4130859375
+          },
+          "tip": {
+            "x": 440.79836477325046,
+            "y": 307.8811137981049
+          },
+          "cuttingSide": 3.994697359472521,
+          "spineSide": -9.283270837366556
+        }
+      ],
+      "tailTip": {
+        "x": 175.10551127712543,
+        "y": 229.1511300225528
+      },
+      "tailRoot": {
+        "x": 254.802734375,
+        "y": 318.935791015625
+      }
+    },
+    {
+      "direction": -1,
+      "blades": [
+        {
+          "side": "right",
+          "p": {
+            "x": 220.2525634765625,
+            "y": 268.43603515625
+          },
+          "tip": {
+            "x": 167.82280850864083,
+            "y": 295.7315341508405
+          },
+          "cuttingSide": -3.9946973594725166,
+          "spineSide": 9.283270837366567
+        },
+        {
+          "side": "left",
+          "p": {
+            "x": 255.6710205078125,
+            "y": 290.4130859375
+          },
+          "tip": {
+            "x": 199.20163522674954,
+            "y": 307.8811137981049
+          },
+          "cuttingSide": -3.9946973594725295,
+          "spineSide": 9.283270837366556
+        }
+      ],
+      "tailTip": {
+        "x": 464.8944887228746,
+        "y": 229.1511300225528
+      },
+      "tailRoot": {
+        "x": 385.197265625,
+        "y": 318.935791015625
+      }
+    }
+  ],
+  "gait": {
+    "cycles": [
+      14,
+      13,
+      13,
+      14
+    ],
+    "maxLift": 0.8499887046807523,
+    "maxRoll": 0.04499940201251043,
+    "maxStanceError": 1.8635460064581162,
+    "distance": 528.0000000000109,
+    "partBuildsBefore": 25,
+    "partBuildsAfter": 25,
+    "movingAfterStop": false
+  },
+  "success": true
+}

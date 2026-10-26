@@ -97,7 +97,7 @@ jobs:
           fi
           echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
       - name: Verify mobile boot, maps, controls, saves and safe updates
-        timeout-minutes: 10
+        timeout-minutes: 15
         run: |
           node tests/player_mutant_browser.cjs
           node tests/organ_skills_browser.cjs
