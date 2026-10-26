@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-37-FLAT-NAVIGATION",
   "baseline": "0f52a2ee8dc7e715e34477c21b52740b136109b1",
-  "progress": 80,
+  "progress": 90,
   "requested": [
     "Same height for every tab, including selected state",
     "Selected tab expands horizontally and completely fills its wider cell",
@@ -71,11 +71,20 @@
       "sha256": "a0ebbe2180a0ac3af737dfa2c00c546daa0940be3ca116a00ca1209a129dde71",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_7d8bfe795270819181ea949563b00de7&account_id=personal"
+    },
+    {
+      "stage": 80,
+      "filename": "EVOLVE_WEB37_CHECKPOINT_080.zip",
+      "library_file_id": "libfile_88afc78e4d848191921eb204c11b937b",
+      "bytes": 821237,
+      "sha256": "99b0d5eaa950107b7cbad6036210ec4235609a54e2b1fd19a21945a65b7e89b2",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_88afc78e4d848191921eb204c11b937b&account_id=personal"
     }
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "All uploaded source, tests and packaged files verified by matching remote Git tree and per-path hashes",
-  "next": "Publish the guarded release, run all twenty browser suites and verify actual Pages",
+  "status": "Verified WEB-37 is ready for guarded publication; previous game size and combat preserved",
+  "next": "Run all twenty browser suites, publish Pages and verify the actual public UI before final backup",
   "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
   "current_release": {
     "version": "V575-WEB-37-FLAT-NAVIGATION",
