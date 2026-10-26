@@ -1,16 +1,16 @@
 {
-  "version": "V575-WEB-43-DISPLAY-RECOVERY",
+  "version": "V575-STEP04-HIT-EVENTS",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 259791,
-  "build": "f5798ff9181a789c27bcdcf741093907ebbd06b74b2030750a60380b52bfe42f",
+  "index_bytes": 259489,
+  "build": "fd2f525bbb49278c9ad38afb8b511759fec477a043fdc42d9ca4408df206e5e1",
   "image_assets": 1005,
-  "cached_files": 1064,
-  "cached_bytes": 378982752,
+  "cached_files": 1065,
+  "cached_bytes": 378986320,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1787,5 +1787,17 @@
       }
     ],
     "physical_Galaxy_S23_plus_tested": false
+  },
+  "step04_hit_events": {
+    "mode": "post-engine read-only wrapper",
+    "source": "web/hit-events-v600.js",
+    "engine": "assets/8df04204797b36219f9f56045aa3ca650bdb618eab51fe258f62cf26608478c3.js",
+    "critical": "null unless explicit source context",
+    "damage_math_unchanged": true,
+    "collision_unchanged": true,
+    "knockback_unchanged": true,
+    "save_keys_unchanged": true,
+    "images_unchanged": true,
+    "galaxy_s23_plus_tested": false
   }
 }
