@@ -81,6 +81,29 @@
     "model_suites": 9
   },
   "source_image_hashes_preserved": 1005,
-  "full_publication_ci": "pending",
-  "physical_Galaxy_S23_plus_tested": false
+  "full_publication_ci": "success",
+  "physical_Galaxy_S23_plus_tested": false,
+  "publication": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "release_commit": "201baa4cf9afaa1fe41815534a9ae94f5ee7842e",
+    "release_tree": "11f87605d7166d213bda13035d3438001361c570",
+    "build": "81349a4856a289a7c3286fbc03b14558c3ecae04e30550ccf5e926d46186fda9",
+    "backup_verified": true,
+    "backup_branch": "backup/web36-090-20261026",
+    "completion_backup_branch": "backup/web36-100-20261026",
+    "deployment_run_id": 40247952427,
+    "deployment_status": "success",
+    "workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40247952427",
+    "browser_suites_passed": 20,
+    "public_bytes_match": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "live_browser_failed_requests": [],
+    "navigation_states_verified": 20,
+    "initial_character_scale_verified": 0.7,
+    "source_images_unchanged": 1005,
+    "all_requested_visual_fixes_verified": true,
+    "physical_Galaxy_S23_plus_tested": false
+  }
 }
