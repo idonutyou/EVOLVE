@@ -1,7 +1,7 @@
 {
   "baseline": "9cb02fe7ec2e21ea23b32d74febdeb2f82ed5e9d",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
-  "progress": 70,
+  "progress": 80,
   "complete": false,
   "requests": [
     "Reduce spike and whip illustration size and intensity to match existing cards",
@@ -75,9 +75,24 @@
       "sha256": "93f554586a6b3448f4be3f53a213cb80b9f31adc415b24c93af868b0853304aa",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_4c95f9f7ead88191ab1ae38ab02a8606&account_id=personal"
+    },
+    {
+      "stage": 70,
+      "filename": "EVOLVE_WEB43_CHECKPOINT_070.zip",
+      "library_file_id": "libfile_dd3a797b8bb08191a7ac8477762a29aa",
+      "bytes": 855495,
+      "sha256": "56c2e5d15c0cb9b9ed3b406265db613a382e07ea10d22e5b3c9a98999bfb8761",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_dd3a797b8bb08191a7ac8477762a29aa&account_id=personal"
     }
   ],
   "stats_and_effects_unchanged": true,
-  "status": "Reviewed deployable source with all existing guards and new live recovery checks retained",
-  "next": "Upload this exact tree to a preserved GitHub branch and deploy"
+  "status": "Exact reviewed source tree preserved on GitHub; all deployment guards retained",
+  "next": "Publish to existing Pages and verify all 25 local and 7 public browser suites",
+  "github_source_checkpoint": {
+    "branch": "backup/web43-070-20261026",
+    "sha": "e08b29f92854298f38238d4c8d7f9ed914ddbe33",
+    "tree": "e23240123fef143cf7035c6462f0184c977e3689",
+    "local_and_remote_tree_equal": true
+  }
 }
