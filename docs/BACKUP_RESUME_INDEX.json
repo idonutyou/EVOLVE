@@ -1,6 +1,6 @@
 {
-  "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
-  "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
   "recovered_local_commit": "95ac1992bc5de4b375255ca56bde2de99b32a587",
   "original_recovery_zip": {
     "filename": "EVOLVE_WEB32_RECOVERED_95ac199.zip",
@@ -9,53 +9,125 @@
   },
   "milestones": [
     {
+      "stage": 10,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_010.zip",
+      "library_file_id": "libfile_3e5aa53954f481918dc3c6c8fffe9ce1",
+      "bytes": 3942,
+      "sha256": "1b1b0b8207173b57d6665d71b02eab513335ae231c62616d6e466c6d2f3e989b",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_3e5aa53954f481918dc3c6c8fffe9ce1&account_id=personal"
+    },
+    {
+      "stage": 20,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_020.zip",
+      "library_file_id": "libfile_fd6c6e9fc014819190343d3dc3078749",
+      "bytes": 7191,
+      "sha256": "b556d61144d7856f24759d9133e921d25039645c87648d39fd9f8d5390d9be55",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_fd6c6e9fc014819190343d3dc3078749&account_id=personal"
+    },
+    {
+      "stage": 30,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_030.zip",
+      "library_file_id": "libfile_3495974959e48191b4c678a4ef5b7fed",
+      "bytes": 7809,
+      "sha256": "68ba7c579e2a82e5c9ca5af64a05d9c3e7e12918029d673845e32a03c2bb7219",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_3495974959e48191b4c678a4ef5b7fed&account_id=personal"
+    },
+    {
+      "stage": 40,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_040.zip",
+      "library_file_id": "libfile_d679672640808191886e1ba9e492e4ba",
+      "bytes": 9129,
+      "sha256": "d7f5f012ea6c19804094f73e08e4237a68f4782f155ebb5e811e4898ca70dc84",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_d679672640808191886e1ba9e492e4ba&account_id=personal"
+    },
+    {
       "stage": 50,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_050.zip",
-      "bytes": 2726808,
-      "sha256": "deb7fc15244cc505382e3c929c8cc0c4c5e97e813310e77e709a998935177a54",
-      "library_file_id": "libfile_9d4915aa133081918b32a4146a6f7977",
-      "confirmed_saved": true
+      "filename": "EVOLVE_WEB41_CHECKPOINT_050.zip",
+      "library_file_id": "libfile_91f07badfad88191944b36caf50f24b8",
+      "bytes": 171888,
+      "sha256": "167e9318688d2789bcbf06771c6bd0bac491bf2cd264d8301559b0e799f919b9",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_91f07badfad88191944b36caf50f24b8&account_id=personal"
     },
     {
       "stage": 60,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_060.zip",
-      "bytes": 2739443,
-      "sha256": "923d7520375ad1c7fb3360eda4bd3cda796d960cd0f4be3ae58243fe99612883",
-      "library_file_id": "libfile_f3b978a7eb30819183e86f424afabb73",
-      "confirmed_saved": true
+      "filename": "EVOLVE_WEB41_CHECKPOINT_060.zip",
+      "library_file_id": "libfile_2f87791e05608191ac3b099eac0e8cd7",
+      "bytes": 192898,
+      "sha256": "fdce7d05bd7a66d71a5a247ac06215f1f6843851cc19734d8c9b90989a9827d4",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_2f87791e05608191ac3b099eac0e8cd7&account_id=personal"
     },
     {
       "stage": 70,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_070.zip",
-      "bytes": 2737016,
-      "sha256": "cf43352619cc7038e8ac881e566e146b990c4db5226988bcc66e5e831bbb62c4",
-      "library_file_id": "libfile_565cf7322680819182da60641605cd0a",
-      "confirmed_saved": true
+      "filename": "EVOLVE_WEB41_CHECKPOINT_070.zip",
+      "library_file_id": "libfile_8e2249e2361c8191b9b7c965b24259c3",
+      "bytes": 196834,
+      "sha256": "d12d1b154e397a9209e46f79fe86e8a3ecccab05a34b246f22924aff2b5c6da6",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_8e2249e2361c8191b9b7c965b24259c3&account_id=personal"
     },
     {
       "stage": 80,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_080.zip",
-      "bytes": 2755358,
-      "sha256": "2a505788edcca70bceaeaf2802afd20ad4463278f9c2919130ea2ce0dafe8832",
-      "library_file_id": "libfile_ea359df0cd608191a44e0014b8072327",
-      "confirmed_saved": true
+      "filename": "EVOLVE_WEB41_CHECKPOINT_080.zip",
+      "library_file_id": "libfile_6fb3b21af8408191aeeed6c6329f5118",
+      "bytes": 197520,
+      "sha256": "2912068701a3ad611fe0ec0512c85e2682637a38a0722ce3784cf3f1c0d8fcb9",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_6fb3b21af8408191aeeed6c6329f5118&account_id=personal"
     },
     {
       "stage": 90,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_090.zip",
-      "bytes": 2762892,
-      "library_file_id": "libfile_681fefc8946881918f942eed378609a6",
-      "confirmed_saved": true
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX1.zip",
+      "library_file_id": "libfile_954ba34407e48191a0535311a0c94ebd",
+      "bytes": 253175,
+      "sha256": "23384b113b725e46831a48d757836274a691c181b7d5605c108bdbeb7dc527b0",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_954ba34407e48191a0535311a0c94ebd&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX2.zip",
+      "library_file_id": "libfile_e6dd70fe56148191a02eb98360e442af",
+      "bytes": 253942,
+      "sha256": "511b764013a85dbd6274bbb73d6261ef070447a79d681532355de796ec9d8afd",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_e6dd70fe56148191a02eb98360e442af&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX3.zip",
+      "library_file_id": "libfile_2b6ffd26957c81919e61cca317f98167",
+      "bytes": 894614,
+      "sha256": "7cf0ca8c2a2f264044c3fcb4fc9117d03fe60ad09667a59081efd4e83c1edf02",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_2b6ffd26957c81919e61cca317f98167&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090.zip",
+      "library_file_id": "libfile_57d65ff5b0ec8191802bc0a9c6dd09ab",
+      "bytes": 198350,
+      "sha256": "fc9fefde127b1d5017999b27d03915f84179862960948ab0ca9d07c7a527bfea",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_57d65ff5b0ec8191802bc0a9c6dd09ab&account_id=personal"
     },
     {
       "stage": 100,
-      "filename": "EVOLVE_WEB32_CHECKPOINT_100.zip",
-      "bytes": 2767218,
-      "sha256": "29ddf58f2dd9aa49da987cbc1064a1ef59a22d264f29d27a3da3caa96b58d477",
-      "library_file_id": "libfile_3ca379c56a008191b62acbaffe8e869a",
-      "file_id": "file_00000000e48481f58eb51a327060d09b",
+      "filename": "EVOLVE_WEB41_CHECKPOINT_100.zip",
+      "bytes": 916406,
+      "sha256": "c9402c18d6d7f0ced47650d08980157e7bb119b31004a0d8364a47bc06cca8c4",
+      "library_file_id": "libfile_c882703c62d08191be0706c47e7ffade",
+      "file_id": "file_000000007ce08230961bff123aa14e58",
       "confirmed_saved": true,
-      "archive_files_verified": 27
+      "download_and_all_file_hashes_reverified": true,
+      "archive_files_verified": 42,
+      "url": "https://chatgpt.com/library?file_id=libfile_c882703c62d08191be0706c47e7ffade&account_id=personal",
+      "completion_backup_branch": "backup/web41-100-20261026"
     }
   ],
   "remote_upload_confirmed": true,
@@ -70,67 +142,97 @@
   },
   "remote_release": {
     "repository": "idonutyou/EVOLVE",
-    "commit": "e43313643277fef53297072f8677bbd072d1d0b6",
-    "tree": "1d80fc63a518b5168fc1bd1486c1537f5a04e15f",
-    "main_metadata_commit": "6a5a6f8e5e5fb98f8578754cb00f45e796e5602e",
-    "backup_branch_verified": true,
-    "main_verified": true,
-    "deployment_run_id": 40258519662,
-    "public_verification_run_id": 40261084200,
+    "source_publish_commit": "d64407d8e899ee857a981d6d32f0f1403c15b02e",
+    "source_tree": "6d3f27dcea976ebb19dc58aa3adb9ef88d8419a9",
+    "deployment_run_id": 40295680334,
     "deployment_status": "success",
-    "public_verification_status": "success",
-    "immutable_backup_branch": "backup/web39-090-fix1-20261026",
-    "ci_recovery_backup_branch": "backup/web39-090-ci-recovery-20261026",
-    "completion_backup_branch": "backup/web39-100-20261026",
-    "completion_receipt_branch": "backup/web39-100-receipt-20261026"
+    "immutable_backup_branch": "backup/web41-090-fix3-20261026",
+    "completion_backup_branch": "backup/web41-100-20261026"
   },
   "publication": {
     "success": true,
+    "status": "Published and verified on the actual public website",
     "url": "https://idonutyou.github.io/EVOLVE/",
-    "version": "V575-WEB-39-ICONS-FULLSCREEN",
-    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
-    "release_commit": "e43313643277fef53297072f8677bbd072d1d0b6",
-    "release_tree": "1d80fc63a518b5168fc1bd1486c1537f5a04e15f",
-    "deployment_run_id": 40258519662,
-    "deployment_attempt": 1,
-    "pages_deployed": true,
-    "deployment_step_status": "success",
-    "public_verification_run_id": 40261084200,
-    "public_verification_status": "success",
-    "public_verification_workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40261084200",
-    "browser_suites_passed": 21,
-    "public_browser_suites_passed": 3,
-    "new_public_files_matched": 11,
+    "version": "V575-WEB-41-UPGRADE-SCENERY",
+    "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+    "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+    "source_publish_commit": "d64407d8e899ee857a981d6d32f0f1403c15b02e",
+    "source_tree": "6d3f27dcea976ebb19dc58aa3adb9ef88d8419a9",
+    "source_tree_verified_exact": true,
+    "workflows": [
+      {
+        "id": 40295680311,
+        "name": "Verify EVOLVE migration tools",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40295680334,
+        "name": "Publish EVOLVE Web",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40295680334"
+      }
+    ],
+    "browser_suites_passed": 23,
+    "public_browser_suites_passed": 5,
+    "actual_public_files_matched": 7,
     "public_bytes_match": true,
-    "live_browser_game_started": true,
-    "live_browser_errors": [],
-    "fullscreen_enter_exit_verified": true,
-    "pwa_manifest_accepted": true,
-    "home_icons_reference_row": 1,
-    "start_inner_material_reference_row": 5,
-    "navigation_frame_and_labels_unchanged": true,
-    "entire_game_engine_unchanged": true,
-    "original_images_unchanged": 1005,
+    "live_upgrade_choices_and_reroll_verified": true,
+    "viewport_layouts_verified": 5,
+    "viewport_events_repaint_paused_game": true,
+    "simulation_clock_unchanged_on_resize": true,
+    "opaque_contour_interior": true,
+    "battlefield_visible_outside_contour": true,
+    "blue_reference_reroll_frame": true,
+    "reroll_frame_safe_margins": true,
+    "duplicate_popup_level_hidden": true,
+    "original_images_unchanged": 1009,
+    "gameplay_unchanged": true,
+    "engine_change": "Only the 1189-byte viewport repaint hook; removing it restores the baseline byte-for-byte",
+    "live_browser_report": "docs/UPGRADE_SCENERY_LIVE_BROWSER_V608.json",
+    "live_bytes_report": "docs/UPGRADE_SCENERY_LIVE_BYTES_V608.json",
+    "engine_diff_proof": "docs/VIEWPORT_REPAINT_PROOF_V609.json",
+    "working_folder": "/workspace/scratch/25bc994140e8/evolve",
     "physical_Galaxy_S23_plus_tested": false,
-    "all_prior_artifacts_retained": true,
-    "rerun_artifact_names_unique": true
+    "previous_successful_publication": {
+      "commit": "8f9e93cde845dc0451121de80423d20a61a98166",
+      "run_id": 40290979172,
+      "conclusion": "success",
+      "public_browser_proof": "docs/UPGRADE_SCENERY_PREVIOUS_LIVE_V608.json",
+      "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a"
+    },
+    "resolved_guard_issues": [
+      {
+        "id": 40284960505,
+        "reason": "Legacy local fixture CSS MIME type blocked card clicks",
+        "resolved_locally": true
+      },
+      {
+        "id": 40289925417,
+        "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
+        "upgrade_ui_suite_passed": true,
+        "resolved_locally": true
+      }
+    ]
   },
   "preserve_all_previous_backups": true,
   "final_checkpoint": {
     "stage": 100,
-    "filename": "EVOLVE_WEB39_CHECKPOINT_100.zip",
-    "bytes": 1105505,
-    "sha256": "11a0d0b9f1b562b26ef0bcea285613baf6757dacbf56a3a6326d84c9ff6cfa4b",
-    "library_file_id": "libfile_6995002476c08191af0e93a9e5530c7e",
+    "filename": "EVOLVE_WEB41_CHECKPOINT_100.zip",
+    "bytes": 916406,
+    "sha256": "c9402c18d6d7f0ced47650d08980157e7bb119b31004a0d8364a47bc06cca8c4",
+    "library_file_id": "libfile_c882703c62d08191be0706c47e7ffade",
+    "file_id": "file_000000007ce08230961bff123aa14e58",
     "confirmed_saved": true,
     "download_and_all_file_hashes_reverified": true,
-    "url": "https://chatgpt.com/library?file_id=libfile_6995002476c08191af0e93a9e5530c7e&account_id=personal",
-    "verified": true,
-    "archive_files_verified": 40
+    "archive_files_verified": 42,
+    "url": "https://chatgpt.com/library?file_id=libfile_c882703c62d08191be0706c47e7ffade&account_id=personal",
+    "completion_backup_branch": "backup/web41-100-20261026"
   },
-  "active_version": "V575-WEB-39-ICONS-FULLSCREEN",
-  "active_build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
-  "active_resume_document": "docs/ICONS_FULLSCREEN_RELEASE_V606.md",
+  "active_version": "V575-WEB-41-UPGRADE-SCENERY",
+  "active_build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+  "active_resume_document": "docs/UPGRADE_SCENERY_RELEASE_V608.md",
   "equipment_fit_WEB33": {
     "progress": 100,
     "baseline": "917ac1cd209bf3eb05a8e90045c59046bb3585ac",
@@ -246,15 +348,16 @@
   },
   "latest_checkpoint": {
     "stage": 100,
-    "filename": "EVOLVE_WEB39_CHECKPOINT_100.zip",
-    "bytes": 1105505,
-    "sha256": "11a0d0b9f1b562b26ef0bcea285613baf6757dacbf56a3a6326d84c9ff6cfa4b",
-    "library_file_id": "libfile_6995002476c08191af0e93a9e5530c7e",
+    "filename": "EVOLVE_WEB41_CHECKPOINT_100.zip",
+    "bytes": 916406,
+    "sha256": "c9402c18d6d7f0ced47650d08980157e7bb119b31004a0d8364a47bc06cca8c4",
+    "library_file_id": "libfile_c882703c62d08191be0706c47e7ffade",
+    "file_id": "file_000000007ce08230961bff123aa14e58",
     "confirmed_saved": true,
     "download_and_all_file_hashes_reverified": true,
-    "url": "https://chatgpt.com/library?file_id=libfile_6995002476c08191af0e93a9e5530c7e&account_id=personal",
-    "verified": true,
-    "archive_files_verified": 40
+    "archive_files_verified": 42,
+    "url": "https://chatgpt.com/library?file_id=libfile_c882703c62d08191be0706c47e7ffade&account_id=personal",
+    "completion_backup_branch": "backup/web41-100-20261026"
   },
   "previous_WEB33_publication": {
     "release_commit": "4b12583052e04195ef5c4bf11ae99711ab1c23b6",
@@ -284,7 +387,7 @@
   },
   "previous_transient_working_folder": "/workspace/scratch/52dc714b3a52/evolve-game",
   "canonical_repository": "https://github.com/idonutyou/EVOLVE",
-  "local_checkout_note": "Temporary workspaces can be cleaned. Restore current main or the latest WEB-37 checkpoint; verify active_version and active_build before resuming.",
+  "local_checkout_note": "Restore current main or the WEB-41 final recovery checkpoint over baseline 824612442201bc2a6a15d5e6e5642b03e9792d17. Preserve all earlier snapshots.",
   "home_hub_WEB34": {
     "progress": 100,
     "baseline": "bbc738b6822f2836780b805b742da48e1313f128",
@@ -438,8 +541,8 @@
     "immutable_backup_branch": "backup/web32-090-20261025",
     "completion_backup_branch": "backup/web32-100-20261025"
   },
-  "active_baseline": "0f52a2ee8dc7e715e34477c21b52740b136109b1",
-  "active_release_commit": "6a581a5afc3db9fb1a751d75074264b7c6064329",
+  "active_baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+  "active_release_commit": "d64407d8e899ee857a981d6d32f0f1403c15b02e",
   "physical_Galaxy_S23_plus_tested": false,
   "visual_fit_WEB35": {
     "progress": 100,
@@ -1185,5 +1288,347 @@
     "download_and_all_file_hashes_reverified": true,
     "archive_files_verified": 19,
     "url": "https://chatgpt.com/library?file_id=libfile_43c9c1e838088191be4fbeec76a19e1a&account_id=personal"
+  },
+  "previous_index_header_before_WEB41": {
+    "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
+    "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
+    "milestones": [
+      {
+        "stage": 50,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_050.zip",
+        "bytes": 2726808,
+        "sha256": "deb7fc15244cc505382e3c929c8cc0c4c5e97e813310e77e709a998935177a54",
+        "library_file_id": "libfile_9d4915aa133081918b32a4146a6f7977",
+        "confirmed_saved": true
+      },
+      {
+        "stage": 60,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_060.zip",
+        "bytes": 2739443,
+        "sha256": "923d7520375ad1c7fb3360eda4bd3cda796d960cd0f4be3ae58243fe99612883",
+        "library_file_id": "libfile_f3b978a7eb30819183e86f424afabb73",
+        "confirmed_saved": true
+      },
+      {
+        "stage": 70,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_070.zip",
+        "bytes": 2737016,
+        "sha256": "cf43352619cc7038e8ac881e566e146b990c4db5226988bcc66e5e831bbb62c4",
+        "library_file_id": "libfile_565cf7322680819182da60641605cd0a",
+        "confirmed_saved": true
+      },
+      {
+        "stage": 80,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_080.zip",
+        "bytes": 2755358,
+        "sha256": "2a505788edcca70bceaeaf2802afd20ad4463278f9c2919130ea2ce0dafe8832",
+        "library_file_id": "libfile_ea359df0cd608191a44e0014b8072327",
+        "confirmed_saved": true
+      },
+      {
+        "stage": 90,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_090.zip",
+        "bytes": 2762892,
+        "library_file_id": "libfile_681fefc8946881918f942eed378609a6",
+        "confirmed_saved": true
+      },
+      {
+        "stage": 100,
+        "filename": "EVOLVE_WEB32_CHECKPOINT_100.zip",
+        "bytes": 2767218,
+        "sha256": "29ddf58f2dd9aa49da987cbc1064a1ef59a22d264f29d27a3da3caa96b58d477",
+        "library_file_id": "libfile_3ca379c56a008191b62acbaffe8e869a",
+        "file_id": "file_00000000e48481f58eb51a327060d09b",
+        "confirmed_saved": true,
+        "archive_files_verified": 27
+      }
+    ],
+    "remote_release": {
+      "repository": "idonutyou/EVOLVE",
+      "commit": "e43313643277fef53297072f8677bbd072d1d0b6",
+      "tree": "1d80fc63a518b5168fc1bd1486c1537f5a04e15f",
+      "main_metadata_commit": "6a5a6f8e5e5fb98f8578754cb00f45e796e5602e",
+      "backup_branch_verified": true,
+      "main_verified": true,
+      "deployment_run_id": 40258519662,
+      "public_verification_run_id": 40261084200,
+      "deployment_status": "success",
+      "public_verification_status": "success",
+      "immutable_backup_branch": "backup/web39-090-fix1-20261026",
+      "ci_recovery_backup_branch": "backup/web39-090-ci-recovery-20261026",
+      "completion_backup_branch": "backup/web39-100-20261026",
+      "completion_receipt_branch": "backup/web39-100-receipt-20261026"
+    },
+    "publication": {
+      "success": true,
+      "url": "https://idonutyou.github.io/EVOLVE/",
+      "version": "V575-WEB-39-ICONS-FULLSCREEN",
+      "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+      "release_commit": "e43313643277fef53297072f8677bbd072d1d0b6",
+      "release_tree": "1d80fc63a518b5168fc1bd1486c1537f5a04e15f",
+      "deployment_run_id": 40258519662,
+      "deployment_attempt": 1,
+      "pages_deployed": true,
+      "deployment_step_status": "success",
+      "public_verification_run_id": 40261084200,
+      "public_verification_status": "success",
+      "public_verification_workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40261084200",
+      "browser_suites_passed": 21,
+      "public_browser_suites_passed": 3,
+      "new_public_files_matched": 11,
+      "public_bytes_match": true,
+      "live_browser_game_started": true,
+      "live_browser_errors": [],
+      "fullscreen_enter_exit_verified": true,
+      "pwa_manifest_accepted": true,
+      "home_icons_reference_row": 1,
+      "start_inner_material_reference_row": 5,
+      "navigation_frame_and_labels_unchanged": true,
+      "entire_game_engine_unchanged": true,
+      "original_images_unchanged": 1005,
+      "physical_Galaxy_S23_plus_tested": false,
+      "all_prior_artifacts_retained": true,
+      "rerun_artifact_names_unique": true
+    },
+    "final_checkpoint": {
+      "stage": 100,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_100.zip",
+      "bytes": 1105505,
+      "sha256": "11a0d0b9f1b562b26ef0bcea285613baf6757dacbf56a3a6326d84c9ff6cfa4b",
+      "library_file_id": "libfile_6995002476c08191af0e93a9e5530c7e",
+      "confirmed_saved": true,
+      "download_and_all_file_hashes_reverified": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_6995002476c08191af0e93a9e5530c7e&account_id=personal",
+      "verified": true,
+      "archive_files_verified": 40
+    },
+    "latest_checkpoint": {
+      "stage": 100,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_100.zip",
+      "bytes": 1105505,
+      "sha256": "11a0d0b9f1b562b26ef0bcea285613baf6757dacbf56a3a6326d84c9ff6cfa4b",
+      "library_file_id": "libfile_6995002476c08191af0e93a9e5530c7e",
+      "confirmed_saved": true,
+      "download_and_all_file_hashes_reverified": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_6995002476c08191af0e93a9e5530c7e&account_id=personal",
+      "verified": true,
+      "archive_files_verified": 40
+    },
+    "active_version": "V575-WEB-39-ICONS-FULLSCREEN",
+    "active_build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+    "active_resume_document": "docs/ICONS_FULLSCREEN_RELEASE_V606.md",
+    "active_baseline": "0f52a2ee8dc7e715e34477c21b52740b136109b1",
+    "active_release_commit": "6a581a5afc3db9fb1a751d75074264b7c6064329",
+    "local_checkout_note": "Temporary workspaces can be cleaned. Restore current main or the latest WEB-37 checkpoint; verify active_version and active_build before resuming."
+  },
+  "upgrade_scenery_WEB41": {
+    "progress": 100,
+    "complete": true,
+    "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+    "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+    "report": "docs/UPGRADE_SCENERY_V608.json",
+    "publication": {
+      "success": true,
+      "status": "Published and verified on the actual public website",
+      "url": "https://idonutyou.github.io/EVOLVE/",
+      "version": "V575-WEB-41-UPGRADE-SCENERY",
+      "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+      "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
+      "source_publish_commit": "d64407d8e899ee857a981d6d32f0f1403c15b02e",
+      "source_tree": "6d3f27dcea976ebb19dc58aa3adb9ef88d8419a9",
+      "source_tree_verified_exact": true,
+      "workflows": [
+        {
+          "id": 40295680311,
+          "name": "Verify EVOLVE migration tools",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 40295680334,
+          "name": "Publish EVOLVE Web",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40295680334"
+        }
+      ],
+      "browser_suites_passed": 23,
+      "public_browser_suites_passed": 5,
+      "actual_public_files_matched": 7,
+      "public_bytes_match": true,
+      "live_upgrade_choices_and_reroll_verified": true,
+      "viewport_layouts_verified": 5,
+      "viewport_events_repaint_paused_game": true,
+      "simulation_clock_unchanged_on_resize": true,
+      "opaque_contour_interior": true,
+      "battlefield_visible_outside_contour": true,
+      "blue_reference_reroll_frame": true,
+      "reroll_frame_safe_margins": true,
+      "duplicate_popup_level_hidden": true,
+      "original_images_unchanged": 1009,
+      "gameplay_unchanged": true,
+      "engine_change": "Only the 1189-byte viewport repaint hook; removing it restores the baseline byte-for-byte",
+      "live_browser_report": "docs/UPGRADE_SCENERY_LIVE_BROWSER_V608.json",
+      "live_bytes_report": "docs/UPGRADE_SCENERY_LIVE_BYTES_V608.json",
+      "engine_diff_proof": "docs/VIEWPORT_REPAINT_PROOF_V609.json",
+      "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+      "physical_Galaxy_S23_plus_tested": false,
+      "previous_successful_publication": {
+        "commit": "8f9e93cde845dc0451121de80423d20a61a98166",
+        "run_id": 40290979172,
+        "conclusion": "success",
+        "public_browser_proof": "docs/UPGRADE_SCENERY_PREVIOUS_LIVE_V608.json",
+        "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a"
+      },
+      "resolved_guard_issues": [
+        {
+          "id": 40284960505,
+          "reason": "Legacy local fixture CSS MIME type blocked card clicks",
+          "resolved_locally": true
+        },
+        {
+          "id": 40289925417,
+          "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
+          "upgrade_ui_suite_passed": true,
+          "resolved_locally": true
+        }
+      ]
+    },
+    "milestones": [
+      {
+        "stage": 10,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_010.zip",
+        "library_file_id": "libfile_3e5aa53954f481918dc3c6c8fffe9ce1",
+        "bytes": 3942,
+        "sha256": "1b1b0b8207173b57d6665d71b02eab513335ae231c62616d6e466c6d2f3e989b",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_3e5aa53954f481918dc3c6c8fffe9ce1&account_id=personal"
+      },
+      {
+        "stage": 20,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_020.zip",
+        "library_file_id": "libfile_fd6c6e9fc014819190343d3dc3078749",
+        "bytes": 7191,
+        "sha256": "b556d61144d7856f24759d9133e921d25039645c87648d39fd9f8d5390d9be55",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_fd6c6e9fc014819190343d3dc3078749&account_id=personal"
+      },
+      {
+        "stage": 30,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_030.zip",
+        "library_file_id": "libfile_3495974959e48191b4c678a4ef5b7fed",
+        "bytes": 7809,
+        "sha256": "68ba7c579e2a82e5c9ca5af64a05d9c3e7e12918029d673845e32a03c2bb7219",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_3495974959e48191b4c678a4ef5b7fed&account_id=personal"
+      },
+      {
+        "stage": 40,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_040.zip",
+        "library_file_id": "libfile_d679672640808191886e1ba9e492e4ba",
+        "bytes": 9129,
+        "sha256": "d7f5f012ea6c19804094f73e08e4237a68f4782f155ebb5e811e4898ca70dc84",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_d679672640808191886e1ba9e492e4ba&account_id=personal"
+      },
+      {
+        "stage": 50,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_050.zip",
+        "library_file_id": "libfile_91f07badfad88191944b36caf50f24b8",
+        "bytes": 171888,
+        "sha256": "167e9318688d2789bcbf06771c6bd0bac491bf2cd264d8301559b0e799f919b9",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_91f07badfad88191944b36caf50f24b8&account_id=personal"
+      },
+      {
+        "stage": 60,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_060.zip",
+        "library_file_id": "libfile_2f87791e05608191ac3b099eac0e8cd7",
+        "bytes": 192898,
+        "sha256": "fdce7d05bd7a66d71a5a247ac06215f1f6843851cc19734d8c9b90989a9827d4",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_2f87791e05608191ac3b099eac0e8cd7&account_id=personal"
+      },
+      {
+        "stage": 70,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_070.zip",
+        "library_file_id": "libfile_8e2249e2361c8191b9b7c965b24259c3",
+        "bytes": 196834,
+        "sha256": "d12d1b154e397a9209e46f79fe86e8a3ecccab05a34b246f22924aff2b5c6da6",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_8e2249e2361c8191b9b7c965b24259c3&account_id=personal"
+      },
+      {
+        "stage": 80,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_080.zip",
+        "library_file_id": "libfile_6fb3b21af8408191aeeed6c6329f5118",
+        "bytes": 197520,
+        "sha256": "2912068701a3ad611fe0ec0512c85e2682637a38a0722ce3784cf3f1c0d8fcb9",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_6fb3b21af8408191aeeed6c6329f5118&account_id=personal"
+      },
+      {
+        "stage": 90,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX1.zip",
+        "library_file_id": "libfile_954ba34407e48191a0535311a0c94ebd",
+        "bytes": 253175,
+        "sha256": "23384b113b725e46831a48d757836274a691c181b7d5605c108bdbeb7dc527b0",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_954ba34407e48191a0535311a0c94ebd&account_id=personal"
+      },
+      {
+        "stage": 90,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX2.zip",
+        "library_file_id": "libfile_e6dd70fe56148191a02eb98360e442af",
+        "bytes": 253942,
+        "sha256": "511b764013a85dbd6274bbb73d6261ef070447a79d681532355de796ec9d8afd",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_e6dd70fe56148191a02eb98360e442af&account_id=personal"
+      },
+      {
+        "stage": 90,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX3.zip",
+        "library_file_id": "libfile_2b6ffd26957c81919e61cca317f98167",
+        "bytes": 894614,
+        "sha256": "7cf0ca8c2a2f264044c3fcb4fc9117d03fe60ad09667a59081efd4e83c1edf02",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_2b6ffd26957c81919e61cca317f98167&account_id=personal"
+      },
+      {
+        "stage": 90,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_090.zip",
+        "library_file_id": "libfile_57d65ff5b0ec8191802bc0a9c6dd09ab",
+        "bytes": 198350,
+        "sha256": "fc9fefde127b1d5017999b27d03915f84179862960948ab0ca9d07c7a527bfea",
+        "confirmed_saved": true,
+        "url": "https://chatgpt.com/library?file_id=libfile_57d65ff5b0ec8191802bc0a9c6dd09ab&account_id=personal"
+      },
+      {
+        "stage": 100,
+        "filename": "EVOLVE_WEB41_CHECKPOINT_100.zip",
+        "bytes": 916406,
+        "sha256": "c9402c18d6d7f0ced47650d08980157e7bb119b31004a0d8364a47bc06cca8c4",
+        "library_file_id": "libfile_c882703c62d08191be0706c47e7ffade",
+        "file_id": "file_000000007ce08230961bff123aa14e58",
+        "confirmed_saved": true,
+        "download_and_all_file_hashes_reverified": true,
+        "archive_files_verified": 42,
+        "url": "https://chatgpt.com/library?file_id=libfile_c882703c62d08191be0706c47e7ffade&account_id=personal",
+        "completion_backup_branch": "backup/web41-100-20261026"
+      }
+    ],
+    "final_checkpoint": {
+      "stage": 100,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_100.zip",
+      "bytes": 916406,
+      "sha256": "c9402c18d6d7f0ced47650d08980157e7bb119b31004a0d8364a47bc06cca8c4",
+      "library_file_id": "libfile_c882703c62d08191be0706c47e7ffade",
+      "file_id": "file_000000007ce08230961bff123aa14e58",
+      "confirmed_saved": true,
+      "download_and_all_file_hashes_reverified": true,
+      "archive_files_verified": 42,
+      "url": "https://chatgpt.com/library?file_id=libfile_c882703c62d08191be0706c47e7ffade&account_id=personal",
+      "completion_backup_branch": "backup/web41-100-20261026"
+    }
   }
 }

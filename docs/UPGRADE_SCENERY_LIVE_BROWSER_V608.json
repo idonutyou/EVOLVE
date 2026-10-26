@@ -1,0 +1,379 @@
+{
+  "checks": [
+    "Real opening choices show the exact LEVEL UP / choose-one title, keep the HUD level and original organ levels, and remove the duplicate popup level; the real reroll click consumes exactly one reroll without applying a skill",
+    "Viewport and system-bar resize events repaint the actual paused game canvas without advancing time; contour interiors are opaque, outside corners remain transparent, and the image-based blue reroll frame retains transparent safe margins",
+    "Five phone and landscape layouts keep the reroll centered below the cards, retain the visible unblurred battlefield, and display red reference ornament with transparent outer corners and an opaque readable title plaque",
+    "The actual opening and later upgrade choices still resume the run; Korean/English changes settle without repeated canvas rebuilds and saved DNA survives returning home"
+  ],
+  "layouts": [
+    {
+      "width": 393,
+      "height": 852,
+      "panel": {
+        "x": 6,
+        "y": 108.625,
+        "width": 381,
+        "height": 634.734375,
+        "right": 387,
+        "bottom": 743.359375
+      },
+      "header": {
+        "x": 6,
+        "y": 108.625,
+        "width": 381,
+        "height": 187.4375,
+        "right": 387,
+        "bottom": 296.0625
+      },
+      "cards": {
+        "x": 6,
+        "y": 296.0625,
+        "width": 381,
+        "height": 340.796875,
+        "right": 387,
+        "bottom": 636.859375
+      },
+      "footer": {
+        "x": 6,
+        "y": 636.859375,
+        "width": 381,
+        "height": 106.5,
+        "right": 387,
+        "bottom": 743.359375
+      },
+      "reroll": {
+        "x": 86.015625,
+        "y": 661.109375,
+        "width": 220.96875,
+        "height": 58,
+        "right": 306.984375,
+        "bottom": 719.109375
+      },
+      "overlay": "rgba(2, 4, 7, 0.16)",
+      "backdrop": "none",
+      "oldBackgrounds": [
+        "none",
+        "none"
+      ]
+    },
+    {
+      "width": 393,
+      "height": 731,
+      "panel": {
+        "x": 6,
+        "y": 93.203125,
+        "width": 381,
+        "height": 544.578125,
+        "right": 387,
+        "bottom": 637.78125
+      },
+      "header": {
+        "x": 6,
+        "y": 93.203125,
+        "width": 381,
+        "height": 160.8125,
+        "right": 387,
+        "bottom": 254.015625
+      },
+      "cards": {
+        "x": 6,
+        "y": 254.015625,
+        "width": 381,
+        "height": 292.390625,
+        "right": 387,
+        "bottom": 546.40625
+      },
+      "footer": {
+        "x": 6,
+        "y": 546.40625,
+        "width": 381,
+        "height": 91.375,
+        "right": 387,
+        "bottom": 637.78125
+      },
+      "reroll": {
+        "x": 86.015625,
+        "y": 563.09375,
+        "width": 220.96875,
+        "height": 58,
+        "right": 306.984375,
+        "bottom": 621.09375
+      },
+      "overlay": "rgba(2, 4, 7, 0.16)",
+      "backdrop": "none",
+      "oldBackgrounds": [
+        "none",
+        "none"
+      ]
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "panel": {
+        "x": 6,
+        "y": 86.40625,
+        "width": 308,
+        "height": 395.1875,
+        "right": 314,
+        "bottom": 481.59375
+      },
+      "header": {
+        "x": 6,
+        "y": 86.40625,
+        "width": 308,
+        "height": 98,
+        "right": 314,
+        "bottom": 184.40625
+      },
+      "cards": {
+        "x": 6,
+        "y": 184.40625,
+        "width": 308,
+        "height": 227.1875,
+        "right": 314,
+        "bottom": 411.59375
+      },
+      "footer": {
+        "x": 6,
+        "y": 411.59375,
+        "width": 308,
+        "height": 70,
+        "right": 314,
+        "bottom": 481.59375
+      },
+      "reroll": {
+        "x": 63,
+        "y": 417.59375,
+        "width": 194,
+        "height": 58,
+        "right": 257,
+        "bottom": 475.59375
+      },
+      "overlay": "rgba(2, 4, 7, 0.16)",
+      "backdrop": "none",
+      "oldBackgrounds": [
+        "none",
+        "none"
+      ]
+    },
+    {
+      "width": 852,
+      "height": 393,
+      "panel": {
+        "x": 76.6875,
+        "y": 7,
+        "width": 698.625,
+        "height": 379,
+        "right": 775.3125,
+        "bottom": 386
+      },
+      "header": {
+        "x": 251,
+        "y": 7,
+        "width": 350,
+        "height": 96,
+        "right": 601,
+        "bottom": 103
+      },
+      "cards": {
+        "x": 76.6875,
+        "y": 103,
+        "width": 698.625,
+        "height": 229,
+        "right": 775.3125,
+        "bottom": 332
+      },
+      "footer": {
+        "x": 76.6875,
+        "y": 332,
+        "width": 698.625,
+        "height": 54,
+        "right": 775.3125,
+        "bottom": 386
+      },
+      "reroll": {
+        "x": 329,
+        "y": 335,
+        "width": 194,
+        "height": 48,
+        "right": 523,
+        "bottom": 383
+      },
+      "overlay": "rgba(2, 4, 7, 0.16)",
+      "backdrop": "none",
+      "oldBackgrounds": [
+        "none",
+        "none"
+      ]
+    },
+    {
+      "width": 915,
+      "height": 412,
+      "panel": {
+        "x": 82.34375,
+        "y": 7,
+        "width": 750.296875,
+        "height": 398,
+        "right": 832.640625,
+        "bottom": 405
+      },
+      "header": {
+        "x": 282.484375,
+        "y": 7,
+        "width": 350,
+        "height": 96,
+        "right": 632.484375,
+        "bottom": 103
+      },
+      "cards": {
+        "x": 82.34375,
+        "y": 103,
+        "width": 750.296875,
+        "height": 248,
+        "right": 832.640625,
+        "bottom": 351
+      },
+      "footer": {
+        "x": 82.34375,
+        "y": 351,
+        "width": 750.296875,
+        "height": 54,
+        "right": 832.640625,
+        "bottom": 405
+      },
+      "reroll": {
+        "x": 360.484375,
+        "y": 354,
+        "width": 194,
+        "height": 48,
+        "right": 554.484375,
+        "bottom": 402
+      },
+      "overlay": "rgba(2, 4, 7, 0.16)",
+      "backdrop": "none",
+      "oldBackgrounds": [
+        "none",
+        "none"
+      ]
+    }
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "source": "https://idonutyou.github.io/EVOLVE/",
+  "physical_Galaxy_S23_plus_tested": false,
+  "build": {
+    "version": "V575-WEB-41-UPGRADE-SCENERY",
+    "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
+    "scriptBytes": 77708246,
+    "preloadResources": true
+  },
+  "opening": {
+    "heading": "레벨 업",
+    "subtitle": "강화 1개 선택",
+    "levelDisplay": "none",
+    "organs": {
+      "arm": 1,
+      "shell": 0,
+      "tail": 0,
+      "mouth": 0
+    },
+    "playerLevel": 1,
+    "remaining": 2,
+    "hudLevel": true
+  },
+  "afterReroll": {
+    "remaining": 1,
+    "cards": 3,
+    "organs": {
+      "arm": 1,
+      "shell": 0,
+      "tail": 0,
+      "mouth": 0
+    }
+  },
+  "viewportPixels": [
+    {
+      "samples": 364,
+      "opaque": 364,
+      "lit": 364,
+      "repaint": {
+        "redraws": 0,
+        "width": 393,
+        "height": 852,
+        "pausedFrameReady": false,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 312,
+      "opaque": 312,
+      "lit": 312,
+      "repaint": {
+        "redraws": 2,
+        "width": 393,
+        "height": 731,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 180,
+      "opaque": 180,
+      "lit": 180,
+      "repaint": {
+        "redraws": 4,
+        "width": 320,
+        "height": 568,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 91,
+      "opaque": 91,
+      "lit": 91,
+      "repaint": {
+        "redraws": 6,
+        "width": 227.9375,
+        "height": 393,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    },
+    {
+      "samples": 104,
+      "opaque": 104,
+      "lit": 104,
+      "repaint": {
+        "redraws": 8,
+        "width": 238.953125,
+        "height": 412,
+        "pausedFrameReady": true,
+        "simulationUnchanged": true
+      },
+      "clock": 0
+    }
+  ],
+  "material": {
+    "crestRed": 9851,
+    "footerRed": 19520,
+    "cornerPixels": 0,
+    "plaqueAlpha": 255,
+    "crestInteriorAlpha": 255,
+    "footerInteriorAlpha": 255,
+    "cardBand": "rgb(2, 1, 6)",
+    "rerollClip": "none",
+    "paints": 2
+  },
+  "blueFrame": {
+    "blue": 1672,
+    "outer": 0,
+    "width": 664,
+    "height": 215
+  },
+  "success": true
+}

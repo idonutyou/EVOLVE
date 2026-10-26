@@ -1,29 +1,67 @@
 {
+  "success": true,
+  "status": "Published and verified on the actual public website",
+  "url": "https://idonutyou.github.io/EVOLVE/",
   "version": "V575-WEB-41-UPGRADE-SCENERY",
   "build": "a9dec1a47c937e7a071067f8477b84fa12292c4e8bdc723502584ccd29294ca6",
   "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
-  "source_publish_commit": null,
-  "status": "User-reported system-bar resize fix and refined opaque/blue UI passed targeted tests; awaiting guarded republish",
-  "url": "https://idonutyou.github.io/EVOLVE/",
-  "workflows": [],
+  "source_publish_commit": "d64407d8e899ee857a981d6d32f0f1403c15b02e",
+  "source_tree": "6d3f27dcea976ebb19dc58aa3adb9ef88d8419a9",
+  "source_tree_verified_exact": true,
+  "workflows": [
+    {
+      "id": 40295680311,
+      "name": "Verify EVOLVE migration tools",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 40295680334,
+      "name": "Publish EVOLVE Web",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40295680334"
+    }
+  ],
+  "browser_suites_passed": 23,
+  "public_browser_suites_passed": 5,
+  "actual_public_files_matched": 7,
+  "public_bytes_match": true,
+  "live_upgrade_choices_and_reroll_verified": true,
+  "viewport_layouts_verified": 5,
+  "viewport_events_repaint_paused_game": true,
+  "simulation_clock_unchanged_on_resize": true,
+  "opaque_contour_interior": true,
+  "battlefield_visible_outside_contour": true,
+  "blue_reference_reroll_frame": true,
+  "reroll_frame_safe_margins": true,
+  "duplicate_popup_level_hidden": true,
+  "original_images_unchanged": 1009,
+  "gameplay_unchanged": true,
+  "engine_change": "Only the 1189-byte viewport repaint hook; removing it restores the baseline byte-for-byte",
+  "live_browser_report": "docs/UPGRADE_SCENERY_LIVE_BROWSER_V608.json",
+  "live_bytes_report": "docs/UPGRADE_SCENERY_LIVE_BYTES_V608.json",
+  "engine_diff_proof": "docs/VIEWPORT_REPAINT_PROOF_V609.json",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
   "physical_Galaxy_S23_plus_tested": false,
-  "previous_failed_run": {
-    "id": 40284960505,
-    "reason": "Legacy local fixture CSS MIME type blocked card clicks",
-    "resolved_locally": true
-  },
-  "second_failed_run": {
-    "id": 40289925417,
-    "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
-    "upgrade_ui_suite_passed": true,
-    "resolved_locally": true
-  },
   "previous_successful_publication": {
     "commit": "8f9e93cde845dc0451121de80423d20a61a98166",
     "run_id": 40290979172,
     "conclusion": "success",
     "public_browser_proof": "docs/UPGRADE_SCENERY_PREVIOUS_LIVE_V608.json",
     "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a"
-  }
+  },
+  "resolved_guard_issues": [
+    {
+      "id": 40284960505,
+      "reason": "Legacy local fixture CSS MIME type blocked card clicks",
+      "resolved_locally": true
+    },
+    {
+      "id": 40289925417,
+      "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
+      "upgrade_ui_suite_passed": true,
+      "resolved_locally": true
+    }
+  ]
 }
