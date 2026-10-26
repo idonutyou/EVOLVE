@@ -1,7 +1,7 @@
 {
   "baseline": "5f383e8183d9b857dbce688bb5b289316a7659a2",
   "version": "V575-WEB-36-NAVIGATION-SCALE",
-  "progress": 80,
+  "progress": 90,
   "requested": [
     "Join all five bottom buttons and fill selected-button side gaps",
     "Move selected icon and text upward; remove top arrow",
@@ -72,11 +72,20 @@
       "sha256": "ae10e27d7e57d47f2ed21fa9ff9db80e07f781b269fe1ebd481292ae686c2da5",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_4980dfa7b834819183c5013f2962f60e&account_id=personal"
+    },
+    {
+      "stage": 80,
+      "filename": "EVOLVE_WEB36_CHECKPOINT_080.zip",
+      "library_file_id": "libfile_6ead5224f22c8191b82be009e3397598",
+      "bytes": 849454,
+      "sha256": "f0f46f5115a8d395a9d2a978c6a64f0482e772b567ae8fc99a3c218987dda436",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_6ead5224f22c8191b82be009e3397598&account_id=personal"
     }
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Expanded navigation and exact scale checks pass; six targeted browser suites plus unit/model checks passed",
-  "next": "Upload tested release, run full 20-suite publication checks and verify actual Pages",
+  "status": "Tested release uploaded and every changed remote Git path verified byte-for-byte; ready for guarded publication",
+  "next": "Run all 20 browser suites, deploy Pages, verify live flow and save final recovery index",
   "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
   "current_release": {
     "version": "V575-WEB-36-NAVIGATION-SCALE",
