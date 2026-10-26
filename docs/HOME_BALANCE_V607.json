@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-40-HOME-BALANCE",
   "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
-  "progress": 80,
+  "progress": 90,
   "backups": [
     {
       "stage": 10,
@@ -65,6 +65,15 @@
       "sha256": "18b2fd5811c7fb723eeb4bc02976a5f4669e22b7061500960570e5462d890165",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_7e2d530107d48191800bfced82532ebc&account_id=personal"
+    },
+    {
+      "stage": 80,
+      "filename": "EVOLVE_WEB40_CHECKPOINT_080.zip",
+      "library_file_id": "libfile_a207aeb70670819193d5803efb67622c",
+      "bytes": 3523225,
+      "sha256": "721850a221c2fe27aaadbdb1bc1e1535988f7a2d4dc2bbdab5b19b23131b09c9",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_a207aeb70670819193d5803efb67622c&account_id=personal"
     }
   ],
   "requested": [
@@ -74,8 +83,8 @@
     "Match reference 3 crimson cracked material, orange glow and warm gold lettering inside the existing start frame"
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Recovered and reverified the complete 70 percent delta; original images, engine, 15 layout states, menus, real battle start and character checks passed again",
-  "next": "Publish the verified build and confirm the actual GitHub Pages deployment",
+  "status": "Verified source uploaded to main; guarded GitHub Pages deployment is running and public verification remains pending",
+  "next": "Confirm the published build, run the live viewport and save checks, and preserve the final recovery archive",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
   "current_release": {
     "version": "V575-WEB-40-HOME-BALANCE",

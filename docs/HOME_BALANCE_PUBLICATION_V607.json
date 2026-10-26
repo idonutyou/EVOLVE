@@ -1,0 +1,32 @@
+{
+  "version": "V575-WEB-40-HOME-BALANCE",
+  "build": "6e931bb2ba53ffd8b29ff0d6d435e5b9e8f97af34c2fc5b8ceb65828d89289d7",
+  "published_source_commit": "631f772945e6effb3f1960a4c3078dbd45b31918",
+  "baseline": "373bfb1f08714266cc51c7a8acaa8be17e870b30",
+  "status": "Source promoted to main; guarded deployment and live verification in progress",
+  "page_url": "https://idonutyou.github.io/EVOLVE/",
+  "workflows": [
+    {
+      "id": 40274118871,
+      "name": "Verify published EVOLVE",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40274118871"
+    },
+    {
+      "id": 40274118848,
+      "name": "Publish EVOLVE Web",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40274118848"
+    },
+    {
+      "id": 40274118926,
+      "name": "Verify EVOLVE migration tools",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40274118926"
+    }
+  ],
+  "physical_Galaxy_S23_plus_tested": false
+}
