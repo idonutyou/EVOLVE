@@ -1,7 +1,7 @@
 {
   "version": "V575-WEB-39-ICONS-FULLSCREEN",
   "baseline": "caa0430a13595695ce896aac22a5732bb39eb2ef",
-  "progress": 90,
+  "progress": 100,
   "requested": [
     "Keep the current bottom navigation frames, labels, dimensions and width-only selected state exactly",
     "Replace only the five glyphs with the exact icons from the first reference image ROW 1",
@@ -80,11 +80,20 @@
       "sha256": "f0d1027654a5a4142ab8120583b36711a5de75b0e7f15aad4f7de2d34a3624c9",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_8de284331b108191a4f34d73760b447c&account_id=personal"
+    },
+    {
+      "stage": 90,
+      "filename": "EVOLVE_WEB39_CHECKPOINT_090.zip",
+      "library_file_id": "libfile_7aa04c5eb1c48191854f545a557274d7",
+      "bytes": 1071406,
+      "sha256": "f3596906120ff2ce20433ad528857d55149d314c67e420ac18541adbc50b9f9a",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_7aa04c5eb1c48191854f545a557274d7&account_id=personal"
     }
   ],
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "Verified all 30 release files on main and preserved immutable GitHub backup; full Pages/browser pipeline started",
-  "next": "Wait for all deployment guards, confirm public manifest/assets/fullscreen and game controls, then save final verified checkpoint",
+  "status": "Completed online publication, all 21 guarded browser suites, three independent live browser suites, and exact-byte checks; retained every earlier backup",
+  "next": "All requested work complete; preserve this final snapshot and record its native saved-file identity in the resume index",
   "working_folder": "/workspace/scratch/653d0c6f7c90/evolve",
   "current_release": {
     "version": "V575-WEB-39-ICONS-FULLSCREEN",
@@ -93,5 +102,38 @@
     "assets": 1046,
     "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
     "preloadResources": true
-  }
+  },
+  "publication": {
+    "success": true,
+    "url": "https://idonutyou.github.io/EVOLVE/",
+    "version": "V575-WEB-39-ICONS-FULLSCREEN",
+    "build": "926bd029033701434bd0eae3028d618851361804bdde74eced498792324b0b9d",
+    "release_commit": "e43313643277fef53297072f8677bbd072d1d0b6",
+    "release_tree": "1d80fc63a518b5168fc1bd1486c1537f5a04e15f",
+    "deployment_run_id": 40258519662,
+    "deployment_attempt": 1,
+    "pages_deployed": true,
+    "deployment_step_status": "success",
+    "public_verification_run_id": 40261084200,
+    "public_verification_status": "success",
+    "public_verification_workflow_url": "https://github.com/idonutyou/EVOLVE/actions/runs/40261084200",
+    "browser_suites_passed": 21,
+    "public_browser_suites_passed": 3,
+    "new_public_files_matched": 11,
+    "public_bytes_match": true,
+    "live_browser_game_started": true,
+    "live_browser_errors": [],
+    "fullscreen_enter_exit_verified": true,
+    "pwa_manifest_accepted": true,
+    "home_icons_reference_row": 1,
+    "start_inner_material_reference_row": 5,
+    "navigation_frame_and_labels_unchanged": true,
+    "entire_game_engine_unchanged": true,
+    "original_images_unchanged": 1005,
+    "physical_Galaxy_S23_plus_tested": false,
+    "all_prior_artifacts_retained": true,
+    "rerun_artifact_names_unique": true
+  },
+  "complete": true,
+  "remaining": "Save and verify the final recovery archive, then record its exact identity"
 }

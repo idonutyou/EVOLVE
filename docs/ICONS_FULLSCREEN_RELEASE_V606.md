@@ -33,5 +33,9 @@
 GitHub 복구 브랜치: `backup/web39-090-fix1-20261026`.
 배포 검사: https://github.com/idonutyou/EVOLVE/actions/runs/40258519662
 
-공개 주소 최종 확인과 100% 체크포인트는 배포 완료 뒤 기록한다.
+공개 주소의 메뉴·실제 전투 시작·캐릭터·전체화면·저장 검사가 모두 통과했다. 새 공개 파일 11개가 로컬과 바이트 단위로 같고, 별도 공개 검증 워크플로도 성공했다.
+
+최종 공개 검증: https://github.com/idonutyou/EVOLVE/actions/runs/40261084200
+
+첫 재시도에서는 보존된 github-pages 아티팩트 2개의 이름이 같아 추가 재배포가 중단했다. 앞으로 실행 ID·재시도 번호로 이름을 구분하여 삭제 없이 보존한다. 공개 최초 로딩에서 페이지 오류 없이 준비 시간만 초과한 경우에 한해서 1회 재검사한다. 게임 기능 검사의 기존 단언은 유지한다.
 이전 체크포인트는 모두 보존한다. 현재 진행/복구 정보: `docs/ICONS_FULLSCREEN_V606.json` 및 `docs/BACKUP_RESUME_INDEX.json`.
