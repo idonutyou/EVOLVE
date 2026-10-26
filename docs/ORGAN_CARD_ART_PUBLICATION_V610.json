@@ -1,0 +1,25 @@
+{
+  "version": "V575-WEB-42-ORGAN-CARD-ART",
+  "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
+  "baseline": "449773f580453ed46e0f37502e0ac00e1c44a298",
+  "source_publish_commit": "97f20ac7f19ca2740d8c110e4ead26ff2b680cfa",
+  "source_tree": "3c2eca4d6f30a6dcd2fb8a24822435b40c9d5557",
+  "status": "Guarded publication and actual public verification running",
+  "url": "https://idonutyou.github.io/EVOLVE/",
+  "workflows": [
+    {
+      "id": 40304898327,
+      "name": "Verify EVOLVE migration tools"
+    },
+    {
+      "id": 40304898306,
+      "name": "Publish EVOLVE Web"
+    }
+  ],
+  "working_folder": "/workspace/scratch/25bc994140e8/evolve",
+  "engine_unchanged": true,
+  "stats_and_effects_unchanged": true,
+  "supplied_original_pngs": 10,
+  "baseline_assets_preserved": 1050,
+  "physical_Galaxy_S23_plus_tested": false
+}

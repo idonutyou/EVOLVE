@@ -2,7 +2,7 @@
   "task": "Replace whip and spike level-up card artwork using the 10 exact supplied PNGs",
   "baseline": "449773f580453ed46e0f37502e0ac00e1c44a298",
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
-  "progress": 80,
+  "progress": 90,
   "complete": false,
   "stats_and_effects_unchanged": true,
   "engine_unchanged": true,
@@ -151,6 +151,15 @@
       "sha256": "147944d812ff908c3300df55226c7a3fec51f453e0eb5047fd44280e6ba58d81",
       "confirmed_saved": true,
       "url": "https://chatgpt.com/library?file_id=libfile_5009051d32348191a9db1f62c6d14725&account_id=personal"
+    },
+    {
+      "stage": 80,
+      "filename": "EVOLVE_WEB42_CHECKPOINT_080.zip",
+      "library_file_id": "libfile_1ade062b64ac819190080d89e85d4c7a",
+      "bytes": 3246361,
+      "sha256": "44e1392470b69436d991f344bca71a4fdf09ca12823a13873080fb17d58b1481",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_1ade062b64ac819190080d89e85d4c7a&account_id=personal"
     }
   ],
   "remaining": [
@@ -159,8 +168,8 @@
     "Verify actual selections and all old image/engine bytes",
     "Deploy and confirm the real public version"
   ],
-  "status": "Exact source and original PNG blobs confirmed on GitHub; ready for guarded publication",
-  "next": "Start full deployment and public browser verification",
+  "status": "Published source on main; full guarded CI and live checks running; original stats preserved",
+  "next": "Finish actual public browser verification and final recovery snapshot",
   "current_release": {
     "version": "V575-WEB-42-ORGAN-CARD-ART",
     "build": "310b1b0451398ce4d74e493f4b3f9715ead3d29542d49ca6339f242b10da431e",
