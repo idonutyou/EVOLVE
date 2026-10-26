@@ -11,8 +11,15 @@
   "full_browser_regression_from_run_40416935849_passed": true,
   "first_deploy_attempt_failed_http_500": true,
   "rerun_attempt": 2,
-  "public_site_version_verified": false,
-  "status": "remote checkpoint saved; 90% publication milestone pending successful live Pages",
+  "public_site_version_verified": true,
+  "status": "90% public V613 version+manifest validated; final live-browser CI/100% recovery pending",
   "previous_backups_preserved": true,
-  "physical_Galaxy_S23_plus_tested": false
+  "physical_Galaxy_S23_plus_tested": false,
+  "public_site_url": "https://idonutyou.github.io/EVOLVE/",
+  "public_manifest_entries": 1067,
+  "public_engine_manifest_path": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+  "public_engine_manifest_sha256": "abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255",
+  "public_engine_bytes": 1674896,
+  "pages_deploy_step_passed_on_rerun": true,
+  "checked_at_utc": "2026-10-26T23:27:27.573Z"
 }
