@@ -14,6 +14,7 @@ on:
       - "tests/browser_smoke.cjs"
       - "tests/visual_fit_browser.cjs"
       - "tests/upgrade_scenery_browser.cjs"
+      - "tests/arm_items_browser.cjs"
       - "tools/verify_upgrade_scenery_v608.py"
       - "tests/attack_warnings_browser.cjs"
       - "tests/web_client.test.cjs"

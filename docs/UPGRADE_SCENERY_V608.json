@@ -77,6 +77,15 @@
     },
     {
       "stage": 90,
+      "filename": "EVOLVE_WEB41_CHECKPOINT_090_FIX1.zip",
+      "library_file_id": "libfile_954ba34407e48191a0535311a0c94ebd",
+      "bytes": 253175,
+      "sha256": "23384b113b725e46831a48d757836274a691c181b7d5605c108bdbeb7dc527b0",
+      "confirmed_saved": true,
+      "url": "https://chatgpt.com/library?file_id=libfile_954ba34407e48191a0535311a0c94ebd&account_id=personal"
+    },
+    {
+      "stage": 90,
       "filename": "EVOLVE_WEB41_CHECKPOINT_090.zip",
       "library_file_id": "libfile_57d65ff5b0ec8191802bc0a9c6dd09ab",
       "bytes": 198350,
@@ -107,8 +116,8 @@
   "existing_clean_art": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
   "implementation": "Add a presentation-only module and stylesheet; reuse original art bytes with feathered canvas contours; do not change the game engine or choice logic",
   "physical_Galaxy_S23_plus_tested": false,
-  "status": "CSS fixture and decoration touch fixes verified locally; all earlier snapshots retained",
-  "next": "Publish corrected source, finish full guarded CI and verify actual Pages build",
+  "status": "Real opening flow retained; random upgrade bonuses isolated in legacy weapon measurements",
+  "next": "Rerun guarded publication and confirm the real Pages screen",
   "current_release": {
     "version": "V575-WEB-41-UPGRADE-SCENERY",
     "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",

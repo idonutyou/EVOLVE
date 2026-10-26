@@ -3,7 +3,7 @@
   "build": "d81cd7f89bcb877d5d8bf906b61547060b76259502522d407f6bcef8ffd2f63a",
   "baseline": "824612442201bc2a6a15d5e6e5642b03e9792d17",
   "source_publish_commit": null,
-  "status": "Corrected source ready after local regression checks; a fresh guarded publication is required",
+  "status": "ARM fixture isolation verified; remaining legacy browser guards running before republish",
   "url": "https://idonutyou.github.io/EVOLVE/",
   "workflows": [],
   "working_folder": "/workspace/scratch/25bc994140e8/evolve",
@@ -11,6 +11,12 @@
   "previous_failed_run": {
     "id": 40284960505,
     "reason": "Legacy local fixture CSS MIME type blocked card clicks",
+    "resolved_locally": true
+  },
+  "second_failed_run": {
+    "id": 40289925417,
+    "reason": "A random opening upgrade polluted the legacy baseline projectile-count fixture",
+    "upgrade_ui_suite_passed": true,
     "resolved_locally": true
   }
 }

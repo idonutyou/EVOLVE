@@ -52,6 +52,16 @@
         "Learned tail uses native textured armor; range upgrades increase visible physical length and segment count"
       ],
       "errors": []
+    },
+    "arm-items-browser.json": {
+      "passed": true,
+      "checks": [
+        "cannon UI equips the marked-end artwork; an actual original ARM projectile travels and damages a campaign enemy; higher stars add the original projectile count and piercing; no bare stab or lightning is emitted",
+        "swords have a real windup and swept melee arc, hit multiple enemies inside the swing once each, alternate upper limbs and leave rear/distant enemies untouched without emitting bullets",
+        "escaped targets are missed; an actual map obstruction blocks blade damage; aiming and drawing preserve both pose caches without rebuilding meshes",
+        "switching the existing single ARM slot replaces the weapon, both choices persist after reload, removal persists and restores bare stabs, and lightning/admin remain locked"
+      ],
+      "errors": []
     }
   },
   "opening": {
@@ -349,6 +359,9 @@
     "rerun_passed": [
       "player_mutant_browser.cjs",
       "upgrade_scenery_browser.cjs"
-    ]
+    ],
+    "second_issue": "Legacy ARM fixture assumed baseline projectile count after selecting a random real opening upgrade",
+    "second_fix": "Reset temporary run bonuses inside the cannon and blade measurement fixtures after exercising the real opening selection",
+    "game_files_changed_for_second_fix": false
   }
 }

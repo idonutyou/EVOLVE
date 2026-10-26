@@ -20,6 +20,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   const previews=await page.evaluate(()=>window.__EVOLVE_ARM_ITEMS_V589__.test.previews());for(const [kind,data] of Object.entries(previews))fs.writeFileSync(path.join(out,'arm-items-'+kind+'-home-art.png'),Buffer.from(data.split(',')[1],'base64'));
   await page.locator('#homeBattleTabV522').click();await page.screenshot({path:path.join(out,'arm-items-cannon-home.png')});await start();
   report.cannon=await page.evaluate(()=>{
+   window.__EVOLVE_UPGRADE_CARDS_V593__.test.reset(); // Measure weapon stats independently of the real random opening upgrade.
    const c=window.__EVOLVE_MAPS_V567__.test.context(),p=window.__EVOLVE_PLAYER_COMBAT_V587__,api=window.__EVOLVE_ARM_ITEMS_V589__;
    c.player.inv=999;for(let i=0;i<20;i++)c.step(.05);const source=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!source)throw Error('No natural enemy fixture');
    let a,spot;for(let i=0;i<32;i++){a=i*Math.PI/16;const x=c.player.x+Math.cos(a)*130,y=c.player.y+Math.sin(a)*130;if(c.clear({x,y},14)&&!c.hit(c.player.x,c.player.y,x,y,1)){spot={x,y};break;}}if(!spot)throw Error('No clear projectile corridor');
@@ -38,6 +39,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.locator('#homeLabTab').click();await page.locator('#partsGridV523 [data-part-id="arm_blades"]').click();assert.match(await page.locator('#partsDetailHintV523').innerText(),/베기/);await page.locator('#partsDetailEquipV523').click();assert.equal(await page.evaluate(()=>window.__EVOLVE_PARTS_V523__.snapshot().worn.arm),'arm_blades');
   await page.screenshot({path:path.join(out,'arm-items-blades-inventory.png')});await page.locator('#homeBattleTabV522').click();await start();
   report.blades=await page.evaluate(()=>{
+   window.__EVOLVE_UPGRADE_CARDS_V593__.test.reset(); // Preserve the real opening flow while isolating melee timing and damage.
    const c=window.__EVOLVE_MAPS_V567__.test.context(),p=window.__EVOLVE_PLAYER_COMBAT_V587__,api=window.__EVOLVE_ARM_ITEMS_V589__;
    c.player.inv=999;for(let i=0;i<20;i++)c.step(.05);const source=c.enemies.find(e=>!e.dead&&!e.finalBoss);if(!source)throw Error('No sword enemy fixture');
    const fixture=(x,y)=>({...source,x,y,hp:10000,maxHp:10000,dead:false,arrivalInvuln:false,arrivalTime:0,barrier:0,r:10,spd:0,kx:0,ky:0,hit:0,stagger:0,staggerLock:0});
