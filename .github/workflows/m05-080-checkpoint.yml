@@ -1,0 +1,57 @@
+name: M05 80 percent verified premerge QA recovery checkpoint
+on:
+  push:
+    branches: [monetization-m05-ux-20261028]
+    paths:
+      - '.github/workflows/m05-080-checkpoint.yml'
+permissions:
+  contents: write
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Independently recheck M04 game SHA, all original assets and 62 mock contracts
+        run: |
+          python3 tools/verify_m05_080_integration.py
+          python3 tools/verify_site.py --dist dist
+          python3 tools/verify_m04_predeploy_gate.py
+          node --test tests/monetization_m05_ux_design.test.cjs tests/monetization_m05_product_detail.test.cjs tests/monetization_m05_mobile_flow.test.cjs tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs tests/monetization_m04_core_visuals.test.cjs
+      - name: Create immutable 80 percent integration recovery ZIP and verify every member
+        run: |
+          python3 tools/checkpoint_m05_080.py
+          python3 tools/verify_m05_080_checkpoint.py
+      - name: Commit 80 percent ZIP and SHA256/CRC evidence to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- checkpoints/EVOLVE_M05_080_20261028.zip checkpoints/EVOLVE_M05_080_20261028.json
+          git commit -m "checkpoint(M05): byte-audited 80 percent game-integrity and premerge recovery"
+          git push origin HEAD:refs/heads/monetization-m05-ux-20261028
+      - name: Fetch persisted remote ZIP and independently verify CRC/SHA and membership
+        run: |
+          git fetch origin monetization-m05-ux-20261028
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/monetization-m05-ux-20261028)"
+          git show origin/monetization-m05-ux-20261028:checkpoints/EVOLVE_M05_080_20261028.zip > "$RUNNER_TEMP/m05-080-remote.zip"
+          git show origin/monetization-m05-ux-20261028:checkpoints/EVOLVE_M05_080_20261028.json > "$RUNNER_TEMP/m05-080-remote.json"
+          python3 - "$RUNNER_TEMP/m05-080-remote.zip" "$RUNNER_TEMP/m05-080-remote.json" <<'PY'
+          import hashlib,json,sys,zipfile
+          b=open(sys.argv[1],'rb').read();m=json.load(open(sys.argv[2]))
+          assert m['stage']=='M05' and m['percent']==80
+          assert len(b)==m['bytes'] and hashlib.sha256(b).hexdigest()==m['sha256']
+          assert m['main_unmodified'] and not m['real_checkout']
+          with zipfile.ZipFile(sys.argv[1]) as z:
+              assert z.testzip() is None
+              assert set(z.namelist())==set(m['files'])|{'CHECKPOINT_MANIFEST.json'}
+              for path,info in m['files'].items():
+                  data=z.read(path)
+                  assert len(data)==info['bytes']
+                  assert hashlib.sha256(data).hexdigest()==info['sha256']
+          print('M05 80% REMOTE ZIP VERIFIED',m['bytes'],m['sha256'],m['file_count'])
+          PY
