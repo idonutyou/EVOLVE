@@ -4,6 +4,8 @@ on:
     branches: [monetization-m04-payment-20261027]
     paths:
       - 'tools/verify_m04_*gate.py'
+      - 'tools/verify_monster_feedback_v614.py'
+      - 'tests/monster_feedback_browser_v614.cjs'
       - '.github/workflows/m04-80-regression.yml'
   workflow_dispatch:
 permissions:
@@ -24,6 +26,7 @@ jobs:
           python3 tools/verify_site.py --dist dist
           python3 tools/verify_m04_art_gate.py
           python3 tools/verify_m04_predeploy_gate.py
+          python3 tools/verify_monster_feedback_v614.py
       - name: Run old gameplay and new mock purchase unit regression
         run: |
           python3 -m unittest discover -s tests -v
