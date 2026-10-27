@@ -1,0 +1,400 @@
+{
+  "step": 8,
+  "completed_automation_work_percent": 100,
+  "date": "2026-10-27",
+  "matrix_total": 23,
+  "tally": {
+    "partial": 20,
+    "not_confirmed": 1,
+    "not_executed": 2
+  },
+  "scenarios": [
+    {
+      "scenario_id": "O01",
+      "kind": "ordinary",
+      "planned_goal": "real-hits",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Real V614 original engine damage/hit signal for 8 ordinary species, STEP05 gun/blade legacy regression"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full melee/ranged moving playfield trial with actual equipped weapon and human feel"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O02",
+      "kind": "ordinary",
+      "planned_goal": "real-hits",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Real V614 original engine damage/hit signal for 8 ordinary species, STEP05 gun/blade legacy regression"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full melee/ranged moving playfield trial with actual equipped weapon and human feel"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O03",
+      "kind": "ordinary",
+      "planned_goal": "heavy-vs-light",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Real V614 original engine damage/hit signal for 8 ordinary species, STEP05 gun/blade legacy regression"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full melee/ranged moving playfield trial with actual equipped weapon and human feel"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O04",
+      "kind": "ordinary",
+      "planned_goal": "projectile-readability",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Real V614 original engine damage/hit signal for 8 ordinary species, STEP05 gun/blade legacy regression"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full melee/ranged moving playfield trial with actual equipped weapon and human feel"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O05",
+      "kind": "ordinary",
+      "planned_goal": "organ-body-owner",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "STEP06 existing organ hit browser regression and V614 precedence, not new full scenario run"
+      ],
+      "testing_mode": [
+        "regression"
+      ],
+      "remaining": [
+        "Representative moving spike/tail fight and human evaluation"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O06",
+      "kind": "ordinary",
+      "planned_goal": "whip-sweep",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "STEP06 existing organ hit browser regression and V614 precedence, not new full scenario run"
+      ],
+      "testing_mode": [
+        "regression"
+      ],
+      "remaining": [
+        "Representative moving spike/tail fight and human evaluation"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O07",
+      "kind": "ordinary",
+      "planned_goal": "player-enemy-bullet-separation",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native 50/180/250 actually living enemy instances exercised through original step/draw, 30 steps (0.48 simulated seconds)"
+      ],
+      "testing_mode": [
+        "short fixed-step density"
+      ],
+      "remaining": [
+        "Long genuine wave duration and Galaxy S23+ frame pacing"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O08",
+      "kind": "ordinary",
+      "planned_goal": "visual-load-and-fps",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native 50/180/250 actually living enemy instances exercised through original step/draw, 30 steps (0.48 simulated seconds)"
+      ],
+      "testing_mode": [
+        "short fixed-step density"
+      ],
+      "remaining": [
+        "Long genuine wave duration and Galaxy S23+ frame pacing"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "O09",
+      "kind": "ordinary",
+      "planned_goal": "visual-cap-and-memory",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native 50/180/250 actually living enemy instances exercised through original step/draw, 30 steps (0.48 simulated seconds)"
+      ],
+      "testing_mode": [
+        "short fixed-step density"
+      ],
+      "remaining": [
+        "Long genuine wave duration and Galaxy S23+ frame pacing"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "M01",
+      "kind": "midboss",
+      "planned_goal": "impact-vs-warning",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native alpha/sentinel/hunter/omega warning skill fixtures, 5 ranked-stat presets"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full boss attacks with actual player aim, close/far, human readability"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "M02",
+      "kind": "midboss",
+      "planned_goal": "projectile-vs-midboss-telegraph",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native alpha/sentinel/hunter/omega warning skill fixtures, 5 ranked-stat presets"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full boss attacks with actual player aim, close/far, human readability"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "M03",
+      "kind": "midboss",
+      "planned_goal": "rush-anticipation",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native alpha/sentinel/hunter/omega warning skill fixtures, 5 ranked-stat presets"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full boss attacks with actual player aim, close/far, human readability"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "M04",
+      "kind": "midboss",
+      "planned_goal": "rank-skill-recovery",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native alpha/sentinel/hunter/omega warning skill fixtures, 5 ranked-stat presets"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full boss attacks with actual player aim, close/far, human readability"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "M05",
+      "kind": "midboss",
+      "planned_goal": "body-scale-and-hp-hud",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native alpha/sentinel/hunter/omega warning skill fixtures, 5 ranked-stat presets"
+      ],
+      "testing_mode": [
+        "fixed-step"
+      ],
+      "remaining": [
+        "Full boss attacks with actual player aim, close/far, human readability"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "T01",
+      "kind": "titan",
+      "planned_goal": "phase-telegraph-vs-contact",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native BIO/VENOM QA spawns and phase state, existing boss warning browser regression"
+      ],
+      "testing_mode": [
+        "fixed-step and regression"
+      ],
+      "remaining": [
+        "Near/far real attacks, phases, and human ratings"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "T02",
+      "kind": "titan",
+      "planned_goal": "distance-readable-hits",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native BIO/VENOM QA spawns and phase state, existing boss warning browser regression"
+      ],
+      "testing_mode": [
+        "fixed-step and regression"
+      ],
+      "remaining": [
+        "Near/far real attacks, phases, and human ratings"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "T03",
+      "kind": "titan",
+      "planned_goal": "corrosion-zones-and-contact",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native BIO/VENOM QA spawns and phase state, existing boss warning browser regression"
+      ],
+      "testing_mode": [
+        "fixed-step and regression"
+      ],
+      "remaining": [
+        "Near/far real attacks, phases, and human ratings"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "T04",
+      "kind": "titan",
+      "planned_goal": "projectile-zones-and-warnings",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "Native BIO/VENOM QA spawns and phase state, existing boss warning browser regression"
+      ],
+      "testing_mode": [
+        "fixed-step and regression"
+      ],
+      "remaining": [
+        "Near/far real attacks, phases, and human ratings"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "T05",
+      "kind": "titan",
+      "planned_goal": "implemented-vs-planned",
+      "status": "not_confirmed",
+      "observed_mechanic_evidence": [],
+      "testing_mode": [
+        "availability"
+      ],
+      "remaining": [
+        "Confirm actual implementation and playability of remaining five planned TITANs"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "P01",
+      "kind": "performance",
+      "planned_goal": "p50-p95-frame-and-memory",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "60 real wall seconds on original RAF; 49.1 game seconds; p95 RAF 33.3ms"
+      ],
+      "testing_mode": [
+        "headless Chrome wall-clock"
+      ],
+      "remaining": [
+        "Full 60 active in-game seconds, physical phone FPS and heat"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "P02",
+      "kind": "performance",
+      "planned_goal": "p50-p95-frame-and-memory",
+      "status": "partial",
+      "observed_mechanic_evidence": [
+        "180 real wall seconds only 100.7 game seconds p95 33.3ms; 240 real wall seconds only 138.0 game seconds p95 50ms"
+      ],
+      "testing_mode": [
+        "headless Chrome wall-clock"
+      ],
+      "remaining": [
+        "180 in-game seconds, Galaxy S23+ 3-minute lag reproduction"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "P03",
+      "kind": "performance",
+      "planned_goal": "p50-p95-frame-and-memory",
+      "status": "not_executed",
+      "observed_mechanic_evidence": [],
+      "testing_mode": [],
+      "remaining": [
+        "300-second genuine session not run"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    },
+    {
+      "scenario_id": "P04",
+      "kind": "performance",
+      "planned_goal": "fps-jank-heat-resume",
+      "status": "not_executed",
+      "observed_mechanic_evidence": [],
+      "testing_mode": [],
+      "remaining": [
+        "User's physical Galaxy S23+ cannot be remotely tested by CI"
+      ],
+      "subjective_scores": null,
+      "real_user_session": false
+    }
+  ],
+  "notes": [
+    "Partial means some native feature evidence, NOT fulfilled end-to-end playfeel test.",
+    "No manual perception score and no actual Galaxy S23+ frame/heat data.",
+    "Main V614 game code unchanged; only test harness and docs merged in PR #3.",
+    "5-minute long duration and 180 in-game second continuous benchmark remain absent."
+  ]
+}
