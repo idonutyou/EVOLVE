@@ -9,8 +9,17 @@
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
 | M03 계정/서버 권한 원장 | **100% (개발용 프로토타입/통합 완료)** | `docs/monetization/M03_100_FINAL_REPORT_KO.md`, PR #7 | 완료; 실제 라이브 과금/운영 서버 미구현 |
-| M04 인게임 과금 콘텐츠·모의 구매 | **30% (사용자 지시에 맞춰 설계 교정)** | `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` (M04 작업 브랜치) | **STEP 2/3 · 40% 모의 구매/보상 실구현** |
+| M04 인게임 과금 콘텐츠·모의 구매 | **40% (모의 구매 엔진 구현·검증, UI 미연결)** | `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` (M04 작업 브랜치) | **STEP 2/3 · 50% 메인 게임 상점·보상 연동** |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점 UX·프리미엄 콘텐츠·반복 가치 → 게임 완성 후 Play/App Store 실결제 연결 |
+
+## M04 최신 40% 검증된 실행 지점 (2026-10-27)
+- 개발 브랜치 `monetization-m04-payment-20261027` SHA `0807072c06e3ae8663b3b7726334e8948b194626`.
+- 복구 브랜치 `backup/monetization-m04-040-verified-20261027` SHA `0807072c06e3ae8663b3b7726334e8948b194626`; ref/파일 해시 원격 2회 대조. 기존 초기 복구 백업은 보존.
+- 신규 `web/mock-premium-v615.js` 모의 구매 엔진: 테스터별 테스트 결정·영수증, 스타터/외형 중복 구매 방지, 코어 모의 장착, 재시작/저장 격리. 시즌 패스는 준비 중이라 구매 차단.
+- 실제 GitHub Actions Node 22 **26/26 통과**: https://github.com/idonutyou/EVOLVE/actions/runs/40518045183 . 실 PG 테스트·결제/출시 전용 코드는 없음.
+- **게임 UI는 아직 미연결**: `dist/index.html`/상점 탭에 스크립트를 로드하지 않았으므로 플레이어가 인게임 구매 버튼을 누르는 기능은 다음 50%. 코어 외형 실제 그래픽도 아직 없음.
+- 다음 `고`→**M04 50%** 실제 게임 홈·UI 진입, 테스트 상품 지급 표시 및 구매/보유 상태 연결. 50% 작업에는 이미지 렌더링 불필요. 이전 이미지/게임 저장 키 훼손 금지.
+- 신규 개발 코드 40% 원격 체크포인트 파일 6개 합계 27,632 bytes (실제 UTF-8). 기존 M01-M04 백업 삭제 금지.
 
 ## 최신 개발 목표 변경 — 실제 결제 연동은 마지막 (2026-10-27)
 - 사용자 최종 출시 계획: **Google Play와 Apple App Store 앱**, 현재 웹은 개발/테스트용.
