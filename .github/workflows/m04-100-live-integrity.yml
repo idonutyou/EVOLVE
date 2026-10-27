@@ -1,0 +1,30 @@
+name: M04 final live build and original artwork gates
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/m04-100-live-integrity.yml'
+      - 'tools/verify_published_lettering_v584.py'
+      - 'tools/verify_movement_field_v590.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the real published asset manifest, current engine and original artwork
+        run: |
+          python3 tools/verify_published_lettering_v584.py --url https://idonutyou.github.io/EVOLVE/ --dist dist --output test-results/m04-live-artwork.json
+      - name: Verify original movement engine/controls and published assets
+        run: |
+          python3 tools/verify_movement_field_v590.py --url https://idonutyou.github.io/EVOLVE/ --dist dist --output test-results/m04-live-movement.json
+      - name: Preserve final verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m04-final-live-integrity
+          path: test-results/m04-live-*.json
+          if-no-files-found: ignore
