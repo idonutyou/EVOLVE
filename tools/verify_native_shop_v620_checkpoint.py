@@ -20,4 +20,4 @@ for path in m['deleted_paths']:
  assert not (R/path).exists(),'Obsolete DEV file still present: '+path
 for p in ('dist/sw.js','monetization/catalog/draft_skus.json','web/mock-core-adapter-v617.js'):
  assert subprocess.check_output(['git','show',m['base_commit']+':'+p],cwd=R)==(R/p).read_bytes(),'Protected original modified: '+p
-print('NATIVE SHOP V620 durable ZIP and 16 Git-tracked deletions verified',m['bytes'],m['sha256'],m['deleted_count'])
+print('NATIVE SHOP V620 durable ZIP and 18 Git-tracked deletions verified',m['bytes'],m['sha256'],m['deleted_count'])
