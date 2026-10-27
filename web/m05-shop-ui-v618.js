@@ -16,13 +16,19 @@ const skuData={
  appearance_unlock_01:{details:'공명 코어 발광 외형 · 캐릭터·파츠·전투 시각 효과, 능력치 변화 없음',group:'APPEARANCE'},
  season_research_pass_01:{details:'미완성 시즌 보상 · 구매 및 지급 잠금',group:'LOCKED'}
 };
-let mode='shop',selected=null,scrollShop=0,scrollCollection=0,wasOpen=false;
+let mode='shop',selected=null,scrollShop=0,scrollCollection=0,wasOpen=false,detailOrigin='shop';
 let safetyOpen=false,safetyFocus=null,writeFailLatched=false,blockedActionCount=0;
 const storageKey=api.storageKey;
 const css=document.createElement('style');css.id='m05ShopStyleV618';css.textContent=[
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel{overscroll-behavior:contain;scrollbar-gutter:stable}',
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel button,#m04MockModalV616[data-m05-ux="true"] .m05DetailLink{min-height:44px;touch-action:manipulation}',
- '#m05NavigationV618{display:flex;gap:8px;margin:8px 0 13px}',
+ '#m05NavigationV618{display:flex;gap:8px;margin:8px 0 13px;flex-shrink:0}',
+ '#m04MockModalV616[data-m05-ux="true"]{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));min-height:0}',
+ '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel{max-height:100%;min-height:0;overflow-x:hidden;overflow-y:auto;overflow-wrap:anywhere}',
+ '#m04MockModalV616[data-m05-ux="true"] .m04MockConfirmActions button,#m04MockModalV616[data-m05-ux="true"] .m04MockHead button,#m04MockModalV616[data-m05-ux="true"] .m04CoreLook button,#m04MockModalV616[data-m05-ux="true"] .m04MockReset{min-height:44px}',
+ '#m04MockModalV616[data-m05-ux="true"] .m04MockConfirmActions{gap:8px;flex-wrap:wrap}',
+ '#m04MockModalV616[data-m05-ux="true"] .m04MockConfirmActions button{min-width:90px}',
+ '@media(max-height:460px) and (orientation:landscape){#m04MockModalV616[data-m05-ux="true"] .m04MockPanel{padding:9px 12px}#m04MockModalV616[data-m05-ux="true"] .m04CoreGallery{grid-template-columns:repeat(2,minmax(0,1fr))}#m05DetailV618{padding:9px 11px}}',
  '#m05NavigationV618 button{flex:1;border-radius:10px;border:1px solid #7c688e;background:#24233a;color:#e7daf3;padding:10px 7px;font:800 13px/1.4 system-ui}',
  '#m05NavigationV618 button[aria-pressed="true"]{background:#533269;border-color:#d9aff7;color:white}',
  '.m05DetailLink{display:inline-flex;align-items:center;color:#b8edff;text-decoration:underline;font:700 12px/1.35 system-ui;padding:4px 8px;margin:4px -8px 0;border-radius:6px}',
@@ -98,10 +104,23 @@ function markReadOnly(message){
 function change(next){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!['shop','collection'].includes(next))return;
  if(mode==='shop')scrollShop=panel.scrollTop;
  if(mode==='collection')scrollCollection=panel.scrollTop;
- mode=next;selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=next==='shop'?scrollShop:scrollCollection});
+ mode=next;selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=next==='shop'?scrollShop:scrollCollection;panel.querySelector('#m05NavigationV618 [data-m05-section="'+next+'"]')?.focus({preventScroll:true})});
 }
-function openDetail(sku){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!skuData[sku])return;if(mode==='shop')scrollShop=panel.scrollTop;selected=sku;mode='detail';render();panel.scrollTop=0;document.getElementById('m05DetailTitleV618')?.focus()}
-function backDetail(){if(pendingConfirmation())return;mode='shop';selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=scrollShop;document.querySelector('.m05DetailLink[data-m05-sku="'+lastSku+'"]')?.focus()})}
+function openDetail(sku){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!skuData[sku])return;
+ detailOrigin=mode==='collection'?'collection':'shop';
+ if(mode==='shop')scrollShop=panel.scrollTop;
+ if(mode==='collection')scrollCollection=panel.scrollTop;
+ selected=sku;mode='detail';render();panel.scrollTop=0;
+ document.getElementById('m05DetailTitleV618')?.focus({preventScroll:true});
+}
+function backDetail(){if(pendingConfirmation())return;
+ const origin=detailOrigin;mode=origin;selected=null;render();
+ requestAnimationFrame(()=>{
+  panel.scrollTop=origin==='collection'?scrollCollection:scrollShop;
+  const target=origin==='collection'?panel.querySelector('.m05GetTheme'):panel.querySelector('.m05DetailLink[data-m05-sku="'+lastSku+'"]');
+  (target||panel.querySelector('#m05NavigationV618 [data-m05-section="'+origin+'"]'))?.focus({preventScroll:true});
+ });
+}
 let lastSku=null;
 function drawDetail(list,confirmOpen){
  if(!selected)return;
@@ -194,7 +213,7 @@ function render(){if(safetyOpen||!m04.isOpen())return;modal.dataset.m05Ux='true'
  const failure=storageFailureMessage();if(failure)writeFailLatched=true;
  if(writeFailLatched)markReadOnly(failure);
 }
-const observer=new MutationObserver(()=>{if(safetyOpen)return;if(m04.isOpen()){if(!wasOpen){mode='shop';selected=null;scrollShop=0;scrollCollection=0;wasOpen=true}render()}else{wasOpen=false;mode='shop';selected=null}});
+const observer=new MutationObserver(()=>{if(safetyOpen)return;if(m04.isOpen()){if(!wasOpen){mode='shop';selected=null;detailOrigin='shop';scrollShop=0;scrollCollection=0;wasOpen=true}render()}else{wasOpen=false;mode='shop';selected=null}});
 observer.observe(modal,{attributes:true,attributeFilter:['hidden'],childList:true,subtree:true});
 originalTrigger?.addEventListener('click',e=>{
  if(safetyOpen){e.preventDefault();e.stopImmediatePropagation();return}
@@ -214,9 +233,20 @@ modal.addEventListener('click',e=>{
  }
 },true);
 modal.addEventListener('keydown',e=>{
+ if(e.key==='Tab'&&!modal.hidden){
+  const area=safetyOpen?panel.querySelector('#m05SafeErrorV619'):pendingConfirmation()?panel.querySelector('#m04MockConfirmV617'):panel;
+  const targetNodes=[...(area||panel).querySelectorAll('button:not(:disabled),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden&&!el.closest('[hidden]')&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+  if(targetNodes.length){
+   const first=targetNodes[0],last=targetNodes[targetNodes.length-1],index=targetNodes.indexOf(document.activeElement);
+   if(e.shiftKey&&(index<=0)){last.focus();e.preventDefault()}
+   else if(!e.shiftKey&&(index<0||index===targetNodes.length-1)){first.focus();e.preventDefault()}
+   e.stopImmediatePropagation();
+  }
+  return;
+ }
  if(safetyOpen&&e.key==='Escape'){e.stopImmediatePropagation();e.preventDefault();closeSafetyModal();return}
  if(e.key==='Escape'&&mode==='detail'&&!panel.querySelector('#m04MockConfirmV617')&&m04.isOpen()){e.stopImmediatePropagation();e.preventDefault();lastSku=selected;backDetail()}},true);
-window.__EVOLVE_DEV_M05_UI_V618__=Object.freeze({mode:'DEV_UI_ONLY',enabled:true,current:()=>mode,openDetail,go:change,safety:()=>Object.freeze({readOnly:writeFailLatched,corruptModal:safetyOpen,blockedActions:blockedActionCount})});
+window.__EVOLVE_DEV_M05_UI_V618__=Object.freeze({mode:'DEV_UI_ONLY',enabled:true,current:()=>mode,openDetail,go:change,safety:()=>Object.freeze({readOnly:writeFailLatched,corruptModal:safetyOpen,blockedActions:blockedActionCount}),detailOrigin:()=>detailOrigin});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();
 })();
