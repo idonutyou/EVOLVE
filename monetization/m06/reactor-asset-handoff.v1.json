@@ -1,0 +1,16 @@
+{
+  "schema": "M06_030",
+  "progress": 30,
+  "rendering_required_now": false,
+  "pivot": [
+    96,
+    96
+  ],
+  "layers": [
+    "reactor_shell_alpha.png",
+    "reactor_inner_lens_alpha.png",
+    "reactor_orbit_front_alpha.png",
+    "reactor_afterglow_alpha.png"
+  ],
+  "art_created": false
+}
