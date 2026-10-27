@@ -17,7 +17,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
  const report={live:!!live,checks:[],errors:[],failedRequests:[],physical_Galaxy_S23_plus_tested:false};
  page.on('pageerror',e=>report.errors.push(e.message));
  page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push(r.url());});
- const ready=()=>page.waitForFunction(()=>window.__EVOLVE_MONSTER_FEEDBACK_V614__?.read().connected &&
+ const ready=()=>page.waitForFunction(()=>window.__EVOLVE_MONSTER_FEEDBACK_V614__?.read().version==='STEP07-V614' &&
   window.__EVOLVE_ORGAN_HITS_V613__?.read().imageReady.spike && !document.getElementById('start').disabled &&
   !document.getElementById('webLoader'),null,{timeout:30000});
  try{
@@ -60,7 +60,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
      eliteArmor:0,nemesis:false,zoneElite:false,midBoss:false,finalBoss:false,stagger:0,staggerLock:999,kx:0,ky:0};
     c.enemies.splice(0,c.enemies.length,e);c.grid();return {e,c};
    }};
-   return {ready:window.__EVOLVE_MONSTER_FEEDBACK_V614__.read().connected,template:template.type};
+   return {ready:window.__EVOLVE_MONSTER_FEEDBACK_V614__.read().version==='STEP07-V614',template:template.type};
   });
   assert.equal(make.ready,true);report.checks.push('V614 boots, original enemy fixture exists and event subscriber connects');
   report.fallback=await page.evaluate(()=>{
@@ -70,7 +70,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
    c.draw();return {damage:hp-e.hp,pose:m.test.pose(e),read:m.read(),source:window.EVOLVE_HIT_EVENTS.read()};
   });
   assert.ok(report.fallback.damage>0);assert.ok(report.fallback.read.fallback>0);
-  assert.ok(report.fallback.pose?.sx<1);report.checks.push('Actual game hurtEnemy produces a bounded generic visual recoil without modifying damage path');
+  assert.ok(report.fallback.pose?.sx<1);assert.equal(report.fallback.read.connected,true);report.checks.push('Actual game hurtEnemy produces a bounded generic visual recoil without modifying damage path');
   await page.screenshot({path:path.join(out,label+'-hurt.png')});
   report.weapon=await page.evaluate(()=>{
    const {e,c}=window.__MONSTER_V614_FIXTURE__.fresh(),m=window.__EVOLVE_MONSTER_FEEDBACK_V614__;
