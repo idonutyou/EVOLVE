@@ -1,0 +1,106 @@
+{
+  "schema_version": "m06.020.state.v1",
+  "product_id": "m06_core_reactor_concept",
+  "sale_status": "NOT_FOR_SALE",
+  "entitlement_id": null,
+  "default_state": "COMING_SOON",
+  "runtime_implementation": false,
+  "m08_only_states": [
+    "AVAILABLE_AFTER_M08",
+    "PENDING_SERVER_RECEIPT",
+    "OWNED",
+    "EQUIPPED",
+    "UNEQUIPPED",
+    "OWNERSHIP_UNVERIFIED",
+    "REVOKED_OR_REFUNDED"
+  ],
+  "transitions": [
+    {
+      "from": "COMING_SOON",
+      "event": "SELECT",
+      "to": "PREVIEW",
+      "grant": false
+    },
+    {
+      "from": "PREVIEW",
+      "event": "CANCEL",
+      "to": "COMING_SOON",
+      "grant": false
+    },
+    {
+      "from": "PREVIEW",
+      "event": "PURCHASE_ATTEMPT_BEFORE_M08",
+      "to": "PREVIEW",
+      "grant": false,
+      "error": "CHECKOUT_DISABLED"
+    },
+    {
+      "from": "AVAILABLE_AFTER_M08",
+      "event": "PURCHASE_REQUEST",
+      "to": "PENDING_SERVER_RECEIPT",
+      "grant": false
+    },
+    {
+      "from": "PENDING_SERVER_RECEIPT",
+      "event": "VALID_SERVER_ENTITLEMENT",
+      "to": "OWNED",
+      "grant": true
+    },
+    {
+      "from": "PENDING_SERVER_RECEIPT",
+      "event": "RECEIPT_INVALID_OR_PENDING",
+      "to": "OWNERSHIP_UNVERIFIED",
+      "grant": false
+    },
+    {
+      "from": "OWNED",
+      "event": "EQUIP",
+      "to": "EQUIPPED",
+      "grant": false
+    },
+    {
+      "from": "EQUIPPED",
+      "event": "UNEQUIP",
+      "to": "UNEQUIPPED",
+      "grant": false
+    },
+    {
+      "from": "EQUIPPED",
+      "event": "SERVER_CONFIRMED_REFUND",
+      "to": "REVOKED_OR_REFUNDED",
+      "grant": false
+    },
+    {
+      "from": "OWNED",
+      "event": "SERVER_CONFIRMED_REFUND",
+      "to": "REVOKED_OR_REFUNDED",
+      "grant": false
+    },
+    {
+      "from": "OWNERSHIP_UNVERIFIED",
+      "event": "RETRY_VERIFY",
+      "to": "OWNERSHIP_UNVERIFIED",
+      "grant": false
+    }
+  ],
+  "non_grant_events": [
+    "SELECT",
+    "CANCEL",
+    "PURCHASE_ATTEMPT_BEFORE_M08",
+    "RECEIPT_INVALID_OR_PENDING",
+    "RETRY_VERIFY",
+    "EQUIP",
+    "UNEQUIP",
+    "SERVER_CONFIRMED_REFUND"
+  ],
+  "gate": {
+    "checkout_enabled": false,
+    "price_minor": null,
+    "client_grants_enabled": false,
+    "requires_server_authoritative_receipt_for_grant": true,
+    "requires_owner_for_equipping": true,
+    "no_test_entitlement_migration": true,
+    "preserve_legacy_save": true,
+    "season_pass_still_locked": true
+  }
+}
