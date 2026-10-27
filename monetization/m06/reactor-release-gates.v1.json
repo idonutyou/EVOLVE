@@ -1,0 +1,79 @@
+{
+  "schema": "M06_030_RELEASE_GATES",
+  "progress": 30,
+  "status": "DESIGN_GATES_ONLY",
+  "overall": "BLOCKED",
+  "art_created": false,
+  "game_runtime_modified": false,
+  "checkout_enabled": false,
+  "price_minor": null,
+  "client_grants_enabled": false,
+  "original_images": 1021,
+  "gates": [
+    {
+      "id": "A01",
+      "criterion": "Distinct hexagonal silhouette and lens vs 2 old core themes at 40px monochrome",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A02",
+      "criterion": "Separate editable 192x192 transparent RGBA artwork layers with common 96,96 pivot",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A03",
+      "criterion": "All 1021 pre-existing image bytes preserved with SHA comparison",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A04",
+      "criterion": "Browser checks 320x568 393x852 852x393 and no overlaps or clipping",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A05",
+      "criterion": "Original 5-tab SHOP only; no DEV modal or second route",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A06",
+      "criterion": "12 repeated preview+cancel cycles preserve original game save and mock balance",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A07",
+      "criterion": "Equipped appearance consistent in ORGANISM and combat; no unowned equips",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A08",
+      "criterion": "No live price or checkout; no client entitlement grant before M08 verified receipts",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A09",
+      "criterion": "No per-frame canvas allocations or storage IO; FPS and memory measured",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A10",
+      "criterion": "Existing gameplay/hitboxes/damage and boss warnings remain readable",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A11",
+      "criterion": "Reduced motion and effects-off preserve readable static core",
+      "result": "NOT_EXECUTED_YET"
+    },
+    {
+      "id": "A12",
+      "criterion": "No release until artwork and restore/refund/server rights safety are complete",
+      "result": "NOT_EXECUTED_YET"
+    }
+  ],
+  "next": {
+    "progress": 40,
+    "render_required": true,
+    "notice_before_start": true
+  }
+}
