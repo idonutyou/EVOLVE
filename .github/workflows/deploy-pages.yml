@@ -14,6 +14,7 @@ on:
       - "tools/verify_monster_feedback_v614.py"
       - "tests/monetization_m05_100_live_browser.cjs"
       - "tests/native_shop_v620_browser.cjs"
+      - "tools/retry_public_browser.py"
       - "tests/browser_smoke.cjs"
       - "tests/visual_fit_browser.cjs"
       - "tests/upgrade_scenery_browser.cjs"
