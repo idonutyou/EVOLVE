@@ -1,5 +1,5 @@
 /* EVOLVE M04-40 | Developer mock purchases, NOT a payment provider or production wallet.
- * Separate EVOLVE_DEV_MOCK_STORE_V1 storage; does not read/write game save or M03.
+ * Native SHOP V620 TEST ONLY (no paid checkout). Separate EVOLVE_DEV_MOCK_STORE_V1 storage; never reads/writes game save or M03.
  */
 (function(root,factory){
  'use strict';
@@ -8,7 +8,7 @@
  if(root&&root.window===root&&root.location){
   const host=root.location.hostname;
   const allowed=host==='idonutyou.github.io'||host==='localhost'||host==='127.0.0.1';
-  if(allowed&&new URLSearchParams(root.location.search).get('evolveMockShop')==='1'){
+  if(allowed){
    Object.defineProperty(root,'__EVOLVE_DEV_MOCK_STORE_V615__',{value:Object.freeze(api),configurable:false,writable:false});
   }
  }
