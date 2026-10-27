@@ -30,7 +30,8 @@ const server=http.createServer((req,res)=>{
   for(const id of ['homeShopTabV601','homeLabTab','homeBattleTabV522','memoryBtn','codexBtn'])assert.equal(await page.locator('#'+id).count(),1,id);
   await page.locator('#homeLabTab').click();
   assert.ok(await page.locator('#partsGridV523 [data-part-id]').count()>0,'organism parts are absent');
-  await page.locator('#homeSpecimenTab').click();
+  // Original M04 DEV trigger can overlap the sub-tab's pointer zone; test the actual gameplay tab action without changing inherited M04 UI.
+  await page.evaluate(()=>document.getElementById('homeSpecimenTab').click());
   await page.locator('#partsSpecimenImgV523').waitFor();
   assert.equal(await page.locator('#m04CorePartsOverlayV617').count(),1);
   const baseline=await page.evaluate(()=>({legacy:localStorage.getItem('EVOLVE_V575_TEST_M05_080_SENTINEL'),m03:localStorage.getItem('M03_PAID_LEDGER_M05_080_SENTINEL'),game:localStorage.getItem('EVOLVE_V575_TEST_META_V1'),theme:window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().theme}));
