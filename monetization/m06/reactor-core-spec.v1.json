@@ -1,0 +1,302 @@
+{
+  "schema_version": "m06.020.v1",
+  "stage": "M06",
+  "step": "1/3",
+  "progress_percent": 20,
+  "status": "SPEC_ONLY_NOT_IMPLEMENTED",
+  "baseline": {
+    "previous_step_sha": "707e8716092977a2c559fc32147f125dd37b6bd2",
+    "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+    "original_image_count": 1021,
+    "shop": "NATIVE_SHOP_V620_ONLY",
+    "current_mock_themes": [
+      "dev_core_theme_01",
+      "dev_core_theme_02"
+    ],
+    "current_renderer_canvas_px": [
+      192,
+      192
+    ],
+    "current_renderer_cache_bytes": 294912,
+    "current_bridge": [
+      "parts",
+      "combat",
+      "preview"
+    ]
+  },
+  "product": {
+    "concept_id": "m06_core_reactor_concept",
+    "working_name_ko": "반응로 코어",
+    "role": "FIRST_PAID_VALUE_CANDIDATE",
+    "final_sku_id": null,
+    "existing_catalog_relation": "appearance_unlock_01_future_candidate_only",
+    "sale_status": "NOT_FOR_SALE",
+    "art_complete": false,
+    "real_price_minor": null,
+    "preview_allowed_after_art_approved": true,
+    "purchase_enabled": false,
+    "server_grants_enabled": false,
+    "entitlement_type": "permanent_cosmetic_after_real_receipt_verification",
+    "slot": "core",
+    "pay_to_win": false,
+    "content_promises": [
+      "영구 보유(실제 구매 후 서버 권리 검증 필수)",
+      "SHOP 상품별 실제 외형 미리보기",
+      "ORGANISM/전투 동일 테마",
+      "무료 코어와 실루엣·시간 연출이 다름"
+    ],
+    "no_early_sale": true
+  },
+  "visual": {
+    "difference_requirement": "not_recolor_only",
+    "comparison_baseline": {
+      "existing_01": "공명 코어: 타원형 밝은 핵, 좌우 방사곡선, 청록 발광",
+      "existing_02": "심홍 코어: 동일 기하학 구조의 색변주"
+    },
+    "reactor": {
+      "shape": "육각형 보호 케이싱 + 서로 어긋난 2중 비대칭 회전 고리 + 독립 중심 렌즈",
+      "unique_markers": [
+        "hexagonal outer shell",
+        "two offset orbit rings",
+        "segmented lens aperture",
+        "outward afterglow trace"
+      ],
+      "color_direction": [
+        "cool pale ivory center",
+        "amber/orchid secondary edge"
+      ],
+      "palette_not_final": true,
+      "avoid": [
+        "single oval droplet only",
+        "recolored current oval",
+        "thorn/tail-shaped protrusions",
+        "hiding player hit feedback",
+        "glow-only differentiation"
+      ],
+      "monochrome_test_required": true
+    },
+    "layer_order": [
+      "player_underlay",
+      "outer_reactor_shell",
+      "inner_core_lens",
+      "near_orbit_ring",
+      "optional_afterglow"
+    ],
+    "anchor": {
+      "source": "mutantArtV599.shell derived point",
+      "slot": "core",
+      "layer_separate": true,
+      "hitboxes_modified": false,
+      "original_sprite_modified": false
+    },
+    "geometry": {
+      "design_space_px": [
+        192,
+        192
+      ],
+      "pivot_px": [
+        96,
+        96
+      ],
+      "visible_shape_box_px": [
+        43,
+        42,
+        149,
+        150
+      ],
+      "safe_padding_px": 16,
+      "texture_cache_count_max": 3,
+      "texture_bytes_each": 147456,
+      "all_three_texture_max_bytes": 442368,
+      "alpha_mode": "transparent",
+      "premultiply_and_scale_check": true
+    },
+    "motion": {
+      "idle_loop_seconds": 4.8,
+      "phase_offsets_seconds": [
+        0,
+        1.6
+      ],
+      "pulse_min_opacity": 0.65,
+      "pulse_max_opacity": 0.95,
+      "orbit_rotation": "subtle_cosmetic_only",
+      "reduce_motion_fallback": "STATIC_SILHOUETTE_AND_LOW_GLOW",
+      "no_rapid_flash": true,
+      "animation_does_not_change_damage_or_hitboxes": true,
+      "cosmetic_can_be_disabled": true
+    },
+    "scale_targets": {
+      "design_only_not_measured": true,
+      "viewports_css_px": [
+        [
+          320,
+          568
+        ],
+        [
+          393,
+          852
+        ],
+        [
+          852,
+          393
+        ]
+      ],
+      "detail_preview_min_outer_diameter_css_px": 54,
+      "shop_card_thumbnail_min_outer_diameter_css_px": 40,
+      "combat_tiny_mode_below_css_px": 18,
+      "small_mode": "outer_hexagon_and_center_lens_only",
+      "min_visible_markers_for_card": 2,
+      "targets_require_actual_browser_measurement": true
+    },
+    "visual_qa": [
+      "light_background",
+      "dark_background",
+      "monochrome",
+      "tiny_mobile",
+      "player_movement",
+      "boss_warning_visible",
+      "damage_flash_visible",
+      "free_core_side_by_side"
+    ]
+  },
+  "integration": {
+    "entry": "original_home_SHOP",
+    "ui_states": [
+      "COMING_SOON",
+      "PREVIEW",
+      "AVAILABLE_AFTER_M08",
+      "OWNED",
+      "EQUIPPED",
+      "UNEQUIPPED",
+      "OWNERSHIP_UNVERIFIED",
+      "REVOKED_OR_REFUNDED"
+    ],
+    "purchase_flow": [
+      "view_details",
+      "preview_without_grant",
+      "view_content_and_permanence",
+      "explicit_purchase_confirmation_only_after_M08",
+      "provider_purchase",
+      "server_receipt_validation",
+      "server_entitlement_commit",
+      "refresh_owned",
+      "equip"
+    ],
+    "transitions": [
+      {
+        "from": "COMING_SOON",
+        "event": "SELECT",
+        "to": "PREVIEW",
+        "grant": false
+      },
+      {
+        "from": "PREVIEW",
+        "event": "CANCEL",
+        "to": "COMING_SOON",
+        "grant": false
+      },
+      {
+        "from": "PREVIEW",
+        "event": "PURCHASE_ATTEMPT_BEFORE_M08",
+        "to": "PREVIEW",
+        "grant": false,
+        "error": "CHECKOUT_DISABLED"
+      },
+      {
+        "from": "AVAILABLE_AFTER_M08",
+        "event": "PURCHASE_REQUEST",
+        "to": "PENDING_SERVER_RECEIPT",
+        "grant": false
+      },
+      {
+        "from": "PENDING_SERVER_RECEIPT",
+        "event": "VALID_SERVER_ENTITLEMENT",
+        "to": "OWNED",
+        "grant": true
+      },
+      {
+        "from": "PENDING_SERVER_RECEIPT",
+        "event": "RECEIPT_INVALID_OR_PENDING",
+        "to": "OWNERSHIP_UNVERIFIED",
+        "grant": false
+      },
+      {
+        "from": "OWNED",
+        "event": "EQUIP",
+        "to": "EQUIPPED",
+        "grant": false
+      },
+      {
+        "from": "EQUIPPED",
+        "event": "UNEQUIP",
+        "to": "UNEQUIPPED",
+        "grant": false
+      },
+      {
+        "from": "EQUIPPED",
+        "event": "SERVER_CONFIRMED_REFUND",
+        "to": "REVOKED_OR_REFUNDED",
+        "grant": false
+      },
+      {
+        "from": "OWNED",
+        "event": "SERVER_CONFIRMED_REFUND",
+        "to": "REVOKED_OR_REFUNDED",
+        "grant": false
+      },
+      {
+        "from": "OWNERSHIP_UNVERIFIED",
+        "event": "RETRY_VERIFY",
+        "to": "OWNERSHIP_UNVERIFIED",
+        "grant": false
+      }
+    ],
+    "rules": {
+      "mock_keys_separate": "EVOLVE_DEV_MOCK_STORE_V1",
+      "game_save_keys": "EVOLVE_V575_TEST_*",
+      "never_write_m03_production_entitlements_from_client": true,
+      "receipt_idempotent": true,
+      "account_sync_in_M08": true,
+      "refund_revokes_only_entitlement_from_that_valid_source": true,
+      "never_auto_delete_corrupted_storage": true,
+      "no_equipping_unowned_skin": true,
+      "duplicate_purchase_blocked": true,
+      "side_effect_free_preview": true,
+      "regular_shop_no_dev_overlay": true
+    }
+  },
+  "production": {
+    "image_render_required_at_current_step": false,
+    "asset_generation_stage": "M06_40_TO_70_AFTER_NOTICE",
+    "publish_before_completion": false,
+    "candidate_asset_set": [
+      "reactor_shell_alpha.png",
+      "reactor_inner_lens_alpha.png",
+      "reactor_orbit_front_alpha.png",
+      "reactor_afterglow_alpha.png"
+    ],
+    "candidate_assets_not_created": true,
+    "naming_finalized": false,
+    "performance_guards": [
+      "No canvas creation during combat frames",
+      "No localStorage reads per combat frame",
+      "No extra hitbox or damage calculations",
+      "Cap three precomputed theme textures to 442368 B total where practical",
+      "Animation time from existing game loop; no additional unbounded timers"
+    ],
+    "acceptance_in_future": [
+      "Actual viewport screenshot comparisons",
+      "Pure silhouette recognizability vs resonance/crimson at thumbnail size",
+      "Home SHOP preview → ORGANISM equip → actual combat continuity",
+      "Unavailable product cannot charge",
+      "No loss of old saves or existing art byte hashes",
+      "Small/mobile landscape FPS regression"
+    ]
+  },
+  "next": {
+    "progress_percent": 30,
+    "step": "1/3",
+    "task": "freeze complete asset handoff checklist, preview contract, publish-blocking acceptance criteria, image production kickoff instructions",
+    "image_rendering_required": false
+  }
+}
