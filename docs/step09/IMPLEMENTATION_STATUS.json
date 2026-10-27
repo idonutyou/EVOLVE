@@ -2,7 +2,7 @@
   "step": 9,
   "part": 1,
   "progress": 30,
-  "phase": "analysis_and_compatibility_design_complete",
+  "phase": "paused_due_to_user_directed_P0_monetization_priority",
   "updated_kst": "2026-10-27",
   "public_game_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
   "public_game_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
@@ -60,5 +60,21 @@
   "next_work": "write test-only card pool verifier and stand-alone evolution metadata selector, test original gameplay before any candidate",
   "future_next_step": 10,
   "future_next_step_title": "외피·꼬리 Lv.3 변이",
-  "future_next_step_image_rendering": "possible; notify beforehand, no rendering this step"
+  "future_next_step_image_rendering": "possible; notify beforehand, no rendering this step",
+  "paused": true,
+  "paused_at_progress": 30,
+  "priority_override_date_kst": "2026-10-27",
+  "required_before_resume": [
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M05",
+    "M06",
+    "M07",
+    "M08"
+  ],
+  "active_now": "M01/2-of-3 after monetization roadmap design",
+  "monetization_roadmap": "docs/monetization/MONETIZATION_FIRST_ROADMAP.json",
+  "can_resume_only_after_monetization_gates": true
 }
