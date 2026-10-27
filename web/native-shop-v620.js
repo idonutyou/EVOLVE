@@ -149,6 +149,7 @@
   // Keep the original DNA upgrade engine nodes alive but remove obsolete cards from SHOP.
   const existing=view.querySelector('#labPanel');
   if(existing){const hold=make('div');hold.id='nativeShopLegacyResearchV620';hold.hidden=true;hold.style.display='none';existing.replaceWith(hold);hold.appendChild(existing);}
+  const hint=document.getElementById('homeShopHintV601');if(hint)hint.textContent='코어 외형·TEST 상품을 확인하고 장착하세요. 실제 결제는 제공하지 않습니다.';
   root=make('section','nativeShopV620');root.id='nativeShopV620';root.setAttribute('aria-label','변이 상점 · 모의 상품');
   content=make('div');content.id='nativeShopContentV620';root.append(content);view.append(root);
   try{shop=api.createStore({enabled:true,storage:window.localStorage});safeSnapshot()}catch(e){failed(e);readOnly=true;}
