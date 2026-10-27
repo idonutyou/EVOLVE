@@ -19,12 +19,21 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
  page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push(r.url());});
  const ready=()=>page.waitForFunction(()=>window.__EVOLVE_MONSTER_FEEDBACK_V614__?.read().connected &&
   window.__EVOLVE_ORGAN_HITS_V613__?.read().imageReady.spike && !document.getElementById('start').disabled &&
-  !document.getElementById('webLoader'),null,{timeout:180000});
+  !document.getElementById('webLoader'),null,{timeout:30000});
  try{
   await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);
    window.requestAnimationFrame=cb=>cb.name==='loop'?0:raf(cb);});
   const url=new URL(base);url.searchParams.set('evolveQA','1');
-  await page.goto(url.href,{waitUntil:'domcontentloaded',timeout:180000});await ready();
+  await page.goto(url.href,{waitUntil:'domcontentloaded',timeout:180000});
+  try{await ready();}catch(error){
+   report.bootDiagnostic=await page.evaluate(()=>({
+    loader:!!document.getElementById('webLoader'),start:!!document.getElementById('start'),startDisabled:document.getElementById('start')?.disabled,
+    organ:window.__EVOLVE_ORGAN_HITS_V613__?.read(),monster:window.__EVOLVE_MONSTER_FEEDBACK_V614__?.read(),
+    version:window.EVOLVE_WEB_CONFIG,loading:document.readyState,
+    scripts:Array.from(document.scripts).map(s=>({src:s.src||'',loaded:s.readyState||'',type:s.type||''})).slice(-8)
+   }));
+   throw new Error('V614 initial readiness failed: '+JSON.stringify(report.bootDiagnostic)+'; '+error.message);
+  }
   report.version=await page.evaluate(()=>window.EVOLVE_WEB_CONFIG);
   const expected=JSON.parse(fs.readFileSync(path.join(dist,'version.json'),'utf8'));
   assert.equal(report.version.version,expected.version);
