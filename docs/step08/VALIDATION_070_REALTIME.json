@@ -1,0 +1,56 @@
+{
+  "step": 8,
+  "checkpoint": 70,
+  "test_type": "REAL WALL CLOCK Chromium browser, original game RAF preserved (not on Galaxy S23+)",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "samples": [
+    {
+      "id": "P01",
+      "ci_run": 40472299360,
+      "conclusion": "success",
+      "wall_seconds": 60,
+      "valid": true,
+      "frames": 3382,
+      "raf_p50_ms": 16.7,
+      "raf_p95_ms": 33.3,
+      "raf_p99_ms": 33.4,
+      "raf_over100ms_ratio": 0,
+      "game_clock_advanced_s": 49.1,
+      "living_end": 32,
+      "heap_first_bytes": 236469621,
+      "heap_last_bytes": 195075208,
+      "scripted_level_up_picks": 4
+    },
+    {
+      "id": "P02",
+      "ci_run": 40472750106,
+      "conclusion": "success",
+      "wall_seconds": 180,
+      "valid": true,
+      "frames": 9775,
+      "raf_p50_ms": 16.7,
+      "raf_p95_ms": 33.3,
+      "raf_p99_ms": 33.4,
+      "raf_over100ms_ratio": 0.00030690537084398974,
+      "game_clock_advanced_s": 100.71173333332884,
+      "living_end": 58,
+      "heap_first_bytes": 236150925,
+      "heap_last_bytes": 200142524,
+      "scripted_level_up_picks": 15
+    }
+  ],
+  "important_limitations": [
+    "180 real seconds ≠ 180 in-game seconds: automated upgrade choice was checked every 10s, so game spent substantial wall time paused at level-up cards. Only 100.7 seconds of game clock passed. Do not claim to have reproduced the user's severe lag after 3 in-game minutes.",
+    "RAF intervals are headless Chromium presentation callback intervals in mobile viewport with SwiftShader; not a phone FPS benchmark, not raw GPU frame timings.",
+    "Alive monster counts at sample end (32 and 58) do not validate 180/250 concurrently alive creatures.",
+    "Two JS heap endpoint samples do not demonstrate memory leak absence; GC can reduce heap.",
+    "No real human steering/survival skill, human game-feel scores, audio or Galaxy S23+ heat observations.",
+    "5 minute measurement not executed. The test runner must choose level-up cards more promptly and record pause durations before claiming 3/5 in-game minute performance."
+  ],
+  "success": true,
+  "game_code_changed": false,
+  "public_game_changed": false,
+  "new_image_generation": 0,
+  "physical_phone_tested": false
+}
