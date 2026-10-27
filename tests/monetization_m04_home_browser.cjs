@@ -89,5 +89,6 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.locator('#homeTabs > button').count(),5);
   assert.equal(errors.filter(e=>e.includes('mock-premium')).length,0,'mock script raised an exception');
   console.log(JSON.stringify({pass:true,realGameShell:true,mobile:'393x852',mockPurchase:true,testCredits:280,coreState:'dev_core_theme_02',visibleThemes:2,combatDraws:live.combatDraws,spriteBuilds:live.builds,legacySavePreserved:true,navigationButtons:before,sceneImage:'test-results/m04-mock-shop-393x852.png'}));
- }finally{await browser.close();await new Promise(ok=>server.close(ok))}
+ }catch(e){await page.screenshot({path:path.join(out,'m04-failure-393x852.png')}).catch(()=>{});console.error('PAGE_ERRORS',JSON.stringify(errors));throw e}
+ finally{await browser.close();await new Promise(ok=>server.close(ok))}
 })().catch(e=>{console.error(e);process.exitCode=1;server.close()});

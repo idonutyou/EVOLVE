@@ -42,7 +42,7 @@
  .m04CoreGallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
  .m04CoreLook{min-width:0;border:1px solid #6b6587;border-radius:12px;padding:9px;background:radial-gradient(ellipse at 50% 36%,#32446380,#131722 75%)}
  .m04CoreLook[data-equipped="true"]{border-color:#a6f1ed;box-shadow:inset 0 0 18px #5ee6f222}
- .m04CoreLook canvas{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+ #m04MockModalV616 .m04CoreLook canvas{position:static!important;inset:auto!important;transform:none!important;display:block;width:100%!important;height:auto!important;aspect-ratio:1;object-fit:contain;pointer-events:none;z-index:auto!important}
  .m04CoreLook b{display:block;color:#e5ecff;font:700 12px system-ui}
  .m04CoreLook p{font:10px/1.5 system-ui;color:#c5c2d6;margin:5px 0}
  .m04CoreLook button{width:100%;min-height:35px;border-radius:7px;border:1px solid #9a93b0;color:#fff;background:#3e3559;font:700 11px system-ui;touch-action:manipulation}
