@@ -43,8 +43,10 @@ const server=http.createServer((req,res)=>{
    const btnSizes=await p.locator('#m04MockModalV616 .m04MockHead button,#m05NavigationV618 button,#m04MockModalV616 .m04CoreLook button').evaluateAll(nodes=>nodes.filter(n=>n.getClientRects().length).map(n=>({name:n.textContent.trim().slice(0,25),height:Math.round(n.getBoundingClientRect().height)})));
    assert.ok(btnSizes.every(x=>x.height>=44),'button under 44px '+JSON.stringify(btnSizes));
    await p.evaluate(()=>document.querySelector('#m04MockModalV616 .m04MockPanel').scrollTop=116);
+   const appearanceLink=p.locator('.m05DetailLink[data-m05-sku="appearance_unlock_01"]');
+   await appearanceLink.scrollIntoViewIfNeeded();
    const previous=await p.evaluate(()=>document.querySelector('#m04MockModalV616 .m04MockPanel').scrollTop);
-   await p.locator('.m05DetailLink[data-m05-sku="appearance_unlock_01"]').click();
+   await appearanceLink.click();
    assert.equal(await p.locator('#m04MockModalV616').getAttribute('data-m05-mode'),'detail');
    assert.equal(await p.evaluate(()=>document.activeElement?.id),'m05DetailTitleV618');
    await p.keyboard.press('Escape');
