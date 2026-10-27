@@ -47,7 +47,7 @@ function createMonsterFeedbackV614(host){
   const p=table[profile(e)],angle=detail?.angle??0,impulse=detail?.strong?1.12:1;
   const oldLife=Number.isFinite(echo.life)?echo.life:p.death;
   const oldMax=Number.isFinite(echo.max)?echo.max:oldLife;
-  const life=clamp(Math.max(oldLife,Math.min(p.death,oldMax+.10)),.20,.70);
+  const life=clamp(Math.max(oldLife,Math.min(p.death,oldMax+.20)),.20,.70);
   echo.life=life;echo.max=life;
   echo.vx=clamp((Number(echo.vx)||0)+Math.cos(angle)*p.fall*impulse,-180,180);
   echo.vy=clamp((Number(echo.vy)||0)+Math.sin(angle)*p.fall*.45+3,-180,180);
