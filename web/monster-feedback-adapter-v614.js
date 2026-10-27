@@ -13,8 +13,11 @@ function monsterFeedbackConnectV614(bridge=window.EVOLVE_HIT_EVENTS){
  monsterFeedbackConnectedV614=true;return true;
 }
 monsterFeedbackConnectV614();
+const monsterFeedbackHurtBaseV614=hurtEnemy;
+hurtEnemy=function(...args){monsterFeedbackConnectV614();return monsterFeedbackHurtBaseV614(...args);};
 const monsterFeedbackUpdateBaseV614=update;
 update=function(dt){
+ monsterFeedbackConnectV614();
  const before=t,result=monsterFeedbackUpdateBaseV614(dt);
  if(t>before)monsterFeedbackV614.step(t-before);
  return result;
