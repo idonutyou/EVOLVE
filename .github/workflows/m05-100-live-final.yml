@@ -1,14 +1,15 @@
 name: M05 100 percent ACTUAL GitHub Pages live commerce shell QA
 on:
-  push:
+  workflow_run:
+    workflows: ["Publish EVOLVE Web"]
+    types: [completed]
     branches: [main]
-    paths:
-      - '.github/workflows/m05-100-live-final.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   final-live-check:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 32
     steps:
