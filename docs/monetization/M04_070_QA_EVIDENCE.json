@@ -1,0 +1,58 @@
+{
+  "stage": "M04",
+  "step": "2/3",
+  "percent": 70,
+  "code_sha": "01d606cdd068dda52a98dfa82457cad120e0ff4d",
+  "ci_run": 40527650445,
+  "ci_job": 122271469298,
+  "ci_conclusion": "success",
+  "node_version": "22",
+  "tests": 34,
+  "tests_passed": 34,
+  "resources": 1078,
+  "original_images": 1021,
+  "mobile_viewports": [
+    [
+      393,
+      852
+    ],
+    [
+      320,
+      568
+    ]
+  ],
+  "core_themes": 2,
+  "test_crystal_redemption": 120,
+  "test_balance_before_reset": 280,
+  "combat_draws_at_least": 6,
+  "cached_sprite_builds": 2,
+  "cached_sprite_bytes": 294912,
+  "ten_thousand_draw_cache_test": true,
+  "cancel_no_write": true,
+  "storage_failure_no_grant": true,
+  "corrupt_save_preserved": true,
+  "valid_restore_clears_error": true,
+  "legacy_save_and_stats_preserved": true,
+  "navigation_buttons": 5,
+  "public_functionality_deployed": false,
+  "actual_payment_connected": false,
+  "physical_Galaxy_S23_plus_tested": false,
+  "new_raster_art_generated": false,
+  "screenshots_artifact_id": 12744563226,
+  "screenshots_artifact_bytes": 751253,
+  "screenshots_artifact_sha256": "96b2a441f3761d4be660566a071398f29e76e3235dfe20347d728ca61d6df9b5",
+  "screenshots": {
+    "docs/qa/m04-070/m04-core-combat-393x852.png": {
+      "bytes": 447781,
+      "sha256": "144859d60356c86570d735c2bf2b50c4d9de70bae2d725d5b794412d62ae5a52"
+    },
+    "docs/qa/m04-070/m04-mock-shop-320x568.png": {
+      "bytes": 105755,
+      "sha256": "769be66fdf4a68a1cf9f86539c7122258d8d2b41319321c31084979b396b8f53"
+    },
+    "docs/qa/m04-070/m04-mock-shop-393x852.png": {
+      "bytes": 197736,
+      "sha256": "133fffa5c255004959bec526fcdf170f7f50f27d9dcdf9928324505fc54be158"
+    }
+  }
+}

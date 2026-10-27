@@ -1,0 +1,9 @@
+{
+  "path": "checkpoints/EVOLVE_M04_070_20261027.zip",
+  "bytes": 2060987,
+  "sha256": "10281b58cdb5b12c20b581635c4fef9e6436e62949cc2e1f66c5f0901417e44a",
+  "files": 33,
+  "uncompressed_bytes": 4829437,
+  "baseline": "4af248bd7d2b655afa77299e9c8afb2743d88278",
+  "archive_crc_and_member_hashes_verified": true
+}

@@ -134,7 +134,7 @@
   "runtime_asset_paths": [
     "assets/19b6ae1188b9d2a9a24b8da5576b6ebbaa648da992f4fb25cd14fb18c2d45ba8.js",
     "assets/420cce5ea1e4cd944214a03f3dc701fc76994670982db5b19c1dde0922bf4dde.js",
-    "assets/054d7c43400d76924426b9ecaf65c640f91a7e06d094ee23f681b2b49e41ab7f.js"
+    "assets/ded745b7a82d62dcade6f4131ebf19171628d2daff52d36fd623fcc11a655832.js"
   ],
   "notes_50_ko": "실제 V614 게임 메인 홈에 개발 전용 모의 상점 UI를 브랜치 dist에 연결함. GitHub Pages main에는 미병합, 실제 돈 청구 0. 독립 DEV_TEST 결정, 가상 코어 소유·장착만 저장하며 그림 변경은 없음.",
   "core_visual_source": "web/mock-core-visuals-v617.js",
@@ -149,5 +149,7 @@
     "test_crystal_spend": 120,
     "combat_stats_changed": false,
     "new_raster_art": false
-  }
+  },
+  "notes_70_ko": "개발용 코어 발광 2종을 실제 파츠/전투에 표시하고 테스트 결정 120개 해금 사용처를 연결. 구매 확인/취소, 저장 실패/손상 격리와 복원/초기화, 한글 웹폰트, 393x852 및 320x568 자동 QA 통과. 공개 미배포, 실제 과금 없음.",
+  "verified_ci": "https://github.com/idonutyou/EVOLVE/actions/runs/40527650445"
 }
