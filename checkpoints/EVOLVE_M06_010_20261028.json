@@ -1,0 +1,56 @@
+{
+  "stage": "M06",
+  "progress_percent": 10,
+  "step": "1/3",
+  "date_kst": "2026-10-28",
+  "baseline_main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "branch": "monetization-m06-premium-art-20261028",
+  "archive_path": "checkpoints/EVOLVE_M06_010_20261028.zip",
+  "archive_size_bytes": 13267,
+  "archive_git_blob_sha": "3dd29574552d5a53dd18f3a22d13ce9d145cfdf5",
+  "archive_crc32": "94de272a",
+  "archive_commit_sha": "0799658fdf7ec6bdf0f03f2b9b1a4dbd4475e08c",
+  "full_tree_recovery_branch": "backup/monetization-m06-010-20261028",
+  "mode": "DESIGN_ONLY",
+  "old_backups_delete_allowed": false,
+  "changed_runtime_files": 0,
+  "new_art_created": false,
+  "entries": [
+    {
+      "path": "docs/monetization/M06_010_PREMIUM_VALUE_KO.md",
+      "bytes": 6381,
+      "crc32": "8e93b33f",
+      "git_blob_sha": "be6981a12f1bd6cb163964a3754c829f10fe4d2a"
+    },
+    {
+      "path": "monetization/m06/premium-value-v1.json",
+      "bytes": 3494,
+      "crc32": "5fef6085",
+      "git_blob_sha": "3db554c0c05c612b53e51013873fc9672ad1d559"
+    },
+    {
+      "path": "tests/m06_010_design.test.cjs",
+      "bytes": 1426,
+      "crc32": "9f7717b6",
+      "git_blob_sha": "3ee10aecaadaaa8a3d1864f8da6b3fda3ffdd2bb"
+    },
+    {
+      "path": ".github/workflows/m06-010-design.yml",
+      "bytes": 951,
+      "crc32": "f6f529d9",
+      "git_blob_sha": "63e7956db4d154de98e359d619de6706c92f4844"
+    },
+    {
+      "path": "CHECKPOINT_README.txt",
+      "bytes": 275,
+      "crc32": "4ed8f112"
+    }
+  ],
+  "validation_contracts": [
+    "M06 10% no game runtime changes",
+    "five existing SKU identifiers unchanged",
+    "original 1021 image assets unchanged",
+    "native SHOP stays only SHOP",
+    "checkout and client grants disabled"
+  ]
+}
