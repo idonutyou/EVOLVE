@@ -90,8 +90,9 @@ function markReadOnly(message){
  writeFailLatched=true;
  let banner=panel.querySelector('#m05SafeBannerV619');
  if(!banner){banner=make('p','','');banner.id='m05SafeBannerV619';banner.setAttribute('role','alert');panel.insertBefore(banner,panel.firstChild)}
- banner.textContent='테스트 기록을 저장하지 못했어. 추가 구매·장착·초기화를 차단했어. 새로고침 전까지 안전 모드로 유지돼. '+message;
- const keys='.m04MockCards button,.m04CoreGallery button,.m04MockReset,#m05DetailActionV618,.m05GetTheme';
+ const nextMessage='테스트 기록을 저장하지 못했어. 추가 구매·장착·초기화를 차단했어. 새로고침 전까지 안전 모드로 유지돼. '+message;
+ if(banner.textContent!==nextMessage)banner.textContent=nextMessage;
+ const keys='.m04MockCards button,.m04CoreGallery button,.m04MockReset,#m05DetailActionV618,.m05GetTheme,#m04MockApproveV617';
  panel.querySelectorAll(keys).forEach(b=>{b.disabled=true;b.setAttribute('aria-disabled','true')});
 }
 function change(next){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!['shop','collection'].includes(next))return;
