@@ -67,7 +67,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
    const {e,c}=window.__MONSTER_V614_FIXTURE__.fresh(),m=window.__EVOLVE_MONSTER_FEEDBACK_V614__;
    const hp=e.hp;
    window.__EVOLVE_ORGAN_HITS_V613__.test.damage(e,15,'arm',0);
-   c.draw();return {damage:hp-e.hp,pose:m.test.pose(e),read:m.read(),source:window.EVOLVE_HIT_EVENTS.read()};
+   window.__EVOLVE_MAPS_V567__.test.context().step(.016);c.draw();return {damage:hp-e.hp,pose:m.test.pose(e),read:m.read(),source:window.EVOLVE_HIT_EVENTS.read()};
   });
   assert.ok(report.fallback.damage>0);assert.ok(report.fallback.read.fallback>0);
   assert.ok(report.fallback.pose?.sx<1);assert.equal(report.fallback.read.connected,true);report.checks.push('Actual game hurtEnemy produces a bounded generic visual recoil without modifying damage path');
