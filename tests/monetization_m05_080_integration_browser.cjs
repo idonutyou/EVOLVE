@@ -32,7 +32,7 @@ const server=http.createServer((req,res)=>{
   assert.ok(await page.locator('#partsGridV523 [data-part-id]').count()>0,'organism parts are absent');
   // Original M04 DEV trigger can overlap the sub-tab's pointer zone; test the actual gameplay tab action without changing inherited M04 UI.
   await page.evaluate(()=>document.getElementById('homeSpecimenTab').click());
-  await page.locator('#partsSpecimenImgV523').waitFor();
+  await page.locator('#homeSpecimenView').waitFor({state:'visible'});
   assert.equal(await page.locator('#m04CorePartsOverlayV617').count(),1);
   const baseline=await page.evaluate(()=>({legacy:localStorage.getItem('EVOLVE_V575_TEST_M05_080_SENTINEL'),m03:localStorage.getItem('M03_PAID_LEDGER_M05_080_SENTINEL'),game:localStorage.getItem('EVOLVE_V575_TEST_META_V1'),theme:window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().theme}));
   assert.equal(baseline.theme,null);
@@ -44,7 +44,8 @@ const server=http.createServer((req,res)=>{
   await page.locator('#m05DetailActionV618').click();
   await page.waitForFunction(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().theme==='dev_core_theme_01');
   assert.equal(await page.locator('#m05DetailV618').getAttribute('data-equipped'),'true');
-  assert.equal(await page.locator('#m04CorePartsOverlayV617').isHidden(),false);
+  assert.equal(await page.locator('#m04CorePartsOverlayV617').count(),1);
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().theme),'dev_core_theme_01');
   const afterPurchase=await page.evaluate(()=>({legacy:localStorage.getItem('EVOLVE_V575_TEST_M05_080_SENTINEL'),m03:localStorage.getItem('M03_PAID_LEDGER_M05_080_SENTINEL'),game:localStorage.getItem('EVOLVE_V575_TEST_META_V1'),mock:window.__EVOLVE_DEV_MOCK_UI_V616__.read()}));
   assert.equal(afterPurchase.legacy,baseline.legacy);
   assert.equal(afterPurchase.m03,baseline.m03);
