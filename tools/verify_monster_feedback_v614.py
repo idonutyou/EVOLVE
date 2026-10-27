@@ -20,7 +20,8 @@ def main():
  # The original V614/M04 builds are immutable. M05 adds five dev-only JS assets
  # to the same 1,078 original entries; reject every other manifest expansion.
  if len(m)==1083 and version['version'].endswith('-M05-UX90'):
-  assert len([x for x in m if x['kind']=='dev-mock-only'])==5
+  # M04 already shipped nine DEV-only hashed scripts; M05 adds exactly five more.
+  assert len([x for x in m if x['kind']=='dev-mock-only'])==14
   assert len([x for x in m if x['kind']=='image'])==1021
   assert all(x['path'].startswith('assets/') and x['path'].endswith('.js') for x in m if x['kind']=='dev-mock-only')
  else:
