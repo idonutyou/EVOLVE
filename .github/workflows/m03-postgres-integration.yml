@@ -26,3 +26,8 @@ jobs:
         env:
           M03_PG_DISPOSABLE: 'YES'
           M03_PG_TEST_URL: postgresql://evolve_ci:test_only_local_secret@127.0.0.1:5432/evolve_m03_test_ci
+
+      - name: Check PostgreSQL client tools
+        run: |
+          command -v pg_dump
+          command -v pg_restore
