@@ -127,7 +127,7 @@
    addCard(frag,label,desc,btn,()=>action('buy',item.sku),disabled,item.sku,owned?'보유 중':!item.ready?'판매 준비 중':'');
   }
   frag.append(make('h4','nativeShopGroupV620','코어 컬렉션'));
-  const options=api.cosmetics(),count=options.filter(item=>state?.owned[item.entitlement]).length;
+  const options=shop.cosmetics(),count=options.filter(item=>state?.owned[item.entitlement]).length;
   frag.append(make('p','nativeShopNoteV620','보유 코어 '+count+' / '+options.length+'개 · 전투 외형에만 적용'));
   for(const item of options){
    const owned=!!state?.owned[item.entitlement],active=state?.equipped.core===item.entitlement;
