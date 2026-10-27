@@ -1,0 +1,603 @@
+{
+  "schema": "EVOLVE_MONETIZATION_FIRST_V1",
+  "date_kst": "2026-10-27",
+  "priority": "all active work must support actual monetization launch before further card/evolution work",
+  "working_prior_order": [
+    {
+      "id": "M01",
+      "title_ko": "수익화 제품/플랫폼/정책 설계",
+      "definition_of_done": "웹 우선 결제 채널, 제품·가치 제안, 무료/유료 분리, 운영 동의, 전체 기존 로드맵 수익화 기준 반영",
+      "next": "M02"
+    },
+    {
+      "id": "M02",
+      "title_ko": "재화·상품·소비처 정량화",
+      "definition_of_done": "무료 DNA 수입/지출 감사, 변이 결정 등 유료 장부 재화 정량, 소비처·무료 접근성·SKU 가격/제공량 시뮬레이션",
+      "next": "M03"
+    },
+    {
+      "id": "M03",
+      "title_ko": "계정·권한·서버 검증 인프라",
+      "definition_of_done": "실제 HTTPS API, 회원·익명 진입/연동, 서버 권위 ledger, 구매 권리 복원·이력·레거시 DNA 보존, 중복 요청 방지",
+      "next": "M04"
+    },
+    {
+      "id": "M04",
+      "title_ko": "최초 실제 결제 경로 구현",
+      "definition_of_done": "웹 배포 채널의 결제업체 sandbox/서명 웹훅→완료·환불·실패·중복 처리, 첫 상품 실결제 검증(운영자 계정/승인 필요)",
+      "next": "M05"
+    },
+    {
+      "id": "M05",
+      "title_ko": "상점·첫 구매 UX 및 안정화",
+      "definition_of_done": "기존 HOME SHOP 탭에 명확한 보상/가격/수량/통화/영수증/복원·고객지원, 세로/가로/뒤로가기/접근성 검증",
+      "next": "M06"
+    },
+    {
+      "id": "M06",
+      "title_ko": "선택형 광고 수익화",
+      "definition_of_done": "H5 게임 광고 신청·승인 후만 실제 광고; 광고 거절·실패는 정상 플레이, 완료 검증/보상 제한/경제 악용 방지",
+      "next": "M07"
+    },
+    {
+      "id": "M07",
+      "title_ko": "재방문·시즌 수익 설계",
+      "definition_of_done": "무료/유료 장기 플레이 가치, 연구패스·구독 또는 수집 코스메틱을 실제 성장·보상루프에 연동; 과금 강제 난도 금지",
+      "next": "M08"
+    },
+    {
+      "id": "M08",
+      "title_ko": "출시 정책·경제 QA 및 매출 관측",
+      "definition_of_done": "체크아웃 실결제/세금/환불/고객지원/개인정보 동의/스토어 배포 옵션/분석 퍼널/복구·악용 시험",
+      "next": "STEP09"
+    }
+  ],
+  "legacy_step_count": 43,
+  "legacy_order_preserved": true,
+  "legacy_completed_already": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "legacy_step03_still_partial": true,
+  "legacy_step09_saved_design_progress": 30,
+  "legacy_43_gate_matrix": [
+    {
+      "legacy_step": 1,
+      "phase": 0,
+      "monetization_dependencies": "현행 기준선, 로그인 없는 로컬 저장 재화와 추후 유료 원장 마이그레이션 구별",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 2,
+      "phase": 0,
+      "monetization_dependencies": "GitHub snapshot 외 서버 DB point-in-time 복원/유료 영수증 안전 백업 추가",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 3,
+      "phase": 0,
+      "monetization_dependencies": "3~5분 게임 랙 재현·성능 KPI에 상점/광고 SDK 오버헤드까지 분리 측정",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 4,
+      "phase": 1,
+      "monetization_dependencies": "공격 이벤트 사용률은 광고/상품 관련 보상 트리거가 될 수 있으나 지급 판정은 서버 검증",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 5,
+      "phase": 1,
+      "monetization_dependencies": "총/칼 피해량·잠금 유지; 유료 구매가 직접 승리 조건이 되지 않도록 보상 연결",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 6,
+      "phase": 1,
+      "monetization_dependencies": "가시/채찍/전격 유지; 광고 보상 후 플레이 동작 차이 검증",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 7,
+      "phase": 1,
+      "monetization_dependencies": "일반/정예 피격 시스템을 유료 외형과 차별화해도 위험 경고·타격 가독성 훼손 금지",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 8,
+      "phase": 1,
+      "monetization_dependencies": "첫 전투 진입·세션 길이, 상점 첫 제안 노출 타이밍의 근거 데이터로만 활용",
+      "payment_gates": [
+        "M01",
+        "M03"
+      ],
+      "status": "completed_archived",
+      "must_include_revenue_impact_review": false
+    },
+    {
+      "legacy_step": 9,
+      "phase": 2,
+      "monetization_dependencies": "**보류(30% 설계 기록 보존)**: 진화 수집 가치/모델을 M01~M08 가격·경제 게이트 후 확정",
+      "payment_gates": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 10,
+      "phase": 2,
+      "monetization_dependencies": "외피/꼬리 2갈래 변이에 수집형 외형/탐험 미션의 유료·무료 소비처 연결",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 11,
+      "phase": 2,
+      "monetization_dependencies": "팔/입 첫 진화의 외형 소장/테마, 특정 속성은 무과금도 접근 가능해야 함",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 12,
+      "phase": 2,
+      "monetization_dependencies": "Lv6 심화 수집 가치, 과금만으로 핵심 피해/도달을 강제하지 않는 정책",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 13,
+      "phase": 2,
+      "monetization_dependencies": "진화 외형과 유료 코스메틱 소유권·동시 착용·기존 아트 복원/편의 분리",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 14,
+      "phase": 3,
+      "monetization_dependencies": "고등급 카드는 기존 추첨 확률 유지; 유료 구매로 희귀도 확률을 몰래 조작 금지",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 15,
+      "phase": 3,
+      "monetization_dependencies": "빌드 친화 카드 추첨과 광고 무료 선택지는 밸런스에 따른 광고 사용 효과 검증",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 16,
+      "phase": 3,
+      "monetization_dependencies": "위험-보상 선택카드에 유료 확률 뽑기나 고의적인 실패 유도 연결 금지",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 17,
+      "phase": 3,
+      "monetization_dependencies": "무료/유료 성장 속도·D1 D7 리텐션·구매자 승률 격차를 정량 비교",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 18,
+      "phase": 4,
+      "monetization_dependencies": "융합 발견·해금 트래킹을 연구 패스/도감 보상과 연결하되 기본 융합 무료",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 19,
+      "phase": 4,
+      "monetization_dependencies": "1차 융합마다 모션·외형 수집 테마 업셀은 선택적으로, 유료 전용 피해 차단",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 20,
+      "phase": 4,
+      "monetization_dependencies": "2차 융합은 월간 미션/도감에 연결해 재방문 동기를 추가",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 21,
+      "phase": 4,
+      "monetization_dependencies": "융합 성장의 과금 중복·무한 손익과 광고 전투 후 보상을 함께 검증",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 22,
+      "phase": 5,
+      "monetization_dependencies": "웨이브 시간 구조는 미션/패스 진행률 데이터로 쓸 수 있으나 브라우저 클레임 위조 검증",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 23,
+      "phase": 5,
+      "monetization_dependencies": "몬스터 행동 다양화로 무료 반복 플레이 가치 보장, 과금 강제 난도 금지",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 24,
+      "phase": 5,
+      "monetization_dependencies": "중간보스 드롭을 무료 경제와 프리미엄 소비처에 연결 (고정 보상/중복 지급 제어)",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 25,
+      "phase": 5,
+      "monetization_dependencies": "7 TITAN 플레이 가능 여부와 보상/유료 외형 콘텐츠 제공 조건 정확히 구분",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 26,
+      "phase": 5,
+      "monetization_dependencies": "TITAN 발견 보상은 패스/업적 및 계정 구매 권리와 별도로 유지·복원",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 27,
+      "phase": 6,
+      "monetization_dependencies": "맵 기믹은 순수 콘텐츠·미션으로 재방문 유도, 결제 여부에 따른 진입 차별 금지",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 28,
+      "phase": 6,
+      "monetization_dependencies": "랜덤 사건의 대가/보상이 유료 재화 보장 뽑기로 이어지면 별도 법규/확률 공개 검토",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 29,
+      "phase": 6,
+      "monetization_dependencies": "맵별 도전 목표, 보상 받기, 광고 노출 위치는 전투 흐름 방해 없는 지점만",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 30,
+      "phase": 7,
+      "monetization_dependencies": "장비 희귀 스킨/컬렉션 상품과 핵심 무기 획득·전투 스펙을 분리",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 31,
+      "phase": 7,
+      "monetization_dependencies": "장비 variant 및 유료 테마 entitlement 매핑; 결제 전에도 기본 프로필 정상",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 32,
+      "phase": 7,
+      "monetization_dependencies": "DNA 연구 소비처/유료 보조재화 수입출의 결정적 지점, M02 정량 경제에 맞춰 설계",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 33,
+      "phase": 7,
+      "monetization_dependencies": "도감 수집 메타데이터 및 시즌 패스/확정형 스킨 상품에 연결",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 34,
+      "phase": 7,
+      "monetization_dependencies": "localStorage DNA·스테이지와 서버 권한 장부를 분리 마이그레이션, 중복 이관 방지",
+      "payment_gates": [
+        "M02",
+        "M03",
+        "M05"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 35,
+      "phase": 8,
+      "monetization_dependencies": "결과 화면에 무료 보상·선택 광고·정량 구매 제안 표시 (광고/구매 강제 금지)",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 36,
+      "phase": 8,
+      "monetization_dependencies": "보스 러시 보상은 1회/반복 지급 자격, 시즌 연구 과제와 연결",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 37,
+      "phase": 8,
+      "monetization_dependencies": "무한 생존의 무제한 자동 보상 반복 수령을 서버 한도/검증으로 통제",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 38,
+      "phase": 8,
+      "monetization_dependencies": "실험실 시작 규칙은 프리미엄 상품을 필수로 요구하지 않음, 선택형 체험 가치를 제공",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 39,
+      "phase": 8,
+      "monetization_dependencies": "챌린지·도감 보상은 실제 지급·중복/복귀 지급 방지 경제 회계 기준과 연계",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 40,
+      "phase": 9,
+      "monetization_dependencies": "백엔드/광고 브릿지 추가 CPU/GPU/메모리 소비 측정, 실기 FPS/발열 우선",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 41,
+      "phase": 9,
+      "monetization_dependencies": "상점·체크아웃 복귀·보상 광고 세로/가로/전체화면/터치 및 접근성 QA",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 42,
+      "phase": 9,
+      "monetization_dependencies": "무료·유료/광고 거절/거래 실패/구매복원 조합 1~후반 스테이지 운영 밸런스",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    },
+    {
+      "legacy_step": 43,
+      "phase": 9,
+      "monetization_dependencies": "실결제 샌드박스/프로덕션/웹훅 재시도·환불/취소·DB 복구·고객정보와 전체 Git 리허설",
+      "payment_gates": [
+        "M03",
+        "M04",
+        "M05",
+        "M08"
+      ],
+      "status": "paused_for_monetization_first",
+      "must_include_revenue_impact_review": true
+    }
+  ],
+  "execution_policy": {
+    "each_mon_step_segments": [
+      "10/20/30 design",
+      "40/50/60/70 technical implementation/sandbox",
+      "80/90/100 regression/live and backup"
+    ],
+    "each_10pct_full_remote_snapshot": true,
+    "images_must_be_preannounced": true,
+    "real_money_requires_verified_provider": true,
+    "no_change_to_original_V614_until_tested": true,
+    "merchant_user_authorization_required_for_final_enable": true
+  },
+  "subscription_note": "Do not sell recurring subscriptions until recurring value, cancel/refund flows and provider contract are verifiable.",
+  "do_not_claim_first_revenue_until_live_purchase_verified": true
+}
