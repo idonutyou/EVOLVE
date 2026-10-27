@@ -1,0 +1,57 @@
+name: M04 live Pages mock purchase verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tests/monetization_m04_home_browser.cjs'
+      - '.github/workflows/m04-live-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-mock-shop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check published manifest matches reviewed M04 build
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,time,urllib.request
+          expected=json.load(open('dist/version.json'))['build']
+          url='https://idonutyou.github.io/EVOLVE/version.json'
+          for i in range(12):
+              with urllib.request.urlopen(url+'?check='+str(i),timeout=20) as res:
+                  got=json.loads(res.read())['build']
+              if got==expected:break
+              if i==11:raise SystemExit('Published build not ready: '+got)
+              time.sleep(10)
+          print('PUBLIC_BUILD_MATCH',got)
+          PY
+      - name: Install browser runner
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m04-live-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/m04-live-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/m04-live-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Test live Pages mock purchase, cancel, equip, reload, isolation on mobile
+        timeout-minutes: 16
+        env:
+          EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+        run: node tests/monetization_m04_home_browser.cjs
+      - name: Retain live screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m04-live-public-mobile
+          path: test-results/m04-*.png
+          if-no-files-found: ignore
