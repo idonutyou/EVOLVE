@@ -34,7 +34,7 @@
 - 브랜치 버전: `V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX70`.
 - SHA-256 빌드: `a687afb0418f55d1e91ab1e9f1374f153d00b54fe6c2133a99096f15145663b0`.
 - M05 80%는 **게임 빌드를 바꾸지 않는 검사·품질 게이트 단계**. 신규 이미지 제작/재렌더링 불필요.
-- 전체 M04/M05 Node 계약 **62/62 정상**. 브라우저 CI: https://github.com/idonutyou/EVOLVE/actions/runs/40573303980 — **최종 상태는 GitHub Actions 결론을 기준으로 기록**한다.
+- 전체 M04/M05 Node 계약 **62/62 통과**. 브라우저·게임 통합 CI https://github.com/idonutyou/EVOLVE/actions/runs/40573303980 **최종 success** (2026-10-28 KST): 원본 홈/파츠 브라우저 QA·M04 홈 모의 결제/전투·M05 실전 코어 효과 검사 전부 통과. M05 코어 전투 발광 렌더 6회, 캐시 빌드 2회 확인.
 - 물리 Galaxy S23+ 실제 설치 및 장시간 FPS·발열 확인은 **아직 수행하지 않았다**.
 
 ## 백업 및 90% 조건
