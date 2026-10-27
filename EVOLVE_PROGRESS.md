@@ -1,3 +1,15 @@
+# 최신 EVOLVE M05 STEP 2/3 · 60% 완료 (2026-10-28 KST)
+
+- **M05 60%: 모의 저장 오류·구매 확인창 닫기 경합·중복 탭 차단을 실제 개발 웹 UI에 구현, 모바일 QA 성공**. 이 수치는 M05 단계별 진행률임.
+- UI `web/m05-shop-ui-v618.js`에 손상 모의 저장 FAIL CLOSED 오류 모달, TEST 저장 쓰기 실패 안전 배너/구매·장착·초기화 차단, 확인 대화창 중 섹션 전환 차단, 배경·상단 닫기=구매 확인 취소 우선, 빠른 3회 확인 멱등 처리 추가.
+- CI https://github.com/idonutyou/EVOLVE/actions/runs/40566198249 **success**. 기존 M04/M05 Node 62/62(50% 기준), 변경 후 Chromium 393×852·320×568, 신규 손상 JSON/Storage 쓰기 실패 시나리오, 50% 정상 구매/장착 회귀 모두 성공.
+- 상세 `docs/monetization/M05_060_FAILURE_SAFETY_QA_KO.md`; 브라우저 `tests/monetization_m05_060_browser.cjs`; 빌드 `tools/build_m05_060.py`. manifest 1,081 / 원본 이미지 1,021개 불변.
+- 개발 브랜치 build `5d5c8f1fe6970e5f82749f1ec6f7f6f59691a797f18aff56d8c99b6e7e92d34e`; `main`/공개 게임 미변경, 실결제 없음, 물리 Galaxy S23+ 미시험.
+- 복구 `backup/monetization-m05-060-20261028`, `checkpoints/EVOLVE_M05_060_20261028.zip`/JSON (원격 검증 후 완료 확정). 이전 10~50% 복구, M04 모두 보존.
+- **다음 `고`: M05 70% STEP 2/3 마무리 — 가로 화면/포커스/키보드/스크롤·장시간 QA**. 새 이미지 렌더링 **불필요**.
+
+---
+
 # 최신 EVOLVE M05 STEP 2/3 · 50% (2026-10-28 KST)
 
 - **M05 50% 완료: 개발 브랜치에서 실제 모의 상품 보유→공명 코어 장착/해제→컬렉션→심홍 코어 해금/장착 UI 검증 성공**. 전체 게임 완성도가 아닌 M05 진행률.
