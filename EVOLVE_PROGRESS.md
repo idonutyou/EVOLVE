@@ -1,3 +1,15 @@
+# 최신 EVOLVE M05 STEP 3/3 · 80% 배포 전 통합 검사 완료 (2026-10-28 KST)
+
+- **M05 80% 완료:** 기존 M04 원본 게임 파일 바이트와 모의 상점 확장의 공존 확인. **이번에는 게임 화면 수정/실제 공개 배포 없음.**
+- 정적 감사 `tools/verify_m05_080_integration.py` 성공: 원본 해시 자산 **1,078개 바이트 동일**(이미지 **1,021개**), M05 개발용 JS 4개만 추가, `index.html`은 플래그 스크립트·버전 정보를 제외하면 M04 main과 동일. 5종 결제 카탈로그 모두 가격 null·운영 checkout=false. 게임 원본·M04 엔진/SW·M03 경로 불변.
+- Chromium 실동작 `tests/monetization_m05_080_integration_browser.cjs` + 기존 홈·파츠·M04 전투/모의 구매 회귀 성공; M05 코어 전투 발광/상점 전투 중 차단/원래 세이브 격리, 62/62 Node 검사 성공: https://github.com/idonutyou/EVOLVE/actions/runs/40573303980.
+- **잔여 리스크:** M04에서 이어진 개발용 DEV 상점 버튼이 ORGANISM 하위 탭 터치를 가리는 경우 있음. 기본 URL에서는 개발 버튼이 없어 영향 없음. **90% 통합 전에 해소·재시험 필요**.
+- 상세 `docs/monetization/M05_080_INTEGRATION_GATE_KO.md`; 기준 `main` SHA `fbe3224a3bdd95020829228427ddc3b05ed41f9e` 미변경, 물리 Galaxy S23+ 미시험. 빌드 M05-UX70 `a687afb0418f55d1e91ab1e9f1374f153d00b54fe6c2133a99096f15145663b0`.
+- 80% 백업 `backup/monetization-m05-080-20261028` / `checkpoints/EVOLVE_M05_080_20261028.zip`·JSON (실제 원격 성공 후 복구 증거). 이전 10~70%/M04 백업 보존.
+- **다음 `고`: M05 90%** 개발 오버레이 터치 겹침 해소 및 안전한 main 병합/개발 Pages 공개 반영 결정. **신규 이미지 렌더링 불필요**, 실결제는 M08까지 비활성.
+
+---
+
 # 최신 EVOLVE M05 STEP 2/3 · 70% 완료 (2026-10-28 KST)
 
 - **M05 70%**: 개발용 모의 상점의 모바일 가로 화면·포커스·스크롤·뒤로가기/12회 반복 동작을 실제 Chrome에서 최종 검사하고 STEP 2/3 UI 구간 종료.
