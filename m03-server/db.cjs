@@ -15,11 +15,13 @@ function makeStore(pool){
   });
  }
  async function readWallet(accountId){
-  const r=await pool.query('SELECT origin_bucket,available_units FROM m03_wallets WHERE account_id=$1',[accountId]);
+  const r=await pool.query('SELECT origin_bucket,available_units,version,updated_at FROM m03_wallets WHERE account_id=$1',[accountId]);
   const get=b=>Number(r.rows.find(x=>x.origin_bucket===b)?.available_units);
   const free=get('free'),paid=get('paid');
   if(!Number.isSafeInteger(free)||!Number.isSafeInteger(paid)||free<0||paid<0)throw Error('BAD_BALANCE');
-  return {freeCrystals:free,paidCrystals:paid,totalCrystals:free+paid,currency:'mutation_crystal'};
+  const versions=r.rows.map(x=>Number(x.version)),times=r.rows.map(x=>Date.parse(x.updated_at));
+  if(!Number.isSafeInteger(free+paid)||versions.some(x=>!Number.isSafeInteger(x)||x<0)||times.some(x=>!Number.isFinite(x)))throw Error('WALLET_INVALID');
+  return {freeCrystals:free,paidCrystals:paid,totalCrystals:free+paid,currency:'mutation_crystal',version:Math.max(...versions),updatedAt:new Date(Math.max(...times)).toISOString()};
  }
  async function readEntitlements(accountId){
   const r=await pool.query("SELECT entitlement_id FROM m03_entitlement_sources WHERE account_id=$1 AND state='active' GROUP BY entitlement_id",[accountId]);
