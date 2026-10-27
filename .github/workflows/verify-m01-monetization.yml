@@ -1,0 +1,24 @@
+name: M01 secure product and transaction contract tests
+on:
+  push:
+    branches: [monetization-m01-contracts-20261027]
+    paths:
+      - "monetization/**"
+      - "tests/monetization*.test.cjs"
+      - ".github/workflows/verify-m01-monetization.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run fail-closed business logic and contract assertions (no API secrets)
+        run: |
+          node --version
+          node --test tests/monetization*.test.cjs
+      - name: Verify production V614 was not modified
+        run: |
+          python3 tools/verify_monster_feedback_v614.py
