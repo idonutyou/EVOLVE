@@ -17,6 +17,8 @@ const skuData={
  season_research_pass_01:{details:'미완성 시즌 보상 · 구매 및 지급 잠금',group:'LOCKED'}
 };
 let mode='shop',selected=null,scrollShop=0,scrollCollection=0,wasOpen=false;
+let safetyOpen=false,safetyFocus=null,writeFailLatched=false,blockedActionCount=0;
+const storageKey=api.storageKey;
 const css=document.createElement('style');css.id='m05ShopStyleV618';css.textContent=[
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel{overscroll-behavior:contain;scrollbar-gutter:stable}',
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel button,#m04MockModalV616[data-m05-ux="true"] .m05DetailLink{min-height:44px;touch-action:manipulation}',
@@ -35,6 +37,10 @@ const css=document.createElement('style');css.id='m05ShopStyleV618';css.textCont
  '#m05DetailV618 .m05Back{background:#292b39}',
  '#m05DetailV618 .m05Disclaimer{font:600 12px/1.5 system-ui;color:#a9f4de}',
  '#m05DetailV618 .m05Secondary{background:#27394a;border-color:#77b8cf}',
+ '#m05SafeErrorV619{padding:18px 14px;border:2px solid #efa391;background:#221c29;border-radius:12px;color:#fff7f2;font:600 13px/1.6 system-ui}',
+ '#m05SafeErrorV619 h2{margin:0 0 8px;color:#ffcfb5;font:900 20px/1.4 system-ui}',
+ '#m05SafeErrorV619 button{width:100%;min-height:44px;border-radius:9px;border:1px solid #e3b4a5;background:#5c3a43;color:white;font:800 13px system-ui}',
+ '#m05SafeBannerV619{margin:10px 0;padding:10px 12px;background:#442637;border:1px solid #ef9fb0;border-radius:9px;color:#ffe4eb;font:700 12px/1.55 system-ui}',
  '#m05CollectionStatusV618{border:1px solid #536e7b;background:#142837;border-radius:8px;padding:9px 10px;color:#d9f7fa;font:700 12px/1.45 system-ui;margin:5px 0 10px}',
  '.m05CollectionMeta{font:700 12px/1.45 system-ui;color:#b9f1ec;margin:8px 0 5px}',
  '.m05GetTheme{width:100%;min-height:44px;border:1px solid #789bba;border-radius:8px;background:#1c3446;color:#e0f8ff;font:800 12px system-ui;margin-top:8px}',
@@ -48,13 +54,53 @@ const css=document.createElement('style');css.id='m05ShopStyleV618';css.textCont
 ].join('\n');document.head.appendChild(css);
 function make(tag,cls,content){const el=document.createElement(tag);if(cls)el.className=cls;if(content!==undefined)el.textContent=content;return el}
 function navButton(label,section){const b=make('button','',label);b.type='button';b.dataset.m05Section=section;b.setAttribute('aria-pressed',String(mode===section));b.addEventListener('click',()=>change(section));return b}
-function change(next){if(!m04.isOpen()||!['shop','collection'].includes(next))return;
+function pendingConfirmation(){return !!panel.querySelector('#m04MockConfirmV617')}
+function safeRead(){
+ try{
+  const state=m04.read();
+  if(!state||!Number.isFinite(state.testCrystals))return null;
+  return state;
+ }catch{return null}
+}
+function storageFailureMessage(){
+ const status=panel.querySelector('#m04MockMessageV616')?.textContent||'';
+ return /저장하지 못|저장 공간|손상|저장 데이터|INVALID_MOCK_STORAGE|MOCK_STORAGE_WRITE_FAILED/.test(status)?status:'';
+}
+function showSafetyModal(){
+ if(safetyOpen)return;
+ safetyOpen=true;safetyFocus=document.activeElement;mode='shop';selected=null;
+ panel.replaceChildren();
+ const card=make('section','');card.id='m05SafeErrorV619';
+ card.setAttribute('role','alert');card.setAttribute('aria-live','assertive');
+ const title=make('h2','','테스트 저장을 확인할 수 없어');
+ title.tabIndex=-1;card.append(title,
+  make('p','','DEV 모의 저장 데이터가 손상되었거나 저장 공간에 접근할 수 없어. 구매·장착·초기화를 차단했어.'),
+  make('p','','기존 테스트 기록을 자동 삭제하거나 덮어쓰지 않아. 브라우저 저장 상태를 확인한 뒤 다시 열어 줘.'));
+ const close=make('button','','닫기');close.type='button';close.addEventListener('click',closeSafetyModal);card.appendChild(close);
+ panel.appendChild(card);
+ modal.dataset.m05Safe='true';modal.hidden=false;
+ title.focus();
+}
+function closeSafetyModal(){
+ if(!safetyOpen)return;
+ safetyOpen=false;modal.hidden=true;delete modal.dataset.m05Safe;
+ panel.replaceChildren();safetyFocus?.focus?.();safetyFocus=null;
+}
+function markReadOnly(message){
+ writeFailLatched=true;
+ let banner=panel.querySelector('#m05SafeBannerV619');
+ if(!banner){banner=make('p','','');banner.id='m05SafeBannerV619';banner.setAttribute('role','alert');panel.insertBefore(banner,panel.firstChild)}
+ banner.textContent='테스트 기록을 저장하지 못했어. 추가 구매·장착·초기화를 차단했어. 새로고침 전까지 안전 모드로 유지돼. '+message;
+ const keys='.m04MockCards button,.m04CoreGallery button,.m04MockReset,#m05DetailActionV618,.m05GetTheme';
+ panel.querySelectorAll(keys).forEach(b=>{b.disabled=true;b.setAttribute('aria-disabled','true')});
+}
+function change(next){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!['shop','collection'].includes(next))return;
  if(mode==='shop')scrollShop=panel.scrollTop;
  if(mode==='collection')scrollCollection=panel.scrollTop;
  mode=next;selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=next==='shop'?scrollShop:scrollCollection});
 }
-function openDetail(sku){if(!m04.isOpen()||!skuData[sku])return;if(mode==='shop')scrollShop=panel.scrollTop;selected=sku;mode='detail';render();panel.scrollTop=0;document.getElementById('m05DetailTitleV618')?.focus()}
-function backDetail(){mode='shop';selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=scrollShop;document.querySelector('.m05DetailLink[data-m05-sku="'+lastSku+'"]')?.focus()})}
+function openDetail(sku){if(safetyOpen||!m04.isOpen()||pendingConfirmation()||!skuData[sku])return;if(mode==='shop')scrollShop=panel.scrollTop;selected=sku;mode='detail';render();panel.scrollTop=0;document.getElementById('m05DetailTitleV618')?.focus()}
+function backDetail(){if(pendingConfirmation())return;mode='shop';selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=scrollShop;document.querySelector('.m05DetailLink[data-m05-sku="'+lastSku+'"]')?.focus()})}
 let lastSku=null;
 function drawDetail(list,confirmOpen){
  if(!selected)return;
@@ -130,8 +176,8 @@ function decorateRows(list){if(!list)return;const catalog=api.catalog(),rows=lis
  row.querySelector('div')?.appendChild(link);
  });
 }
-function render(){if(!m04.isOpen())return;modal.dataset.m05Ux='true';modal.dataset.m05Mode=mode;
- const list=panel.querySelector('.m04MockCards');if(!list)return;
+function render(){if(safetyOpen||!m04.isOpen())return;modal.dataset.m05Ux='true';modal.dataset.m05Mode=mode;
+ const list=panel.querySelector('.m04MockCards');if(!list){if(!safeRead())showSafetyModal();return}
  if(!panel.querySelector('#m05NavigationV618')){
   const nav=make('nav');nav.id='m05NavigationV618';nav.setAttribute('aria-label','개발용 상점 화면');
   nav.append(navButton('모의 상점','shop'),navButton('코어 컬렉션','collection'));
@@ -143,13 +189,33 @@ function render(){if(!m04.isOpen())return;modal.dataset.m05Ux='true';modal.datas
  if(mode!=='collection')panel.querySelector('#m05CollectionStatusV618')?.remove();
  const detail=panel.querySelector('#m05DetailV618');if(mode==='detail'){if(!detail)drawDetail(list,!!panel.querySelector('#m04MockConfirmV617'))}else detail?.remove();
  const confirmation=panel.querySelector('#m04MockConfirmV617');
- if(confirmation){confirmation.style.display='block';const cancel=confirmation.querySelector('button');if(cancel)cancel.focus()}
+ if(confirmation){confirmation.style.display='block';const cancel=confirmation.querySelector('button');if(cancel&&document.activeElement!==cancel)cancel.focus()}
+ const failure=storageFailureMessage();if(failure)writeFailLatched=true;
+ if(writeFailLatched)markReadOnly(failure);
 }
-const observer=new MutationObserver(()=>{if(m04.isOpen()){if(!wasOpen){mode='shop';selected=null;scrollShop=0;scrollCollection=0;wasOpen=true}render()}else{wasOpen=false;mode='shop';selected=null}});
+const observer=new MutationObserver(()=>{if(safetyOpen)return;if(m04.isOpen()){if(!wasOpen){mode='shop';selected=null;scrollShop=0;scrollCollection=0;wasOpen=true}render()}else{wasOpen=false;mode='shop';selected=null}});
 observer.observe(modal,{attributes:true,attributeFilter:['hidden'],childList:true,subtree:true});
-originalTrigger?.addEventListener('click',()=>requestAnimationFrame(render));
-modal.addEventListener('keydown',e=>{if(e.key==='Escape'&&mode==='detail'&&!panel.querySelector('#m04MockConfirmV617')&&m04.isOpen()){e.stopImmediatePropagation();e.preventDefault();lastSku=selected;backDetail()}},true);
-window.__EVOLVE_DEV_M05_UI_V618__=Object.freeze({mode:'DEV_UI_ONLY',enabled:true,current:()=>mode,openDetail,go:change});
+originalTrigger?.addEventListener('click',e=>{
+ if(safetyOpen){e.preventDefault();e.stopImmediatePropagation();return}
+ if(!safeRead()){e.preventDefault();e.stopImmediatePropagation();showSafetyModal();return}
+ requestAnimationFrame(render);
+},true);
+modal.addEventListener('click',e=>{
+ if(safetyOpen){if(e.target===modal){e.stopImmediatePropagation();e.preventDefault();closeSafetyModal()}return}
+ const confirm=panel.querySelector('#m04MockConfirmV617');
+ if(!confirm)return;
+ const closeControl=panel.querySelector('.m04MockHead button');
+ if(e.target===modal||closeControl?.contains(e.target)){
+  e.stopImmediatePropagation();e.preventDefault();confirm.querySelector('button')?.click();return
+ }
+ if(e.target.closest('#m05NavigationV618,.m05DetailLink,#m05DetailV618 .m05Back,.m05GetTheme')){
+  e.preventDefault();e.stopImmediatePropagation();blockedActionCount++;
+ }
+},true);
+modal.addEventListener('keydown',e=>{
+ if(safetyOpen&&e.key==='Escape'){e.stopImmediatePropagation();e.preventDefault();closeSafetyModal();return}
+ if(e.key==='Escape'&&mode==='detail'&&!panel.querySelector('#m04MockConfirmV617')&&m04.isOpen()){e.stopImmediatePropagation();e.preventDefault();lastSku=selected;backDetail()}},true);
+window.__EVOLVE_DEV_M05_UI_V618__=Object.freeze({mode:'DEV_UI_ONLY',enabled:true,current:()=>mode,openDetail,go:change,safety:()=>Object.freeze({readOnly:writeFailLatched,corruptModal:safetyOpen,blockedActions:blockedActionCount})});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();
 })();
