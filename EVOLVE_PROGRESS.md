@@ -1,3 +1,16 @@
+# 최신 EVOLVE M05 STEP 2/3 · 40% (2026-10-28 KST)
+
+- **M05 40%: 실제 개발용 상점/컬렉션 섹션 전환 + 상품 상세 UI 구현 및 Chrome 모바일 통과**. 전체 게임 완성도가 아니라 M05 개별 진행률.
+- 구현 `web/m05-shop-ui-v618.js`, 패키징 `tools/build_m05_040.py`, 실동작 QA `tests/monetization_m05_040_browser.cjs`, 보고 `docs/monetization/M05_040_IMPL_QA_KO.md`.
+- SHA-256 asset 하나 추가, 기능 브랜치 dist 리소스 1,079개/원본 이미지 1,021개 유지, M04 모의 구매 엔진·기존 저장/원본 게임 보존.
+- 실제 Chrome 모바일 393×852·320×568: 2개 섹션, 상품 상세 5개, 모의 취소 바이트 불변, 테스트 결정 +100, 코어 2종, 버튼 44px, 가로 넘침 없음.
+- GitHub Actions https://github.com/idonutyou/EVOLVE/actions/runs/40558205928 **success**, Node 62/62.
+- M05 확장 UI는 `?evolveMockShop=1&evolveM05UX=1`에서만. `main`·공개 GitHub Pages는 현재 **변경하지 않음**; 실결제 없음.
+- 40% 백업 `backup/monetization-m05-040-20261028`, `checkpoints/EVOLVE_M05_040_20261028.zip`/JSON (백업 SHA 확인 후 완료 기준). 이전 10/20/30% 모두 보존.
+- **다음 `고` → M05 50%:** 소유/장착 상품 상세 CTA·상태 표시 개선. 이미지 렌더링 **불필요**.
+
+---
+
 # 최신: EVOLVE M05 STEP 1/3 · 30% 설계 완료 (2026-10-28 KST)
 
 - **M05 30% STEP 1/3 종료**: 10% 정보 구조, 20% 상품/소유 상태, 30% 모바일 화면 전환·터치·스크롤·접근성 설계 동결. 이 퍼센트는 게임 전체가 아니라 M05의 진행률.
