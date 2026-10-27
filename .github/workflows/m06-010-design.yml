@@ -16,6 +16,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 12
       - name: Validate premium cosmetic design safeguards
         run: node tests/m06_010_design.test.cjs
       - name: Ensure the existing game bundle is not part of M06 10% change
