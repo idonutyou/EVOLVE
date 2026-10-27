@@ -4,8 +4,8 @@
   "date_kst": "2026-10-27",
   "current_major_step": "M01",
   "current_part": 3,
-  "current_progress": 80,
-  "result": "M01 security audit complete: 51/51 QA contract tests pass, but all 40 production acceptance gates remain blocked/unimplemented",
+  "current_progress": 90,
+  "result": "M01 51/51 QA contract tests and deployment-isolated PR #5 merged; zero live revenue gates passed",
   "revenue_priority": "P0 before further STEP09 and subsequent gameplay design",
   "previous_legacy_step": "STEP09",
   "previous_legacy_30_percent_saved": true,
@@ -54,7 +54,8 @@
     "docs/monetization/M01_VALIDATION_070.json",
     "docs/monetization/M01_PART2_HANDOFF_KO.md",
     "tests/monetization_security_m01.test.cjs",
-    "docs/monetization/M01_ACCEPTANCE_AUDIT_080.json"
+    "docs/monetization/M01_ACCEPTANCE_AUDIT_080.json",
+    "docs/monetization/M01_INTEGRATION_090.json"
   ],
   "backup_branches": [
     "backup/monetization-m01-010-20261027",
@@ -64,11 +65,12 @@
     "backup/monetization-m01-050-20261027",
     "backup/monetization-m01-060-20261027",
     "backup/monetization-m01-070-20261027",
-    "backup/monetization-m01-080-20261027"
+    "backup/monetization-m01-080-20261027",
+    "backup/monetization-m01-090-20261027"
   ],
   "next_part": 3,
-  "next_progress": 90,
-  "next_task": "security-only PR merge to main, preserve V614 without Pages runtime changes",
+  "next_progress": 100,
+  "next_task": "final M01 report, restore readback all ten Git snapshots and Handoff M02",
   "new_image_rendering_next_part": false,
   "next_major_step_after_m01": "M02 economy and SKU quantitative balancing",
   "provider_approval_requires_user_action": true,
@@ -117,5 +119,10 @@
   "production_acceptance_gates": 40,
   "production_acceptance_passed": 0,
   "production_gate_contract_partial": 23,
-  "production_gate_unimplemented": 17
+  "production_gate_unimplemented": 17,
+  "integration_pr": 5,
+  "integration_merge_commit": "a793b62d637d450d59189c6b28a33ada5acd72b2",
+  "production_dist_files_unchanged": 1103,
+  "production_dist_blobs_identical": true,
+  "checkout_live": false
 }
