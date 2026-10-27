@@ -1,3 +1,20 @@
+# EVOLVE 최신 인수인계 — M05 40%, STEP 2/3 (2026-10-28 KST)
+
+> 다음 사용자 `고`는 **M05 50%** 구현 단계로 이동한다. M04~M05 10/20/30%를 반복하지 않는다.
+
+- 작업 브랜치 `monetization-m05-ux-20261028`; main 기준 `fbe3224a3bdd95020829228427ddc3b05ed41f9e`. 공개 게임은 M04 그대로.
+- 40% 신규 `web/m05-shop-ui-v618.js`와 `tools/build_m05_040.py`, `tests/monetization_m05_040_browser.cjs`; 검증 `docs/monetization/M05_040_IMPL_QA_KO.md`.
+- 개발 웹 오버레이 확장 **2중 플래그** `?evolveMockShop=1&evolveM05UX=1` (허용 호스트+홈에서만). M04 원래 `?evolveMockShop=1` 화면과 기본 URL은 변경 없이 유지.
+- 실제 게임 HTML에서 상점/컬렉션 2개 UI 탭·5종 상품 상세·M04 구매 확인/취소 위임·코어 2종 표시. 393×852/320×568 QA 통과, 저장 안전, 탭 높이 44px.
+- 기능 브랜치 version `V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX40`, build `45b179c830ad2e488d148c6d55a41c653694b4aba548da1ea32852b222299b62`; manifest 1079 / 원본 이미지 1021.
+- QA https://github.com/idonutyou/EVOLVE/actions/runs/40558205928 success, Node 62/62. **Galaxy S23+ 실기기 FPS/발열 시험은 하지 않음**.
+- 40% 복구 `backup/monetization-m05-040-20261028`; `checkpoints/EVOLVE_M05_040_20261028.zip`/JSON. 10/20/30% 이전 백업 전부 보존.
+- 다음 M05 50%: 상품 상세 구매·보유·장착 UI 상태와 컬렉션 직접 이동을 구체적으로 개선. **이미지 새로 생성할 필요 없음.**
+- 실제 결제·가격/StoreKit/Billing 비활성. 원본 저장 `EVOLVE_V575_TEST_*`, M03 유료 원장, 기존 이미지 보존. GitHub Pages는 STEP 3/3 80~100% 후 안전 배포.
+- 과거 인수인계는 아래 원문으로 보존한다.
+
+---
+
 # EVOLVE 최신 작업 인수인계 — M05 STEP 1/3 · 30% 완료 (2026-10-28 KST)
 
 > 사용자의 다음 `고`는 **M05 40% · STEP 2/3 구현 첫 구간**. M05 10~30% 설계와 M04 100%를 다시 하지 말 것.
