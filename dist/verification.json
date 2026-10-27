@@ -1,5 +1,5 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX70",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249088424,
   "index_bytes": 260596,
-  "build": "a687afb0418f55d1e91ab1e9f1374f153d00b54fe6c2133a99096f15145663b0",
+  "build": "b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b",
   "image_assets": 1005,
-  "cached_files": 1082,
-  "cached_bytes": 386347057,
+  "cached_files": 1083,
+  "cached_bytes": 386366614,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -2008,5 +2008,19 @@
     "real_checkout": false,
     "main_deployed": false,
     "landscape_keyboard_focus_scroll": true
+  },
+  "m05_ux_090": {
+    "percent": 90,
+    "dev_only": true,
+    "flag": [
+      "evolveMockShop=1",
+      "evolveM05UX=1"
+    ],
+    "new_asset": "assets/44780c30bcb2d4881c933bc460f4de11c22b607152e1d40354533e1b98133691.js",
+    "prior_asset": "assets/a98a49fd2ce36a7ec0bbcd411d118b68fd7fd5346aa3df294a8503c5740b3568.js",
+    "image_count": 1021,
+    "real_checkout": false,
+    "main_published": false,
+    "dev_trigger_fixed": true
   }
 }
