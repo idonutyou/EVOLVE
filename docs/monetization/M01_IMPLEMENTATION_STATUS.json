@@ -3,9 +3,9 @@
   "priority": "monetization-first",
   "date_kst": "2026-10-27",
   "current_major_step": "M01",
-  "current_part": 1,
-  "current_progress": 30,
-  "result": "strategy_and_43_step_reprioritization_design_only",
+  "current_part": 2,
+  "current_progress": 40,
+  "result": "draft-only catalog, JSON schema, static checkout guard and CI catalog tests passed",
   "revenue_priority": "P0 before further STEP09 and subsequent gameplay design",
   "previous_legacy_step": "STEP09",
   "previous_legacy_30_percent_saved": true,
@@ -15,7 +15,7 @@
   "baseline_main_sha": "1da98901f336117cc8dd9b69a25dd7c6fb237596",
   "public_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
   "public_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
-  "code_changed": false,
+  "code_changed": true,
   "game_dist_changed": false,
   "pages_deployed": false,
   "new_images_generated": 0,
@@ -39,17 +39,29 @@
     "docs/monetization/MONETIZATION_FIRST_ROADMAP.json",
     "docs/monetization/M01_030_ACCEPTANCE_TESTS.json",
     "docs/monetization/M01_030_HANDOFF_KO.md",
-    "docs/step06/ROADMAP_PROGRESS.md"
+    "docs/step06/ROADMAP_PROGRESS.md",
+    "monetization/catalog/draft_skus.json",
+    "monetization/catalog/draft_catalog.schema.json",
+    "monetization/catalog/catalog_guard.cjs",
+    "tests/monetization_catalog_m01.test.cjs",
+    ".github/workflows/verify-m01-monetization.yml"
   ],
   "backup_branches": [
     "backup/monetization-m01-010-20261027",
     "backup/monetization-m01-020-20261027",
-    "backup/monetization-m01-030-20261027"
+    "backup/monetization-m01-030-20261027",
+    "backup/monetization-m01-040-20261027"
   ],
   "next_part": 2,
-  "next_progress": 40,
-  "next_task": "provider-independent SKU catalog, status model and anti-fake-entitlement unit tests",
+  "next_progress": 50,
+  "next_task": "pure transaction state machine with server-only trusted receipt transitions",
   "new_image_rendering_next_part": false,
   "next_major_step_after_m01": "M02 economy and SKU quantitative balancing",
-  "provider_approval_requires_user_action": true
+  "provider_approval_requires_user_action": true,
+  "sku_draft_count": 5,
+  "catalog_ci_run": 40481177611,
+  "catalog_ci_result": "success",
+  "product_prices_registered": false,
+  "client_checkout_enabled": false,
+  "game_code_changed": false
 }
