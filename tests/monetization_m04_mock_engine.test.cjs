@@ -117,7 +117,7 @@ test('receipt limits stop unlimited developer save growth',()=>{
  const {shop,storage}=start();
  const mock=JSON.parse(storage.getItem(storageKey)||JSON.stringify({schema:'evolve.dev-mock-shop.v1',profiles:{}}));
  mock.profiles[profile]={schema:'evolve.dev-mock-shop.v1',testCrystals:0,receipts:{},owned:{},equipped:{},revision:0};
- for(let i=0;i<500;i++)mock.profiles[profile].receipts['history_'+i]={sku:'mutation_crystal_small'};
+ for(let i=0;i<500;i++)mock.profiles[profile].receipts['history_request_'+i]={sku:'mutation_crystal_small',mockOnly:true,source:'dev_mock',status:'MOCK_GRANTED',devCrystals:100};
  storage.setItem(storageKey,JSON.stringify(mock));
  assert.throws(()=>buy(shop,'mutation_crystal_small',id(24)),/MOCK_RECEIPT_LIMIT/);
  assert.equal(shop.snapshot(profile).testCrystals,0);
@@ -161,4 +161,22 @@ test('a failed test crystal debit grants no cosmetic and retains the balance',()
  const broken=createStore({enabled:true,storage:{getItem:backing.getItem,setItem:()=>{throw Error('FULL')}}});
  assert.throws(()=>broken.redeemCosmetic(profile,'dev_core_theme_02',id(38)),/MOCK_STORAGE_WRITE_FAILED/);
  assert.equal(backing.getItem(storageKey),before);
+});
+
+test('malformed nested records and unowned equipped cores fail closed without erasure',()=>{
+ for(const mutate of [p=>{p.owned=[]},p=>{p.receipts=[]},p=>{p.equipped={core:'dev_core_theme_02'}},p=>{p.revision=-1},p=>{p.owned={dev_core_theme_01:'yes'}}]){
+  const {shop,storage}=start();buy(shop,'mutation_crystal_mid',id(41));
+  const d=JSON.parse(storage.getItem(storageKey));mutate(d.profiles[profile]);
+  const raw=JSON.stringify(d);storage.setItem(storageKey,raw);
+  assert.throws(()=>shop.snapshot(profile),/INVALID_MOCK_STORAGE/);
+  assert.equal(storage.getItem(storageKey),raw);
+ }
+});
+test('Object prototype method names do not become test profiles or alter Object.prototype',()=>{
+ const {shop}=start();
+ for(const [i,name] of ['toString','valueOf','hasOwnProperty'].entries()){
+  shop.simulatePurchase('mutation_crystal_small',name,id(50+i));
+  assert.equal(shop.snapshot(name).testCrystals,100);
+ }
+ assert.equal(Object.prototype.testCrystals,undefined);
 });

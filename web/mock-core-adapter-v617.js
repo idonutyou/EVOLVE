@@ -2,7 +2,8 @@
 if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615__){
  const mockCoreVisualsV617=window.__EVOLVE_DEV_CORE_VISUALS_V617__;
  const mockCoreRendererV617=mockCoreVisualsV617.createRenderer((w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c;});
- const mockCoreStoreV617=window.__EVOLVE_DEV_MOCK_STORE_V615__.createStore({enabled:true,storage:window.localStorage});
+ let mockCoreStoreV617=null;
+ try{mockCoreStoreV617=window.__EVOLVE_DEV_MOCK_STORE_V615__.createStore({enabled:true,storage:window.localStorage});}catch(e){/* Optional cosmetics must not prevent the original game boot. */}
  let mockCoreThemeV617=null,mockCoreErrorV617=null,mockCoreCombatDrawsV617=0;
  const mockCoreProfileV617='dev_local_profile_01';
  const mockCoreOverlayV617=document.createElement('canvas');
@@ -31,6 +32,7 @@ if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615_
  }
  function mockCoreSyncV617(){
   try{
+   if(!mockCoreStoreV617)throw Error('MOCK_STORAGE_UNAVAILABLE');
    const v=mockCoreStoreV617.snapshot(mockCoreProfileV617),id=v.equipped.core;
    mockCoreThemeV617=v.owned[id]===true&&Object.prototype.hasOwnProperty.call(mockCoreVisualsV617.themes,id)?id:null;
    mockCoreErrorV617=null;
@@ -53,7 +55,7 @@ if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615_
  const mockCoreRefreshBaseV617=mutantRefreshV599;
  mutantRefreshV599=function(...args){const out=mockCoreRefreshBaseV617(...args);mockCorePaintPartsV617();return out;};
  window.addEventListener('evolve:dev-mock-change',mockCoreSyncV617);
- window.addEventListener('storage',e=>{if(e.key===mockCoreStoreV617.storageKey||e.key===null)mockCoreSyncV617();});
+ window.addEventListener('storage',e=>{if(e.key===window.__EVOLVE_DEV_MOCK_STORE_V615__.storageKey||e.key===null)mockCoreSyncV617();});
  window.addEventListener('pageshow',mockCoreSyncV617);
  window.addEventListener('resize',mockCorePaintPartsV617);
  window.__EVOLVE_DEV_CORE_BRIDGE_V617__=Object.freeze({

@@ -31,10 +31,19 @@
  const copy=x=>JSON.parse(JSON.stringify(x));
  const safeId=(v,max=72)=>typeof v==='string'&&v.length>=3&&v.length<=max&&/^[A-Za-z0-9_-]+$/.test(v)&&!['__proto__','constructor','prototype'].includes(v);
  const fresh=()=>({schema:VERSION,profiles:{}});
+ const record=v=>v!==null&&typeof v==='object'&&!Array.isArray(v);
+ const owns=(obj,key)=>Object.prototype.hasOwnProperty.call(obj,key);
  function validate(state){
-  if(!state||state.schema!==VERSION||typeof state.profiles!=='object'||state.profiles===null||Array.isArray(state.profiles))bad('INVALID_MOCK_STORAGE');
-  for(const profile of Object.values(state.profiles)){
-   if(!profile||profile.schema!==VERSION||!Number.isSafeInteger(profile.testCrystals)||profile.testCrystals<0||!profile.receipts||!profile.owned||!profile.equipped||!Number.isSafeInteger(profile.revision))bad('INVALID_MOCK_STORAGE');
+  if(!record(state)||state.schema!==VERSION||!record(state.profiles))bad('INVALID_MOCK_STORAGE');
+  for(const [id,profile] of Object.entries(state.profiles)){
+   if(!safeId(id)||!record(profile)||profile.schema!==VERSION||!Number.isSafeInteger(profile.testCrystals)||profile.testCrystals<0||!record(profile.receipts)||!record(profile.owned)||!record(profile.equipped)||!Number.isSafeInteger(profile.revision)||profile.revision<0)bad('INVALID_MOCK_STORAGE');
+   for(const [key,value] of Object.entries(profile.owned))if((!owns(COSMETICS,key)&&key!=='dev_starter_support_v1')||value!==true)bad('INVALID_MOCK_STORAGE');
+   for(const [slot,id] of Object.entries(profile.equipped))if(slot!=='core'||!owns(COSMETICS,id)||profile.owned[id]!==true)bad('INVALID_MOCK_STORAGE');
+   for(const [key,r] of Object.entries(profile.receipts)){
+    if(!safeId(key,96)||key.length<12||!record(r)||r.mockOnly!==true||r.source!=='dev_mock'||r.status!=='MOCK_GRANTED'||!Number.isSafeInteger(r.devCrystals)||r.devCrystals<0)bad('INVALID_MOCK_STORAGE');
+    if(!owns(CATALOG,r.sku)&&r.sku!=='redeem_dev_core_theme_02')bad('INVALID_MOCK_STORAGE');
+    if(r.sku==='redeem_dev_core_theme_02'&&r.testCrystalsSpent!==COSMETICS.dev_core_theme_02.testPrice)bad('INVALID_MOCK_STORAGE');
+   }
   }
   return state;
  }
@@ -70,7 +79,7 @@
    if(item.repeatLimit===1&&Object.values(profile.receipts).some(r=>r.sku===sku))bad('MOCK_ALREADY_OWNED');
    if(Object.keys(profile.receipts).length>=500)bad('MOCK_RECEIPT_LIMIT');
    if(profile.testCrystals>Number.MAX_SAFE_INTEGER-item.devCrystals)bad('MOCK_BALANCE_OVERFLOW');
-   const next=copy(data),p=next.profiles[id]||emptyProfile();
+   const next=copy(data),p=owns(next.profiles,id)?next.profiles[id]:emptyProfile();
    p.testCrystals+=item.devCrystals;
    if(item.entitlement)p.owned[item.entitlement]=true;
    const receipt={mockOnly:true,source:'dev_mock',mockTransactionId:'devmock_'+requestId,sku,kind:item.kind,devCrystals:item.devCrystals,entitlement:item.entitlement,status:'MOCK_GRANTED'};

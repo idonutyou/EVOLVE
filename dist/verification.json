@@ -1,5 +1,5 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK60",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249088424,
   "index_bytes": 260454,
-  "build": "24f445d78bcd4943ee46685208269d5175994a43150c1d5ac27b814a6537aa47",
+  "build": "728d1c005881c2c77a932c579ae2caf99aed3b83fca8dfdd59bf86a835e24f90",
   "image_assets": 1005,
-  "cached_files": 1074,
-  "cached_bytes": 384560546,
+  "cached_files": 1077,
+  "cached_bytes": 386273269,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1927,14 +1927,14 @@
     "physical_device_tested": false
   },
   "m04_mock_content": {
-    "percent": 60,
-    "engine": "assets/feb5d1be5cf65cfedfd8e54acad760673c1b5df4aba808fde62621e99a3bf66f.js",
+    "percent": 70,
+    "engine": "assets/a588f107bb6f44770ad9b0e23f56beda5ad5edfcf92499969c18bc442e8e4908.js",
     "baseline_engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "engine_restores_exactly": true,
     "asset_paths": [
-      "assets/d808dee9bbaf9e3ef180edd1d866553216837dd93c28fa07659129acb76e634b.js",
+      "assets/19b6ae1188b9d2a9a24b8da5576b6ebbaa648da992f4fb25cd14fb18c2d45ba8.js",
       "assets/420cce5ea1e4cd944214a03f3dc701fc76994670982db5b19c1dde0922bf4dde.js",
-      "assets/47ac3d222dbbf9389439eb895434e373f7c85432682d4695029e381178e7e2a9.js"
+      "assets/054d7c43400d76924426b9ecaf65c640f91a7e06d094ee23f681b2b49e41ab7f.js"
     ],
     "new_images": 0,
     "source_art_unchanged": true,
