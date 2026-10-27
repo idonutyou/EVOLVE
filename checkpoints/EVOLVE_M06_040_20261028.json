@@ -1,0 +1,17 @@
+{
+  "stage": "M06",
+  "progress_percent": 40,
+  "base_commit": "6f85e41b7a6c8eeafb5b8dd611ba1c7776f7e633",
+  "main_at_start": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "backup_library_file_id": "libfile_41b83b512f408191b721876d61c728e7",
+  "backup_name": "EVOLVE_M06_CHECKPOINT_040_20261028.zip",
+  "backup_bytes": 9180214,
+  "backup_sha256": "f2b06b1e12bb19400945a7886a051c3ab2f1ad4333b1f4601936c67aaec4b01a",
+  "downloaded_and_compared_byte_for_byte": true,
+  "zip_crc_verified": true,
+  "internal_file_hashes_verified": 28,
+  "art_is_candidate_only": true,
+  "game_integration_complete": false,
+  "public_deployment_complete": false,
+  "physical_device_tested": false
+}

@@ -1,0 +1,53 @@
+{
+  "pass": true,
+  "layers": {
+    "reactor_shell_alpha.png": {
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "visible_alpha_16_bbox": [
+        46,
+        43,
+        146,
+        149
+      ],
+      "center_alpha": 0,
+      "sha256": "7f452eb2c62c17a465a83fe9528ee2c2273e153ab4da9f8fa898de70eef5853f"
+    },
+    "reactor_inner_lens_alpha.png": {
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "visible_alpha_16_bbox": [
+        71,
+        71,
+        120,
+        120
+      ],
+      "center_alpha": 253,
+      "sha256": "8a7cddae1b1bfde13d42df58b75104aaf345af51949be14ed1c12a1682372ad0"
+    },
+    "reactor_orbit_front_alpha.png": {
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGBA",
+      "visible_alpha_16_bbox": [
+        42,
+        46,
+        150,
+        146
+      ],
+      "center_alpha": 0,
+      "sha256": "9c17975c15218caee25bac5aefb5a3e21d64bfd1c4df2eb385fe3ce781e4bbca"
+    }
+  },
+  "character_original_sha256": "6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531",
+  "physical_device_tested": false,
+  "runtime_integration_tested": false
+}
