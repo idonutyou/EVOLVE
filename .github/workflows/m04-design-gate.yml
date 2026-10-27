@@ -1,4 +1,4 @@
-name: M04 design-only billing gate
+name: M04 mock-first premium content design safety
 on:
   push:
     branches: [monetization-m04-payment-20261027]
@@ -17,5 +17,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Assert checkout is disabled in both M01 and M04
+      - name: Check isolated mock purchases and disabled store billing
         run: node --test tests/monetization_m04_design.test.cjs
