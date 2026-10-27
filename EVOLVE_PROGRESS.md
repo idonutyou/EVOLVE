@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
-| M03 계정/서버 권한 원장 | **70% 작업 백업 / 통합검증 차단** | 작업 브랜치 `docs/monetization/M03_070_QA_HANDOFF_KO.md` | **70% 차단 해결 후 80% 여부 판단** |
+| M03 계정/서버 권한 원장 | **70% 실DB 검증 완료 / STEP 2/3 완료** | 작업 브랜치 `docs/monetization/M03_070_QA_HANDOFF_KO.md` | **STEP 3/3 · 80% 보안 회귀** |
 | M04 실제 결제 검증 | 미시작 | `docs/monetization/M03_HANDOFF_KO.md` | M03 인증·원장 이후 PG 샌드박스와 검증 |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점·광고·반복 수집·출시 게이트 |
 
@@ -30,6 +30,13 @@
 2. **실제 임시 PostgreSQL DB**에서 20%+50% SQL 마이그레이션, 동시 잔고 사용·트랜잭션 롤백·재시작·백업 복원을 실행 및 기록.
 3. 완료하면 별도 새 체크포인트·두 번 원격 검증 후 STEP 3/3(80~100%)로 진행. 실DB를 쓸 수 없으면 테스트 미검증 유지하고 완료라 선언하지 않는다.
 4. 실제 결제·광고 보상·유료 재화 지급은 여전히 금지. 이미지 렌더링 불필요.
+
+## 최신 70% 검증 완료 기록 (이전 '차단' 상태를 대체)
+- M03 작업 HEAD `c3e327e22db27905ba5f90bbac48ce8532b246f8`; 최종 원격 백업 `backup/monetization-m03-070-verified-20261027` 동일 SHA, 검증 2회 성공.
+- 새 회귀 검사 5건 포함 Node 22 **18/18** 통과. 실제 PostgreSQL 17에서 migration, 트랜잭션·동시성·롤백·재접속, `pg_dump`→별도 DB `pg_restore` 통과. 테이블 3개 행 개수 일치 확인.
+- 증빙 CI https://github.com/idonutyou/EVOLVE/actions/runs/40506471512 ; 작업 브랜치 `docs/monetization/M03_070_VERIFIED_QA_KO.md`.
+- 기존 70% QA 파일은 이전 차단 기록. 최신 검증 우선. **다음 80%부터 STEP 3/3**, 이미지 렌더링 필요 없음.
+- 기존 상품/결제 차단 유지. 운영 서버/실결제/실매출 없음. 공개 게임 파일 변경 없음.
 
 ## 새 진행률 10% 체크포인트 작성 양식
 각 10% 때 아래 항목을 실제값으로 기록:
