@@ -135,7 +135,7 @@ async function functional(page,report){
 
 async function realtime(page,report){
  const duration=Number(process.env.STEP08_DURATION_S||60);
- assert.ok([60,180,300].includes(duration));
+ assert.ok([60,180,240,300].includes(duration));
  await page.locator('#start').click();
  await require('./choose_opening_skill.cjs')(page);
  await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
@@ -147,7 +147,7 @@ async function realtime(page,report){
   // This is not a representative human-control balance or survival test.
   context.player.inv=999;context.player.hp=context.player.maxHp=10000;
   g.setNatural(true);
-  const start=performance.now(),clock=g.read().seconds,samples=[],deltas=[],hidden=[];
+  const start=performance.now(),clock=g.read().seconds,samples=[],deltas=[],hidden=[],upgradeActions=[];
   let last=null,frames=0,looping=true,ignored=0;
   const snap=()=>({wall_ms:performance.now()-start,clock_seconds:g.read().seconds,
     running:g.read().running,visible:document.visibilityState==='visible',
@@ -163,17 +163,29 @@ async function realtime(page,report){
      else ignored++;
    }last=t;frames++;window.requestAnimationFrame(observer);
   };
+  // Test-only input: use existing V598 tap guard, never alter the original RAF/step.
+  const upgradeTimer=setInterval(()=>{
+    try{
+      const organs=window.__EVOLVE_ORGAN_SKILLS_V598__?.test;
+      const choosing=window.__EVOLVE_UPGRADE_CARDS_V593__?.test?.context()?.choosing?.();
+      const card=document.querySelector('#cards .card');
+      if(choosing && card && organs?.canChoose?.()){
+        card.click();
+        upgradeActions.push({wall_ms:performance.now()-start,game_seconds:g.read().seconds,organ:card.dataset.organ||null});
+      }
+    }catch(error){upgradeActions.push({wall_ms:performance.now()-start,error:String(error)});}
+  },180);
   const timer=setInterval(()=>samples.push(snap()),10000);
   document.addEventListener('visibilitychange',()=>hidden.push({at:performance.now()-start,state:document.visibilityState}));
   window.__STEP08_REALTIME__={sample:snap,results:()=>{
-    looping=false;clearInterval(timer);samples.push(snap());
+    looping=false;clearInterval(timer);clearInterval(upgradeTimer);samples.push(snap());
     const sorted=deltas.slice().sort((a,b)=>a-b),q=p=>sorted.length?sorted[Math.min(sorted.length-1,Math.floor((sorted.length-1)*p))]:null;
     const durationMs=performance.now()-start;
     return{duration_actual_ms:durationMs,frames_seen:frames,frame_interval_samples:sorted.length,
       frame_p50_ms:q(.50),frame_p95_ms:q(.95),frame_p99_ms:q(.99),max_interval_ms:sorted.at(-1)||null,
       frames_over_50ms:sorted.filter(x=>x>50).length,frames_over_100ms:sorted.filter(x=>x>100).length,
       ratio_over_100ms:sorted.length?sorted.filter(x=>x>100).length/sorted.length:null,
-      ignored_intervals:ignored,samples,visibility_changes:hidden,
+      ignored_intervals:ignored,samples,visibility_changes:hidden,automated_upgrade_actions:upgradeActions,
       game_clock_advanced_seconds:g.read().seconds-clock,physical_device:false,
       metric_meaning:'Chromium requestAnimationFrame callback interval, NOT GPU FPS and NOT device FPS'};
    }};
@@ -182,18 +194,14 @@ async function realtime(page,report){
  const tenSecondChunks=Math.ceil(duration/10),ticks=[];
  for(let i=0;i<tenSecondChunks;i++){
   await page.waitForTimeout(10000);
-  const overlay=await page.locator('#levelOverlay').isVisible().catch(()=>false);
-  if(overlay&&await page.locator('#cards .card').count()){
-   await page.locator('#cards .card').first().click().catch(()=>{});ticks.push({at_seconds:(i+1)*10,auto_upgrade:true});
-  }
-  // Existing game can itself pause for boss intro/level choice. Record, never hide.
+  // Choices now occur every 180ms inside the test browser; host samples every 10s.
   const stat=await page.evaluate(()=>window.__STEP08_REALTIME__?.sample());
   ticks.push({at_seconds:(i+1)*10,actual_wall_ms:stat?.wall_ms,game_seconds:stat?.clock_seconds,
     living_enemies:stat?.lives,feedback_active:stat?.feedback,visibility:stat?.visible});
  }
  report.realtime=await page.evaluate(()=>window.__STEP08_REALTIME__.results());
  report.realtime.ticks=ticks;
- const which=duration===60?'P01':duration===180?'P02':'P03';
+ const which=duration===60?'P01':duration===180||duration===240?'P02':'P03';
  const valid=report.realtime.duration_actual_ms>=duration*1000*.95&&report.realtime.frame_interval_samples>=100&&
    report.realtime.visibility_changes.every(x=>x.state==='visible');
  const item=report.scenarios.find(x=>x.id===which);
@@ -207,7 +215,7 @@ async function realtime(page,report){
   p50:report.realtime.frame_p50_ms,p95:report.realtime.frame_p95_ms,p99:report.realtime.frame_p99_ms,
   over100:report.realtime.ratio_over_100ms,game_time:report.realtime.game_clock_advanced_seconds,
   living_final:report.realtime.samples.at(-1)?.lives,heap_first:report.realtime.samples.at(0)?.heap_bytes,
-  heap_last:report.realtime.samples.at(-1)?.heap_bytes,automated_upgrade_clicks:ticks.filter(t=>t.auto_upgrade).length}));
+  heap_last:report.realtime.samples.at(-1)?.heap_bytes,automated_upgrade_clicks:report.realtime.automated_upgrade_actions.length}));
 }
 
 async function main(){
