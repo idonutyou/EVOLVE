@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/native-shop-live-v620.yml'
+      - 'tests/native_shop_v620_browser.cjs'
   workflow_dispatch:
 permissions:
   contents: read
