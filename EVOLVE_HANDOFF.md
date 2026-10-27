@@ -1,3 +1,19 @@
+# EVOLVE 최신 인수인계 — M05 80% STEP 3/3 통합 회귀 통과 (2026-10-28 KST)
+
+> 다음 사용자 `고` = **M05 90%**. 기존 M04/M05 10~80%를 반복하지 말고, 80% QA가 발견한 개발용 버튼 터치 충돌을 우선 해결한 뒤 안전 배포를 검토할 것.
+
+- GitHub `idonutyou/EVOLVE` 기능 브랜치 `monetization-m05-ux-20261028`, 복구 `backup/monetization-m05-080-20261028`. main M04 기준 **`fbe3224a3bdd95020829228427ddc3b05ed41f9e`**, 공개 GitHub Pages **미변경**.
+- 정적 게이트 `tools/verify_m05_080_integration.py` main의 기존 **1,078개 리소스 원본 바이트 SHA**를 브랜치와 비교, 이미지 **1,021개** 유지. M05 전용 해시 UI asset 4개로 총 1,082개. 정식 결제 false/모든 SKU 가격 null, 기존 M04 엔진·코어 렌더러·서비스워커 바이트 동일.
+- `index.html`도 M05 한 태그/빌드 정보만 제외하면 main 원본과 완전 동일. 기타 게임 코드·M03 유료 원장 미수정.
+- 실게임 브라우저 통합 `tests/monetization_m05_080_integration_browser.cjs` / 기존 `tests/home_hub_browser.cjs`, `tests/arm_items_browser.cjs`, `tests/monetization_m04_home_browser.cjs` 통과: 홈 5탭, ORGANISM 파츠, DEV 공명 코어 획득/장착, BATTLE 전투 발광 draw 6회/캐시 builds 2회, 전투 중 모의 상점 차단, M03·게임 저장값 보존. 기본 URL DEV 전역 없음.
+- Node M04/M05 회귀 **62/62 pass**, CI **40573303980** https://github.com/idonutyou/EVOLVE/actions/runs/40573303980 success.
+- **발견된 미해결 배치 문제:** 개발용 M04 `#m04MockTriggerV616` 버튼의 실제 터치 영역이 모바일 ORGANISM 서브탭 `#homeSpecimenTab`과 겹친다. 오리지널 게임 기능 자체는 정상(스크립트 클릭으로 검사), 기본 URL은 DEV 트리거 없음. **90% 때 개발용 상점 버튼 위치만 조정·실제 터치 회귀 후 main 병합/Pages 배포**. 메인 일반 게임 UI를 무단 재설계하지 말 것.
+- M05 80% 품질 보고 `docs/monetization/M05_080_INTEGRATION_GATE_KO.md`, 체크포인트 ZIP `checkpoints/EVOLVE_M05_080_20261028.zip`·JSON, 전체 소스 복구 브랜치. 기존 10~70%/M04 백업 삭제 금지. 80% 새 이미지/게임 엔진 수정 없음.
+- 다음 **90% 이미지 렌더링 불필요**. 안전 통합이 가능하면 main과 Pages 업데이트, 변경 생기면 별도 QA/원격 SHA 두 번 검증. 실제 Google Play/Apple Billing 등 **실결제 M08**, 개발 모의 구매만 존치.
+- 실물 Galaxy S23+ 장시간 FPS/발열 테스트는 여전히 미실시. 기존 상세 인수인계는 아래 기록 유지.
+
+---
+
 # EVOLVE 최신 인수인계 — M05 STEP 2/3 · 70% 완료 (2026-10-28 KST)
 
 > 사용자의 다음 `고`는 **M05 80% STEP 3/3 회귀/배포 안전 게이트**. M04와 M05 10~70%를 처음부터 다시 하지 말 것.
