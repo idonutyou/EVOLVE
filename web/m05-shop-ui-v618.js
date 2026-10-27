@@ -20,6 +20,8 @@ let mode='shop',selected=null,scrollShop=0,scrollCollection=0,wasOpen=false,deta
 let safetyOpen=false,safetyFocus=null,writeFailLatched=false,blockedActionCount=0;
 const storageKey=api.storageKey;
 const css=document.createElement('style');css.id='m05ShopStyleV618';css.textContent=[
+ // M05-only DEV control: stay ABOVE the bottom five-tab bar rather than covering ORGANISM or other tabs.
+ '#poster #m04MockTriggerV616{top:auto;bottom:calc(96px + var(--safeB,0px));right:8px;min-height:44px;z-index:39}',
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel{overscroll-behavior:contain;scrollbar-gutter:stable}',
  '#m04MockModalV616[data-m05-ux="true"] .m04MockPanel button,#m04MockModalV616[data-m05-ux="true"] .m05DetailLink{min-height:44px;touch-action:manipulation}',
  '#m05NavigationV618{display:flex;gap:8px;margin:8px 0 13px;flex-shrink:0}',
