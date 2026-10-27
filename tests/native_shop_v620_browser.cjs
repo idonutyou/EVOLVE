@@ -12,7 +12,14 @@ const server=http.createServer((req,res)=>{
 (async()=>{
  await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
  const chrome=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
- const base='http://127.0.0.1:'+server.address().port+'/';const results=[];
+ const base=(process.env.EVOLVE_TEST_BASE_URL||('http://127.0.0.1:'+server.address().port+'/')).replace(/\\/?$/,'/');const results=[];
+ if(process.env.EVOLVE_TEST_BASE_URL){
+  const p=await fetch(base+'version.json?nativev620='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(30000)});
+  assert.equal(p.status,200,'Actual Pages version fetch failed');
+  const actual=await p.json(),expected=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8'));
+  assert.equal(actual.build,expected.build,'PUBLIC Pages build differs from repository native SHOP build');
+  assert.equal(actual.assets,1072);
+ }
  try{
   for(const [w,h] of [[393,852],[320,568],[852,393]]){
    const context=await chrome.newContext({viewport:{width:w,height:h},isMobile:true,hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
