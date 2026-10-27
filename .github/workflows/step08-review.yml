@@ -30,6 +30,15 @@ jobs:
           STEP08_MODE: probe
           STEP08_PHASE: '40'
         run: node tests/combat_playtest_step08_browser.cjs
+      - name: Exercise real ordinary, ranked midboss and BIO/VENOM pathways
+        env:
+          STEP08_MODE: functional
+          STEP08_PHASE: '50'
+        run: node tests/combat_playtest_step08_browser.cjs
+      - name: Preserve baseline weapon, organ and monster interactions
+        run: |
+          node tests/monster_feedback_browser_v614.cjs
+          node tests/admin_combat_browser.cjs
       - name: Retain test-only evidence
         if: always()
         uses: actions/upload-artifact@v4
