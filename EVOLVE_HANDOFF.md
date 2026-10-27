@@ -1,3 +1,19 @@
+# EVOLVE 최신 인수인계 — M05 STEP 3/3 · 90% 진행 (2026-10-28 KST)
+
+> **다음 `고` = M05 100%**. 기존 M05 10~90% 기능을 다시 처음부터 구현하지 않는다. 최우선 과금 가치 콘텐츠 확보, 실제 매출 Billing은 게임 전체 완성 후 M08.
+
+- GitHub `idonutyou/EVOLVE`; 기능 브랜치 `monetization-m05-ux-20261028`. 90% 기본 빌드 `V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90`, sha `b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b`. M04 main 원본 `fbe3224a3bdd95020829228427ddc3b05ed41f9e`는 변경 전 기준.
+- **실제 수정** `web/m05-shop-ui-v618.js`의 M05 개발 옵트인 CSS에서 `#m04MockTriggerV616`을 하단 5탭 위로 옮겨 터치 겹침 제거. M04 원래 엔진·게임/전투/파츠·M03·오리지널 이미지 변경 없음.
+- `tests/monetization_m05_090_touch_browser.cjs`: 393×852, 320×568, 852×393에서 ORGANISM 서브탭·하단 5탭 실제 locator.click 정상, DEV 버튼 간 터치 교차 없음, 개발 상점 표시 정상, 기본 URL의 DEV 기능 숨김. 이전 50~80% 회귀/전투·장착·저장 안전 통과, Node 62/62.
+- 처음 workflow https://github.com/idonutyou/EVOLVE/actions/runs/40575562801 의 QA **모두 성공**했지만 브랜치에 이 대화의 문서 갱신이 추가되어 최종 git push만 non-fast-forward 거부. 검증 당시 소스와 현재 소스가 바이트 동일한지/모바일 단계 success 확인 후 https://github.com/idonutyou/EVOLVE/actions/runs/40576659951 **success**로 빌드를 개발 브랜치에 재저장했다.
+- 리소스 총 1,083개, 원본 M04 1,078개/이미지 1,021개 불변, M05 DEV JS 5개 추가. 실결제 false/상품 가격 null, 운영 유료 권리·영수증 없음. 실제 Galaxy S23+ 장시간 물리 디바이스 시험은 미실시.
+- 90% 복구 `backup/monetization-m05-090-20261028`(전체 Git 트리), ZIP `checkpoints/EVOLVE_M05_090_20261028.zip` 및 SHA/CRC JSON. 이전 10~80% 이전 백업 절대 삭제 금지.
+- `main` 브랜치 fast-forward 후 Pages 워크플로 `deploy-pages.yml` 자동 배포. **실제 배포 완료/공개 URL 확인 없이 배포 성공이라 말하지 않는다**. M05 100%는 Pages 실 URL 재조회, 원본·게임 상태·모의/유료 분리, 최종 백업/인수인계 종결 단계.
+- **다음 이미지 렌더링 불필요**. 기존 이미지 그대로 유지. M06 이후 프리미엄 코스메틱 아트는 별도 렌더링 안내 후 수행.
+- 이전 인수인계는 아래 원문 계속 유지.
+
+---
+
 # EVOLVE 최신 인수인계 — M05 80% STEP 3/3 통합 회귀 통과 (2026-10-28 KST)
 
 > 다음 사용자 `고` = **M05 90%**. 기존 M04/M05 10~80%를 반복하지 말고, 80% QA가 발견한 개발용 버튼 터치 충돌을 우선 해결한 뒤 안전 배포를 검토할 것.
