@@ -28,6 +28,19 @@ test('disposable PostgreSQL atomicity and persistence',{skip:enabled?false:'no d
   await assert.rejects(store.tx(async c=>{await c.query("UPDATE m03_wallets SET available_units=0 WHERE account_id=$1 AND origin_bucket='paid'",[uid]);throw Error('ABORT');}),/ABORT/);
   const sum=await pool.query("SELECT SUM(delta_units)::bigint AS sum FROM m03_ledger_entries WHERE account_id=$1 AND origin_bucket='paid'",[uid]);
   assert.equal(Number(sum.rows[0].sum),20);
+  // Immutable event journal: attempts to erase or rewrite accounting history must fail.
+  await assert.rejects(pool.query('DELETE FROM m03_ledger_entries WHERE account_id=$1',[uid]),/append-only/);
+  await assert.rejects(pool.query('UPDATE m03_ledger_entries SET delta_units=42 WHERE account_id=$1',[uid]),/append-only/);
+  await assert.rejects(pool.query('DELETE FROM m03_ledger_operations WHERE account_id=$1',[uid]),/append-only/);
+  // Actual DB isolation: two accounts may have separate wallets and source-backed rights.
+  const other=randomUUID();
+  await pool.query('INSERT INTO m03_accounts(account_id) VALUES($1)',[other]);
+  for(const bucket of ['free','paid'])await pool.query('INSERT INTO m03_wallets(account_id,origin_bucket) VALUES($1,$2)',[other,bucket]);
+  assert.equal((await store.readWallet(other)).paidCrystals,0);
+  assert.equal((await store.readWallet(uid)).paidCrystals,20);
+  const first=await pool.query("SELECT count(*)::int AS n FROM m03_ledger_entries WHERE account_id=$1",[uid]);
+  const second=await pool.query("SELECT count(*)::int AS n FROM m03_ledger_entries WHERE account_id=$1",[other]);
+  assert.equal(first.rows[0].n,2);assert.equal(second.rows[0].n,0);
   await pool.end();pool=new Pool(opts);
   assert.equal((await makeStore(pool).readWallet(uid)).paidCrystals,20);
  }finally{await pool.end()}
