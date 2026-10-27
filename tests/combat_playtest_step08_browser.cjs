@@ -40,8 +40,10 @@ async function functional(page,report){
   window.__EVOLVE_TEST_MODULE_V575__.setNatural(false);
   c.player.inv=999;c.player.hp=c.player.maxHp=10000;
   const template=catalog.find(x=>x.id==='crawler');
-  const reset=()=>{for(const e of c.enemies)e.dead=true;c.enemies.length=0;c.eBullets.length=0;c.telegraphs.length=0;c.biomeHazards.length=0;
-    for(const key of ['arm','shell','tail','mouth','wing','leg'])c.state[key]=0;
+  const reset=()=>{for(const e of c.enemies)e.dead=true;c.enemies.length=0;
+    for(const field of ['eBullets','telegraphs','biomeHazards'])if(Array.isArray(c[field]))c[field].length=0;
+    const organs=window.__EVOLVE_ORGAN_SKILLS_V598__.test.context();
+    for(const key of ['arm','shell','tail','mouth','wing','leg'])if(organs.state)organs.state[key]=0;
     feedback.test.reset();window.__EVOLVE_WEAPON_HITS_V612__.test.reset();window.__EVOLVE_ORGAN_HITS_V613__.test.reset();
   };
   // Test actual core hit + monster reaction for each existing ordinary actor type.
