@@ -3,6 +3,7 @@
 'use strict';
 const params=new URLSearchParams(location.search);
 if(params.get('evolveMockShop')!=='1'||params.get('evolveM05UX')!=='1'||!['idonutyou.github.io','localhost','127.0.0.1'].includes(location.hostname))return;
+function initialize(){
 const m04=window.__EVOLVE_DEV_MOCK_UI_V616__,api=window.__EVOLVE_DEV_MOCK_STORE_V615__;
 const modal=document.getElementById('m04MockModalV616');
 if(!m04||!api||!modal||api.mode!=='MOCK_ONLY')return;
@@ -95,4 +96,6 @@ observer.observe(modal,{attributes:true,attributeFilter:['hidden'],childList:tru
 originalTrigger?.addEventListener('click',()=>requestAnimationFrame(render));
 modal.addEventListener('keydown',e=>{if(e.key==='Escape'&&mode==='detail'&&!panel.querySelector('#m04MockConfirmV617')&&m04.isOpen()){e.stopImmediatePropagation();e.preventDefault();lastSku=selected;backDetail()}},true);
 window.__EVOLVE_DEV_M05_UI_V618__=Object.freeze({mode:'DEV_UI_ONLY',enabled:true,current:()=>mode,openDetail,go:change});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();
 })();
