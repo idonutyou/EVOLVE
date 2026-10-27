@@ -1,0 +1,51 @@
+{
+  "step": 8,
+  "substep": 1,
+  "progress": 30,
+  "stage": "plan_and_audit_finished",
+  "created_kst": "2026-10-27",
+  "baseline_main_commit": "10fc95c7313a08084e7b95738f50188f72850a27",
+  "baseline_public_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "baseline_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "live_url": "https://idonutyou.github.io/EVOLVE/",
+  "new_images_generated": 0,
+  "new_image_rendering_required": false,
+  "game_code_modified": false,
+  "dist_modified": false,
+  "public_deployment_modified": false,
+  "actual_playtests_executed": 0,
+  "actual_device_tests_executed": 0,
+  "performance_FPS_measured": false,
+  "manual_play_feel_reviews_collected": 0,
+  "test_scenarios_planned": 23,
+  "scenario_categories": {
+    "ordinary": 9,
+    "midboss": 5,
+    "titan": 5,
+    "performance": 4
+  },
+  "artifacts": [
+    "docs/step08/BASELINE_AUDIT_KO.md",
+    "docs/step08/PLAYTEST_MATRIX_V1.json",
+    "docs/step08/TEST_HARNESS_SPEC_KO.md"
+  ],
+  "all_existing_step07_backups_preserved": true,
+  "active_branch": "step08-combat-playtest-v614-20261027",
+  "backup_refs": [
+    "backup/step08-010-20261027",
+    "backup/step08-020-20261027",
+    "backup/step08-030-20261027"
+  ],
+  "pending_tasks": [
+    "actual playback scenarios and browser evidence",
+    "real-time non-mocked RAF 1-minute timing and optional 3/5 min",
+    "human subjective ratings when available",
+    "Galaxy S23+ physical 3–5 min and heat (not accessible from CI)"
+  ],
+  "next_part": 2,
+  "next_checkpoint": 40,
+  "next_work": "test-only browser harness and initial ordinary, midboss, TITAN reproducibility",
+  "next_step_after_step08": 9,
+  "next_step_label": "스킬 레벨 모델·카드 규칙 정리",
+  "next_step_image_rendering": "not required by default"
+}
