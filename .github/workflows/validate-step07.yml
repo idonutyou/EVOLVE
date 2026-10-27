@@ -17,6 +17,7 @@ jobs:
       - name: Verify candidate manifest and 24 unit tests
         run: |
           python3 tools/verify_site.py --dist dist
+          python3 tools/verify_monster_feedback_v614.py
           node --test tests/monster_feedback_v614.test.cjs tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs
           node tests/monster_motion.test.cjs
       - name: Prepare mobile Chromium
