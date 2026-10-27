@@ -1,0 +1,52 @@
+name: M03 PostgreSQL disposable smoke test
+on:
+  push:
+    branches: [monetization-m03-ledger-20261027]
+    paths: ['m03-server/**', '.github/workflows/m03-postgres-integration.yml']
+permissions:
+  contents: read
+jobs:
+  postgres-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: evolve_m03_test_ci
+          POSTGRES_USER: evolve_ci
+          POSTGRES_PASSWORD: test_only_local_secret
+        ports: ['5432:5432']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix m03-server --ignore-scripts
+      - run: node --test m03-server/tests/*.test.cjs
+        env:
+          M03_PG_DISPOSABLE: 'YES'
+          M03_PG_TEST_URL: postgresql://evolve_ci:test_only_local_secret@127.0.0.1:5432/evolve_m03_test_ci
+
+      - name: Check PostgreSQL client tools
+        run: |
+          command -v pg_dump
+          command -v pg_restore
+      - name: PostgreSQL dump and restore validation
+        env:
+          PGPASSWORD: test_only_local_secret
+        run: |
+          set -euo pipefail
+          pg_dump -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Fc -f "$RUNNER_TEMP/m03.dump"
+          createdb -h 127.0.0.1 -U evolve_ci evolve_m03_test_restored
+          pg_restore -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored --exit-on-error "$RUNNER_TEMP/m03.dump"
+          for table in m03_wallets m03_ledger_entries m03_ledger_operations; do
+            a="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Atc "SELECT count(*) FROM $table")"
+            b="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored -Atc "SELECT count(*) FROM $table")"
+            test "$a" = "$b"
+            echo "$table restored row count: $b"
+            hash_sql="SELECT md5(coalesce(string_agg(to_jsonb(t)::text, '|' ORDER BY to_jsonb(t)::text),'')) FROM $table AS t"
+            x="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Atc "$hash_sql")"
+            y="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored -Atc "$hash_sql")"
+            test "$x" = "$y"
+            echo "$table restored values hash matched: $x"
+          done
