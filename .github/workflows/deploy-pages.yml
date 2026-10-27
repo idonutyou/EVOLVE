@@ -11,6 +11,8 @@ on:
       - "tools/install_manual_upload.py"
       - "tools/patch_web_lifecycle.py"
       - "tools/verify_site.py"
+      - "tools/verify_monster_feedback_v614.py"
+      - "tests/monetization_m05_100_live_browser.cjs"
       - "tests/browser_smoke.cjs"
       - "tests/visual_fit_browser.cjs"
       - "tests/upgrade_scenery_browser.cjs"
