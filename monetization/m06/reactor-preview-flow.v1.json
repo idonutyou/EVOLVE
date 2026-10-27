@@ -1,0 +1,71 @@
+{
+  "schema": "M06_030_preview",
+  "progress": 30,
+  "implemented": false,
+  "screen": "homeShopViewV601",
+  "shop_single": true,
+  "dev_modal": false,
+  "real_price_minor": null,
+  "checkout_enabled": false,
+  "client_grants_enabled": false,
+  "default": "ART_NOT_READY",
+  "mock_wallet": "EVOLVE_DEV_MOCK_STORE_V1",
+  "game_save": "EVOLVE_V575_TEST_*",
+  "states": [
+    {
+      "id": "ART_NOT_READY",
+      "label": "제작 준비 중",
+      "actions": [],
+      "purchase": false
+    },
+    {
+      "id": "ART_READY_PREVIEW",
+      "label": "무료 미리보기",
+      "actions": [
+        "OPEN"
+      ],
+      "purchase": false
+    },
+    {
+      "id": "PREVIEW",
+      "label": "미리보기 중",
+      "actions": [
+        "CLOSE",
+        "INSPECT"
+      ],
+      "purchase": false,
+      "save_mutation": false
+    },
+    {
+      "id": "SALE_BLOCKED",
+      "label": "판매 준비 중",
+      "actions": [
+        "CLOSE"
+      ],
+      "purchase": false
+    }
+  ],
+  "future_after_M08": [
+    "PENDING_SERVER_RECEIPT",
+    "OWNED",
+    "EQUIPPED",
+    "UNEQUIPPED",
+    "OWNERSHIP_UNVERIFIED",
+    "REVOKED_OR_REFUNDED"
+  ],
+  "rules": {
+    "preview_never_grants": true,
+    "preview_no_currency_change": true,
+    "preview_no_game_save_change": true,
+    "preview_no_mock_wallet_change": true,
+    "no_unowned_equip": true,
+    "payment_requires_server_receipt": true,
+    "existing_shop_only": true,
+    "season_pass_locked": true,
+    "art_required_before_preview": true
+  },
+  "next": {
+    "progress": 40,
+    "image_rendering_required": true
+  }
+}
