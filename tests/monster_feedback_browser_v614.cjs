@@ -81,8 +81,9 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   assert.ok(report.weapon.weapon>0);report.checks.push('Gun retains STEP05 exclusive response ownership and no duplicated V614 transform');
   report.death=await page.evaluate(()=>{
    const {e,c}=window.__MONSTER_V614_FIXTURE__.fresh(35),m=window.__EVOLVE_MONSTER_FEEDBACK_V614__;
-   const prev=c.deathEchoes.length;window.__EVOLVE_ORGAN_HITS_V613__.test.damage(e,800,'arm',0);c.draw();
-   const added=c.deathEchoes.slice(prev);
+   const deathEchoes=m.test.context().deathEchoes,prev=deathEchoes.length;
+   window.__EVOLVE_ORGAN_HITS_V613__.test.damage(e,800,'arm',0);c.draw();
+   const added=deathEchoes.slice(prev);
    return {dead:e.dead,echoCount:added.length,decorated:added.filter(d=>d._monsterFeedbackDoneV614).length,stats:m.read(),hp:e.hp};
   });
   assert.equal(report.death.dead,true);assert.equal(report.death.echoCount,1);
