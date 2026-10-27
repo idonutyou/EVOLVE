@@ -1,0 +1,22 @@
+{
+  "stage": "M04",
+  "percent": 90,
+  "step": "3/3",
+  "checkpoint_type": "full Git repository tree and official GitHub branch source archive",
+  "backup_branch": "backup/monetization-m04-090-20261028",
+  "release_main_merge_commit": "71f3549040e656324f766114503e6ba57a929eba",
+  "release_ci_run": 40541493132,
+  "pages_deploy_step": "success",
+  "public_version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70",
+  "public_build_sha256": "9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6",
+  "manifest_asset_count": 1078,
+  "preserved_image_count": 1021,
+  "live_billing_enabled": false,
+  "previous_backup_80": "backup/monetization-m04-080-20261028",
+  "previous_backup_70": "backup/monetization-m04-070-20261027",
+  "main_before_merge": "backup/m04-main-predeploy-20261028",
+  "artifact_sha256": null,
+  "archive_size_bytes": null,
+  "archive_hash_verified": false,
+  "next": "M04 100 percent live browser purchase/equip/restore regression and final handoff"
+}
