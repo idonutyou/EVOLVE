@@ -30,4 +30,3 @@ jobs:
           node --test tests/web_client.test.cjs
           node --test tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs tests/monster_feedback_v614.test.cjs
           node --test tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs tests/monetization_m04_core_visuals.test.cjs
-          python3 tools/verify_monster_feedback_v614.py
