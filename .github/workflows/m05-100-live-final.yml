@@ -1,0 +1,68 @@
+name: M05 100 percent ACTUAL GitHub Pages live commerce shell QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/m05-100-live-final.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  final-live-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assert 100 percent build and original images are unchanged in Git
+        run: |
+          python3 tools/verify_m05_090_release.py
+          python3 tools/verify_site.py --dist dist
+          python3 tools/verify_m04_predeploy_gate.py
+          python3 tools/verify_monster_feedback_v614.py
+          node --check tests/monetization_m05_100_live_browser.cjs
+      - name: Wait for published Pages build to equal immutable main build
+        timeout-minutes: 15
+        run: |
+          python3 - <<'PY'
+          import json,time,urllib.request
+          local=json.load(open('dist/version.json'))
+          u='https://idonutyou.github.io/EVOLVE/version.json'
+          for i in range(45):
+              try:
+                  req=urllib.request.Request(u+'?evolve_m05_100='+str(i)+'_'+str(time.time()),headers={'Cache-Control':'no-cache','User-Agent':'EVOLVE-M05-Final-QA'})
+                  with urllib.request.urlopen(req,timeout=20) as r:published=json.load(r)
+                  if (published.get('build')==local['build'] and published.get('assets')==1083):
+                      print('M05 100% LIVE BUILD VERIFIED',published['build'],published['version'],flush=True)
+                      break
+                  print('Not yet published',i,'actual',published.get('build'),'desired',local['build'],flush=True)
+              except Exception as e:print('Live fetch retry',i,type(e).__name__,str(e)[:200],flush=True)
+              time.sleep(18)
+          else:raise SystemExit('PUBLISHED BUILD STILL M04 or unavailable. Refuse false release success.')
+          PY
+      - name: Install isolated real Chrome
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m05-100-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/m05-100-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/m05-100-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Test ACTUAL public mobile gameplay and DEV mock ownership/equip, no live billing
+        timeout-minutes: 12
+        env:
+          EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+        run: node tests/monetization_m05_100_live_browser.cjs
+      - name: Preserve public-site device/screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m05-100-live-public-mobile
+          path: test-results/m05-100-live-*.png
+          if-no-files-found: ignore
