@@ -1,0 +1,64 @@
+{
+  "stage": "M05",
+  "percent": 80,
+  "step": "3/3",
+  "source_branch": "monetization-m05-ux-20261028",
+  "backup_branch": "backup/monetization-m05-080-20261028",
+  "base_commit": "2e647bc08a56831e4d12090cf20aa07887c3bb38",
+  "archive": "checkpoints/EVOLVE_M05_080_20261028.zip",
+  "archive_mode": "incremental overlay on 70%; complete Git tree held in backup ref",
+  "bytes": 32909,
+  "sha256": "d65c06bfe5a8c94c7605966e7921a9e25bbe34271af88f9b6bb3f559fb399343",
+  "file_count": 10,
+  "files": {
+    ".github/workflows/m05-080-checkpoint.yml": {
+      "bytes": 3131,
+      "sha256": "3be92a81be94dcc1e2132da3236709d3285698612c0dcc8e4b169a9db1f8e0aa"
+    },
+    ".github/workflows/m05-080-integration.yml": {
+      "bytes": 2607,
+      "sha256": "4e9e98edf4a4c63216dc8a54002602cb1bbdfe9c800f7e1882feb775dec3c392"
+    },
+    "EVOLVE_HANDOFF.md": {
+      "bytes": 22978,
+      "sha256": "b04b5e0be1a1ae9da2779f286258e6b408ed9b64d04b884df6a610913bb790ed"
+    },
+    "EVOLVE_PROGRESS.md": {
+      "bytes": 13074,
+      "sha256": "545ed5ee74a241d28f15271a17b1d315f3ddca2e253a0ec3a2c7eb1ba5e82142"
+    },
+    "EVOLVE_ROADMAP.md": {
+      "bytes": 11515,
+      "sha256": "eb1d1e1e568be19c6c2ddd00ceaff09a5ced133c7c7ceed9ab7f12ca4102e563"
+    },
+    "docs/monetization/M05_080_INTEGRATION_GATE_KO.md": {
+      "bytes": 5153,
+      "sha256": "d786ff2619c5404433ee8c8b472c8351e814875e8d57cb9fb48f69877263827c"
+    },
+    "tests/monetization_m05_080_integration_browser.cjs": {
+      "bytes": 8019,
+      "sha256": "19f6d40a22f214539fc8a74f06ab45029d2c6c6e2de64c5e7ca8fd82157f31d7"
+    },
+    "tools/checkpoint_m05_080.py": {
+      "bytes": 3381,
+      "sha256": "500626aa41815e9841da36b6642926a6da46a3c59d63ba0700a7529e0206fe5a"
+    },
+    "tools/verify_m05_080_checkpoint.py": {
+      "bytes": 1591,
+      "sha256": "3d7cfa12a4299e9f612974a6d3393869e6719af50950a32a4fafa49c91175801"
+    },
+    "tools/verify_m05_080_integration.py": {
+      "bytes": 4908,
+      "sha256": "9f2a5c3018ae648b79f437000079782d7d758098ab27020adffb9741adf22935"
+    }
+  },
+  "crc_and_sha256_verified": true,
+  "main_unmodified": true,
+  "dist_game_untouched_since_70": true,
+  "original_image_count": 1021,
+  "site_asset_count": 1082,
+  "real_checkout": false,
+  "original_main_sha": "fbe3224a3bdd95020829228427ddc3b05ed41f9e",
+  "integration_qa_run": 40572366219,
+  "next": "M05 90% controlled main merge and dev Pages integration only after all release gates pass"
+}
