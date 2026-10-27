@@ -9,8 +9,16 @@
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
 | M03 계정/서버 권한 원장 | **100% (개발용 프로토타입/통합 완료)** | `docs/monetization/M03_100_FINAL_REPORT_KO.md`, PR #7 | 완료; 실제 라이브 과금/운영 서버 미구현 |
-| M04 인게임 과금 콘텐츠·모의 구매 | **40% (모의 구매 엔진 구현·검증, UI 미연결)** | `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` (M04 작업 브랜치) | **STEP 2/3 · 50% 메인 게임 상점·보상 연동** |
+| M04 인게임 과금 콘텐츠·모의 구매 | **50% (모의 상점 홈 UI 통합/모바일 자동 QA, main 미배포)** | `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` (M04 작업 브랜치) | **STEP 2/3 · 60% 게임 내 상품 가치 및 장착 경계** |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점 UX·프리미엄 콘텐츠·반복 가치 → 게임 완성 후 Play/App Store 실결제 연결 |
+
+## 현재 M04 50% 확인된 원격 체크포인트 (2026-10-27)
+- 완료: **M04 50% 개발용 모의 상점**을 V614 원본 메인홈에 `?evolveMockShop=1`로 선택 활성화. 개발 브랜치 `monetization-m04-payment-20261027`의 `dist/`에 두 신규 SHA256 JS 에셋/매니페스트/게임 버전/홈 UI 연결. **main 공개 배포는 하지 않음.**
+- HEAD·50% 백업: `backup/monetization-m04-050-20261027` @ `4af248bd7d2b655afa77299e9c8afb2743d88278` (원격 SHA/파일 2회 검증 성공). 기존 모든 체크포인트 유지.
+- 실제 GitHub Actions https://github.com/idonutyou/EVOLVE/actions/runs/40520829120 **success**: `tools/verify_site.py`, Node 22 테스트 **26/26**, 원래 게임 모바일 Chrome 393×852에서 구매/테스트 결정 지급·모의 코어 장착·새로고침 후 복원·기존 DNA/스테이지 해금 유지·5개 nav/URL 비활성 검사 통과. 393×852는 자동 브라우저 에뮬레이션, 물리 Galaxy S23+ 검증은 아님.
+- 실제 상품 5개가 모두 판매 가능한 상태가 아님. 시즌 패스 구매 금지, 코어는 *모의 소유/장착 상태만* 있고 실제 신규 코어 아트 미생성. 운영 가격/실결제/유료 서버 권리 연동 없음.
+- 다음 사용자 `고`: **M04 60%**, 본게임 아이템/코어/외형 연계·유료 상품 실제 플레이 가치 보강. **이미지 렌더링은 새 외형 아트를 실제 제작하는 작업이면 필요**하며 시작 전에 고지. 게임 이미지 재생성/교체 허락 없이 금지.
+- 상세: `docs/monetization/M04_050_HOME_MOCK_UI_KO.md` (작업 브랜치). 80~100% 단계 공개 배포 전까지 main 현행 빌드 유지.
 
 ## M04 최신 40% 검증된 실행 지점 (2026-10-27)
 - 개발 브랜치 `monetization-m04-payment-20261027` SHA `0807072c06e3ae8663b3b7726334e8948b194626`.
