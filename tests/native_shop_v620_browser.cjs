@@ -22,7 +22,11 @@ const server=http.createServer((req,res)=>{
    });
    const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(String(e)));
    await p.goto(base+'?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
-   await p.waitForFunction(()=>window.__EVOLVE_NATIVE_SHOP_V620__&&document.querySelector('#nativeShopV620')&&!document.getElementById('webLoader'),null,{timeout:220000});
+   try{await p.waitForFunction(()=>window.__EVOLVE_NATIVE_SHOP_V620__&&document.querySelector('#nativeShopV620')&&!document.getElementById('webLoader'),null,{timeout:30000})}
+   catch(e){
+    const debug=await p.evaluate(()=>({ready:!!window.__EVOLVE_NATIVE_SHOP_V620__,api:!!window.__EVOLVE_DEV_MOCK_STORE_V615__,visuals:!!window.__EVOLVE_DEV_CORE_VISUALS_V617__,home:!!document.getElementById('homeShopViewV601'),loader:!!document.getElementById('webLoader'),currentScript:[...document.scripts].filter(x=>x.hasAttribute('data-native-shop')).map(x=>({src:x.src,outer:x.outerHTML.slice(0,160)})),bodyText:document.body.innerText.slice(0,600),build:window.EVOLVE_WEB_CONFIG?.version}));
+    console.error('V620_INIT_DEBUG',JSON.stringify({debug,errors}));await p.screenshot({path:path.join(output,'native-shop-v620-startup-error.png')});throw e;
+   }
    await p.evaluate(()=>document.getElementById('introSplash')?.click());
    assert.equal(await p.locator('#homeTabs>button').count(),5);
    assert.equal(await p.locator('#m04MockTriggerV616').count(),0);
