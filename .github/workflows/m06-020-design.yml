@@ -1,0 +1,32 @@
+name: M06 020 reactor core spec safety gate
+on:
+  push:
+    branches:
+      - "monetization-m06-premium-art-*"
+    paths:
+      - "monetization/m06/**"
+      - "docs/monetization/M06_020_REACTOR_CORE_SPEC_KO.md"
+      - "tests/m06_020_contract.test.cjs"
+      - ".github/workflows/m06-020-design.yml"
+  workflow_dispatch:
+jobs:
+  reactor-spec-qa:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+      - name: Verify 10 percent and 20 percent design safety contracts
+        run: |
+          node tests/m06_010_design.test.cjs
+          node tests/m06_020_contract.test.cjs
+      - name: Refuse changes to game, native shop, art and production SKU catalog
+        run: |
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m06-design-changes.txt
+          cat /tmp/m06-design-changes.txt
+          if grep -E '^(dist/|web/|art/|monetization/catalog/)' /tmp/m06-design-changes.txt; then
+            echo 'Design-only stage must not touch runtime or art/catalog.'
+            exit 1
+          fi
