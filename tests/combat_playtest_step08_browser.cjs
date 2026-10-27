@@ -106,7 +106,7 @@ async function functional(page,report){
   rows.availability.push({id:'remaining-five-titans',state:'not_confirmed',reason:'Cannot infer all seven planned TITAN implementations from BIO/VENOM QA shortcuts'});
   return {rows,issues,clock:window.__EVOLVE_TEST_MODULE_V575__.read().seconds,feedback:feedback.read()};
  });
- report.functional=data;
+ report.functional=data;console.log('STEP08_FUNCTIONAL_DATA '+JSON.stringify(data));
  for(const r of data.rows.ordinary.filter(x=>x.id!=='ordinary-lethal')){
   const id=r.id==='crawler'?'O01':r.id==='spitter'?'O02':r.id==='brute'?'O03':r.id==='froststalker'?'O04':null;
   if(id){const caseRow=report.scenarios.find(x=>x.id===id);Object.assign(caseRow,{status:r.state==='verified'?'functional_verified':'partial',evidence:r,mode:'game_core_hit_not_human_play'});}
