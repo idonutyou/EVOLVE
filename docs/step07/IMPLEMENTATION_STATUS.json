@@ -1,8 +1,8 @@
 {
   "step": 7,
   "substep": 2,
-  "overall_step_progress": 60,
-  "status": "V614 candidate passes 24/24 unit suites, existing motion and actual monster/weapon/organ mobile Chromium tests; 3/3 full regression and public deploy pending",
+  "overall_step_progress": 70,
+  "status": "STEP07 2/3 complete; V614 candidate code and 24 local tests + actual Chromium weapon/organ/monster regression passed; full deployment pending 3/3",
   "game_public_version": "V575-STEP06-ORGAN-HITS-V613",
   "game_public_build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
   "baseline_main_commit": "82ccefffaf801be3e560310493eae86003c82d93",
@@ -19,7 +19,8 @@
     "backup/step07-030-20261027",
     "backup/step07-040-20261027",
     "backup/step07-050-20261027",
-    "backup/step07-060-20261027"
+    "backup/step07-060-20261027",
+    "backup/step07-070-20261027"
   ],
   "code_modified": true,
   "images_modified": false,
@@ -28,8 +29,8 @@
   "actual_browser_monster_feedback_tests_run": true,
   "physical_Galaxy_S23_plus_tested": false,
   "prior_backups_preserved": true,
-  "next_substep": 2,
-  "next_progress": 70,
+  "next_substep": 3,
+  "next_progress": 80,
   "after_step07": "STEP 08 타격감 첫 플레이 검증; 신규 이미지 렌더링 기본 불필요",
   "code_paths": [
     "web/monster-feedback-v614.js",
@@ -46,5 +47,12 @@
   "actual_browser_run_id": 40432070871,
   "actual_browser_result": "success",
   "integrity_verifier": "tools/verify_monster_feedback_v614.py",
-  "candidate_browser_verified": true
+  "candidate_browser_verified": true,
+  "published": false,
+  "new_images_generated": 0,
+  "package_verified": true,
+  "build_parity_verified": true,
+  "original_png_hashes_verified": 1021,
+  "previous_checkpoints_verified": true,
+  "handoff": "docs/step07/PART2_HANDOFF_KO.md"
 }
