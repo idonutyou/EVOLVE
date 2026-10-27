@@ -4,6 +4,10 @@ on:
     branches: [feature/native-shop-unification-20261028]
     paths:
       - '.github/workflows/native-shop-v620.yml'
+      - 'tests/native_shop_v620_browser.cjs'
+      - 'web/native-shop-v620.js'
+      - 'web/mock-premium-v615.js'
+      - 'web/mock-core-visuals-v617.js'
 permissions:
   contents: write
 jobs:
