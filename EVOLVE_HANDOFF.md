@@ -1,3 +1,16 @@
+# 최신 인수인계: EVOLVE M04 90% (2026-10-28 KST)
+
+**M04 STEP 3/3 90% 완료 → 다음 `고`는 M04 100% 라이브 배포 검증·최종 백업.** 이 퍼센트는 게임 전체 진행률이 아님.
+
+- main 병합 `71f3549040e656324f766114503e6ba57a929eba`; Pages 실행 https://github.com/idonutyou/EVOLVE/actions/runs/40541493132 배포 성공.
+- 공개 version.json 빌드 `9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6` 확인.
+- 신규 이미지 불필요. 원본 이미지 1,021개, 기존 저장·무료 DNA 보존. 실제 결제/가격 없음.
+- 90% 체크포인트 `backup/monetization-m04-090-20261028`; 70/80%와 배포 전 main 백업 유지.
+- 다음 100%는 개발용 `?evolveMockShop=1`의 모의 구매/취소/장착/새로고침과 일반 URL 무영향 검증. 물리 휴대폰 별도.
+- 상세 `docs/monetization/M04_090_DEPLOY_KO.md`. 아래는 이전 70% 인수인계 원본으로 이력 보존.
+
+---
+
 # EVOLVE — 새 채팅 인수인계
 
 최신 확인: 2026-10-27 KST. 저장소 `idonutyou/EVOLVE`.
