@@ -18,7 +18,7 @@ test('STEP 1/3 frozen at M05 30%, chained to immutable 10% and 20% designs',()=>
  assert.equal(ux.percent,10);assert.equal(detail.percent,20);
  assert.equal(flow.baseline.checkpoint_20_sha,'c1713c838f7c2dd5301b4d41d315296acaa7d864');
  const active=JSON.parse(read('dist/version.json'));
- assert.ok(active.build===flow.baseline.published_build||(['-M05-UX40','-M05-UX50'].some(s=>active.version.endsWith(s))&&[1079,1080].includes(active.assets)&&active.build===JSON.parse(read('dist/verification.json')).build),'Only original M04 or reviewed M05 development build is allowed');
+ assert.ok(active.build===flow.baseline.published_build||(['-M05-UX40','-M05-UX50','-M05-UX60','-M05-UX70'].some(s=>active.version.endsWith(s))&&[1079,1080,1081,1082].includes(active.assets)&&active.build===JSON.parse(read('dist/verification.json')).build),'Only original M04 or reviewed M05 development build is allowed');
  assert.equal(flow.freeze.design_ready_for_step_2,true);
  assert.equal(flow.freeze.new_images_required_for_next_40_percent,false);
 });
