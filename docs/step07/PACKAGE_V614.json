@@ -2,12 +2,12 @@
   "baseline_version": "V575-STEP06-ORGAN-HITS-V613",
   "baseline_build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
   "baseline_engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
-  "engine": "assets/7c25167c0808363c623d8361144257ee3437a395cd34b70bb60137d891e8fdee.js",
+  "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
   "new_assets": [
     {
-      "path": "assets/7c25167c0808363c623d8361144257ee3437a395cd34b70bb60137d891e8fdee.js",
-      "sha256": "7c25167c0808363c623d8361144257ee3437a395cd34b70bb60137d891e8fdee",
-      "bytes": 1683555,
+      "path": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
+      "sha256": "e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a",
+      "bytes": 1683735,
       "kind": "game-code"
     }
   ],
