@@ -1,3 +1,18 @@
+# EVOLVE 최신 인수인계 — 기본 SHOP 단일화 V620 (2026-10-28 KST)
+
+> M06 10%를 진행하기 전에 사용자 요청인 **DEV 상점 삭제·원래 SHOP 교체 작업을 완료**해야 함. 완료 후 사용자 `고`는 M06 STEP 1/3 · 10%. M05 이전 기능 다시 구현 금지.
+
+- GitHub `idonutyou/EVOLVE` 기능 브랜치 `feature/native-shop-unification-20261028`, 직전 공개 main `4bceade598f3caad3235d0b41e508b1e33c33768`. 성공 후 main fast-forward 및 실제 Pages 검증.
+- `web/native-shop-v620.js`: 홈 5탭의 **SHOP** 페이지에만 TEST 구매 상품 5종, 코어 외형 2종, 소유/장착/확인/취소와 TEST 결정 표시. 기존 DNA 강화 카드 `labPanel`은 SHOP에서 숨기되 게임 루틴 참조 보호 위해 DOM 유지.
+- 제거 `web/mock-premium-ui-v616.js`, `web/m05-shop-ui-v618.js` 소스, 기존 팝업/트리거용 해시 자산 14개; 3개 독립 native TEST JS 신규, 총 자산 1072 / 기존 이미지 1021 원본. 과거 M05 10~100% 복구는 삭제 금지.
+- 기존 `web/mock-premium-v615.js`/ `web/mock-core-visuals-v617.js`는 일반 주소에서 테스트 기능 제공하도록 가드만 조정, 실제 인앱 결제 구현/서버 원장/DNA/전투 스탯 변화 없음. 독립 저장 키 `EVOLVE_DEV_MOCK_STORE_V1`, 실제 가격 null + checkout=false, client_grants=false.
+- 3뷰포트 Chrome 통합 검사 https://github.com/idonutyou/EVOLVE/actions/runs/40588368786 success: 별도 DEV 버튼/모달 0, 기본 SHOP 구매·장착·TEST 결정 400→280·원래 저장 보호·손상 방치 안 함, 홈/파츠/전투 회귀 통과.
+- 정적 QA `tools/verify_native_shop_v620.py`; 빌드 `tools/build_native_shop_v620.py`; 상세 `docs/monetization/NATIVE_SHOP_V620_MIGRATION_KO.md`; 공개 Pages 배포 검증/백업 `backup/native-shop-v620-20261028`, `checkpoints/EVOLVE_NATIVE_SHOP_V620_20261028.zip`/JSON.
+- M05 완료는 유지, M06 10%는 사용자 요청으로 중단 상태; 재개 시 **과금 가치 콘텐츠 설계 최우선**. M06 10%는 이미지 렌더링 불필요, 실제 아트 제작 단계 전에는 알릴 것.
+- 물리 Galaxy S23+ 장시간 FPS/발열 시험은 미진행. 이전 인수인계는 아래 유지.
+
+---
+
 # EVOLVE 최종 인수인계 — M05 100% 완료 (2026-10-28 KST)
 
 - 다음 고는 M06 10% STEP 1/3. M05 10~100%를 다시 반복하지 않는다. 모든 작업의 최우선순위는 매출을 만들 수 있는 실제 구매 가치 콘텐츠.
