@@ -1,8 +1,8 @@
 {
   "step": 7,
   "substep": 2,
-  "overall_step_progress": 40,
-  "status": "visual_model_and_isolated_unit_tests_written; engine integration pending",
+  "overall_step_progress": 50,
+  "status": "integrated candidate on private branch; local CI/unit/parity pending",
   "game_public_version": "V575-STEP06-ORGAN-HITS-V613",
   "game_public_build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
   "baseline_main_commit": "82ccefffaf801be3e560310493eae86003c82d93",
@@ -27,10 +27,14 @@
   "physical_Galaxy_S23_plus_tested": false,
   "prior_backups_preserved": true,
   "next_substep": 2,
-  "next_progress": 50,
+  "next_progress": 60,
   "after_step07": "STEP 08 타격감 첫 플레이 검증; 신규 이미지 렌더링 기본 불필요",
   "code_paths": [
     "web/monster-feedback-v614.js",
     "tests/monster_feedback_v614.test.cjs"
-  ]
+  ],
+  "candidate_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "candidate_build": "25e59b004ba77f6d8d3527098a74d50d50d32f4a0365c71aae8e25b1937871eb",
+  "engine": "assets/7c25167c0808363c623d8361144257ee3437a395cd34b70bb60137d891e8fdee.js",
+  "main_published": false
 }
