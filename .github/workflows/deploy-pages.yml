@@ -19,6 +19,11 @@ on:
       - "tests/weapon_hits_browser_v612.cjs"
       - "tests/organ_hits_v613.test.cjs"
       - "tests/organ_hits_browser_v613.cjs"
+      - "tests/monster_feedback_v614.test.cjs"
+      - "tests/monster_feedback_browser_v614.cjs"
+      - "tools/verify_monster_feedback_v614.py"
+      - "web/monster-feedback-v614.js"
+      - "web/monster-feedback-adapter-v614.js"
       - "tests/organ_card_art_browser.cjs"
       - "tests/display_recovery_browser.cjs"
       - "tools/verify_display_recovery_v611.py"
@@ -97,7 +102,8 @@ jobs:
           node tests/visual_clarity.test.cjs
           node tests/boss_cinematic.test.cjs
           node tests/organ_skills.test.cjs
-          node --test tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs
+          node --test tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs tests/monster_feedback_v614.test.cjs
+          python3 tools/verify_monster_feedback_v614.py
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
@@ -130,6 +136,7 @@ jobs:
           node tests/arm_items_browser.cjs
           node tests/weapon_hits_browser_v612.cjs
           node tests/organ_hits_browser_v613.cjs
+          node tests/monster_feedback_browser_v614.cjs
           node tests/original_player_browser.cjs
           node tests/player_combat_browser.cjs
           node tests/player_scorpion_browser.cjs
@@ -170,6 +177,7 @@ jobs:
         run: |
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_hits_browser_v613.cjs --report test-results/organ-hits-live.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/monster_feedback_browser_v614.cjs --report test-results/monster-feedback-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
@@ -191,6 +199,9 @@ jobs:
             test-results/home-hub-live-browser.json
             test-results/weapon-hits-live.json
             test-results/organ-hits-live.json
+            test-results/monster-feedback-live.json
+            test-results/monster-feedback-live-*.png
+            test-results/monster-feedback-local-*.png
             test-results/organ-hits-live-*.png
             test-results/weapon-hits-live-*.png
             test-results/visual-fit-live-browser.json

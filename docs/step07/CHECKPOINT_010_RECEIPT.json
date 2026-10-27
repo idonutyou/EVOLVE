@@ -1,0 +1,18 @@
+{
+  "step": 7,
+  "substep": 1,
+  "checkpoint": 10,
+  "backup_type": "GitHub complete repository immutable commit, protected by named branch",
+  "remote_branch": "backup/step07-010-20261027",
+  "remote_commit": "fc031bf6a018bf006da3138b3e86dc12f8ae3c6e",
+  "artifact_path": "docs/step07/BASELINE_AUDIT_KO.md",
+  "artifact_bytes": 3670,
+  "artifact_sha256": "c39550f684dc3b79f93539b0c40933e3db64a0796b8ea0b37a0b46ca20ed06dd",
+  "artifact_git_blob_sha": "7cd9a3bcf24be35ec66f002cf2bb09bd719070ba",
+  "remote_ref_readback_matches": true,
+  "remote_file_readback_equals_work_branch": true,
+  "prior_snapshots_preserved": true,
+  "game_engine_changed": false,
+  "public_pages_deployed": false,
+  "note": "Git object snapshot, not a separate ZIP; recorded SHA-256 applies to the named document, not to the whole repository."
+}

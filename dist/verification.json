@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP06-ORGAN-HITS-V613",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249072372,
-  "index_bytes": 259955,
-  "build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
+  "index_bytes": 259961,
+  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
   "image_assets": 1005,
   "cached_files": 1067,
-  "cached_bytes": 382811092,
+  "cached_bytes": 382819931,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -412,7 +412,7 @@
   },
   "painted_warning": {
     "baseline_commit": "d8f6d2eaa6aa28a884c3eb2a3c5009c5711353af",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "art": {
       "atlases": {
         "lettering": {
@@ -623,7 +623,7 @@
   },
   "attack_warnings": {
     "baseline_commit": "6fabbfbed161b077707ca704cf080f13ec36c762",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "source": "web/attack-warning-v582.js",
     "foreground_first": true,
     "red_filled_shapes": true,
@@ -643,7 +643,7 @@
     ]
   },
   "admin_mode": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "c66a8a9ee606d11db22f9ce9949ba19e4a032f06",
     "unlock": "five consecutive footer codex button clicks",
     "default_enabled": false,
@@ -656,7 +656,7 @@
     "existing_maps_and_collision_data_unchanged": true
   },
   "player_scorpion": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "2235f3b56c51434d0a555f0c9b3512c13c4708b6",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -677,7 +677,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_combat": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "f7e554f77e3550dd5e8959b8dc9d79df57ef1405",
     "source": "web/player-combat-v587.js",
     "facing": "left is the exact horizontal mirror of right; broad tilt; body upper side remains upright and head remains away from vertical",
@@ -702,7 +702,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "original_player": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "1ddc00e1fd6e16aa88d7729254e75f23c3ff809d",
     "art": {
       "path": "assets/40df7f6cb18401d39c83fd51360ab080516e10cf3c27bc966756299817f1c6d9.png",
@@ -738,7 +738,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "arm_items": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "2243d05e416cdabfc12137ab34a7afd4d7e96c74",
     "source": "web/arm-items-v589.js",
     "implemented_ids": [
@@ -760,7 +760,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "movement_field": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "34b9dea9c2b52139ebbad90570ff55c6ae018df9",
     "source": "web/movement-field-v590.js",
     "body_follows_actual_movement_only": true,
@@ -782,7 +782,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "horde_roles": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "8aac2f1cb3668011ee300d0b6dee3d684045b50d",
     "ordinary_movement_multiplier": 0.5,
     "ordinary_spawn_multiplier": 1.95,
@@ -822,7 +822,7 @@
     "midbosses_rebalanced_by_request": true
   },
   "visual_clarity": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "5996ae1f9322ebb2d3ed0cb2e47dfb10c9e6fbc2",
     "wave_and_spawn_decoration_rings_removed": true,
     "cpu_and_gpu_paths_updated": true,
@@ -845,7 +845,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "upgrade_cards": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "2fa4c431a76737486ed94e11016d605556c98c0a",
     "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
     "independent_stat_cards": 17,
@@ -970,7 +970,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "upgrade_reference": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline_commit": "79ea7d94d753f67fd59b491a40ddecd1041b711e",
     "reference": {
       "path": "assets/a74022013514e36066c097b588938dc418e74ea15f676187eeb6675045eb829c.jpg",
@@ -1080,7 +1080,7 @@
     "level_display": "Original top-left combat HUD only"
   },
   "playfield_v595": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/87dd05baef540c3f698cc40db6dc60eff44b79de4080e02945ebf4bb554b6da7.css",
     "shell": "assets/c3dfb005a76a08fd3b04148811a22da679d856ce473429833f61992abc747901.js",
     "ground_art": {
@@ -1118,7 +1118,7 @@
     }
   },
   "admin_combat_v596": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline": "3f8f3164bc19d89fb67d4ea95069674f9fcba1ab",
     "new_species": [
       "ripper",
@@ -1180,7 +1180,7 @@
   },
   "home_map_miniatures_v597": {
     "baseline": "f336a949c51a9dedc74c48c031c8c594f0a5b59f",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/995e212aa7a769aace0e8f5e3974ad1599b7c84c0e5cbeaaf2b245638c7aef68.css",
     "art": {
       "infected": {
@@ -1268,7 +1268,7 @@
   },
   "organ_skills_v598": {
     "baseline": "169505e96c4331a2072219e674862f51632e06a6",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/5583101b6a241c1a93c6041e0fc5efccdb27f8c5dad4467f9fbab193964eb143.css",
     "font": {
       "path": "assets/530d4b5110222e68544c56c2b418bcd95e1fe08c900f50c98f63270e5237b479.woff",
@@ -1296,7 +1296,7 @@
     "physical_Galaxy_S23_plus_tested": false
   },
   "player_mutant_v599": {
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "baseline": "9e32ef7cd98a4be02e2b2a70c7885c94f820389f",
     "source": {
       "path": "assets/6c0f3022ea1dcc3114c2618ab42d8d6c987a5c1ac5230c758ac491e038952531.png",
@@ -1316,7 +1316,7 @@
   },
   "equipment_fit_v600": {
     "baseline": "917ac1cd209bf3eb05a8e90045c59046bb3585ac",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "cannon_scale": 0.026,
     "blade_scale": 0.032,
     "blade_edges_down": true,
@@ -1328,7 +1328,7 @@
   },
   "home_hub_v601": {
     "baseline": "bbc738b6822f2836780b805b742da48e1313f128",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
     "art": {
       "path": "assets/20de2058e13b39666018142d7ab8b0997dd72473cf5078661c33a978d1a74cdd.png",
@@ -1386,7 +1386,7 @@
   },
   "visual_fit_v602": {
     "baseline": "2c4ed8cc3937550d53a85daa097d725c79c95bfd",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
     "navigation_height_and_contours_fixed": true,
     "start_art_contour_clipped": true,
@@ -1402,7 +1402,7 @@
   },
   "navigation_scale_v603": {
     "baseline": "5f383e8183d9b857dbce688bb5b289316a7659a2",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
     "connected_navigation_rail": true,
     "shared_home_background": true,
@@ -1416,7 +1416,7 @@
   },
   "flat_navigation_v604": {
     "baseline": "0f52a2ee8dc7e715e34477c21b52740b136109b1",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
     "same_height_all_tabs": true,
     "selected_width_weight": 1.6,
@@ -1429,7 +1429,7 @@
   },
   "icons_fullscreen_v606": {
     "baseline": "caa0430a13595695ce896aac22a5732bb39eb2ef",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "stylesheet": "assets/9015fe330a3e206f54bacd64dfc8d476096b1a97b5bf2cd3e0899e2d57a79fb0.css",
     "reference": {
       "source": "art/home-controls-v606/reference.png",
@@ -1743,7 +1743,7 @@
         "part_y": 1342
       }
     ],
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "engine_unchanged": false,
     "all_baseline_asset_bytes_unchanged": false,
     "card_names_levels_effects_and_handlers_unchanged": true,
@@ -1759,7 +1759,7 @@
     "baseline": "9cb02fe7ec2e21ea23b32d74febdeb2f82ed5e9d",
     "script": "assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js",
     "stylesheet": "assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "engine_baseline": "assets/0d81a51db37e67db329d82f01aaad4b01ce257ab2b0b3f350e1b4e6dca93fdc6.js",
     "engine_changes_rendering_only": true,
     "baseline_engine_restores_exactly_after_reversing_patches": true,
@@ -1791,7 +1791,7 @@
   "step04_hit_events": {
     "mode": "lexically wrapped hurtEnemy; output preserved",
     "source": "web/hit-events-v601.js",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "critical": "nullable unless explicit source",
     "damage_math_unchanged": true,
     "collision_unchanged": true,
@@ -1822,7 +1822,7 @@
     "full_ci_status": "manifest-pointer-correction-retest-pending",
     "engine_metadata_migration": {
       "previous": "assets/f7232057c8a7780a0c21d05b66c678028083f019ba51fa9324f468ee50cbb5ca.js",
-      "current": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+      "current": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
       "updatedFields": 25,
       "original_engine_preserved": true,
       "verified_no_pre_v601_pointers": true
@@ -1831,7 +1831,7 @@
   "weapon_hits_v612": {
     "baseline": "bd0a25454bfc9fdc1336de1e534f7b5aee6b1639",
     "baseline_engine": "assets/0b7abf3fbe44f27149f793dad0c200c95df00a5053318c3ad109d2eb3b54acaf.js",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "events": "assets/b06cf9dd33ac1b541d38674317ccef963f424f8a18da613376c06d8370336fc7.js",
     "art": {
       "gun": "assets/b4ea6a0d3ae63c2d6d53ec0581da5325c94cef3dc6afcaa5891a6eb837470a86.png",
@@ -1858,7 +1858,7 @@
     "baseline": "95af335a3beda5c66110eb882baf027850bbf921",
     "equivalent_local_baseline": "a62ae18ac26167dd6ee4591323984f7c8774ca2c",
     "baseline_engine": "assets/156794b24e569feddc9f4d085efae8139de69f9d53485c891608801e1dc63c99.js",
-    "engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
     "scope": [
       "spike",
       "tail",
@@ -1879,11 +1879,37 @@
     "physical_Galaxy_S23_plus_tested": false,
     "new_assets": [
       {
-        "path": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+        "path": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
         "sha256": "abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255",
         "bytes": 1674896,
         "kind": "game-code"
       }
     ]
+  },
+  "monster_feedback_v614": {
+    "baseline_version": "V575-STEP06-ORGAN-HITS-V613",
+    "baseline_build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
+    "baseline_engine": "assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js",
+    "engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
+    "new_assets": [
+      {
+        "path": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
+        "sha256": "e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a",
+        "bytes": 1683735,
+        "kind": "game-code"
+      }
+    ],
+    "new_images": 0,
+    "original_image_hashes_unchanged": true,
+    "original_image_count": 1021,
+    "reversible_addition": true,
+    "baseline_engine_restores_byte_for_byte": true,
+    "damage_and_collision_unmodified": true,
+    "boss_logic_unmodified": true,
+    "existing_hit_reactions_unmodified": true,
+    "save_keys_unchanged": true,
+    "scoped_effects": "monster hit fallback + existing death echo",
+    "published": false,
+    "physical_Galaxy_S23_plus_tested": false
   }
 }

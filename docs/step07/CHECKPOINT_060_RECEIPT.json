@@ -1,0 +1,19 @@
+{
+  "step": 7,
+  "checkpoint": 60,
+  "type": "entire-repository-git-branch-snapshot (not zip)",
+  "branch": "backup/step07-060-20261027",
+  "commit": "bd055f8c6af0eee926a6334a31d8d084f6912e07",
+  "ref_rechecked": true,
+  "commit_file_retrieved_again": true,
+  "artifact": "docs/step07/VALIDATION_060.json",
+  "artifact_bytes": 1872,
+  "artifact_sha256": "86ce5f232381389eae98adac3921e746b5fbde82f95e99e41d6123917b9eb637",
+  "artifact_git_blob_sha": "3e1c947232243d16fcb863211af6a9140b0b0f74",
+  "repository_git_files": 1667,
+  "repository_logical_bytes": 709661004,
+  "repository_dist_files": 1103,
+  "prior_backups_preserved": true,
+  "public_site_unchanged": true,
+  "ci_browser_success_run": 40432070871
+}

@@ -1,0 +1,70 @@
+name: STEP07 V614 browser and regression candidate
+on:
+  push:
+    branches: [step07-monster-feedback-v614-20261027]
+    paths:
+      - 'tests/monster_feedback_browser_v614.cjs'
+      - '.github/workflows/validate-step07.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 32
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify candidate manifest and 24 unit tests
+        run: |
+          python3 tools/verify_site.py --dist dist
+          python3 tools/verify_monster_feedback_v614.py
+          node --test tests/monster_feedback_v614.test.cjs tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs
+          node tests/monster_motion.test.cjs
+      - name: Verify existing gameplay and legacy animation systems
+        run: |
+          python3 -m unittest discover -s tests -v
+          node --test tests/web_client.test.cjs
+          node tests/campaign_lightning.test.cjs
+          node tests/organ_skills.test.cjs
+          node tests/monster_motion.test.cjs
+          node tests/horde_roles.test.cjs
+          node tests/movement_field.test.cjs
+          node tests/boss_cinematic.test.cjs
+          node tests/visual_clarity.test.cjs
+      - name: Prepare mobile Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Verify actual damage, single death, owner priority and saved UI
+        run: |
+          node tests/monster_feedback_browser_v614.cjs
+          node tests/weapon_hits_browser_v612.cjs
+          node tests/organ_hits_browser_v613.cjs
+      - name: Regression of bosses, HUD, maps, controls and existing assets
+        timeout-minutes: 17
+        run: |
+          node tests/home_hub_browser.cjs
+          node tests/home_map_miniatures_browser.cjs
+          node tests/visual_fit_browser.cjs
+          node tests/upgrade_scenery_browser.cjs
+          node tests/display_recovery_browser.cjs
+          node tests/arm_items_browser.cjs
+          node tests/horde_roles_browser.cjs
+          node tests/movement_field_browser.cjs
+          node tests/original_player_browser.cjs
+          node tests/boss_cinematic_browser.cjs
+          node tests/attack_warnings_browser.cjs
+          node tests/browser_smoke.cjs
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: step07-browser-local-v614
+          path: test-results
+          if-no-files-found: ignore

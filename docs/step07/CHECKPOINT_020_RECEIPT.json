@@ -1,0 +1,18 @@
+{
+  "step": 7,
+  "substep": 1,
+  "checkpoint": 20,
+  "backup_type": "GitHub complete repository immutable commit, protected by named branch",
+  "remote_branch": "backup/step07-020-20261027",
+  "remote_commit": "3940ecb9c50faef26e462871f3eb923ceca07689",
+  "artifact_path": "docs/step07/FEEDBACK_DESIGN_KO.md",
+  "artifact_bytes": 6854,
+  "artifact_sha256": "dc5398b1382520818f2d17397adf2ac76ba2f6c682a5f8be0101e784c7689d3a",
+  "artifact_git_blob_sha": "7e0788f69fb6e8fca27cc91cdc89b07a87798cc9",
+  "remote_ref_readback_matches": true,
+  "remote_file_readback_equals_work_branch": true,
+  "prior_snapshots_preserved": true,
+  "game_engine_changed": false,
+  "public_pages_deployed": false,
+  "note": "Git object snapshot, not a separate ZIP; recorded SHA-256 applies to the named document, not to the whole repository."
+}
