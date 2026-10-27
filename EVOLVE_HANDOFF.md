@@ -1,10 +1,63 @@
 # EVOLVE — 새 채팅 자동 인수인계 (항상 먼저 읽기)
 
+## 최신 재개 — M04 STEP 2/3 · 60% (2026-10-27 KST)
+
+- 실제 구현: 공명/심홍 코어 발광 2종, 캐릭터 미리보기·파츠 화면·전투 표시, 테스트 결정 120개로 심홍 코어 해금. 기존 상품 5종/무료 DNA/파츠·무기 능력치/이미지 원본 보존. 신규 래스터 이미지 생성 없음.
+- 검증된 코드 SHA: `74363621d050a2ef4c8250a1e8193b19cd549339`. GitHub Actions https://github.com/idonutyou/EVOLVE/actions/runs/40525500252 **success**: Node 22 32/32, 원본 이미지 1,021개/리소스 SHA256, 모바일 393×852 구매→결정 소비→테마 교체→재로드→실제 전투 발광/캐시 한도 검사 통과.
+- 작업 브랜치 `monetization-m04-payment-20261027`. 60% 복구 브랜치 `backup/monetization-m04-060-20261027` 및 `checkpoints/EVOLVE_M04_060_20261027.zip`을 생성·재조회한 결과를 기준으로 재개한다. 10~50% 백업도 유지한다.
+- 공개 main/Pages 기능 배포·실결제·물리 Galaxy S23+ 검증은 아직 하지 않았다. 코어 테마는 기존 아트 위 별도 발광 레이어이며 M06의 정식 신규 프리미엄 아트 완성은 아니다.
+- 다음 70%: 모의 구매 확인/취소, 잘못된 저장·차감 실패·복원/초기화, 파츠/전투 값 보존, UI 한글 글꼴과 모바일 화면 보강. 이미지 생성 불필요. 70% 이후 STEP 2/3 종료; 80~100% 공개 통합/배포는 다음 사용자 지시에서 진행한다.
+
 최초 생성: 2026-10-27 KST
 저장소: `idonutyou/EVOLVE`
 공개 게임: https://idonutyou.github.io/EVOLVE/
 
 > 이 파일은 **재개 위치를 찾아가기 위한 안내서**이지 자동 최신화된 실행 로그가 아니다. 새 세션은 반드시 GitHub 브랜치, 커밋, 실제 소스, 최근 QA/체크포인트를 다시 조회해 기록의 최신성을 확인한다.
+
+## 최신 재개 — M04 50% 개발용 홈 모의 구매 UI 구현 검증 완료 (2026-10-27)
+
+- **현재 정확한 완료 지점:** M04 STEP 2/3 **50%**. 기존 40% 모의 구매 엔진을 실제 V614 메인 홈 UI에 연결하고 GitHub Actions에서 모바일 브라우저 393×852 실제 게임 쉘 시험 성공. **아직 공개 `main`/GitHub Pages에는 이 기능 미병합·미배포**.
+- 작업 브랜치 `monetization-m04-payment-20261027` HEAD `4af248bd7d2b655afa77299e9c8afb2743d88278`. **50% 원격 백업** `backup/monetization-m04-050-20261027` @ 동일 SHA, ref+주요 파일/blob SHA를 **독립 2회 검증**. 과거 10~40% 및 모든 M01–M03 백업 유지.
+- `web/mock-premium-ui-v616.js` + `web/mock-premium-v615.js`를 SHA256 명명 새 `dist/assets/` 파일 두 개로 복사·검증하고 `dist/index.html`의 홈에 **'◈ DEV 상점'** 진입 UI 연결. 기존 `#homeTabs` 5개 불변, 코어 실이미지/전투/원래 사용자 세이브 키 불변.
+- **오직 `?evolveMockShop=1` 개발용 URL 플래그** 및 허용 호스트에서만 모의 상점 버튼 표시; 플래그 없으면 게임 화면과 일반 사용 흐름 영향 최소화. 테스트 결정 +100/+300, 1회 스타터 +75, 코어 소유/모의 장착, 시즌 패스 미완성 구매 차단. 모의 저장 `EVOLVE_DEV_MOCK_STORE_V1` 별도; 실제 과금·플랫폼 결제·유료 원장·실판매 없음.
+- `dist/asset-manifest.json` 1067→1069 및 해당 검증 메타데이터 `dist/version.json`/`dist/verification.json`을 **개발 브랜치에서만** 갱신. 기존 이미지 바이트·원본 엔진 asset SHA 그대로.
+- 검증: https://github.com/idonutyou/EVOLVE/actions/runs/40520829120 **success**. `tools/verify_site.py` 게임/이미지 검증 통과, Node 22 **26/26 통과**, 실제 V614 홈 Chromium 모바일 393×852 모의 구매→테스트 결정 400·코어 장착→재로드 복원·세이브 주요 필드 유지·탭 5개 유지·모의 URL 없으면 상점 없음. 스크린샷 GitHub Actions 아티팩트 ID `12741811864`. 물리 Galaxy S23+ 테스트는 하지 않음. 후속 계약 상태 변경 Node 26/26 실행도 https://github.com/idonutyou/EVOLVE/actions/runs/40521226187 에서 통과.
+- 상세 `docs/monetization/M04_050_HOME_MOCK_UI_KO.md` (M04 작업 브랜치).
+- **다음 사용자 `고` → M04 STEP 2/3 60%**: 상품의 게임 내 실질 가치·기존 파츠/코어 장착 경계 확인, 실제 외형이 필요한 콘텐츠/설계 확정·UI 검증. **이미지 렌더링: 60%의 실제 신규 코어/신체 외형 제작을 포함하면 필요하므로 작업 착수 전 사용자에게 사전 안내.** 기존 아트 수정·재생성 금지. 70% 저장·복원/취소·성능 및 메인 통합, 80~100% 공개 배포와 최종 검증.
+- 최종 출시는 Google Play/App Store. 실제 Billing/StoreKit 연동은 게임 완성 후 M08. 사용자가 요구한 **과금할 만한 콘텐츠 우선**, 실제 결제는 후순위 원칙 유지.
+
+## 2026-10-27 최신 M04 40% 원격 재개 — 모의 구매 엔진 검증 완료
+- **M04 STEP 2/3 진행률 40% (모의 구매 로직만 완료)**. M04 개발 브랜치 `monetization-m04-payment-20261027` HEAD `0807072c06e3ae8663b3b7726334e8948b194626`. main 공개 게임 파일은 아직 바꾸지 않았다.
+- 40% 원격 복구 `backup/monetization-m04-040-verified-20261027` @ `0807072c06e3ae8663b3b7726334e8948b194626` — 원격 ref 및 핵심 파일·blob SHA 2회 검증. 원래 40% 초기 복구 `backup/monetization-m04-040-20261027`도 보존.
+- 실제 작성 코드: `web/mock-premium-v615.js` — 오직 `MOCK_ONLY` 테스트용 상품/재화·외형 소유권·코어 장착 상태·중복 방지·저장 복원/초기화 엔진. 신규 저장 키 `EVOLVE_DEV_MOCK_STORE_V1`. M03 유료 원장, 게임 저장 `EVOLVE_V575_TEST_*`, 라이브 결제와 격리.
+- Node 22 GitHub Actions **26/26 통과** (설계 계약 12 + 모의 엔진 14): https://github.com/idonutyou/EVOLVE/actions/runs/40518045183 . 초안 테스트 두 번 실패 후 실제 수정·재검증 통과.
+- **주의: 아직 `dist/index.html`과 메인 게임 상점 UI에 연결하지 않았다.** 게임에서 모의 구매 버튼을 누르는 경험은 50% 작업. 코어 테마는 테스트 소유·장착 **상태만** 기록하며, 새 외형 렌더링은 아직 구현하지 않았다.
+- 상세: M04 작업 브랜치 `docs/monetization/M04_040_MOCK_RUNTIME_KO.md`, `monetization/m04/mock-premium-shop.design.json`.
+- **다음 사용자의 `고` → M04 50%**: 실제 V614 게임 메인홈에 모의 구매 진입점/상품 획득/테스트 재화 표기를 안전하게 연결. 구조·에셋 검증 후 단계별 실게임 회귀. 신규 이미지 렌더링 **불필요**, 실제 외형 제작 단계는 사전 안내.
+- 수익화 최우선은 플레이할 가치가 있는 콘텐츠·모의 구매. 실제 Google Play Billing 및 Apple StoreKit 연동은 게임 완성 후 M08. 기존 모든 백업 보존.
+
+## 최우선 사용자 지시 — 실제 결제는 게임 완성 후, 지금은 모의 구매와 상품 콘텐츠 (2026-10-27)
+- **최종 출시: Google Play + Apple App Store. 현재 GitHub Pages 웹은 개발/테스트 전용.** 웹 PG 우선 연동 계획 철회.
+- **과금 최우선의 의미:** 게임 내 구매할 만한 패키지·변이 결정·캐릭터 각 부위/코어 외형·무기 연출·시즌 보상을 실제로 만들고 **모의 결제→획득→장착/사용/저장/복원** 테스트. 카드 청구·상점 사업자 계정·실 운영 PG·결제 서버는 **게임 완성 후 마지막 M08 단계**에서 Google Play Billing과 StoreKit 2를 연결.
+- 기존 M03 개발용 원장 100%·M04 10~30% 연구는 백업에 보존하고 **반복하거나 결제 제공자 구현을 먼저 진행하지 않는다.** M04 30% 기획은 새 지침으로 교정됨.
+- 최신 M04 작업 브랜치 `monetization-m04-payment-20261027`에 `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md`와 `monetization/m04/mock-premium-shop.design.json` 저장. `monetization/m04/payment-flow.draft.json`의 실제 스토어 결제는 **M08로 미룸**.
+- **최신 검증된 교정 백업** `backup/m04-030-mock-first-verified-20261027` @ `5a339a70a33e43d2de66eff9f690ec2d2c8dadb2`, 원격 ref와 주요 파일 2회 검증. 이전 교정 백업도 보존. 이 SHA는 **M04 작업 브랜치의 모의 구매 방향 교정 체크포인트**이며 main 게임을 바꾼 것이 아님.
+- GitHub Actions Node 22 모의 구매/스토어 결제 분리 **12/12 정적 계약 테스트 통과**, https://github.com/idonutyou/EVOLVE/actions/runs/40514171284 . 실제 게임 모의 상점 구현·실결제 테스트 아님.
+- M04 진행률은 **30% 설계/방향 교정 완료**. 다음 사용자 `고` → **M04 STEP 2/3 40% 실제 게임 내 모의 구매 및 상품 보상 인터페이스 구축**. 기존 저장 키/무료 DNA/확정 아트 보존, 판매 상품 카탈로그는 비활성 유지.
+- 다음 작업의 이미지 렌더링: **필요 없음**. 실제 스킨/새 외형 이미지를 만드는 단계에서는 착수 전에 사용자에게 고지.
+- 기존 완료 전 백업 삭제 금지. 실제 결제·유료 원장과 모의 구매 데이터는 절대 혼합하지 않는다.
+
+## 최신 재개 지점 — M04 30% 설계 완료 (2026-10-27)
+
+- M01/M02 시험 모델·계약 및 M03 개발용 원장 트랙은 이전 100% 완료 상태 유지. **실제 PG 승인·운영 서버·실매출은 미구현**.
+- **M04 실제 결제 경로 STEP 1/3 (10~30%) 완료**. 작업 브랜치 `monetization-m04-payment-20261027`, SHA `5af53769bcaa30e1ba4d86e19e62226511fc58d5`. **M04 산출물 6개 파일은 아직 main에 병합하지 않았다.**
+- M04 10% 백업 `backup/monetization-m04-010-20261027` @ `173f362bd3bdf1ecf2da9564b347bbe232908654`; 20% `backup/monetization-m04-020-20261027` @ `557082043f29f27e9c0c3c925a3ffd4ed10a77db`; **30%** `backup/monetization-m04-030-20261027` @ `5af53769bcaa30e1ba4d86e19e62226511fc58d5`. 10%마다 ref/파일 원격 **2회 검증**.
+- 최신 작업 문서 `docs/monetization/M04_030_DESIGN_HANDOFF_KO.md` (M04 작업 브랜치). 공식 정책/웹 PG·Play 결제 분기, 서버 검증된 주문·결제상태·환불 안전 상태 JSON, 정적 계약 검사 8개.
+- Node 22 GitHub Actions **8/8 통과 / 0 실패**: https://github.com/idonutyou/EVOLVE/actions/runs/40511265054 . **정적 설계 계약 검사로서 결제사 샌드박스/실결제 검증은 아님**.
+- 독립 웹 PG의 첫 검토 후보 **토스페이먼츠**, 대안 포트원 V2, Play 배포 시 Google Play Billing 별도 검토. 아직 공급자 최종 선택·가맹점 계약·실가격·PG 자격증명 없음.
+- 판매 플래그 `checkout_enabled=false`, M01 5종 SKU `draft_disabled`/가격 null 유지, `dist/`, `web/`, 이미지/게임 저장 키 변경 없음. 유료 결정 지급 활성화 없음.
+- **다음 `고`: M04 STEP 2/3 (40~70%), 우선 40% 모의 공급자 adapter/서버 주문 검증 프로토타입 착수.** 신규 이미지 렌더링 필요 없음. 외부 계정 개설·실비용 발생 금지.
+- 과거의 M03/M04 재개 기록은 이 최신 항목에 우선하지 않는다. 기존 모든 M01~M04 복구 백업 삭제 금지.
 
 ## 최신 M03 100% 복구 상태 — 이전 70% 기록보다 우선
 - **M03 개발용 계정·원장 트랙 100% 완료**, PR #7로 main에 안전 병합. **실제 결제·실매출·운영 계정 서비스는 미구현**.
