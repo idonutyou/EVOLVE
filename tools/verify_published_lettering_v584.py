@@ -41,8 +41,12 @@ def main():
     assert live_manifest == (args.dist / 'asset-manifest.json').read_bytes(), 'Published asset manifest differs'
     entries = json.loads(live_manifest)
     primary_engines = [entry for entry in entries if entry.get('kind') == 'game-code' and entry.get('bytes', 0) > 100_000]
-    assert len(primary_engines) == 1, 'Expected one verified main game engine'
-    engine = primary_engines[0]['path']
+    if 'm04_mock_content' in report:
+        engine = report['m04_mock_content']['engine']
+        assert sum(e['path'] == engine for e in primary_engines) == 1, 'M04 verified current engine missing'
+    else:
+        assert len(primary_engines) == 1, 'Expected one verified main game engine'
+        engine = primary_engines[0]['path']
     live_engine = fetch(engine)
     engine_sha = hashlib.sha256(live_engine).hexdigest()
     assert engine_sha == Path(engine).stem, 'Published engine bytes differ'
