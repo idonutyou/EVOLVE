@@ -1,4 +1,5 @@
 name: STEP07 V614 candidate build and local checks
+# Runs only on the isolated candidate branch; never deploys Pages.
 on:
   push:
     branches: [step07-monster-feedback-v614-20261027]
