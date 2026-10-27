@@ -1,6 +1,6 @@
 {
   "version": "m04.mock-premium.v1",
-  "status": "DESIGN_ONLY_NOT_CONNECTED_TO_GAME",
+  "status": "DEV_MOCK_ENGINE_IMPLEMENTED_NOT_WIRED_TO_GAME_UI",
   "dev_mode": "MOCK_ONLY",
   "web_role": "TEST_ONLY",
   "release_platforms": [
@@ -98,5 +98,33 @@
     "No edits to old save keys, game art bytes, map or combat without targeted work",
     "All store items need playable granted value before test price can be finalized",
     "Keep product IDs and entitlement IDs stable to connect native billing later"
-  ]
+  ],
+  "runtime_module_path": "web/mock-premium-v615.js",
+  "runtime_version": "evolve.dev-mock-shop.v1",
+  "runtime_loaded_in_published_game": false,
+  "runtime_ui_connected": false,
+  "mock_transaction_testing": "IMPLEMENTED_IN_ISOLATED_LOCAL_STORAGE",
+  "entitlement_grants_dev_only": true,
+  "real_cosmetic_art_connected": false,
+  "test_grants": {
+    "starter_genome_once": {
+      "devTestCrystals": 75,
+      "devEntitlement": "dev_starter_support_v1"
+    },
+    "mutation_crystal_small": {
+      "devTestCrystals": 100
+    },
+    "mutation_crystal_mid": {
+      "devTestCrystals": 300
+    },
+    "appearance_unlock_01": {
+      "devEntitlement": "dev_core_theme_01",
+      "visualReady": false
+    },
+    "season_research_pass_01": {
+      "disabled": "CONTENT_NOT_READY"
+    }
+  },
+  "integration_next": "M04_050_WEB_HOME_MOCK_UI_AND_GAME_ITEMS",
+  "notes_40_ko": "모의 구매 엔진을 개발 브랜치 web/에 구현. 실제 게임 화면에 표시되거나 dist/index.html에서 로드되는 것은 아직 아님. 유료 실재화, 실제 외형 리소스, 기존 저장 상태를 수정하지 않음."
 }
