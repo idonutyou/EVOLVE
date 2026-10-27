@@ -21,6 +21,12 @@
 - 상품 5종 `draft_disabled`, 실제 가격 null, `checkout_enabled=false` 유지. 정식 Google Play Billing / Apple StoreKit은 게임 전체 완료 뒤 M08에서 도입.
 - 추가 이미지 렌더링 **없음**, 기존 이미지 1,021개 바이트와 5개 메인 탭 보존. 물리 Galaxy S23+ 장시간 사용/발열/FPS 실기기 검증은 아직 수행하지 않음.
 
+## 모바일 검증 최종 증거 (2026-10-28 KST)
+
+- [QA #40575562801](https://github.com/idonutyou/EVOLVE/actions/runs/40575562801): Chromium 실터치 3개 뷰포트에서 DEV vs 하단 메뉴 교차 영역 0, ORGANISM 실제 터치 정상, 기존 50~80% 회귀 통과, 62/62 Node 계약 통과. **마지막 commit push만 non-fast-forward 경합으로 거부**되어 전체 run 결론은 failure. 사용자 코드/게임 기능 테스트 실패가 아님.
+- [검증 결과 재사용 및 빌드 저장 #40576659951](https://github.com/idonutyou/EVOLVE/actions/runs/40576659951): QA 성공 단계 API 확인 및 QA가 검사한 소스의 바이트 동일성 확인, 원본 보호·62/62 회귀 재검사, 최신 브랜치에서 M05-UX90 build를 안전하게 커밋·푸시. **success**.
+- 최종 개발용 UI 빌드 SHA `b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b`, 총 해시 자산 1,083개 (기존 1,078개 + DEV UI 스크립트 5개).
+
 ## 체크포인트 및 다음
 
 - 90% 테스트: https://github.com/idonutyou/EVOLVE/actions/runs/40575562801 (성공 여부는 작업 최종 보고에서 별도 확정).
