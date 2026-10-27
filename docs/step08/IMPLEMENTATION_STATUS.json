@@ -1,8 +1,8 @@
 {
   "step": 8,
   "substep": 2,
-  "progress": 40,
-  "stage": "test_harness_boot_probe_passed",
+  "progress": 50,
+  "stage": "fixed_step_real_gameplay_QA_passed",
   "created_kst": "2026-10-27",
   "baseline_main_commit": "10fc95c7313a08084e7b95738f50188f72850a27",
   "baseline_public_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
@@ -27,7 +27,8 @@
   "artifacts": [
     "docs/step08/BASELINE_AUDIT_KO.md",
     "docs/step08/PLAYTEST_MATRIX_V1.json",
-    "docs/step08/TEST_HARNESS_SPEC_KO.md"
+    "docs/step08/TEST_HARNESS_SPEC_KO.md",
+    "docs/step08/VALIDATION_050.json"
   ],
   "all_existing_step07_backups_preserved": true,
   "active_branch": "step08-combat-playtest-v614-20261027",
@@ -35,7 +36,8 @@
     "backup/step08-010-20261027",
     "backup/step08-020-20261027",
     "backup/step08-030-20261027",
-    "backup/step08-040-20261027"
+    "backup/step08-040-20261027",
+    "backup/step08-050-20261027"
   ],
   "pending_tasks": [
     "actual playback scenarios and browser evidence",
@@ -44,7 +46,7 @@
     "Galaxy S23+ physical 3–5 min and heat (not accessible from CI)"
   ],
   "next_part": 2,
-  "next_checkpoint": 50,
+  "next_checkpoint": 60,
   "next_work": "test-only browser harness and initial ordinary, midboss, TITAN reproducibility",
   "next_step_after_step08": 9,
   "next_step_label": "스킬 레벨 모델·카드 규칙 정리",
@@ -55,5 +57,12 @@
   "test_paths": [
     "tests/combat_playtest_step08_browser.cjs",
     ".github/workflows/step08-review.yml"
-  ]
+  ],
+  "functional_ci_run": 40471742145,
+  "functional_ci_conclusion": "success",
+  "functional_monster_hit_types": 8,
+  "functional_midboss_profiles": 4,
+  "functional_native_titans": 2,
+  "real_time_perf_measured": false,
+  "automated_functional_scenarios_with_data": 14
 }
