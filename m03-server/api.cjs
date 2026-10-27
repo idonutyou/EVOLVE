@@ -13,8 +13,8 @@ function createHandler({store,identity}){
   if(path!=='/v1/accounts/bootstrap'&&req.method!=='GET')return send(res,405,{code:'METHOD_NOT_ALLOWED'});
   let principal;try{principal=verifyIdentity(req.headers.authorization,identity)}catch{return send(res,401,{code:'UNAUTHORIZED'})}
   try{
-   const account=await store.getOrCreateAccount(principal);
-   if(account.status!=='active')return send(res,403,{code:'ACCOUNT_DISABLED'});
+   const account=path==='/v1/accounts/bootstrap'?await store.getOrCreateAccount(principal):await store.getAccount(principal);
+   if(!account||account.status!=='active')return send(res,403,{code:'ACCOUNT_DISABLED'});
    if(path==='/v1/accounts/bootstrap'&&req.method==='POST')return send(res,200,{accountId:account.id});
    if(path==='/v1/me/wallet'&&req.method==='GET')return send(res,200,await store.readWallet(account.id));
    if(path==='/v1/me/entitlements'&&req.method==='GET')return send(res,200,{entitlements:await store.readEntitlements(account.id)});
