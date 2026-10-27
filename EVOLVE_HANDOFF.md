@@ -1,3 +1,17 @@
+# EVOLVE 최신 인수인계 — M06 STEP 1/3 · 20% 코어 사양 (2026-10-28 KST)
+
+> 다음 `고` = **M06 30%**. M05 완료·V620 기본 SHOP 단일화·M06 10~20%를 다시 구현하지 않는다. 디자인 설계만 진행 중이므로 `main`/공개 게임 변경 없음.
+
+- 저장소 `idonutyou/EVOLVE` 브랜치 `monetization-m06-premium-art-20261028`. 변경 전 `main` `b73c848a781e30453c3e003de673a98143fa5d42`. M06 10% 복구 `backup/monetization-m06-010-20261028` 유지.
+- M06 20%: Reactor Core(반응로 코어) 제작용 형태·피벗·개별 오버레이·모바일 표시·시간 연출·저성능 모드·권리 상태 전이 설계. `monetization/m06/reactor-core-spec.v1.json`, `reactor-ownership-fsm.v1.json`, `docs/monetization/M06_020_REACTOR_CORE_SPEC_KO.md`, `tests/m06_020_contract.test.cjs`.
+- 현재 V617 코어 캐시 2×192×192×4=294,912바이트. 동일 크기의 세 번째 코어 추가를 가정하면 442,368바이트 **이론적 스프라이트 메모리**; 실제 화면/성능은 신규 렌더링 단계에서 검증.
+- 기존 공명/심홍과 모양부터 다른 **육각 케이싱/이중 궤도/렌즈**. 320/393 모바일·가로 852와 54/40/18 CSS px는 테스트 전의 설계 목표.
+- 원래 SHOP 외 새 DEV 팝업 금지, TEST 저장/무료 DNA/게임 세이브/M03 분리, 실판매 가격 null·checkout=false·client_grants=false. 기존 1,021개 아트 미변경, M06 새 그림 아직 없음.
+- 20% 복구 `backup/monetization-m06-020-20261028` + `checkpoints/EVOLVE_M06_020_20261028.zip`/JSON, 원격 2회 확인과 Actions 성공 결과를 실제 확인해야 완료 확정. 과거 복구 절대 삭제 금지.
+- 다음 **M06 30%, STEP 1/3 마지막**: 외형 에셋/정렬 체크리스트, SHOP 미리보기 상태 및 QC/판매 차단 계약 최종 동결. **이미지 렌더링 불필요**. 첫 신규 아트 제작은 40% 이후 별도 예고.
+
+---
+
 # EVOLVE 최신 인수인계 — 기본 SHOP 단일화 V620 (2026-10-28 KST)
 
 > M06 10%를 진행하기 전에 사용자 요청인 **DEV 상점 삭제·원래 SHOP 교체 작업을 완료**해야 함. 완료 후 사용자 `고`는 M06 STEP 1/3 · 10%. M05 이전 기능 다시 구현 금지.
