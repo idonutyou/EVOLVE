@@ -32,7 +32,7 @@ def main():
         time.sleep(5)
     manifest = fetch('asset-manifest.json')
     assert manifest == (args.dist/'asset-manifest.json').read_bytes(), 'Live manifest differs'
-    engine = verification['movement_field']['engine']
+    engine = verification.get('m04_mock_content', {}).get('engine', verification['movement_field']['engine'])
     code = fetch(engine)
     digest = hashlib.sha256(code).hexdigest()
     assert digest == Path(engine).stem, 'Live engine differs'
