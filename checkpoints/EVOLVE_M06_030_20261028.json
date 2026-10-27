@@ -1,0 +1,9 @@
+{
+  "step": "M06-030",
+  "checkpoint_type": "FULL_GIT_TREE",
+  "branch": "backup/monetization-m06-030-20261028",
+  "commit": "ed02d11b199b6eb867db91a93a9c4b66342531eb",
+  "revenue_enabled": false,
+  "original_images_unchanged": 1021,
+  "prior_backups_retained": true
+}
