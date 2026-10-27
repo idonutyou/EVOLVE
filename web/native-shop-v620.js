@@ -137,7 +137,7 @@
    const row=make('article','nativeShopCardV620'),left=make('div');
    left.append(make('strong','',item.label),make('small','',desc),make('p','nativeShopStatusV620',active?'장착 중':owned?'획득 완료':'미보유'));
    const btn=button(label,()=>action(owned?'equip':'redeem',item.entitlement),disable,item.entitlement);
-   btn.dataset.nativeCore=item.entitlement;
+   delete btn.dataset.nativeSku;btn.dataset.nativeCore=item.entitlement;
    btn.setAttribute('aria-pressed',String(active));
    row.append(left,btn);frag.append(row);
   }
