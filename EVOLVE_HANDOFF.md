@@ -1,3 +1,19 @@
+# EVOLVE 최신 작업 인수인계 — M05 STEP 1/3 · 30% 완료 (2026-10-28 KST)
+
+> 사용자의 다음 `고`는 **M05 40% · STEP 2/3 구현 첫 구간**. M05 10~30% 설계와 M04 100%를 다시 하지 말 것.
+
+- 베이스 main/M04 최종: `fbe3224a3bdd95020829228427ddc3b05ed41f9e`. 현재 공개 게임 동일.
+- 작업 브랜치 `monetization-m05-ux-20261028`. **main 미병합**, 게임 파일 `dist/`와 기존 M04 소스 `web/`는 현재 30%까지 원본 유지.
+- 설계 3종: `monetization/m05/store-inventory-ux.v1.json`, `product-detail-states.v1.json`, `mobile-flow.v1.json`; 최종 UX 문서 `docs/monetization/M05_030_MOBILE_UX_FREEZE_KO.md`.
+- UX: 기존 홈 5탭 유지, 옵트인 상점 오버레이·상품 상세·코어 컬렉션·확인/취소·오류 화면. 기존 M04 테스트 결정, 코어 2종, 독립 저장만 사용. 320/393 모바일과 가로, 44px 터치, 스크롤/포커스/키보드 상태 명세 확정.
+- 테스트 `tests/monetization_m05_mobile_flow.test.cjs`, 10/20%·M04 기존 테스트와 합쳐 설계 계약 검증. 모바일 시뮬레이션은 **구현 40% 이후**.
+- 30% 백업 `backup/monetization-m05-030-20261028`; `checkpoints/EVOLVE_M05_030_20261028.zip`/JSON. 10/20% 백업 보존. 검증된 SHA/ZIP 크기는 해당 JSON 참조.
+- 실제 결제/가격/제휴 SDK/Google Play·Apple StoreKit: **게임 완성 후 M08**. 현재 DEV MOCK ONLY.
+- 다음 40%에는 **이미지 신규 렌더링 필요 없음**. 별도 M05 UI 모듈을 개발 브랜치에 구현하되 원본 게임/M04 모의 구매 엔진 저장을 덮어쓰지 말고 10% 증분 종료 후 원격 백업+2회 검증.
+- 오래된 이전 인수인계 기록은 아래에 이력으로 보존한다.
+
+---
+
 # EVOLVE 최신 인수인계 — M05 20% (STEP 1/3, 2026-10-28 KST)
 
 > 다음 사용자 `고`는 **M05 30%**에서 모바일 상점 화면 상태 전환/키보드·터치 접근성 설계를 마친다. 아직 게임 UI 자체를 구현하거나 배포하지 않았다.
