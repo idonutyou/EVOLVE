@@ -1,3 +1,16 @@
+# M05 최신 진행 — STEP 1/3 · 10% 설계 (2026-10-28 KST)
+
+- **M05 10%: 상점·코어 인벤토리 기본 정보 구조 설계 완료**. 구현·웹 배포는 아직 하지 않았다.
+- 현재 작업 브랜치 `monetization-m05-ux-20261028`, 기준 M04 100% main `fbe3224a3bdd95020829228427ddc3b05ed41f9e`.
+- 설계 `monetization/m05/store-inventory-ux.v1.json`, 검토 `docs/monetization/M05_010_UX_AUDIT_KO.md`, 테스트 `tests/monetization_m05_ux_design.test.cjs`.
+- 5개 기존 홈 탭/기존 파츠 인벤토리 보호, DEV 모의 상점 → 코어 컬렉션 UX 규칙 및 모바일 44px 기준 정의.
+- M04 기존 상품 5개·코어 2종/TEST 결정 120개 소비 유지, 시즌 패스 잠금·실제 결제 비활성 보존.
+- 신규 이미지 없음. 아직 브라우저 UI 변경/기존 GitHub Pages 반영 없음.
+- 원격 체크포인트: `backup/monetization-m05-010-20261028`, 아카이브 `checkpoints/EVOLVE_M05_010_20261028.zip` (검증 후 완료 처리).
+- **다음 사용자 `고`: M05 20% 상품 상세/소유 상태와 오류 문구 계약 구체화**, 이미지 생성 불필요.
+
+---
+
 # EVOLVE — 검증된 현재 진행률 (2026-10-28 KST)
 
 > 아래 비율은 EVOLVE 전체 완성도가 아니라 **수익화 각 단계의 개별 완성도**임.
