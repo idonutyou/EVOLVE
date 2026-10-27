@@ -1,3 +1,20 @@
+# EVOLVE 최신 인수인계 — M05 STEP 2/3 · 60% (2026-10-28 KST)
+
+> 다음 `고` = **M05 70%** 모바일/가로/포커스·스크롤/안정성 통합 회귀. 10%씩 진행, 다음 단계 및 이미지 필요 여부를 꼭 알릴 것.
+
+- GitHub `idonutyou/EVOLVE` 기능 브랜치 `monetization-m05-ux-20261028`; `main` 최종 M04 100% `fbe3224a3bdd95020829228427ddc3b05ed41f9e` 불변.
+- 핵심 M05 `web/m05-shop-ui-v618.js` 레이어만 확장, 기존 M04 구매·코어 저장 엔진 `web/mock-premium-v615.js` / UI `web/mock-premium-ui-v616.js` / 게임 `dist` 이미지 원본·M03 원장 수정 없음.
+- 60%: 개발 옵트인 2중 플래그 `?evolveMockShop=1&evolveM05UX=1`에서 손상 localStorage 데이터 안전 오류 모달, 저장 쓰기 실패 후 구매/장착/초기화 읽기 전용, 확인창 닫기·배경 터치=확인 취소 우선, 확인창 중 섹션 전환 차단 및 트리플 클릭 중복 지급 방지.
+- 검사 https://github.com/idonutyou/EVOLVE/actions/runs/40566198249 성공, Node 62/62(빌드 전), 브라우저 393×852/320×568 양쪽 통과, 별도 손상 JSON/쓰기 거부 장면 검증, 50% 소유/장착/심홍 해금 QA 재검사. 원래 게임 세이브 바이트 보호.
+- 신규 asset `assets/13a854181d47bd909efdcc938b4caf33db57cee36718d9b54dd4e61a1bcbadba.js`; 16,977 bytes. 브랜치 dist manifest 1,081개/원본 이미지 1,021개.
+- 기능 브랜치 build `5d5c8f1fe6970e5f82749f1ec6f7f6f59691a797f18aff56d8c99b6e7e92d34e`. `main` 미병합·Pages 공개 미반영. 실결제는 M08에만. 물리 Galaxy S23+ 미시험.
+- 60% 체크포인트 `backup/monetization-m05-060-20261028`와 `checkpoints/EVOLVE_M05_060_20261028.zip`/JSON; SHA/CRC/원격 2회 후 유효. 10/20/30/40/50% 이전 백업 삭제 금지.
+- UI 예외 상세 `docs/monetization/M05_060_FAILURE_SAFETY_QA_KO.md`; 테스트 `tests/monetization_m05_060_browser.cjs`; 빌더 `tools/build_m05_060.py`.
+- 다음 70% **신규 이미지 불필요**. 모바일 가로/터치·포커스·스크롤과 게임 홈 안전 복귀/접근성 검사, 반복 브라우저 QA 마무리. 80~100%는 main 통합/Pages 단계로만.
+- 과거 인수인계 원문 아래 유지.
+
+---
+
 # EVOLVE 최신 인수인계 — M05 STEP 2/3 · 50% 완료 (2026-10-28 KST)
 
 > 다음 `고`는 **M05 60%** 실제 UI의 저장 오류·중복탭·화면 전환 안정화를 진행한다. M04/M05 10~50%의 구현을 반복하지 않는다.
