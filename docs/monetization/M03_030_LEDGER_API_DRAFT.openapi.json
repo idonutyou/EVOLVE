@@ -1,0 +1,391 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "EVOLVE M03 planned account & server wallet API",
+    "version": "m03-design-0.3.0",
+    "description": "SPEC_ONLY: M03 30% design. No deployed endpoint, wallet grant or payment processing. Existing M01 mock never authorizes production payouts."
+  },
+  "servers": [
+    {
+      "url": "https://api.evolve.invalid",
+      "description": "RFC reserved invalid placeholder; not deployed"
+    }
+  ],
+  "x-m03-mode": "SPEC_ONLY",
+  "x-revenue-enabled": false,
+  "x-paid-grant-enabled": false,
+  "x-provider-verified": false,
+  "x-cors-note": "Specific allow-listed GitHub Pages origin, never wildcard combined with credentialed requests. OIDC tokens short-lived, do not store service keys or long-lived bearer secrets in localStorage.",
+  "security": [
+    {
+      "userAuth": []
+    }
+  ],
+  "paths": {
+    "/v1/accounts/bootstrap": {
+      "post": {
+        "summary": "Verified existing identity only. No anonymous client mint or trust in body.accountId.",
+        "operationId": "bootstrapServerAccount",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/me/wallet": {
+      "get": {
+        "operationId": "getM03Wallet",
+        "summary": "Server-authoritative free/paid buckets; never browser DNA",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Only after authenticated M03 backend exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalletResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/me/entitlements": {
+      "get": {
+        "operationId": "getM03Entitlements",
+        "summary": "Aggregate only active source-backed rights; user may not choose account",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Only after authenticated M03 backend exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitlementResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/catalog": {
+      "get": {
+        "operationId": "getM03DisabledCatalog",
+        "summary": "Read-only unpriced disabled catalogue; never provider prices until verified",
+        "responses": {
+          "200": {
+            "description": "Disabled-only draft safe view",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogDisabled"
+                }
+              }
+            }
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/rewards/claims": {
+      "post": {
+        "operationId": "claimVerifiedReward",
+        "summary": "Disabled until server-verifiable goal events, per-account caps and idempotency implemented",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/checkout/sessions": {
+      "post": {
+        "operationId": "createCheckoutSessionM03Disabled",
+        "summary": "M04 only after real merchant authorization, provider catalog and signature tests",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/purchases/verify": {
+      "post": {
+        "operationId": "verifyPurchaseM03Disabled",
+        "summary": "A browser return URL, receipt string or mock event never causes grants",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    },
+    "/v1/purchases/restore": {
+      "post": {
+        "operationId": "restoreM03Disabled",
+        "summary": "M04 provider verification, refund-safe source reconciliation required",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "503": {
+            "$ref": "#/components/responses/Disabled"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "userAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Short-lived server-verified access token (identity provider TBD)"
+      }
+    },
+    "schemas": {
+      "WalletResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "currency",
+          "freeCrystals",
+          "paidCrystals",
+          "totalCrystals",
+          "version",
+          "updatedAt"
+        ],
+        "properties": {
+          "currency": {
+            "const": "mutation_crystal"
+          },
+          "freeCrystals": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "paidCrystals": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalCrystals": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Server-computed freeCrystals+paidCrystals; not an independent client writable field"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "EntitlementResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entitlements",
+          "updatedAt"
+        ],
+        "properties": {
+          "entitlements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "entitlementId",
+                "active"
+              ],
+              "properties": {
+                "entitlementId": {
+                  "type": "string"
+                },
+                "active": {
+                  "type": "boolean"
+                },
+                "activeSources": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CatalogDisabled": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "checkoutEnabled",
+          "reason",
+          "products"
+        ],
+        "properties": {
+          "checkoutEnabled": {
+            "const": false
+          },
+          "reason": {
+            "const": "PAYMENTS_NOT_CONNECTED"
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "sku",
+                "purchasable"
+              ],
+              "properties": {
+                "sku": {
+                  "type": "string"
+                },
+                "purchasable": {
+                  "const": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message",
+          "requestId"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "No valid server-verified identity/session",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "Conflicting idempotency fingerprint or stale operation; no partial wallet changes",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "Disabled": {
+        "description": "M03_SPEC_ONLY or PAYMENT_BACKEND_NOT_READY; no grant/checkout",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-m03-deployment-gates": [
+    "authenticated-account-subject-server-verified",
+    "zero-client-sourced-paid-grants",
+    "atomic-db-wallet-ledger-entitlement-transaction",
+    "no-negative-available-balance",
+    "source-specific-entitlement-revocation",
+    "wallet-snapshot-ledger-reconciliation",
+    "replay-and-concurrent-double-spend-tested",
+    "secrets-never-in-static-github-pages",
+    "provider-signed-payment-and-refund-verification-M04-only",
+    "pricing-provider-and-merchant-approval-M04-only",
+    "actual-HTTPS-and-DB-backup-restore-proven-before-serving-users"
+  ]
+}
