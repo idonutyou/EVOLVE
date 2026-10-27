@@ -1,20 +1,27 @@
-# EVOLVE — 검증된 최신 진행 상태 (2026-10-28 KST)
+# EVOLVE — 검증된 현재 진행률 (2026-10-28 KST)
 
-| 단계 | 검증 상태 | 다음 |
+> 아래 비율은 EVOLVE 전체 완성도가 아니라 **수익화 각 단계의 개별 완성도**임.
+
+| 단계 | 최종 확인 | 다음 작업 |
 | --- | --- | --- |
-| M01 과금 모델/초안 | 100% | 내부 설계 완료 |
-| M02 경제 시뮬레이션 | 100% | 내부 시뮬레이션 완료 |
-| M03 개발용 원장 | 100% | 운영 서비스 아님 |
-| **M04 모의 과금 및 코어 콘텐츠** | **90%, STEP 3/3 진행** | **100% 실제 URL 검증·최종 복구** |
-| M05~M07 상점 UX/정식 스킨/반복 가치 | 미시작 | M04 종료 후 |
-| M08 네이티브 실결제 | 미시작 | 게임 완성 후 |
+| M01 상품/과금 모델 설계 | 100% 내부 설계 | 완료, 실판매 아님 |
+| M02 경제 수치 시뮬레이션 | 100% 내부 시험 | 완료 |
+| M03 개발용 권한·원장 | 100% 개발 프로토타입 | 운영 서비스 아님 |
+| **M04 모의 상점·코어 외형·구매 흐름** | **100% 완료 (STEP 3/3)** | M05 STEP 1/3 착수 |
+| M05 게임 상점·인벤토리 UX | **0%** | 다음 10% 사용성/플로우 설계 |
+| M06 정식 프리미엄 아트 | 0% | M05 이후, 제작 전 렌더링 고지 |
+| M07 반복 플레이 가치·시즌·경제 | 0% | 후속 개발 |
+| M08 Google Play/Apple 실결제 | 0% | 게임 완성 후 |
 
-## M04 90% 확인
-- GitHub main 통합 커밋: `71f3549040e656324f766114503e6ba57a929eba`.
-- Pages 배포 https://github.com/idonutyou/EVOLVE/actions/runs/40541493132 — **Deploy GitHub Pages 단계 성공**.
-- 실제 공개 version.json: `V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70`, build `9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6`.
-- 80% 사전 회귀 CI https://github.com/idonutyou/EVOLVE/actions/runs/40541168495 **success**. 기존 이미지 1,021개 보존, M04 Node 34/34.
-- 실결제/가격 활성화 없음. Pages 웹은 개발용. 모의 상점은 `?evolveMockShop=1` 에서만.
-- 90% 원격 복구: `backup/monetization-m04-090-20261028`; 상세 `docs/monetization/M04_090_DEPLOY_KO.md`.
-- 사용자가 다음 `고`라고 하면 M04 **100% 실제 배포 URL·구매·저장·장착 점검**부터 재개. 이미지 신규 생성 불필요.
-- 과거 10~80% 백업, `backup/m04-main-predeploy-20261028` 보존. **모든 퍼센트는 게임 전체가 아니라 M04 해당 단계만 뜻함.**
+## M04 100% 근거
+- **라이브 모의 구매·취소·장착·복원 테스트 성공:** https://github.com/idonutyou/EVOLVE/actions/runs/40545030346
+- **라이브 엔진/원본 아트/이동 검증 성공:** https://github.com/idonutyou/EVOLVE/actions/runs/40546116720
+- 공개 게임 https://idonutyou.github.io/EVOLVE/ 및 모의 테스트 `?evolveMockShop=1` 검증.
+- 공개 빌드 `9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6` / 리소스 1,078개 / 원본 이미지 1,021개.
+- 기존 모의 저장 격리/실제 결제 비활성 유지. **물리 Galaxy S23+ 시험 아님**.
+- 최종 상세 보고: `docs/monetization/M04_100_FINAL_REPORT_KO.md`.
+- **100% 복구:** `backup/monetization-m04-100-20261028`, `checkpoints/EVOLVE_M04_100_20261028.json`.
+- 10~90%와 배포 이전 main 복구 브랜치 보존. 이전 진행 기록은 Git 이력과 백업 브랜치 동명 문서에 보존.
+
+## 다음 사용자 지시 `고`
+M05 **STEP 1/3, 10%**부터 시작하고 원격 체크포인트를 2회 확인 후 보고한다. 첫 10%는 신규 이미지 생성 불필요. M04 개발 내용을 처음부터 반복하지 않는다.
