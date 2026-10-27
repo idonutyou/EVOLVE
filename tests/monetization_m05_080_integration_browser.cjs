@@ -63,7 +63,7 @@ const server=http.createServer((req,res)=>{
   assert.ok(combat.builds<=2,'core sprite rebuild per frame');
   await page.evaluate(()=>window.__EVOLVE_DEV_MOCK_UI_V616__.open());
   assert.equal(await page.evaluate(()=>window.__EVOLVE_DEV_MOCK_UI_V616__.isOpen()),false);
-  assert.equal(await page.evaluate(()=>window.__EVOLVE_DEV_M05_UI_V618__.current()),'detail');
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_DEV_M05_UI_V618__.current()),'shop','combat attempted to open the dev modal');
   await page.evaluate(()=>window.__EVOLVE_COMBAT_V596__.test.context().home());
   await page.waitForFunction(()=>window.EVOLVE_WEB_GUARD.atHome(),null,{timeout:30000});
   assert.equal(await page.evaluate(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().theme),'dev_core_theme_01');
