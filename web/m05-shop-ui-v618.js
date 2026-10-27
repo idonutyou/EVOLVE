@@ -105,7 +105,8 @@ function decorateCollection(){
   if(owned)count++;
   card.dataset.owned=String(owned);card.dataset.equipped=String(equipped);
   const btn=card.querySelector('button');
-  if(btn){btn.setAttribute('aria-label',(key==='dev_core_theme_01'?'공명 코어':'심홍 코어')+' '+(equipped?'해제':owned?'장착':'미보유'))}
+  if(btn&&owned)btn.setAttribute('aria-label',(key==='dev_core_theme_01'?'공명 코어':'심홍 코어')+' '+(equipped?'해제':'장착'));
+  else if(btn)btn.removeAttribute('aria-label');
   if(owned&&btn)btn.setAttribute('aria-pressed',String(equipped));
   if(!card.querySelector('.m05CollectionMeta')){
    const copy=make('p','m05CollectionMeta',equipped?'장착 중':owned?'획득 완료 · 장착 가능':'미보유 · 해금이 필요해');
