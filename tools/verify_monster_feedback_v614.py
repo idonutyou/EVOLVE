@@ -19,7 +19,13 @@ def main():
  assert version['build'] and version['assets']==len(m)
  # The original V614/M04 builds are immutable. M05 adds five dev-only JS assets
  # to the same 1,078 original entries; reject every other manifest expansion.
- if len(m)==1083 and version['version'].endswith('-M05-UX90'):
+ if len(m)==1072 and version['version'].endswith('-M05-UX90-SHOP620'):
+  # Home SHOP replaces the entire old DEV overlay: preserve 1069 original non-DEV resources,
+  # remove 14 obsolete DEV assets and install just 3 isolated TEST-only native SHOP scripts.
+  assert len([x for x in m if x['kind']=='native-shop-test-only'])==3
+  assert len([x for x in m if x['kind']=='dev-mock-only'])==0
+  assert len([x for x in m if x['kind']=='image'])==1021
+ elif len(m)==1083 and version['version'].endswith('-M05-UX90'):
   # M04 already shipped nine DEV-only hashed scripts; M05 adds exactly five more.
   assert len([x for x in m if x['kind']=='dev-mock-only'])==14
   assert len([x for x in m if x['kind']=='image'])==1021
