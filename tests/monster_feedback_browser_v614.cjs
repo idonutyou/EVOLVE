@@ -46,7 +46,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   await page.locator('#start').click();await require('./choose_opening_skill.cjs')(page);
   await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   const make=await page.evaluate(()=>{
-   const a=window.__EVOLVE_ORGAN_HITS_V613__.test,
+   const a=window.__EVOLVE_ORGAN_SKILLS_V598__.test,
       ctx=a.context(),test=window.__EVOLVE_MONSTER_FEEDBACK_V614__.test,
       roster=window.__EVOLVE_MONSTER_CATALOG_V593__.list();
    const template=window.__EVOLVE_STARTUP_V595__.test.spawn(roster.find(q=>q.id==='crawler'));
