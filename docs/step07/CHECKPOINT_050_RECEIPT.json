@@ -1,0 +1,19 @@
+{
+  "step": 7,
+  "checkpoint": 50,
+  "type": "entire-repository-git-branch-snapshot (not zip)",
+  "branch": "backup/step07-050-20261027",
+  "commit": "8f97d23c3fd125f9f13390d25875eefec1071246",
+  "ref_rechecked": true,
+  "commit_file_retrieved_again": true,
+  "artifact": "docs/step07/PACKAGE_V614.json",
+  "artifact_bytes": 1053,
+  "artifact_sha256": "c97786ed565857cd54fff52eb6a3d231b99de1083231fc944d24819ab01b0704",
+  "artifact_git_blob_sha": "bb76d8a99a39eda894122fffbde2f25e8534c2e6",
+  "repository_git_files": 1662,
+  "repository_logical_bytes": 707961629,
+  "repository_dist_files": 1102,
+  "prior_backups_preserved": true,
+  "public_site_unchanged": true,
+  "ci_browser_success_run": null
+}
