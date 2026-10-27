@@ -1,0 +1,56 @@
+name: M05 60 percent permanent verified safety recovery checkpoint
+on:
+  push:
+    branches: [monetization-m05-ux-20261028]
+    paths:
+      - '.github/workflows/m05-060-checkpoint.yml'
+permissions:
+  contents: write
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify saved 60 percent feature site and original M04 paid catalog
+        run: |
+          node --check web/m05-shop-ui-v618.js
+          python3 tools/verify_site.py --dist dist
+          python3 tools/verify_m04_predeploy_gate.py
+          node --test tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs tests/monetization_m04_core_visuals.test.cjs tests/monetization_m05_product_detail.test.cjs
+      - name: Package 60 percent source/website change set and check SHA plus CRC
+        run: |
+          python3 tools/checkpoint_m05_060.py
+          python3 tools/verify_m05_060_checkpoint.py
+      - name: Persist recovery ZIP and proof on feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- checkpoints/EVOLVE_M05_060_20261028.zip checkpoints/EVOLVE_M05_060_20261028.json
+          git commit -m "checkpoint(M05): verified 60 percent error-safe UX full recovery"
+          git push origin HEAD:refs/heads/monetization-m05-ux-20261028
+      - name: Fetch remote ZIP independently and verify archive SHA CRC and every file
+        run: |
+          git fetch origin monetization-m05-ux-20261028
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/monetization-m05-ux-20261028)"
+          git show origin/monetization-m05-ux-20261028:checkpoints/EVOLVE_M05_060_20261028.zip > "$RUNNER_TEMP/m05-060-remote.zip"
+          git show origin/monetization-m05-ux-20261028:checkpoints/EVOLVE_M05_060_20261028.json > "$RUNNER_TEMP/m05-060-remote.json"
+          python3 - "$RUNNER_TEMP/m05-060-remote.zip" "$RUNNER_TEMP/m05-060-remote.json" <<'PY'
+          import hashlib,json,sys,zipfile
+          raw=open(sys.argv[1],'rb').read();m=json.load(open(sys.argv[2]))
+          assert m['stage']=='M05' and m['percent']==60
+          assert len(raw)==m['bytes'] and hashlib.sha256(raw).hexdigest()==m['sha256']
+          assert not m['actual_billing_enabled']
+          with zipfile.ZipFile(sys.argv[1]) as z:
+              assert z.testzip() is None
+              assert set(z.namelist())==set(m['files'])|{'CHECKPOINT_MANIFEST.json'}
+              for path,item in m['files'].items():
+                  b=z.read(path)
+                  assert len(b)==item['bytes'] and hashlib.sha256(b).hexdigest()==item['sha256']
+          print('M05 60% PERSISTED REMOTE ZIP VERIFIED',m['bytes'],m['sha256'],m['file_count'])
+          PY
