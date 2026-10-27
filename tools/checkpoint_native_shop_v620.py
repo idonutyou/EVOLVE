@@ -7,10 +7,10 @@ BASE="4bceade598f3caad3235d0b41e508b1e33c33768"
 NAME="EVOLVE_NATIVE_SHOP_V620_20261028"
 def sha(x):return hashlib.sha256(x).hexdigest()
 def main():
- lines=subprocess.check_output(["git","diff","--name-status",BASE,"HEAD"],cwd=ROOT,text=True).splitlines()
+ lines=subprocess.check_output(["git","diff","--no-renames","--name-status",BASE,"HEAD"],cwd=ROOT,text=True).splitlines()
  deleted=sorted(line.split('\t',1)[1] for line in lines if line.startswith('D\t'))
  changed=sorted(line.split('\t',1)[1] for line in lines if not line.startswith('D\t') and '\t' in line and not line.split('\t',1)[1].startswith('checkpoints/'))
- assert len([x for x in deleted if x.startswith('dist/assets/')])==12,deleted # 14 manifest entries removed; 2 were never tracked by Git
+ assert len([x for x in deleted if x.startswith('dist/assets/')])==14,deleted # Git rename detection disabled so replaced hash assets become deletes plus additions
  assert "web/mock-premium-ui-v616.js" in deleted and "web/m05-shop-ui-v618.js" in deleted
  assert ".github/workflows/m05-100-live-final.yml" in deleted
  assert ".github/workflows/m05-100-checkpoint.yml" in deleted
