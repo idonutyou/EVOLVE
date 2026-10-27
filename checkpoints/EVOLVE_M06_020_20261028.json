@@ -1,0 +1,97 @@
+{
+  "schema_version": "evolve.m06.checkpoint.v1",
+  "stage": "M06",
+  "step": "1/3",
+  "progress_percent": 20,
+  "date_kst": "2026-10-28",
+  "status": "DESIGN_SPEC_ONLY",
+  "main_baseline_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "previous_m06_10_sha": "707e8716092977a2c559fc32147f125dd37b6bd2",
+  "work_branch": "monetization-m06-premium-art-20261028",
+  "full_tree_backup_branch": "backup/monetization-m06-020-20261028",
+  "archive_path": "checkpoints/EVOLVE_M06_020_20261028.zip",
+  "archive_bytes": 88384,
+  "archive_crc32": "8a0d9965",
+  "archive_git_blob_sha": "b1a8ba47bab7bb8e2ab4d9b8d5fab6df0ae54642",
+  "archive_commit_sha": "e1164a33333f69ae64e20d7320b0ebfc2db81dd3",
+  "archive_type": "INCREMENTAL_DESIGN_FILES_ONLY",
+  "previous_backups_retained": true,
+  "delete_prior_backups_before_100_percent": false,
+  "new_game_assets": false,
+  "game_runtime_modified": false,
+  "production_checkout_enabled": false,
+  "price_minor": null,
+  "client_grants_enabled": false,
+  "actual_public_deployment_changed": false,
+  "original_images_preserved": 1021,
+  "test_evidence": [
+    {
+      "run_id": 40598645789,
+      "conclusion": "success",
+      "name": "M06 020 reactor core spec safety gate",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40598645789"
+    }
+  ],
+  "entries": [
+    {
+      "path": "monetization/m06/reactor-core-spec.v1.json",
+      "bytes": 8652,
+      "crc32": "c4cf1c3f",
+      "git_blob_sha": "815b2197f8f8d654b3161d0b3bda48eb7583310e"
+    },
+    {
+      "path": "monetization/m06/reactor-ownership-fsm.v1.json",
+      "bytes": 2403,
+      "crc32": "727d642f",
+      "git_blob_sha": "ddf7da66334bea5943bc356104ac1e29f23012e1"
+    },
+    {
+      "path": "docs/monetization/M06_020_REACTOR_CORE_SPEC_KO.md",
+      "bytes": 5776,
+      "crc32": "db4b3993",
+      "git_blob_sha": "d7fd50089687baaf5496d688689f3d466a795090"
+    },
+    {
+      "path": "tests/m06_020_contract.test.cjs",
+      "bytes": 3124,
+      "crc32": "cd7017ab",
+      "git_blob_sha": "4e6fd8ba17bee82c1ec66e9359fbb5e2cf9cf099"
+    },
+    {
+      "path": ".github/workflows/m06-020-design.yml",
+      "bytes": 1127,
+      "crc32": "6f2ec969",
+      "git_blob_sha": "7f06eebd14a2b2fe52adeafa82d890c8ffa3e368"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 18961,
+      "crc32": "e20e33fa",
+      "git_blob_sha": "1c69193ecb97c7051af24d3ed853e5b447aa1567"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 31704,
+      "crc32": "213ae45f",
+      "git_blob_sha": "0db5ee88b45043f1d30753c2c17fd69589b17afe"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 15071,
+      "crc32": "fbaeffe4",
+      "git_blob_sha": "581730ec25760583fe9bf289ee5a78242ab52a26"
+    },
+    {
+      "path": "CHECKPOINT_M06_020.txt",
+      "bytes": 304,
+      "crc32": "b28587a1",
+      "git_blob_sha": null
+    }
+  ],
+  "recovery_instructions": "For full tree restore checkout backup/monetization-m06-020-20261028; ZIP by itself holds incremental design documents, not complete game.",
+  "next_stage": {
+    "step": "1/3",
+    "progress_percent": 30,
+    "renderer_required": false
+  }
+}
