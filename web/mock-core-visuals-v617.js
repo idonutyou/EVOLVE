@@ -1,11 +1,11 @@
-/* M04-60: cached cosmetic light overlays. Original artwork and combat values are untouched. */
+/* Native SHOP V620: cached TEST-only cosmetic light overlays on regular SHOP. Original artwork and combat values are untouched. */
 (function(root,factory){
  'use strict';
  const api=factory();
  if(typeof module==='object'&&module.exports)module.exports=api;
  if(root&&root.window===root&&root.location&&
     ['idonutyou.github.io','localhost','127.0.0.1'].includes(root.location.hostname)&&
-    new URLSearchParams(root.location.search).get('evolveMockShop')==='1'){
+    true){
   Object.defineProperty(root,'__EVOLVE_DEV_CORE_VISUALS_V617__',{value:api});
  }
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
