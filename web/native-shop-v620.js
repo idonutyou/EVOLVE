@@ -101,6 +101,7 @@
  }
  function render(){
   if(!root||!content)return;
+  const hint=document.getElementById('homeShopHintV601');if(hint)hint.textContent='코어 외형·TEST 상품을 확인하고 장착하세요. 실제 결제는 제공하지 않습니다.';
   const state=safeSnapshot();
   const frag=document.createDocumentFragment();
   frag.append(make('h3','nativeShopTitleV620','변이 상점'));
