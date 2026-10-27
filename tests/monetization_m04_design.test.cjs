@@ -62,3 +62,25 @@ test('native release shell and products are not implemented at 30%',()=>{
  assert.equal(d.native_bridge.status,'DESIGN_ONLY');
  assert.equal(d.response_on_unready.http_status,503);
 });
+
+const mock=JSON.parse(readFileSync(join(root,'monetization/m04/mock-premium-shop.design.json'),'utf8'));
+test('M04 mock premium purchases are design-only and do not charge money',()=>{
+ assert.equal(mock.status,'DESIGN_ONLY_NOT_CONNECTED_TO_GAME');
+ assert.equal(mock.dev_mode,'MOCK_ONLY');
+ assert.equal(mock.live_billing,'DEFERRED_TO_M08');
+ assert.equal(mock.actual_payment_methods_allowed,false);
+ assert.equal(mock.client_payment_routes_enabled,false);
+ assert.equal(mock.mock_purchase_adapter.developer_only,true);
+});
+test('mock assets cannot migrate into production balances or legacy saves',()=>{
+ assert.equal(mock.mock_purchase_adapter.redeem_as_paid_crystal_in_m03,false);
+ assert.equal(mock.persistence.never_sync_mock_to_real_wallet,true);
+ assert.equal(mock.persistence.must_not_modify_legacy_save,true);
+ assert.equal(mock.persistence.new_key,'EVOLVE_DEV_MOCK_STORE_V1');
+});
+test('mock store draft items match unmodified M01 SKUs',()=>{
+ assert.deepEqual(mock.product_drafts.map(x=>x.sku).sort(),cat.products.map(x=>x.sku).sort());
+ assert.ok(mock.product_drafts.every(x=>x.actual_price===null));
+ assert.equal(d.store_sdk_development_deferred,true);
+ assert.equal(d.live_billing_integration_stage,'M08_FINAL_RELEASE_ONLY');
+});
