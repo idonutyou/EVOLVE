@@ -1,0 +1,28 @@
+name: M03 PostgreSQL disposable smoke test
+on:
+  push:
+    branches: [monetization-m03-ledger-20261027]
+    paths: ['m03-server/**', '.github/workflows/m03-postgres-integration.yml']
+permissions:
+  contents: read
+jobs:
+  postgres-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: evolve_m03_test_ci
+          POSTGRES_USER: evolve_ci
+          POSTGRES_PASSWORD: test_only_local_secret
+        ports: ['5432:5432']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix m03-server --ignore-scripts
+      - run: node --test m03-server/tests/*.test.cjs
+        env:
+          M03_PG_DISPOSABLE: 'YES'
+          M03_PG_TEST_URL: postgresql://evolve_ci:test_only_local_secret@127.0.0.1:5432/evolve_m03_test_ci
