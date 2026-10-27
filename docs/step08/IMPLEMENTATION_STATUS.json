@@ -1,8 +1,8 @@
 {
   "step": 8,
   "substep": 2,
-  "progress": 50,
-  "stage": "fixed_step_real_gameplay_QA_passed",
+  "progress": 60,
+  "stage": "60_real_seconds_headless_Chrome_measured",
   "created_kst": "2026-10-27",
   "baseline_main_commit": "10fc95c7313a08084e7b95738f50188f72850a27",
   "baseline_public_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
@@ -15,7 +15,7 @@
   "public_deployment_modified": false,
   "actual_playtests_executed": 0,
   "actual_device_tests_executed": 0,
-  "performance_FPS_measured": false,
+  "performance_FPS_measured": true,
   "manual_play_feel_reviews_collected": 0,
   "test_scenarios_planned": 23,
   "scenario_categories": {
@@ -28,7 +28,8 @@
     "docs/step08/BASELINE_AUDIT_KO.md",
     "docs/step08/PLAYTEST_MATRIX_V1.json",
     "docs/step08/TEST_HARNESS_SPEC_KO.md",
-    "docs/step08/VALIDATION_050.json"
+    "docs/step08/VALIDATION_050.json",
+    "docs/step08/VALIDATION_060.json"
   ],
   "all_existing_step07_backups_preserved": true,
   "active_branch": "step08-combat-playtest-v614-20261027",
@@ -37,7 +38,8 @@
     "backup/step08-020-20261027",
     "backup/step08-030-20261027",
     "backup/step08-040-20261027",
-    "backup/step08-050-20261027"
+    "backup/step08-050-20261027",
+    "backup/step08-060-20261027"
   ],
   "pending_tasks": [
     "actual playback scenarios and browser evidence",
@@ -46,7 +48,7 @@
     "Galaxy S23+ physical 3–5 min and heat (not accessible from CI)"
   ],
   "next_part": 2,
-  "next_checkpoint": 60,
+  "next_checkpoint": 70,
   "next_work": "test-only browser harness and initial ordinary, midboss, TITAN reproducibility",
   "next_step_after_step08": 9,
   "next_step_label": "스킬 레벨 모델·카드 규칙 정리",
@@ -64,5 +66,16 @@
   "functional_midboss_profiles": 4,
   "functional_native_titans": 2,
   "real_time_perf_measured": false,
-  "automated_functional_scenarios_with_data": 14
+  "automated_functional_scenarios_with_data": 14,
+  "performance_metric_type": "rAF callback intervals, not GPU or phone FPS",
+  "headless_60sec_ci_run": 40472299360,
+  "headless_60sec_ci_result": "success",
+  "frame_intervals_sampled": 3382,
+  "frame_p50_ms": 16.7,
+  "frame_p95_ms": 33.3,
+  "frame_p99_ms": 33.4,
+  "over100ms_ratio": 0,
+  "game_time_advanced_seconds": 49.1,
+  "real_3min_not_yet_tested": true,
+  "real_5min_not_yet_tested": true
 }
