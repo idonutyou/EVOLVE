@@ -1,0 +1,407 @@
+{
+  "schema": "evolve.m05.mobile-flow.v1",
+  "stage": "M05",
+  "percent": 30,
+  "step": "1/3",
+  "status": "DESIGN_FROZEN_NOT_IMPLEMENTED",
+  "extends": [
+    "monetization/m05/store-inventory-ux.v1.json",
+    "monetization/m05/product-detail-states.v1.json"
+  ],
+  "baseline": {
+    "branch": "monetization-m05-ux-20261028",
+    "checkpoint_20_sha": "c1713c838f7c2dd5301b4d41d315296acaa7d864",
+    "main_sha": "fbe3224a3bdd95020829228427ddc3b05ed41f9e",
+    "published_build": "9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6"
+  },
+  "scope": {
+    "design_only": true,
+    "changes_live_game": false,
+    "changes_dist": false,
+    "images_generated": false,
+    "real_payment": false,
+    "only_developer_query": "evolveMockShop=1",
+    "host_allowlist": [
+      "idonutyou.github.io",
+      "localhost",
+      "127.0.0.1"
+    ],
+    "home_only": true,
+    "keep_existing_home_tab_count": 5,
+    "keep_existing_organism_equipment": true,
+    "mock_only_storage_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "legacy_save_prefix": "EVOLVE_V575_TEST_",
+    "real_checkout_enabled": false,
+    "season_pass_locked": true
+  },
+  "surfaces": [
+    {
+      "id": "HOME",
+      "role": "existing_home",
+      "entry": "m04MockTriggerV616",
+      "scroll": "existing_home",
+      "focus_return": "last_trigger"
+    },
+    {
+      "id": "SHOP_LIST",
+      "role": "mock_store_list",
+      "section": "shop",
+      "scroll": "modal_inner_only",
+      "focus_enter": "section_heading",
+      "persistent_scroll": true
+    },
+    {
+      "id": "PRODUCT_DETAIL",
+      "role": "detail",
+      "section": "shop",
+      "scroll": "modal_inner_only",
+      "focus_enter": "product_heading",
+      "persistent_selected_sku": true,
+      "preview": "original game sprite + M04 cached glow only"
+    },
+    {
+      "id": "CORE_COLLECTION",
+      "role": "cosmetic_inventory",
+      "section": "collection",
+      "scroll": "modal_inner_only",
+      "focus_enter": "collection_heading",
+      "persistent_scroll": true
+    },
+    {
+      "id": "CONFIRM",
+      "role": "modal_confirmation",
+      "scroll": "no_background_scroll",
+      "focus_enter": "cancel_button",
+      "focus_trap": true,
+      "spend_requires_explicit_ack": true
+    },
+    {
+      "id": "PROCESSING",
+      "role": "transaction_in_flight",
+      "scroll": "frozen",
+      "close_disabled": true,
+      "action_disabled": true
+    },
+    {
+      "id": "RESULT",
+      "role": "status_announcement",
+      "scroll": "resume_previous_section",
+      "focus_enter": "result_or_action",
+      "aria_live": "polite"
+    },
+    {
+      "id": "SAFE_ERROR",
+      "role": "corrupt_or_unavailable_mock_storage",
+      "scroll": "modal_inner_only",
+      "focus_enter": "error_heading",
+      "aria_live": "assertive",
+      "read_only": true,
+      "no_auto_reset": true
+    },
+    {
+      "id": "HISTORY_PLACEHOLDER",
+      "role": "planned_unimplemented",
+      "scroll": "none",
+      "focus_enter": "none",
+      "enabled": false
+    }
+  ],
+  "transitions": [
+    {
+      "from": "HOME",
+      "event": "OPEN_DEV_SHOP",
+      "to": "SHOP_LIST",
+      "guard": "dev flag + allowlisted host + atHome"
+    },
+    {
+      "from": "SHOP_LIST",
+      "event": "TAP_PRODUCT",
+      "to": "PRODUCT_DETAIL",
+      "guard": "known five SKUs; season purchase remains disabled"
+    },
+    {
+      "from": "SHOP_LIST",
+      "event": "TAP_COLLECTION",
+      "to": "CORE_COLLECTION",
+      "guard": "home and readable mock storage"
+    },
+    {
+      "from": "CORE_COLLECTION",
+      "event": "TAP_SHOP",
+      "to": "SHOP_LIST",
+      "guard": "home and readable mock storage"
+    },
+    {
+      "from": "PRODUCT_DETAIL",
+      "event": "TAP_BACK",
+      "to": "SHOP_LIST",
+      "guard": "restore selected SKU and list scroll"
+    },
+    {
+      "from": "PRODUCT_DETAIL",
+      "event": "TAP_BUY",
+      "to": "CONFIRM",
+      "guard": "eligible unowned or repeatable with stable request ID"
+    },
+    {
+      "from": "CORE_COLLECTION",
+      "event": "TAP_REDEEM",
+      "to": "CONFIRM",
+      "guard": "unowned crimson, testCrystals>=120"
+    },
+    {
+      "from": "CONFIRM",
+      "event": "CANCEL",
+      "to": "DETAIL_OR_COLLECTION",
+      "guard": "no storage write"
+    },
+    {
+      "from": "CONFIRM",
+      "event": "ACCEPT",
+      "to": "PROCESSING",
+      "guard": "home and same request ID"
+    },
+    {
+      "from": "PROCESSING",
+      "event": "SUCCESS",
+      "to": "RESULT",
+      "guard": "persisted mock receipt; read back"
+    },
+    {
+      "from": "PROCESSING",
+      "event": "FAILURE",
+      "to": "SAFE_ERROR_OR_DETAIL",
+      "guard": "read-only on corrupt storage"
+    },
+    {
+      "from": "RESULT",
+      "event": "DISMISS",
+      "to": "DETAIL_OR_COLLECTION",
+      "guard": "only refresh mock state"
+    },
+    {
+      "from": "SHOP_LIST",
+      "event": "ESCAPE_OR_CLOSE",
+      "to": "HOME",
+      "guard": "restore original focus"
+    },
+    {
+      "from": "CORE_COLLECTION",
+      "event": "ESCAPE_OR_CLOSE",
+      "to": "HOME",
+      "guard": "restore original focus"
+    },
+    {
+      "from": "PRODUCT_DETAIL",
+      "event": "ESCAPE",
+      "to": "SHOP_LIST",
+      "guard": "do not mutate storage"
+    },
+    {
+      "from": "CONFIRM",
+      "event": "ESCAPE",
+      "to": "DETAIL_OR_COLLECTION",
+      "guard": "cancel first"
+    },
+    {
+      "from": "PROCESSING",
+      "event": "ESCAPE_OR_CLOSE",
+      "to": "PROCESSING",
+      "guard": "blocked; prevent double request"
+    },
+    {
+      "from": "HOME",
+      "event": "ENTER_COMBAT",
+      "to": "HOME",
+      "guard": "mock shop cannot be opened in combat"
+    }
+  ],
+  "back_priority": [
+    "PROCESSING_BLOCK",
+    "CONFIRM_CANCEL",
+    "DETAIL_TO_LIST",
+    "SECTION_TO_HOME",
+    "CLOSED_NOOP"
+  ],
+  "scroll": {
+    "strategy": "single home overlay with internal scroll; no body scroll chaining",
+    "safe_area": "pad modal top/bottom with CSS env(safe-area-inset-top/bottom,0px)",
+    "list_restore": "section + selected SKU + scrollTop in volatile UI, not new localStorage",
+    "detail_back": "restore selected product vertical position; no home page scrolling",
+    "section_change": "restore each section's prior scrollTop",
+    "confirmation": "lock modal background scroll and save position",
+    "close": "discard volatile position, do not force game reload",
+    "resize": "clamp scroller; keep focused element visible",
+    "keyboard_open": "confirm buttons remain reachable; no keyboard-overlay traps",
+    "landscape": "recompute available height, never crop original character art"
+  },
+  "mobile": {
+    "viewports": [
+      {
+        "width": 320,
+        "height": 568
+      },
+      {
+        "width": 393,
+        "height": 852
+      },
+      {
+        "width": 852,
+        "height": 393
+      }
+    ],
+    "minimum_touch_width_px": 44,
+    "minimum_touch_height_px": 44,
+    "minimum_target_spacing_px": 8,
+    "product_card_flow": "one column; name, dev reward, readiness text then full-width action on narrow screen",
+    "narrow_320": "wrap Korean text, never overlap side-by-side actions; touch target >=44",
+    "normal_393": "balanced padding and line wrapping; visible selected state",
+    "landscape": "scroll modal internally, max height within safe area, no horizontal overflow",
+    "modal_max_width_css_px": 440,
+    "text": {
+      "body_min_px": 12,
+      "action_min_px": 13,
+      "title_min_px": 17,
+      "line_height_min": 1.35,
+      "wrap_korean": true
+    },
+    "confirm": {
+      "button_order": [
+        "취소",
+        "확인"
+      ],
+      "first_focus": "취소",
+      "show_test_balance_before_after": true,
+      "mock_badge": true,
+      "no_auto_approval": true
+    },
+    "states": {
+      "locked": "visible lock explanation, not only grey",
+      "owned": "visible ownership label",
+      "equipped": "visible equipped text/aria-pressed, not color alone",
+      "error": "role=alert"
+    }
+  },
+  "accessibility": {
+    "dialog_role": "dialog",
+    "aria_modal": true,
+    "focus_on_open": "section heading tabindex=-1",
+    "focus_on_detail": "product heading tabindex=-1",
+    "focus_on_confirm": "cancel button",
+    "focus_on_error": "error heading and role=alert",
+    "focus_return_on_close": "originating DEV trigger or prior home control",
+    "trap_tab": true,
+    "escape_cancel_first": true,
+    "keyboard": [
+      "Tab",
+      "Shift+Tab",
+      "Escape",
+      "Enter",
+      "Space"
+    ],
+    "announcements": {
+      "success": "role=status aria-live=polite",
+      "error": "role=alert aria-live=assertive",
+      "balance": "update without repeated loop announcements"
+    },
+    "disabled_controls": {
+      "disabled_attribute": true,
+      "aria_disabled": true,
+      "reason_text_visible": true
+    }
+  },
+  "safety": {
+    "corrupt_save": "FAIL_CLOSED_NO_RESET",
+    "storage_unavailable": "DISABLE_GRANTS",
+    "storage_write_failure": "NO_SUCCESS_MESSAGE",
+    "cancel": "NO_STORAGE_BYTES_CHANGED",
+    "insufficient_test_crystals": "DISABLE_REDEEM_SHOW_120",
+    "retry": "SAME_REQUEST_ID",
+    "processing_tap": "IGNORE",
+    "combat_open": "BLOCK",
+    "history": "DEFERRED_AND_DISABLED",
+    "real_payment_provider": "ABSENT",
+    "mock_reset": "TWO_TAPS_ONLY",
+    "never_write_keys": [
+      "EVOLVE_V575_TEST_*",
+      "M03_PAID_LEDGER_*"
+    ],
+    "startup_without_flag": "MOCK_UI_ABSENT"
+  },
+  "qa": [
+    {
+      "id": "NAV_5",
+      "viewport": "393x852",
+      "assertion": "Existing five home tabs unchanged"
+    },
+    {
+      "id": "SMALL",
+      "viewport": "320x568",
+      "assertion": "No overflow; wrapped Korean labels; 44px actions"
+    },
+    {
+      "id": "NORMAL",
+      "viewport": "393x852",
+      "assertion": "Detail and ownership legible; actions unclipped"
+    },
+    {
+      "id": "LANDSCAPE",
+      "viewport": "852x393",
+      "assertion": "Internal scroll and safe area, no game crop"
+    },
+    {
+      "id": "CANCEL_BYTES",
+      "viewport": "393x852",
+      "assertion": "cancel keeps test store byte identical"
+    },
+    {
+      "id": "FLAG_OFF",
+      "viewport": "393x852",
+      "assertion": "default URL hides mock shop globals"
+    },
+    {
+      "id": "COMBAT_BLOCK",
+      "viewport": "393x852",
+      "assertion": "no purchases away from home"
+    },
+    {
+      "id": "PREVIEW",
+      "viewport": "393x852",
+      "assertion": "only original player with existing two glow effects"
+    },
+    {
+      "id": "DEBIT_120",
+      "viewport": "393x852",
+      "assertion": "crimson confirmation and once-only debit"
+    },
+    {
+      "id": "CORRUPT",
+      "viewport": "320x568",
+      "assertion": "no erase on storage corruption"
+    },
+    {
+      "id": "KEYBOARD",
+      "viewport": "393x852",
+      "assertion": "Tab trap and ESC cancels first and focus returns"
+    },
+    {
+      "id": "LEGACY",
+      "viewport": "393x852",
+      "assertion": "original DNA stages equipment and paid ledger unchanged"
+    }
+  ],
+  "freeze": {
+    "milestone": "M05_STEP_1_3_30_PERCENT",
+    "design_ready_for_step_2": true,
+    "required_files": [
+      "monetization/m05/store-inventory-ux.v1.json",
+      "monetization/m05/product-detail-states.v1.json",
+      "monetization/m05/mobile-flow.v1.json",
+      "docs/monetization/M05_030_MOBILE_UX_FREEZE_KO.md"
+    ],
+    "next_40_percent": "Implement dev-only mobile shop and collection section navigation and product detail UI in an isolated module, preserve M04 runtime",
+    "new_images_required_for_next_40_percent": false,
+    "do_not_merge_main_until_regression": true,
+    "note": "A data contract is not live-browser visual verification; visual behavior must be tested after implementation"
+  }
+}
