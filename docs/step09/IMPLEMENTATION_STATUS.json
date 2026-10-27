@@ -1,0 +1,64 @@
+{
+  "step": 9,
+  "part": 1,
+  "progress": 30,
+  "phase": "analysis_and_compatibility_design_complete",
+  "updated_kst": "2026-10-27",
+  "public_game_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "public_game_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "baseline_main_commit": "1da98901f336117cc8dd9b69a25dd7c6fb237596",
+  "work_branch": "step09-skill-card-model-v614-20261027",
+  "new_images_generated": 0,
+  "image_rendering_required": false,
+  "game_code_modified": false,
+  "dist_modified": false,
+  "public_deployment_modified": false,
+  "card_registry_count_from_source": 38,
+  "existing_combat_level_max_from_source": 5,
+  "existing_arm_level_at_start": 1,
+  "old_rarity_probabilities": [
+    0.6,
+    0.27,
+    0.1,
+    0.027,
+    0.003
+  ],
+  "proposed_milestone_levels": [
+    3,
+    6
+  ],
+  "proposed_milestone_model": "separate read-only evolution progress based on selected eligible attack upgrades; no game functionality implemented",
+  "test_matrix_checks": 45,
+  "tests_executed_in_this_part": 0,
+  "test_results_status": "all 45 planned, not executed",
+  "documents": [
+    "docs/step09/BASELINE_AUDIT_KO.md",
+    "docs/step09/LEVEL_EVOLUTION_SPEC_KO.md",
+    "docs/step09/TEST_MATRIX_V1.json",
+    "docs/step09/PART1_HANDOFF_KO.md"
+  ],
+  "backups": [
+    "backup/step09-010-20261027",
+    "backup/step09-020-20261027",
+    "backup/step09-030-20261027"
+  ],
+  "prior_step08_and_step07_backups_preserved": true,
+  "required_invariants": [
+    "original V614 damage/card numbers and XP=12 remain unchanged",
+    "arm cannon/blade/bare exclusive pools",
+    "learned organ 0->1 and no attack before learning",
+    "rarity percentages and independent tier roll fixed",
+    "shell health passive not counted as spike growth",
+    "combat level up to5 distinct from future Lv3/6 mutation rank",
+    "card image resources saved and unchanged",
+    "no initial weapon selection overlay",
+    "lightning lock and mouth spit retained",
+    "existing saved arm/part metadata unchanged"
+  ],
+  "next_part": 2,
+  "next_percent": 40,
+  "next_work": "write test-only card pool verifier and stand-alone evolution metadata selector, test original gameplay before any candidate",
+  "future_next_step": 10,
+  "future_next_step_title": "외피·꼬리 Lv.3 변이",
+  "future_next_step_image_rendering": "possible; notify beforehand, no rendering this step"
+}
