@@ -1,0 +1,18 @@
+{
+  "step": 8,
+  "percent": 50,
+  "checkpoint_type": "complete Git repository immutable commit pinned by backup branch; not ZIP",
+  "recovery_branch": "backup/step08-050-20261027",
+  "immutable_commit": "427187433179eccd32f5b030c96541933834e773",
+  "remote_ref_read_back_verified": true,
+  "document_path": "docs/step08/VALIDATION_050.json",
+  "document_git_blob_sha": "c6cbf1bb901c05dd9a52d625a981e573cd6a09e7",
+  "document_bytes": 1622,
+  "document_retrieved_from_branch_and_commit_equal": true,
+  "successful_evidence_run": 40471742145,
+  "game_code_modified": false,
+  "public_pages_modified": false,
+  "original_images_modified": false,
+  "prior_backups_preserved": true,
+  "actual_Galaxy_S23_plus_tested": false
+}
