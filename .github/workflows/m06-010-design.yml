@@ -1,0 +1,27 @@
+name: M06 010 premium paid-value design gate
+on:
+  push:
+    branches:
+      - "monetization-m06-premium-art-*"
+    paths:
+      - "monetization/m06/**"
+      - "docs/monetization/M06_010_PREMIUM_VALUE_KO.md"
+      - "tests/m06_010_design.test.cjs"
+      - ".github/workflows/m06-010-design.yml"
+  workflow_dispatch:
+jobs:
+  paid-value-design:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate premium cosmetic design safeguards
+        run: node tests/m06_010_design.test.cjs
+      - name: Ensure the existing game bundle is not part of M06 10% change
+        run: |
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m06-010-files.txt
+          if grep -E '^(dist/|web/|monetization/catalog/)' /tmp/m06-010-files.txt; then
+            echo 'M06 010 cannot modify published game, shop, or SKU catalog'
+            exit 1
+          fi
