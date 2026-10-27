@@ -1,4 +1,5 @@
 name: STEP08 isolated combat playtest review
+# Isolated QA; no changes to game assets or public Pages.
 on:
   push:
     branches: [step08-combat-playtest-v614-20261027]
