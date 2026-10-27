@@ -132,6 +132,84 @@ async function functional(page,report){
  return data;
 }
 
+
+async function realtime(page,report){
+ const duration=Number(process.env.STEP08_DURATION_S||60);
+ assert.ok([60,180,300].includes(duration));
+ await page.locator('#start').click();
+ await require('./choose_opening_skill.cjs')(page);
+ await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
+ report.realtime_conditions={duration_target_seconds:duration,real_wall_clock:true,original_game_raf_not_suppressed:true,
+    headless_chromium_mobile_viewport:true,GalaxyS23Plus:false,automated_upgrade_choices:true};
+ await page.evaluate(()=>{
+  const g=window.__EVOLVE_TEST_MODULE_V575__,context=g.test.context();
+  // Prevent QA simulation from ending due to unattended stationary player death.
+  // This is not a representative human-control balance or survival test.
+  context.player.inv=999;context.player.hp=context.player.maxHp=10000;
+  g.setNatural(true);
+  const start=performance.now(),clock=g.read().seconds,samples=[],deltas=[],hidden=[];
+  let last=null,frames=0,looping=true,ignored=0;
+  const snap=()=>({wall_ms:performance.now()-start,clock_seconds:g.read().seconds,
+    running:g.read().running,visible:document.visibilityState==='visible',
+    lives:context.enemies.filter(e=>!e.dead).length,
+    feedback:window.__EVOLVE_MONSTER_FEEDBACK_V614__.read().active,
+    game_updates:window.EVOLVE_HIT_EVENTS?.read()?.hits??null,
+    heap_bytes:Number.isFinite(performance.memory?.usedJSHeapSize)?performance.memory.usedJSHeapSize:null,
+    overlay:!document.getElementById('levelOverlay')?.hidden && getComputedStyle(document.getElementById('levelOverlay')).display!=='none'});
+  const observer=t=>{
+   if(!looping)return;
+   if(last!==null){const dt=t-last;
+     if(dt>=0&&dt<15000&&document.visibilityState==='visible'&&deltas.length<25000) deltas.push(dt);
+     else ignored++;
+   }last=t;frames++;window.requestAnimationFrame(observer);
+  };
+  const timer=setInterval(()=>samples.push(snap()),10000);
+  document.addEventListener('visibilitychange',()=>hidden.push({at:performance.now()-start,state:document.visibilityState}));
+  window.__STEP08_REALTIME__={sample:snap,results:()=>{
+    looping=false;clearInterval(timer);samples.push(snap());
+    const sorted=deltas.slice().sort((a,b)=>a-b),q=p=>sorted.length?sorted[Math.min(sorted.length-1,Math.floor((sorted.length-1)*p))]:null;
+    const durationMs=performance.now()-start;
+    return{duration_actual_ms:durationMs,frames_seen:frames,frame_interval_samples:sorted.length,
+      frame_p50_ms:q(.50),frame_p95_ms:q(.95),frame_p99_ms:q(.99),max_interval_ms:sorted.at(-1)||null,
+      frames_over_50ms:sorted.filter(x=>x>50).length,frames_over_100ms:sorted.filter(x=>x>100).length,
+      ratio_over_100ms:sorted.length?sorted.filter(x=>x>100).length/sorted.length:null,
+      ignored_intervals:ignored,samples,visibility_changes:hidden,
+      game_clock_advanced_seconds:g.read().seconds-clock,physical_device:false,
+      metric_meaning:'Chromium requestAnimationFrame callback interval, NOT GPU FPS and NOT device FPS'};
+   }};
+  window.requestAnimationFrame(observer);
+ });
+ const tenSecondChunks=Math.ceil(duration/10),ticks=[];
+ for(let i=0;i<tenSecondChunks;i++){
+  await page.waitForTimeout(10000);
+  const overlay=await page.locator('#levelOverlay').isVisible().catch(()=>false);
+  if(overlay&&await page.locator('#cards .card').count()){
+   await page.locator('#cards .card').first().click().catch(()=>{});ticks.push({at_seconds:(i+1)*10,auto_upgrade:true});
+  }
+  // Existing game can itself pause for boss intro/level choice. Record, never hide.
+  const stat=await page.evaluate(()=>window.__STEP08_REALTIME__?.sample());
+  ticks.push({at_seconds:(i+1)*10,actual_wall_ms:stat?.wall_ms,game_seconds:stat?.clock_seconds,
+    living_enemies:stat?.lives,feedback_active:stat?.feedback,visibility:stat?.visible});
+ }
+ report.realtime=await page.evaluate(()=>window.__STEP08_REALTIME__.results());
+ report.realtime.ticks=ticks;
+ const which=duration===60?'P01':duration===180?'P02':'P03';
+ const valid=report.realtime.duration_actual_ms>=duration*1000*.95&&report.realtime.frame_interval_samples>=100&&
+   report.realtime.visibility_changes.every(x=>x.state==='visible');
+ const item=report.scenarios.find(x=>x.id===which);
+ Object.assign(item,{status:valid?'measured':'invalid_capture',actual_result:report.realtime,method:'real_wall_clock_unmodified_game_loop'});
+ report.realtime_measurement_valid=valid;
+ report.performance_pass_or_fail='not_judged_until_device_and_context_review';
+ await page.screenshot({path:path.join(out,'step08-realtime-'+duration+'s.png')}).catch(()=>{});
+ if(!valid)console.log('STEP08_PERFORMANCE_CAPTURE_INVALID '+JSON.stringify({actual:report.realtime.duration_actual_ms,frames:report.realtime.frame_interval_samples,changes:report.realtime.visibility_changes}));
+ console.log('STEP08_PERFORMANCE_METRICS '+JSON.stringify({
+  duration_seconds:duration,valid,frames:report.realtime.frame_interval_samples,
+  p50:report.realtime.frame_p50_ms,p95:report.realtime.frame_p95_ms,p99:report.realtime.frame_p99_ms,
+  over100:report.realtime.ratio_over_100ms,game_time:report.realtime.game_clock_advanced_seconds,
+  living_final:report.realtime.samples.at(-1)?.lives,heap_first:report.realtime.samples.at(0)?.heap_bytes,
+  heap_last:report.realtime.samples.at(-1)?.heap_bytes,automated_upgrade_clicks:ticks.filter(t=>t.auto_upgrade).length}));
+}
+
 async function main(){
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const chrome=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,
@@ -164,7 +242,8 @@ async function main(){
   report.scenarios=matrix.cases.map(x=>({id:x.id,status:'not_executed'}));
   if(mode==='probe')report.success=true;
   else if(mode==='functional'){await functional(page,report);report.success=true;}
-  else throw new Error('Mode '+mode+' is not implemented yet, no claim of measured performance');
+  else if(mode==='realtime'){await realtime(page,report);report.success=report.realtime_measurement_valid;}
+  else throw new Error('Unknown STEP08 mode: '+mode);
  }catch(e){report.success=false;report.failure=String(e.stack||e);
   await page.screenshot({path:path.join(out,'step08-'+mode+'-failed.png')}).catch(()=>{});throw e;
  }finally{
