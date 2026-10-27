@@ -1,0 +1,128 @@
+{
+  "schema_version": "m06.010.v1",
+  "stage": "M06",
+  "progress_percent": 10,
+  "step": "1/3",
+  "status": "DESIGN_ONLY",
+  "baseline": {
+    "repository": "idonutyou/EVOLVE",
+    "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+    "shop": "NATIVE_SHOP_V620_ONLY",
+    "original_images": 1021
+  },
+  "monetization": {
+    "priority": "MAKE_PAID_CONTENT_WORTH_OWNING",
+    "store_path": "existing_home_SHOP",
+    "currency": "KRW",
+    "live_price_minor": null,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "gameplay_stat_boosts": false,
+    "paid_rng": false,
+    "mock_save_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "real_billing_stage": "M08"
+  },
+  "proposals": [
+    {
+      "code": "m06_core_reactor_concept",
+      "rank": 0,
+      "category": "core_cosmetic",
+      "slot_ids": [
+        "core"
+      ],
+      "pitch": "distinct dual-ring reactor casing, pulse cadence and visible trail",
+      "different_from_current": [
+        "resonance",
+        "crimson"
+      ],
+      "draft_sku_relation": "appearance_unlock_01_could_be_future_art",
+      "status": "NOT_FOR_SALE",
+      "art_required_later": true,
+      "visual_criteria": [
+        "distinct silhouette",
+        "distinct pulse rhythm",
+        "home+organism+combat visibility",
+        "no stat change"
+      ]
+    },
+    {
+      "code": "m06_forearm_pair_concept",
+      "rank": 1,
+      "category": "weapon_cosmetic",
+      "slot_ids": [
+        "left_forearm",
+        "right_forearm"
+      ],
+      "pitch": "two detachable bioguns with exactly one readable muzzle each",
+      "constraints": {
+        "parts": 2,
+        "muzzles_per_part": 1,
+        "spikes_as_gun": false,
+        "tail_as_gun": false,
+        "pivots_independent": true
+      },
+      "status": "NOT_FOR_SALE",
+      "art_required_later": true,
+      "visual_criteria": [
+        "recognizable single-barrel guns",
+        "no base-part overlaps",
+        "mirror-safe mounting",
+        "no hitbox change"
+      ]
+    },
+    {
+      "code": "m06_titan_echo_concept",
+      "rank": 2,
+      "category": "body_skin_cosmetic",
+      "slot_ids": [
+        "head",
+        "body",
+        "tail"
+      ],
+      "theme_families": [
+        "BIO",
+        "VENOM",
+        "VOID"
+      ],
+      "pitch": "distinct material and biological identity per titan, no boss power unlocked",
+      "status": "NOT_FOR_SALE",
+      "art_required_later": true
+    },
+    {
+      "code": "m06_starter_cosmetic_concept",
+      "rank": 3,
+      "category": "starter_bundle_concept",
+      "slot_ids": [
+        "core",
+        "left_forearm",
+        "right_forearm",
+        "head",
+        "body",
+        "tail"
+      ],
+      "pitch": "guaranteed visual ownership with selectable preview, no duplicate entitlements",
+      "draft_sku_relation": "starter_genome_once_not_changed",
+      "status": "NOT_FOR_SALE",
+      "art_required_later": true
+    }
+  ],
+  "invariants": {
+    "sku_ids_unchanged": [
+      "starter_genome_once",
+      "mutation_crystal_small",
+      "mutation_crystal_mid",
+      "appearance_unlock_01",
+      "season_research_pass_01"
+    ],
+    "season_pass_locked": true,
+    "no_new_dev_modal": true,
+    "original_assets_immutable": true,
+    "save_keys_untouched": true,
+    "no_art_created_this_step": true
+  },
+  "next": {
+    "progress_percent": 20,
+    "task": "P0 core asset specifications, mobile readability, equip/ownership lifecycle and production gate",
+    "art_rendering_required": false
+  }
+}
