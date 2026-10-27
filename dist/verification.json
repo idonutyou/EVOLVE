@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK50",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
-  "assets_bytes": 249072372,
-  "index_bytes": 259961,
-  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "assets_bytes": 249088424,
+  "index_bytes": 260321,
+  "build": "8fee1c1add722a5e9db8359fa997299454ec738a1b11a78d8466f6c7a8efbe56",
   "image_assets": 1005,
-  "cached_files": 1067,
-  "cached_bytes": 382819931,
+  "cached_files": 1069,
+  "cached_bytes": 382835983,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1911,5 +1911,19 @@
     "scoped_effects": "monster hit fallback + existing death echo",
     "published": false,
     "physical_Galaxy_S23_plus_tested": false
+  },
+  "m04_mock50": {
+    "scoped": "dev-only opt-in mock home storefront",
+    "query_parameter": "evolveMockShop=1",
+    "checkout_enabled": false,
+    "amount_real_money": false,
+    "existing_combat_assets_unchanged": true,
+    "legacy_save_keys_unchanged": true,
+    "asset_paths": [
+      "assets/d9db3b7dc93e39cccb5ad7f1ceb307cf44384dc80a99499cacba7044f9040f2b.js",
+      "assets/8fee1c1add722a5e9db8359fa997299454ec738a1b11a78d8466f6c7a8efbe56.js"
+    ],
+    "published": false,
+    "physical_device_tested": false
   }
 }
