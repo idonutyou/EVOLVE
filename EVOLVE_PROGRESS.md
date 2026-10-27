@@ -9,8 +9,18 @@
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
 | M03 계정/서버 권한 원장 | **100% (개발용 프로토타입/통합 완료)** | `docs/monetization/M03_100_FINAL_REPORT_KO.md`, PR #7 | 완료; 실제 라이브 과금/운영 서버 미구현 |
-| M04 실제 결제 검증 | 미시작 | `docs/monetization/M03_HANDOFF_KO.md` | M03 인증·원장 이후 PG 샌드박스와 검증 |
+| M04 실제 결제 검증 | **30% (STEP 1/3 설계 완료)** | M04 작업 브랜치 `docs/monetization/M04_030_DESIGN_HANDOFF_KO.md` | **STEP 2/3 · 40~70% 구현** |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점·광고·반복 수집·출시 게이트 |
+
+## M04 최신 검증 체크포인트 — 30% (STEP 1/3 완료)
+- **현재 브랜치:** `monetization-m04-payment-20261027` @ `5af53769bcaa30e1ba4d86e19e62226511fc58d5` (M04 6개 파일 신규; main에는 미병합).
+- **10% 복구:** `backup/monetization-m04-010-20261027` @ `173f362bd3bdf1ecf2da9564b347bbe232908654`, 2회 원격 검증.
+- **20% 복구:** `backup/monetization-m04-020-20261027` @ `557082043f29f27e9c0c3c925a3ffd4ed10a77db`, 2회 원격 검증.
+- **30% 복구:** `backup/monetization-m04-030-20261027` @ `5af53769bcaa30e1ba4d86e19e62226511fc58d5`, 2회 원격 검증. 신규 파일 6개 총 실제 UTF-8 크기 24,619 bytes.
+- 30% Node 22 정적 계약 CI **8/8 성공**, https://github.com/idonutyou/EVOLVE/actions/runs/40511265054 . 실제 결제/PG 샌드박스·상용 계정 연결 **미실시**.
+- 다음 **M04 STEP 2/3 (40~70%)**: 40%부터 공급자 중립 가상 adapter 및 서버 주문 검증 프로토타입. M03 100% 이후 완료된 작업 반복 금지.
+- 이 체크포인트의 퍼센트는 M04 연구/계약 설계 진척이며 실제 수익화/출시 준비율이 아니다. 이미지 렌더링 불필요. `dist/`/게임/이미지/저장키/M01 카탈로그 불변, 기존 복구 전부 유지.
+- 아래 M03 70% 차단·미검증 내용은 과거 이력이며 최신 복구 기준이 아님.
 
 ## 마지막 확인된 원격 복구 포인트
 - M02 100% `backup/monetization-m02-100-20261027` @ `ff8afcd157a09cea3d65f5967d891ab8b98bf4a7`.
