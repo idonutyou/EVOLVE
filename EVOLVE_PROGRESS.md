@@ -1,3 +1,15 @@
+# EVOLVE 현재 우선작업 — 기본 SHOP 단일화 V620 (2026-10-28 KST)
+
+- 사용자 결정: **기존 홈의 SHOP 하나만 사용**. DEV 상점 버튼·팝업·전용 URL/옛 TEST 상점 소스 삭제, 안 쓰는 기존 DNA 강화 카드는 SHOP에서 숨김. 게임 세이브/DOM 엔진은 보호.
+- 신규 `web/native-shop-v620.js`는 SHOP에 5종 TEST 상품과 2종 코어 컬렉션/장착·해제·120 TEST 결정 교환 내장. **일반 앱 실행부터 접근**. 정식 가격·결제/운영 권리 지급은 여전히 OFF.
+- 별도 DEV 소스 2개 삭제 + 게시된 구형 DEV 자산 **14개 삭제**, 새 native SHOP 전용 해시 JS 3개 추가. **1,072 리소스, 이미지 원본 1,021개** 보존.
+- 실제 모바일 Chromium 393×852/320×568/가로852×393 및 홈/파츠/전투 QA success: https://github.com/idonutyou/EVOLVE/actions/runs/40588368786.
+- 상세 `docs/monetization/NATIVE_SHOP_V620_MIGRATION_KO.md`. 배포 전 원본 바이트 감사 `tools/verify_native_shop_v620.py`.
+- M05 작업 진척 100% 완료 사실은 유지. **M06 10% 기획은 사용자 SHOP 수정 요청으로 잠시 중단**; 이번 기능 정리는 M06 진도에 포함되지 않음.
+- 다음 과제: 기본 SHOP 실제 온라인 배포 확인·백업 완료 후 M06 10% 구매 가치 콘텐츠 설계 재개. 이미지 렌더링 필요 없음.
+
+---
+
 # EVOLVE M05 STEP 3/3 · 100% 최종 완료 (2026-10-28 KST)
 
 - M05 개발용 상점 UX 100% 완료. 게임 전체 완성도나 실제 결제 도입 100%라는 의미가 아님.
