@@ -8,9 +8,14 @@ function positiveInteger(n, name, min, max) {
 
 // Inventory simulation only. A hypothetical new theme is released periodically.
 // Attendance, purchasing intent, rewards, price and supply are inputs, not predictions.
-function simulateCollection({days=84, releaseEveryDays=7, maxThemes=100, themeCost=150,
+function simulateCollection(options={}) {
+  if (!options||typeof options!=='object'||Array.isArray(options)) throw new TypeError('options must be an object');
+  const allowed=new Set(['days','releaseEveryDays','maxThemes','themeCost','dailyCrystals','weeklyCrystals',
+    'weeklyGoal','attendance','purchasePlan','consumeOrder']);
+  for (const key of Object.keys(options)) if (!allowed.has(key)) throw new TypeError('unsupported collection option: '+key);
+  const {days=84, releaseEveryDays=7, maxThemes=100, themeCost=150,
   dailyCrystals=5, weeklyCrystals=10, weeklyGoal=7, attendance=[true],
-  purchasePlan=[], consumeOrder='paid_first'}={}) {
+  purchasePlan=[], consumeOrder='paid_first'}=options;
   assertDraft();
   positiveInteger(days,'days',1,365);
   positiveInteger(releaseEveryDays,'releaseEveryDays',1,365);
@@ -26,6 +31,7 @@ function simulateCollection({days=84, releaseEveryDays=7, maxThemes=100, themeCo
   if (!['paid_first','free_first'].includes(consumeOrder)) throw new RangeError('invalid consumeOrder');
   const plan=purchasePlan.map(entry=>{
     if (!entry || typeof entry!=='object') throw new TypeError('invalid planned purchase');
+    for (const key of Object.keys(entry)) if (!['day','sku'].includes(key)) throw new TypeError('unsupported planned purchase field: '+key);
     positiveInteger(entry.day,'purchase day',1,days);
     const product=config.premium_draft.sku_candidates.find(p=>p.sku===entry.sku);
     if (!product || !['starter_genome_once','mutation_crystal_small','mutation_crystal_mid'].includes(entry.sku)) {

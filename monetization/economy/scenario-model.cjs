@@ -17,10 +17,15 @@ function trialEvent(stage, won) {
   };
 }
 
-function simulatePlayer({ days = 7, minutesPerDay = 20, runSeconds = 400,
+function simulatePlayer(options = {}) {
+  if (!options || typeof options !== 'object' || Array.isArray(options)) throw new TypeError('options must be an object');
+  const allowed=new Set(['days','minutesPerDay','runSeconds','wins','completeDaily','starterPurchase',
+    'autoBuyTheme','dailyCrystals','weeklyCrystals','eventFactory']);
+  for (const key of Object.keys(options)) if (!allowed.has(key)) throw new TypeError('unsupported player option: '+key);
+  const { days = 7, minutesPerDay = 20, runSeconds = 400,
   wins = [true, true, false], completeDaily = true, starterPurchase = false,
   autoBuyTheme = true, dailyCrystals = cfg.premium_draft.free_daily,
-  weeklyCrystals = cfg.premium_draft.free_weekly, eventFactory = trialEvent } = {}) {
+  weeklyCrystals = cfg.premium_draft.free_weekly, eventFactory = trialEvent } = options;
   core.assertDraft();
   validInteger(days, 'days', 1, 365);
   validInteger(minutesPerDay, 'minutesPerDay', 0, 1440);
@@ -105,19 +110,25 @@ function packComparisons() {
     midExtraVersusEqualPriceSmall:mid.crystals/(small.crystals*equivalentSmallPacks)-1};
 }
 
-function hypotheticalCash({sku, count, refunds = 0, feesOnRefundedOrders = true}) {
+function hypotheticalCash({sku, count, refunds = 0, feesOnRefundedOrders = true,
+  processingFeeRate = cfg.finance_assumptions.processing_fee_rate,
+  processingFeeVatRate = cfg.finance_assumptions.processing_fee_vat_rate,
+  salesVatRate = cfg.finance_assumptions.sales_vat_inclusive_rate}) {
   core.assertDraft();
   validInteger(count, 'count'); validInteger(refunds, 'refunds', 0, count);
   if (typeof feesOnRefundedOrders !== 'boolean') throw new TypeError('feesOnRefundedOrders must be boolean');
   const p=cfg.premium_draft.sku_candidates.find(x=>x.sku===sku);
   if (!p) throw new RangeError('unknown trial SKU');
-  const f=cfg.finance_assumptions;
+  for (const [name,rate] of Object.entries({processingFeeRate,processingFeeVatRate,salesVatRate})) {
+    if (!Number.isFinite(rate)||rate<0||rate>1) throw new RangeError(name+' must be a fraction between 0 and 1');
+  }
   const gross=p.price_krw*count, refunded=p.price_krw*refunds, retained=gross-refunded;
   const feeBase=feesOnRefundedOrders ? gross : retained;
-  const fee=feeBase*f.processing_fee_rate*(1+f.processing_fee_vat_rate);
-  const outputVatReserve=retained*f.sales_vat_inclusive_rate/(1+f.sales_vat_inclusive_rate);
+  const fee=feeBase*processingFeeRate*(1+processingFeeVatRate);
+  const outputVatReserve=retained*salesVatRate/(1+salesVatRate);
   return {kind:'SIMULATION_ONLY',sku,count,refunds,gross,refunded,fee,outputVatReserve,
-    remainingBeforeOtherCosts:retained-fee-outputVatReserve,notOperatingProfit:true};
+    remainingBeforeOtherCosts:retained-fee-outputVatReserve,notOperatingProfit:true,
+    assumptions:{processingFeeRate,processingFeeVatRate,salesVatRate,feesOnRefundedOrders}};
 }
 
 module.exports={trialEvent,simulatePlayer,packComparisons,hypotheticalCash};

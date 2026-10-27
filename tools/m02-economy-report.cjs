@@ -4,6 +4,7 @@
 // All printed values are deterministic trial scenarios, not forecasts or payment results.
 const {simulatePlayer,packComparisons,hypotheticalCash}=require('../monetization/economy/scenario-model.cjs');
 const {simulateCollection}=require('../monetization/economy/collection-model.cjs');
+const {exampleSensitivity}=require('../monetization/economy/finance-model.cjs');
 const player=(options)=>{const r=simulatePlayer({days:7,...options});return {assumptions:r.assumptions,
   day3:r.daily[2],day7:r.daily[6],trialChargeKRW:r.paidGrossKRW};};
 const plan=[{day:1,sku:'starter_genome_once'},{day:29,sku:'mutation_crystal_small'},
@@ -27,6 +28,7 @@ const out={
     freeFiveDaysPerWeek:collection({releaseEveryDays:7,attendance:[true,true,true,true,true,false,false],weeklyGoal:5})
   },
   packComparisons:packComparisons(),
-  starterCashExample:hypotheticalCash({sku:'starter_genome_once',count:1})
+  starterCashExample:hypotheticalCash({sku:'starter_genome_once',count:1}),
+  financeSensitivity:exampleSensitivity()
 };
 process.stdout.write(JSON.stringify(out,null,2)+'\n');

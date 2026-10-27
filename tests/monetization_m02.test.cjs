@@ -165,3 +165,60 @@ test('trial collection rejects repeat starter purchases and invalid schedules', 
   assert.throws(()=>simulateCollection({purchasePlan:[{day:1000,sku:'mutation_crystal_small'}]}),RangeError);
   assert.throws(()=>simulateCollection({releaseEveryDays:0}),RangeError);
 });
+
+const {simulateBatch,exampleSensitivity}=require('../monetization/economy/finance-model.cjs');
+
+test('100-order illustration reproduces the independent refund, fee and VAT arithmetic', () => {
+  const orders=[{sku:'starter_genome_once',count:40,refunds:1},{sku:'mutation_crystal_small',count:30,refunds:1},
+    {sku:'mutation_crystal_mid',count:10,refunds:0},{sku:'appearance_unlock_01',count:20,refunds:0}];
+  const a=simulateBatch({orders}).totals;
+  assert.deepEqual([a.orders,a.refundOrders,a.gross,a.refunded],[100,2,303000,5500]);
+  assert.ok(Math.abs(a.fee-11332.2)<1e-7);
+  assert.ok(Math.abs(a.outputVatReserve-27045.45454545)<1e-5);
+  assert.ok(Math.abs(a.remainingBeforeOtherCosts-259122.34545455)<1e-5);
+});
+
+test('sensitivity shows lower retained cash for higher fee or more refunds under the same assumptions', () => {
+  const m=exampleSensitivity(); assert.equal(m.results.length,9);
+  const get=(fee,label)=>m.results.find(x=>x.feeRate===fee&&x.refundCase===label).remainingBeforeOtherCosts;
+  assert.ok(get(.03,'2% counts')>get(.034,'2% counts'));
+  assert.ok(get(.034,'2% counts')>get(.05,'2% counts'));
+  assert.ok(get(.034,'0% counts')>get(.034,'2% counts'));
+  assert.ok(get(.034,'2% counts')>get(.034,'10% counts'));
+});
+
+test('invalid fee rates and impossible refund amounts are rejected', () => {
+  assert.throws(()=>hypotheticalCash({sku:'starter_genome_once',count:1,processingFeeRate:NaN}),RangeError);
+  assert.throws(()=>hypotheticalCash({sku:'starter_genome_once',count:1,salesVatRate:-.1}),RangeError);
+  assert.throws(()=>hypotheticalCash({sku:'starter_genome_once',count:1,processingFeeVatRate:1.1}),RangeError);
+  assert.throws(()=>simulateBatch({orders:[{sku:'mutation_crystal_mid',count:1,refunds:2}]}),RangeError);
+});
+
+test('trial models reject unsupported DNA, balance or claimed-payment inputs', () => {
+  assert.throws(()=>simulatePlayer({dna:999999999}),/unsupported player option/);
+  assert.throws(()=>simulateCollection({localStorage:{dna:999999999}}),/unsupported collection option/);
+  assert.throws(()=>simulateCollection({paidBalance:999999999}),/unsupported collection option/);
+  assert.throws(()=>simulateCollection({purchasePlan:[{day:1,sku:'starter_genome_once',paymentConfirmed:true}]}),/unsupported planned purchase field/);
+});
+
+test('hypothetical premium currency remains conserved across attendance, supply and source order', () => {
+  for (const dailyCrystals of [0,3,5,8]) for (const releaseEveryDays of [7,28]) for (const consumeOrder of ['paid_first','free_first']) {
+    const r=simulateCollection({days:56,dailyCrystals,releaseEveryDays,consumeOrder,
+      purchasePlan:[{day:1,sku:'starter_genome_once'}]});
+    const last=r.daily.at(-1);
+    assert.equal(r.freeEarned-r.freeSpent,last.free);
+    assert.equal(r.paidEarned-r.paidSpent,last.paid);
+    assert.equal(r.freeSpent+r.paidSpent,r.obtained.length*150);
+    assert.ok(last.free>=0&&last.paid>=0&&last.owned<=last.released);
+  }
+});
+
+test('report CLI returns a simulation-only reproducible result without activating checkout', () => {
+  const {execFileSync}=require('node:child_process');
+  const {join}=require('node:path');
+  const report=JSON.parse(execFileSync(process.execPath,[join(__dirname,'../tools/m02-economy-report.cjs')],{encoding:'utf8'}));
+  assert.equal(report.kind,'SIMULATION_ONLY');
+  assert.equal(report.financeSensitivity.results.length,9);
+  assert.equal(report.baseline.free20.day7.researchRanks,28);
+  assert.equal(config.checkout_enabled,false);
+});
