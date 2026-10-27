@@ -1,0 +1,51 @@
+name: M04 50% mock shop real-home mobile QA
+on:
+  push:
+    branches: [monetization-m04-payment-20261027]
+    paths:
+      - 'web/mock-premium*.js'
+      - 'dist/index.html'
+      - 'dist/version.json'
+      - 'dist/verification.json'
+      - 'dist/asset-manifest.json'
+      - 'dist/assets/d9db3b7dc93e39cccb5ad7f1ceb307cf44384dc80a99499cacba7044f9040f2b.js'
+      - 'dist/assets/8fee1c1add722a5e9db8359fa997299454ec738a1b11a78d8466f6c7a8efbe56.js'
+      - 'tests/monetization_m04_home_browser.cjs'
+      - '.github/workflows/m04-home-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-home-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify original assets and incremental mock shell
+        run: python3 tools/verify_site.py --dist dist
+      - name: Check mock logic and design contract
+        run: node --test tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs
+      - name: Install browser runner (no game assets regenerated)
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m04-playwright" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/m04-playwright/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/m04-playwright/node_modules" >> "$GITHUB_ENV"
+      - name: Test original EVOLVE V614 home with optional mock purchases on 393x852
+        timeout-minutes: 12
+        run: node tests/monetization_m04_home_browser.cjs
+      - name: Retain browser screenshot for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m04-mock-home-mobile-check
+          path: test-results/m04-mock-shop-393x852.png
+          if-no-files-found: ignore
