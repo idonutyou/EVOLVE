@@ -44,4 +44,9 @@ jobs:
             b="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored -Atc "SELECT count(*) FROM $table")"
             test "$a" = "$b"
             echo "$table restored row count: $b"
+            hash_sql="SELECT md5(coalesce(string_agg(to_jsonb(t)::text, '|' ORDER BY to_jsonb(t)::text),'')) FROM $table AS t"
+            x="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Atc "$hash_sql")"
+            y="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored -Atc "$hash_sql")"
+            test "$x" = "$y"
+            echo "$table restored values hash matched: $x"
           done
