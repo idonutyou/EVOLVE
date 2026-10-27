@@ -16,7 +16,15 @@ def main():
  assert new.count(addition)==1 and new.replace(addition,b'')==old,'Base gameplay engine changed'
  assert pkg['baseline_engine']==patch['baseline_engine'] and pkg['engine']==patch['new_engine']
  assert version['version']=='V575-STEP07-MONSTER-FEEDBACK-V614' or version['version'].startswith('V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK')
- assert version['build'] and version['assets']==len(m) and len(m) in (1067,1078)
+ assert version['build'] and version['assets']==len(m)
+ # The original V614/M04 builds are immutable. M05 adds five dev-only JS assets
+ # to the same 1,078 original entries; reject every other manifest expansion.
+ if len(m)==1083 and version['version'].endswith('-M05-UX90'):
+  assert len([x for x in m if x['kind']=='dev-mock-only'])==5
+  assert len([x for x in m if x['kind']=='image'])==1021
+  assert all(x['path'].startswith('assets/') and x['path'].endswith('.js') for x in m if x['kind']=='dev-mock-only')
+ else:
+  assert len(m) in (1067,1078),'Unexpected original manifest size / unreviewed build'
  assert len([x for x in m if x['kind']=='image'])==pkg['original_image_count']==1021
  for item in m:
   if item['kind']=='image':
