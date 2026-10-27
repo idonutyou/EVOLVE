@@ -1,0 +1,102 @@
+{
+  "stage": "M05",
+  "percent": 90,
+  "step": "3/3",
+  "source_branch": "monetization-m05-ux-20261028",
+  "backup_branch": "backup/monetization-m05-090-20261028",
+  "base": "c61623a5274defb54f3a725101fc9f7ea4c9ccf9",
+  "archive": "checkpoints/EVOLVE_M05_090_20261028.zip",
+  "archive_type": "incremental from M05 80%; permanent full Git tree in backup branch",
+  "bytes": 195353,
+  "sha256": "e1c880bbd010b6cc4419b67f2e2c8a4c240e250c793d05b503fb4cc3581b3f63",
+  "file_count": 20,
+  "files": {
+    ".github/workflows/m05-090-checkpoint.yml": {
+      "bytes": 3187,
+      "sha256": "7b0a5d5f8c43cadd9ec30e39f7505a7a929bb346122a9d1a0517e7b2258820ce"
+    },
+    ".github/workflows/m05-090-persist.yml": {
+      "bytes": 2629,
+      "sha256": "3c1233d1386c65f1d1a3d6d59a96a79375f3020eaae5d871a2d2009716356667"
+    },
+    ".github/workflows/m05-090-ui.yml": {
+      "bytes": 3270,
+      "sha256": "86f0a1e4d4f9eba94cadc5be5a038be5cfc19e98454b4a041f20a04ecc306229"
+    },
+    "EVOLVE_HANDOFF.md": {
+      "bytes": 25508,
+      "sha256": "7de54430a6520a979d9d8af0c51c36f060c738cc4d53959b2833e51bec597d09"
+    },
+    "EVOLVE_PROGRESS.md": {
+      "bytes": 14736,
+      "sha256": "dd5b9bf01a3c6cdbe08b88dbeae811194ed19abc257f9a734bc3f2896f9572f9"
+    },
+    "EVOLVE_ROADMAP.md": {
+      "bytes": 12490,
+      "sha256": "b7ec761c4d444767fd9e0eb13c439332ffb0bb1c940b94a391167c6b127fee12"
+    },
+    "dist/asset-manifest.json": {
+      "bytes": 208779,
+      "sha256": "f4915fa03fda141e5680ade358296c2f6ac85a17f10ed45b24bf6b85659eca26"
+    },
+    "dist/assets/44780c30bcb2d4881c933bc460f4de11c22b607152e1d40354533e1b98133691.js": {
+      "bytes": 19557,
+      "sha256": "44780c30bcb2d4881c933bc460f4de11c22b607152e1d40354533e1b98133691"
+    },
+    "dist/index.html": {
+      "bytes": 260596,
+      "sha256": "4ae7becc1b1ed7e19ce997c436b0049233c6aeed57c25de927971c6243f87d62"
+    },
+    "dist/verification.json": {
+      "bytes": 69014,
+      "sha256": "45018564f9271da35574a5a87cf9545974d02247911f81390f20aefd16dfafc1"
+    },
+    "dist/version.json": {
+      "bytes": 312,
+      "sha256": "34873d1d92c22f492e861582e40d2748c0456c84cee44079b220d1c3851cc1a5"
+    },
+    "docs/monetization/M05_090_MERGE_QA_KO.md": {
+      "bytes": 4199,
+      "sha256": "6cdb50f40924b18c5a676c5b9801349b198c275f94957161b183195d58cf4a7c"
+    },
+    "tests/monetization_m05_090_touch_browser.cjs": {
+      "bytes": 4827,
+      "sha256": "a3223f90033d4153e3c31318472c333d6cb49fc02a1af809b7bf76b12b72934a"
+    },
+    "tests/monetization_m05_mobile_flow.test.cjs": {
+      "bytes": 8419,
+      "sha256": "2b531f77c55840c639f2756222ca46e574ba32cbc21e1fe8654ce590fee4d38b"
+    },
+    "tests/monetization_m05_ux_design.test.cjs": {
+      "bytes": 5604,
+      "sha256": "81e56a25c81452ecbba08c5d3f98ae4af4a507e4ed6d2574a97c4f3d779739cb"
+    },
+    "tools/build_m05_090.py": {
+      "bytes": 2449,
+      "sha256": "69c5fd8221be526b92c9d273f8718f5ac53f513c62f78782ddd0757150444704"
+    },
+    "tools/checkpoint_m05_090.py": {
+      "bytes": 3870,
+      "sha256": "b5ab5efcd988cfdb82877b35a42ebd0bb83d1b94ac3073fbf2d7b936d0bd8a14"
+    },
+    "tools/verify_m05_090_checkpoint.py": {
+      "bytes": 1546,
+      "sha256": "87d39aaaaac37a04ab42f7cfd01dbe60d74844a4b4f7a89b552d34524e96d0aa"
+    },
+    "tools/verify_m05_090_release.py": {
+      "bytes": 3590,
+      "sha256": "723f03f19c0edd4d7d214ff0bf4e66182f1ad76152260e8191108824584029bc"
+    },
+    "web/m05-shop-ui-v618.js": {
+      "bytes": 19557,
+      "sha256": "44780c30bcb2d4881c933bc460f4de11c22b607152e1d40354533e1b98133691"
+    }
+  },
+  "crc_sha_members_verified": true,
+  "images_preserved": 1021,
+  "site_assets": 1083,
+  "added_dev_asset": "assets/44780c30bcb2d4881c933bc460f4de11c22b607152e1d40354533e1b98133691.js",
+  "actual_billing_enabled": false,
+  "browser_run": 40575562801,
+  "next": "M05 100% published Pages verify + final handoff"
+}
