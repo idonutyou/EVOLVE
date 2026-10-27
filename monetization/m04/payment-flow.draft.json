@@ -1,0 +1,190 @@
+{
+  "schema_version": "m04.checkout-contract.draft.v1",
+  "environment": "DESIGN_ONLY",
+  "checkout_enabled": false,
+  "provider_sandbox_connected": false,
+  "merchant_approved": false,
+  "secure_account_provider_connected": false,
+  "server_payouts_enabled": false,
+  "pricing_source": "VERIFIED_MERCHANT_PROVIDER_ONLY",
+  "production_price_available": false,
+  "public_api_exposed": false,
+  "primary_exploration": "toss_payments_web",
+  "alternatives": [
+    "portone_v2_web",
+    "google_play_billing"
+  ],
+  "product_catalog_path": "monetization/catalog/draft_skus.json",
+  "currency": "KRW",
+  "order_contract": {
+    "server_generated_id": true,
+    "server_verified_account_id": true,
+    "authoritative_fields": [
+      "account_id",
+      "sku",
+      "server_price_minor",
+      "currency",
+      "units_or_entitlement",
+      "provider",
+      "merchant_id",
+      "created_at",
+      "expires_at",
+      "idempotency_key"
+    ],
+    "fields_never_authoritative_from_client": [
+      "account_id",
+      "amount",
+      "price_minor",
+      "currency",
+      "premium_crystal_units",
+      "entitlement_id",
+      "paid",
+      "payment_status",
+      "grant_allowed",
+      "merchant_id"
+    ],
+    "uniqueness": [
+      "provider:provider_transaction_id",
+      "account_id:idempotency_key",
+      "provider:provider_event_id"
+    ],
+    "hash_request_payload": true,
+    "provider_api_confirmation_required": true,
+    "callback_success_never_confirms_payment": true
+  },
+  "providers": {
+    "toss_payments_web": {
+      "status_paid": "DONE",
+      "status_not_paid": [
+        "READY",
+        "IN_PROGRESS",
+        "WAITING_FOR_DEPOSIT",
+        "ABORTED",
+        "EXPIRED"
+      ],
+      "refund_like": [
+        "CANCELED",
+        "PARTIAL_CANCELED"
+      ],
+      "verified_via": "server-side-provider-API-confirm-then-readback",
+      "webhook_payment_status": "notify-and-requery-provider",
+      "note": "General payment webhooks are not assumed to have universal HMAC; verify each event type per provider docs; reconcile with payment lookup."
+    },
+    "portone_v2_web": {
+      "status_paid": "PAID",
+      "status_not_paid": [
+        "READY",
+        "PENDING",
+        "VIRTUAL_ACCOUNT_ISSUED",
+        "FAILED"
+      ],
+      "refund_like": [
+        "CANCELLED",
+        "PARTIAL_CANCELLED"
+      ],
+      "verified_via": "server-side-PortOne-V2-payment-lookup",
+      "note": "Illustrative statuses to recheck against selected channel/version before writing adapter."
+    },
+    "google_play_billing": {
+      "status_paid": "PURCHASED",
+      "verified_via": "server-side-Google-Play-Developer-API-with-purchase-token",
+      "note": "Distinct Play policy adapter; web PG approval never substitutes for Play verification."
+    }
+  },
+  "states": [
+    "DRAFT_DISABLED",
+    "ORDER_CREATED",
+    "AWAITING_PROVIDER",
+    "AWAITING_DEPOSIT",
+    "PAID_VERIFIED",
+    "FULFILLED",
+    "CANCELLED",
+    "EXPIRED",
+    "REFUND_REVIEW",
+    "REVERSED",
+    "DISPUTED"
+  ],
+  "transitions_design_only": [
+    {
+      "from": "DRAFT_DISABLED",
+      "to": "ORDER_CREATED",
+      "by": "server-merchant-catalog-active-and-account-verified",
+      "enabled": false
+    },
+    {
+      "from": "ORDER_CREATED",
+      "to": "AWAITING_PROVIDER",
+      "by": "server-checkout-creation"
+    },
+    {
+      "from": "AWAITING_PROVIDER",
+      "to": "AWAITING_DEPOSIT",
+      "by": "provider-waiting-for-deposit"
+    },
+    {
+      "from": "AWAITING_PROVIDER",
+      "to": "PAID_VERIFIED",
+      "by": "provider-server-requery-status-paid"
+    },
+    {
+      "from": "AWAITING_DEPOSIT",
+      "to": "PAID_VERIFIED",
+      "by": "provider-server-requery-status-paid"
+    },
+    {
+      "from": "PAID_VERIFIED",
+      "to": "FULFILLED",
+      "by": "server-atomic-entitlement-ledger-commit"
+    },
+    {
+      "from": "AWAITING_PROVIDER",
+      "to": "CANCELLED",
+      "by": "provider-server-verified-cancellation"
+    },
+    {
+      "from": "AWAITING_PROVIDER",
+      "to": "EXPIRED",
+      "by": "server-expiry-or-provider-expiration"
+    },
+    {
+      "from": "FULFILLED",
+      "to": "REFUND_REVIEW",
+      "by": "provider-server-verified-refund-with-source-review"
+    },
+    {
+      "from": "REFUND_REVIEW",
+      "to": "REVERSED",
+      "by": "reviewed-policy-and-atomic-source-specific-reversal"
+    },
+    {
+      "from": "FULFILLED",
+      "to": "DISPUTED",
+      "by": "provider-server-verified-chargeback-dispute"
+    }
+  ],
+  "fulfilment_gates": [
+    "server-authenticated-recoverable-account",
+    "merchant-enabled-by-server",
+    "server-catalog-sku-active-content-ready",
+    "server-catalog-price-and-currency-match",
+    "provider-merchant-account-match",
+    "provider-transaction-unique-not-refunded",
+    "provider-server-API-status-PAID-not-pending",
+    "provider-order-ID-linked-to-server-account",
+    "atomic-ledger-entitlement-operation",
+    "one-time-or-seasonal-repeat-limits-enforced"
+  ],
+  "response_on_unready": {
+    "http_status": 503,
+    "code": "PAYMENT_BACKEND_NOT_READY"
+  },
+  "documents": [
+    "docs/monetization/M04_010_CHANNEL_PROVIDER_AUDIT_KO.md",
+    "docs/monetization/M04_020_PAYMENT_STATE_MACHINE_KO.md"
+  ],
+  "notes": [
+    "All transitions are future-only documentation; no production checkout active.",
+    "Mock order events and client redirects never grant crystals.",
+    "Toss general payment webhook needs server payment query; do not invent a single signature verification rule for all event types."
+  ]
+}
