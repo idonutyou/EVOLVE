@@ -1,4 +1,5 @@
 name: STEP08 actual 50 180 250 living-monster density review
+# Native spawn() already inserts each unique active monster.
 on:
   push:
     branches: [step08-combat-playtest-v614-20261027]
