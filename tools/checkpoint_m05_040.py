@@ -18,7 +18,7 @@ def main():
  assert all(new.get(p)==entry for p,entry in old.items())
  addition=list(set(new)-set(old))
  assert len(addition)==1 and new[addition[0]]['kind']=='dev-mock-only'
- assert addition[0] in changed
+ assert ('dist/'+addition[0]) in changed
  assert sum(x['kind']=='image' for x in current)==1021
  v=json.loads((R/'dist/version.json').read_text())
  assert v['assets']==len(current) and v['version'].endswith('M05-UX40')
