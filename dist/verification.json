@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
-  "assets_bytes": 249072372,
-  "index_bytes": 259961,
-  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "assets_bytes": 249088424,
+  "index_bytes": 260454,
+  "build": "9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6",
   "image_assets": 1005,
-  "cached_files": 1067,
-  "cached_bytes": 382819931,
+  "cached_files": 1078,
+  "cached_bytes": 386288630,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1911,5 +1911,38 @@
     "scoped_effects": "monster hit fallback + existing death echo",
     "published": false,
     "physical_Galaxy_S23_plus_tested": false
+  },
+  "m04_mock50": {
+    "scoped": "dev-only opt-in mock home storefront",
+    "query_parameter": "evolveMockShop=1",
+    "checkout_enabled": false,
+    "amount_real_money": false,
+    "existing_combat_assets_unchanged": true,
+    "legacy_save_keys_unchanged": true,
+    "asset_paths": [
+      "assets/d9db3b7dc93e39cccb5ad7f1ceb307cf44384dc80a99499cacba7044f9040f2b.js",
+      "assets/8fee1c1add722a5e9db8359fa997299454ec738a1b11a78d8466f6c7a8efbe56.js"
+    ],
+    "published": false,
+    "physical_device_tested": false
+  },
+  "m04_mock_content": {
+    "percent": 70,
+    "engine": "assets/a588f107bb6f44770ad9b0e23f56beda5ad5edfcf92499969c18bc442e8e4908.js",
+    "baseline_engine": "assets/e343fb68db8ad1e2fb09bad6c28f3d95eff1c5ef232438670453adb56cfba64a.js",
+    "engine_restores_exactly": true,
+    "asset_paths": [
+      "assets/19b6ae1188b9d2a9a24b8da5576b6ebbaa648da992f4fb25cd14fb18c2d45ba8.js",
+      "assets/420cce5ea1e4cd944214a03f3dc701fc76994670982db5b19c1dde0922bf4dde.js",
+      "assets/ded745b7a82d62dcade6f4131ebf19171628d2daff52d36fd623fcc11a655832.js"
+    ],
+    "new_images": 0,
+    "source_art_unchanged": true,
+    "cosmetic_stats_unchanged": true,
+    "theme_count": 2,
+    "test_crystal_redemption": 120,
+    "query": "evolveMockShop=1",
+    "published": false,
+    "physical_device_tested": false
   }
 }

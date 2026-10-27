@@ -38,7 +38,7 @@ const server=http.createServer((req,res)=>{const url=new URL(req.url,'http://loc
   const expected=JSON.parse(fs.readFileSync(path.join(dist,'version.json'),'utf8'));
   assert.equal(report.version.version,expected.version);
   assert.equal(report.version.build,expected.build);
-  assert.equal(report.version.version,'V575-STEP07-MONSTER-FEEDBACK-V614');
+  assert.ok(report.version.version==='V575-STEP07-MONSTER-FEEDBACK-V614'||report.version.version.startsWith('V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK'),'unexpected game version for V614 regression');
   await page.locator('#homeLabTab').click();
   await page.locator('#partsGridV523 [data-part-id="arm_cannon"]').click();
   await page.locator('#partsDetailEquipV523').click();

@@ -15,8 +15,8 @@ def main():
  addition=patch['addition'].encode()
  assert new.count(addition)==1 and new.replace(addition,b'')==old,'Base gameplay engine changed'
  assert pkg['baseline_engine']==patch['baseline_engine'] and pkg['engine']==patch['new_engine']
- assert version['version']=='V575-STEP07-MONSTER-FEEDBACK-V614'
- assert version['build'] and version['assets']==len(m)==1067
+ assert version['version']=='V575-STEP07-MONSTER-FEEDBACK-V614' or version['version'].startswith('V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK')
+ assert version['build'] and version['assets']==len(m) and len(m) in (1067,1078)
  assert len([x for x in m if x['kind']=='image'])==pkg['original_image_count']==1021
  for item in m:
   if item['kind']=='image':

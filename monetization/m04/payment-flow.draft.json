@@ -1,0 +1,214 @@
+{
+  "schema_version": "m04.mobile-stores.design.v2",
+  "environment": "MOBILE_STORES_DESIGN_ONLY",
+  "checkout_enabled": false,
+  "provider_sandbox_connected": false,
+  "merchant_approved": false,
+  "secure_account_provider_connected": false,
+  "server_payouts_enabled": false,
+  "pricing_source": "VERIFIED_PLATFORM_STORE_CATALOG_ONLY",
+  "production_price_available": false,
+  "public_api_exposed": false,
+  "primary_exploration": "google_play_billing",
+  "alternatives": [
+    "apple_storekit_2"
+  ],
+  "product_catalog_path": "monetization/catalog/draft_skus.json",
+  "currency": "KRW",
+  "order_contract": {
+    "server_generated_id": true,
+    "server_verified_account_id": true,
+    "app_build_identity_verified": true,
+    "authoritative_fields": [
+      "account_id",
+      "internal_sku",
+      "platform",
+      "platform_product_id",
+      "store_transaction_id_or_purchase_token",
+      "store_verified_status",
+      "store_environment",
+      "entitlement_or_crystal_units"
+    ],
+    "fields_never_authoritative_from_client": [
+      "account_id",
+      "amount",
+      "price_minor",
+      "currency",
+      "premium_crystal_units",
+      "entitlement_id",
+      "paid",
+      "payment_status",
+      "grant_allowed",
+      "platform_product_id",
+      "receipt_verified"
+    ],
+    "uniqueness": [
+      "platform:store_transaction_id_or_purchase_token",
+      "account_id:idempotency_key",
+      "platform:notification_id"
+    ],
+    "hash_request_payload": true,
+    "store_server_verification_required": true,
+    "callback_success_never_confirms_payment": true
+  },
+  "providers": {
+    "google_play_billing": {
+      "native_sdk": "Google Play Billing Library",
+      "purchase_proof": "purchaseToken",
+      "verification": "Google Play Developer API one-time product purchases:get or subscriptionsv2:get as appropriate",
+      "paid_status": "PURCHASED",
+      "pending_status": "PENDING",
+      "purchase_ack_or_consume": "after verified atomic server grant, acknowledge non-consumables / consume consumables, idempotently",
+      "notifications": "Google Play Real-time Developer Notifications + Voided Purchases API; notifications prompt server re-verification",
+      "identity_binding": "obfuscatedAccountId derived from verified game account with privacy protections",
+      "refund": "Void/Refund verification via developer APIs before source-specific review"
+    },
+    "apple_storekit_2": {
+      "native_sdk": "StoreKit 2",
+      "purchase_proof": "signedTransactionInfo JWS or verified transaction identifier",
+      "verification": "App Store Server API Get Transaction Info + validated signedTransactionInfo JWS and app identity, environment, productId, revocation",
+      "paid_status": "VERIFIED_TRANSACTION",
+      "pending_status": "PENDING",
+      "completion": "Only after server idempotent entitlement grant; ensure transaction finish() is handled correctly",
+      "notifications": "App Store Server Notifications V2 with validated signedPayload JWS",
+      "identity_binding": "appAccountToken associated with game account where applicable",
+      "refund": "App Store Server API transaction history / signed revocation and V2 notifications, source-specific review",
+      "non_expiry": "purchased in-app currency must not expire"
+    }
+  },
+  "states": [
+    "DRAFT_DISABLED",
+    "ORDER_CREATED",
+    "AWAITING_STORE",
+    "PENDING_STORE_APPROVAL",
+    "STORE_PURCHASE_VERIFIED",
+    "FULFILLED",
+    "CANCELLED",
+    "REFUND_REVIEW",
+    "REVERSED",
+    "DISPUTED"
+  ],
+  "transitions_design_only": [
+    {
+      "from": "DRAFT_DISABLED",
+      "to": "ORDER_CREATED",
+      "by": "verified-account-and-actual-store-product-approval",
+      "enabled": false
+    },
+    {
+      "from": "ORDER_CREATED",
+      "to": "AWAITING_STORE",
+      "by": "native-sdk-purchase-flow"
+    },
+    {
+      "from": "AWAITING_STORE",
+      "to": "PENDING_STORE_APPROVAL",
+      "by": "store-pending-notification"
+    },
+    {
+      "from": "AWAITING_STORE",
+      "to": "STORE_PURCHASE_VERIFIED",
+      "by": "store-api-verified-token-or-transaction"
+    },
+    {
+      "from": "PENDING_STORE_APPROVAL",
+      "to": "STORE_PURCHASE_VERIFIED",
+      "by": "store-api-verified-token-or-transaction"
+    },
+    {
+      "from": "STORE_PURCHASE_VERIFIED",
+      "to": "FULFILLED",
+      "by": "server-atomic-ledger-and-entitlement-grant"
+    },
+    {
+      "from": "AWAITING_STORE",
+      "to": "CANCELLED",
+      "by": "store-cancelled-or-failed"
+    },
+    {
+      "from": "FULFILLED",
+      "to": "REFUND_REVIEW",
+      "by": "store-verified-refund-or-revocation"
+    },
+    {
+      "from": "REFUND_REVIEW",
+      "to": "REVERSED",
+      "by": "approved-source-specific-reversal"
+    },
+    {
+      "from": "FULFILLED",
+      "to": "DISPUTED",
+      "by": "store-verified-dispute"
+    }
+  ],
+  "fulfilment_gates": [
+    "authenticated-recoverable-game-account",
+    "store-app-identity-package-name-or-bundle-id-match",
+    "store-environment-verified-test-vs-production",
+    "store-product-id-maps-to-internal-sku",
+    "store-reported-product-and-quantity-valid",
+    "store-transaction-status-verified-not-pending",
+    "store-purchase-token-or-transaction-id-not-already-granted",
+    "server-atomic-wallet-ledger-and-entitlement-source-grant",
+    "store-acknowledgement-or-finish-policy-verified",
+    "refund-or-voided-transaction-check",
+    "repeat-limits-and-season-eligibility"
+  ],
+  "response_on_unready": {
+    "http_status": 503,
+    "code": "PAYMENT_BACKEND_NOT_READY"
+  },
+  "documents": [
+    "docs/monetization/M04_030_MOBILE_STORES_PIVOT_KO.md"
+  ],
+  "release_target": "GOOGLE_PLAY_AND_APPLE_APP_STORE",
+  "web_role": "DEVELOPMENT_AND_TEST_ONLY_NO_PAYMENTS",
+  "target_platforms": [
+    "android_google_play",
+    "ios_apple_app_store"
+  ],
+  "web_payment_provider_candidates": [],
+  "platform_product_ids_status": "UNASSIGNED",
+  "native_app_project_status": "NOT_CREATED",
+  "native_bridge": {
+    "status": "DESIGN_ONLY",
+    "game_runtime_candidate": "shared_existing_html_canvas_runtime_in_native_host",
+    "actual_host_technology": "UNDECIDED",
+    "require_native_purchase_surface": true,
+    "android": "Google Play Billing Library via native Android app integration",
+    "ios": "StoreKit 2 via native iOS app integration",
+    "must_not_treat_webview_payment_redirect_as_store_purchase": true,
+    "release_builds": "NEVER_USE_DEVELOPMENT_ONLY_WEB_PG",
+    "note": "Choose build/runtime architecture and app IDs before implementation; static GitHub Pages is not the shipped binary."
+  },
+  "product_type_mapping": {
+    "starter_genome_once": {
+      "google_play": "one_time_product",
+      "apple_app_store": "non_consumable",
+      "notes": "Account-once enforcement in server ledger, finalize packaged items"
+    },
+    "mutation_crystal_small": {
+      "google_play": "one_time_product_consumable",
+      "apple_app_store": "consumable"
+    },
+    "mutation_crystal_mid": {
+      "google_play": "one_time_product_consumable",
+      "apple_app_store": "consumable"
+    },
+    "appearance_unlock_01": {
+      "google_play": "one_time_product",
+      "apple_app_store": "non_consumable"
+    },
+    "season_research_pass_01": {
+      "google_play": "UNDECIDED_PENDING_SEASON_POLICY",
+      "apple_app_store": "UNDECIDED_PENDING_SEASON_POLICY"
+    }
+  },
+  "note_ko": "2026-10-27 사용자 확정: Google Play / Apple App Store 최종 출시, 웹은 개발용만. 이전 웹 PG 우선 가정은 폐기.",
+  "current_priority": "MOCK_PREMIUM_CONTENT_FIRST",
+  "live_billing_integration_stage": "M08_FINAL_RELEASE_ONLY",
+  "store_sdk_development_deferred": true,
+  "dev_mock_purchase_mode": "ISOLATED_GAME_TEST_ONLY",
+  "dev_mock_purchase_artifact": "monetization/m04/mock-premium-shop.design.json",
+  "docs_authoritative": "docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md"
+}
