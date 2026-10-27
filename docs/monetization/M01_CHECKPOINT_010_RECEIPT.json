@@ -1,0 +1,17 @@
+{
+  "major_step": "M01",
+  "checkpoint_percent": 10,
+  "kind": "full Git repository immutable snapshot commit pinned by recovery branch; not ZIP",
+  "branch": "backup/monetization-m01-010-20261027",
+  "commit": "185ae8b2045026a504df81a7530701732dedda5b",
+  "remote_ref_verified": true,
+  "evidence_path": "docs/monetization/M01_010_BASELINE_KO.md",
+  "git_blob_sha": "cdb1cbd075d1f3bb69b3de6c1d3ab6db936c4cc4",
+  "evidence_bytes": 7812,
+  "evidence_sha256": "f3df6ce0ab0b6d0a325565cb64d1e813a4111da57a1c3247566504abad2a5716",
+  "backup_branch_and_commit_file_readback_equal": true,
+  "game_files_modified": false,
+  "new_images_generated": 0,
+  "real_payments_enabled": false,
+  "previous_existing_checkpoints_preserved": true
+}
