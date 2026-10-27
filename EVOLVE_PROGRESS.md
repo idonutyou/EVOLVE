@@ -1,3 +1,15 @@
+# 최신 EVOLVE M05 90% — 개발용 버튼 충돌 수정/공개 통합 준비 (2026-10-28 KST)
+
+- **M05 90%:** M04 개발용 DEV 상점 버튼과 ORGANISM 하단 5탭 실제 터치 충돌을 M05 옵트인 CSS만 수정해 제거. 기존 M04 구매 엔진과 일반 게임 UI 무변경. 새 이미지 렌더링 불필요.
+- Chromium 실터치 **393×852·320×568·852×393**: 하단 5탭/ORGANISM 서브탭 locator.click, DEV 상점 열기, 겹침 0, 기본 URL DEV 숨김 **통과**. 이전 80% 전투 코어·전투 중 상점 차단, 70% 가로·포커스·12회, 60% 저장 에러, 50% 코어 장착, M04 원본 상점 재검사 통과.
+- Node **62/62 통과**, 90% 소스/브라우저 증거 https://github.com/idonutyou/EVOLVE/actions/runs/40575562801 (브라우저 PASS, 원격 푸시 경합으로 전체 run fail), 기존 브라우저 QA 결과·소스 일치 확인 후 **저장 재검증 success** https://github.com/idonutyou/EVOLVE/actions/runs/40576659951.
+- 기능 브랜치 빌드 `V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90`, 해시 `b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b`, 리소스 1,083개·원본 이미지 1,021개 그대로. 상용 결제 `checkout_enabled=false`, 가격 null.
+- 90% 영구 복구 `backup/monetization-m05-090-20261028`, `checkpoints/EVOLVE_M05_090_20261028.zip` 및 JSON. 이전 10~80% 전부 보존.
+- **다음 `고`: M05 100%** GitHub Pages 실제 URL/빌드/모바일/게임 저장 및 최종 백업·인수인계. 이미지 렌더링 **불필요**.
+- 공개 main 통합은 90% 복구 확인 이후에만 수행하며, 최종 URL 검증은 100% 단계에서 별도 진행.
+
+---
+
 # 최신 EVOLVE M05 STEP 3/3 · 80% 배포 전 통합 검사 완료 (2026-10-28 KST)
 
 - **M05 80% 완료:** 기존 M04 원본 게임 파일 바이트와 모의 상점 확장의 공존 확인. **이번에는 게임 화면 수정/실제 공개 배포 없음.**
