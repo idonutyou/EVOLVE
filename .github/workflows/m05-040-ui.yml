@@ -1,0 +1,59 @@
+name: M05 40 percent development-only shop UI build and mobile QA
+on:
+  push:
+    branches: [monetization-m05-ux-20261028]
+    paths:
+      - '.github/workflows/m05-040-ui.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  feature-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check isolated UI and safety guard
+        run: |
+          node --check web/m05-shop-ui-v618.js
+          node --check tests/monetization_m05_040_browser.cjs
+          python3 tools/verify_m04_predeploy_gate.py
+          node --test tests/monetization_m05_ux_design.test.cjs tests/monetization_m05_product_detail.test.cjs tests/monetization_m05_mobile_flow.test.cjs tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs tests/monetization_m04_core_visuals.test.cjs
+      - name: Package feature-only UI into hashed website asset
+        run: |
+          python3 tools/build_m05_040.py
+          python3 tools/verify_site.py --dist dist
+      - name: Install mobile Chromium
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m05-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/m05-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/m05-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Test M05 real game shell on 393 and 320 mobile viewports
+        timeout-minutes: 15
+        run: node tests/monetization_m05_040_browser.cjs
+      - name: Store M05 mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m05-040-mobile
+          path: test-results/m05-040-*.png
+          if-no-files-found: ignore
+      - name: Commit tested development website to M05 feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- dist/index.html dist/version.json dist/verification.json dist/asset-manifest.json
+          git add -- 'dist/assets/*.js'
+          git commit -m "build(M05 40%): commit browser-tested dev-only store UI assets"
+          git push origin HEAD:refs/heads/monetization-m05-ux-20261028
