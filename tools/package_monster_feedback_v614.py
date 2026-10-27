@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the STEP07 V614 visual-only candidate from exact V613 without altering public main."""
 from pathlib import Path
-import hashlib,json,re
+import hashlib,json,re,subprocess
 
 ROOT=Path(__file__).resolve().parents[1]
 DIST=ROOT/'dist'
@@ -10,13 +10,17 @@ VERSION='V575-STEP07-MONSTER-FEEDBACK-V614'
 BASE_VERSION='V575-STEP06-ORGAN-HITS-V613'
 BASE_BUILD='054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf'
 BASE_ENGINE='assets/abea964a4ccb5c0f4ea1079f481aa6bb5a4ec0574cf85c0b0801038b1b17d255.js'
+BASE_COMMIT='82ccefffaf801be3e560310493eae86003c82d93'
+def baseline(path):
+ return subprocess.check_output(['git','show',BASE_COMMIT+':'+path],cwd=ROOT)
 def dump(path,value):path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
 def main():
- version=json.loads((DIST/'version.json').read_text())
+ subprocess.run(['git','fetch','--no-tags','--depth=1','origin',BASE_COMMIT],cwd=ROOT,check=True,capture_output=True)
+ version=json.loads(baseline('dist/version.json'))
  assert version['version']==BASE_VERSION and version['build']==BASE_BUILD,'Refuse non-V613 baseline'
- html=(DIST/'index.html').read_text()
- manifest=json.loads((DIST/'asset-manifest.json').read_text())
- report=json.loads((DIST/'verification.json').read_text())
+ html=baseline('dist/index.html').decode()
+ manifest=json.loads(baseline('dist/asset-manifest.json'))
+ report=json.loads(baseline('dist/verification.json'))
  assert sum(e['path']==BASE_ENGINE for e in manifest)==1
  assert html.count(BASE_ENGINE)>=1
  original=(DIST/BASE_ENGINE).read_bytes()
