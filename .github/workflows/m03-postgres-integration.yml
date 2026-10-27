@@ -31,3 +31,17 @@ jobs:
         run: |
           command -v pg_dump
           command -v pg_restore
+      - name: PostgreSQL dump and restore validation
+        env:
+          PGPASSWORD: test_only_local_secret
+        run: |
+          set -euo pipefail
+          pg_dump -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Fc -f "$RUNNER_TEMP/m03.dump"
+          createdb -h 127.0.0.1 -U evolve_ci evolve_m03_test_restored
+          pg_restore -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored --exit-on-error "$RUNNER_TEMP/m03.dump"
+          for table in m03_wallets m03_ledger_entries m03_ledger_operations; do
+            a="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_ci -Atc "SELECT count(*) FROM $table")"
+            b="$(psql -h 127.0.0.1 -U evolve_ci -d evolve_m03_test_restored -Atc "SELECT count(*) FROM $table")"
+            test "$a" = "$b"
+            echo "$table restored row count: $b"
+          done
