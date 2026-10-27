@@ -2,6 +2,11 @@
 const {createHash,randomUUID}=require('node:crypto');
 function makeStore(pool){
  async function tx(fn){const c=await pool.connect();try{await c.query('BEGIN');const result=await fn(c);await c.query('COMMIT');return result}catch(e){await c.query('ROLLBACK');throw e}finally{c.release()}}
+ async function getAccount({issuer,subject}){
+  const hash=createHash('sha256').update(issuer+'|'+subject).digest();
+  const found=await pool.query('SELECT a.account_id,a.status FROM m03_auth_identities i JOIN m03_accounts a ON i.account_id=a.account_id WHERE i.issuer=$1 AND i.subject_hash=$2',[issuer,hash]);
+  return found.rows.length?{id:found.rows[0].account_id,status:found.rows[0].status}:null;
+ }
  async function getOrCreateAccount({issuer,subject}){
   const digest=createHash('sha256').update(issuer+'|'+subject).digest();
   return tx(async c=>{
@@ -27,6 +32,6 @@ function makeStore(pool){
   const r=await pool.query("SELECT entitlement_id FROM m03_entitlement_sources WHERE account_id=$1 AND state='active' GROUP BY entitlement_id",[accountId]);
   return r.rows.map(x=>({entitlementId:x.entitlement_id,active:true}));
  }
- return {tx,getOrCreateAccount,readWallet,readEntitlements,pool};
+ return {tx,getAccount,getOrCreateAccount,readWallet,readEntitlements,pool};
 }
 module.exports={makeStore};
