@@ -1,5 +1,5 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX50",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX60",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
@@ -7,10 +7,10 @@
   "unique_assets": 977,
   "assets_bytes": 249088424,
   "index_bytes": 260596,
-  "build": "8f07d26768a502d3a74a15d10f3ef6d63538b562d86782cb6c204aed43dc6ed3",
+  "build": "5d5c8f1fe6970e5f82749f1ec6f7f6f59691a797f18aff56d8c99b6e7e92d34e",
   "image_assets": 1005,
-  "cached_files": 1080,
-  "cached_bytes": 386310745,
+  "cached_files": 1081,
+  "cached_bytes": 386327722,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -1974,6 +1974,22 @@
     "assets": 1080,
     "image_count": 1021,
     "original_m04_engine_unchanged": true,
+    "real_checkout": false,
+    "main_deployed": false
+  },
+  "m05_ux_060": {
+    "percent": 60,
+    "dev_only": true,
+    "requires_query": [
+      "evolveMockShop=1",
+      "evolveM05UX=1"
+    ],
+    "new_asset": "assets/13a854181d47bd909efdcc938b4caf33db57cee36718d9b54dd4e61a1bcbadba.js",
+    "previous_asset": "assets/50ee6a3a1f87e6593c319796a92928c5aad639d5eb667b965a90b63a40295b26.js",
+    "new_asset_sha256": "13a854181d47bd909efdcc938b4caf33db57cee36718d9b54dd4e61a1bcbadba",
+    "images": 1021,
+    "existing_game_engine_modified": false,
+    "M04_engine_modified": false,
     "real_checkout": false,
     "main_deployed": false
   }
