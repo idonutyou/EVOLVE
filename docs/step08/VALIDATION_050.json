@@ -1,0 +1,56 @@
+{
+  "step": 8,
+  "progress": 50,
+  "mode": "fixed_dt_functional_QA",
+  "ci_run": 40471742145,
+  "ci_result": "success",
+  "source_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "real_HP_damage_tests": 8,
+  "hp_reduced_each_by": 25,
+  "hit_event_increment_each": 1,
+  "feedback_fallback_each": 1,
+  "lethal_test": {
+    "dead": true,
+    "echoes": 1,
+    "decorated": 1
+  },
+  "midboss_four_profiles": [
+    "alpha/crush",
+    "sentinel/fan",
+    "hunter/pounce",
+    "omega/rupture"
+  ],
+  "midboss_warn_fields_present_all": true,
+  "midboss_five_tiers": [
+    "common",
+    "rare",
+    "epic",
+    "legendary",
+    "mythic"
+  ],
+  "native_TITAN_spawned": [
+    "BIO",
+    "VENOM"
+  ],
+  "venom_native_phase": 3,
+  "other_TITAN_availability": "not confirmed",
+  "scenario_cases_with_some_test_data": 14,
+  "scenario_cases_partial_subclaims": [
+    "no actual near/far player attack pattern verified for TITAN",
+    "ordinary ranged-vs-melee equipment motion not fully exercised by fixed core hurt; previous V612 browser covers actual gun and sword"
+  ],
+  "scenarios_total": 23,
+  "actual_human_subjective_scores": 0,
+  "realtime_frame_perf_measured": false,
+  "physical_phone_tested": false,
+  "game_changes": false,
+  "errors": [],
+  "request_failures": [],
+  "browser_tests_passed": [
+    "step08 mode=probe",
+    "step08 mode=functional",
+    "monster_feedback_browser_v614",
+    "admin_combat_browser"
+  ],
+  "notes": "Only the original V614 game APIs and real damage path were used for functional checks. Fixed-step progression is not real duration/FPS nor a human playfeel rating."
+}
