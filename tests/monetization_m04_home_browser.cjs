@@ -19,7 +19,7 @@ const server=http.createServer((req,res)=>{
  const ctx=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true,deviceScaleFactor:1});
  const page=await ctx.newPage(),errors=[];
  page.on('pageerror',e=>errors.push(String(e)));
- const base='http://127.0.0.1:'+server.address().port+'/';
+ const base=process.env.EVOLVE_TEST_BASE_URL||('http://127.0.0.1:'+server.address().port+'/');
  const out=path.resolve(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
  try{
   await page.addInitScript(()=>{if(!localStorage.getItem('EVOLVE_V575_TEST_META_V1'))localStorage.setItem('EVOLVE_V575_TEST_META_V1',JSON.stringify({dna:1200,stage:3,unlockedStageV522:4,homeStageV522:3}));});
