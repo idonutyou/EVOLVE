@@ -75,6 +75,7 @@ const server=http.createServer((req,res)=>{
   assert.equal((await page.evaluate(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read())).theme,'dev_core_theme_02');
   await page.evaluate(()=>document.getElementById('introSplash')?.click());
   await page.locator('#start').click();
+  await page.locator('#cards .card').first().click();
   await page.waitForFunction(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read().combatDraws>5,null,{timeout:30000});
   const live=await page.evaluate(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read());
   assert.equal(live.theme,'dev_core_theme_02');assert.ok(live.builds<=2,'no per-frame sprite rebuild');
