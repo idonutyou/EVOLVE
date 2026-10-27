@@ -1,0 +1,19 @@
+{
+  "step": 9,
+  "progress": 30,
+  "backup_type": "entire Git repository immutable commit snapshot pinned by recovery branch (not ZIP)",
+  "branch": "backup/step09-030-20261027",
+  "commit": "bdf80c5af0c59af5249dd2144899786928a67006",
+  "remote_ref_readback_verified": true,
+  "verified_evidence_path": "docs/step09/PART1_HANDOFF_KO.md",
+  "verified_git_blob_sha": "6d5f8518ebbb23b209edacb09797d995709ac827",
+  "verified_bytes": 5388,
+  "immutable_commit_file_content_equals_backup_branch": true,
+  "baseline_build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "code_modified": false,
+  "dist_modified": false,
+  "new_images_generated": 0,
+  "actual_unit_and_browser_tests_run": false,
+  "stage": "design",
+  "prior_backups_preserved": true
+}
