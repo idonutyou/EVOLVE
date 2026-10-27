@@ -21,6 +21,14 @@
   "existing_hit_reactions_unmodified": true,
   "save_keys_unchanged": true,
   "scoped_effects": "monster hit fallback + existing death echo",
-  "published": false,
-  "physical_Galaxy_S23_plus_tested": false
+  "published": true,
+  "physical_Galaxy_S23_plus_tested": false,
+  "public_url": "https://idonutyou.github.io/EVOLVE/",
+  "deployment_merge_commit": "de9af23e22535dbfe05d7d69fbf242ec0593d4c0",
+  "deployment_run_id": 40455917703,
+  "deployment_attempt": 1,
+  "deployment_conclusion": "success",
+  "live_browser_verified": true,
+  "live_engine_sha256_verified": true,
+  "final_report": "docs/step07/FINAL_REPORT_KO.md"
 }
