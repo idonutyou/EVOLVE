@@ -1,0 +1,59 @@
+{
+  "stage": "M05",
+  "percent": 20,
+  "step": "1/3",
+  "archive": "checkpoints/EVOLVE_M05_020_20261028.zip",
+  "backup_branch": "backup/monetization-m05-020-20261028",
+  "source_branch": "monetization-m05-ux-20261028",
+  "baseline_commit": "db518e05f598ffef9ee34646ee7eb69866950d7f",
+  "archive_type": "incremental overlay; full source tree in immutable backup branch",
+  "bytes": 25774,
+  "sha256": "18f3ce461cb32cc9324025b392c3157dbadfa7f214415c8e8adc62821d3476bc",
+  "file_count": 10,
+  "files": {
+    ".github/workflows/m05-020-checkpoint.yml": {
+      "bytes": 2948,
+      "sha256": "94f4c462f858ac8de08d4364afaa154e5bc586578a436da1675e2c41f4307f2b"
+    },
+    ".github/workflows/m05-design-gate.yml": {
+      "bytes": 987,
+      "sha256": "8cd204195fea2fd7b445eea4ff4858c6f6ee67d14830dd6f6b78fa1f7c5566c8"
+    },
+    "EVOLVE_HANDOFF.md": {
+      "bytes": 10386,
+      "sha256": "300aad28e72c91a6f266eded01502478f6030150bb3427893d130c909a1a6363"
+    },
+    "EVOLVE_PROGRESS.md": {
+      "bytes": 4318,
+      "sha256": "2a3f64e2f08cdcc1ca9990dbd6aa4c273452f719f55a0fff7513f1b0aa172c0d"
+    },
+    "EVOLVE_ROADMAP.md": {
+      "bytes": 5795,
+      "sha256": "91876161b6b3f51867050e9f91a4a82af4298ba1136df3edd7888a0ee33e006c"
+    },
+    "docs/monetization/M05_020_DETAIL_STATES_KO.md": {
+      "bytes": 6439,
+      "sha256": "7d061d193b628c2399805c1c7f772e4def45c6daa84be30e563b3a60f3c29381"
+    },
+    "monetization/m05/product-detail-states.v1.json": {
+      "bytes": 11461,
+      "sha256": "19eec24e8a60faabbf7a7b78c3207724059c42aff74bfbf76b9218e944c242eb"
+    },
+    "tests/monetization_m05_product_detail.test.cjs": {
+      "bytes": 7154,
+      "sha256": "71cb4b12f2b9ebfcc4ab8cb464952f47edf50778265dace1d1e552bfbb865da6"
+    },
+    "tools/checkpoint_m05_020.py": {
+      "bytes": 3772,
+      "sha256": "2c7846940fddad63c258c3f7aec74ac71bf8b70e1c9e92ad23e672304cac3f25"
+    },
+    "tools/verify_m05_020_checkpoint.py": {
+      "bytes": 1618,
+      "sha256": "4f8ba950b1b2aa5d9535313590f98c4051b98ad12b30b63b3204d018ccfdcb28"
+    }
+  },
+  "design_only": true,
+  "actual_purchase_enabled": false,
+  "archive_crc_and_member_hashes_verified": true,
+  "previous_checkpoint_branch": "backup/monetization-m05-010-20261028"
+}
