@@ -1,0 +1,20 @@
+{
+  "step": 8,
+  "substep": 1,
+  "checkpoint": 10,
+  "backup_type": "full Git repository commit snapshot by branch (not ZIP)",
+  "remote_branch": "backup/step08-010-20261027",
+  "remote_commit": "6b3556af8e7bcede3340fdec3381a5aded8fb59f",
+  "remote_ref_verified": true,
+  "document_path": "docs/step08/BASELINE_AUDIT_KO.md",
+  "document_bytes": 4651,
+  "document_sha256": "55e6d9b70f12f32444758567f86039ba4b3d04b479a1c3b54b46efeebff79c81",
+  "document_git_blob_sha": "115e93fecb62f31fc6d02f0b3499a9231d190a93",
+  "document_read_back_from_snapshot_and_immutable_commit_equal": true,
+  "game_code_unchanged": true,
+  "dist_unchanged": true,
+  "public_pages_unchanged": true,
+  "real_playtest_performed": false,
+  "new_images_generated": 0,
+  "prior_backup_branches_preserved": true
+}
