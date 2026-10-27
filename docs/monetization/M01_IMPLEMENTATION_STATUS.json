@@ -4,8 +4,8 @@
   "date_kst": "2026-10-27",
   "current_major_step": "M01",
   "current_part": 2,
-  "current_progress": 40,
-  "result": "draft-only catalog, JSON schema, static checkout guard and CI catalog tests passed",
+  "current_progress": 50,
+  "result": "M01 QA-only transaction state machine and strict receipt/grant/refund order, duplicate webhook replay tests passing",
   "revenue_priority": "P0 before further STEP09 and subsequent gameplay design",
   "previous_legacy_step": "STEP09",
   "previous_legacy_30_percent_saved": true,
@@ -44,17 +44,20 @@
     "monetization/catalog/draft_catalog.schema.json",
     "monetization/catalog/catalog_guard.cjs",
     "tests/monetization_catalog_m01.test.cjs",
-    ".github/workflows/verify-m01-monetization.yml"
+    ".github/workflows/verify-m01-monetization.yml",
+    "monetization/contracts/transaction_fsm.cjs",
+    "tests/monetization_transaction_m01.test.cjs"
   ],
   "backup_branches": [
     "backup/monetization-m01-010-20261027",
     "backup/monetization-m01-020-20261027",
     "backup/monetization-m01-030-20261027",
-    "backup/monetization-m01-040-20261027"
+    "backup/monetization-m01-040-20261027",
+    "backup/monetization-m01-050-20261027"
   ],
   "next_part": 2,
-  "next_progress": 50,
-  "next_task": "pure transaction state machine with server-only trusted receipt transitions",
+  "next_progress": 60,
+  "next_task": "server API request/response contract, account ownership, unique provider transaction and refund ledger model",
   "new_image_rendering_next_part": false,
   "next_major_step_after_m01": "M02 economy and SKU quantitative balancing",
   "provider_approval_requires_user_action": true,
@@ -63,5 +66,10 @@
   "catalog_ci_result": "success",
   "product_prices_registered": false,
   "client_checkout_enabled": false,
-  "game_code_changed": false
+  "game_code_changed": false,
+  "transaction_ci_run": 40481801295,
+  "transaction_ci_result": "success",
+  "fsm_qa_only": true,
+  "real_provider_verification_implemented": false,
+  "backend_ledger_connected": false
 }
