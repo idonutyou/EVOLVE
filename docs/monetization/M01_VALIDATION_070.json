@@ -1,0 +1,78 @@
+{
+  "schema": "EVOLVE_MON_M01_PART2_VALIDATION_V1",
+  "date_kst": "2026-10-27",
+  "monetization_step": "M01",
+  "part": "2/3",
+  "checkpoint": 70,
+  "public_game_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "live_game_code_modified": false,
+  "dist_modified": false,
+  "pages_deployed": false,
+  "new_images_generated": 0,
+  "working_branch": "monetization-m01-contracts-20261027",
+  "ci_runs": [
+    {
+      "percent": 40,
+      "run": 40481177611,
+      "conclusion": "success",
+      "checks": "five draft-disabled SKUs, price-null catalog and safe checkout gate"
+    },
+    {
+      "percent": 50,
+      "run": 40481801295,
+      "conclusion": "success",
+      "checks": "QA-only purchase state machine and webhook ordering/replay/refund (corrected test harness from failed attempt 40481682963)"
+    },
+    {
+      "percent": 60,
+      "run": 40482396863,
+      "conclusion": "success",
+      "checks": "account-isolated test ledger with price-independent fixture, refund/debt, restore and OpenAPI contract"
+    },
+    {
+      "percent": 70,
+      "run": 40482685586,
+      "conclusion": "success",
+      "checks": "45 of 45 Node tests across catalog, FSM, ledger/API, customer funnel; full V614 source reversal verified"
+    }
+  ],
+  "latest_test_count": 45,
+  "latest_test_passes": 45,
+  "latest_test_failures": 0,
+  "catalog_skus": 5,
+  "all_checkout_disabled": true,
+  "prices_finalized": false,
+  "subscription_active": false,
+  "validation_claims": [
+    "Published V614 game byte-identical because only monetization/, tests/monetization*.test.cjs and isolated workflow and docs status files changed",
+    "Test catalog refuses client activation and prices; browser-only localDNA cannot mint premium products",
+    "Pure payment state transition QA model rejects invalid order and duplicate/forged state jumps",
+    "QA-only in-memory ledger rejects reused provider transaction and client amount, isolates users and simulates refund/debt/entitlement restore",
+    "OpenAPI lists 6 documentation-only future endpoints, .invalid host and 503 until server launch",
+    "Simulated full funnel covers cancel, fake callback, receipt→grant, duplicate, refund and restore"
+  ],
+  "not_claimed": [
+    "No real checkout integration, merchant onboarding, verified production receipt, live API service, authenticated user login, actual DB transactions or real account deletion flow",
+    "No real money received, purchases, ads or subscriptions",
+    "QA origin strings can be forged if used in a browser; test fixture is NOT an actual security authority",
+    "In-memory idempotency is NOT concurrency-safe after process restarts or multiple servers; M03 requires unique indexes and DB transaction semantics",
+    "No registered KRW price or crystal quantity, no actual receipt/provider reconciliation; M02/M03/M04 must resolve"
+  ],
+  "hard_disabled": {
+    "checkout": true,
+    "web_ad_reward_claim": true,
+    "premium_currency_mint": true,
+    "production_provider": true
+  },
+  "remaining_provider_tasks": [
+    "Select web payments merchant/platform and verify contract availability in Korea",
+    "Create backend hosting/DB and authorized user accounts",
+    "Store secrets outside GitHub/Pages and verify signed webhooks or query provider server API",
+    "Idempotent atomic grant, refund and purchase restoration",
+    "Legal disclosures: privacy, terms, tax and customer support",
+    "Ad network onboarding and approved rewarded SSV before advertising revenue"
+  ],
+  "next_part": "M01 3/3 80–100%; verify failure mode and code isolation, merge tests/docs only, lock specification, then M02 quantitative game economy",
+  "backup_ref_after_status": "backup/monetization-m01-070-20261027"
+}

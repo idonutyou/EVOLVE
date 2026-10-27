@@ -1,0 +1,17 @@
+{
+  "milestone": "M01",
+  "progress": 50,
+  "checkpoint_type": "FULL Git repository immutable tree pinned via recovery branch, not ZIP",
+  "branch": "backup/monetization-m01-050-20261027",
+  "commit": "0371318ae7e19585eb9fa4ba133f0f506cbad1a2",
+  "remote_ref_verified": true,
+  "file_readback_path": "monetization/contracts/transaction_fsm.cjs",
+  "file_git_blob_sha": "442174d5203f2b4a754a1fe60f2265220fe51d05",
+  "file_bytes": 4663,
+  "file_sha256": "6ce7d31951d5b6a37a75f742e3f2657842536ca3ee3ed04324770da132430f67",
+  "readback_content_equal_between_backup_branch_and_commit": true,
+  "successful_CI_run": 40481801295,
+  "actual_revenue_received": false,
+  "actual_checkout_enabled": false,
+  "prior_checkpoints_preserved": true
+}
