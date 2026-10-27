@@ -9,8 +9,16 @@
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
 | M03 계정/서버 권한 원장 | **100% (개발용 프로토타입/통합 완료)** | `docs/monetization/M03_100_FINAL_REPORT_KO.md`, PR #7 | 완료; 실제 라이브 과금/운영 서버 미구현 |
-| M04 실제 결제 검증 | **30% (STEP 1/3 설계 완료)** | M04 작업 브랜치 `docs/monetization/M04_030_DESIGN_HANDOFF_KO.md` | **STEP 2/3 · 40~70% 구현** |
-| M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점·광고·반복 수집·출시 게이트 |
+| M04 인게임 과금 콘텐츠·모의 구매 | **30% (사용자 지시에 맞춰 설계 교정)** | `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` (M04 작업 브랜치) | **STEP 2/3 · 40% 모의 구매/보상 실구현** |
+| M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점 UX·프리미엄 콘텐츠·반복 가치 → 게임 완성 후 Play/App Store 실결제 연결 |
+
+## 최신 개발 목표 변경 — 실제 결제 연동은 마지막 (2026-10-27)
+- 사용자 최종 출시 계획: **Google Play와 Apple App Store 앱**, 현재 웹은 개발/테스트용.
+- 당장 실제 결제 연동이 아니라 **실제로 판매할 콘텐츠·상점·모의 구매 기능을 먼저 만든다**. 실제 스토어 SDK/PG/백엔드 실판매 활성화는 게임 완성 직전 M08에서 처리.
+- 이전 M04 10~30% PG 조사 완료 문서는 이력 보존. **M04 30% 교정 설계**: `monetization-m04-payment-20261027`의 `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` 및 `monetization/m04/mock-premium-shop.design.json`.
+- 교정 작업 체크포인트 `backup/m04-030-mock-first-20261027` @ `53bd7ce554cf07ef7137f05a55c51b76a18d7d0f`, 원격 2회 검증. 현재 판매 플래그 false, 카탈로그 5개 판매 금지.
+- 다음 `고` → **M04 STEP 2/3 · 40%**, 신규 테스트 전용 저장 네임스페이스에서 모의 구매·상품 보상 게임 연계부터. 실결제 구현 금지, 이전 단계를 되풀이하지 않는다.
+- 이번 방향 전환의 이미지 렌더링 **불필요**. 외형용 신규 이미지 제작 시 시작 전에 안내.
 
 ## M04 최신 검증 체크포인트 — 30% (STEP 1/3 완료)
 - **현재 브랜치:** `monetization-m04-payment-20261027` @ `5af53769bcaa30e1ba4d86e19e62226511fc58d5` (M04 6개 파일 신규; main에는 미병합).
