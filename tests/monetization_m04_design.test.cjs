@@ -65,7 +65,9 @@ test('native release shell and products are not implemented at 30%',()=>{
 
 const mock=JSON.parse(readFileSync(join(root,'monetization/m04/mock-premium-shop.design.json'),'utf8'));
 test('M04 mock premium purchases are design-only and do not charge money',()=>{
- assert.equal(mock.status,'DESIGN_ONLY_NOT_CONNECTED_TO_GAME');
+ assert.equal(mock.status,'DEV_MOCK_ENGINE_IMPLEMENTED_NOT_WIRED_TO_GAME_UI');
+ assert.equal(mock.runtime_loaded_in_published_game,false);
+ assert.equal(mock.runtime_ui_connected,false);
  assert.equal(mock.dev_mode,'MOCK_ONLY');
  assert.equal(mock.live_billing,'DEFERRED_TO_M08');
  assert.equal(mock.actual_payment_methods_allowed,false);
