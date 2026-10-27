@@ -204,5 +204,11 @@
       "apple_app_store": "UNDECIDED_PENDING_SEASON_POLICY"
     }
   },
-  "note_ko": "2026-10-27 사용자 확정: Google Play / Apple App Store 최종 출시, 웹은 개발용만. 이전 웹 PG 우선 가정은 폐기."
+  "note_ko": "2026-10-27 사용자 확정: Google Play / Apple App Store 최종 출시, 웹은 개발용만. 이전 웹 PG 우선 가정은 폐기.",
+  "current_priority": "MOCK_PREMIUM_CONTENT_FIRST",
+  "live_billing_integration_stage": "M08_FINAL_RELEASE_ONLY",
+  "store_sdk_development_deferred": true,
+  "dev_mock_purchase_mode": "ISOLATED_GAME_TEST_ONLY",
+  "dev_mock_purchase_artifact": "monetization/m04/mock-premium-shop.design.json",
+  "docs_authoritative": "docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md"
 }
