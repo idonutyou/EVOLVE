@@ -1,0 +1,73 @@
+{
+  "schema_version": "m01.v1",
+  "environment": "DRAFT_ONLY",
+  "display_currency": "KRW",
+  "price_source": "VERIFIED_PROVIDER_CATALOG_ONLY",
+  "checkout_enabled": false,
+  "client_grants_enabled": false,
+  "merchant_connected": false,
+  "backend_ledger_connected": false,
+  "note_ko": "M01 상품 후보/계약 전용. 고객에게 판매하거나 재화를 지급할 수 없음. 가격과 수량은 M02 확정 전 공란.",
+  "products": [
+    {
+      "sku": "starter_genome_once",
+      "category": "starter",
+      "purchase_type": "account_once",
+      "status": "draft_disabled",
+      "price_minor": null,
+      "premium_crystal_units": null,
+      "entitlement_id": null,
+      "repeat_limit": 1,
+      "title_ko": "첫 변이 지원 패키지",
+      "content_state": "not_finalized"
+    },
+    {
+      "sku": "mutation_crystal_small",
+      "category": "currency_pack",
+      "purchase_type": "consumable",
+      "status": "draft_disabled",
+      "price_minor": null,
+      "premium_crystal_units": null,
+      "entitlement_id": null,
+      "repeat_limit": null,
+      "title_ko": "변이 결정 소형 묶음",
+      "content_state": "not_finalized"
+    },
+    {
+      "sku": "mutation_crystal_mid",
+      "category": "currency_pack",
+      "purchase_type": "consumable",
+      "status": "draft_disabled",
+      "price_minor": null,
+      "premium_crystal_units": null,
+      "entitlement_id": null,
+      "repeat_limit": null,
+      "title_ko": "변이 결정 중형 묶음",
+      "content_state": "not_finalized"
+    },
+    {
+      "sku": "appearance_unlock_01",
+      "category": "cosmetic",
+      "purchase_type": "non_consumable",
+      "status": "draft_disabled",
+      "price_minor": null,
+      "premium_crystal_units": null,
+      "entitlement_id": null,
+      "repeat_limit": 1,
+      "title_ko": "진화 코어 외형 테마",
+      "content_state": "not_finalized"
+    },
+    {
+      "sku": "season_research_pass_01",
+      "category": "season_pass",
+      "purchase_type": "seasonal_non_consumable",
+      "status": "draft_disabled",
+      "price_minor": null,
+      "premium_crystal_units": null,
+      "entitlement_id": null,
+      "repeat_limit": 1,
+      "title_ko": "연구 시즌 패스 (조건부 후보)",
+      "content_state": "not_finalized"
+    }
+  ]
+}
