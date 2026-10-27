@@ -61,7 +61,8 @@ test('M01 refunds must match already credited simulated provider transaction',()
  assert.throws(()=>next(t,ev('SERVER_REFUND_CONFIRMED','other',{origin:'QA_SIMULATED_REFUND_VERIFIER',providerTransactionId:'qa_other_tx'})));
  t=next(t,refund());assert.equal(t.status,'REFUNDED');assert.equal(t.refunded,true);
  assert.equal(t.credited,true); // history, NOT permission to keep real entitlement
- assert.throws(()=>next(t,checkout()));
+ assert.equal(transitionTestOrder(t,checkout()).duplicate,true); // old event replay is idempotent
+ assert.throws(()=>next(t,ev('SERVER_CHECKOUT_CREATED','checkoutAgain',{origin:'QA_SIMULATED_PROVIDER'})));
  assert.equal(transitionTestOrder(t,refund()).duplicate,true);
 });
 test('M01 live orders or invalid actor IDs are always rejected',()=>{
