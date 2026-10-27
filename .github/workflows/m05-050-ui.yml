@@ -1,11 +1,6 @@
 name: M05 50 percent owner/equip mobile UX integration
 on:
-  push:
-    branches: [monetization-m05-ux-20261028]
-    paths:
-      - '.github/workflows/m05-050-ui.yml'
-      - 'web/m05-shop-ui-v618.js'
-      - 'tests/monetization_m05_050_browser.cjs'
+  workflow_dispatch:
 permissions:
   contents: write
 jobs:
