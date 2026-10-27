@@ -25,7 +25,7 @@
  });
  const bad=(code)=>{const e=new Error(code);e.code=code;throw e;};
  const copy=x=>JSON.parse(JSON.stringify(x));
- const safeId=(v,max=72)=>typeof v==='string'&&!['__proto__','constructor','prototype'].includes(v)&&new RegExp('^[A-Za-z0-9_-]{3,'+max+'}
+ const safeId=(v,max=72)=>typeof v==='string'&&v.length>=3&&v.length<=max&&/^[A-Za-z0-9_-]+$/.test(v)&&!['__proto__','constructor','prototype'].includes(v);
  const fresh=()=>({schema:VERSION,profiles:{}});
  function validate(state){
   if(!state||state.schema!==VERSION||typeof state.profiles!=='object'||state.profiles===null||Array.isArray(state.profiles))bad('INVALID_MOCK_STORAGE');
