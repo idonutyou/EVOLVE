@@ -76,3 +76,49 @@ test('rejects invalid stage, negative balances and invalid event input', () => {
   assert.throws(() => oneKillReward({kind:'unknown',killIndex:1}), RangeError);
   assert.throws(() => evaluateRun({stage:1,won:true,chests:NaN}), RangeError);
 });
+
+const {simulatePlayer,packComparisons,hypotheticalCash} = require('../monetization/economy/scenario-model.cjs');
+
+test('seven-day hypothetical examples match the independently calculated design table', () => {
+  const short=simulatePlayer({days:7,minutesPerDay:20});
+  const long=simulatePlayer({days:7,minutesPerDay:60});
+  const d1=short.daily[0],d3=short.daily[2],d7=short.daily[6],l7=long.daily[6];
+  assert.deepEqual([d1.runs,d1.clears,d1.totalDna,d1.spentDna,d1.dna,d1.researchRanks],[3,2,331,310,21,9]);
+  assert.deepEqual([d3.runs,d3.clears,d3.totalDna,d3.spentDna,d3.dna,d3.researchRanks],[9,6,1184,1140,44,19]);
+  assert.deepEqual([d7.runs,d7.clears,d7.totalDna,d7.spentDna,d7.dna,d7.researchRanks],[21,14,3139,2590,549,28]);
+  assert.deepEqual([l7.runs,l7.clears,l7.totalDna,l7.spentDna,l7.dna,l7.researchRanks],[63,42,11675,2590,9085,28]);
+});
+
+test('a trial cosmetic purchase changes cosmetic access, not DNA or research', () => {
+  const free=simulatePlayer({days:7,minutesPerDay:20});
+  const paid=simulatePlayer({days:7,minutesPerDay:20,starterPurchase:true});
+  const a=free.daily[6],b=paid.daily[6];
+  assert.deepEqual([a.totalDna,a.dna,a.researchRanks,a.clears],[b.totalDna,b.dna,b.researchRanks,b.clears]);
+  assert.equal(a.boughtThemeDay,null); assert.equal(b.boughtThemeDay,1);
+  assert.equal(b.freeCrystals,45); assert.equal(b.paidCrystals,0); assert.equal(paid.paidGrossKRW,2200);
+});
+
+test('the free crystal route reaches the 150-crystal theme on day 24 under full completion', () => {
+  const r=simulatePlayer({days:24,minutesPerDay:0});
+  assert.equal(r.daily[22].boughtThemeDay,null);
+  assert.equal(r.daily[23].boughtThemeDay,24);
+  assert.equal(r.daily[23].freeCrystals,0);
+});
+
+test('package pricing and hypothetical processing/refund assumptions are explicit', () => {
+  const p=packComparisons();
+  assert.equal(p.smallPerCrystal,16.5); assert.ok(Math.abs(p.midExtraVersusEqualPriceSmall-.125)<1e-10);
+  const noRefund=hypotheticalCash({sku:'starter_genome_once',count:1});
+  assert.ok(Math.abs(noRefund.remainingBeforeOtherCosts-1917.72)<1e-7);
+  const feeRetained=hypotheticalCash({sku:'starter_genome_once',count:2,refunds:1,feesOnRefundedOrders:true});
+  const feeReversed=hypotheticalCash({sku:'starter_genome_once',count:2,refunds:1,feesOnRefundedOrders:false});
+  assert.ok(feeReversed.remainingBeforeOtherCosts>feeRetained.remainingBeforeOtherCosts);
+  assert.equal(feeRetained.notOperatingProfit,true);
+});
+
+test('rejects invalid or excessive simulation and sale assumptions', () => {
+  assert.throws(()=>simulatePlayer({days:0}),RangeError);
+  assert.throws(()=>simulatePlayer({days:2,wins:[]}),TypeError);
+  assert.throws(()=>hypotheticalCash({sku:'missing',count:1}),RangeError);
+  assert.throws(()=>hypotheticalCash({sku:'starter_genome_once',count:1,refunds:2}),RangeError);
+});
