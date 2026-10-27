@@ -6,6 +6,18 @@
 
 > 이 파일은 **재개 위치를 찾아가기 위한 안내서**이지 자동 최신화된 실행 로그가 아니다. 새 세션은 반드시 GitHub 브랜치, 커밋, 실제 소스, 최근 QA/체크포인트를 다시 조회해 기록의 최신성을 확인한다.
 
+## 최신 재개 — M04 50% 개발용 홈 모의 구매 UI 구현 검증 완료 (2026-10-27)
+
+- **현재 정확한 완료 지점:** M04 STEP 2/3 **50%**. 기존 40% 모의 구매 엔진을 실제 V614 메인 홈 UI에 연결하고 GitHub Actions에서 모바일 브라우저 393×852 실제 게임 쉘 시험 성공. **아직 공개 `main`/GitHub Pages에는 이 기능 미병합·미배포**.
+- 작업 브랜치 `monetization-m04-payment-20261027` HEAD `4af248bd7d2b655afa77299e9c8afb2743d88278`. **50% 원격 백업** `backup/monetization-m04-050-20261027` @ 동일 SHA, ref+주요 파일/blob SHA를 **독립 2회 검증**. 과거 10~40% 및 모든 M01–M03 백업 유지.
+- `web/mock-premium-ui-v616.js` + `web/mock-premium-v615.js`를 SHA256 명명 새 `dist/assets/` 파일 두 개로 복사·검증하고 `dist/index.html`의 홈에 **'◈ DEV 상점'** 진입 UI 연결. 기존 `#homeTabs` 5개 불변, 코어 실이미지/전투/원래 사용자 세이브 키 불변.
+- **오직 `?evolveMockShop=1` 개발용 URL 플래그** 및 허용 호스트에서만 모의 상점 버튼 표시; 플래그 없으면 게임 화면과 일반 사용 흐름 영향 최소화. 테스트 결정 +100/+300, 1회 스타터 +75, 코어 소유/모의 장착, 시즌 패스 미완성 구매 차단. 모의 저장 `EVOLVE_DEV_MOCK_STORE_V1` 별도; 실제 과금·플랫폼 결제·유료 원장·실판매 없음.
+- `dist/asset-manifest.json` 1067→1069 및 해당 검증 메타데이터 `dist/version.json`/`dist/verification.json`을 **개발 브랜치에서만** 갱신. 기존 이미지 바이트·원본 엔진 asset SHA 그대로.
+- 검증: https://github.com/idonutyou/EVOLVE/actions/runs/40520829120 **success**. `tools/verify_site.py` 게임/이미지 검증 통과, Node 22 **26/26 통과**, 실제 V614 홈 Chromium 모바일 393×852 모의 구매→테스트 결정 400·코어 장착→재로드 복원·세이브 주요 필드 유지·탭 5개 유지·모의 URL 없으면 상점 없음. 스크린샷 GitHub Actions 아티팩트 ID `12741811864`. 물리 Galaxy S23+ 테스트는 하지 않음. 후속 계약 상태 변경 Node 26/26 실행도 https://github.com/idonutyou/EVOLVE/actions/runs/40521226187 에서 통과.
+- 상세 `docs/monetization/M04_050_HOME_MOCK_UI_KO.md` (M04 작업 브랜치).
+- **다음 사용자 `고` → M04 STEP 2/3 60%**: 상품의 게임 내 실질 가치·기존 파츠/코어 장착 경계 확인, 실제 외형이 필요한 콘텐츠/설계 확정·UI 검증. **이미지 렌더링: 60%의 실제 신규 코어/신체 외형 제작을 포함하면 필요하므로 작업 착수 전 사용자에게 사전 안내.** 기존 아트 수정·재생성 금지. 70% 저장·복원/취소·성능 및 메인 통합, 80~100% 공개 배포와 최종 검증.
+- 최종 출시는 Google Play/App Store. 실제 Billing/StoreKit 연동은 게임 완성 후 M08. 사용자가 요구한 **과금할 만한 콘텐츠 우선**, 실제 결제는 후순위 원칙 유지.
+
 ## 2026-10-27 최신 M04 40% 원격 재개 — 모의 구매 엔진 검증 완료
 - **M04 STEP 2/3 진행률 40% (모의 구매 로직만 완료)**. M04 개발 브랜치 `monetization-m04-payment-20261027` HEAD `0807072c06e3ae8663b3b7726334e8948b194626`. main 공개 게임 파일은 아직 바꾸지 않았다.
 - 40% 원격 복구 `backup/monetization-m04-040-verified-20261027` @ `0807072c06e3ae8663b3b7726334e8948b194626` — 원격 ref 및 핵심 파일·blob SHA 2회 검증. 원래 40% 초기 복구 `backup/monetization-m04-040-20261027`도 보존.
