@@ -14,7 +14,7 @@ test('M05 starts as design-only at 10% with unchanged published M04 baseline',()
  assert.equal(d.status,'DESIGN_ONLY_NOT_IN_GAME');assert.equal(d.release.current_design_not_deployed,true);
  assert.equal(d.baseline.source_commit,'fbe3224a3bdd95020829228427ddc3b05ed41f9e');
  const active=JSON.parse(read('dist/version.json'));
- assert.ok(active.build===d.baseline.published_build||(['-M05-UX40','-M05-UX50'].some(s=>active.version.endsWith(s))&&[1079,1080].includes(active.assets)&&active.build===JSON.parse(read('dist/verification.json')).build),'Only original M04 or reviewed M05 development build is allowed');
+ assert.ok(active.build===d.baseline.published_build||(['-M05-UX40','-M05-UX50','-M05-UX60','-M05-UX70'].some(s=>active.version.endsWith(s))&&[1079,1080,1081,1082].includes(active.assets)&&active.build===JSON.parse(read('dist/verification.json')).build),'Only original M04 or reviewed M05 development build is allowed');
 });
 test('five existing home navigation tabs remain the only main tabs',()=>{
  assert.deepEqual(d.preservation.existing_five_home_tabs,expectedTabs);
