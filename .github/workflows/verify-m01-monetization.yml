@@ -1,5 +1,6 @@
 name: M01 secure product and transaction contract tests
-# Milestone 60 verifies catalog, refund/debt mock ledger and API-only contract.
+# Milestone 70 checks draft SKU + QA FSM + simulated account ledger + full simulated customer funnel.
+# No live provider calls, no Pages deploy and no source asset changes.
 on:
   push:
     branches: [monetization-m01-contracts-20261027]
