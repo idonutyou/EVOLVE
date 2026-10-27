@@ -1,0 +1,49 @@
+name: V620 verify native SHOP on ACTUAL public Pages URL
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/native-shop-live-v620.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-native-shop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify original game binary, images and no DEV modal or real billing
+        run: |
+          python3 tools/verify_native_shop_v620.py
+          python3 tools/verify_site.py --dist dist
+          python3 tools/verify_monster_feedback_v614.py
+          python3 tools/verify_m04_predeploy_gate.py
+      - name: Prepare Chrome for REAL publicly hosted PWA
+        run: |
+          npm install --prefix "$RUNNER_TEMP/native-shop-live" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/native-shop-live/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/native-shop-live/node_modules" >> "$GITHUB_ENV"
+      - name: Exercise public SHOP without DEV URL on 3 mobile layouts
+        timeout-minutes: 14
+        env:
+          EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+        run: |
+          node tests/native_shop_v620_browser.cjs
+      - name: Upload actual public mobile shop screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-shop-v620-public-live
+          path: test-results/native-shop-v620-*.png
+          if-no-files-found: ignore
