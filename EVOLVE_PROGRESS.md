@@ -1,3 +1,16 @@
+# 최신 EVOLVE M05 STEP 2/3 · 70% 완료 (2026-10-28 KST)
+
+- **M05 70%**: 개발용 모의 상점의 모바일 가로 화면·포커스·스크롤·뒤로가기/12회 반복 동작을 실제 Chrome에서 최종 검사하고 STEP 2/3 UI 구간 종료.
+- UI `web/m05-shop-ui-v618.js` 및 `tools/build_m05_070.py`; 브라우저 `tests/monetization_m05_070_browser.cjs`; 보고 `docs/monetization/M05_070_RESPONSIVE_QA_KO.md`.
+- **320×568 / 393×852 / 852×393**: 모달 내부 스크롤, 상점/컬렉션 복귀, Tab/Shift+Tab/Escape, 44px 주요 버튼, 12회 열고 닫기, 게임 세이브 보존 성공.
+- 이전 50% 구매·장착, 60% 저장 손상·연속 확인 모바일 회귀도 성공. CI https://github.com/idonutyou/EVOLVE/actions/runs/40568940812 **success**. 설계/모의 결제 회귀 별도 62/62 검증 체크포인트에 포함.
+- 빌드 `a687afb0418f55d1e91ab1e9f1374f153d00b54fe6c2133a99096f15145663b0`, 리소스 1,082개, 원본 이미지 1,021개 무변경. 실제 Android 물리 폰 테스트는 아직 아님.
+- `main` 공개 게임 M04 SHA `fbe3224a3bdd95020829228427ddc3b05ed41f9e` 유지, 실결제 disabled, 기존 데이터 보전.
+- **70% 복구:** `backup/monetization-m05-070-20261028`, `checkpoints/EVOLVE_M05_070_20261028.zip`/JSON (SHA/CRC/원격 재확인 후 유효). 10~60% 이전 백업 전부 보존.
+- **다음 `고`: M05 80%, STEP 3/3** 배포 전 게임/세이브/전투·코어·상점 통합 회귀 및 합병 준비. **이미지 렌더링 불필요**.
+
+---
+
 # 최신 EVOLVE M05 STEP 2/3 · 60% 완료 (2026-10-28 KST)
 
 - **M05 60%: 모의 저장 오류·구매 확인창 닫기 경합·중복 탭 차단을 실제 개발 웹 UI에 구현, 모바일 QA 성공**. 이 수치는 M05 단계별 진행률임.
