@@ -27,7 +27,7 @@ test('GET bootstrap never creates account even with valid token',async()=>{
 });
 test('wallet HTTP response matches contract version and timestamp',async()=>{
  const expected={freeCrystals:10,paidCrystals:12,totalCrystals:22,currency:'mutation_crystal',version:3,updatedAt:'2026-10-27T12:00:00.000Z'};
- await withApi({getOrCreateAccount:async()=>({id:'server-account-123',status:'active'}),readWallet:async id=>{assert.equal(id,'server-account-123');return expected}},async url=>{
+ await withApi({getAccount:async()=>({id:'server-account-123',status:'active'}),readWallet:async id=>{assert.equal(id,'server-account-123');return expected}},async url=>{
   const r=await fetch(url+'/v1/me/wallet',{headers:{Authorization:token}});
   assert.equal(r.status,200);assert.deepEqual(await r.json(),expected);
  });
