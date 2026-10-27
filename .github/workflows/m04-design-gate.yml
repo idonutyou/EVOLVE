@@ -1,0 +1,21 @@
+name: M04 design-only billing gate
+on:
+  push:
+    branches: [monetization-m04-payment-20261027]
+    paths:
+      - 'monetization/m04/**'
+      - 'tests/monetization_m04_design.test.cjs'
+      - '.github/workflows/m04-design-gate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Assert checkout is disabled in both M01 and M04
+        run: node --test tests/monetization_m04_design.test.cjs
