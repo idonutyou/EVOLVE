@@ -16,7 +16,8 @@
 - 사용자 최종 출시 계획: **Google Play와 Apple App Store 앱**, 현재 웹은 개발/테스트용.
 - 당장 실제 결제 연동이 아니라 **실제로 판매할 콘텐츠·상점·모의 구매 기능을 먼저 만든다**. 실제 스토어 SDK/PG/백엔드 실판매 활성화는 게임 완성 직전 M08에서 처리.
 - 이전 M04 10~30% PG 조사 완료 문서는 이력 보존. **M04 30% 교정 설계**: `monetization-m04-payment-20261027`의 `docs/monetization/M04_MOCK_FIRST_PRIORITY_PIVOT_KO.md` 및 `monetization/m04/mock-premium-shop.design.json`.
-- 교정 작업 체크포인트 `backup/m04-030-mock-first-20261027` @ `53bd7ce554cf07ef7137f05a55c51b76a18d7d0f`, 원격 2회 검증. 현재 판매 플래그 false, 카탈로그 5개 판매 금지.
+- 최신 교정 복구 `backup/m04-030-mock-first-verified-20261027` @ `5a339a70a33e43d2de66eff9f690ec2d2c8dadb2`, 원격 2회 검증. 이전 `backup/m04-030-mock-first-20261027` 보존.
+- Node 22 CI **12/12 통과**: https://github.com/idonutyou/EVOLVE/actions/runs/40514171284 . **모의 결제 설계 계약 테스트**이며 인게임 상점 실구현·실결제 테스트가 아니다. 현재 판매 플래그 false, 카탈로그 5개 판매 금지.
 - 다음 `고` → **M04 STEP 2/3 · 40%**, 신규 테스트 전용 저장 네임스페이스에서 모의 구매·상품 보상 게임 연계부터. 실결제 구현 금지, 이전 단계를 되풀이하지 않는다.
 - 이번 방향 전환의 이미지 렌더링 **불필요**. 외형용 신규 이미지 제작 시 시작 전에 안내.
 
