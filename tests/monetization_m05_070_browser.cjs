@@ -58,8 +58,10 @@ const server=http.createServer((req,res)=>{
    await p.locator('#m05NavigationV618 button[data-m05-section="collection"]').click();
    assert.equal(await p.locator('#m04MockModalV616').getAttribute('data-m05-mode'),'collection');
    await p.evaluate(()=>document.querySelector('.m04MockPanel').scrollTop=80);
+   const getTheme=p.locator('.m05GetTheme');
+   await getTheme.scrollIntoViewIfNeeded();
    const originalCollectionY=await p.evaluate(()=>document.querySelector('.m04MockPanel').scrollTop);
-   await p.locator('.m05GetTheme').click();
+   await getTheme.click();
    assert.equal(await p.locator('#m04MockModalV616').getAttribute('data-m05-mode'),'detail');
    assert.equal(await p.evaluate(()=>window.__EVOLVE_DEV_M05_UI_V618__.detailOrigin()),'collection');
    await p.keyboard.press('Escape');
