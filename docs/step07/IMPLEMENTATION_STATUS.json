@@ -1,8 +1,8 @@
 {
   "step": 7,
-  "substep": 1,
-  "overall_step_progress": 30,
-  "status": "design_complete_implementation_not_started",
+  "substep": 2,
+  "overall_step_progress": 40,
+  "status": "visual_model_and_isolated_unit_tests_written; engine integration pending",
   "game_public_version": "V575-STEP06-ORGAN-HITS-V613",
   "game_public_build": "054829b5e936f04e306a4ec40269e6cc811dda47a352f3bf2a810420559154bf",
   "baseline_main_commit": "82ccefffaf801be3e560310493eae86003c82d93",
@@ -16,9 +16,10 @@
   "snapshot_branches": [
     "backup/step07-010-20261027",
     "backup/step07-020-20261027",
-    "backup/step07-030-20261027"
+    "backup/step07-030-20261027",
+    "backup/step07-040-20261027"
   ],
-  "code_modified": false,
+  "code_modified": true,
   "images_modified": false,
   "public_deployment_modified": false,
   "automation_tests_run": false,
@@ -26,6 +27,10 @@
   "physical_Galaxy_S23_plus_tested": false,
   "prior_backups_preserved": true,
   "next_substep": 2,
-  "next_progress": 40,
-  "after_step07": "STEP 08 타격감 첫 플레이 검증; 신규 이미지 렌더링 기본 불필요"
+  "next_progress": 50,
+  "after_step07": "STEP 08 타격감 첫 플레이 검증; 신규 이미지 렌더링 기본 불필요",
+  "code_paths": [
+    "web/monster-feedback-v614.js",
+    "tests/monster_feedback_v614.test.cjs"
+  ]
 }
