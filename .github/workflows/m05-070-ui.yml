@@ -4,6 +4,7 @@ on:
     branches: [monetization-m05-ux-20261028]
     paths:
       - '.github/workflows/m05-070-ui.yml'
+      - 'tests/monetization_m05_070_browser.cjs'
 permissions:
   contents: write
 jobs:
