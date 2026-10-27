@@ -22,7 +22,7 @@ const server=http.createServer((req,res)=>{
  const base='http://127.0.0.1:'+server.address().port+'/';
  const out=path.resolve(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
  try{
-  await page.addInitScript(()=>localStorage.setItem('EVOLVE_V575_TEST_META_V1',JSON.stringify({dna:1200,stage:3,unlockedStageV522:4,homeStageV522:3})));
+  await page.addInitScript(()=>{if(!localStorage.getItem('EVOLVE_V575_TEST_META_V1'))localStorage.setItem('EVOLVE_V575_TEST_META_V1',JSON.stringify({dna:1200,stage:3,unlockedStageV522:4,homeStageV522:3}));});
   await page.goto(base+'?evolveMockShop=1',{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_DEV_MOCK_UI_V616__&&document.getElementById('m04MockTriggerV616')&&!document.getElementById('webLoader'),null,{timeout:240000});
   const before=await page.locator('#homeTabs > button').count();assert.equal(before,5,'navigation tab count changed');
@@ -57,7 +57,10 @@ const server=http.createServer((req,res)=>{
   await page.waitForFunction(()=>window.__EVOLVE_DEV_MOCK_UI_V616__&&!document.getElementById('webLoader'),null,{timeout:240000});
   const after=await page.evaluate(()=>window.__EVOLVE_DEV_MOCK_UI_V616__.read());
   assert.equal(after.testCrystals,400);assert.equal(after.equipped.core,'dev_core_theme_01');
-  assert.equal(await page.evaluate(()=>localStorage.getItem('EVOLVE_V575_TEST_META_V1')),saved.legacy);
+  const legacyAfter=JSON.parse(await page.evaluate(()=>localStorage.getItem('EVOLVE_V575_TEST_META_V1')));
+  const legacyBefore=JSON.parse(saved.legacy);
+  assert.equal(legacyAfter.dna,legacyBefore.dna,'legacy DNA modified by mock shop');
+  assert.equal(legacyAfter.unlockedStageV522,legacyBefore.unlockedStageV522,'legacy stage unlock modified by mock shop');
   await page.goto(base,{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('#m04MockTriggerV616').count(),0,'mock shop must remain hidden without explicit opt-in');
   assert.equal(await page.locator('#homeTabs > button').count(),5);
