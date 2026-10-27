@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
-| M03 계정/서버 권한 원장 | **70% 실DB 검증 완료 / STEP 2/3 완료** | 작업 브랜치 `docs/monetization/M03_070_QA_HANDOFF_KO.md` | **STEP 3/3 · 80% 보안 회귀** |
+| M03 계정/서버 권한 원장 | **100% (개발용 프로토타입/통합 완료)** | `docs/monetization/M03_100_FINAL_REPORT_KO.md`, PR #7 | 완료; 실제 라이브 과금/운영 서버 미구현 |
 | M04 실제 결제 검증 | 미시작 | `docs/monetization/M03_HANDOFF_KO.md` | M03 인증·원장 이후 PG 샌드박스와 검증 |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점·광고·반복 수집·출시 게이트 |
 
@@ -37,6 +37,15 @@
 - 증빙 CI https://github.com/idonutyou/EVOLVE/actions/runs/40506471512 ; 작업 브랜치 `docs/monetization/M03_070_VERIFIED_QA_KO.md`.
 - 기존 70% QA 파일은 이전 차단 기록. 최신 검증 우선. **다음 80%부터 STEP 3/3**, 이미지 렌더링 필요 없음.
 - 기존 상품/결제 차단 유지. 운영 서버/실결제/실매출 없음. 공개 게임 파일 변경 없음.
+
+## 최신 확인 — M03 100% 내부 개발 트랙 종료
+- PR #7에서 계정/원장 개발용 코드 31개 파일 main 병합. **실결제·운영 서비스 출시 아님**.
+- 완료 커밋 및 100% 백업 `backup/monetization-m03-100-20261027` @ `3d418b5e92d0ac0ef800d5cf453b85642c69223a`; 원격 ref/주요 파일 2회 검증.
+- 80% `backup/monetization-m03-080-20261027` @ `723a4c9a42264e596c97afb3247f74d87173ecc0`, 90% `backup/monetization-m03-090-20261027` @ `2f8e97e7e92b046885727d98d7d25244ab6f7a5e`. 두 체크포인트 각각 2회 원격 검증.
+- 실제 PostgreSQL 17, Node 22 **22/22** 통과, 실 DB 원장 변경 불가·계정 구분·백업 복원 행 값 해시 일치 검증. https://github.com/idonutyou/EVOLVE/actions/runs/40508368361
+- 다음 **M04 STEP 1/3 · 10~30%**. `docs/monetization/M04_HANDOFF_KO.md` 기준 채널/PG 후보·정책/보안 검증부터 진행. 이미지 렌더링 불필요.
+- 5개 SKU 모두 `draft_disabled`, 실제 가격/결정 수량 null, 판매 비활성. M03 개발용 서버/DB는 사용자 운영 환경에 배포되지 않음.
+- 아래 예전 '70% 차단' 내용은 역사적 이력으로만 보존하며 현재 재개 기준이 아님. 기존 백업 삭제 금지.
 
 ## 새 진행률 10% 체크포인트 작성 양식
 각 10% 때 아래 항목을 실제값으로 기록:
