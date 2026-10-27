@@ -9,6 +9,8 @@ function createHandler({store,identity}){
   if(path==='/v1/catalog'&&req.method==='GET')return send(res,200,{checkoutEnabled:false,products:[]});
   if(req.method==='POST'&&path!=='/v1/accounts/bootstrap')return send(res,503,DISABLED);
   if(!['/v1/accounts/bootstrap','/v1/me/wallet','/v1/me/entitlements'].includes(path))return send(res,404,{code:'NOT_FOUND'});
+  if(path==='/v1/accounts/bootstrap'&&req.method!=='POST')return send(res,405,{code:'METHOD_NOT_ALLOWED'});
+  if(path!=='/v1/accounts/bootstrap'&&req.method!=='GET')return send(res,405,{code:'METHOD_NOT_ALLOWED'});
   let principal;try{principal=verifyIdentity(req.headers.authorization,identity)}catch{return send(res,401,{code:'UNAUTHORIZED'})}
   try{
    const account=await store.getOrCreateAccount(principal);
