@@ -1,8 +1,8 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90",
-  "build": "b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b",
-  "scriptBytes": 81253997,
-  "assets": 1083,
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620",
+  "build": "a0ae7debb02e6dda7dd38a48e7ce071e5f14d28a5c28f6d71e6444a25f272add",
+  "scriptBytes": 81108410,
+  "assets": 1072,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "preloadResources": true
 }
