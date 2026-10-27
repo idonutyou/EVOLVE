@@ -34,6 +34,10 @@ const css=document.createElement('style');css.id='m05ShopStyleV618';css.textCont
  '#m05DetailV618 button:disabled{opacity:.6}',
  '#m05DetailV618 .m05Back{background:#292b39}',
  '#m05DetailV618 .m05Disclaimer{font:600 12px/1.5 system-ui;color:#a9f4de}',
+ '#m05DetailV618 .m05Secondary{background:#27394a;border-color:#77b8cf}',
+ '#m05CollectionStatusV618{border:1px solid #536e7b;background:#142837;border-radius:8px;padding:9px 10px;color:#d9f7fa;font:700 12px/1.45 system-ui;margin:5px 0 10px}',
+ '.m05CollectionMeta{font:700 12px/1.45 system-ui;color:#b9f1ec;margin:8px 0 5px}',
+ '.m05GetTheme{width:100%;min-height:44px;border:1px solid #789bba;border-radius:8px;background:#1c3446;color:#e0f8ff;font:800 12px system-ui;margin-top:8px}',
  '#m04MockModalV616[data-m05-mode="shop"] .m04CoreGallery,#m04MockModalV616[data-m05-mode="shop"] .m04CoreSectionTitle{display:none}',
  '#m04MockModalV616[data-m05-mode="collection"] .m04MockCards{display:none}',
  '#m04MockModalV616[data-m05-mode="detail"] .m04MockCards,#m04MockModalV616[data-m05-mode="detail"] .m04CoreGallery,#m04MockModalV616[data-m05-mode="detail"] .m04CoreSectionTitle{display:none}',
@@ -49,27 +53,74 @@ function change(next){if(!m04.isOpen()||!['shop','collection'].includes(next))re
  if(mode==='collection')scrollCollection=panel.scrollTop;
  mode=next;selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=next==='shop'?scrollShop:scrollCollection});
 }
-function openDetail(sku){if(!m04.isOpen()||!skuData[sku])return;scrollShop=panel.scrollTop;selected=sku;mode='detail';render();panel.scrollTop=0;document.getElementById('m05DetailTitleV618')?.focus()}
+function openDetail(sku){if(!m04.isOpen()||!skuData[sku])return;if(mode==='shop')scrollShop=panel.scrollTop;selected=sku;mode='detail';render();panel.scrollTop=0;document.getElementById('m05DetailTitleV618')?.focus()}
 function backDetail(){mode='shop';selected=null;render();requestAnimationFrame(()=>{panel.scrollTop=scrollShop;document.querySelector('.m05DetailLink[data-m05-sku="'+lastSku+'"]')?.focus()})}
 let lastSku=null;
-function drawDetail(list,confirmOpen){if(!selected)return;const idx=api.catalog().findIndex(x=>x.sku===selected);if(idx<0)return;
- const item=api.catalog()[idx],info=skuData[item.sku],state=(()=>{try{return m04.read()}catch{return null}})();
+function drawDetail(list,confirmOpen){
+ if(!selected)return;
+ const catalog=api.catalog(),idx=catalog.findIndex(x=>x.sku===selected);
+ if(idx<0)return;
+ const item=catalog[idx],info=skuData[item.sku];
+ let state=null;try{state=m04.read()}catch{}
  const owned=!!(item.entitlement&&state?.owned?.[item.entitlement]);
- const box=make('section','');box.id='m05DetailV618';box.setAttribute('aria-label','DEV 모의 상품 상세');
- const back=make('button','m05Back','← 상품 목록');back.type='button';back.addEventListener('click',()=>{lastSku=selected;backDetail()});box.appendChild(back);
+ const equipped=!!(owned&&state?.equipped?.core===item.entitlement);
+ const repeatable=item.repeatLimit!==1&&item.ready;
+ const previouslyGranted=!!(repeatable&&Object.values(state?.receipts||{}).some(r=>r.sku===item.sku));
+ const source=list?.querySelectorAll('.m04MockCard')[idx]?.querySelector('button');
+ const box=make('section','');box.id='m05DetailV618';box.dataset.sku=item.sku;
+ box.dataset.owned=String(owned);box.dataset.equipped=String(equipped);
+ box.setAttribute('aria-label','DEV 모의 상품 상세');
+ const back=make('button','m05Back','← 상품 목록');back.type='button';
+ back.addEventListener('click',()=>{lastSku=selected;backDetail()});
+ box.appendChild(back);
  box.appendChild(make('div','m05Tag',info.group));
  const title=make('h3','',item.label);title.id='m05DetailTitleV618';title.tabIndex=-1;box.appendChild(title);
  box.appendChild(make('p','',info.details));
- box.appendChild(make('span','m05Badge',!item.ready?'준비 중':owned?'보유 중':item.repeatLimit===1?'1회 한정 · DEV 테스트':'DEV 테스트 지급'));
+ const badge=!item.ready?'준비 중':equipped?'장착 중':owned?'보유 중':repeatable?(previouslyGranted?'반복 지급 가능':'반복 획득 가능'):'미보유';
+ const status=make('span','m05Badge',badge);status.dataset.status=equipped?'equipped':owned?'owned':!item.ready?'locked':'available';
+ status.setAttribute('role','status');box.appendChild(status);
  if(state)box.appendChild(make('p','','현재 TEST 결정: '+state.testCrystals.toLocaleString('ko-KR')+'개'));
- const source=list?.querySelectorAll('.m04MockCard')[idx]?.querySelector('button');
- const action=make('button','',!item.ready?'준비 중':owned?'컬렉션에서 장착':item.repeatLimit===1?'모의 획득':'모의 획득');
- action.type='button';action.disabled=!item.ready||(!owned&&(!source||source.disabled))||!!confirmOpen;
- if(owned&&item.sku==='appearance_unlock_01'){action.disabled=!!confirmOpen;action.addEventListener('click',()=>change('collection'))}
- else if(owned){action.disabled=true;action.textContent='보유 중'}
- else action.addEventListener('click',()=>source?.click());
- box.appendChild(action);box.appendChild(make('p','m05Disclaimer','DEV MOCK ONLY · 실제 결제 없음 · 원래 게임 재화와 별개'));
+ const actionLabel=!item.ready?'준비 중':owned&&item.sku==='appearance_unlock_01'?(equipped?'해제':'장착'):owned?'보유 중':previouslyGranted?'다시 모의 획득':'모의 획득';
+ const action=make('button','',actionLabel);action.type='button';action.id='m05DetailActionV618';
+ action.disabled=!!confirmOpen||!item.ready||!state||!source||source.disabled||(owned&&item.sku!=='appearance_unlock_01');
+ action.setAttribute('aria-label',item.label+' '+actionLabel);
+ if(owned&&item.sku==='appearance_unlock_01')action.setAttribute('aria-pressed',String(equipped));
+ action.addEventListener('click',()=>{if(!action.disabled&&!panel.querySelector('#m04MockConfirmV617'))source?.click()});
+ box.appendChild(action);
+ if(owned&&item.sku==='appearance_unlock_01'){
+  const go=make('button','m05Secondary','코어 컬렉션 보기');
+  go.type='button';go.disabled=!!confirmOpen;go.addEventListener('click',()=>change('collection'));box.appendChild(go);
+ }
+ box.appendChild(make('p','m05Disclaimer','DEV MOCK ONLY · 실제 결제 없음 · 원래 게임 재화와 별개'));
  const insertBefore=list||panel.querySelector('#m04MockMessageV616');panel.insertBefore(box,insertBefore);
+}
+function decorateCollection(){
+ const gallery=panel.querySelector('.m04CoreGallery');
+ if(!gallery)return;
+ let state=null;try{state=m04.read()}catch{}
+ const cards=gallery.querySelectorAll('.m04CoreLook');
+ let count=0;
+ cards.forEach(card=>{
+  const key=card.dataset.entitlement,owned=!!state?.owned?.[key],equipped=!!(owned&&state?.equipped?.core===key);
+  if(owned)count++;
+  card.dataset.owned=String(owned);card.dataset.equipped=String(equipped);
+  const btn=card.querySelector('button');
+  if(btn){btn.setAttribute('aria-label',(key==='dev_core_theme_01'?'공명 코어':'심홍 코어')+' '+(equipped?'해제':owned?'장착':'미보유'))}
+  if(owned&&btn)btn.setAttribute('aria-pressed',String(equipped));
+  if(!card.querySelector('.m05CollectionMeta')){
+   const copy=make('p','m05CollectionMeta',equipped?'장착 중':owned?'획득 완료 · 장착 가능':'미보유 · 해금이 필요해');
+   card.appendChild(copy);
+  }
+  if(key==='dev_core_theme_01'&&!owned&&!card.querySelector('.m05GetTheme')){
+   const jump=make('button','m05GetTheme','공명 코어 상품 상세');
+   jump.type='button';jump.addEventListener('click',()=>openDetail('appearance_unlock_01'));card.appendChild(jump);
+  }
+ });
+ if(mode==='collection'&&!panel.querySelector('#m05CollectionStatusV618')){
+  const p=make('p','', '보유 중인 코어 '+count+'/'+cards.length+'개 · 획득 후 장착하면 파츠와 전투에 발광만 적용돼.');
+  p.id='m05CollectionStatusV618';p.setAttribute('role','status');
+  panel.insertBefore(p,gallery);
+ }
 }
 function decorateRows(list){if(!list)return;const catalog=api.catalog(),rows=list.querySelectorAll('.m04MockCard');
  rows.forEach((row,index)=>{const item=catalog[index];if(!item||row.querySelector('.m05DetailLink'))return;
@@ -87,6 +138,8 @@ function render(){if(!m04.isOpen())return;modal.dataset.m05Ux='true';modal.datas
  }
  panel.querySelectorAll('#m05NavigationV618 button').forEach(b=>b.setAttribute('aria-pressed',String(mode===b.dataset.m05Section)));
  decorateRows(list);
+ decorateCollection();
+ if(mode!=='collection')panel.querySelector('#m05CollectionStatusV618')?.remove();
  const detail=panel.querySelector('#m05DetailV618');if(mode==='detail'){if(!detail)drawDetail(list,!!panel.querySelector('#m04MockConfirmV617'))}else detail?.remove();
  const confirmation=panel.querySelector('#m04MockConfirmV617');
  if(confirmation){confirmation.style.display='block';const cancel=confirmation.querySelector('button');if(cancel)cancel.focus()}
