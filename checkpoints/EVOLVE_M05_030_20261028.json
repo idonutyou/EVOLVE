@@ -1,0 +1,56 @@
+{
+  "stage": "M05",
+  "percent": 30,
+  "step": "1/3",
+  "base": "c1713c838f7c2dd5301b4d41d315296acaa7d864",
+  "archive": "checkpoints/EVOLVE_M05_030_20261028.zip",
+  "branch": "backup/monetization-m05-030-20261028",
+  "bytes": 26344,
+  "sha256": "b386fa0c26606e0d893c384eb0695bd631f948a37ead6a23fa7ceda981bc20a5",
+  "files": {
+    ".github/workflows/m05-030-checkpoint.yml": {
+      "bytes": 2821,
+      "sha256": "c3d3e9c2c4c5b75716256a1ee19667cf7a78ee884c0c6e7acc9e933e2c69c359"
+    },
+    ".github/workflows/m05-design-gate.yml": {
+      "bytes": 1085,
+      "sha256": "b2ab14cfc0ce6a127314a66084cff65b1c02c18457a38e71cc6c15f450bc4e13"
+    },
+    "EVOLVE_HANDOFF.md": {
+      "bytes": 12112,
+      "sha256": "c7d741e2fe3d74fc4e101dfafd8815130fe2133b3ddbc0e9366ea5e557b260d7"
+    },
+    "EVOLVE_PROGRESS.md": {
+      "bytes": 5580,
+      "sha256": "87b8feadec99d807468a99f20b47d87b35257800d50b6e64341e677986d53816"
+    },
+    "EVOLVE_ROADMAP.md": {
+      "bytes": 6797,
+      "sha256": "87fe48bf1efc56eebbe98a2300d978d87dd5b973c38bd752061d370016006a85"
+    },
+    "docs/monetization/M05_030_MOBILE_UX_FREEZE_KO.md": {
+      "bytes": 5559,
+      "sha256": "6ef87692b5b582944ff4369a58d1ec5aa8c102ceb93e0a5abe2da02b64465f0f"
+    },
+    "monetization/m05/mobile-flow.v1.json": {
+      "bytes": 11639,
+      "sha256": "e44a991f7e1797a6b1f78a27cc66daceb6f78973c2f2da4e2960f30ed34d1af8"
+    },
+    "tests/monetization_m05_mobile_flow.test.cjs": {
+      "bytes": 8115,
+      "sha256": "b3503e44d830888a7a989f2193df2d5ec1c4c8c15e9bd4a9c7d581d1273a2e69"
+    },
+    "tools/checkpoint_m05_030.py": {
+      "bytes": 2022,
+      "sha256": "1559e4f3b7055391a0d9a1cc773c5c1f62e00c3749322b19940211bba01f914a"
+    },
+    "tools/verify_m05_030_checkpoint.py": {
+      "bytes": 1246,
+      "sha256": "3c4a8a3fc99927f078aba68afb49813d1d34eaf58871b6ef956a4d876659a406"
+    }
+  },
+  "file_count": 10,
+  "crc_verified": true,
+  "design_only": true,
+  "real_payment": false
+}
