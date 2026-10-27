@@ -1,4 +1,5 @@
 name: M01 secure product and transaction contract tests
+# Milestone 50 verifies catalog and QA-only transaction state reducer.
 on:
   push:
     branches: [monetization-m01-contracts-20261027]
