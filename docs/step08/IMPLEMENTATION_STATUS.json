@@ -1,8 +1,8 @@
 {
   "step": 8,
-  "substep": 2,
-  "progress": 70,
-  "stage": "STEP08_2_of_3_completed_with_functional_and_real_60_180_second_browser_evidence",
+  "substep": 3,
+  "progress": 80,
+  "stage": "240_wall_seconds_browser_completed_but_game_clock_138_seconds_and_frame_p95_50ms",
   "created_kst": "2026-10-27",
   "baseline_main_commit": "10fc95c7313a08084e7b95738f50188f72850a27",
   "baseline_public_version": "V575-STEP07-MONSTER-FEEDBACK-V614",
@@ -32,7 +32,8 @@
     "docs/step08/VALIDATION_060.json",
     "docs/step08/VALIDATION_070_REALTIME.json",
     "docs/step08/TRIAGE_070.json",
-    "docs/step08/PART2_HANDOFF_KO.md"
+    "docs/step08/PART2_HANDOFF_KO.md",
+    "docs/step08/VALIDATION_080.json"
   ],
   "all_existing_step07_backups_preserved": true,
   "active_branch": "step08-combat-playtest-v614-20261027",
@@ -43,7 +44,8 @@
     "backup/step08-040-20261027",
     "backup/step08-050-20261027",
     "backup/step08-060-20261027",
-    "backup/step08-070-20261027"
+    "backup/step08-070-20261027",
+    "backup/step08-080-20261027"
   ],
   "pending_tasks": [
     "actual playback scenarios and browser evidence",
@@ -52,7 +54,7 @@
     "Galaxy S23+ physical 3–5 min and heat (not accessible from CI)"
   ],
   "next_part": 3,
-  "next_checkpoint": 80,
+  "next_checkpoint": 90,
   "next_work": "test-only browser harness and initial ordinary, midboss, TITAN reproducibility",
   "next_step_after_step08": 9,
   "next_step_label": "스킬 레벨 모델·카드 규칙 정리",
@@ -95,5 +97,11 @@
   "headless_180s_ci_result": "success",
   "phone_3min_lag_reproduced": false,
   "phone_3min_lag_resolved": false,
-  "realtime_3min_in_game_playtested": false
+  "realtime_3min_in_game_playtested": false,
+  "realtime_240s_ci_run": 40474031159,
+  "realtime_240s_ci_result": "success",
+  "realtime_240s_game_clock_s": 138.0041,
+  "realtime_240s_p95_ms": 50,
+  "realtime_240s_p99_ms": 66.7,
+  "game_180s_target_met": false
 }
