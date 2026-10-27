@@ -15,7 +15,7 @@
 ## 테스트
 - `tests/monetization_m04_mock_engine.test.cjs`: 모의 구매 보상, 멱등성, 반복 소유권, 장착/해제, 새 계정 분리, 재실행 저장, 기존 세이브 불변, corrupted storage 실패 차단, 쓰기 실패 차단, receipt 한도, 비활성 SKU 등 **14건**.
 - 기존 M04 플랫폼/모의 결제 설계 계약 **12건**도 보존. `.github/workflows/m04-design-gate.yml`이 두 테스트 파일을 함께 실행하도록 수정됨.
-- Node 22 GitHub Actions 테스트 결과를 확인해 pass/fail을 구분한 뒤 40% 완료 판정. 초기 CI 파서 오류(`safeId` 잘림)는 수정 후 신규 실행에서 재검증한다.
+- **검증 완료:** 실제 Node 22 GitHub Actions https://github.com/idonutyou/EVOLVE/actions/runs/40518045183 — **26/26 통과, 실패 0** (설계 계약 12 + 엔진 14). 초기 파서 오류와 구 설계 상태 불일치는 수정됨.
 - 정적 라이브러리 검증은 휴대폰 메인 게임 통합이나 출시 결제 테스트가 아니다.
 
 ## 다음 50% (사용자 '고')
