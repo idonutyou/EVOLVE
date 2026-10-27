@@ -13,6 +13,7 @@ on:
       - "tools/verify_site.py"
       - "tools/verify_monster_feedback_v614.py"
       - "tests/monetization_m05_100_live_browser.cjs"
+      - "tests/native_shop_v620_browser.cjs"
       - "tests/browser_smoke.cjs"
       - "tests/visual_fit_browser.cjs"
       - "tests/upgrade_scenery_browser.cjs"
@@ -122,6 +123,7 @@ jobs:
           node tests/player_mutant_browser.cjs
           node tests/organ_skills_browser.cjs
           node tests/home_map_miniatures_browser.cjs
+          node tests/native_shop_v620_browser.cjs
           node tests/home_hub_browser.cjs
           node tests/visual_fit_browser.cjs
           node tests/home_balance_browser.cjs
@@ -180,6 +182,7 @@ jobs:
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_hits_browser_v613.cjs --report test-results/organ-hits-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/monster_feedback_browser_v614.cjs --report test-results/monster-feedback-live.json
+          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/native_shop_v620_browser.cjs --report test-results/native-shop-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
