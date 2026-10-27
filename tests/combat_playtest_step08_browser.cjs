@@ -104,7 +104,7 @@ async function functional(page,report){
    }catch(error){issues.push({case:kind,error:String(error)});rows.titan.push({id:kind,state:'blocked',error:String(error)});}
   }
   rows.availability.push({id:'remaining-five-titans',state:'not_confirmed',reason:'Cannot infer all seven planned TITAN implementations from BIO/VENOM QA shortcuts'});
-  return {rows,issues,clock:c.clock(),feedback:feedback.read()};
+  return {rows,issues,clock:window.__EVOLVE_TEST_MODULE_V575__.read().seconds,feedback:feedback.read()};
  });
  report.functional=data;
  for(const r of data.rows.ordinary.filter(x=>x.id!=='ordinary-lethal')){
