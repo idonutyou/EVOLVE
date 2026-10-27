@@ -4,6 +4,8 @@ on:
     branches: [feature/native-shop-unification-20261028]
     paths:
       - '.github/workflows/native-shop-checkpoint.yml'
+      - 'tools/checkpoint_native_shop_v620.py'
+      - 'tools/verify_native_shop_v620_checkpoint.py'
 permissions:
   contents: write
 jobs:
@@ -45,7 +47,7 @@ jobs:
           b=open(sys.argv[1],'rb').read();m=json.load(open(sys.argv[2]))
           assert m['stage']=='NATIVE_SHOP_V620' and m['site_asset_count']==1072
           assert len(b)==m['bytes'] and hashlib.sha256(b).hexdigest()==m['sha256']
-          assert m['deleted_count']==18 and not m['real_checkout_enabled']
+          assert m['deleted_count']==16 and not m['real_checkout_enabled']
           with zipfile.ZipFile(sys.argv[1]) as z:
               assert z.testzip() is None
               assert set(z.namelist())==set(m['files'])|{'CHECKPOINT_MANIFEST.json'}
