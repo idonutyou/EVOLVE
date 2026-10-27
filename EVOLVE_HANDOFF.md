@@ -1,3 +1,21 @@
+# EVOLVE 최신 인수인계 — M04 100% 완료 (2026-10-28 KST)
+
+> **다음 사용자 `고`는 M05 STEP 1/3 10%부터 시작한다.** M04 60~100% 작업 반복 금지. 아래의 90%/70% 기록은 이전 이력임.
+
+- 저장소: `idonutyou/EVOLVE`. 개발 웹: https://idonutyou.github.io/EVOLVE/
+- 실제 공개 빌드: `9ab09b21eb95876b7977a0aaef34ac51c931c3565fcc8a9e45209812bdd290d6`, 리소스 1,078개/원본 이미지 1,021개.
+- 라이브 모의 구매/취소·테스트 결정 +400→280·코어 2종 장착·재로드/복구·게임 저장 보존 자동 QA **success**: https://github.com/idonutyou/EVOLVE/actions/runs/40545030346
+- 라이브 게임 엔진/원본 아트/이동 코드 바이트 검증 **success**: https://github.com/idonutyou/EVOLVE/actions/runs/40546116720
+- 90% 원본 Pages 워크플로 https://github.com/idonutyou/EVOLVE/actions/runs/40541493132 는 배포 단계 성공/이후 이전 엔진 개수 가정 검사 실패. 후속 수정 후 별도 공개 실서버 2종 검증으로 해당 문제 해결.
+- 개발 플래그 `?evolveMockShop=1`만 상점 표시. 일반 URL 무영향, 시즌 패스 잠금, 실가격/실결제/API 비활성.
+- 실기기 Galaxy S23+ 장시간 성능·발열 테스트는 **하지 않음**.
+- 최종 보고: `docs/monetization/M04_100_FINAL_REPORT_KO.md`.
+- 100% 백업: `backup/monetization-m04-100-20261028`; `checkpoints/EVOLVE_M04_100_20261028.json`. 이전 모든 체크포인트 삭제 금지.
+- 다음 M05 상점/인벤토리 UX. **첫 10% 디자인 분석은 이미지 렌더링 불필요**. 모든 단계를 3 STEP/10%씩 진행하고 매 체크포인트 원격 저장 및 두 번 검증한다.
+- 최종 타깃 Google Play·Apple App Store. 실제 Billing/StoreKit 연결은 게임 완성 후 M08.
+
+---
+
 # 최신 인수인계: EVOLVE M04 90% (2026-10-28 KST)
 
 **M04 STEP 3/3 90% 완료 → 다음 `고`는 M04 100% 라이브 배포 검증·최종 백업.** 이 퍼센트는 게임 전체 진행률이 아님.
