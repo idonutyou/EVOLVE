@@ -40,7 +40,7 @@ const percentile=(sorted,p)=>sorted.length?sorted[Math.min(sorted.length-1,Math.
       _mapBirthLockedV562:false,r:e.r||10,spd:Math.max(12,e.spd||24),
       shot:999,dashCd:999,slamCd:999,frostSpecialCd:999,
       barrier:0,prism:0,elite:false,midBoss:false,nemesis:false,finalBoss:false});
-     c.enemies.push(e);
+     // Native spawn() already inserted the real monster into c.enemies. Never push twice.
     }
     c.rebuild();
     const activeStart=c.enemies.filter(e=>!e.dead).length,stepTimes=[],drawTimes=[];
