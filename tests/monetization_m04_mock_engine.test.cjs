@@ -122,9 +122,43 @@ test('receipt limits stop unlimited developer save growth',()=>{
  assert.throws(()=>buy(shop,'mutation_crystal_small',id(24)),/MOCK_RECEIPT_LIMIT/);
  assert.equal(shop.snapshot(profile).testCrystals,0);
 });
-test('cosmetic entitlement has no falsely claimed rendered asset',()=>{
+test('core entitlement now provides a rendered cosmetic without gameplay stats',()=>{
  const cosmetic=catalog().find(x=>x.sku==='appearance_unlock_01');
- assert.equal(cosmetic.visualReady,false);
+ assert.equal(cosmetic.visualReady,true);
  assert.equal(cosmetic.entitlement,'dev_core_theme_01');
  assert.equal(cosmetic.kind,'cosmetic');
+});
+
+test('test crystals unlock a usable second core and survive reload without a second debit',()=>{
+ const {shop,storage}=start();buy(shop,'mutation_crystal_mid',id(30));
+ const first=shop.redeemCosmetic(profile,'dev_core_theme_02',id(31));
+ assert.equal(first.receipt.testCrystalsSpent,120);
+ assert.equal(first.state.testCrystals,180);assert.equal(first.state.owned.dev_core_theme_02,true);
+ const restored=createStore({storage,enabled:true});
+ assert.equal(restored.redeemCosmetic(profile,'dev_core_theme_02',id(31)).replayed,true);
+ assert.equal(restored.snapshot(profile).testCrystals,180);
+ assert.equal(restored.equip(profile,'core','dev_core_theme_02').equipped.core,'dev_core_theme_02');
+ assert.throws(()=>restored.redeemCosmetic(profile,'dev_core_theme_02',id(32)),/MOCK_ALREADY_OWNED/);
+ assert.equal(restored.snapshot(profile).testCrystals,180);
+});
+test('insufficient test crystals and unknown redemption preserve the exact stored bytes',()=>{
+ const {shop,storage}=start();buy(shop,'mutation_crystal_small',id(33));
+ const before=storage.getItem(storageKey);
+ assert.throws(()=>shop.redeemCosmetic(profile,'dev_core_theme_02',id(34)),/MOCK_INSUFFICIENT_TEST_CRYSTALS/);
+ assert.throws(()=>shop.redeemCosmetic(profile,'__proto__',id(34)),/UNKNOWN_MOCK_REDEMPTION/);
+ assert.equal(storage.getItem(storageKey),before);
+});
+test('redemption and mock purchase request IDs share one idempotency domain',()=>{
+ const {shop}=start();buy(shop,'mutation_crystal_mid',id(35));
+ assert.throws(()=>shop.redeemCosmetic(profile,'dev_core_theme_02',id(35)),/MOCK_IDEMPOTENCY_CONFLICT/);
+ shop.redeemCosmetic(profile,'dev_core_theme_02',id(36));
+ assert.throws(()=>buy(shop,'mutation_crystal_small',id(36)),/MOCK_IDEMPOTENCY_CONFLICT/);
+ assert.equal(shop.snapshot(profile).testCrystals,180);
+});
+test('a failed test crystal debit grants no cosmetic and retains the balance',()=>{
+ const backing=fakeStorage();const {shop}=start(backing);buy(shop,'mutation_crystal_mid',id(37));
+ const before=backing.getItem(storageKey);
+ const broken=createStore({enabled:true,storage:{getItem:backing.getItem,setItem:()=>{throw Error('FULL')}}});
+ assert.throws(()=>broken.redeemCosmetic(profile,'dev_core_theme_02',id(38)),/MOCK_STORAGE_WRITE_FAILED/);
+ assert.equal(backing.getItem(storageKey),before);
 });

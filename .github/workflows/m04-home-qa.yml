@@ -1,9 +1,10 @@
-name: M04 50% mock shop real-home mobile QA
+name: M04 mock shop and visible core mobile QA
 on:
   push:
     branches: [monetization-m04-payment-20261027]
     paths:
       - 'web/mock-premium*.js'
+      - 'web/mock-core*.js'
       - 'dist/index.html'
       - 'dist/version.json'
       - 'dist/verification.json'
@@ -27,7 +28,7 @@ jobs:
       - name: Verify original assets and incremental mock shell
         run: python3 tools/verify_site.py --dist dist
       - name: Check mock logic and design contract
-        run: node --test tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs
+        run: node --test tests/monetization_m04_design.test.cjs tests/monetization_m04_mock_engine.test.cjs tests/monetization_m04_core_visuals.test.cjs
       - name: Install browser runner (no game assets regenerated)
         shell: bash
         run: |
@@ -39,7 +40,7 @@ jobs:
             echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
           fi
           echo "NODE_PATH=$RUNNER_TEMP/m04-playwright/node_modules" >> "$GITHUB_ENV"
-      - name: Test original EVOLVE V614 home with optional mock purchases on 393x852
+      - name: Test EVOLVE home, crystal spending and visible combat cores on 393x852
         timeout-minutes: 12
         run: node tests/monetization_m04_home_browser.cjs
       - name: Retain browser screenshot for review
@@ -47,5 +48,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: m04-mock-home-mobile-check
-          path: test-results/m04-mock-shop-393x852.png
+          path: test-results/m04-*.png
           if-no-files-found: ignore

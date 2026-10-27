@@ -1,4 +1,4 @@
-/* EVOLVE M04-50 | Optional home overlay for DEVELOPMENT MOCK store only.
+/* EVOLVE M04-60 | Optional home overlay for DEVELOPMENT MOCK store only.
  * Never reads/writes real premium currency, DNA, M03 wallets, or existing game state.
  * Explicit opt-in: ?evolveMockShop=1 on the EVOLVE development host.
  */
@@ -39,13 +39,22 @@
  .m04MockFoot{border-top:1px solid #5c526b;padding-top:9px;display:flex;align-items:center;justify-content:space-between;gap:8px}
  .m04MockDisclaimer{font:10px/1.55 system-ui;color:#d8bfd7;max-width:245px}
  .m04MockReset{font-size:10px;background:#312332}
+ .m04CoreGallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+ .m04CoreLook{min-width:0;border:1px solid #6b6587;border-radius:12px;padding:9px;background:radial-gradient(ellipse at 50% 36%,#32446380,#131722 75%)}
+ .m04CoreLook[data-equipped="true"]{border-color:#a6f1ed;box-shadow:inset 0 0 18px #5ee6f222}
+ .m04CoreLook canvas{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+ .m04CoreLook b{display:block;color:#e5ecff;font:700 12px system-ui}
+ .m04CoreLook p{font:10px/1.5 system-ui;color:#c5c2d6;margin:5px 0}
+ .m04CoreLook button{width:100%;min-height:35px;border-radius:7px;border:1px solid #9a93b0;color:#fff;background:#3e3559;font:700 11px system-ui;touch-action:manipulation}
+ .m04CoreLook button:disabled{opacity:.55}
+ .m04CoreSectionTitle{font:700 13px system-ui;margin:14px 0 2px;color:#bceef9}
  @media(max-width:360px){.m04MockPanel{padding:11px}.m04MockCard{padding:8px}.m04MockHead h2{font-size:17px}.m04MockItemName{font-size:12px}}
  `;
  const titles={
   starter_genome_once:'테스트 결정 +75 · 1회 구매 보상',
   mutation_crystal_small:'테스트 결정 +100 · 반복 가능',
   mutation_crystal_mid:'테스트 결정 +300 · 반복 가능',
-  appearance_unlock_01:'코어 외형 테스트 소유권 · 실제 그래픽 준비 중',
+  appearance_unlock_01:'공명 코어 발광 · 파츠 화면과 전투에 적용',
   season_research_pass_01:'시즌 보상 미완성 · 모의 구매 잠금'
  };
  const errors={
@@ -56,25 +65,32 @@
   MOCK_RECEIPT_LIMIT:'테스트 구매 기록 한도에 도달했어.',
   MOCK_BALANCE_OVERFLOW:'테스트 결정 잔고 한도 초과.',
   MOCK_IDEMPOTENCY_CONFLICT:'같은 구매 요청이 다른 상품에 사용됐어.'
+  ,MOCK_INSUFFICIENT_TEST_CRYSTALS:'테스트 결정이 부족해. 결정 묶음을 모의 구매해 줘.'
  };
  function current(){return shop.snapshot(PROFILE)}
+ function notifyChange(){window.dispatchEvent(new Event('evolve:dev-mock-change'))}
+ function requestId(){
+  const uuid=window.crypto?.randomUUID?.().replace(/-/g,'_');
+  if(!uuid)throw Error('RANDOM_ID_UNAVAILABLE');
+  return 'mock_req_'+uuid;
+ }
  function button(title,action){const n=el('button','',title);n.type='button';n.addEventListener('click',action);return n}
  function buy(sku){
   if(disabled||!shop)return;
   try{
-   const uuid=window.crypto?.randomUUID?.().replace(/-/g,'_');
-   if(!uuid)throw Error('RANDOM_ID_UNAVAILABLE');
-   const {receipt,replayed}=shop.simulatePurchase(sku,PROFILE,'mock_req_'+uuid);
+   const {receipt,replayed}=shop.simulatePurchase(sku,PROFILE,requestId());
    lastError=(replayed?'이미 처리된 테스트 요청 · ':'모의 구매 완료 · ')+receipt.sku;
+   notifyChange();
    draw();
   }catch(e){lastError=errors[e.code]||'모의 구매 실패: '+String(e.code||e.message||e);draw()}
  }
- function toggleCore(){
+ function toggleCore(entitlement='dev_core_theme_01'){
   try{
    const s=current();
-   if(s.equipped.core)shop.unequip(PROFILE,'core');
-   else shop.equip(PROFILE,'core','dev_core_theme_01');
-   lastError='코어 테스트 장착 상태가 변경됐어. 실제 외형 적용은 후속 작업이야.';
+   if(s.equipped.core===entitlement)shop.unequip(PROFILE,'core');
+   else shop.equip(PROFILE,'core',entitlement);
+   notifyChange();
+   lastError='코어 발광을 변경했어. 파츠 화면과 전투에서 확인할 수 있어.';
   }catch(e){lastError=errors[e.code]||'장착할 수 없어.'}
   draw();
  }
@@ -83,13 +99,36 @@
   if(!shop)return;
   if(++resetClicks<2){lastError='테스트 구매 기록만 초기화하려면 한 번 더 눌러 줘.';draw();return}
   resetClicks=0;
-  try{shop.resetTestProfile(PROFILE);lastError='모의 구매 기록만 초기화했어. 기존 게임 저장은 유지돼.'}
+  try{shop.resetTestProfile(PROFILE);notifyChange();lastError='모의 구매 기록만 초기화했어. 기존 게임 저장은 유지돼.'}
   catch(e){lastError=errors[e.code]||'테스트 초기화 실패';}
   draw();
  }
  const modal=el('div');modal.id='m04MockModalV616';modal.hidden=true;modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');modal.setAttribute('aria-label','EVOLVE 개발용 모의 상점');
  const panel=el('section','m04MockPanel');
  modal.appendChild(panel);
+ function redeem(entitlement){
+  try{
+   shop.redeemCosmetic(PROFILE,entitlement,requestId());notifyChange();
+   lastError='심홍 코어 해금 완료 · 테스트 결정 120개 사용';
+  }catch(e){lastError=errors[e.code]||'외형 해금 실패: '+String(e.code||e.message||e)}
+  draw();
+ }
+ function drawLooks(state){
+  panel.appendChild(el('h3','m04CoreSectionTitle','코어 컬렉션 · 능력치 변화 없음'));
+  const gallery=el('div','m04CoreGallery'),bridge=window.__EVOLVE_DEV_CORE_BRIDGE_V617__;
+  for(const item of shop?.cosmetics()||[]){
+   const card=el('article','m04CoreLook'),owned=!!state?.owned[item.entitlement],equipped=state?.equipped.core===item.entitlement;
+   card.dataset.entitlement=item.entitlement;card.dataset.equipped=String(equipped);
+   const preview=bridge?.preview(item.entitlement,320);
+   if(preview){preview.setAttribute('aria-label',item.label+' 장착 미리보기');preview.setAttribute('role','img');card.appendChild(preview)}
+   else card.appendChild(el('p','','캐릭터 미리보기 준비 중…'));
+   card.append(el('b','',item.label),el('p','',equipped?'장착 중 · 파츠 / 전투 적용':owned?'보유 중 · 장착 가능':item.testPrice?'테스트 결정 '+item.testPrice+'개':'상단 코어 상품 모의 구매로 획득'));
+   const action=button(owned?(equipped?'해제':'장착'):item.testPrice?'120 TEST 결정으로 해금':'상품에서 획득',()=>owned?toggleCore(item.entitlement):redeem(item.entitlement));
+   action.disabled=disabled||!bridge?.read().ready||(!owned&&(!item.testPrice||state.testCrystals<item.testPrice));
+   card.appendChild(action);gallery.appendChild(card);
+  }
+  panel.appendChild(gallery);
+ }
  function draw(){
   panel.replaceChildren();
   const h=el('div','m04MockHead'),start=el('div');
@@ -106,7 +145,7 @@
    const owned=!!(item.entitlement&&state?.owned[item.entitlement]);
    let caption='모의 구매',action=()=>buy(item.sku);
    if(!item.ready){caption='준비 중';action=()=>{}}
-   else if(owned&&item.sku==='appearance_unlock_01'){caption=state?.equipped.core===item.entitlement?'해제':'장착';action=toggleCore}
+   else if(owned&&item.sku==='appearance_unlock_01'){caption=state?.equipped.core===item.entitlement?'해제':'장착';action=()=>toggleCore(item.entitlement)}
    else if(owned){caption='보유 중';action=()=>{}}
    const b=button(caption,action);
    b.disabled=disabled||!item.ready||(owned&&item.sku!=='appearance_unlock_01');
@@ -114,10 +153,11 @@
    row.appendChild(b);list.appendChild(row);
   }
   panel.appendChild(list);
+  drawLooks(state);
   const message=el('p');message.id='m04MockMessageV616';message.setAttribute('role','status');message.textContent=lastError;
   panel.appendChild(message);
   const foot=el('div','m04MockFoot');
-  foot.append(el('span','m04MockDisclaimer','MOCK ONLY · 코어 테마는 소유/장착 상태만 저장. 실제 그래픽·유료 재화와 분리.'),button('테스트 초기화',reset));
+  foot.append(el('span','m04MockDisclaimer','MOCK ONLY · 테스트 결정과 코어 발광만 시험 적용. 실제 결제·전투 능력치 변화 없음.'),button('테스트 초기화',reset));
   panel.appendChild(foot);
  }
  let lastFocus=null;
@@ -137,6 +177,7 @@
   const trigger=button('◈ DEV 상점',open);
   trigger.id='m04MockTriggerV616';trigger.setAttribute('aria-label','개발 전용 모의 상점 열기');
   q('poster').append(trigger,modal);
+  window.addEventListener('evolve:dev-cosmetics-ready',()=>{if(opening)draw()});
   modal.addEventListener('click',e=>{if(e.target===modal)close()});
   modal.addEventListener('keydown',e=>{
    if(e.key==='Escape'){e.preventDefault();close()}
