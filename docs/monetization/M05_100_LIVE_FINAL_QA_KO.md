@@ -1,6 +1,12 @@
 # EVOLVE M05 — STEP 3/3 · 100% 최종 공개 통합·복구 보고
 작성: 2026-10-28 KST · 저장소 `idonutyou/EVOLVE`
 
+## 최종 결과: 공개 배포 및 실 사이트 모바일 QA 성공
+
+- 공개 배포: https://github.com/idonutyou/EVOLVE/actions/runs/40578916545 (success).
+- 실제 Pages URL에서 모바일/모의 구매/게임 저장: https://github.com/idonutyou/EVOLVE/actions/runs/40582048900 (success).
+- 운영 결제/가격 비활성, 원본 이미지 1,021개 보존. 물리 Galaxy S23+ 직접 검사는 아직 미실시.
+
 ## 범위와 성공 조건
 
 이 보고는 EVOLVE의 **M05 개발용 모의 상점 UX 작업** 최종 보고다. **게임 전체의 완성도 100%가 아니며 실제 유료 결제의 완성을 뜻하지 않는다.** 상품 가치 우선순위를 반영하되, 진짜 Google Play Billing/Apple StoreKit/서버 영수증 검증은 게임 전체 완성 후 M08로 분리한다.
@@ -24,8 +30,8 @@
 
 - **배포 실패 원인 1차 진단:** 원본 V614 verifier가 리소스 1,067 또는 1,078개만 허용해, 1,083개 개발 스크립트 번들 빌드에서 안전하게 실패. 원본 게임 수학/이미지 검증은 보존하고 정확한 M05 버전과 원본 1,021개 이미지 개수를 검사하도록 보강.
 - **배포 실패 원인 2차 진단:** M04에 이미 존재하던 dev-mock-only 스크립트 9개와 M05 추가 5개를 구분하지 않은 카운트 가정. 이를 **정확히 14개**로 수정하여 유효하지 않은 리소스 추가는 계속 거부하도록 함.
-- 성공한 GitHub Pages 배포 워크플로: **[최종 성공 run ID로 확정]**. 외부 실제 공개 주소: https://idonutyou.github.io/EVOLVE/
-- 마지막 필수 실제 공개 URL 검증: `tests/monetization_m05_100_live_browser.cjs`가 공개 `version.json`의 SHA-256 빌드·리소스 수 및 이미지 수 확인, 모바일 393×852/320×568에서 DEV 두 플래그로 테스트 코어 구매·장착·컬렉션, 게임 메뉴 실제 터치, 기존 세이브/M03 기록 보존, 일반 URL DEV 미노출을 검증. **[성공 run ID와 결론 확인 후 확정]**.
+- 성공한 GitHub Pages 배포 워크플로: **#40578916545 success**. 외부 실제 공개 주소: https://idonutyou.github.io/EVOLVE/
+- 마지막 필수 실제 공개 URL 검증: `tests/monetization_m05_100_live_browser.cjs`가 공개 `version.json`의 SHA-256 빌드·리소스 수 및 이미지 수 확인, 모바일 393×852/320×568에서 DEV 두 플래그로 테스트 코어 구매·장착·컬렉션, 게임 메뉴 실제 터치, 기존 세이브/M03 기록 보존, 일반 URL DEV 미노출을 검증. **#40582048900 success**.
 - 인수인계 시점에 개발용 Chromium 모바일 에뮬레이션 QA는 수행했지만 **물리 Galaxy S23+ 실기기 FPS·발열·장시간 조작 테스트는 미실시**. 공개 URL을 사용자가 Android에서 수동으로 확인하는 절차는 권장한다.
 
 ## 복구 및 실결제 격리

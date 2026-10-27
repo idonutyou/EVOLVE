@@ -1,3 +1,19 @@
+# EVOLVE 최종 인수인계 — M05 100% 완료 (2026-10-28 KST)
+
+- 다음 고는 M06 10% STEP 1/3. M05 10~100%를 다시 반복하지 않는다. 모든 작업의 최우선순위는 매출을 만들 수 있는 실제 구매 가치 콘텐츠.
+- GitHub Pages https://idonutyou.github.io/EVOLVE/ ; 브랜치 main; 배포 버전 V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90; 빌드 b985a41a63ea8c9f4e9b6c773dbc7cbcb7b579855a907bdfb693e7e53463d60b.
+- Pages 배포 #40578916545 success https://github.com/idonutyou/EVOLVE/actions/runs/40578916545, 공개 실 URL 모바일 Chrome QA #40582048900 success https://github.com/idonutyou/EVOLVE/actions/runs/40582048900.
+- M05: 10~30 정보/상품 UX 설계, 40 상점 상세, 50 코어 소유/장착, 60 손상/중복/닫기 안전, 70 모바일 접근성, 80 전체 게임 byte 감사, 90 DEV 터치 충돌 해결/메인 병합, 100 Pages 공개·실 URL QA.
+- 주요 보존: 기존 게임 홈 5탭, 전투/파츠·맵·세이브·M03 장부, 기존 이미지 1,021개. 기존 자산 1,078개에 새 M05 개발 스크립트 5개만 추가하여 1,083개.
+- 100% 배포 첫 실패는 낡은 V614 검증기의 허용 자산수 1,067/1,078, 두 번째는 기존 M04 DEV 9개를 제외한 추가 5개만 계산한 가정 때문. 지금은 총 DEV 14개, 이미지 1,021개를 정확히 검증한다.
+- 정식 상품 가격 null, checkout_enabled=false, client_grants_enabled=false, 실제 Google Play/Apple Billing 및 영수증 검증 미구현. 게임 완성 후 M08에서 연결.
+- 최종 전체 트리 복구 backup/monetization-m05-100-20261028; 90% 기준 ZIP checkpoints/EVOLVE_M05_100_20261028.zip 과 SHA256/CRC JSON. 10~90% 복구 절대 삭제 금지.
+- 상세 최종 보고 docs/monetization/M05_100_LIVE_FINAL_QA_KO.md. 실제 물리 Galaxy S23+ 발열·프레임·장시간 시험은 미실시.
+- M06 10% 이미지 렌더링 불필요; 향후 새 프리미엄 스킨 실 제작에는 렌더링 필요 가능성이 크므로 각 10% 이전에 알릴 것.
+- 이전 인수인계는 아래 기록 그대로 유지.
+
+---
+
 # EVOLVE 최신 인수인계 — M05 STEP 3/3 · 90% 진행 (2026-10-28 KST)
 
 > **다음 `고` = M05 100%**. 기존 M05 10~90% 기능을 다시 처음부터 구현하지 않는다. 최우선 과금 가치 콘텐츠 확보, 실제 매출 Billing은 게임 전체 완성 후 M08.
