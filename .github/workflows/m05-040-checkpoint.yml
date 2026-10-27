@@ -4,6 +4,8 @@ on:
     branches: [monetization-m05-ux-20261028]
     paths:
       - '.github/workflows/m05-040-checkpoint.yml'
+      - 'tests/monetization_m05_ux_design.test.cjs'
+      - 'tests/monetization_m05_mobile_flow.test.cjs'
 permissions:
   contents: write
 jobs:
