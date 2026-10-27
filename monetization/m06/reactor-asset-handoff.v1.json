@@ -1,16 +1,159 @@
 {
   "schema": "M06_030",
   "progress": 30,
-  "rendering_required_now": false,
-  "pivot": [
+  "step": "1/3",
+  "status": "DESIGN_FROZEN_NOT_RENDERED",
+  "baseline": {
+    "main": "b73c848a781e30453c3e003de673a98143fa5d42",
+    "old_backup": "backup/monetization-m06-020-20261028",
+    "original_image_count": 1021
+  },
+  "product": {
+    "id": "m06_core_reactor_concept",
+    "sku": null,
+    "entitlement": null,
+    "price_minor": null,
+    "for_sale": false
+  },
+  "local_canvas_px": [
+    192,
+    192
+  ],
+  "local_pivot_px": [
     96,
     96
   ],
-  "layers": [
-    "reactor_shell_alpha.png",
-    "reactor_inner_lens_alpha.png",
-    "reactor_orbit_front_alpha.png",
-    "reactor_afterglow_alpha.png"
+  "design_bounds_px": [
+    43,
+    42,
+    149,
+    150
   ],
-  "art_created": false
+  "safe_padding_px": 16,
+  "coordinate_basis": {
+    "original_art_file": "web/player-mutant-art-v599.json",
+    "mutant_anchor_px": [
+      650,
+      500
+    ],
+    "core_shell_point_px": [
+      655,
+      351
+    ],
+    "combat_projection": "mutantSourceWorldV599(mutantBodyPointV599(mutantArtV599.shell))",
+    "preview_projection": "mockCorePreviewPointV617(size)",
+    "fixed_world_coords_disallowed": true
+  },
+  "layers": [
+    {
+      "id": "shell",
+      "file": "reactor_shell_alpha.png",
+      "z": 0,
+      "required": true,
+      "visual": "hexagonal casing",
+      "canvas_px": [
+        192,
+        192
+      ],
+      "pivot_px": [
+        96,
+        96
+      ],
+      "format": "transparent PNG RGBA",
+      "created": false
+    },
+    {
+      "id": "lens",
+      "file": "reactor_inner_lens_alpha.png",
+      "z": 1,
+      "required": true,
+      "visual": "segmented lens",
+      "canvas_px": [
+        192,
+        192
+      ],
+      "pivot_px": [
+        96,
+        96
+      ],
+      "format": "transparent PNG RGBA",
+      "created": false
+    },
+    {
+      "id": "ring",
+      "file": "reactor_orbit_front_alpha.png",
+      "z": 2,
+      "required": true,
+      "visual": "asymmetric double rings",
+      "canvas_px": [
+        192,
+        192
+      ],
+      "pivot_px": [
+        96,
+        96
+      ],
+      "format": "transparent PNG RGBA",
+      "created": false
+    },
+    {
+      "id": "afterglow",
+      "file": "reactor_afterglow_alpha.png",
+      "z": 3,
+      "required": false,
+      "visual": "subtle trail",
+      "canvas_px": [
+        192,
+        192
+      ],
+      "pivot_px": [
+        96,
+        96
+      ],
+      "format": "transparent PNG RGBA",
+      "created": false
+    }
+  ],
+  "cache_plan": {
+    "runtime_composite_sprite_count": 1,
+    "all_theme_cache_count_max": 3,
+    "raw_rgba_3_theme_bytes": 442368,
+    "gpu_decode_memory_excluded": true,
+    "measure_real_memory_later": true
+  },
+  "visual_targets": {
+    "viewports": [
+      [
+        320,
+        568
+      ],
+      [
+        393,
+        852
+      ],
+      [
+        852,
+        393
+      ]
+    ],
+    "shop_detail_min_css_px": 54,
+    "shop_card_min_css_px": 40,
+    "combat_small_below_css_px": 18,
+    "monochrome_comparison_with_old_core_required": true,
+    "not_yet_measured": true
+  },
+  "art_generation": {
+    "this_step": false,
+    "next_step": true,
+    "notify_before_next_step": true,
+    "keep_all_original_assets": true,
+    "independent_editable_layers": true,
+    "loop_seconds": 4.8,
+    "reduced_motion_static": true
+  },
+  "next": {
+    "progress": 40,
+    "step": "2/3",
+    "image_rendering_required": true
+  }
 }
