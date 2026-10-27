@@ -49,11 +49,14 @@ function transitionTestOrder(order,event) {
   if(order.providerTransactionId&&event.providerTransactionId!==order.providerTransactionId)
    throw new Error('Provider transaction conflict');
  }
- if(type==='SERVER_ATOMIC_GRANT_COMMITTED' && !order.providerTransactionId)
-  throw new Error('Cannot credit without verified provider reference');
+ if(type==='SERVER_ATOMIC_GRANT_COMMITTED') {
+  if(!order.providerTransactionId) throw new Error('Cannot credit without verified provider reference');
+  if(event.origin!=='QA_SIMULATED_ATOMIC_LEDGER')throw new Error('Only a simulated server ledger commit can advance grant');
+ }
  if(type==='SERVER_REFUND_CONFIRMED' &&
-  (event.providerTransactionId!==order.providerTransactionId||!order.credited))
-  throw new Error('Refund must refer to a credited transaction');
+  (event.providerTransactionId!==order.providerTransactionId||!order.credited||
+   event.origin!=='QA_SIMULATED_REFUND_VERIFIER'))
+  throw new Error('Refund must refer to a credited transaction and verified simulated refund');
  if(type==='SERVER_CHECKOUT_CREATED' && event.origin!=='QA_SIMULATED_PROVIDER')
   throw new Error('Client return is not checkout authorization');
  const updated={...order,
