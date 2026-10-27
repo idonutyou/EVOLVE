@@ -6,8 +6,8 @@ Node 20+ with `pg` dependency. The process refuses to start unless `NODE_ENV=dev
 
 The server listens only to `127.0.0.1:8787` and does not implement live checkout. **Never publish this prototype as a public production service.** Identity provider choice and token keys are not configured in this repository.
 
-For a disposable PostgreSQL database, a developer must review then apply `docs/monetization/M03_020_LEDGER_SCHEMA.sql` followed by `m03-server/migrations/002_idempotent_results.sql`. This sequence has **not** been validated on an actual database. Never apply to production without a complete migration review.
+For a disposable PostgreSQL database, a developer must review then apply `docs/monetization/M03_020_LEDGER_SCHEMA.sql` followed by `m03-server/migrations/002_idempotent_results.sql`. This sequence passed a disposable PostgreSQL 17.11 test on GitHub Actions run 40505953388. Never apply to production without a complete migration review.
 
-`m03-server/tests/*.test.cjs` uses Node native test runner and an in-memory SQL fake; these tests are not PostgreSQL integration tests. A real SQL testing environment is required to verify concurrent transactions, deadlocks, migrations, backups and restoration.
+`m03-server/tests/*.test.cjs` uses Node native test runner and an in-memory SQL fake; these tests are not PostgreSQL integration tests. The GitHub Actions disposable PostgreSQL environment verified migrations, concurrent debits, rollback and backup/restore; operational disaster recovery and deadlock load tests remain pending.
 
 Current limitations: 40% API is local-only, catalog reports disabled, all payment/reward mutation routes reject transactions. 50% spending function is internal-only and no real credit mechanism exists. 60% refund requests only create a pending manual review case, never revoke rights. Full customer authentication/session policy, JWT key rotation, database permission tests and source-specific refunds remain 80–100% work.
