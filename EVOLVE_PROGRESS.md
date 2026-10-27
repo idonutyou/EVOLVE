@@ -8,27 +8,28 @@
 | --- | --- | --- | --- |
 | M01 과금 모델·모의 계약 | 100% (해당 연구·계약 단계 완료) | `docs/monetization/M01_FINAL_REPORT_KO.md` | 종료, 실제 판매 미개시 |
 | M02 정량 경제 시뮬레이션 | **100% (M02 내부 시험·검증·병합 완료)** | `docs/monetization/M02_100_FINAL_REPORT_KO.md`; PR #6 | 완료, 실결제/매출 미구현 |
-| M03 계정/서버 권한 원장 | **30% (STEP 1/3 설계 완료)** | 작업 브랜치 `docs/monetization/M03_030_DESIGN_HANDOFF_KO.md` | **STEP 2/3 · 40~70%** |
+| M03 계정/서버 권한 원장 | **70% 작업 백업 / 통합검증 차단** | 작업 브랜치 `docs/monetization/M03_070_QA_HANDOFF_KO.md` | **70% 차단 해결 후 80% 여부 판단** |
 | M04 실제 결제 검증 | 미시작 | `docs/monetization/M03_HANDOFF_KO.md` | M03 인증·원장 이후 PG 샌드박스와 검증 |
 | M05~M08 | 미시작 | `EVOLVE_ROADMAP.md` | 상점·광고·반복 수집·출시 게이트 |
 
 ## 마지막 확인된 원격 복구 포인트
-- M02 100% `backup/monetization-m02-100-20261027` @ `ff8afcd157a09cea3d65f5967d891ab8b98bf4a7` (main 기준, 이전 완료).
-- M03 10% `backup/monetization-m03-010-20261027` @ `38c1cfdf88d6aa4e1b9f0f59ce7afbe67f691e26` (원격 두 번 검증).
-- M03 20% `backup/monetization-m03-020-20261027` @ `061c482cbc13352189a1f82db3718722616054b7` (원격 두 번 검증).
-- M03 **30%** `backup/monetization-m03-030-20261027` @ `654375d610fdf72b882c58c2b86566af1515d817` (원격 두 번 검증).
-- 작업 브랜치 `monetization-m03-ledger-20261027`, `docs/monetization/M03_030_DESIGN_HANDOFF_KO.md` 및 SQL/OpenAPI 설계. 작업 브랜치 변경 6개 파일, main 배포는 변경하지 않음.
-- M03 설계검사 10건 V8 호환 환경 10/10; SQL/Node/실DB/로그인/결제 실환경 미검증.
-- 모든 M01, M02 및 M03 이전 백업 삭제 금지. 사용자 계정·지갑 및 실제 거래 서버·DB는 미구축.
-- 주의: 이 진행 파일은 main의 안내용 메타데이터이며 최신 설계 소스는 M03 작업 브랜치에 있다.
+- M02 100% `backup/monetization-m02-100-20261027` @ `ff8afcd157a09cea3d65f5967d891ab8b98bf4a7`.
+- M03 10% `backup/monetization-m03-010-20261027` @ `38c1cfdf88d6aa4e1b9f0f59ce7afbe67f691e26`.
+- M03 20% `backup/monetization-m03-020-20261027` @ `061c482cbc13352189a1f82db3718722616054b7`.
+- M03 30% `backup/monetization-m03-030-20261027` @ `654375d610fdf72b882c58c2b86566af1515d817`.
+- M03 40% `backup/monetization-m03-040-20261027` @ `8e4e8706c24d16e824c57ea081c49845df1e9ec1` (원격 2회 확인).
+- M03 50% `backup/monetization-m03-050-20261027` @ `f3441f6bfd00ebe6d2da406d870b8a73d6308d29` (원격 2회 확인).
+- M03 60% `backup/monetization-m03-060-20261027` @ `8ddcbade5db871faf0b00b8c912ee2f5007c60e5` (원격 2회 확인).
+- M03 **70% 작업 백업, 완료 승인 보류** `backup/monetization-m03-070-20261027` @ `7927ab26f52e2c4c15d23ea1943f7e4576b2a17f` (원격 2회 확인).
+- Native Node v22.16.0 12/12 테스트 통과, 소스+테스트 Git blob 해시 8개 일치. **테스트는 모의 DB/로컬 HTTP이고 실제 PostgreSQL 마이그레이션·백업복원·권한 테스트는 미실행**.
+- 70% 블로커: bootstrap GET 부작용, wallet 응답 필드 계약 미일치, 실제 PG 동시성/복원 테스트 부재.
+- `main`은 상태 파일만 갱신. `dist/`, `web/`, 이미지, 저장 키, 판매 활성화 코드 변경 없음. M01~M03 모든 백업 유지.
 
-## 다음 작업 — M03 / STEP 2-of-3
-- 40%: 실제 개발용 비공개 API/트랜잭션 DB 마이그레이션 초안 및 계정 인증·안전한 지갑 조회 구현; 결제/지급 차단 유지.
-- 50%: idempotency, 원자적 잔고·원장, 경쟁 소비와 서버 병렬요청 통합 시험.
-- 60%: 권리 출처 별 검증, 환불 검토/재시도, 타계정 접근 차단 및 안전한 복원.
-- 70%: DB 재시작/백업 복원, 회귀·실환경·동시성 QA와 80–100% 인수인계.
-- 각 10%에서 복구 브랜치·커밋·원격 파일 **두 번 확인**. 무단 과금·실제 PG 판매 금지.
-- 이미지 렌더링: **필요 없음**.
+## 다음 작업 — M03 STEP 2/3 70% 차단 해소
+1. 작업 브랜치 `monetization-m03-ledger-20261027`의 `m03-server/api.cjs`, `db.cjs` 불일치 2건 수정/계약 테스트.
+2. **실제 임시 PostgreSQL DB**에서 20%+50% SQL 마이그레이션, 동시 잔고 사용·트랜잭션 롤백·재시작·백업 복원을 실행 및 기록.
+3. 완료하면 별도 새 체크포인트·두 번 원격 검증 후 STEP 3/3(80~100%)로 진행. 실DB를 쓸 수 없으면 테스트 미검증 유지하고 완료라 선언하지 않는다.
+4. 실제 결제·광고 보상·유료 재화 지급은 여전히 금지. 이미지 렌더링 불필요.
 
 ## 새 진행률 10% 체크포인트 작성 양식
 각 10% 때 아래 항목을 실제값으로 기록:
