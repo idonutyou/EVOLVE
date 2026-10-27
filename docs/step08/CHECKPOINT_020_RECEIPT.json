@@ -1,0 +1,20 @@
+{
+  "step": 8,
+  "substep": 1,
+  "checkpoint": 20,
+  "backup_type": "full Git repository commit snapshot by branch (not ZIP)",
+  "remote_branch": "backup/step08-020-20261027",
+  "remote_commit": "011dd68cf90609f41daceec4f9cd2f4de73ddc98",
+  "remote_ref_verified": true,
+  "document_path": "docs/step08/PLAYTEST_MATRIX_V1.json",
+  "document_bytes": 21163,
+  "document_sha256": "06bee26dc06232350e6be109eb78247a026ba2b46cae26fc5225dc007fc7f8b1",
+  "document_git_blob_sha": "cb6ce38cf1a36c29fd0c3ab280fcaae1af648b9a",
+  "document_read_back_from_snapshot_and_immutable_commit_equal": true,
+  "game_code_unchanged": true,
+  "dist_unchanged": true,
+  "public_pages_unchanged": true,
+  "real_playtest_performed": false,
+  "new_images_generated": 0,
+  "prior_backup_branches_preserved": true
+}
