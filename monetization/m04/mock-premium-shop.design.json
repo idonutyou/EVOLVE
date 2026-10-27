@@ -1,0 +1,102 @@
+{
+  "version": "m04.mock-premium.v1",
+  "status": "DESIGN_ONLY_NOT_CONNECTED_TO_GAME",
+  "dev_mode": "MOCK_ONLY",
+  "web_role": "TEST_ONLY",
+  "release_platforms": [
+    "google_play",
+    "apple_app_store"
+  ],
+  "live_billing": "DEFERRED_TO_M08",
+  "client_payment_routes_enabled": false,
+  "store_provider_keys_allowed": false,
+  "actual_payment_methods_allowed": false,
+  "sandbox_currency": {
+    "id": "dev_test_credit",
+    "label_ko": "개발 테스트 크레딧",
+    "convertible_to_real_currency": false,
+    "grantable_as_real_purchase": false
+  },
+  "persistence": {
+    "new_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "legacy_save_prefix": "EVOLVE_V575_TEST_",
+    "must_not_modify_legacy_save": true,
+    "never_sync_mock_to_real_wallet": true,
+    "can_reset_test_state": true
+  },
+  "mock_purchase_adapter": {
+    "method": "simulatePurchase(productId, localTestProfile, uniqueRequestId)",
+    "output": "MOCK_ONLY receipt + draft entitlement or test credit",
+    "idempotency": "uniqueRequestId returns one grant only",
+    "developer_only": true,
+    "provider_transaction_id_accepted": false,
+    "redeem_as_paid_crystal_in_m03": false,
+    "lifecycle": [
+      "MOCK_PREVIEW",
+      "MOCK_APPROVED",
+      "MOCK_GRANTED",
+      "MOCK_OWNED",
+      "MOCK_EQUIPPED",
+      "MOCK_REFUNDED_OR_RESET"
+    ]
+  },
+  "product_drafts": [
+    {
+      "sku": "starter_genome_once",
+      "family": "starter_pack",
+      "dev_status": "CONTENT_AND_REWARD_MAPPING_REQUIRED",
+      "test_value_hint": "one_time_new_player_support_pack",
+      "mock_price_units": null,
+      "actual_price": null
+    },
+    {
+      "sku": "mutation_crystal_small",
+      "family": "premium_crystal",
+      "dev_status": "TEST_CURRENCY_GRANT_REQUIRED",
+      "mock_price_units": null,
+      "actual_price": null
+    },
+    {
+      "sku": "mutation_crystal_mid",
+      "family": "premium_crystal",
+      "dev_status": "TEST_CURRENCY_GRANT_REQUIRED",
+      "mock_price_units": null,
+      "actual_price": null
+    },
+    {
+      "sku": "appearance_unlock_01",
+      "family": "cosmetics",
+      "dev_status": "ART_AND_EQUIP_SLOT_REQUIRED",
+      "mock_price_units": null,
+      "actual_price": null
+    },
+    {
+      "sku": "season_research_pass_01",
+      "family": "season",
+      "dev_status": "SEASON_REWARDS_AND_UI_REQUIRED",
+      "mock_price_units": null,
+      "actual_price": null
+    }
+  ],
+  "gameplay_value_priority": [
+    "core_evolution_cosmetics",
+    "head_arm_leg_tail_cosmetics",
+    "weapon_visual_effects",
+    "starter_bundle",
+    "test_premium_currency_use",
+    "season_collection"
+  ],
+  "target_mobile_purchases": {
+    "android": "Google Play Billing later",
+    "ios": "StoreKit 2 later"
+  },
+  "guards": [
+    "Never label mock purchase as real sale",
+    "No mobile platform SDK or provider transaction until M08",
+    "No real money and no business account needed for current development",
+    "Mock entitlements are never transferred to production entitlements",
+    "No edits to old save keys, game art bytes, map or combat without targeted work",
+    "All store items need playable granted value before test price can be finalized",
+    "Keep product IDs and entitlement IDs stable to connect native billing later"
+  ]
+}
