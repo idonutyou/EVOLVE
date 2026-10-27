@@ -206,7 +206,7 @@
   trigger.id='m04MockTriggerV616';trigger.setAttribute('aria-label','개발 전용 모의 상점 열기');
   q('poster').append(trigger,modal);
   window.addEventListener('evolve:dev-cosmetics-ready',()=>{if(opening)draw()});
-  window.addEventListener('storage',e=>{if(opening&&(e.key===API.storageKey||e.key===null))draw()});
+  window.addEventListener('storage',e=>{if(opening&&(e.key===API.storageKey||e.key===null)){lastError='테스트 저장 상태를 다시 불러왔어.';draw()}});
   modal.addEventListener('click',e=>{if(e.target===modal)close()});
   modal.addEventListener('keydown',e=>{
    if(e.key==='Escape'){e.preventDefault();if(pending)cancelPending();else close()}

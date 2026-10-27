@@ -118,6 +118,7 @@ const server=http.createServer((req,res)=>{
   assert.equal(await rows.nth(1).locator('button').isDisabled(),true,'corrupt profile must not grant');
   await page.evaluate(raw=>{localStorage.setItem('EVOLVE_DEV_MOCK_STORE_V1',raw);window.dispatchEvent(new StorageEvent('storage',{key:'EVOLVE_DEV_MOCK_STORE_V1'}));},goodMock);
   assert.equal((await page.evaluate(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__.read())).theme,'dev_core_theme_02');
+  assert.doesNotMatch(await page.locator('#m04MockMessageV616').textContent(),/손상/,'valid restore must clear stale corruption message');
   await page.locator('#m04MockModalV616 button').first().click();
   await page.evaluate(()=>document.getElementById('introSplash')?.click());
   await page.locator('#start').click();
