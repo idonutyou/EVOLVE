@@ -39,6 +39,7 @@ function simulatePlayer({ days = 7, minutesPerDay = 20, runSeconds = 400,
 
   for (let day=1; day<=days; day++) {
     let todayDna=0, todayWins=0;
+    const beforeRanks=Object.values(levels).reduce((a,b)=>a+b,0);
     if (completeDaily) {
       freeCrystals += dailyCrystals;
       if (day % 7 === 0) freeCrystals += weeklyCrystals;
@@ -79,8 +80,14 @@ function simulatePlayer({ days = 7, minutesPerDay = 20, runSeconds = 400,
         dna=purchased.dna; spentDna+=purchased.cost; levels[selected.id]=purchased.rank;
       }
     }
+    const researchRanks=Object.values(levels).reduce((a,b)=>a+b,0);
+    const maxRanks=cfg.dna.research.reduce((sum,item)=>sum+item.max_rank,0);
+    const upgradesToday=researchRanks-beforeRanks;
+    const eligibleRemaining=cfg.dna.research.some(item=>clears>=item.unlocks_after_clears && levels[item.id]<item.max_rank);
+    const researchStatus=researchRanks===maxRanks?'all_maxed':upgradesToday>0?'upgraded':
+      eligibleRemaining?'no_upgrade_insufficient_or_no_spend':'locked_by_clear';
     daily.push({day,runs,clears,todayWins,todayDna,totalDna,spentDna,dna,
-      researchRanks:Object.values(levels).reduce((a,b)=>a+b,0),
+      researchRanks,upgradesToday,researchStatus,
       freeCrystals,paidCrystals,boughtThemeDay});
   }
   return {kind:'SIMULATION_ONLY', assumptions:{days,minutesPerDay,runSeconds,runsPerDay,

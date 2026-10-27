@@ -122,3 +122,46 @@ test('rejects invalid or excessive simulation and sale assumptions', () => {
   assert.throws(()=>hypotheticalCash({sku:'missing',count:1}),RangeError);
   assert.throws(()=>hypotheticalCash({sku:'starter_genome_once',count:1,refunds:2}),RangeError);
 });
+
+const {simulateCollection} = require('../monetization/economy/collection-model.cjs');
+
+test('research outcome distinguishes no upgrade from reaching the research cap', () => {
+  const none=simulatePlayer({days:7,minutesPerDay:0,completeDaily:false});
+  assert.equal(none.daily[2].researchStatus,'no_upgrade_insufficient_or_no_spend');
+  assert.equal(none.daily[6].researchRanks,0);
+  const full=simulatePlayer({days:7,minutesPerDay:20});
+  assert.equal(full.daily[2].researchStatus,'upgraded');
+  assert.equal(full.daily[6].researchStatus,'all_maxed');
+});
+
+test('84-day collection conserves free/paid crystals and never purchases a theme twice', () => {
+  const r=simulateCollection({days:84}); const last=r.daily.at(-1);
+  assert.deepEqual([r.freeEarned,r.paidEarned,last.released,last.owned,last.free,last.paid],[540,0,12,3,90,0]);
+  assert.equal(r.freeEarned-r.freeSpent,last.free);
+  assert.equal(r.paidEarned-r.paidSpent,last.paid);
+  assert.equal(new Set(r.obtained.map(x=>x.theme)).size,r.obtained.length);
+});
+
+test('content supply limits actual consumption even when a player has paid balance', () => {
+  const purchasePlan=[{day:1,sku:'starter_genome_once'},{day:29,sku:'mutation_crystal_small'},
+    {day:57,sku:'mutation_crystal_small'}];
+  const weekly=simulateCollection({days:84,releaseEveryDays:7,purchasePlan});
+  const monthly=simulateCollection({days:84,releaseEveryDays:28,purchasePlan});
+  assert.deepEqual([weekly.daily.at(-1).released,weekly.daily.at(-1).owned],[12,7]);
+  assert.deepEqual([monthly.daily.at(-1).released,monthly.daily.at(-1).owned],[3,3]);
+  assert.equal(weekly.gross,8800); assert.equal(monthly.gross,8800);
+  assert.ok(monthly.daily.at(-1).free+monthly.daily.at(-1).paid > weekly.daily.at(-1).free+weekly.daily.at(-1).paid);
+});
+
+test('a five-of-seven attendance pattern uses an explicit weekly goal', () => {
+  const r=simulateCollection({days:84,attendance:[true,true,true,true,true,false,false],weeklyGoal:5});
+  assert.equal(r.freeEarned,420);
+  assert.equal(r.daily.at(-1).owned,2);
+  assert.equal(r.daily.at(-1).free,120);
+});
+
+test('trial collection rejects repeat starter purchases and invalid schedules', () => {
+  assert.throws(()=>simulateCollection({purchasePlan:[{day:1,sku:'starter_genome_once'},{day:2,sku:'starter_genome_once'}]}),/limited/);
+  assert.throws(()=>simulateCollection({purchasePlan:[{day:1000,sku:'mutation_crystal_small'}]}),RangeError);
+  assert.throws(()=>simulateCollection({releaseEveryDays:0}),RangeError);
+});
