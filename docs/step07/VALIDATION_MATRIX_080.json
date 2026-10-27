@@ -1,0 +1,226 @@
+{
+  "step": 7,
+  "progress": 80,
+  "date_kst": "2026-10-27",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614",
+  "build": "8bf4982e0c0662adaf631bc0abbf3f96cf9dc509697dd0f26d5d46408c046317",
+  "candidate_regression_run": 40455081105,
+  "candidate_regression": "success",
+  "candidate_artifact_id": 12712405913,
+  "checks_total": 29,
+  "counts": {
+    "pass": 14,
+    "partial": 11,
+    "pending": 4,
+    "fail": 0
+  },
+  "criteria": [
+    {
+      "id": "behavior-1",
+      "category": "behavior",
+      "criterion": "existing monster idle-walk-windup-attack-hurt-death state transitions unchanged",
+      "result": "pass",
+      "evidence": "Original monster_motion test and original_player regression passed"
+    },
+    {
+      "id": "behavior-2",
+      "category": "behavior",
+      "criterion": "gun/blade/spike/tail active pose gets exactly one owner (no double transform)",
+      "result": "pass",
+      "evidence": "STEP05/06 V614 co-owner tests and actual live engine runner passed"
+    },
+    {
+      "id": "behavior-3",
+      "category": "behavior",
+      "criterion": "direct positive real damage only; shield-only, miss and DOT do not trigger new generic jolt",
+      "result": "pass",
+      "evidence": "Unit test shield/DOT/misses and actual injury checked"
+    },
+    {
+      "id": "behavior-4",
+      "category": "behavior",
+      "criterion": "normal vs heavy thresholds derive from actual HP lost/critical context, not attempted damage",
+      "result": "pass",
+      "evidence": "Unit heavy threshold tests passed"
+    },
+    {
+      "id": "behavior-5",
+      "category": "behavior",
+      "criterion": "repeated pellets/same target coalesce; no unbounded per-target timers",
+      "result": "pass",
+      "evidence": "Unit 250-hit active cap/coalescing verified"
+    },
+    {
+      "id": "behavior-6",
+      "category": "behavior",
+      "criterion": "arcShockV576 remains separate; locked lightning equipment stays locked",
+      "result": "pass",
+      "evidence": "Campaign lightning plus equipment-lock organ browser passed"
+    },
+    {
+      "id": "behavior-7",
+      "category": "behavior",
+      "criterion": "death triggers one echo per eligible monster and no echo for invisible rejected spawns",
+      "result": "partial",
+      "evidence": "One visible killed enemy single echo verified; invisible rejected spawn not specifically tested"
+    },
+    {
+      "id": "behavior-8",
+      "category": "behavior",
+      "criterion": "boss/finalBoss/TITAN death and phase behavior remains byte/logic compatible",
+      "result": "partial",
+      "evidence": "Core engine byte-identical; BIO/VENOM cinematic browser checks passed; not exhaustive every TITAN phase"
+    },
+    {
+      "id": "behavior-9",
+      "category": "behavior",
+      "criterion": "midboss 5 rarity grades and special attack warnings preserved",
+      "result": "partial",
+      "evidence": "Attack warning browser and five-rank config preservation; not five-rank live fight"
+    },
+    {
+      "id": "behavior-10",
+      "category": "behavior",
+      "criterion": "death does not alter XP, enemy drops, kill statistics or victory triggers",
+      "result": "partial",
+      "evidence": "Core engine byte identity demonstrates XP code unchanged; dynamic XP/drop comparison not tested"
+    },
+    {
+      "id": "graphics-1",
+      "category": "graphics",
+      "criterion": "legacy V578 ten painted forms remain distinct in GPU and Canvas",
+      "result": "pass",
+      "evidence": "monster_motion + original_player browser verify existing frames"
+    },
+    {
+      "id": "graphics-2",
+      "category": "graphics",
+      "criterion": "new species fall back to safe base appearance and do not modify existing textures",
+      "result": "partial",
+      "evidence": "species mapping source audited; all types not rendered in test"
+    },
+    {
+      "id": "graphics-3",
+      "category": "graphics",
+      "criterion": "GPU and Canvas orientation/size/foot anchor visually equivalent",
+      "result": "partial",
+      "evidence": "Both render paths use same API; full visual pixel-parity not measured"
+    },
+    {
+      "id": "graphics-4",
+      "category": "graphics",
+      "criterion": "no per-frame atlas rebuild, new texture upload or extra death sprites",
+      "result": "pass",
+      "evidence": "Manifest+PNG SHA256; no new atlas rebuilt; only engine changed"
+    },
+    {
+      "id": "graphics-5",
+      "category": "graphics",
+      "criterion": "HP bar placement and red warning layer stay readable; no impact above warning",
+      "result": "partial",
+      "evidence": "Attack-warnings browser passed; exhaustive overlay eye inspection pending"
+    },
+    {
+      "id": "graphics-6",
+      "category": "graphics",
+      "criterion": "reduced-motion and flash=0 suppress new distortion/glare",
+      "result": "pass",
+      "evidence": "V612/V613 reduced-motion and flash tests plus V614 reduced-motion unit passed"
+    },
+    {
+      "id": "lifecycle-1",
+      "category": "lifecycle",
+      "criterion": "pause and upgrade-choice freeze visual time as designed",
+      "result": "partial",
+      "evidence": "Game time stops in update; pause path tested in older suites; not full upgrade-choice visual-timer capture"
+    },
+    {
+      "id": "lifecycle-2",
+      "category": "lifecycle",
+      "criterion": "return home, restart, reload and orientation clear transient hit/death state",
+      "result": "pass",
+      "evidence": "Mobile viewport rotations, home reset and reload equipment browser passed"
+    },
+    {
+      "id": "lifecycle-3",
+      "category": "lifecycle",
+      "criterion": "equipped weapon, save keys, all custom collision JSON remain identical",
+      "result": "pass",
+      "evidence": "Engine baseline byte identity, original map checks in broad suite and persisted cannon"
+    },
+    {
+      "id": "lifecycle-4",
+      "category": "lifecycle",
+      "criterion": "running vs idle screens never show stale reaction",
+      "result": "pass",
+      "evidence": "Page reload and home cleanup in V614 browser passed"
+    },
+    {
+      "id": "stress-1",
+      "category": "stress",
+      "criterion": "50 enemies; hit coalescing and death cap no excessive transients",
+      "result": "partial",
+      "evidence": "250 injected event bounded <=24; not 50 concurrently walking/dying enemies"
+    },
+    {
+      "id": "stress-2",
+      "category": "stress",
+      "criterion": "180 and 250 enemies; zero unbounded caches and effects do not exceed existing shared cap 28",
+      "result": "partial",
+      "evidence": "250 synthetic hits ≤24 poses; memory trend and all existing effect module totals not profiled"
+    },
+    {
+      "id": "stress-3",
+      "category": "stress",
+      "criterion": "1/3/5 minute browser combat checks collect frame-time p50/p95, new effect count, memory trend (not declare hardware FPS pass)",
+      "result": "pending",
+      "evidence": "No timed 1/3/5-minute frame percentile or memory trend report"
+    },
+    {
+      "id": "stress-4",
+      "category": "stress",
+      "criterion": "Galaxy S23+ physical FPS/heat remains unverified until actual human or device session",
+      "result": "pending",
+      "evidence": "Actual physical S23+ frame rate, heat not available in CI"
+    },
+    {
+      "id": "publication-1",
+      "category": "publication",
+      "criterion": "node monster_motion.test.cjs plus V612/V613 unit suites pass",
+      "result": "pass",
+      "evidence": "Node 24 tests, previous monster motion and expanded Python suite successful"
+    },
+    {
+      "id": "publication-2",
+      "category": "publication",
+      "criterion": "browser portraits landscape and live hit-contact fixtures pass",
+      "result": "partial",
+      "evidence": "Candidate mobile browser success; public Pages is not yet V614"
+    },
+    {
+      "id": "publication-3",
+      "category": "publication",
+      "criterion": "dist asset manifest hash, engine SHA256 and original image SHA256 unchanged except planned new engine",
+      "result": "pass",
+      "evidence": "Verify site, V614 hash reversible, 1021 PNG preserved"
+    },
+    {
+      "id": "publication-4",
+      "category": "publication",
+      "criterion": "published build/version matches V614 and no forced in-fight page reload",
+      "result": "pending",
+      "evidence": "Await Pages deployment + published browser run; zero forced in-fight refresh test still pending"
+    },
+    {
+      "id": "publication-5",
+      "category": "publication",
+      "criterion": "10..100% remote checkpoints independently retrieved and verified before milestone claims",
+      "result": "pending",
+      "evidence": "10–70% backups verified; 80-100% still to be completed"
+    }
+  ],
+  "scope_note": "Pass is only given to tested evidence. Partial does not imply full acceptance. 1/3/5-min percentile, physical Galaxy S23+ and published Pages remain unverified at 80%; not blocked from code-only release but retained as explicit residual risks.",
+  "new_generated_images": 0,
+  "legacy_images_preserved": 1021,
+  "published": false
+}
