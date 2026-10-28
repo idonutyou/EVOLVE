@@ -1,0 +1,23 @@
+{
+  "schema": "EVOLVE_M09_DESIGN_CHECKPOINT_V1",
+  "stage": "M09-010",
+  "percent": 10,
+  "date_kst": "2026-10-29",
+  "baseline_main": "934329b17631da5c7514f005239d95e4da9a3706",
+  "kind": "design_only",
+  "public_release": false,
+  "images_rendered": false,
+  "touched_game_files": false,
+  "docs": [
+    "docs/monetization/M09_010_VALUE_SINK_AUDIT_KO.md"
+  ],
+  "expected_free_crystals_per_day_max": 45,
+  "known_permanent_crystal_sink": {
+    "item": "crimson",
+    "cost": 120,
+    "once": true
+  },
+  "premium_month_rule": "KST month day 1 through actual last calendar day",
+  "billing": "LOCAL_PREVIEW_ONLY",
+  "next": "M09-020 quantitative scenario and priorities; no art"
+}
