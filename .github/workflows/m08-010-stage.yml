@@ -1,0 +1,31 @@
+name: M08 010 focused stage event
+on:
+  push:
+    branches: ["monetization-m08-010-*"]
+    paths:
+      - "web/m08-stage-mission-v622.js"
+      - "dist/m08-stage-mission-v622.js"
+      - "dist/index.html"
+      - "tests/m08_010_live_stage.test.cjs"
+      - ".github/workflows/m08-010-stage.yml"
+  workflow_dispatch:
+jobs:
+  focused-contract:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Narrow syntax and authentic-stage-source regression
+        run: |
+          node --check web/m08-stage-mission-v622.js
+          node --check dist/m08-stage-mission-v622.js
+          node tests/m08_010_live_stage.test.cjs
+      - name: Hard-stop changes to combat, monster, images or SHOP
+        run: |
+          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/changed.txt
+          if grep -E '^(web/|dist/|art/|assets/|monetization/)' /tmp/changed.txt | grep -Ev '^(web/m08-stage-mission-v622\.js|dist/m08-stage-mission-v622\.js|dist/index\.html)$'; then
+            echo "Modified protected original game files";exit 1
+          fi
