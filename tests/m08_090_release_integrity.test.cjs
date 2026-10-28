@@ -13,7 +13,7 @@ const names=[
  ['shop-front-v621.js','v=100'],
  ['m08-stage-mission-v622.js','v=10'],
  ['m08-runtime-missions-v623.js','v=20'],
- ['m08-mission-rewards-v624.js','v=100']
+ ['m08-mission-rewards-v624.js','v=101']
 ];
 let last=-1;
 for(const [name,version] of names){

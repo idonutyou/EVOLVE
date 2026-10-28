@@ -60,7 +60,7 @@ assert.ok(src.includes('m08RewardWalletV624'),'show wallet balance on CHALLENGE'
 assert.ok(src.includes("refreshMode:'EVENT_DRIVEN'"),'event-driven refresh contract');
 assert.ok(!src.includes('setInterval('),'no repeated idle reward polling');
 const index=fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');
-assert.equal((index.match(/m08-mission-rewards-v624\.js\?v=40/g)||[]).length,1);
-assert.ok(index.indexOf('m08-runtime-missions-v623.js?v=20')<index.indexOf('m08-mission-rewards-v624.js?v=40'));
+assert.equal((index.match(/m08-mission-rewards-v624\.js\?v=101/g)||[]).length,1);
+assert.ok(index.indexOf('m08-runtime-missions-v623.js?v=20')<index.indexOf('m08-mission-rewards-v624.js?v=101'));
 assert.ok(index.includes('shop-experience-v621.js?v=100&m08=40'));
 console.log('M08 40% PASS: reward 10+5+10 to local wallet, legacy schema, no duplicate, no corruption, no billing.');
