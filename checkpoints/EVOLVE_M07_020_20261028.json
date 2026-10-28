@@ -1,0 +1,121 @@
+{
+  "schema_version": "EVOLVE_M07_020_CHECKPOINT_V1",
+  "progress_percent": 20,
+  "step": "1/3",
+  "date_kst": "2026-10-28",
+  "stage": "M07",
+  "status": "NON_RENDER_DESIGN_AND_PURE_TESTS",
+  "baseline_main": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "work_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup_branch": "backup/monetization-m07-020-20261028",
+  "prior_10_backup_branch": "backup/monetization-m07-010-20261028",
+  "preserve_M06_all_backup_branches": true,
+  "keep_all_previous_backups": true,
+  "archive_path": "checkpoints/EVOLVE_M07_020_20261028.zip",
+  "archive_bytes": 93557,
+  "archive_crc32": "47337230",
+  "archive_git_blob_sha": "2f38998efcad7a85b930eec4dfc46baccd42a08f",
+  "archive_commit": "e5d8a6f86c9bd5361721b4af10726344e591f8cb",
+  "archive_type": "INCREMENTAL_M07_DESIGN_AND_QA_NOT_RUNNABLE_GAME",
+  "files": [
+    {
+      "path": "monetization/m07/season-period-reward-020.v1.json",
+      "bytes": 3974,
+      "crc32": "4deccee5",
+      "git_blob_sha": "bc2b5fb9a5b2c3e05a46c4c1ded527b6223c343d"
+    },
+    {
+      "path": "monetization/m07/event-source-audit-020.v1.json",
+      "bytes": 3067,
+      "crc32": "b046b7d5",
+      "git_blob_sha": "de11341b7a3a0bf72d9a82e0980747146793da79"
+    },
+    {
+      "path": "monetization/m07/utc-period-planner-v1.cjs",
+      "bytes": 2868,
+      "crc32": "3159af6c",
+      "git_blob_sha": "adc2217f01db1afbf80bd52e5e3682925320038e"
+    },
+    {
+      "path": "tests/m07_020_period_contract.test.cjs",
+      "bytes": 4482,
+      "crc32": "d5eccce7",
+      "git_blob_sha": "50bda6281e3c183b8942a91bfa099bda2561c0c8"
+    },
+    {
+      "path": ".github/workflows/m07-020-design.yml",
+      "bytes": 1047,
+      "crc32": "c5ccd2be",
+      "git_blob_sha": "9344825a6949691f40d0c040fb7e314d8b756ca9"
+    },
+    {
+      "path": ".github/workflows/m07-010-design.yml",
+      "bytes": 945,
+      "crc32": "fd9a8f48",
+      "git_blob_sha": "4bb6082d6a83e39ccf9d180c826816587be76fa2"
+    },
+    {
+      "path": "docs/monetization/M07_020_EVENT_UTC_CAP_AUDIT_KO.md",
+      "bytes": 5977,
+      "crc32": "49e50bc4",
+      "git_blob_sha": "8b4e9f49126deb25005c330b2a55fe27923f67c5"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 20345,
+      "crc32": "5435827a",
+      "git_blob_sha": "c292cdbee43ac86db78f18347b6a44aea49f38df"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 32597,
+      "crc32": "533cf6d9",
+      "git_blob_sha": "9e0230fc62fb26d90ac295a41daed910a4604eff"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 16415,
+      "crc32": "81b7181e",
+      "git_blob_sha": "39fa53acec01fe3f0d1f0f21000e5581303e23b6"
+    },
+    {
+      "path": "CHECKPOINT_M07_020.txt",
+      "bytes": 214,
+      "crc32": "22c8da78",
+      "git_blob_sha": null
+    }
+  ],
+  "github_actions": [
+    {
+      "name": "M07 020 UTC mission/source safety contract",
+      "id": 40680019671,
+      "result": "success",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40680019671"
+    },
+    {
+      "name": "M07 010 non-render retention safety contract after fetch-depth fix",
+      "id": 40680139783,
+      "result": "success",
+      "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40680139783"
+    }
+  ],
+  "invariants": {
+    "no_new_art": true,
+    "no_live_game_modification": true,
+    "original_images_preserved": 1021,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "price_minor": null,
+    "season_pass_locked": true,
+    "rewards_actually_granted": 0,
+    "actual_verified_event_producer_wired": false,
+    "original_shop_only": true,
+    "main_unmodified": true
+  },
+  "next": {
+    "progress_percent": 30,
+    "step": "1/3",
+    "image_rendering_required": false,
+    "work": "Frozen API shapes, states and release blockers"
+  }
+}
