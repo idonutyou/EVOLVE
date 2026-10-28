@@ -15,6 +15,7 @@
   Object.freeze({id:'crystal100',title:'변이 결정 ×100',category:'재화',price:'₩1,200',kind:'crystal',crystals:100,once:false,badge:'기본'}),
   Object.freeze({id:'crystal300',title:'변이 결정 ×300',category:'재화',price:'₩3,300',kind:'crystal',crystals:300,once:false,badge:'인기'}),
   Object.freeze({id:'resonance',title:'공명 코어',category:'외형',price:'₩4,900',kind:'cosmetic',crystals:0,once:true,badge:'영구 외형'}),
+  Object.freeze({id:'crimson',title:'심홍 코어',category:'외형',price:'◆ 120',kind:'redeem',crystals:0,spendCrystals:120,once:true,badge:'결정 교환'}),
   Object.freeze({id:'researchpass',title:'월간 연구 패스',category:'시즌',price:'₩5,900',kind:'monthly',crystals:0,once:false,badge:'월간 전용'})
  ]);
  const byId=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
@@ -55,12 +56,16 @@
    if(Object.keys(s.orders).length>=1200)throw Error('ORDER_LIMIT');
    if(p.once&&s.owned[id]===true)throw Error('ALREADY_OWNED');
    if(id==='researchpass'&&s.passMonths[month])throw Error('ALREADY_OWNED');
-   if(s.crystals>100000000-p.crystals-50)throw Error('BALANCE_LIMIT');
-   const next=copy(s),firstBonus=!next.firstPurchase?50:0;
-   next.crystals+=p.crystals+firstBonus;next.firstPurchase=true;
+   const spend=p.kind==='redeem'?p.spendCrystals:0;
+   if(spend>0&&s.crystals<spend)throw Error('INSUFFICIENT_CRYSTALS');
+   const firstBonus=p.kind==='redeem'?0:!s.firstPurchase?50:0;
+   if(s.crystals-spend>100000000-p.crystals-firstBonus)throw Error('BALANCE_LIMIT');
+   const next=copy(s);
+   next.crystals=next.crystals-spend+p.crystals+firstBonus;
+   if(p.kind!=='redeem')next.firstPurchase=true;
    if(p.once)next.owned[id]=true;
    if(id==='researchpass')next.passMonths[month]=true;
-   const receipt={item:id,month,charged:false,status:'GRANTED_LOCAL',firstBonus,crystals:p.crystals};
+   const receipt={item:id,month,charged:false,status:'GRANTED_LOCAL',firstBonus,crystals:p.crystals,spentCrystals:spend};
    next.orders[requestId]=receipt;next.revision++;write(next);
    return Object.freeze({replayed:false,state:snapshot(),receipt:copy(receipt)});
   }
