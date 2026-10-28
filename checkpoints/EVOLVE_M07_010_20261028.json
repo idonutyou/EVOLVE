@@ -1,0 +1,72 @@
+{
+  "schema_version": "EVOLVE_CHECKPOINT_M07_010_V1",
+  "date_kst": "2026-10-28",
+  "module": "M07",
+  "progress_percent": 10,
+  "step": "1/3",
+  "status": "NON_RENDER_DESIGN_ONLY",
+  "main_baseline_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "work_branch": "monetization-m07-retention-20261028",
+  "backup_branch": "backup/monetization-m07-010-20261028",
+  "zip_path": "checkpoints/EVOLVE_M07_010_20261028.zip",
+  "zip_bytes": 15616,
+  "zip_crc32": "d8a9e60a",
+  "zip_blob_sha": "1ab72760307973481b2c94df63d3c6f01ab836d0",
+  "zip_commit_sha": "1d6f8ecf151b4b0c8af36094ff621506ded62083",
+  "archive_scope": "INCREMENTAL_DOCS_TEST_AND_WORKFLOW; FULL_TREE_IN_BACKUP_BRANCH",
+  "files": [
+    {
+      "path": "monetization/m07/season-retention-010.v1.json",
+      "bytes": 5767,
+      "crc32": "715b13bc",
+      "git_blob_sha": "06c1baa51b3ba19c6c8762bba2b69a80974bd3b7"
+    },
+    {
+      "path": "docs/monetization/M07_010_NON_RENDER_REORDER_KO.md",
+      "bytes": 4926,
+      "crc32": "9f5bfb02",
+      "git_blob_sha": "3f925f765fd8ef02e5475df3e37325bb420f46c3"
+    },
+    {
+      "path": "tests/m07_010_nonrender_design.test.cjs",
+      "bytes": 3031,
+      "crc32": "20a6b2df",
+      "git_blob_sha": "a9034da48d41a5cb387c7ebf2bfdb9324b6ddb7c"
+    },
+    {
+      "path": ".github/workflows/m07-010-design.yml",
+      "bytes": 944,
+      "crc32": "1b25d75b",
+      "git_blob_sha": "ea5cffef986ad33c2d19bba031b104d72087a8c3"
+    },
+    {
+      "path": "CHECKPOINT_README.txt",
+      "bytes": 164,
+      "crc32": "b56164a4",
+      "git_blob_sha": null
+    }
+  ],
+  "actions_ci": {
+    "run_id": 40679251569,
+    "status": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40679251569"
+  },
+  "invariants": {
+    "new_images_generated": false,
+    "game_runtime_modified": false,
+    "old_art_unchanged": true,
+    "original_images": 1021,
+    "shop_updated": false,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "season_pass_locked": true,
+    "old_backups_delete": false,
+    "m06_work_preserved": true
+  },
+  "next": {
+    "progress_percent": 20,
+    "art_rendering_required": false,
+    "mission_event_audit": true,
+    "utc_and_reward_caps": true
+  }
+}
