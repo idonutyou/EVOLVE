@@ -1,5 +1,0 @@
-/* Use the original card frame and typography; only replace the illustration. */
-#levelPanel #cards .suppliedOrganCardV610>.upgradeArtV593{visibility:visible!important;animation:none!important;filter:none!important}
-#levelPanel #cards .suppliedOrganCardV610 .upgradeSpriteV593{display:none!important}
-#levelPanel #cards .suppliedOrganCardV610 img.rasterCopyV611[data-raster-role='upgradeSpriteV593']{display:none!important}
-#levelPanel #cards .suppliedOrganCardV610 .upgradeSuppliedArtV611{display:block;width:72%;height:72%;object-fit:contain;filter:brightness(.9) saturate(.75);pointer-events:none}

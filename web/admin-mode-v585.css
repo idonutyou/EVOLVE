@@ -1,5 +1,0 @@
-/* WEB-18: hide developer controls before the first frame, including saved test preferences. */
-html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#homeMapEditV562,#mapModalV562,#mapEditorV562,#stressPanelV424,#stressBadgeV424,#venomV537TestButton,#evolvePerfQA513){display:none!important}
-#adminNoticeV585[hidden]{display:none!important}
-#adminNoticeV585{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:20001;max-width:calc(100vw - 32px);padding:11px 16px;border:1px solid #658677;border-radius:9px;background:#101d18f5;color:#eff9f2;font:700 13px/1.5 system-ui,sans-serif;box-shadow:0 4px 20px #0008;pointer-events:none;text-align:center}
-#tmModalV573 #adminExitV585{width:100%;margin:0 0 12px;background:#382c27;border-color:#987c61;color:#ffe8c5}

@@ -1,7 +1,0 @@
-{
-  "mode": "built-in image_gen",
-  "reference": "1000027490.png",
-  "prompt": "Transparent production 4 columns by 5 rows sprite sheet. Exact ivory-armored burgundy-jointed cyan-core scorpion identity, four lower walking feet, exactly two raised upper piercing limbs, one curled non-attacking tail. Fixed elevated three-quarter top-down camera facing lower-right. Rows: 4 idle breathing poses; 4 alternating grounded walking poses; 4 left-upper-limb anticipation/extension/impact/retraction poses; 4 corresponding right-upper-limb stabbing poses; 2 hit recoils and 2 collapsing/dead poses. Consistent body scale, full limbs within each cell, clean alpha, no text/grid/particles/equipment/projectiles.",
-  "saved_atlas": "assets/973b82ac6bde0325e2134a9f9a2924f3ab50efad9e7e50c946f26a064cc37660.png",
-  "original_generated_bytes_preserved": true
-}

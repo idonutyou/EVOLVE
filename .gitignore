@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-node_modules/
-test-results/
-asset-bundles/.*
-asset-bundles/*.bin
-.evolve-static-*/
