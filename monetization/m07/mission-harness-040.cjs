@@ -32,7 +32,7 @@ function createLocalSeasonHarness(options){
   const m=missionById.get(missionId);
   if(!m||input.eventType!==m.eventType)return {error:'UNRECOGNIZED_EVENT'};
   const ts=requireTime(input.eventUtc);
-  const period=free.candidatePeriod(m.cadence,new Date(ts).toISOString(),start.startUtc,start.days);
+  const period=free.candidatePeriod(m.cadence,new Date(Math.floor(ts/1000)*1000).toISOString(),start.startUtc,start.days);
   if(!belongs(period))return {error:'OUTSIDE_FREE_PERIOD'};
   return {eventId,missionId,m,period};
  }
@@ -65,7 +65,7 @@ function createLocalSeasonHarness(options){
   const paidActive=paid.isWithinPaidMonth(paidMonth.month,atUtc);
   const freeActive=ts>=Date.parse(start.startUtc)&&ts<Date.parse(start.endUtc);
   const missionProgress=MISSIONS.map(m=>{
-    const key=freeActive?free.candidatePeriod(m.cadence,atUtc,start.startUtc,start.days):null;
+    const key=freeActive?free.candidatePeriod(m.cadence,new Date(Math.floor(ts/1000)*1000).toISOString(),start.startUtc,start.days):null;
     const id=key===null?null:free.completionDedupe({seasonId:freeCycleId,accountId,missionId:m.id,periodKey:key});
     return Object.freeze({missionId:m.id,periodKey:key,goal:m.goal,previewCount:id?(counts.get(id)||0):0,previewCompleted:id?completions.has(id):false,claimable:false,claimed:false,awardsGranted:0});
   });
