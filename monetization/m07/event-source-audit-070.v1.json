@@ -1,0 +1,133 @@
+{
+  "schema_version": "EVOLVE_M07_070_UI_EVENT_ADAPTER_AUDIT_V1",
+  "progress_percent": 70,
+  "step": "3/3",
+  "mapping_status": "BROWSER_LOCAL_ONLY_NO_SERVER_AUTHORITY",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "real_server_verified_event_sources_found": 0,
+  "source_event_runtime_not_connected": true,
+  "confirmed_ui": [
+    {
+      "path": "web/home-hub-v601.js",
+      "blob_sha": "0c8a411379062693b66b43dfc104772c019d2135",
+      "lines": [
+        4,
+        21,
+        46,
+        53,
+        58,
+        68,
+        71
+      ],
+      "observed": [
+        "5 HOME navigation tabs SHOP PARTS BATTLE CHALLENGE CODEX",
+        "CHALLENGE is the existing homeChallengeViewV601 section",
+        "renderHomeChallengesV601 is legacy local challenge display",
+        "SHOP is homeShopViewV601",
+        "No reason to create DEV SHOP or new global HOME tab"
+      ],
+      "integration_idea": "Later mount one read-only research panel inside existing CHALLENGE container, only after browser layout/restore QA",
+      "claim_status": "not attached"
+    },
+    {
+      "path": "web/native-shop-v620.js",
+      "blob_sha": "53e0dabfaf815255525698d671b99f31aa3c9616",
+      "lines": [
+        19,
+        46,
+        54,
+        64,
+        105,
+        125,
+        127,
+        154
+      ],
+      "observed": [
+        "Existing season_research_pass_01 label is '준비 중 · 구매할 수 없음'",
+        "Item readiness determines disabled action button",
+        "Single native SHOP currently operates mock-only"
+      ],
+      "integration_idea": "Keep 5 existing SKU and disabled premium pass card unchanged until M08",
+      "claim_status": "not attached"
+    },
+    {
+      "path": "web/admin-mode-v585.js",
+      "blob_sha": "c1989c1e1d3d5f6939cd5c81d5cd8431c6b201df",
+      "lines": [
+        7,
+        9,
+        10,
+        12,
+        16
+      ],
+      "observed": [
+        "grantStageClearReward local wrapper is possible stage-clear trigger but NOT authenticated",
+        "startHomeBattleV522 is start not run finish",
+        "5x CODEX activates local admin mode shortcuts"
+      ],
+      "integration_idea": "Never trust these local hooks for production rewards",
+      "claim_status": "not attached"
+    },
+    {
+      "path": "web/admin-state-v585.js",
+      "blob_sha": "abf46a5645018953f97b29af95c990725289a9f8",
+      "lines": [
+        3,
+        4,
+        5
+      ],
+      "observed": [
+        "EVOLVE_V575_TEST_NORMAL_PROGRESS_V585 is editable localStorage gameplay progress"
+      ],
+      "integration_idea": "Migrate or show verified states from account server only, not local storage",
+      "claim_status": "not attached"
+    },
+    {
+      "path": "dist/index.html",
+      "blob_sha": "4c5589ee8af9d88a08b21b223836d4147ca5e044",
+      "lines": [
+        1848,
+        1458,
+        1459,
+        1496,
+        1499
+      ],
+      "observed": [
+        "Existing HOME nav has mobile layout and short-height media rules",
+        "Standalone preview should be checked at 320px/390px and landscape before integration"
+      ],
+      "integration_idea": "No changes to dist or original store",
+      "claim_status": "not attached"
+    }
+  ],
+  "main_shop_guard": {
+    "native_shop_unchanged": true,
+    "applies_to_existing_shop": false,
+    "challenge_tab_read_only_preview_later": true,
+    "original_five_tab_order": [
+      "SHOP",
+      "PARTS",
+      "BATTLE",
+      "CHALLENGE",
+      "CODEX"
+    ],
+    "extra_DEV_shop_created": false,
+    "season_pass_sku": "season_research_pass_01",
+    "season_pass_draft_disabled": true
+  },
+  "render_policy": {
+    "new_images": false,
+    "gray_background_concept_art_unneeded": true,
+    "markup_only": true,
+    "standalone_preview_is_game_update": false,
+    "preview_sends_requests": false,
+    "preview_writes_storage": false,
+    "preview_has_purchase_button": false
+  },
+  "next": {
+    "progress_percent": 80,
+    "step": "3/3",
+    "image_rendering_required": false,
+    "work": "Further no-image UI integration feasibility + narrow feature-branch browser-only read-only preview if safe, with disabled grants"
+  }
+}
