@@ -68,7 +68,7 @@ bad(s=>s.clientGrantsEnabled=true);
 bad(s=>s.realRewardsGranted=1);
 bad(s=>s.paidState='OWNED_ACTIVE_MONTH');
 bad(s=>s.paidStartUtc='2026-10-01T00:00:00.000Z');
-bad(s=>s.freeEndExclusiveUtc='2026-10-29T00:00:00.000Z');
+bad(s=>s.freeEndExclusiveUtc='2026-10-29T00:00:01.000Z');
 bad(s=>s.missions[0].claimable=true);
 bad(s=>s.missions[0].awardsGranted=1);
 bad(s=>s.missions[0].previewCount=2);
