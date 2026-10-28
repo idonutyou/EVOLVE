@@ -1,0 +1,28 @@
+name: M07 010 non-render retention safety contract
+on:
+  push:
+    branches:
+      - "monetization-m07-retention-*"
+    paths:
+      - "monetization/m07/**"
+      - "tests/m07_010_nonrender_design.test.cjs"
+      - ".github/workflows/m07-010-design.yml"
+  workflow_dispatch:
+jobs:
+  m07-no-render:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 8
+      - name: Verify no-render season and monetization safety contract
+        run: node tests/m07_010_nonrender_design.test.cjs
+      - name: Verify no existing game/image/catalog files touched
+        run: |
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-files.txt
+          if grep -E '^(dist/|web/|assets/|monetization/catalog/|monetization/economy/)' /tmp/m07-files.txt; then
+            echo 'M07 10% is design only.'
+            exit 1
+          fi
