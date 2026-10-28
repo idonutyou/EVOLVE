@@ -1,0 +1,186 @@
+{
+  "schema_version": "EVOLVE_M07_RETENTION_010_V1",
+  "module": "M07",
+  "progress_percent": 10,
+  "step": "1/3",
+  "status": "DESIGN_ONLY",
+  "design_date_kst": "2026-10-28",
+  "baseline": {
+    "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+    "shop": "existing_home_SHOP_V620",
+    "five_tabs": [
+      "SHOP",
+      "PARTS",
+      "BATTLE",
+      "CHALLENGE",
+      "CODEX"
+    ],
+    "original_images": 1021,
+    "monetization_catalog": "monetization/catalog/draft_skus.json",
+    "economy_model": "monetization/economy/economy-config.draft.json",
+    "real_transactions": false
+  },
+  "rescheduling": {
+    "reason": "USER_DEFER_ALL_WORK_NEEDING_NEW_IMAGE_RENDERING",
+    "held_modules": [
+      "M06 premium artwork generation/revisions",
+      "M06 additional visual effects and visual composition requiring new images"
+    ],
+    "preserve_existing_m06_branch": "monetization-m06-premium-art-20261028",
+    "preserve_all_m06_backups": true,
+    "allow_while_art_held": [
+      "M07 mission data contracts",
+      "M07 season progression pure engine",
+      "M07 free-vs-premium sample economics",
+      "M07 existing text UI and accessibility without new art",
+      "M07 mock-only QA",
+      "M08 non-live launch safety audit"
+    ],
+    "never_auto_trigger_rendering": true
+  },
+  "goal": {
+    "free_player_return_value": "Daily and weekly optional research missions accessible without payment",
+    "premium_candidate": "optional season cosmetic collection with clear visual deliverables only after M06 art completion",
+    "season_pass_sku": "season_research_pass_01",
+    "season_pass_status": "draft_disabled",
+    "premium_content_ready": false,
+    "free_track_required": true,
+    "paid_track_launch_blocked": true,
+    "compulsory_purchase_to_win": false
+  },
+  "contract": {
+    "season_length_days_proposal": 28,
+    "day_boundary": "UTC_SERVER_TIME_TO_BE_IMPLEMENTED",
+    "season_activation": false,
+    "subscription": false,
+    "auto_renewal": false,
+    "paid_rng": false,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "price_minor": null,
+    "real_rewards_granted": false,
+    "entitlement_migration_from_mock": false,
+    "free_dna_rebalance": false,
+    "all_business_logic_separate_from_combat": true
+  },
+  "missions": [
+    {
+      "mission_id": "m07_daily_first_run",
+      "cadence": "daily",
+      "event": "RUN_COMPLETED_VERIFIED",
+      "goal": 1,
+      "source_status": "CANDIDATE_NOT_WIRED",
+      "reward_kind": "free_collection_progress",
+      "premium_required": false
+    },
+    {
+      "mission_id": "m07_daily_stage_activity",
+      "cadence": "daily",
+      "event": "STAGE_ACTIVITY_VERIFIED",
+      "goal": 1,
+      "source_status": "CANDIDATE_NOT_WIRED",
+      "reward_kind": "free_collection_progress",
+      "premium_required": false
+    },
+    {
+      "mission_id": "m07_weekly_codex_discovery",
+      "cadence": "weekly",
+      "event": "CODEX_DISCOVERY_VERIFIED",
+      "goal": 1,
+      "source_status": "CANDIDATE_NOT_WIRED",
+      "reward_kind": "free_collection_progress",
+      "premium_required": false
+    }
+  ],
+  "rewards": {
+    "free": [
+      {
+        "id": "research_record",
+        "value": "research_progress_record_only",
+        "value_ready_for_grant": false
+      },
+      {
+        "id": "free_badge",
+        "value": "text_badge_candidate",
+        "value_ready_for_grant": false
+      }
+    ],
+    "premium": [
+      {
+        "id": "season_theme_cosmetic",
+        "value": "needs_final_M06_art_and_verified_entitlement",
+        "value_ready_for_grant": false
+      }
+    ],
+    "no_gameplay_premium_power": true,
+    "prohibit_granting_unfinished_content": true,
+    "free_completion_not_paywalled": true
+  },
+  "requirements": {
+    "server_authority_future": "M08",
+    "mission_events_must_be_verified": true,
+    "event_dedupe_by": [
+      "season_id",
+      "account_id",
+      "event_id",
+      "mission_id"
+    ],
+    "claim_dedupe_by": [
+      "season_id",
+      "account_id",
+      "reward_id"
+    ],
+    "no_device_clock_reward_trust": true,
+    "offline_pending_not_assumed_authoritative": true,
+    "never_reset_corrupt_original_save": true,
+    "receipt_refunds_server_source_aware": true,
+    "dont_merge_mock_with_real_wallet": true,
+    "mock_save_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "game_save_key_pattern": "EVOLVE_V575_TEST_*",
+    "sku_ids_untouched": true
+  },
+  "telemetry": {
+    "proposed_events": [
+      "season_page_open",
+      "mission_progress_view",
+      "free_claim_request",
+      "premium_preview_open",
+      "purchase_interest_without_checkout"
+    ],
+    "enabled": false,
+    "collect_pii": false,
+    "opt_in_and_privacy_review_required": true,
+    "measure": [
+      "D1_return",
+      "D7_return",
+      "weekly_free_track_completion",
+      "premium_preview_to_interest"
+    ],
+    "actual_results_available": false
+  },
+  "next": {
+    "progress_percent": 20,
+    "step": "1/3",
+    "work": "Season duration, mission event-source audit, offline/clock tampering safeguards and free reward cap contract",
+    "image_rendering_required": false
+  },
+  "third": {
+    "progress_percent": 30,
+    "step": "1/3",
+    "work": "Non-image season data contracts and release-blocking acceptance matrix",
+    "image_rendering_required": false
+  },
+  "gates": {
+    "no_new_images": true,
+    "no_live_shop_change": true,
+    "no_dist_change": true,
+    "no_game_save_change": true,
+    "no_checkout": true,
+    "no_production_premium_grants": true,
+    "season_pass_locked": true
+  },
+  "notes": [
+    "28 days, mission names and rewards are tentative proposals, not live systems.",
+    "An existing candidate M06 40% asset folder on feature branch is historical; it is not published or automatically used."
+  ]
+}
