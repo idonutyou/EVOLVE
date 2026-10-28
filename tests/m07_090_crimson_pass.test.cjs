@@ -91,6 +91,6 @@ assert.ok(!ui.includes('모의 구매'));
 assert.ok(!ui.includes('TEST 상품'));
 assert.ok(!ui.includes('실제 결제 완료'));
 const index=fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');
-assert.match(index,/shop-experience-v621\.js\?v=90/);
-assert.match(index,/shop-front-v621\.js\?v=90/);
+assert.match(index,/shop-experience-v621\.js\?v=100/);
+assert.match(index,/shop-front-v621\.js\?v=100/);
 console.log('M07 90% PASS: free-to-claim currency can redeem permanent crimson cosmetic at 120, idempotent two-skin ownership, KST monthly rollover and no billing.');

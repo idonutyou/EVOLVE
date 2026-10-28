@@ -1,0 +1,42 @@
+name: M07 100 final in-game SHOP and CHALLENGE browser
+on:
+  push:
+    branches: ["monetization-m07-100-*"]
+    paths:
+      - "dist/index.html"
+      - "dist/shop-*.js"
+      - "web/shop-*.js"
+      - "tests/m07_080_shop_browser.cjs"
+      - "tests/home_hub_browser.cjs"
+      - ".github/workflows/m07-100-browser.yml"
+  workflow_dispatch:
+jobs:
+  final-real-game:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser test dependencies
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Run complete mobile game SHOP / CHALLENGE / two cores
+        timeout-minutes: 15
+        run: |
+          node tests/m07_080_shop_browser.cjs
+          node tests/home_hub_browser.cjs
+      - name: Retain test screenshots and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m07-100-final-browser-${{ github.run_id }}
+          path: test-results
+          if-no-files-found: ignore
