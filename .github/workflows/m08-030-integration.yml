@@ -1,0 +1,51 @@
+name: M08 030 integration and ZIP safety
+on:
+  push:
+    branches: ["monetization-m08-010-*"]
+    paths:
+      - "tests/m08_030_integration.test.cjs"
+      - "tests/m08_030_integration_browser.cjs"
+      - "tools/verify_m08_030_checkpoint.py"
+      - "checkpoints/EVOLVE_M08_030_20261028.*"
+      - ".github/workflows/m08-030-integration.yml"
+  workflow_dispatch:
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: 10 20 30 contract regression
+        run: |
+          node tests/m08_010_live_stage.test.cjs
+          node tests/m08_020_runtime_missions.test.cjs
+          node tests/m08_030_integration.test.cjs
+      - name: Verify ZIP SHA CRC source and protected game paths
+        run: |
+          python tools/verify_m08_030_checkpoint.py
+          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/m08-paths
+          if grep -E '^(web/|dist/|art/|assets/)' /tmp/m08-paths | grep -Ev '^(web/m08-stage-mission-v622\.js|web/m08-runtime-missions-v623\.js|dist/m08-stage-mission-v622\.js|dist/m08-runtime-missions-v623\.js|dist/index\.html)$'; then
+            echo "Protected original game file changed"; exit 1
+          fi
+      - name: Browser setup reuse installed Chrome
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m08-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome" ]; then
+            "$RUNNER_TEMP/m08-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/m08-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Focused Chromium three viewports and actual HOME
+        timeout-minutes: 9
+        run: node tests/m08_030_integration_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m08-030-challenge-evidence
+          path: test-results/m08-030-*.png
+          if-no-files-found: ignore

@@ -1,0 +1,119 @@
+{
+  "schema": "EVOLVE_M08_030_INCREMENTAL_BACKUP_V1",
+  "created_kst": "2026-10-28",
+  "percent": 30,
+  "base_source_commit": "df5a292b2f279dd39041e88d243555f1fc58bb6d",
+  "ref": "monetization-m08-010-game-events-20261028",
+  "backup_ref": "backup/monetization-m08-030-20261028",
+  "archive": "checkpoints/EVOLVE_M08_030_20261028.zip",
+  "archive_bytes": 326738,
+  "archive_sha256": "725b356c474d7dfb69e5ca8177b3e18a99a9b2fd3ccef319d17bb45a6d822247",
+  "content": "M08 10/20/30 changed files only; full repository recoverable from Git branch",
+  "files": [
+    {
+      "path": "web/m08-stage-mission-v622.js",
+      "size": 7122,
+      "crc32": "7f60b397",
+      "sha256": "181fac869d4d061ba08a0c1fe980c223cd0272402a7f49247fea9cdbf53c17ed"
+    },
+    {
+      "path": "dist/m08-stage-mission-v622.js",
+      "size": 7122,
+      "crc32": "7f60b397",
+      "sha256": "181fac869d4d061ba08a0c1fe980c223cd0272402a7f49247fea9cdbf53c17ed"
+    },
+    {
+      "path": "web/m08-runtime-missions-v623.js",
+      "size": 8680,
+      "crc32": "f5d3cf6c",
+      "sha256": "987b136e0904613de4709cb75fa8816556925b93efda6f4e49f5d534de32d903"
+    },
+    {
+      "path": "dist/m08-runtime-missions-v623.js",
+      "size": 8680,
+      "crc32": "f5d3cf6c",
+      "sha256": "987b136e0904613de4709cb75fa8816556925b93efda6f4e49f5d534de32d903"
+    },
+    {
+      "path": "dist/index.html",
+      "size": 260832,
+      "crc32": "b2c2dd39",
+      "sha256": "ac194fa30fc534d31f8d233ff3a1fed2de7a0f5852b99374db091ea2915e7444"
+    },
+    {
+      "path": "tests/m08_010_live_stage.test.cjs",
+      "size": 3683,
+      "crc32": "d95d3f4e",
+      "sha256": "e2bdbfe33964aa363fff03b2cb36d1677cb18c4ae510dd804fb4804e30a44773"
+    },
+    {
+      "path": "tests/m08_020_runtime_missions.test.cjs",
+      "size": 3742,
+      "crc32": "dda8a66b",
+      "sha256": "f3b776f3b106351a185ff8a967a983978461d549f7b6e02db984b53457829044"
+    },
+    {
+      "path": "tests/m08_030_integration.test.cjs",
+      "size": 3480,
+      "crc32": "3a86b07b",
+      "sha256": "6741dad1a491a860b26e964ed28d2e1c9020494d9f9cfcfa5ee612c80e38fd4d"
+    },
+    {
+      "path": "tests/m08_030_integration_browser.cjs",
+      "size": 5397,
+      "crc32": "755ae5f3",
+      "sha256": "4eb853d47e7553ce25695b3e23190116637fd5e23489195548337f0ea33603d7"
+    },
+    {
+      "path": ".github/workflows/m08-010-stage.yml",
+      "size": 1572,
+      "crc32": "5e5014cc",
+      "sha256": "d2354822af879e954975bfc32503252e83b4e9f4efe8128b67596c78468e608a"
+    },
+    {
+      "path": ".github/workflows/m08-030-integration.yml",
+      "size": 2208,
+      "crc32": "abb0a7ec",
+      "sha256": "09f08f458e48bdde868f1f9f1a84a534cc9826eeefd68676d3fc6949cda3074b"
+    },
+    {
+      "path": "docs/monetization/M08_010_LIVE_STAGE_FAST_WORKFLOW_KO.md",
+      "size": 2534,
+      "crc32": "ae5124af",
+      "sha256": "18ad6b295c4419b10dd8422874536ba59b42fa4362ebb80c9ad730a4c110b012"
+    },
+    {
+      "path": "docs/monetization/M08_020_RUNTIME_EVENT_BRIDGE_KO.md",
+      "size": 3156,
+      "crc32": "be860da6",
+      "sha256": "c9d69c257c3a7c37cf76c23b0a756fa265d088d4b0a7d5c905b5917ce2e22b86"
+    },
+    {
+      "path": "docs/monetization/M08_030_INTEGRATION_QA_KO.md",
+      "size": 2453,
+      "crc32": "0bfced97",
+      "sha256": "8c9092e97499ff6001e106664379f121625d85bd087d403a98df2c0d83cc9aa9"
+    },
+    {
+      "path": "tools/verify_m08_030_checkpoint.py",
+      "size": 1361,
+      "crc32": "9f0e4c60",
+      "sha256": "c4e78cca06129870f57ddbb3f0081fe758240f880bb0f96028bc5ee318eee249"
+    },
+    {
+      "path": "checkpoints/EVOLVE_M08_010_FOCUSED_QA_20261028.json",
+      "size": 1125,
+      "crc32": "89dad26c",
+      "sha256": "ba8c7fafffa66f239f4fadba88d71c294bb7cd654f2b6ee27e28d8ceb16197e4"
+    },
+    {
+      "path": "checkpoints/EVOLVE_M08_020_FOCUSED_QA_20261028.json",
+      "size": 981,
+      "crc32": "c765e381",
+      "sha256": "b5e350f9d5d00a1aabde8d89a34ae4fcc3868a6f5bf59fcc21ba8e56015009d8"
+    }
+  ],
+  "billing": false,
+  "reward_grants": false,
+  "main_deployed": false
+}
