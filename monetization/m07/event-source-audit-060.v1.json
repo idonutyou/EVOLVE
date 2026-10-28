@@ -1,0 +1,108 @@
+{
+  "schema_version": "EVOLVE_M07_060_LEGACY_EVENT_ENTRYPOINT_AUDIT_V1",
+  "progress_percent": 60,
+  "step": "2/3",
+  "audited_date_kst": "2026-10-28",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "status": "LOCAL_STAGE_REWARD_HOOK_FOUND_NOT_AUTHORITATIVE",
+  "trusted_producer_connected": false,
+  "real_progress_wired": false,
+  "real_grants_enabled": false,
+  "confirmed_main_sources": [
+    {
+      "path": "web/admin-mode-v585.js",
+      "sha": "c1989c1e1d3d5f6939cd5c81d5cd8431c6b201df",
+      "evidence_lines": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        18
+      ],
+      "symbols": [
+        "grantStageClearReward",
+        "startHomeBattleV522",
+        "selectHomeStageV522",
+        "evolveAdminEnabledV585",
+        "saveNormalProgressV585"
+      ],
+      "observation": "Wraps local grantStageClearReward and updates normalProgressV585.unlocked for non-admin, calls underlying local grant. Stage-start is also wrapped. Not authenticated server proof.",
+      "trust_level": "CLIENT_LOCAL_UNTRUSTED",
+      "use_for": "POTENTIAL_READ_ONLY_DIAGNOSTIC_EVENT_MAPPING_ONLY",
+      "prohibited_as": "SERVER_VERIFIED_STAGE_ACTIVITY_OR_PREMIUM_CLAIM"
+    },
+    {
+      "path": "web/admin-state-v585.js",
+      "sha": "abf46a5645018953f97b29af95c990725289a9f8",
+      "evidence_lines": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "symbols": [
+        "EVOLVE_V575_TEST_NORMAL_PROGRESS_V585",
+        "normalProgressV585",
+        "saveNormalProgressV585"
+      ],
+      "observation": "Campaign progress localStorage persistence; spoofable or manually modified, cannot be reward authority.",
+      "trust_level": "CLIENT_LOCAL_UNTRUSTED",
+      "use_for": "MIGRATION_OR_UI_CONTEXT_ONLY",
+      "prohibited_as": "AUTHORITATIVE_MISSION_COMPLETION"
+    },
+    {
+      "path": "web/home-hub-v601.js",
+      "sha": "0c8a411379062693b66b43dfc104772c019d2135",
+      "evidence_lines": [
+        4,
+        45,
+        53
+      ],
+      "symbols": [
+        "homeHubTabsV601",
+        "codexBtn",
+        "memoryBtn"
+      ],
+      "observation": "Five HOME tabs (SHOP/PARTS/BATTLE/CHALLENGE/CODEX), navigation alone not gameplay evidence.",
+      "trust_level": "UI_ONLY"
+    }
+  ],
+  "candidate_to_source": [
+    {
+      "mission_id": "m07_daily_stage_activity",
+      "candidate_symbol": "grantStageClearReward",
+      "candidate_path": "web/admin-mode-v585.js",
+      "status": "LOCAL_CANDIDATE_UNTRUSTED",
+      "needs": "Find actual underlying stage completion in original engine, ensure authentic run/stage proof/account identity and admin mode isolation. Might not cover activity semantics."
+    },
+    {
+      "mission_id": "m07_daily_first_run",
+      "candidate_symbol": "startHomeBattleV522",
+      "candidate_path": "web/admin-mode-v585.js",
+      "status": "START_ONLY_NOT_COMPLETION",
+      "needs": "Identify actual legitimate gameplay run end and completion proof, with server binding."
+    },
+    {
+      "mission_id": "m07_weekly_codex_discovery",
+      "candidate_symbol": "codexBtn",
+      "candidate_path": "web/home-hub-v601.js",
+      "status": "NAVIGATION_ONLY_NOT_DISCOVERY",
+      "needs": "Identify authoritative unique codex unlock event distinct from page view and previous unlock."
+    }
+  ],
+  "admin_mode_protection": "Five CODEX button presses enable local administrator shortcuts per file; all related state transitions must be disallowed as reward proof unless independently authenticated by server. Do not infer admin-mode anti-cheat from local guard.",
+  "caveats": [
+    "This is source evidence from two additional short web JS files plus UI reference.",
+    "The underlying grantStageClearReward implementation resides in other original engine/bundle code not verified at this milestone.",
+    "No actual gameplay-event submission or reward wiring occurred.",
+    "Do not treat client event names or localStorage records as payment authority."
+  ],
+  "next": {
+    "progress_percent": 70,
+    "step": "3/3",
+    "work": "Further isolate event hooks and create read-only text preview design without image rendering or fake server grants",
+    "image_rendering_required": false
+  }
+}
