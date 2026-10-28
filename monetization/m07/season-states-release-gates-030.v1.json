@@ -1,0 +1,139 @@
+{
+  "schema_version": "EVOLVE_M07_030_STATES_V1",
+  "progress_percent": 30,
+  "status": "DESIGN_ONLY_BLOCKED",
+  "free_states": [
+    "UNAVAILABLE",
+    "ACTIVE",
+    "PENDING_UNVERIFIED",
+    "VERIFIED_COMPLETE",
+    "CLAIMABLE",
+    "CLAIMED",
+    "EXPIRED"
+  ],
+  "paid_states": [
+    "DRAFT_DISABLED",
+    "ART_PENDING",
+    "SALE_BLOCKED",
+    "AVAILABLE_AFTER_M08",
+    "VERIFYING",
+    "OWNED_ACTIVE_MONTH",
+    "EXPIRED_MONTH",
+    "REVOKED_REFUNDED",
+    "VERIFY_FAILED"
+  ],
+  "rules": {
+    "free_28_day_allowed": true,
+    "paid_strict_calendar_month_kst": true,
+    "paid_expires_next_month_day_1_at_00_kst": true,
+    "permanent_cosmetic_kept": true,
+    "auto_renew": false,
+    "verified_server_event_required": true,
+    "atomic_claim_required": true,
+    "duplicate_claim_returns_same_result": true,
+    "unverified_event_grants": false,
+    "premium_art_ready": false,
+    "late_month_fairness_approved": false,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "price_minor": null
+  },
+  "gates": [
+    {
+      "id": "R01",
+      "title": "verified gameplay events",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R02",
+      "title": "authenticated account entitlement ledger",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R03",
+      "title": "KST month 28/29/30/31 and year boundary",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R04",
+      "title": "free cycle independent from paid expiry",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R05",
+      "title": "premium cosmetic art ready",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R06",
+      "title": "late-month buyer fairness rule",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R07",
+      "title": "free track without pass",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R08",
+      "title": "atomic deduplicated claims",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R09",
+      "title": "auto-renewal disabled",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R10",
+      "title": "permanent owned cosmetics survive expiry",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R11",
+      "title": "stale/offline/invalid proof rejection",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R12",
+      "title": "receipt-linked refunds and restore",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R13",
+      "title": "original home SHOP only and original game unchanged",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R14",
+      "title": "mobile and performance QA",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    },
+    {
+      "id": "R15",
+      "title": "privacy/support and revenue metrics QA",
+      "result": "NOT_EXECUTED",
+      "blocks_release": true
+    }
+  ],
+  "overall": "NOT_FOR_SALE",
+  "premium_sku": "season_research_pass_01",
+  "next": {
+    "progress_percent": 40,
+    "image_rendering_required": false
+  }
+}
