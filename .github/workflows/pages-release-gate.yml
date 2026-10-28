@@ -83,4 +83,5 @@ jobs:
         run: echo 'Full game and asset regression is required before publishing unknown or engine modifications.' >> "$GITHUB_STEP_SUMMARY"
       - name: Confirm identical website is a no-op
         if: steps.compare.outputs.status == 'unchanged'
-        run: echo 'No change: no publish, no Pages commit, no 386 MB download.' >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo 'No change: no publish, no Pages commit, no 386 MB download.' >> "$GITHUB_STEP_SUMMARY"
