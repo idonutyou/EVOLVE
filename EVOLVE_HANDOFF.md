@@ -1,3 +1,11 @@
+# EVOLVE M07 50% 인수인계 (2026-10-28 KST)
+- 10~30% 설계, 40% 독립 미션 시뮬레이터, **50%** 시뮬레이터 JSON 테스트 기록·리플레이 복원과 재검증·변조 실패 차단. 게임/서버/정식 지급엔 미연결.
+- `monetization/m07/mission-journal-050.cjs`, `tests/m07_050_journal_restore.test.cjs`, `event-source-audit-050.v1.json`, `docs/monetization/M07_050_JOURNAL_RESTORE_QA_KO.md`. SHA-256은 테스트용 손상 검출이며 운영 권위 아님.
+- 유료 패스 월간 1일~말일 KST, 무료 미션 선택형 28일 가능. M06 신규 이미지 작업 보류, 원본 SHOP/게임·1021 이미지 보호, 결제/실보상 0.
+- 다음 '고' = M07 60% 비이미지 QA 및 게임 이벤트 소스 추가 검사. 백업 `backup/monetization-m07-050-20261028`/증분 ZIP·JSON.
+
+---
+
 # EVOLVE M07 40% — STEP 2/3 독립 비이미지 미션 시뮬레이터 (2026-10-28 KST)
 
 - M07 10~30% 설계 동결 완료. **40% 실코드** `monetization/m07/mission-harness-040.cjs`: 별도 메모리에서 무료 일/주 연구 미션 3종의 시뮬레이션 이벤트 진척, 중복 이벤트 차단, 달력 기간 경계/스냅샷 계산, 보상 수령·구매 항상 OFF.
