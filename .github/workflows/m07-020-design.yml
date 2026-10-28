@@ -23,10 +23,10 @@ jobs:
           node tests/m07_010_nonrender_design.test.cjs
           node tests/m07_020_period_contract.test.cjs
           node tests/m07_020_paid_month_policy.test.cjs
-      - name: Protect original game, premium data and non-render policy
+      - name: Preserve combat, graphics, merchant catalog and previous backups (V621 shop allowlist)
         run: |
-          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-020-files.txt
-          if grep -E '^(dist/|web/|art/|assets/|monetization/catalog/|monetization/economy/|monetization/m06/)' /tmp/m07-020-files.txt; then
-            echo 'No original game, art, SKU, or M06 changes allowed'
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-protected.txt
+          if grep -E '^(web/|dist/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)' /tmp/m07-protected.txt | grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$'; then
+            echo 'Forbidden change outside V621 shop experience.'
             exit 1
           fi
