@@ -1,84 +1,114 @@
 {
-  "schema_version": "EVOLVE_M07_MONTHLY_CALENDAR_V1",
+  "schema_version": "EVOLVE_M07_DUAL_PERIOD_POLICY_V2",
   "progress_percent": 20,
-  "policy_status": "USER_APPROVED_DATE_RULE",
-  "date_decision_ko": "매월 1일 시작, 해당 월의 마지막 날 종료",
-  "season_type": "CALENDAR_MONTH",
-  "fixed_day_seasons_allowed": false,
-  "season_id_example": "season_2026_10",
-  "timezone": "Asia/Seoul",
-  "season_start_local": "YYYY-MM-01T00:00:00+09:00",
-  "season_end_display_local": "해당 월 마지막 날 23:59:59 KST",
-  "season_end_exclusive_local": "다음 달 1일 00:00:00 KST",
-  "server_timestamps": "UTC_INSTANT_FROM_SERVER",
-  "calendar_and_display": "ASIA_SEOUL_SERVER_CONFIG_NOT_DEVICE_CLOCK",
-  "local_midnight_utc": "previous calendar day 15:00:00Z",
-  "daily_reset_local": "00:00 Asia/Seoul",
-  "weekly_reset_local": "Monday 00:00 Asia/Seoul",
-  "week_interval_within_month": "only verified events inside active monthly season count",
-  "month_lengths": [
-    28,
-    29,
-    30,
-    31
-  ],
-  "leap_years_supported": true,
-  "year_rollover_supported": true,
-  "month_change_resets": [
-    "unclaimed seasonal mission progress per policy",
-    "monthly counters",
-    "seasonal free points"
-  ],
-  "month_change_must_not_delete": [
-    "owned cosmetics",
-    "verified permanent purchase entitlements",
-    "original game save",
-    "other season history",
-    "M03 ledger entries"
-  ],
-  "premium_track": "LOCKED_UNTIL_ART_AND_M08",
-  "payment_enabled": false,
-  "refund_restore_work_not_done": true,
-  "late_month_join": "FREE_MISSION_PARTICIPATION_ALLOWED_WITHIN_REMAINING_MONTH",
-  "late_month_paid_sale": "BLOCKED_UNTIL_PRICE_FAIRNESS_AND_RETROACTIVE_PROGRESS_RULE_ACCEPTED",
-  "points_model": {
-    "daily_missions_per_day": 2,
-    "weekly_missions_per_touching_week": 1,
-    "cap_formula": "2*daysInCalendarMonth + numberOfMondayWeeksTouchingCalendarMonth",
-    "cap_is_draft_balance_only": true,
-    "not_paid_currency": true
+  "step": "1/3",
+  "policy_status": "USER_CORRECTION_FINAL_PRIORITY",
+  "date_decision_ko": "유료 시즌은 반드시 매월 1일 00시 시작~그 달 말일 종료. 무료 플레이·무료 미션은 28일 주기 허용.",
+  "last_user_correction": "유료 아이템 아니면 28일 상관 없어 유료는 1달씩 해야 해",
+  "scope_and_precedence": {
+    "paid_season_pass": "STRICT_CALENDAR_MONTH",
+    "free_events_and_nonpaid_missions": "MAY_USE_28_DAY_PERIOD",
+    "no_28_day_limit_on_paid_content": true,
+    "paid_policy_overrides_old_28_day_m07_010_020_drafts": true,
+    "no_forced_calendar_month_for_free_nonpaid": true,
+    "price_and_checkout_not_activated": true
   },
-  "sample_months": [
+  "paid_calendar": {
+    "sku": "season_research_pass_01",
+    "calendar": "GREGORIAN_MONTH",
+    "timezone": "Asia/Seoul",
+    "start_local": "calendar_month_day_1_00:00:00_KST",
+    "end_display_local": "calendar_month_last_day_23:59:59_KST",
+    "end_exclusive_local": "next_month_day_1_00:00:00_KST",
+    "start_month_based_not_purchase_time": true,
+    "duration_varies_days": [
+      28,
+      29,
+      30,
+      31
+    ],
+    "monthly_purchase_per_period_when_live": true,
+    "automatic_subscription_renewal": false,
+    "billing_status": "DRAFT_DISABLED_UNTIL_M08",
+    "seller_customer_copy_required": [
+      "해당 월 1일~말일 유효",
+      "시작·종료 날짜와 남은 기간 구매 전에 표시",
+      "다음 달 자동 연장 없음",
+      "늦게 구매하는 이용자에게 불리하지 않은 가격·소급 진행 정책 출시 전 확정"
+    ],
+    "late_purchase_policy": "UNDECIDED_BLOCK_CHECKOUT_UNTIL_FAIRNESS_RULE_DEFINED",
+    "ownership_policy": "monthly_pass_entitlement_separate_from_permanent_cosmetic_owned",
+    "billing_retry_receipt_refund": "M08_FUTURE_SERVER_AUTHORITY",
+    "month_id": "YYYY-MM_AsiaSeoul",
+    "utc_timestamp_for_server": "KST_date_at_midnight_translated_to_UTC_instant_not_server_UTC_calendar_day"
+  },
+  "free_cycles": {
+    "can_use_28_day": true,
+    "cycle_type": "OPTIONAL_28_DAY_FREE_MISSION_CYCLE",
+    "example_length_days": 28,
+    "free_calendar_month_allowed_as_separate_choice": true,
+    "paid_calendar_expiration_must_not_reset_free_cycle": true,
+    "can_play_without_paid_pass": true,
+    "free_missions_eligible_without_purchase": true,
+    "no_premium_reward_grants_from_free_28_day": false,
+    "free_28_day_quota_estimates_not_premium_month_entitlements": true
+  },
+  "examples": [
     {
+      "kind": "paid",
       "month": "2026-10",
-      "days": 31,
-      "touching_weeks": 5,
-      "theoretical_free_points": 67
+      "local_start": "2026-10-01T00:00:00+09:00",
+      "local_end_exclusive": "2026-11-01T00:00:00+09:00",
+      "calendar_days": 31
     },
     {
+      "kind": "paid",
       "month": "2026-11",
-      "days": 30,
-      "touching_weeks": 6,
-      "theoretical_free_points": 66
+      "local_start": "2026-11-01T00:00:00+09:00",
+      "local_end_exclusive": "2026-12-01T00:00:00+09:00",
+      "calendar_days": 30
     },
     {
+      "kind": "paid",
       "month": "2027-02",
-      "days": 28,
-      "touching_weeks": 4,
-      "theoretical_free_points": 60
+      "local_start": "2027-02-01T00:00:00+09:00",
+      "local_end_exclusive": "2027-03-01T00:00:00+09:00",
+      "calendar_days": 28
     },
     {
+      "kind": "paid",
       "month": "2028-02",
-      "days": 29,
-      "touching_weeks": 5,
-      "theoretical_free_points": 63
+      "local_start": "2028-02-01T00:00:00+09:00",
+      "local_end_exclusive": "2028-03-01T00:00:00+09:00",
+      "calendar_days": 29
+    },
+    {
+      "kind": "free",
+      "cycle_start_utc": "2026-10-28T00:00:00.000Z",
+      "cycle_end_exclusive_utc": "2026-11-25T00:00:00.000Z",
+      "cycle_days": 28
     }
   ],
-  "supersedes": [
-    "M07 10% 28-day draft",
-    "M07 20% UTC-midnight draft",
-    "M07 20% 28-day example"
-  ],
-  "art_render_required": false,
-  "main_game_changed": false
+  "security_and_preservation": {
+    "server_verified_month_identity_when_enabled": true,
+    "no_client_clock_for_billing": true,
+    "no_currency_or_gameplay_power_bonus": true,
+    "no_auto_delete_original_save": true,
+    "preserve_previous_month_entitlement_history": true,
+    "retain_purchased_permanent_cosmetics": true,
+    "separate_mock_store_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "real_receipts_required_after_M08": true,
+    "original_images_unchanged": 1021,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "price_minor": null,
+    "season_not_live": true
+  },
+  "m07_010_020_old_spec_handling": "Legacy 28-day numeric draft now applies only to optional free content; paid calendar month uses this file as authoritative source.",
+  "next": {
+    "m07_progress_percent": 30,
+    "step": "1/3",
+    "image_rendering_required": false,
+    "work": "Finalize dual-period season API and launch blockers without art"
+  }
 }
