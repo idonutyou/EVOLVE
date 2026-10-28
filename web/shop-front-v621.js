@@ -201,7 +201,7 @@
     const ms=Math.max(0,Date.parse(s.paidWindow.endExclusiveUtc)-Date.now());
     const hours=Math.floor(ms/3600000),minutes=Math.ceil(ms/60000);
     const remaining=hours>=24?Math.floor(hours/24)+'일 '+hours%24+'시간':hours>=1?hours+'시간':Math.max(0,minutes)+'분';
-    detail+=' 이 패스는 '+s.month+'월의 마지막 날 23:59(KST)까지만 유효합니다. 현재 남은 기간 약 '+remaining+'이며, 다음 달 자동 갱신되지 않습니다.';
+    detail+=' 이 패스는 '+s.month.replace('-','년 ')+'월 마지막 날 23:59(KST)까지만 유효합니다. 현재 남은 기간 약 '+remaining+'이며, 다음 달 자동 갱신되지 않습니다.';
     if(ms<86400000)detail+=' 주의: 이번 달 종료까지 24시간 미만 남았습니다.';
    }
    add(c,'p','',detail);
