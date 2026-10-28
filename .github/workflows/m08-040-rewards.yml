@@ -24,7 +24,7 @@ jobs:
     permissions: {contents: read}
     steps:
       - uses: actions/checkout@v4
-        with: {fetch-depth: 8} # 30% base + 40/50/60/70/80 changes, avoid full Git history
+        with: {fetch-depth: 16} # includes immutable M08 30% diff baseline without full repository history
       - name: M08 10-80 and M07 SHOP sensitive regression
         run: |
           node --check web/shop-experience-v621.js
