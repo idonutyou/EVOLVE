@@ -1,0 +1,36 @@
+name: M07 090 real shop experience guard
+on:
+  push:
+    branches: ["monetization-m07-090-*"]
+    paths:
+      - "web/shop-*.js"
+      - "dist/shop-*.js"
+      - "dist/index.html"
+      - "tests/m07_080_shop_experience.test.cjs"
+      - "tests/m07_090_crimson_pass.test.cjs"
+      - ".github/workflows/m07-090-shop.yml"
+  workflow_dispatch:
+jobs:
+  shop-qa:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: V621 browser-store syntax, legacy and new shop logic
+        run: |
+          node --check web/shop-experience-v621.js
+          node --check web/shop-front-v621.js
+          node --check dist/shop-experience-v621.js
+          node --check dist/shop-front-v621.js
+          node tests/m07_080_shop_experience.test.cjs
+          node tests/m07_090_crimson_pass.test.cjs
+      - name: Preserve original game, artwork, player, monster, M03 and pricing catalog
+        run: |
+          git diff --name-only 44d3aa6d95cfcf0eeddc80fccc8a8fba90152c08 HEAD > /tmp/m07_090_changed.txt
+          if grep -E '^(dist/|web/|assets/|art/|monetization/|assets/)' /tmp/m07_090_changed.txt | grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$'; then
+            echo 'A protected original asset, game, combat, monster, or catalog was altered.'
+            exit 1
+          fi
