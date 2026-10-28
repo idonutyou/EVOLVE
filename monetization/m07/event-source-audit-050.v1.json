@@ -1,0 +1,69 @@
+{
+  "schema_version": "EVOLVE_M07_050_MORE_EVENT_SOURCE_AUDIT_V1",
+  "progress_percent": 50,
+  "checked_date_kst": "2026-10-28",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "scope": "SIX_ADDITIONAL_REVIEWED_FILES_EXACT_EVENT_SYMBOL_SCAN_NOT_FULL_GAME_AUDIT",
+  "status": "NO_TRUSTED_EVENT_PRODUCER_ESTABLISHED",
+  "reviewed": [
+    {
+      "path": "web/player-combat-v587.js",
+      "blob_sha": "5c1ab4c735de1020f5894ec4ce928694d418a48e",
+      "length_chars": 10836,
+      "named_verified_event_symbols_found": 0,
+      "notes": "Player-combat helper, no three M07 event names or dispatchEvent discovered."
+    },
+    {
+      "path": "web/home-controls-v606.js",
+      "blob_sha": "00419e01aa953836ed729891935397315c068a68",
+      "length_chars": 2951,
+      "named_verified_event_symbols_found": 0,
+      "notes": "Home controls, no three M07 event names or dispatchEvent discovered."
+    },
+    {
+      "path": "web/home-map-miniatures-v597.js",
+      "blob_sha": "f1038f28203b5bff65cf0836f9892cb64ec40dd8",
+      "length_chars": 2314,
+      "named_verified_event_symbols_found": 0,
+      "notes": "Map miniatures are stage selection visuals, not verified stage completion."
+    },
+    {
+      "path": "web/monster-feedback-v614.js",
+      "blob_sha": "c8c284a608757a78cb85abda6923c004be4e9c32",
+      "length_chars": 5834,
+      "named_verified_event_symbols_found": 0,
+      "notes": "Monster feedback and hit visuals, not a verified run/stage/codex event source."
+    },
+    {
+      "path": "web/home-hub-v601.js",
+      "blob_sha": "0c8a411379062693b66b43dfc104772c019d2135",
+      "length_chars": 10657,
+      "named_verified_event_symbols_found": 0,
+      "notes": "CHALLENGE/CODEX tab UI alone is not verified accomplishment."
+    },
+    {
+      "path": "web/home-balance-art-v607.json",
+      "blob_sha": "1cf4881c41e04d6fa3d5b6acac3b03acea70a9bf",
+      "length_chars": 247,
+      "named_verified_event_symbols_found": 0,
+      "notes": "Art data, no gameplay event producer."
+    }
+  ],
+  "searched_symbols": [
+    "RUN_COMPLETED_VERIFIED",
+    "STAGE_ACTIVITY_VERIFIED",
+    "CODEX_DISCOVERY_VERIFIED",
+    "dispatchEvent",
+    "CustomEvent"
+  ],
+  "not_reviewed": [
+    "Complete hashed/minified game engine bundle in dist/assets",
+    "Server-side authenticated gameplay event producer and account ledger",
+    "All future versions of gameplay"
+  ],
+  "next_required": "At M07 60-70, identify actual game completion and discovery sources in full runtime or server, validate anti-replay; do not silently treat scene transitions as verified progress.",
+  "implementation_happened": false,
+  "real_reward_grants": 0,
+  "source_verification_ready": false,
+  "images_required": false
+}
