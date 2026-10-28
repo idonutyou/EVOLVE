@@ -1,0 +1,117 @@
+{
+  "schema_version": "EVOLVE_M07_040_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "stage": "M07",
+  "progress_percent": 40,
+  "step": "2/3",
+  "status": "PURE_LOCAL_SIMULATION_TESTED_NO_REAL_GRANTS",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "working_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup_branch": "backup/monetization-m07-040-20261028",
+  "previous_full_tree_backup": "backup/monetization-m07-030-20261028",
+  "older_backup_protection": "ALL_M01_M06_AND_M07_010_030_BACKUPS_RETAINED",
+  "archive_path": "checkpoints/EVOLVE_M07_040_20261028.zip",
+  "archive_bytes": 117831,
+  "archive_crc32": "73d7ab35",
+  "archive_blob_sha": "306f69f356ac864652bb55966e439ffb03e36052",
+  "archive_commit": "76361a8b45251f2de8bad0926e36cf3663822ea6",
+  "archive_kind": "INCREMENTAL_TEST_SOURCE_NOT_FULL_GAME",
+  "files": [
+    {
+      "path": "monetization/m07/mission-harness-040.cjs",
+      "bytes": 5827,
+      "crc32": "ed1dbbe3",
+      "git_blob_sha": "8d151638bd5072f6cfcb674f52ac2602726d5116"
+    },
+    {
+      "path": "tests/m07_040_mission_harness.test.cjs",
+      "bytes": 7142,
+      "crc32": "b9cb3bb1",
+      "git_blob_sha": "03c90e45d04d2ba9f973d23210acf40ad6378506"
+    },
+    {
+      "path": ".github/workflows/m07-040-harness.yml",
+      "bytes": 1124,
+      "crc32": "ce133e4c",
+      "git_blob_sha": "294855b87a014fb89f2b75500e60f342645a88cd"
+    },
+    {
+      "path": "docs/monetization/M07_040_MISSION_HARNESS_QA_KO.md",
+      "bytes": 4477,
+      "crc32": "37dede88",
+      "git_blob_sha": "74a1a4038ff5c8e7290e1428160cc0918ccda3bd"
+    },
+    {
+      "path": "monetization/m07/season-api-contract-030.v1.json",
+      "bytes": 5082,
+      "crc32": "643f9738",
+      "git_blob_sha": "ab3fc6b9391e0f11d72c8de9600e991acbc8c5a0"
+    },
+    {
+      "path": "monetization/m07/monthly-calendar-policy.v1.json",
+      "bytes": 4455,
+      "crc32": "cd2d5f86",
+      "git_blob_sha": "fdf90fafd9abaa427915d85be96a78a57b1d6be0"
+    },
+    {
+      "path": "monetization/m07/paid-month-calendar-v1.cjs",
+      "bytes": 1795,
+      "crc32": "de56e31d",
+      "git_blob_sha": "f6fb0a430bae5064c857a66e4fd184196d96bd0f"
+    },
+    {
+      "path": "monetization/m07/utc-period-planner-v1.cjs",
+      "bytes": 2868,
+      "crc32": "3159af6c",
+      "git_blob_sha": "adc2217f01db1afbf80bd52e5e3682925320038e"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 24882,
+      "crc32": "ebfe202d",
+      "git_blob_sha": "ceb095c5ef705e6bc8a5c6010537fa97a1065056"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 37134,
+      "crc32": "8f9a8780",
+      "git_blob_sha": "b3995776059837aefc3242bb8bec2ea3bff7086d"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 20952,
+      "crc32": "a5a96039",
+      "git_blob_sha": "3ae85e15966794c90214758462932716267b9d63"
+    },
+    {
+      "path": "CHECKPOINT_M07_040.txt",
+      "bytes": 295,
+      "crc32": "c0868216",
+      "git_blob_sha": null
+    }
+  ],
+  "ci": {
+    "run_id": 40682767590,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40682767590"
+  },
+  "safety": {
+    "art_rendered": false,
+    "game_runtime_changed": false,
+    "shop_changed": false,
+    "real_checkout_enabled": false,
+    "real_reward_grants": 0,
+    "premium_monthly_1st_to_last_KST": true,
+    "free_28day_optional": true,
+    "no_subscription_autorenewal": true,
+    "original_images": 1021,
+    "source_event_verification_not_available": true,
+    "simulation_is_not_server_authority": true
+  },
+  "next": {
+    "progress_percent": 50,
+    "step": "2/3",
+    "work": "Improve idempotency and period boundary fail-closed tests plus source event mapping audit",
+    "image_rendering_required": false
+  }
+}
