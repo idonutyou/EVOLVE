@@ -1,0 +1,21 @@
+name: M07 030 API freeze
+on:
+  push:
+    branches: ["monetization-m07-retention-*"]
+    paths:
+      - "monetization/m07/**"
+      - "tests/m07_030_api_release_freeze.test.cjs"
+      - ".github/workflows/m07-030-design.yml"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 110
+      - name: Validate all M07 designs
+        run: |
+          node tests/m07_010_nonrender_design.test.cjs
+          node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
+          node tests/m07_030_api_release_freeze.test.cjs
