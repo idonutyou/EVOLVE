@@ -1,0 +1,84 @@
+{
+  "schema_version": "EVOLVE_M07_MONTHLY_CALENDAR_V1",
+  "progress_percent": 20,
+  "policy_status": "USER_APPROVED_DATE_RULE",
+  "date_decision_ko": "매월 1일 시작, 해당 월의 마지막 날 종료",
+  "season_type": "CALENDAR_MONTH",
+  "fixed_day_seasons_allowed": false,
+  "season_id_example": "season_2026_10",
+  "timezone": "Asia/Seoul",
+  "season_start_local": "YYYY-MM-01T00:00:00+09:00",
+  "season_end_display_local": "해당 월 마지막 날 23:59:59 KST",
+  "season_end_exclusive_local": "다음 달 1일 00:00:00 KST",
+  "server_timestamps": "UTC_INSTANT_FROM_SERVER",
+  "calendar_and_display": "ASIA_SEOUL_SERVER_CONFIG_NOT_DEVICE_CLOCK",
+  "local_midnight_utc": "previous calendar day 15:00:00Z",
+  "daily_reset_local": "00:00 Asia/Seoul",
+  "weekly_reset_local": "Monday 00:00 Asia/Seoul",
+  "week_interval_within_month": "only verified events inside active monthly season count",
+  "month_lengths": [
+    28,
+    29,
+    30,
+    31
+  ],
+  "leap_years_supported": true,
+  "year_rollover_supported": true,
+  "month_change_resets": [
+    "unclaimed seasonal mission progress per policy",
+    "monthly counters",
+    "seasonal free points"
+  ],
+  "month_change_must_not_delete": [
+    "owned cosmetics",
+    "verified permanent purchase entitlements",
+    "original game save",
+    "other season history",
+    "M03 ledger entries"
+  ],
+  "premium_track": "LOCKED_UNTIL_ART_AND_M08",
+  "payment_enabled": false,
+  "refund_restore_work_not_done": true,
+  "late_month_join": "FREE_MISSION_PARTICIPATION_ALLOWED_WITHIN_REMAINING_MONTH",
+  "late_month_paid_sale": "BLOCKED_UNTIL_PRICE_FAIRNESS_AND_RETROACTIVE_PROGRESS_RULE_ACCEPTED",
+  "points_model": {
+    "daily_missions_per_day": 2,
+    "weekly_missions_per_touching_week": 1,
+    "cap_formula": "2*daysInCalendarMonth + numberOfMondayWeeksTouchingCalendarMonth",
+    "cap_is_draft_balance_only": true,
+    "not_paid_currency": true
+  },
+  "sample_months": [
+    {
+      "month": "2026-10",
+      "days": 31,
+      "touching_weeks": 5,
+      "theoretical_free_points": 67
+    },
+    {
+      "month": "2026-11",
+      "days": 30,
+      "touching_weeks": 6,
+      "theoretical_free_points": 66
+    },
+    {
+      "month": "2027-02",
+      "days": 28,
+      "touching_weeks": 4,
+      "theoretical_free_points": 60
+    },
+    {
+      "month": "2028-02",
+      "days": 29,
+      "touching_weeks": 5,
+      "theoretical_free_points": 63
+    }
+  ],
+  "supersedes": [
+    "M07 10% 28-day draft",
+    "M07 20% UTC-midnight draft",
+    "M07 20% 28-day example"
+  ],
+  "art_render_required": false,
+  "main_game_changed": false
+}
