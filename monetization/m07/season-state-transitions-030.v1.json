@@ -1,0 +1,127 @@
+{
+  "schema_version": "EVOLVE_M07_030_TRANSITIONS_V1",
+  "progress_percent": 30,
+  "status": "DRAFT_SPEC_NO_RUNTIME",
+  "free": [
+    {
+      "from": "UNAVAILABLE",
+      "event": "SERVER_START_FREE_CYCLE",
+      "to": "ACTIVE",
+      "client_grant": false
+    },
+    {
+      "from": "ACTIVE",
+      "event": "UNVERIFIED_OFFLINE_EVENT",
+      "to": "PENDING_UNVERIFIED",
+      "client_grant": false
+    },
+    {
+      "from": "PENDING_UNVERIFIED",
+      "event": "SERVER_REJECTED_EVENT",
+      "to": "ACTIVE",
+      "client_grant": false
+    },
+    {
+      "from": "ACTIVE",
+      "event": "SERVER_ACCEPTED_UNIQUE_EVENT",
+      "to": "VERIFIED_COMPLETE",
+      "client_grant": false
+    },
+    {
+      "from": "VERIFIED_COMPLETE",
+      "event": "REWARD_CONTENT_READY",
+      "to": "CLAIMABLE",
+      "client_grant": false
+    },
+    {
+      "from": "CLAIMABLE",
+      "event": "SERVER_ATOMIC_CLAIM_COMMIT",
+      "to": "CLAIMED",
+      "client_grant": false
+    },
+    {
+      "from": "CLAIMED",
+      "event": "DUPLICATE_CLAIM",
+      "to": "CLAIMED",
+      "client_grant": false
+    },
+    {
+      "from": "ACTIVE",
+      "event": "FREE_CYCLE_EXPIRES",
+      "to": "EXPIRED",
+      "client_grant": false
+    }
+  ],
+  "premium": [
+    {
+      "from": "DRAFT_DISABLED",
+      "event": "AWAIT_APPROVED_ART",
+      "to": "ART_PENDING",
+      "client_grant": false
+    },
+    {
+      "from": "ART_PENDING",
+      "event": "ART_READY_BUT_SALE_LOCKED",
+      "to": "SALE_BLOCKED",
+      "client_grant": false
+    },
+    {
+      "from": "SALE_BLOCKED",
+      "event": "M08_ALL_GATES_VERIFIED",
+      "to": "AVAILABLE_AFTER_M08",
+      "client_grant": false
+    },
+    {
+      "from": "AVAILABLE_AFTER_M08",
+      "event": "PROVIDER_PAYMENT_PENDING",
+      "to": "VERIFYING",
+      "client_grant": false
+    },
+    {
+      "from": "VERIFYING",
+      "event": "VALID_SERVER_MONTH_RECEIPT",
+      "to": "OWNED_ACTIVE_MONTH",
+      "client_grant": false
+    },
+    {
+      "from": "VERIFYING",
+      "event": "INVALID_SERVER_RECEIPT",
+      "to": "VERIFY_FAILED",
+      "client_grant": false
+    },
+    {
+      "from": "OWNED_ACTIVE_MONTH",
+      "event": "NEXT_MONTH_DAY_1_00_KST",
+      "to": "EXPIRED_MONTH",
+      "client_grant": false
+    },
+    {
+      "from": "OWNED_ACTIVE_MONTH",
+      "event": "SOURCE_VERIFIED_REFUND",
+      "to": "REVOKED_REFUNDED",
+      "client_grant": false
+    },
+    {
+      "from": "EXPIRED_MONTH",
+      "event": "AUTO_RENEW_REQUEST",
+      "to": "EXPIRED_MONTH",
+      "client_grant": false
+    }
+  ],
+  "future_server_entitlements_only_on": [
+    "SERVER_ATOMIC_CLAIM_COMMIT",
+    "VALID_SERVER_MONTH_RECEIPT"
+  ],
+  "disallowed": [
+    "CLIENT_REQUEST_PREMIUM_OWNED",
+    "CLIENT_RECEIPT_IS_VALID",
+    "CLIENT_CLOCK_MONTH_ROLLOVER",
+    "OFFLINE_GRANT",
+    "TEST_WALLET_TO_REAL_ENTITLEMENT"
+  ],
+  "grant_enabled_now": false,
+  "season_pass_checkout_now": false,
+  "prior_snapshots_rejected": true,
+  "verified_record_history_kept": true,
+  "permanent_rewards_not_expired_with_pass": true
+}
