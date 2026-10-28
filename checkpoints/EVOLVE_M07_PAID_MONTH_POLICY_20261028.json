@@ -1,0 +1,36 @@
+{
+  "schema_version": "M07_PAID_MONTH_POLICY_CORRECTION_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "m07_progress_percent": 20,
+  "not_new_progress_milestone": true,
+  "decision": "Paid season pass each calendar month KST (1st 00:00 through last day); nonpaid mission/event may use 28 days",
+  "period_policy": "monetization/m07/monthly-calendar-policy.v1.json",
+  "paid_calculator": "monetization/m07/paid-month-calendar-v1.cjs",
+  "free_calculator": "monetization/m07/utc-period-planner-v1.cjs",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "working_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup": "backup/monetization-m07-paid-month-policy-20261028",
+  "older_m07_020_backup_preserved": true,
+  "all_M06_backups_preserved": true,
+  "zip": "checkpoints/EVOLVE_M07_PAID_MONTH_POLICY_20261028.zip",
+  "zip_size": 19363,
+  "zip_crc32": "e37873c0",
+  "zip_git_blob_sha": "6aa7b36a967b27e84d78c50d21f2630f1d4eb4e0",
+  "zip_commit": "fc0cc87c25e723201c2b534fe9749a32c54aed53",
+  "zip_type": "INCREMENTAL_POLICY_FILES_ONLY",
+  "full_game_source_on_backup_branch": true,
+  "ci_success": {
+    "m07_020": 40681246482,
+    "m07_010": 40681254443
+  },
+  "no_new_images": true,
+  "no_gameplay_modified": true,
+  "no_real_paid_sales": true,
+  "checkout_enabled": false,
+  "price_minor": null,
+  "client_grants_enabled": false,
+  "next": {
+    "progress": 30,
+    "rendering_required": false
+  }
+}
