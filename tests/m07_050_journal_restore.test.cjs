@@ -108,4 +108,11 @@ assert.equal(s.exportTestJournal(),checkpoint); // failed imports cannot mutate 
 assert.equal(catalog.checkout_enabled,false);
 assert.equal(catalog.client_grants_enabled,false);
 assert.equal(catalog.products.find(x=>x.sku==='season_research_pass_01').status,'draft_disabled');
+const eventAudit=JSON.parse(fs.readFileSync(require('node:path').join(__dirname,'../monetization/m07/event-source-audit-050.v1.json'),'utf8'));
+assert.equal(eventAudit.progress_percent,50);
+assert.equal(eventAudit.reviewed.length,6);
+assert.ok(eventAudit.reviewed.every(f=>f.named_verified_event_symbols_found===0));
+assert.equal(eventAudit.source_verification_ready,false);
+assert.equal(eventAudit.real_reward_grants,0);
+assert.equal(eventAudit.implementation_happened,false);
 console.log('M07 50% PASS: 5 accepted TEST events replay; pending lost safely; tamper/stale/duplicate/period/identity rejection; 0 real claims or payments.');
