@@ -1,12 +1,15 @@
-name: M08 010 focused stage event
+name: M08 focused stage and runtime missions
 on:
   push:
     branches: ["monetization-m08-010-*"]
     paths:
       - "web/m08-stage-mission-v622.js"
+      - "web/m08-runtime-missions-v623.js"
       - "dist/m08-stage-mission-v622.js"
+      - "dist/m08-runtime-missions-v623.js"
       - "dist/index.html"
       - "tests/m08_010_live_stage.test.cjs"
+      - "tests/m08_020_runtime_missions.test.cjs"
       - ".github/workflows/m08-010-stage.yml"
   workflow_dispatch:
 jobs:
@@ -18,14 +21,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Narrow syntax and authentic-stage-source regression
+      - name: Narrow syntax and live-stage/runtime event tests
         run: |
           node --check web/m08-stage-mission-v622.js
+          node --check web/m08-runtime-missions-v623.js
           node --check dist/m08-stage-mission-v622.js
+          node --check dist/m08-runtime-missions-v623.js
           node tests/m08_010_live_stage.test.cjs
-      - name: Hard-stop changes to combat, monster, images or SHOP
+          node tests/m08_020_runtime_missions.test.cjs
+      - name: Hard-stop changes to combat, monster, original images or SHOP
         run: |
-          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/changed.txt
-          if grep -E '^(web/|dist/|art/|assets/|monetization/)' /tmp/changed.txt | grep -Ev '^(web/m08-stage-mission-v622\.js|dist/m08-stage-mission-v622\.js|dist/index\.html)$'; then
-            echo "Modified protected original game files";exit 1
+          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/m08-changed.txt
+          if grep -E '^(web/|dist/|art/|assets/)' /tmp/m08-changed.txt | grep -Ev '^(web/m08-stage-mission-v622\.js|web/m08-runtime-missions-v623\.js|dist/m08-stage-mission-v622\.js|dist/m08-runtime-missions-v623\.js|dist/index\.html)$'; then
+            echo "Unexpected protected game or original asset modification"; exit 1
           fi
