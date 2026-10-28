@@ -20,9 +20,11 @@
 - Backups and recovery take priority over new implementation. Before rebuilding
   interrupted work, check this repository's previous scratch workspaces and
   local commits as well as its remote branch and saved recovery archives.
-- Before reporting each 10% milestone, create a recoverable checkpoint, verify
-  its archive and file hashes, and confirm persistent saving succeeded. A local
-  commit or an attempted upload alone is not a confirmed persistent backup.
+- Before reporting each 10% milestone, create a recoverable checkpoint and verify
+  the changed files, archive and persistent storage once. Reuse already verified
+  Git blob/tree hashes for untouched large resources; reserve full asset rehash
+  for final release or meaningful integrity risk. A local commit or an attempted
+  upload alone is not a confirmed persistent backup.
 - Record the exact working folder, baseline/build, completed and remaining work,
   and the saved checkpoint identifier. Provide its real file link and size.
   Preserve earlier snapshots. If a remote write is blocked, save the recovery
@@ -35,3 +37,19 @@
   until the user asks. Keep every 10% remote checkpoint and verification.
 
 - User-approved map rules and the saved-JSON fast update procedure are in docs/MAP_UPDATE_RULES_KO.md. Read that file before map work. When a supplied save is already deployed byte-for-byte/equivalent, verify the live build and report completion without redoing the patch.
+
+## Default FAST WORK protocol for EVERY EVOLVE chat room (2026-10-29, user-approved)
+
+**Default to the fastest safe workflow without requiring the user to repeat the request.** This applies to character/core/weapon changes and subsequent monetization, UI, map, and game work. Existing protection/release rules still override shortcuts when real risk exists.
+
+1. **Recover, do not repeat.** First locate the newest verified working ZIP, Git branch, or Library checkpoint; resume from its changed files instead of reconstructing finished work. Compare current main HEAD and original checkpoint. Don't confuse a reported percentage with a deployed commit.
+2. **Never re-fetch/rebuild/hash ~386MB of unchanged original assets as a routine intermediate step.** Use tracked Git blob/tree IDs, preserved baseline manifest, and the delta list; validate SHA-256 of new/modified files and checkpoint archive once. Hash all resources only for a final high-risk release or if asset integrity is genuinely suspect.
+3. **Reuse focused existing tests.** Character work: prefer the already-existing `tests/player_mutant_browser.cjs` and minimal necessary unit/compatibility checks. One focused Chromium run per meaningful changed behavior; do not run the entire 28-script browser suite for each 10% milestone. Avoid fresh server/browser/process launches and repeated 386MB preload when tests can safely reuse the same environment. Do not build a new QA harness unless the existing one cannot test the behavior.
+4. **Correct stale expectations instead of treating them as game defects.** When replacing the original character image/animation, update assertions tied to the intentionally replaced PNG SHA, shape, 20 frames, or anatomy; preserve actual movement, weapon, collision, save, and shop checks. Never silently disable a genuine behavioral assertion.
+5. **Default remaining-work cadence:** next changed-feature segment = focused recovery/behavior checks; next integration segment = one consolidated character/equipment/store/save check; final segment = one appropriate full regression, release integrity, backups and real public Pages publication verification. For high-risk engine/save/asset changes, run any additional relevant safety checks necessary **before** public release, not at every untouched step.
+6. **10% recovery points remain mandatory; optimize their cost.** Save only new/modified project files plus exact base commit/build, paths, hashes and restore instructions. Verify once and preserve previous checkpoints. Do not repeatedly download and re-verify the same 13MB or repack 386MB on every milestone. If remote binary upload is unavailable, preserve the actual recoverable ZIP in authorized Library/files and report GitHub publication as pending—do not claim it was pushed.
+7. **Deployment:** avoid repeated online deployments. Publish only when the intended feature passes the necessary integration/final checks. Remember Pages publishes from `pages-fast-evolve-20261029`, not directly from `main`. Never mistake a passing local browser test for an online build.
+8. **Work-credit preservation:** minimize repetitive repository browsing, tool calls, speculative test reruns, screenshots, huge log dumps and speculative optimization projects. Fail fast, repair only the failing case, and report concise percentages/result/next step. Avoid time/credit saving claims without measurement.
+9. **No unrequested art changes:** reuse approved images, protect the central core and exactly four default walking legs; tell the user before a stage that truly needs image rendering. Preserve M08 shop, M09 economic docs, game saves and established character art unless explicitly changed.
+
+This policy is stored in-repository so any new EVOLVE development conversation should read this `AGENTS.md` at the start and automatically use the protocol; note that a chat which does not consult the repository may not receive these instructions. Existing 10%-checkpoint, asset-safety and final-publication conditions are not waived.
