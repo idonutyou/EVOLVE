@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 80
+          fetch-depth: 0
       - name: Verify no-render season and monetization safety contract
         run: node tests/m07_010_nonrender_design.test.cjs
       - name: Verify no existing game/image/catalog files touched
