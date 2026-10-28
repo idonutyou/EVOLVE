@@ -1,0 +1,134 @@
+{
+  "schema": "EVOLVE_M09_020_ECONOMY_DESIGN_V1",
+  "date_kst": "2026-10-29",
+  "status": "DESIGN_ONLY_UNAPPROVED_PRICES",
+  "billing_connected": false,
+  "existing_product_count": 6,
+  "existing_shop": {
+    "source": "web/shop-experience-v621.js",
+    "storage_key": "EVOLVE_SHOP_EXPERIENCE_V621_V1",
+    "starter": {
+      "price_display_krw": 1200,
+      "crystals": 75,
+      "first_purchase_bonus": 50,
+      "once": true
+    },
+    "small": {
+      "price_display_krw": 1200,
+      "crystals": 100,
+      "first_purchase_bonus": 50
+    },
+    "premium_pass": {
+      "price_display_krw": 5900,
+      "tier_count": 5,
+      "crystals_per_tier": 35,
+      "monthly_calendar": true,
+      "starts_on_day": 1,
+      "ends_on_last_day": true,
+      "auto_renew": false
+    },
+    "current_crimson_sink": {
+      "crystals": 120,
+      "once": true
+    }
+  },
+  "earning": {
+    "daily": 20,
+    "mission_stage": 10,
+    "mission_run": 5,
+    "mission_codex": 10,
+    "theoretical_per_day_max": 45,
+    "month_scenarios": [
+      {
+        "days": 28,
+        "claimed_daily": 28,
+        "stage": 4,
+        "run": 18,
+        "codex": 7,
+        "illustrative_free_total": 760,
+        "theoretical_max": 1260
+      },
+      {
+        "days": 30,
+        "claimed_daily": 30,
+        "stage": 4,
+        "run": 20,
+        "codex": 8,
+        "illustrative_free_total": 820,
+        "theoretical_max": 1350
+      },
+      {
+        "days": 31,
+        "claimed_daily": 31,
+        "stage": 5,
+        "run": 21,
+        "codex": 9,
+        "illustrative_free_total": 865,
+        "theoretical_max": 1395
+      }
+    ]
+  },
+  "proposed_ui_only_sinks": [
+    {
+      "id": "lab_nameplate",
+      "crystals": 180,
+      "permanent": true,
+      "affects_combat": false,
+      "image_rendering_required": false
+    },
+    {
+      "id": "codex_frame",
+      "crystals": 360,
+      "permanent": true,
+      "affects_combat": false,
+      "image_rendering_required": false
+    },
+    {
+      "id": "lab_theme",
+      "crystals": 720,
+      "permanent": true,
+      "affects_combat": false,
+      "image_rendering_required": false
+    }
+  ],
+  "proposed_starter": {
+    "crystals": 160,
+    "noncombat_collectible": true,
+    "price": "REVIEW_NOT_APPROVED"
+  },
+  "proposed_pass_calendar": {
+    "claim_day_milestones": [
+      1,
+      3,
+      7,
+      14,
+      21
+    ],
+    "paid_term": "KST_FIRST_TO_LAST_DAY",
+    "rewards": "REVIEW_NOT_IMPLEMENTED",
+    "no_auto_renewal": true
+  },
+  "revenue_analytics": {
+    "mode": "LOCAL_AGGREGATE_DESIGN",
+    "event_names": [
+      "shop_open",
+      "product_view",
+      "purchase_confirm_local",
+      "cosmetic_redeem",
+      "cosmetic_equip",
+      "pass_claim",
+      "return_home"
+    ],
+    "production_analytics": false
+  },
+  "protections": {
+    "current_skus_unchanged": true,
+    "existing_wallet_key_unchanged": true,
+    "no_game_engine_changes": true,
+    "no_character_art_changes": true,
+    "no_live_checkout": true,
+    "same_month_boundaries": true,
+    "unlimited_free_play": true
+  },
+  "next_phase": "M09_030_design_freeze"
+}

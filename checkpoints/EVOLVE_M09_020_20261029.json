@@ -1,0 +1,29 @@
+{
+  "schema": "EVOLVE_M09_DESIGN_CHECKPOINT_V1",
+  "stage": "M09-020",
+  "percent": 20,
+  "date_kst": "2026-10-29",
+  "parent_10pct_commit": "5a23fee0d7ec0846245eab7b75c59baf098952ce",
+  "kind": "design_only",
+  "gameplay_changed": false,
+  "public_release": false,
+  "rendering_required": false,
+  "monthly_paid_rule": "KST_DAY_1_TO_LAST_DAY",
+  "files": [
+    "docs/monetization/M09_020_PRODUCT_PRIORITY_KO.md",
+    "monetization/economy/m09-020-design.json",
+    "tests/m09_020_design.test.cjs",
+    ".github/workflows/m09-020-design.yml"
+  ],
+  "economy_hypothesis": {
+    "free_daily_max": 45,
+    "sinks": [
+      180,
+      360,
+      720
+    ],
+    "sink_total": 1260,
+    "proposed_starter_crystals": 160
+  },
+  "next": "M09_030_design_freeze"
+}

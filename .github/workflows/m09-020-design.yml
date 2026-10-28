@@ -1,0 +1,31 @@
+name: EVOLVE M09 20% design-only economy QA
+on:
+  push:
+    branches: ["monetization-m09-020-20261029"]
+    paths:
+      - "docs/monetization/M09_020_PRODUCT_PRIORITY_KO.md"
+      - "monetization/economy/m09-020-design.json"
+      - "tests/m09_020_design.test.cjs"
+      - ".github/workflows/m09-020-design.yml"
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  m09-design:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Pull only M09 design and frozen SHOP/M08 sources
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /monetization/economy/m09-020-design.json
+            /tests/m09_020_design.test.cjs
+            /web/shop-experience-v621.js
+            /web/m08-mission-rewards-v624.js
+            /docs/monetization/M09_010_VALUE_SINK_AUDIT_KO.md
+            /docs/monetization/M09_020_PRODUCT_PRIORITY_KO.md
+      - name: Check quantified economy, six existing products and month rules
+        run: node tests/m09_020_design.test.cjs

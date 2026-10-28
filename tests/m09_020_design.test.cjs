@@ -1,0 +1,35 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const d=JSON.parse(fs.readFileSync(path.join(root,'monetization/economy/m09-020-design.json'),'utf8'));
+const actual=require('../web/shop-experience-v621.js');
+const shopSrc=fs.readFileSync(path.join(root,'web/shop-experience-v621.js'),'utf8');
+const m08Src=fs.readFileSync(path.join(root,'web/m08-mission-rewards-v624.js'),'utf8');
+assert.equal(d.billing_connected,false);
+assert.equal(d.existing_product_count,6);
+assert.equal(actual.products.length,6);
+assert.deepEqual(new Set(actual.products.map(x=>x.id)),new Set(['starter','crystal100','crystal300','resonance','crimson','researchpass']));
+assert.equal(actual.storageKey,d.existing_shop.storage_key);
+assert.equal(actual.products.find(x=>x.id==='starter').crystals,d.existing_shop.starter.crystals);
+assert.equal(actual.products.find(x=>x.id==='crystal100').crystals,d.existing_shop.small.crystals);
+assert.equal(actual.products.find(x=>x.id==='researchpass').price,'₩5,900');
+assert.equal(actual.products.find(x=>x.id==='crimson').spendCrystals,120);
+assert.equal(shopSrc.includes('charged:false'),true,'no operating card charge');
+assert.ok(m08Src.includes("['stage','신규 스테이지 연구']"));
+assert.equal(d.earning.theoretical_per_day_max,d.earning.daily+d.earning.mission_stage+d.earning.mission_run+d.earning.mission_codex);
+for(const s of d.earning.month_scenarios){
+ assert.equal(s.illustrative_free_total,s.claimed_daily*d.earning.daily+s.stage*d.earning.mission_stage+s.run*d.earning.mission_run+s.codex*d.earning.mission_codex);
+ assert.equal(s.theoretical_max,s.days*d.earning.theoretical_per_day_max);
+ for(const k of ['claimed_daily','stage','run','codex'])assert.ok(s[k]>=0&&s[k]<=s.days);
+}
+assert.equal(d.existing_shop.premium_pass.tier_count*d.existing_shop.premium_pass.crystals_per_tier,175);
+const sinks=d.proposed_ui_only_sinks;
+assert.equal(sinks.reduce((a,x)=>a+x.crystals,0),1260);
+assert.ok(sinks.every(x=>x.permanent&&!x.affects_combat&&!x.image_rendering_required));
+assert.ok(d.proposed_starter.crystals>d.existing_shop.small.crystals,'starter cannot be worse than small at same candidate price');
+assert.deepEqual(d.proposed_pass_calendar.claim_day_milestones,[1,3,7,14,21]);
+assert.equal(d.proposed_pass_calendar.paid_term,'KST_FIRST_TO_LAST_DAY');
+assert.equal(d.protections.current_skus_unchanged,true);
+assert.equal(d.protections.existing_wallet_key_unchanged,true);
+assert.equal(d.protections.no_live_checkout,true);
+console.log('M09 20% DESIGN PASS: 6 live mock SKUs preserved; 28/30/31-day earnings; sinks=1260; KST monthly and no billing.');
