@@ -1,0 +1,51 @@
+name: M07 100 final SHOP contract
+on:
+  push:
+    branches: ["monetization-m07-100-*"]
+    paths:
+      - "web/shop-experience-v621.js"
+      - "web/shop-front-v621.js"
+      - "dist/shop-experience-v621.js"
+      - "dist/shop-front-v621.js"
+      - "dist/index.html"
+      - "tools/wait_for_shop_publication.py"
+      - "tests/m07_100_final_contract.test.cjs"
+      - "tests/m07_090_crimson_pass.test.cjs"
+      - ".github/workflows/m07-100-final.yml"
+  workflow_dispatch:
+jobs:
+  final-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Syntax and complete M07 retention, SHOP and calendar tests
+        run: |
+          node --check web/shop-front-v621.js
+          node --check web/shop-experience-v621.js
+          node --check dist/shop-front-v621.js
+          node --check dist/shop-experience-v621.js
+          python3 -m py_compile tools/wait_for_shop_publication.py
+          node tests/m07_010_nonrender_design.test.cjs
+          node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
+          node tests/m07_030_api_release_freeze.test.cjs
+          node tests/m07_040_mission_harness.test.cjs
+          node tests/m07_050_journal_restore.test.cjs
+          node tests/m07_060_atomic_batch.test.cjs
+          node tests/m07_070_text_preview.test.cjs
+          node tests/m07_080_shop_experience.test.cjs
+          node tests/m07_090_crimson_pass.test.cjs
+          node tests/m07_100_final_contract.test.cjs
+      - name: Protect M07 90 live original game, combat, monsters, images, SHOP gateway
+        run: |
+          git diff --name-only a8d595f81673546ddefe31612792fde0f93d05fe HEAD > /tmp/m07-100-changes.txt
+          cat /tmp/m07-100-changes.txt
+          if grep -E '^(web/|dist/|assets/|art/|monetization/)' /tmp/m07-100-changes.txt | grep -Ev '^(web/shop-front-v621\.js|web/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/index\.html)$'; then
+            echo "M07 100 touched protected engine/art/economy"
+            exit 1
+          fi
