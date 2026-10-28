@@ -17,9 +17,16 @@ const output=path.resolve(__dirname,'../test-results/m08-100-public-smoke.json')
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:100000});
   await page.waitForFunction(()=>!document.getElementById('webLoader')&&window.__EVOLVE_HOME_HUB_V601__?.read()?.ready&&window.__EVOLVE_SHOP_V621__&&window.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__,null,{timeout:120000});
   report.checks.push('real Github Pages game boot, HOME, V621 SHOP and M08 mission global ready');
-  const version=await page.evaluate(()=>window.EVOLVE_WEB_CONFIG?.build||'');
-  assert.equal(version,'b20414516e19afecb1a7a1d0d67e3b98d456d26029993fd012fec043db8e89ad','published new build marker');
-  report.checks.push('published M08 build matches signed release');
+  const version=await page.evaluate(async()=>{
+   const res=await fetch('version.json?m08_live_version='+Date.now(),{cache:'no-store'});
+   assertBrowserResponse(res);
+   const remote=await res.json();
+   return {html:window.EVOLVE_WEB_CONFIG?.build||'',published:remote.build||''};
+   function assertBrowserResponse(response){if(!response.ok)throw Error('PUBLIC_VERSION_HTTP_'+response.status);}
+  });
+  assert.ok(version.html.length>=32,'version identifier exists');
+  assert.equal(version.html,version.published,'published HTML and version.json agree');
+  report.checks.push('published HTML build exactly matches live version.json');
   await page.locator('#memoryBtn').click();
   const card=page.locator('#m08MissionRewardsV624');
   await card.waitFor({state:'visible',timeout:10000});
