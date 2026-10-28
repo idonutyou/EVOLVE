@@ -1,0 +1,45 @@
+name: EVOLVE deployment speed safety probe
+on:
+  push:
+    branches: ["speed/deploy-v7-20261029"]
+    paths:
+      - ".github/workflows/ci-speed-probe.yml"
+      - ".github/workflows/deploy-pages.yml"
+      - "tools/ci_deploy_scope.py"
+      - "tools/verify_public_m08.py"
+      - "tests/test_ci_deploy_scope.py"
+permissions: {contents: read}
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          filter: blob:none
+          sparse-checkout: |
+            .github
+            tools
+            tests
+            dist
+            web
+      - name: Validate fast/full classifier and required M08 JS contract
+        run: |
+          python3 -m unittest discover -s tests -p test_ci_deploy_scope.py -v
+          python3 -m py_compile tools/ci_deploy_scope.py tools/verify_public_m08.py
+          node tests/m08_090_release_integrity.test.cjs
+          python3 tools/verify_site.py --dist dist
+      - name: Confirm deployment workflow contains intact full rollback and safeguards
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('.github/workflows/deploy-pages.yml').read_text()
+          for required in ('git sparse-checkout disable','node tests/player_mutant_browser.cjs',
+                           'node tests/m08_040_mission_rewards_browser.cjs','actions/deploy-pages@v4',
+                           'tools/verify_public_m08.py','tools/verify_site.py','workflow_dispatch:',
+                           'if: steps.scope.outputs.mode == \'full\''):
+              assert required in s, required
+          assert 'needs: readiness' not in s
+          print('Fast/full deployment structure guard PASS')
+          PY

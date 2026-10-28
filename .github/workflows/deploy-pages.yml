@@ -7,7 +7,6 @@ on:
     paths:
       - "EVOLVE_V575_INSTALL.json"
       - "dist/**"
-      - ".github/workflows/deploy-pages.yml"
       - "tools/install_manual_upload.py"
       - "tools/patch_web_lifecycle.py"
       - "tools/verify_site.py"
@@ -47,26 +46,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  readiness:
-    runs-on: ubuntu-latest
-    outputs:
-      ready: ${{ steps.input.outputs.ready }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Wait for the complete first upload
-        id: input
-        shell: bash
-        run: |
-          if [ -s dist/index.html ] || [ -s EVOLVE_V575_INSTALL.json ]; then
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "Waiting for the user's full V575 package. Nothing will be published." >> "$GITHUB_STEP_SUMMARY"
-          fi
-
   publish:
-    needs: readiness
-    if: needs.readiness.outputs.ready == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -77,8 +57,44 @@ jobs:
       name: github-pages
       url: ${{ steps.pages.outputs.page_url }}
     steps:
-      - name: Check out repository
+      - name: Fetch only active EVOLVE deployment folders
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          filter: blob:none
+          sparse-checkout: |
+            dist
+            tools
+            tests
+            web
+            docs
+            monetization
+            .github
+      - name: Choose fast or full verification (unknown changes fail closed)
+        id: scope
+        shell: bash
+        env:
+          EVOLVE_BEFORE: ${{ github.event.before }}
+          EVOLVE_EVENT: ${{ github.event_name }}
+          EVOLVE_SHA: ${{ github.sha }}
+        run: |
+          MODE=full
+          if [ "$EVOLVE_EVENT" = push ] && [[ "$EVOLVE_BEFORE" =~ ^[a-f0-9]{40}$ ]] &&
+             [[ ! "$EVOLVE_BEFORE" =~ ^0{40}$ ]]; then
+            git fetch --no-tags --filter=blob:none --depth=1 origin "$EVOLVE_BEFORE" || true
+            if git cat-file -e "$EVOLVE_BEFORE^{commit}" 2>/dev/null &&
+               git diff --name-only "$EVOLVE_BEFORE" "$EVOLVE_SHA" > /tmp/evolve-deploy-files; then
+              python3 tools/ci_deploy_scope.py /tmp/evolve-deploy-files > /tmp/evolve-mode
+              MODE="$(cat /tmp/evolve-mode)"
+            fi
+          fi
+          if [ ! -s dist/index.html ]; then MODE=full; fi
+          printf 'mode=%s\n' "$MODE" >> "$GITHUB_OUTPUT"
+          printf 'EVOLVE_DEPLOY_MODE=%s\n' "$MODE" >> "$GITHUB_ENV"
+          echo "EVOLVE DEPLOY $MODE; a full regression remains available via workflow_dispatch."
+      - name: Expand full repository only for engine, assets or unknown changes
+        if: steps.scope.outputs.mode == 'full'
+        run: git sparse-checkout disable
       - name: Restore first manual upload without replacing an existing game
         id: restore
         shell: bash
@@ -89,14 +105,17 @@ jobs:
           fi
       - name: Repair online-shell startup order without changing gameplay or art
         run: python3 tools/patch_web_lifecycle.py --dist dist --client web/client.js
-      - name: Refuse to publish an empty or incomplete game
-        shell: bash
+      - name: Verify V575 immutable game and release files on every deployment
         run: |
-          test -s dist/index.html || { echo "ERROR: playable game index.html is missing"; exit 1; }
-          test -s dist/version.json || { echo "ERROR: game version manifest is missing"; exit 1; }
-          test -s dist/asset-manifest.json || { echo "ERROR: original asset manifest is missing"; exit 1; }
-          test -d dist/assets || { echo "ERROR: extracted game images are missing"; exit 1; }
+          test -s dist/index.html
+          test -s dist/version.json
+          test -s dist/asset-manifest.json
+          test -d dist/assets
           python3 tools/verify_site.py --dist dist
+          node tests/m08_090_release_integrity.test.cjs
+      - name: Full engine and storage contracts (only changed engine/unknown)
+        if: steps.scope.outputs.mode == 'full'
+        run: |
           python3 -m unittest discover -s tests -v
           node --test tests/web_client.test.cjs
           node tests/campaign_lightning.test.cjs
@@ -109,6 +128,17 @@ jobs:
           node tests/organ_skills.test.cjs
           node --test tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs tests/monster_feedback_v614.test.cjs
           python3 tools/verify_monster_feedback_v614.py
+      - name: Fast M08 SHOP and save regression (same tracked sources as the verified release)
+        if: steps.scope.outputs.mode == 'fast'
+        run: |
+          node tests/m08_010_live_stage.test.cjs
+          node tests/m08_020_runtime_missions.test.cjs
+          node tests/m08_040_mission_rewards.test.cjs
+          node tests/m08_060_monthly_boundary.test.cjs
+          node tests/m08_070_reward_ux.test.cjs
+          node tests/m08_080_release_gate.test.cjs
+          node tests/m07_100_final_contract.test.cjs
+          node --test tests/web_client.test.cjs
       - name: Prepare browser verification
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
@@ -119,7 +149,14 @@ jobs:
             echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
           fi
           echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Fast mobile HOME, CHALLENGE reward and SHOP browser
+        if: steps.scope.outputs.mode == 'fast'
+        timeout-minutes: 5
+        run: |
+          node tests/home_hub_browser.cjs
+          node tests/m08_040_mission_rewards_browser.cjs
       - name: Verify mobile boot, maps, controls, saves and safe updates
+        if: steps.scope.outputs.mode == 'full'
         timeout-minutes: 15
         run: |
           node tests/player_mutant_browser.cjs
@@ -179,10 +216,17 @@ jobs:
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
+      - name: Verify exact live M08 release bytes and version (fast and full)
+        run: python3 tools/verify_public_m08.py --url "${{ steps.pages.outputs.page_url }}" --timeout 180
       - name: Await M07 90 shop assets after Pages CDN propagation
+        if: steps.scope.outputs.mode == 'full'
         timeout-minutes: 12
         run: python3 tools/wait_for_shop_publication.py --url "${{ steps.pages.outputs.page_url }}" --timeout 560
+      - name: Verify actual published mobile HOME for fast releases
+        if: steps.scope.outputs.mode == 'fast'
+        run: python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
       - name: Confirm the actual published build, administrator gate and artwork
+        if: steps.scope.outputs.mode == 'full'
         run: |
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_hits_browser_v613.cjs --report test-results/organ-hits-live.json
