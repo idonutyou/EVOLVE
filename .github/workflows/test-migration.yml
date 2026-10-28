@@ -1,31 +1,49 @@
 name: Verify EVOLVE migration tools
-
+# Extractor-specific tests, not every monetization or release-gate edit.
 on:
   push:
     branches: [main]
     paths:
-      - "tools/**"
-      - "tests/**"
+      - "tools/split_embedded_assets.py"
+      - "tools/build_web.py"
+      - "tools/asset_bundles.py"
+      - "tools/prepare_fragments.py"
+      - "tools/install_manual_upload.py"
+      - "tools/patch_web_lifecycle.py"
+      - "tools/verify_site.py"
+      - "tests/test_split_assets.py"
+      - "tests/test_web_packaging.py"
       - ".github/workflows/test-migration.yml"
   pull_request:
     paths:
-      - "tools/**"
-      - "tests/**"
+      - "tools/split_embedded_assets.py"
+      - "tools/build_web.py"
+      - "tools/asset_bundles.py"
+      - "tools/prepare_fragments.py"
+      - "tools/install_manual_upload.py"
+      - "tools/patch_web_lifecycle.py"
+      - "tools/verify_site.py"
+      - "tests/test_split_assets.py"
+      - "tests/test_web_packaging.py"
       - ".github/workflows/test-migration.yml"
   workflow_dispatch:
-
-permissions:
-  contents: read
-
+permissions: {contents: read}
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/
+            /tests/
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Python syntax check
         run: python -m py_compile tools/split_embedded_assets.py tests/test_split_assets.py
-      - name: Extraction tests
+      - name: V575 extraction, packaging and original image checksum regressions
         run: python -m unittest discover -s tests -v

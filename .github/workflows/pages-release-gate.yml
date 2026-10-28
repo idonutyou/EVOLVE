@@ -1,0 +1,87 @@
+name: EVOLVE Pages release readiness (read-only)
+# GitHub GITHUB_TOKEN pushes cannot trigger branch-based Pages builds.
+on:
+  push:
+    branches: [main, speed/pages-gate-20261029]
+    paths:
+      - "dist/**"
+      - "tools/pages_release_gate.py"
+      - "tests/test_pages_release_gate.py"
+      - ".github/workflows/pages-release-gate.yml"
+  workflow_dispatch:
+permissions: {contents: read}
+concurrency:
+  group: evolve-pages-release-gate
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Only fetch release metadata and tests, not 386 MB images
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/workflows/pages-release-gate.yml
+            /tools/pages_release_gate.py
+            /tests/test_pages_release_gate.py
+            /tests/m08_*.test.cjs
+            /web/m08-*.js
+            /web/shop-*.js
+            /dist/index.html
+            /dist/version.json
+            /dist/verification.json
+            /dist/asset-manifest.json
+            /dist/sw.js
+            /dist/shop-experience-v621.js
+            /dist/shop-front-v621.js
+            /dist/m08-*.js
+      - name: Test change classifier and immutable tree safeguards
+        run: |
+          python3 -m unittest discover -s tests -p test_pages_release_gate.py -v
+          python3 -m py_compile tools/pages_release_gate.py
+      - name: Compare current Pages root with main dist Git tree (metadata only)
+        id: compare
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --filter=blob:none --depth=1 origin \
+            refs/heads/pages-fast-evolve-20261029:refs/remotes/origin/pages-fast-evolve-20261029
+          python3 tools/pages_release_gate.py --source HEAD \
+            --pages refs/remotes/origin/pages-fast-evolve-20261029 \
+            --output /tmp/evolve-pages-release.json
+          status="$(python3 -c 'import json;print(json.load(open("/tmp/evolve-pages-release.json"))["status"])')"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          report=json.load(open('/tmp/evolve-pages-release.json'))
+          print('## EVOLVE publication readiness — read-only')
+          print('\n**Status:**',report['status'],'\n')
+          print('**main/dist tree:**',report['main_dist_tree'],'\n')
+          print('**Pages root tree:**',report['pages_root_tree'],'\n')
+          print('**Next:**',report['note'],'\n')
+          if report['changed_files']:
+              print('**Changed files:**',', '.join(report['changed_files'][:30]))
+          print('\nNo Pages commit, upload or deployment was performed.')
+          PY
+      - name: Focused M08/SHOP contracts for known low-risk changes
+        if: steps.compare.outputs.status == 'focused'
+        run: |
+          node tests/m08_010_live_stage.test.cjs
+          node tests/m08_020_runtime_missions.test.cjs
+          node tests/m08_040_mission_rewards.test.cjs
+          node tests/m08_060_monthly_boundary.test.cjs
+          node tests/m08_070_reward_ux.test.cjs
+          node tests/m08_080_release_gate.test.cjs
+          node tests/m08_090_release_integrity.test.cjs
+          echo 'Focused contracts PASS; authenticated branch sync requires verified release evidence.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Report full gameplay or character QA required
+        if: steps.compare.outputs.status == 'full'
+        run: echo 'Full game and asset regression is required before publishing unknown or engine modifications.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Confirm identical website is a no-op
+        if: steps.compare.outputs.status == 'unchanged'
+        run: |
+          echo 'No change: no publish, no Pages commit, no 386 MB download.' >> "$GITHUB_STEP_SUMMARY"

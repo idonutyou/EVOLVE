@@ -1,121 +1,30 @@
-name: Publish EVOLVE Web
-# Deploy the installed game from current main; archive restore is first-upload only.
-
+name: EVOLVE full game regression (manual, no deploy)
+# The real site publishes from pages-fast-evolve-20261029:/(root).
 on:
-  push:
-    branches: [main]
-    paths:
-      - "EVOLVE_V575_INSTALL.json"
-      - "dist/**"
-      - "tools/install_manual_upload.py"
-      - "tools/patch_web_lifecycle.py"
-      - "tools/verify_site.py"
-      - "tools/verify_monster_feedback_v614.py"
-      - "tests/monetization_m05_100_live_browser.cjs"
-      - "tests/m07_080_shop_browser.cjs"
-      - "tools/wait_for_shop_publication.py"
-      - "tools/retry_public_browser.py"
-      - "tests/browser_smoke.cjs"
-      - "tests/visual_fit_browser.cjs"
-      - "tests/upgrade_scenery_browser.cjs"
-      - "tests/arm_items_browser.cjs"
-      - "tests/weapon_hits_v612.test.cjs"
-      - "tests/weapon_hits_browser_v612.cjs"
-      - "tests/organ_hits_v613.test.cjs"
-      - "tests/organ_hits_browser_v613.cjs"
-      - "tests/monster_feedback_v614.test.cjs"
-      - "tests/monster_feedback_browser_v614.cjs"
-      - "tools/verify_monster_feedback_v614.py"
-      - "web/monster-feedback-v614.js"
-      - "web/monster-feedback-adapter-v614.js"
-      - "tests/organ_card_art_browser.cjs"
-      - "tests/display_recovery_browser.cjs"
-      - "tools/verify_display_recovery_v611.py"
-      - "tools/verify_organ_card_art_v610.py"
-      - "tools/verify_upgrade_scenery_v608.py"
-      - "tests/attack_warnings_browser.cjs"
-      - "tests/web_client.test.cjs"
-      - "web/client.js"
   workflow_dispatch:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: evolve-pages
-  cancel-in-progress: false
-
+permissions: {contents: read}
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.pages.outputs.page_url }}
+    timeout-minutes: 35
     steps:
-      - name: Fetch only active EVOLVE deployment folders
+      - name: Checkout all active game assets for intentional full regression
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 1
           filter: blob:none
           sparse-checkout: |
             dist
             tools
             tests
             web
-            docs
-            monetization
-            .github
-      - name: Choose fast or full verification (unknown changes fail closed)
-        id: scope
-        shell: bash
-        env:
-          EVOLVE_BEFORE: ${{ github.event.before }}
-          EVOLVE_EVENT: ${{ github.event_name }}
-          EVOLVE_SHA: ${{ github.sha }}
-        run: |
-          MODE=full
-          if [ "$EVOLVE_EVENT" = push ] && [[ "$EVOLVE_BEFORE" =~ ^[a-f0-9]{40}$ ]] &&
-             [[ ! "$EVOLVE_BEFORE" =~ ^0{40}$ ]]; then
-            git fetch --no-tags --filter=blob:none --depth=1 origin "$EVOLVE_BEFORE" || true
-            if git cat-file -e "$EVOLVE_BEFORE^{commit}" 2>/dev/null &&
-               git diff --name-only "$EVOLVE_BEFORE" "$EVOLVE_SHA" > /tmp/evolve-deploy-files; then
-              python3 tools/ci_deploy_scope.py /tmp/evolve-deploy-files > /tmp/evolve-mode
-              MODE="$(cat /tmp/evolve-mode)"
-            fi
-          fi
-          if [ ! -s dist/index.html ]; then MODE=full; fi
-          printf 'mode=%s\n' "$MODE" >> "$GITHUB_OUTPUT"
-          printf 'EVOLVE_DEPLOY_MODE=%s\n' "$MODE" >> "$GITHUB_ENV"
-          echo "EVOLVE DEPLOY $MODE; a full regression remains available via workflow_dispatch."
-      - name: Expand full repository only for engine, assets or unknown changes
-        if: steps.scope.outputs.mode == 'full'
-        run: git sparse-checkout disable
-      - name: Restore first manual upload without replacing an existing game
-        id: restore
-        shell: bash
-        run: |
-          if [ ! -s dist/index.html ]; then
-            python3 tools/install_manual_upload.py --root . --dist dist
-            echo "restored=true" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Repair online-shell startup order without changing gameplay or art
-        run: python3 tools/patch_web_lifecycle.py --dist dist --client web/client.js
-      - name: Verify V575 immutable game and release files on every deployment
+      - name: Original assets, gameplay, storage and engine contract
         run: |
           test -s dist/index.html
           test -s dist/version.json
-          test -s dist/asset-manifest.json
           test -d dist/assets
           python3 tools/verify_site.py --dist dist
           node tests/m08_090_release_integrity.test.cjs
-      - name: Full engine and storage contracts (only changed engine/unknown)
-        if: steps.scope.outputs.mode == 'full'
-        run: |
           python3 -m unittest discover -s tests -v
           node --test tests/web_client.test.cjs
           node tests/campaign_lightning.test.cjs
@@ -128,18 +37,7 @@ jobs:
           node tests/organ_skills.test.cjs
           node --test tests/weapon_hits_v612.test.cjs tests/organ_hits_v613.test.cjs tests/monster_feedback_v614.test.cjs
           python3 tools/verify_monster_feedback_v614.py
-      - name: Fast M08 SHOP and save regression (same tracked sources as the verified release)
-        if: steps.scope.outputs.mode == 'fast'
-        run: |
-          node tests/m08_010_live_stage.test.cjs
-          node tests/m08_020_runtime_missions.test.cjs
-          node tests/m08_040_mission_rewards.test.cjs
-          node tests/m08_060_monthly_boundary.test.cjs
-          node tests/m08_070_reward_ux.test.cjs
-          node tests/m08_080_release_gate.test.cjs
-          node tests/m07_100_final_contract.test.cjs
-          node --test tests/web_client.test.cjs
-      - name: Prepare browser verification
+      - name: Prepare Chromium
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
           chrome_path="$(command -v google-chrome || command -v chromium || true)"
@@ -149,15 +47,8 @@ jobs:
             echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
           fi
           echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
-      - name: Fast mobile HOME, CHALLENGE reward and SHOP browser
-        if: steps.scope.outputs.mode == 'fast'
-        timeout-minutes: 5
-        run: |
-          node tests/home_hub_browser.cjs
-          node tests/m08_040_mission_rewards_browser.cjs
-      - name: Verify mobile boot, maps, controls, saves and safe updates
-        if: steps.scope.outputs.mode == 'full'
-        timeout-minutes: 15
+      - name: Complete mobile, character, combat, map and HOME browser suite
+        timeout-minutes: 18
         run: |
           node tests/player_mutant_browser.cjs
           node tests/organ_skills_browser.cjs
@@ -188,91 +79,10 @@ jobs:
           node tests/red_pulse_browser.cjs
           node tests/boss_cinematic_browser.cjs
           node tests/attack_warnings_browser.cjs
-      - name: Retain browser evidence
+      - name: Preserve full browser regression reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: evolve-browser-verification
+          name: evolve-full-regression
           path: test-results
-          if-no-files-found: ignore
-      - name: Keep the restored game in GitHub for future updates
-        if: steps.restore.outputs.restored == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add --force -- dist
-          git commit -m "Install verified full EVOLVE V575 website from manual upload"
-          git push origin HEAD:main
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-      - name: Upload verified website
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Deploy GitHub Pages
-        id: pages
-        uses: actions/deploy-pages@v4
-        with:
-          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
-
-      - name: Verify exact live M08 release bytes and version (fast and full)
-        run: python3 tools/verify_public_m08.py --url "${{ steps.pages.outputs.page_url }}" --timeout 180
-      - name: Await M07 90 shop assets after Pages CDN propagation
-        if: steps.scope.outputs.mode == 'full'
-        timeout-minutes: 12
-        run: python3 tools/wait_for_shop_publication.py --url "${{ steps.pages.outputs.page_url }}" --timeout 560
-      # Fast releases already passed HOME/CHALLENGE/SHOP Chromium locally.
-      # The immediately preceding published-byte gate verifies the exact online
-      # HTML, version, SHOP and mission script files. Cold 340MB game boots are
-      # covered by the manual full-site browser suite, never a flaky fast gate.
-      - name: Confirm the actual published build, administrator gate and artwork
-        if: steps.scope.outputs.mode == 'full'
-        run: |
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_hits_browser_v613.cjs --report test-results/organ-hits-live.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/monster_feedback_browser_v614.cjs --report test-results/monster-feedback-live.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/m07_080_shop_browser.cjs --report test-results/native-shop-live-browser.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/visual_fit_browser.cjs --report test-results/visual-fit-live-browser.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_balance_browser.cjs --report test-results/home-balance-live-browser.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/upgrade_scenery_browser.cjs --report test-results/upgrade-scenery-live-browser.json
-          python3 tools/verify_upgrade_scenery_v608.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/upgrade-scenery-live-bytes.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/organ_card_art_browser.cjs --report test-results/organ-card-art-live-browser.json
-          python3 tools/verify_organ_card_art_v610.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/organ-card-art-live-bytes.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/display_recovery_browser.cjs --report test-results/display-recovery-live-browser.json
-          python3 tools/verify_display_recovery_v611.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/display-recovery-live-bytes.json
-          python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/fullscreen_browser.cjs --report test-results/fullscreen-live-browser.json
-          python3 tools/verify_published_lettering_v584.py --url "${{ steps.pages.outputs.page_url }}" --dist dist
-          python3 tools/verify_movement_field_v590.py --url "${{ steps.pages.outputs.page_url }}" --dist dist --output test-results/web27-live.json
-      - name: Retain publication evidence
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: evolve-publication-verification
-          path: |
-            test-results/home-hub-live-browser.json
-            test-results/weapon-hits-live.json
-            test-results/organ-hits-live.json
-            test-results/monster-feedback-live.json
-            test-results/monster-feedback-live-*.png
-            test-results/monster-feedback-local-*.png
-            test-results/organ-hits-live-*.png
-            test-results/weapon-hits-live-*.png
-            test-results/visual-fit-live-browser.json
-            test-results/home-balance-live-browser.json
-            test-results/upgrade-scenery-live-browser.json
-            test-results/upgrade-scenery-live-bytes.json
-            test-results/organ-card-art-live-browser.json
-            test-results/organ-card-art-live-bytes.json
-            test-results/display-recovery-live-browser.json
-            test-results/display-recovery-live-bytes.json
-            test-results/display-recovery-*.png
-            test-results/organ-card-art-*.png
-            test-results/upgrade-scenery-*.png
-            test-results/fullscreen-live-browser.json
-            test-results/visual-fit-*.png
-            test-results/home-hub-*.png
-            test-results/web17-live.json
-            test-results/web27-live.json
           if-no-files-found: ignore
