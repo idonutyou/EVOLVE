@@ -71,6 +71,8 @@
     "step": "3/3",
     "rendering_required": false
   },
-  "zip_structure_verified": false,
-  "correction_note": "Replaced malformed initial archive with corrected ZIP local header/central directory; remote CRC verification is required."
+  "zip_structure_verified": true,
+  "correction_note": "Initial ZIP structure corrected and re-parsed from remote base64. All 5 entry CRC32 values, central directory, EOCD, total CRC32 now validated. No change to main or original game.",
+  "zip_verified_entries": 5,
+  "zip_correction_completed": true
 }
