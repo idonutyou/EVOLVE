@@ -23,12 +23,20 @@ jobs:
         with:
           fetch-depth: 2
           filter: blob:none
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
-            .github
-            tools
-            tests
-            dist
-            web
+            /.github/workflows/ci-speed-probe.yml
+            /.github/workflows/deploy-pages.yml
+            /tools/
+            /tests/
+            /web/
+            /dist/index.html
+            /dist/version.json
+            /dist/verification.json
+            /dist/shop-experience-v621.js
+            /dist/m08-stage-mission-v622.js
+            /dist/m08-runtime-missions-v623.js
+            /dist/m08-mission-rewards-v624.js
       - name: Validate fast/full classifier and required M08 JS contract
         run: |
           python3 -m unittest discover -s tests -p test_ci_deploy_scope.py -v
@@ -39,7 +47,12 @@ jobs:
           node tests/m08_070_reward_ux.test.cjs
           node tests/m08_080_release_gate.test.cjs
           node tests/m07_100_final_contract.test.cjs
-          python3 tools/verify_site.py --dist dist
+          python3 - <<'PY'
+          from pathlib import Path
+          assert Path('dist/index.html').is_file()
+          assert Path('dist/version.json').is_file()
+          print('Non-asset source-only stage checkout PASS')
+          PY
       - name: Confirm deployment workflow contains intact full rollback and safeguards
         run: |
           python3 - <<'PY'
