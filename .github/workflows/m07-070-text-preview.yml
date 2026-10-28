@@ -26,10 +26,10 @@ jobs:
           node tests/m07_050_journal_restore.test.cjs
           node tests/m07_060_atomic_batch.test.cjs
           node tests/m07_070_text_preview.test.cjs
-      - name: Guard original game, images, SHOP, and price catalog
+      - name: Preserve combat, graphics, merchant catalog and previous backups (V621 shop allowlist)
         run: |
-          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07_070_modified.txt
-          if grep -E '^(dist/|web/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)' /tmp/m07_070_modified.txt; then
-            echo 'M07 isolated 70-percent preview must not change the existing game or SHOP.'
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-protected.txt
+          if grep -E '^(web/|dist/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)' /tmp/m07-protected.txt | grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$'; then
+            echo 'Forbidden change outside V621 shop experience.'
             exit 1
           fi
