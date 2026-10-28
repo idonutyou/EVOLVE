@@ -34,6 +34,7 @@ jobs:
             /dist/version.json
             /dist/verification.json
             /dist/shop-experience-v621.js
+            /dist/shop-front-v621.js
             /dist/m08-stage-mission-v622.js
             /dist/m08-runtime-missions-v623.js
             /dist/m08-mission-rewards-v624.js
