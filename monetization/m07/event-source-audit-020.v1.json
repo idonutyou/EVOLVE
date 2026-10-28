@@ -1,0 +1,69 @@
+{
+  "schema_version": "EVOLVE_M07_020_EVENT_SOURCE_AUDIT_V1",
+  "review_date_kst": "2026-10-28",
+  "main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "audit_status": "PARTIAL_SOURCE_ONLY_NO_VERIFIED_GAMEPLAY_EVENTS_FOUND",
+  "evidence": [
+    {
+      "path": "web/home-hub-v601.js",
+      "blob_sha": "0c8a411379062693b66b43dfc104772c019d2135",
+      "bytes": 10657,
+      "verified_mission_events_found": 0,
+      "observed": "Defines 5 HOME tabs; CHALLENGE and CODEX are UI destinations, not verified run/stage/discovery events.",
+      "do_not_assume": "Tabs imply authoritative event emitters"
+    },
+    {
+      "path": "web/native-shop-v620.js",
+      "blob_sha": "53e0dabfaf815255525698d671b99f31aa3c9616",
+      "bytes": 11669,
+      "verified_mission_events_found": 0,
+      "observed": "Native SHOP test purchase and core equip; evolve:dev-mock-change is a mock-store update, not play activity.",
+      "do_not_assume": "Test store balance is research season reward authority"
+    },
+    {
+      "path": "web/client.js",
+      "blob_sha": "0347dce71018657805e936249170984eb56c6645",
+      "bytes": 6058,
+      "verified_mission_events_found": 0,
+      "observed": "Handles web resource/lifecycle; no verified mission events in reviewed file.",
+      "do_not_assume": "Loading the page indicates completed run"
+    },
+    {
+      "path": "dist/index.html",
+      "blob_sha": "4c5589ee8af9d88a08b21b223836d4147ca5e044",
+      "bytes": 259933,
+      "verified_mission_events_found": 0,
+      "observed": "Has CODEX/CHALLENGE DOM shell but no named verified mission event in reviewed HTML.",
+      "do_not_assume": "HTML DOM alone verifies actions"
+    }
+  ],
+  "limitations": [
+    "Audited these exact four checked-in files, not the full minified/hashed combat bundle.",
+    "Game may contain local state transitions, but this audit does not claim all sources absent.",
+    "No authenticated server-signed gameplay-event producer has been established.",
+    "No network/API integration was added. This is an audit/data contract only."
+  ],
+  "event_gap": [
+    {
+      "candidate": "RUN_COMPLETED_VERIFIED",
+      "producer": "UNMAPPED",
+      "required_evidence": "Authoritative run_id, session start/end, legitimate completion proof, account binding",
+      "do_not_wire": "Button click or game launch"
+    },
+    {
+      "candidate": "STAGE_ACTIVITY_VERIFIED",
+      "producer": "UNMAPPED",
+      "required_evidence": "Authoritative stage_id, run_id, actual stage activity proof, anti-replay",
+      "do_not_wire": "HOME BATTLE tab click"
+    },
+    {
+      "candidate": "CODEX_DISCOVERY_VERIFIED",
+      "producer": "UNMAPPED",
+      "required_evidence": "New discovery identifier, preexisting unlock state and verified new discovery event",
+      "do_not_wire": "Open CODEX tab"
+    }
+  ],
+  "next_audit_gate": "Inspect gameplay bundle and server event producer at implementation; non-authoritative browser events can be UI preview only, never production reward claims.",
+  "image_rendering_required": false,
+  "implementation_performed": false
+}
