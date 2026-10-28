@@ -1,3 +1,15 @@
+# EVOLVE M07 80% / STEP 3/3 — 게임 안에서 체험하는 V621 SHOP (2026-10-28 KST)
+
+- 사용자의 최신 기준에 맞춰 **실제 결제만 제외하고 SHOP 내 상품/선물/월간 패스/외형 장착을 직접 체험 가능**하도록 구현. 유저 화면에는 "모의 구매/TEST 상품"을 쓰지 않고 '구매/수령/보유' 표시. **실결제 없음·금액 미청구·가격 후보**는 명확히 표시.
+- 구현: `web/shop-experience-v621.js`/동등한 `dist/shop-experience-v621.js` 로컬 장부, `web/shop-front-v621.js`/`dist/shop-front-v621.js` 게임 본래 SHOP 마운트. `dist/index.html` 후크. 첫 구매 결정+50, 첫 패키지 결정+75, 결정100/300, 공명 코어 외형 영구 획득/기존 V617 게임 장착, 매일 무료 결정+20, 연구 시즌 패스 및 프리미엄 5단계 수령. 다른 HOME 탭/전투 코드/원본 캐릭터/몬스터/1021 이미지/기존 세이브 불변.
+- 유료 시즌은 **KST 매월 1일 00:00~말일(다음 달 1일 00:00 미포함)**. 무료 이벤트는 별도 28일도 허용. 기존 M07 10~70%의 신뢰 이벤트 검증 없음은 유효: 일일/프리미엄 보상은 현 브라우저 별도 체험 지갑에만 지급, 실제 계정/게임 재화/서버 영수증과 무관. 영구 스킨은 기존 코어 브리지로 게임 내 실제 외형 전환.
+- UX 참고: 2025~26 고매출 모바일게임의 패키지·재화·코스메틱·패스·첫구매 혜택 패턴. 특정 게임의 이미지는 복제하지 않았고 이번 단계는 CSS 그래픽만 적용. 상세 `docs/monetization/M07_080_ACTUAL_GAME_SHOP_KO.md`.
+- 자동 QA: `tests/m07_080_shop_experience.test.cjs` 10~80% Node 테스트, `tests/m07_080_shop_browser.cjs` 393x852/320x568/852x393 실제 게임 SHOP/가격·보상·월간패스/원본 저장·외형 장착/오버플로·44px 버튼. `tests/home_hub_browser.cjs` 5개 HOME 탭·원래 게임 시작 보전. CI `M07 080 in-game SHOP experience` + `M07 080 browser integration` 성공 확인.
+- 이전 공개 `main` 보존: `backup/pre-m07-080-live-20261028`. V621 배포 원본: `backup/m07-080-live-shop-v621-20261028` (SHA `44d3aa6d95cfcf0eeddc80fccc8a8fba90152c08`). `Publish EVOLVE Web` 자동 배포 완료 여부를 확인해야 최종 라이브 검증. M07 소스 백업 `backup/monetization-m07-080-20261028` + CRC ZIP/receipt.
+- 다음 `고`: **M07 90%, STEP 3/3** — 실제 게임 내 체험 UX 심화, 시즌/결정 사용처 연동과 반복/종료/저장 복원 회귀, 구매/수령 UI 보정. **캐릭터/전투/몬스터 이미지 렌더링 불필요. 상점 배너/패스 UI 이미지는 제작 허용.**
+
+---
+
 # EVOLVE M07 70% — STEP 3/3 진행 (2026-10-28 KST)
 
 - 70% 신규 **이미지 없는 연구 시즌 텍스트 UI 제작·검사**: `monetization/m07/season-text-view-070.cjs`(읽기 전용 HTML 생성), `season-text-demo-070.html`(독립 정적 미리보기), `tests/m07_070_text_preview.test.cjs`, `event-source-audit-070.v1.json`, `docs/monetization/M07_070_TEXT_PREVIEW_UI_AUDIT_KO.md`.
