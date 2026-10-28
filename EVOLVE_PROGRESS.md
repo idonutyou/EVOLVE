@@ -1,3 +1,15 @@
+# EVOLVE M07 70% — STEP 3/3 진행 (2026-10-28 KST)
+
+- 70% 신규 **이미지 없는 연구 시즌 텍스트 UI 제작·검사**: `monetization/m07/season-text-view-070.cjs`(읽기 전용 HTML 생성), `season-text-demo-070.html`(독립 정적 미리보기), `tests/m07_070_text_preview.test.cjs`, `event-source-audit-070.v1.json`, `docs/monetization/M07_070_TEXT_PREVIEW_UI_AUDIT_KO.md`.
+- 3종 무료 연구 미션/테스트 진척, 유료 월간 패스 종료 안내, `판매 준비 중·구매 불가` 문구만 표시. **실제 게임 또는 Pages 적용은 아직 안 됨**, 구매/보상/클라이언트 권리 부여/게임 세이브 저장 없음.
+- 원본 HTML·게임 파일 조사: 기본 SHOP은 `homeShopViewV601`, 시즌 패스 카드 현재 disabled. CHALLENGE 기존 `homeChallengeViewV601`·`renderHomeChallengesV601` 존재. 실제 통합 때는 CHALLENGE 내부 별도 블록만 검토하고 기존 목록·메뉴·SHOP을 유지. `grantStageClearReward`와 관리자 진행도는 로컬 코드라 신뢰 이벤트 아님.
+- 유료 시즌은 **매월 1일~말일 KST**, 무료 미션·이벤트는 28일 운영 가능, 영구 구매 외형은 기간 만료로 삭제 불가. M06 새 렌더링 계속 보류, 기존 1,021개 이미지·SHOP·게임 세이브·카탈로그·M06 이전 시안/백업 보존.
+- GitHub 자동 검사 `M07 070 read-only text season preview`: 성공, 구버전 010/020/030 워크플로의 원본 보호 비교가 얕은 clone에서 깨지는 문제도 `fetch-depth:0`으로 수정.
+- 70% 전체 원격 트리 복구 `backup/monetization-m07-070-20261028` 및 증분 ZIP/JSON 체크포인트 별도 검증.
+- 다음 `고`: **M07 80%, STEP 3/3**. 원본 HOME/SHOP 보전 상태에서 CHALLENGE 텍스트 UI 기능 브랜치 통합·모바일 브라우저 QA 준비. **새 이미지 렌더링 불필요.**
+
+---
+
 # EVOLVE — M07 60% STEP 2/3 완료 (2026-10-28 KST)
 
 - 실제 구현: 독립 테스트용 `monetization/m07/mission-batch-gate-060.cjs` — 미션 이벤트 최대 32개 묶음의 **전부 성공/전부 롤백** 테스트 처리, 요청 ID 재전송 중복 차단, 과거 리비전/다른 계정·무료 시즌 스냅샷 적용 거부. 실지급 0, 운영 권위/서버 연결 **없음**.
