@@ -1,4 +1,4 @@
-name: M08 040 research rewards focused regression
+name: M08 040-060 research rewards regression and recovery
 on:
   push:
     branches: ["monetization-m08-010-*"]
@@ -10,6 +10,9 @@ on:
       - "tests/m08_040_mission_rewards.test.cjs"
       - "tests/m08_040_mission_rewards_browser.cjs"
       - ".github/workflows/m08-040-rewards.yml"
+      - "tests/m08_060_monthly_boundary.test.cjs"
+      - "tools/verify_m08_060_checkpoint.py"
+      - "checkpoints/EVOLVE_M08_060_20261029.*"
   workflow_dispatch:
 jobs:
   reward-gate:
@@ -24,12 +27,15 @@ jobs:
           node --check web/shop-experience-v621.js
           node --check web/m08-mission-rewards-v624.js
           node tests/m08_040_mission_rewards.test.cjs
+          node tests/m08_060_monthly_boundary.test.cjs
           node tests/m08_010_live_stage.test.cjs
           node tests/m08_020_runtime_missions.test.cjs
           node tests/m08_030_integration.test.cjs
           node tests/m07_080_shop_experience.test.cjs
           node tests/m07_090_crimson_pass.test.cjs
           node tests/m07_100_final_contract.test.cjs
+      - name: Verify M08 60% incremental ZIP SHA256 CRC and byte-for-byte source
+        run: python tools/verify_m08_060_checkpoint.py
       - name: Strict originals protection and scope
         run: |
           git diff --name-only e7b89f0b768e645924a3a332e1c25663a5547ffb HEAD > /tmp/m08_040_changed
@@ -48,4 +54,6 @@ jobs:
           echo "NODE_PATH=$RUNNER_TEMP/m08-browser/node_modules" >> "$GITHUB_ENV"
       - name: Existing game CHALLENGE reward and SHOP spend focused Chromium
         timeout-minutes: 8
-        run: node tests/m08_040_mission_rewards_browser.cjs
+        run: |
+          node tests/m08_030_integration_browser.cjs
+          node tests/m08_040_mission_rewards_browser.cjs
