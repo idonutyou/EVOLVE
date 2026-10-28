@@ -1,0 +1,74 @@
+{
+  "schema_version": "EVOLVE_M07_060_CHECKPOINT_V1",
+  "module": "M07",
+  "progress_percent": 60,
+  "step": "2/3",
+  "date_kst": "2026-10-28",
+  "status": "TEST_ONLY_ATOMIC_BATCH_NO_LIVE_REWARDS",
+  "baseline_main": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "work_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup": "backup/monetization-m07-060-20261028",
+  "previous_backup": "backup/monetization-m07-050-20261028",
+  "archive": "checkpoints/EVOLVE_M07_060_20261028.zip",
+  "archive_type": "INCREMENTAL_NOT_FULL_GAME",
+  "archive_bytes": 21709,
+  "archive_crc32": "9d3c2842",
+  "archive_blob_sha": "d8ba03af049b6bbdfb8a629dbd0cff4be7f45881",
+  "archive_commit": "6e9e49b10c6e767ebf8f0d6ccfa96289c18e32cf",
+  "entries": [
+    {
+      "path": "monetization/m07/mission-batch-gate-060.cjs",
+      "bytes": 4640,
+      "crc32": "422fb59a",
+      "git_blob_sha": "e5cea35e07c04122be4ed0d5e13e851c92f1a516"
+    },
+    {
+      "path": "tests/m07_060_atomic_batch.test.cjs",
+      "bytes": 5714,
+      "crc32": "b29ad5bf",
+      "git_blob_sha": "01494089e2e402a4651fc8ac2254ebee9e580dec"
+    },
+    {
+      "path": "monetization/m07/event-source-audit-060.v1.json",
+      "bytes": 4188,
+      "crc32": "7ee45961",
+      "git_blob_sha": "d6afb7d3a5ebc6779d660852949aea37cddf1af2"
+    },
+    {
+      "path": "docs/monetization/M07_060_ATOMIC_BATCH_EVENT_HOOK_AUDIT_KO.md",
+      "bytes": 5166,
+      "crc32": "80ae98f0",
+      "git_blob_sha": "45b6871058dc64489ce7a31c90025017337ac8b9"
+    },
+    {
+      "path": ".github/workflows/m07-060-atomic.yml",
+      "bytes": 1145,
+      "crc32": "d0c29803",
+      "git_blob_sha": "bd2ed24bd8a3e851b9a61108ebfecf3900ac4568"
+    }
+  ],
+  "actions": {
+    "id": 40684783502,
+    "result": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40684783502"
+  },
+  "safety": {
+    "game_changed": false,
+    "images_generated": false,
+    "original_images_preserved": 1021,
+    "old_shop_changed": false,
+    "checkout": false,
+    "client_grants": false,
+    "real_rewards": 0,
+    "old_M06_legacy_backups_preserved": true,
+    "source_verified_gameplay_event_connected": false,
+    "local_stage_clear_hook_found_but_untrusted": true,
+    "paid_pass": "FIRST_TO_LAST_KST_CALENDAR_MONTH",
+    "free_cycle_optional_28days": true
+  },
+  "next": {
+    "progress_percent": 70,
+    "step": "3/3",
+    "rendering_required": false
+  }
+}
