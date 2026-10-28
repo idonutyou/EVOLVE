@@ -86,7 +86,7 @@ const ledgerDist=fs.readFileSync(path.join(__dirname,'../dist/shop-experience-v6
 const ledger=fs.readFileSync(path.join(__dirname,'../web/shop-experience-v621.js'),'utf8');
 assert.equal(ui,uiDist);
 assert.equal(ledger,ledgerDist);
-for(const token of ['eStoreCollectionV621','button[data-core', 'bridgeOwnedCore','dev_core_theme_02','evolve:dev-mock-change','월간 패스 활성화','실제 금액은 청구되지 않습니다'])assert.ok(ui.includes(token),token);
+for(const token of ['eStoreCollectionV621','action.dataset.core=id', 'bridgeOwnedCore','dev_core_theme_02','evolve:dev-mock-change','월간 패스 활성화','실제 금액은 청구되지 않습니다'])assert.ok(ui.includes(token),token);
 assert.ok(!ui.includes('모의 구매'));
 assert.ok(!ui.includes('TEST 상품'));
 assert.ok(!ui.includes('실제 결제 완료'));
