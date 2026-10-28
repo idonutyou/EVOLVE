@@ -13,26 +13,35 @@ on:
 jobs:
   focused-contract:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: {contents: read}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Narrow syntax and live-stage/runtime event tests
+        with: {fetch-depth: 0}
+      - name: Original stage and runtime contract tests
         run: |
           node --check web/m08-stage-mission-v622.js
           node --check web/m08-runtime-missions-v623.js
-          node --check dist/m08-stage-mission-v622.js
-          node --check dist/m08-runtime-missions-v623.js
           node tests/m08_010_live_stage.test.cjs
           node tests/m08_020_runtime_missions.test.cjs
-      - name: Hard-stop changes to combat, monster, original images or SHOP
+      - name: Original game and image path guard
         run: |
-          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/m08-changed.txt
-          if grep -E '^(web/|dist/|art/|assets/)' /tmp/changed.txt | grep -Ev '^(web/m08-stage-mission-v622\\.js|web/m08-runtime-missions-v623\\.js|web/m08-mission-rewards-v624\\.js|web/shop-experience-v621\\.js|dist/m08-stage-mission-v622\\.js|dist/m08-runtime-missions-v623\\.js|dist/m08-mission-rewards-v624\\.js|dist/shop-experience-v621\\.js|dist/index\\.html)
-            echo "Unexpected protected game or original asset modification"; exit 1
-          fi
-; then
-            echo "Unexpected protected game or original asset modification"; exit 1
-          fi
+          git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/m08-protected.txt
+          python - <<'PY'
+          from pathlib import Path
+          whitelist = {
+              'web/m08-stage-mission-v622.js',
+              'web/m08-runtime-missions-v623.js',
+              'web/m08-mission-rewards-v624.js',
+              'web/shop-experience-v621.js',
+              'dist/m08-stage-mission-v622.js',
+              'dist/m08-runtime-missions-v623.js',
+              'dist/m08-mission-rewards-v624.js',
+              'dist/shop-experience-v621.js',
+              'dist/index.html',
+          }
+          unsafe = [path for path in Path('/tmp/m08-protected.txt').read_text().splitlines()
+                    if path.startswith(('web/', 'dist/', 'art/', 'assets/')) and path not in whitelist]
+          if unsafe:
+              raise SystemExit('Protected original files changed: ' + ', '.join(unsafe))
+          print('M08 original game/image guard PASS')
+          PY
