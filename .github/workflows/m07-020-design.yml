@@ -6,6 +6,7 @@ on:
     paths:
       - "monetization/m07/**"
       - "tests/m07_020_period_contract.test.cjs"
+      - "tests/m07_020_paid_month_policy.test.cjs"
       - ".github/workflows/m07-020-design.yml"
   workflow_dispatch:
 jobs:
@@ -16,11 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 20
+          fetch-depth: 80
       - name: Run M07 10 and 20 percent contracts
         run: |
           node tests/m07_010_nonrender_design.test.cjs
           node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
       - name: Protect original game, premium data and non-render policy
         run: |
           git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-020-files.txt
