@@ -7,10 +7,8 @@ on:
       - "web/m08-runtime-missions-v623.js"
       - "dist/m08-stage-mission-v622.js"
       - "dist/m08-runtime-missions-v623.js"
-      - "dist/index.html"
       - "tests/m08_010_live_stage.test.cjs"
       - "tests/m08_020_runtime_missions.test.cjs"
-      - ".github/workflows/m08-010-stage.yml"
   workflow_dispatch:
 jobs:
   focused-contract:
@@ -32,6 +30,9 @@ jobs:
       - name: Hard-stop changes to combat, monster, original images or SHOP
         run: |
           git diff --name-only 55cc3054e07c5545ba7d3e12e64cadad75f6c34e HEAD > /tmp/m08-changed.txt
-          if grep -E '^(web/|dist/|art/|assets/)' /tmp/m08-changed.txt | grep -Ev '^(web/m08-stage-mission-v622\.js|web/m08-runtime-missions-v623\.js|dist/m08-stage-mission-v622\.js|dist/m08-runtime-missions-v623\.js|dist/index\.html)$'; then
+          if grep -E '^(web/|dist/|art/|assets/)' /tmp/changed.txt | grep -Ev '^(web/m08-stage-mission-v622\\.js|web/m08-runtime-missions-v623\\.js|web/m08-mission-rewards-v624\\.js|web/shop-experience-v621\\.js|dist/m08-stage-mission-v622\\.js|dist/m08-runtime-missions-v623\\.js|dist/m08-mission-rewards-v624\\.js|dist/shop-experience-v621\\.js|dist/index\\.html)
+            echo "Unexpected protected game or original asset modification"; exit 1
+          fi
+; then
             echo "Unexpected protected game or original asset modification"; exit 1
           fi

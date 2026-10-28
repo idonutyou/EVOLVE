@@ -19,7 +19,7 @@
   Object.freeze({id:'researchpass',title:'월간 연구 패스',category:'시즌',price:'₩5,900',kind:'monthly',crystals:0,once:false,badge:'월간 전용'})
  ]);
  const byId=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
- const fresh=()=>({schema:SCHEMA,revision:0,crystals:0,firstPurchase:false,owned:{},orders:{},passMonths:{},dailyClaims:{},rewardClaims:{}});
+ const fresh=()=>({schema:SCHEMA,revision:0,crystals:0,firstPurchase:false,owned:{},orders:{},passMonths:{},dailyClaims:{},rewardClaims:{},missionClaims:{}});
  const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
  const copy=x=>JSON.parse(JSON.stringify(x));
  function kstDay(timestamp){
@@ -36,12 +36,37 @@
  function validate(x){
   if(!requireObject(x)||x.schema!==SCHEMA||!Number.isSafeInteger(x.revision)||x.revision<0||!Number.isSafeInteger(x.crystals)||x.crystals<0||x.crystals>100000000||typeof x.firstPurchase!=='boolean')throw Error('STORE_DATA_INVALID');
   for(const k of ['owned','orders','passMonths','dailyClaims','rewardClaims'])if(!requireObject(x[k])||Object.keys(x[k]).length>2500)throw Error('STORE_DATA_INVALID');
+  if(x.missionClaims!==undefined){
+   if(!requireObject(x.missionClaims)||Object.keys(x.missionClaims).length>2500)throw Error('STORE_DATA_INVALID');
+   for(const [key,val] of Object.entries(x.missionClaims))
+    if(!/^20\d\d-(0[1-9]|1[0-2])-([0-2]\d|3[01]):(?:stage|run|codex)$/.test(key)||val!==true)throw Error('STORE_DATA_INVALID');
+  }
   for(const k of Object.keys(x.owned))if(!own(byId,k)||x.owned[k]!==true)throw Error('STORE_DATA_INVALID');
   for(const [id,o] of Object.entries(x.orders))if(!/^[A-Za-z0-9_-]{12,72}$/.test(id)||!requireObject(o)||!own(byId,o.item)||typeof o.month!=='string')throw Error('STORE_DATA_INVALID');
   for(const [k,v] of Object.entries(x.passMonths))if(!/^20\d\d-(0[1-9]|1[0-2])$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
   for(const [k,v] of Object.entries(x.dailyClaims))if(!/^20\d\d-\d\d-\d\d$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
   for(const [k,v] of Object.entries(x.rewardClaims))if(!/^20\d\d-(0[1-9]|1[0-2]):[1-5]$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
   return x;
+ }
+ const MISSION_REWARDS=Object.freeze({stage:10,run:5,codex:10});
+ const STAGE_KEY='EVOLVE_M08_STAGE_MISSION_V622_V1',RUNTIME_KEY='EVOLVE_M08_RUNTIME_MISSIONS_V623_V1';
+ function eligibleMission(storage,mission,day){
+  const key=mission==='stage'?STAGE_KEY:RUNTIME_KEY;
+  let raw;
+  try{raw=storage.getItem(key)}catch(_){throw Error('MISSION_SOURCE_UNAVAILABLE')}
+  if(raw===null)return false;
+  let evidence;try{evidence=JSON.parse(raw)}catch(_){throw Error('MISSION_SOURCE_CORRUPT')}
+  if(!requireObject(evidence))throw Error('MISSION_SOURCE_CORRUPT');
+  if(mission==='stage'){
+   if(evidence.schema!=='evolve.m08.stage.v622.1'||!requireObject(evidence.days))throw Error('MISSION_SOURCE_CORRUPT');
+   const value=evidence.days[day];if(value!==undefined&&value!==true)throw Error('MISSION_SOURCE_CORRUPT');
+   return value===true;
+  }
+  if(evidence.schema!=='evolve.m08.runtime.v623.1'||!requireObject(evidence.days))throw Error('MISSION_SOURCE_CORRUPT');
+  const record=evidence.days[day];
+  if(record===undefined)return false;
+  if(!requireObject(record)||!Number.isSafeInteger(record.runEnds)||record.runEnds<0||!Number.isSafeInteger(record.discoveries)||record.discoveries<0)throw Error('MISSION_SOURCE_CORRUPT');
+  return (mission==='run'?record.runEnds:record.discoveries)>0;
  }
  function createStore({storage,clock=()=>Date.now()}={}){
   if(!storage||typeof storage.getItem!=='function'||typeof storage.setItem!=='function')throw Error('STORAGE_UNAVAILABLE');
@@ -84,7 +109,31 @@
    const next=copy(s);if(next.crystals>99999960)throw Error('BALANCE_LIMIT');
    next.crystals+=35;next.rewardClaims[key]=true;next.revision++;write(next);return snapshot();
   }
-  return Object.freeze({snapshot,order,claimDaily,claimPremium});
+  function missionStatus(){
+   const s=read(),day=kstDay(now()),result={};
+   for(const mission of Object.keys(MISSION_REWARDS)){
+    const key=day+':'+mission,claimed=s.missionClaims?.[key]===true;
+    let ready=false,blocked=false;
+    if(!claimed)try{ready=eligibleMission(storage,mission,day)}catch(_){blocked=true}
+    result[mission]=Object.freeze({day,ready,claimed,blocked,crystals:MISSION_REWARDS[mission]});
+   }
+   return Object.freeze(result);
+  }
+  function claimMission(mission){
+   if(!own(MISSION_REWARDS,mission))throw Error('MISSION_UNKNOWN');
+   const s=read(),day=kstDay(now()),key=day+':'+mission;
+   if(s.missionClaims?.[key]===true)throw Error('ALREADY_CLAIMED');
+   if(!eligibleMission(storage,mission,day))throw Error('MISSION_NOT_COMPLETE');
+   const value=MISSION_REWARDS[mission];
+   if(s.crystals>100000000-value)throw Error('BALANCE_LIMIT');
+   if(Object.keys(s.missionClaims||{}).length>=2500)throw Error('MISSION_CLAIMS_LIMIT');
+   const next=copy(s);
+   next.missionClaims=next.missionClaims||{};
+   next.missionClaims[key]=true;
+   next.crystals+=value;next.revision++;write(next);
+   return Object.freeze({mission,day,crystals:value,charged:false,source:'LOCAL_PREVIEW_ONLY',state:snapshot()});
+  }
+  return Object.freeze({snapshot,order,claimDaily,claimPremium,missionStatus,claimMission});
  }
- return Object.freeze({createStore,kstDay,kstMonth,paidMonthWindow,products:PRODUCTS,storageKey:STORAGE_KEY,mode:'LOCAL_PREVIEW_NO_BILLING'});
+ return Object.freeze({createStore,kstDay,kstMonth,paidMonthWindow,products:PRODUCTS,missionRewards:MISSION_REWARDS,storageKey:STORAGE_KEY,mode:'LOCAL_PREVIEW_NO_BILLING'});
 });

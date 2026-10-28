@@ -1,0 +1,26 @@
+{
+  "schema": "EVOLVE_M08_040_REMOTE_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "percent": 40,
+  "step": "M08 STEP 2/3",
+  "base_sha": "e7b89f0b768e645924a3a332e1c25663a5547ffb",
+  "backup": "backup/monetization-m08-040-20261028",
+  "feature_branch": "monetization-m08-010-game-events-20261028",
+  "reward_crystals": {
+    "stage": 10,
+    "run": 5,
+    "codex": 10
+  },
+  "wallet_storage": "EVOLVE_SHOP_EXPERIENCE_V621_V1",
+  "new_key_removed": false,
+  "original_combat_modified": false,
+  "billing_connected": false,
+  "server_verified": false,
+  "main_deployed": false,
+  "zip_deferred_until_percent": 60,
+  "test_files": [
+    "tests/m08_040_mission_rewards.test.cjs",
+    "tests/m08_040_mission_rewards_browser.cjs"
+  ],
+  "next": "M08 50% UI/error resilience + local reward store integration regression"
+}
