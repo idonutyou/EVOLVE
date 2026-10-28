@@ -11,8 +11,8 @@ import urllib.parse
 import urllib.request
 
 MARKERS = (
-    ("/", b"shop-experience-v621.js?v=90"),
-    ("/", b"shop-front-v621.js?v=90"),
+    ("/", b"shop-experience-v621.js?v=100"),
+    ("/", b"shop-front-v621.js?v=100"),
     ("/shop-experience-v621.js", b"id:'crimson'"),
     ("/shop-front-v621.js", b"eStoreCollectionV621"),
 )
