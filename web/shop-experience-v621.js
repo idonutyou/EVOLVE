@@ -52,7 +52,7 @@
   function order(id,requestId){
    if(!own(byId,id)||typeof requestId!=='string'||!/^[A-Za-z0-9_-]{12,72}$/.test(requestId))throw Error('INVALID_ORDER');
    const s=read(),p=byId[id],month=kstMonth(now());
-   if(own(s.orders,requestId)){const receipt=s.orders[requestId];if(receipt.item!==id||receipt.month!==month)throw Error('ORDER_ID_CONFLICT');return Object.freeze({replayed:true,state:snapshot(),receipt:copy(receipt)});}
+   if(own(s.orders,requestId)){const receipt=s.orders[requestId];if(receipt.item!==id)throw Error('ORDER_ID_CONFLICT');return Object.freeze({replayed:true,state:snapshot(),receipt:copy(receipt)});}
    if(Object.keys(s.orders).length>=1200)throw Error('ORDER_LIMIT');
    if(p.once&&s.owned[id]===true)throw Error('ALREADY_OWNED');
    if(id==='researchpass'&&s.passMonths[month])throw Error('ALREADY_OWNED');
