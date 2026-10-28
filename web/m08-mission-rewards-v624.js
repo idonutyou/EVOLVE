@@ -11,7 +11,7 @@
  const rows=Object.freeze([['stage','신규 스테이지 연구'],['run','전투 종료 연구'],['codex','도감 발견 연구']]);
  function createController({store}={}){
   if(!store||typeof store.missionStatus!=='function'||typeof store.claimMission!=='function'||typeof store.snapshot!=='function')throw Error('MISSION_REWARD_SETUP');
-  return Object.freeze({status:()=>store.missionStatus(),claim:id=>store.claimMission(id)});
+  return Object.freeze({status:()=>store.missionStatus(),balance:()=>store.snapshot().crystals,claim:id=>store.claimMission(id)});
  }
  function mount(w){
   const engine=w.__EVOLVE_SHOP_EXPERIENCE_V621__,doc=w.document;
@@ -31,12 +31,13 @@
    const host=doc.getElementById('homeChallengeViewV601');if(!host)return;
    if(!card){card=doc.createElement('section');card.id=id;card.className='m08MissionRewardsV624';card.setAttribute('aria-label','일일 전투 및 발견 연구 보상');host.append(card);
     if(!doc.getElementById(styleId)){const style=doc.createElement('style');style.id=styleId;style.textContent=css;doc.head.append(style);}}
-   let states;
-   try{states=controller.status()}catch(_){card.textContent='연구 보상 기록을 읽을 수 없습니다. 기존 저장 데이터는 보존됩니다.';return}
-   const sig=JSON.stringify(states)+'|'+error+'|'+locked;
+   let states,balance;
+   try{states=controller.status();balance=controller.balance()}catch(_){card.textContent='연구 보상 기록을 읽을 수 없습니다. 기존 저장 데이터는 보존됩니다.';stamp='';return}
+   const sig=JSON.stringify(states)+'|'+balance+'|'+error+'|'+locked;
    if(sig===stamp)return;stamp=sig;card.replaceChildren();
    const heading=doc.createElement('h3');heading.textContent='일일 연구 보상';card.append(heading);
    const intro=doc.createElement('p');intro.textContent='연구를 완료하면 변이 결정을 받을 수 있습니다. 보상은 현재 브라우저의 체험 지갑에만 저장됩니다.';card.append(intro);
+   const wallet=doc.createElement('p');wallet.className='m08RewardWalletV624';wallet.textContent='보유 결정 ◆ '+balance.toLocaleString('ko-KR');card.append(wallet);
    for(const [mission,title] of rows){
     const s=states[mission],row=doc.createElement('div');row.className='m08RewardRowV624';card.append(row);
     const label=doc.createElement('strong');label.textContent=title+' · ◆ '+s.crystals;row.append(label);
@@ -53,9 +54,17 @@
    }
    const note=doc.createElement('p');note.textContent=error||'하루에 각 연구 1회 · 한국시간 기준 · 실제 결제 및 서버 검증 없음';note.setAttribute('role','status');card.append(note);
   }
-  draw();const timer=w.setInterval(draw,1800);w.addEventListener('pageshow',draw);
-  w.addEventListener('storage',event=>{if(event.key===engine.storageKey||event.key===null)draw();});
-  w.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__=Object.freeze({read:()=>controller.status(),claim:mission=>{const r=controller.claim(mission);stamp='';draw();return r;},refresh:draw,stop:()=>w.clearInterval(timer),mode:'LOCAL_CRYSTALS_NO_BILLING'});
+  // M08 50%: no 1.8s idle polling. Return to CHALLENGE, focus or storage update refreshes the card.
+  const memory=doc.getElementById('memoryBtn');
+  const onVisibility=()=>{if(doc.visibilityState==='visible')draw();};
+  const sourceKeys=new Set([engine.storageKey,'EVOLVE_M08_STAGE_MISSION_V622_V1','EVOLVE_M08_RUNTIME_MISSIONS_V623_V1']);
+  const onStorage=event=>{if(event.key===null||sourceKeys.has(event.key))draw();};
+  draw();memory?.addEventListener('click',draw);w.addEventListener('pageshow',draw);
+  w.addEventListener('focus',draw);doc.addEventListener('visibilitychange',onVisibility);
+  w.addEventListener('storage',onStorage);
+  function stop(){memory?.removeEventListener('click',draw);w.removeEventListener('pageshow',draw);
+   w.removeEventListener('focus',draw);doc.removeEventListener('visibilitychange',onVisibility);w.removeEventListener('storage',onStorage);}
+  w.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__=Object.freeze({read:()=>controller.status(),claim:mission=>{const r=controller.claim(mission);stamp='';draw();return r;},refresh:draw,stop,refreshMode:'EVENT_DRIVEN',mode:'LOCAL_CRYSTALS_NO_BILLING'});
   return true;
  }
  return Object.freeze({createController,mount,mode:'LOCAL_CRYSTALS_NO_BILLING'});

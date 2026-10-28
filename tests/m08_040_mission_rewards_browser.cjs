@@ -24,8 +24,11 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    const unlocked=window.__EVOLVE_ADMIN_MODE_V585__.read().normal.unlocked;
    localStorage.setItem('EVOLVE_M08_STAGE_MISSION_V622_V1',JSON.stringify({schema:'evolve.m08.stage.v622.1',seenUnlocked:unlocked,stageEvents:1,completed:{'1':true},days:{[day]:true},lastStage:1,revision:1}));
    localStorage.setItem('EVOLVE_M08_RUNTIME_MISSIONS_V623_V1',JSON.stringify({schema:'evolve.m08.runtime.v623.1',revision:1,runEnds:1,discoveries:1,codex:null,days:{[day]:{runEnds:1,discoveries:1}}}));
-   window.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__.refresh();
   });
+  // M08 50%: returning to CHALLENGE refreshes without an idle 1.8s timer.
+  await page.locator('#homeBattleTabV522').click();
+  await page.locator('#memoryBtn').click();
+  assert.equal(await page.locator('#m08MissionRewardsV624 .m08RewardWalletV624').textContent(),'보유 결정 ◆ 0');
   for(const id of ['stage','run','codex']){
    const button=page.locator('#m08MissionRewardsV624 button[data-m08-claim="'+id+'"]');
    await button.waitFor({state:'visible'});
@@ -34,6 +37,8 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    assert.equal(await button.isEnabled(),false,'duplicate claim '+id);
   }
   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),25);
+  assert.equal(await page.locator('#m08MissionRewardsV624 .m08RewardWalletV624').textContent(),'보유 결정 ◆ 25');
+  assert.equal(await page.evaluate(()=>window.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__.refreshMode),'EVENT_DRIVEN');
   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().firstPurchase),false);
   const saved=await page.evaluate(()=>({original:localStorage.getItem('EVOLVE_V575_M08_040_SAFE'),ledger:localStorage.getItem('EVOLVE_M03_M08_040_SAFE')}));
   assert.deepEqual(saved,{original:'GAME',ledger:'LEDGER'});

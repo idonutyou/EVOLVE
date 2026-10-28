@@ -1,0 +1,21 @@
+{
+  "schema": "EVOLVE_M08_050_FAST_CHECKPOINT_V1",
+  "progress_percent": 50,
+  "date_kst": "2026-10-29",
+  "baseline_commit": "cb5995b0277792004fbfb7a114671626a52fbcf0",
+  "backup_branch": "backup/monetization-m08-050-20261029",
+  "phase": "STEP 2/3",
+  "changes": "M08 reward card event-driven refresh; immediate current wallet amount; no 1800ms idle timer",
+  "modified": [
+    "web/m08-mission-rewards-v624.js",
+    "dist/m08-mission-rewards-v624.js",
+    "tests/m08_040_mission_rewards.test.cjs",
+    "tests/m08_040_mission_rewards_browser.cjs"
+  ],
+  "retained_m08_040_wallet_schema": true,
+  "existing_game_save_unchanged": true,
+  "billing": false,
+  "new_art": false,
+  "full_browser_and_incremental_zip_due_at_60_percent": true,
+  "next": "M08 60% focused + integrated browser and ZIP recovery"
+}
