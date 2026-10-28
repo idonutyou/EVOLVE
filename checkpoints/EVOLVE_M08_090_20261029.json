@@ -1,0 +1,81 @@
+{
+  "schema": "EVOLVE_M08_090_INCREMENTAL_RECOVERY_V1",
+  "date": "2026-10-29",
+  "percent": 90,
+  "backup_from": "backup/monetization-m08-060-20261029",
+  "recovery_branch": "backup/monetization-m08-090-20261029",
+  "archive": "checkpoints/EVOLVE_M08_090_20261029.zip",
+  "archive_bytes": 37256,
+  "archive_sha256": "cb41b8f912ebd3f980b4c018765c8d3d51f71eb6084ee9cfb2c984c3d52be9e6",
+  "files": [
+    {
+      "path": ".github/workflows/m08-040-rewards.yml",
+      "size": 3399,
+      "sha256": "25884daa68a88c8f671883764baa3fbdfd9442dbe94dcd7fb40c427fbfc273ab",
+      "crc32": "b60a3146"
+    },
+    {
+      "path": "tests/m08_090_release_integrity.test.cjs",
+      "size": 1828,
+      "sha256": "6173254ad72752b1c1c815565a2287680c3bd0713746ec39f94391207d98da1f",
+      "crc32": "6d3a3728"
+    },
+    {
+      "path": "tools/verify_m08_090_checkpoint.py",
+      "size": 1277,
+      "sha256": "a0fc9396777cd050df88b1e345e424a44fcb702d84b33839ee60079689816a3b",
+      "crc32": "c438a5c2"
+    },
+    {
+      "path": "docs/monetization/M08_090_RELEASE_RECOVERY_KO.md",
+      "size": 1419,
+      "sha256": "4f3296b436bb22c719b2c189f1ad486fc079e7a259d2675e539004341b0e69e5",
+      "crc32": "9519087b"
+    },
+    {
+      "path": "checkpoints/EVOLVE_M08_070_20261029.json",
+      "size": 688,
+      "sha256": "d09dbedd860b30317095b8fe25182b5ef6f8e69afc0ff2349d3b52f6c1973902",
+      "crc32": "17df3852"
+    },
+    {
+      "path": "checkpoints/EVOLVE_M08_080_20261029.json",
+      "size": 991,
+      "sha256": "f0bbea75c80fa0bac655040cb403982fe600c34779b477f1bd80baa069bd427a",
+      "crc32": "ddc5c870"
+    },
+    {
+      "path": "web/m08-mission-rewards-v624.js",
+      "size": 7071,
+      "sha256": "fe538031a6df0ba565f8ad24cc07ca796b0ed7cf16b103ed04fbf202ca33fa7a",
+      "crc32": "4c4f2a80"
+    },
+    {
+      "path": "dist/m08-mission-rewards-v624.js",
+      "size": 7071,
+      "sha256": "fe538031a6df0ba565f8ad24cc07ca796b0ed7cf16b103ed04fbf202ca33fa7a",
+      "crc32": "4c4f2a80"
+    },
+    {
+      "path": "tests/m08_040_mission_rewards_browser.cjs",
+      "size": 6557,
+      "sha256": "09322352a19dad095dce12fdb4a1154745919687e196231410b062e258d39f7b",
+      "crc32": "fea9a7df"
+    },
+    {
+      "path": "tests/m08_070_reward_ux.test.cjs",
+      "size": 1515,
+      "sha256": "225f053a75dcb518e4d8a1cee99e479a7d71761cfdb9014a284fb17dc90f9f5c",
+      "crc32": "fe7c5cdb"
+    },
+    {
+      "path": "tests/m08_080_release_gate.test.cjs",
+      "size": 3762,
+      "sha256": "2abf2562912432450bff98bc44cfa37678ce694345fe2b0679e32d922ef5601c",
+      "crc32": "180b3c1b"
+    }
+  ],
+  "real_money": false,
+  "public_deployed": false,
+  "scope": "M08 70–90% changed files; full recovery via remote git branch"
+}

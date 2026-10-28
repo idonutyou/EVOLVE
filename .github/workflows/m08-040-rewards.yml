@@ -1,4 +1,4 @@
-name: M08 070-080 research rewards acceptance
+name: M08 090 pre-deploy recovery and feature gate
 on:
   push:
     branches: ["monetization-m08-010-*"]
@@ -14,6 +14,9 @@ on:
       - "tests/m08_070_reward_ux.test.cjs"
       - "tests/m08_080_release_gate.test.cjs"
       - "checkpoints/EVOLVE_M08_080_20261029.json"
+      - "checkpoints/EVOLVE_M08_090_20261029.*"
+      - "tests/m08_090_release_integrity.test.cjs"
+      - "tools/verify_m08_090_checkpoint.py"
       - "tools/verify_m08_060_checkpoint.py"
       - "checkpoints/EVOLVE_M08_060_20261029.*"
   workflow_dispatch:
@@ -33,6 +36,7 @@ jobs:
           node tests/m08_060_monthly_boundary.test.cjs
           node tests/m08_070_reward_ux.test.cjs
           node tests/m08_080_release_gate.test.cjs
+          node tests/m08_090_release_integrity.test.cjs
           node tests/m08_010_live_stage.test.cjs
           node tests/m08_020_runtime_missions.test.cjs
           node tests/m08_030_integration.test.cjs
@@ -41,6 +45,8 @@ jobs:
           node tests/m07_100_final_contract.test.cjs
       # M08 60% ZIP SHA256/CRC was verified at 60%; it is an immutable delta,
       # not a comparison target for M08 70-80 updated working files.
+      - name: M08 90% byte-for-byte recovery ZIP integrity
+        run: python3 tools/verify_m08_090_checkpoint.py
       - name: Strict originals protection and scope
         run: |
           git diff --name-only e7b89f0b768e645924a3a332e1c25663a5547ffb HEAD > /tmp/m08_040_changed
