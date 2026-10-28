@@ -14,6 +14,7 @@ on:
       - "tools/verify_monster_feedback_v614.py"
       - "tests/monetization_m05_100_live_browser.cjs"
       - "tests/m07_080_shop_browser.cjs"
+      - "tools/wait_for_shop_publication.py"
       - "tools/retry_public_browser.py"
       - "tests/browser_smoke.cjs"
       - "tests/visual_fit_browser.cjs"
@@ -178,6 +179,9 @@ jobs:
         with:
           artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
+      - name: Await M07 90 shop assets after Pages CDN propagation
+        timeout-minutes: 12
+        run: python3 tools/wait_for_shop_publication.py --url "${{ steps.pages.outputs.page_url }}" --timeout 560
       - name: Confirm the actual published build, administrator gate and artwork
         run: |
           python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/weapon_hits_browser_v612.cjs --report test-results/weapon-hits-live.json
