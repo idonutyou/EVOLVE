@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 80
+          fetch-depth: 0
       - name: Run M07 10 and 20 percent contracts
         run: |
           node tests/m07_010_nonrender_design.test.cjs
