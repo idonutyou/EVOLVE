@@ -9,6 +9,16 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
  'use strict';
  const rows=Object.freeze([['stage','신규 스테이지 연구'],['run','전투 종료 연구'],['codex','도감 발견 연구']]);
+ const friendlyErrors=Object.freeze({
+  ALREADY_CLAIMED:'이미 받은 보상입니다.',MISSION_NOT_COMPLETE:'오늘의 연구 완료 기록이 필요합니다.',
+  MISSION_SOURCE_CORRUPT:'연구 진행 기록을 확인할 수 없습니다.',MISSION_SOURCE_UNAVAILABLE:'연구 진행 기록을 읽을 수 없습니다.',
+  STORAGE_WRITE_FAILED:'저장 공간을 확인해 주세요. 보상은 지급되지 않았습니다.',
+  BALANCE_LIMIT:'보유 결정이 상한에 도달했습니다.',STORE_DATA_INVALID:'상점 저장 기록을 확인해 주세요.'
+ });
+ function explainError(error){
+  const code=error&&typeof error.message==='string'?error.message:'';
+  return Object.prototype.hasOwnProperty.call(friendlyErrors,code)?friendlyErrors[code]:'보상을 수령하지 못했습니다. 기록을 확인해 주세요.';
+ }
  function createController({store}={}){
   if(!store||typeof store.missionStatus!=='function'||typeof store.claimMission!=='function'||typeof store.snapshot!=='function')throw Error('MISSION_REWARD_SETUP');
   return Object.freeze({status:()=>store.missionStatus(),balance:()=>store.snapshot().crystals,claim:id=>store.claimMission(id)});
@@ -25,14 +35,17 @@
    '#homeChallengeViewV601 .m08RewardRowV624{padding:10px 0;border-top:1px solid #69545a;display:flex;align-items:center;justify-content:space-between;gap:10px}'+
    '#homeChallengeViewV601 .m08RewardRowV624 strong{font-size:12px;line-height:1.5}'+
    '#homeChallengeViewV601 .m08RewardRowV624 button{min-height:44px;min-width:108px;border-radius:9px;border:1px solid #dfaf76;background:#75473d;color:#fff2dc;font-weight:900;font-size:12px;padding:8px;touch-action:manipulation}'+
-   '#homeChallengeViewV601 .m08RewardRowV624 button:disabled{opacity:.55;background:#3a343a}';
-  let card=null,stamp='',error='',locked=false;
+   '#homeChallengeViewV601 .m08RewardRowV624 button:disabled{opacity:.55;background:#3a343a}'+
+   '@media(max-width:350px){#homeChallengeViewV601 .m08RewardRowV624{flex-wrap:wrap}#homeChallengeViewV601 .m08RewardRowV624 button{width:100%}}';
+  let card=null,stamp='',error='',currentDay='',locked=false;
   function draw(){
    const host=doc.getElementById('homeChallengeViewV601');if(!host)return;
    if(!card){card=doc.createElement('section');card.id=id;card.className='m08MissionRewardsV624';card.setAttribute('aria-label','일일 전투 및 발견 연구 보상');host.append(card);
     if(!doc.getElementById(styleId)){const style=doc.createElement('style');style.id=styleId;style.textContent=css;doc.head.append(style);}}
    let states,balance;
    try{states=controller.status();balance=controller.balance()}catch(_){card.textContent='연구 보상 기록을 읽을 수 없습니다. 기존 저장 데이터는 보존됩니다.';stamp='';return}
+   const day=states.stage?.day||'';
+   if(day!==currentDay){currentDay=day;error='';}
    const sig=JSON.stringify(states)+'|'+balance+'|'+error+'|'+locked;
    if(sig===stamp)return;stamp=sig;card.replaceChildren();
    const heading=doc.createElement('h3');heading.textContent='일일 연구 보상';card.append(heading);
@@ -47,12 +60,12 @@
     button.addEventListener('click',()=>{
      if(locked)return;locked=true;
      try{controller.claim(mission);error='결정 '+s.crystals+'개를 받았습니다.';}
-     catch(e){error=e?.message||'보상을 수령할 수 없습니다.';}
+     catch(e){error=explainError(e);}
      finally{locked=false;stamp='';draw();}
     });
     row.append(button);
    }
-   const note=doc.createElement('p');note.textContent=error||'하루에 각 연구 1회 · 한국시간 기준 · 실제 결제 및 서버 검증 없음';note.setAttribute('role','status');card.append(note);
+   const note=doc.createElement('p');note.textContent=error||'하루에 각 연구 1회 · 한국시간 기준 · 실제 결제 및 서버 검증 없음';note.setAttribute('role','status');note.setAttribute('aria-live','polite');card.append(note);
   }
   // M08 50%: no 1.8s idle polling. Return to CHALLENGE, focus or storage update refreshes the card.
   const memory=doc.getElementById('memoryBtn');
@@ -67,5 +80,5 @@
   w.__EVOLVE_M08_MISSION_REWARDS_V624_ACTIVE__=Object.freeze({read:()=>controller.status(),claim:mission=>{const r=controller.claim(mission);stamp='';draw();return r;},refresh:draw,stop,refreshMode:'EVENT_DRIVEN',mode:'LOCAL_CRYSTALS_NO_BILLING'});
   return true;
  }
- return Object.freeze({createController,mount,mode:'LOCAL_CRYSTALS_NO_BILLING'});
+ return Object.freeze({createController,mount,explainError,mode:'LOCAL_CRYSTALS_NO_BILLING'});
 });

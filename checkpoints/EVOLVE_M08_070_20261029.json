@@ -1,0 +1,15 @@
+{
+  "schema": "EVOLVE_M08_070_FAST_CHECKPOINT_V1",
+  "kst_date": "2026-10-29",
+  "progress": 70,
+  "baseline": "3cce079077360bd5e68c79a6b0203df581a1f77e",
+  "branch": "monetization-m08-010-game-events-20261028",
+  "backup_branch": "backup/monetization-m08-070-20261029",
+  "changes": "User-friendly reward failures, reset stale notification on KST day rollover, mobile 320px narrow wrap, accessible feedback",
+  "unchanged": "V621 wallet schema, original gameplay/assets/saves",
+  "billing": false,
+  "main_deployed": false,
+  "images_rendered": false,
+  "ci_policy": "70% preflight passed; single focused CI reserved for combined 80% regression",
+  "next": "M08 80% regression and QA"
+}
