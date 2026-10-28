@@ -31,7 +31,9 @@ jobs:
           echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
       - name: Run actual in-game SHOP 393,320,landscape browser QA
         timeout-minutes: 10
-        run: node tests/m07_080_shop_browser.cjs
+        run: |
+          node tests/m07_080_shop_browser.cjs
+          node tests/home_hub_browser.cjs
       - name: Browser screenshots
         if: always()
         uses: actions/upload-artifact@v4
