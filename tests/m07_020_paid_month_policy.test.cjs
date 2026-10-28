@@ -1,0 +1,27 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const policy=JSON.parse(fs.readFileSync(path.join(__dirname,'../monetization/m07/monthly-calendar-policy.v1.json'),'utf8'));
+const paid=require('../monetization/m07/paid-month-calendar-v1.cjs');
+const free=require('../monetization/m07/utc-period-planner-v1.cjs');
+const catalog=JSON.parse(fs.readFileSync(path.join(__dirname,'../monetization/catalog/draft_skus.json'),'utf8'));
+assert.equal(policy.scope_and_precedence.paid_season_pass,'STRICT_CALENDAR_MONTH');
+assert.equal(policy.scope_and_precedence.free_events_and_nonpaid_missions,'MAY_USE_28_DAY_PERIOD');
+assert.equal(policy.free_cycles.can_use_28_day,true);
+assert.equal(policy.paid_calendar.automatic_subscription_renewal,false);
+assert.equal(policy.security_and_preservation.checkout_enabled,false);
+assert.equal(policy.security_and_preservation.client_grants_enabled,false);
+assert.equal(policy.security_and_preservation.price_minor,null);
+const expected=[['2026-10',31,'2026-09-30T15:00:00.000Z','2026-10-31T15:00:00.000Z'],['2026-11',30,'2026-10-31T15:00:00.000Z','2026-11-30T15:00:00.000Z'],['2027-02',28,'2027-01-31T15:00:00.000Z','2027-02-28T15:00:00.000Z'],['2028-02',29,'2028-01-31T15:00:00.000Z','2028-02-29T15:00:00.000Z'],['2026-12',31,'2026-11-30T15:00:00.000Z','2026-12-31T15:00:00.000Z']];
+for(const [m,days,start,end]of expected){const got=paid.paidMonthWindow(m);assert.equal(got.days,days);assert.equal(got.startUtc,start);assert.equal(got.endExclusiveUtc,end);assert.equal(got.checkoutEnabled,false);assert.equal(got.autoRenew,false);assert.equal(paid.isWithinPaidMonth(m,start),true);assert.equal(paid.isWithinPaidMonth(m,new Date(Date.parse(end)-1).toISOString()),true);assert.equal(paid.isWithinPaidMonth(m,end),false);assert.equal(paid.isWithinPaidMonth(m,new Date(Date.parse(start)-1).toISOString()),false);}
+assert.throws(()=>paid.paidMonthWindow('2026-13'),/YYYY_MM_REQUIRED/);
+assert.throws(()=>paid.paidMonthWindow('2026-2'),/YYYY_MM_REQUIRED/);
+assert.throws(()=>paid.isWithinPaidMonth('2026-11','2026-11-01'),/VERIFIED_UTC/);
+const rollingFree=free.seasonWindow('2026-10-28T00:00:00.000Z',28);
+assert.equal(rollingFree.endUtc,'2026-11-25T00:00:00.000Z');
+assert.notEqual(rollingFree.endUtc,paid.paidMonthWindow('2026-10').endExclusiveUtc);
+assert.equal(catalog.products.find(x=>x.sku==='season_research_pass_01').status,'draft_disabled');
+assert.equal(catalog.checkout_enabled,false);
+assert.equal(catalog.client_grants_enabled,false);
+console.log('M07 20% USER POLICY CORRECTION PASS: Paid calendar month 1st-last; free 28-day option; no checkout');
