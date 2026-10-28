@@ -1,0 +1,76 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {chromium}=require('playwright');
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
+const root=path.resolve(__dirname,'../dist');
+const output=path.resolve(__dirname,'../test-results');fs.mkdirSync(output,{recursive:true});
+const mime={'.html':'text/html','.js':'application/javascript','.json':'application/json','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.woff2':'font/woff2'};
+const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://localhost'),p=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':u.pathname));if(!p.startsWith(root+path.sep)||!fs.existsSync(p)||!fs.statSync(p).isFile()){res.writeHead(404);res.end();return}res.setHeader('Content-Type',mime[path.extname(p)]||'application/octet-stream');fs.createReadStream(p).pipe(res);});
+(async()=>{
+ await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
+ const chrome=await chromium.launch({executablePath:process.env.CHROME_BIN||undefined,headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
+ const selectedBase=process.env.EVOLVE_TEST_BASE_URL||('http://127.0.0.1:'+server.address().port+'/');
+ const origin=selectedBase.endsWith('/')?selectedBase:selectedBase+'/';
+ const report=[];
+ try{
+  for(const [width,height] of [[393,852],[320,568],[852,393]]){
+   const context=await chrome.newContext({viewport:{width,height},isMobile:true,hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
+   await context.addInitScript(()=>{
+     localStorage.setItem('EVOLVE_V575_SHOP621_SAVE_SENTINEL','KEEP_SAVE');
+     localStorage.setItem('EVOLVE_M03_SHOP621_LEDGER_SENTINEL','KEEP_LEDGER');
+   });
+   const page=await context.newPage(),errors=[];
+   page.on('pageerror',e=>errors.push(String(e)));
+   await page.goto(origin+'?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
+   await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__&&!document.getElementById('webLoader'),null,{timeout:80000});
+   await page.evaluate(()=>document.getElementById('introSplash')?.click());
+   assert.equal(await page.locator('#homeTabs>button').count(),5);
+   assert.equal(await page.locator('#m04MockTriggerV616').count(),0);
+   await page.locator('#homeShopTabV601').click();
+   await page.locator('#evolveShopV621').waitFor({state:'visible'});
+   assert.equal(await page.locator('#nativeShopV620').isVisible(),false);
+   assert.equal(await page.locator('#evolveShopV621 button[role=tab]').count(),5);
+   assert.match(await page.locator('#evolveShopV621').innerText(),/결제 연결 전 체험 중/);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),0);
+   await page.locator('#evolveShopV621 .eStoreCardV621').filter({hasText:'첫 진화 패키지'}).getByRole('button',{name:/구매/}).click();
+   await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
+   await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__.read().crystals===125);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().firstPurchase),true);
+   await page.locator('#evolveShopV621 .eStoreCardV621').filter({hasText:'공명 코어'}).getByRole('button',{name:/구매/}).click();
+   await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
+   await page.waitForFunction(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__?.read().theme==='dev_core_theme_01',null,{timeout:30000});
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().owned.resonance),true);
+   await page.getByRole('tab',{name:'시즌'}).click();
+   await page.locator('#evolveShopV621 .eStoreCardV621').filter({hasText:'월간 연구 패스'}).getByRole('button',{name:/구매/}).click();
+   await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().passActive),true);
+   await page.locator('#evolveShopV621 .eStoreDailyV621').getByRole('button',{name:'보상 받기'}).click();
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().mayClaimDaily),false);
+   await page.locator('#evolveShopV621 .eStoreDailyV621').getByRole('button',{name:/연구 단계 1.*결정 35개 받기/}).click();
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().rewardClaims[window.__EVOLVE_SHOP_V621__.read().month+':1']),true);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),180);
+   const meta=await page.evaluate(()=>({game:localStorage.getItem('EVOLVE_V575_SHOP621_SAVE_SENTINEL'),ledger:localStorage.getItem('EVOLVE_M03_SHOP621_LEDGER_SENTINEL'),local:localStorage.getItem('EVOLVE_SHOP_EXPERIENCE_V621_V1')!==null}));
+   assert.deepEqual(meta,{game:'KEEP_SAVE',ledger:'KEEP_LEDGER',local:true});
+   assert.equal(await page.locator('#evolveShopV621 a').count(),0);
+   const bad=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+   assert.ok(bad<=3,'horizontal overflow: '+bad);
+   const taps=await page.locator('#evolveShopV621 button:visible').evaluateAll(nodes=>nodes.map(b=>Math.round(b.getBoundingClientRect().height)));
+   assert.ok(taps.every(h=>h>=44),'button too small '+JSON.stringify(taps));
+   await page.screenshot({path:path.join(output,'shop-v621-'+width+'x'+height+'.png'),fullPage:true});
+   await page.reload({waitUntil:'domcontentloaded',timeout:180000});
+   await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__&&!document.getElementById('webLoader'),null,{timeout:80000});
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),180);
+   assert.deepEqual(errors,[]);
+   report.push({viewport:width+'x'+height,shopIntegrated:true,tabs:5,firstBonus:true,permanentCoreEquipped:true,monthlyPass:true,premiumReward:true,noBilling:true,savesIntact:true,tapsAtLeast44:true});
+   await context.close();
+  }
+  const ctx=await chrome.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true,serviceWorkers:'block'});
+  await ctx.addInitScript(()=>localStorage.setItem('EVOLVE_SHOP_EXPERIENCE_V621_V1','invalid-json{'));
+  const page=await ctx.newPage();await page.goto(origin+'?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
+  await page.waitForFunction(()=>window.__EVOLVE_NATIVE_SHOP_V620__&&!document.getElementById('webLoader'),null,{timeout:80000});
+  assert.equal(await page.evaluate(()=>localStorage.getItem('EVOLVE_SHOP_EXPERIENCE_V621_V1')),'invalid-json{');
+  assert.equal(await page.evaluate(()=>!!window.__EVOLVE_SHOP_V621__),false);
+  await ctx.close();
+  console.log(JSON.stringify({success:true,viewports:report,corruptSavePreserved:true,realPayment:false}));
+ }finally{await chrome.close();server.close()}
+})().catch(e=>{console.error(e.stack||e);process.exitCode=1});
