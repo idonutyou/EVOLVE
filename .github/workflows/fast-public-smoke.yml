@@ -1,10 +1,6 @@
 name: EVOLVE Fast Live M08 Acceptance
 on:
-  push:
-    branches: [main]
-    paths:
-      - "tests/m08_100_public_smoke.cjs"
-      - ".github/workflows/fast-public-smoke.yml"
+  workflow_dispatch:
 permissions: {contents: read}
 jobs:
   live:
