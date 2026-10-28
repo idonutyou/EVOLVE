@@ -12,6 +12,7 @@ on:
       - "dist/version.json"
       - "dist/verification.json"
       - "tests/m08_090_release_integrity.test.cjs"
+      - "tests/m08_040_mission_rewards.test.cjs"
 permissions: {contents: read}
 jobs:
   validate:
@@ -33,6 +34,11 @@ jobs:
           python3 -m unittest discover -s tests -p test_ci_deploy_scope.py -v
           python3 -m py_compile tools/ci_deploy_scope.py tools/verify_public_m08.py
           node tests/m08_090_release_integrity.test.cjs
+          node tests/m08_040_mission_rewards.test.cjs
+          node tests/m08_060_monthly_boundary.test.cjs
+          node tests/m08_070_reward_ux.test.cjs
+          node tests/m08_080_release_gate.test.cjs
+          node tests/m07_100_final_contract.test.cjs
           python3 tools/verify_site.py --dist dist
       - name: Confirm deployment workflow contains intact full rollback and safeguards
         run: |
