@@ -1,0 +1,102 @@
+{
+  "schema_version": "EVOLVE_M07_070_CHECKPOINT_V1",
+  "module": "M07",
+  "percent_complete": 70,
+  "step": "3/3",
+  "date_kst": "2026-10-28",
+  "status": "READ_ONLY_STANDALONE_TEST_UI_NO_GAME_WIRING",
+  "work_branch": "monetization-m07-retention-20261028",
+  "baseline_main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "backup_branch": "backup/monetization-m07-070-20261028",
+  "previous_backup_branch": "backup/monetization-m07-060-20261028",
+  "preserve_all_previous_backups": true,
+  "archive_path": "checkpoints/EVOLVE_M07_070_20261028.zip",
+  "archive_type": "INCREMENTAL_NEW_070_FILES_NOT_FULL_GAME",
+  "archive_bytes": 26668,
+  "archive_crc32": "90de284c",
+  "archive_git_blob": "8e899eed66f7325479fd0c1756a788bef914fb1d",
+  "archive_commit": "16178e83a93121985248184ea9d1db1a2f1eec11",
+  "files": [
+    {
+      "path": "monetization/m07/season-text-view-070.cjs",
+      "bytes": 7219,
+      "crc32": "62174f6b",
+      "git_blob_sha": "9a642780af8ef43cee5afedafdda267f711de9cd"
+    },
+    {
+      "path": "monetization/m07/season-text-demo-070.html",
+      "bytes": 3782,
+      "crc32": "48dddd2a",
+      "git_blob_sha": "1acf5551b4e41b20efbb729ed2e79d1535011951"
+    },
+    {
+      "path": "tests/m07_070_text_preview.test.cjs",
+      "bytes": 5639,
+      "crc32": "d9f11e3e",
+      "git_blob_sha": "c96bc0f95d7318ee67498fd50710252789c96952"
+    },
+    {
+      "path": "monetization/m07/event-source-audit-070.v1.json",
+      "bytes": 4130,
+      "crc32": "e2abe76c",
+      "git_blob_sha": "5d926823e96c0cfab14bda8fc77530eef2f50f92"
+    },
+    {
+      "path": "docs/monetization/M07_070_TEXT_PREVIEW_UI_AUDIT_KO.md",
+      "bytes": 3504,
+      "crc32": "fef30a99",
+      "git_blob_sha": "d4cc36b5962a760584ebb9698f1e4fb6bbde272b"
+    },
+    {
+      "path": ".github/workflows/m07-070-text-preview.yml",
+      "bytes": 1396,
+      "crc32": "1f632bdb",
+      "git_blob_sha": "ce722560079fe73c2569201fe46e9f0d850b4685"
+    }
+  ],
+  "ci": [
+    {
+      "id": 40686218980,
+      "name": "M07 070 read-only text season preview",
+      "conclusion": "success"
+    },
+    {
+      "id": 40686240536,
+      "name": "M07 010 non-render retention safety contract",
+      "conclusion": "success"
+    },
+    {
+      "id": 40686246577,
+      "name": "M07 020 UTC mission/source safety contract",
+      "conclusion": "success"
+    },
+    {
+      "id": 40686253803,
+      "name": "M07 030 API freeze",
+      "conclusion": "success"
+    }
+  ],
+  "contracts": {
+    "existing_shop_unchanged": true,
+    "original_game_unmodified": true,
+    "original_image_count": 1021,
+    "new_art_rendered": false,
+    "premium_sku": "season_research_pass_01",
+    "sku_still_disabled": true,
+    "price_minor": null,
+    "real_checkout_enabled": false,
+    "real_client_grants": false,
+    "real_rewards_granted": 0,
+    "actual_gameplay_event_source_verified": false,
+    "standalone_preview_not_deployed": true,
+    "paid_month": "KST 1st to last day",
+    "free_28_day_optional": true
+  },
+  "next": {
+    "module": "M07",
+    "percent": 80,
+    "step": "3/3",
+    "image_rendering_required": false,
+    "work": "Assess safe existing CHALLENGE read-only UI integration on branch; protect SHOP, game saves and wallet"
+  }
+}
