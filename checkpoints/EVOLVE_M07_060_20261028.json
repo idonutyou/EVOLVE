@@ -11,10 +11,10 @@
   "previous_backup": "backup/monetization-m07-050-20261028",
   "archive": "checkpoints/EVOLVE_M07_060_20261028.zip",
   "archive_type": "INCREMENTAL_NOT_FULL_GAME",
-  "archive_bytes": 21709,
-  "archive_crc32": "9d3c2842",
-  "archive_blob_sha": "d8ba03af049b6bbdfb8a629dbd0cff4be7f45881",
-  "archive_commit": "6e9e49b10c6e767ebf8f0d6ccfa96289c18e32cf",
+  "archive_bytes": 21699,
+  "archive_crc32": "afcab253",
+  "archive_blob_sha": "f831410ecc181c415d591d253a0127880a076853",
+  "archive_commit": "afd3819e4a9f283e6b64380a2ddbbf628fe78e43",
   "entries": [
     {
       "path": "monetization/m07/mission-batch-gate-060.cjs",
@@ -70,5 +70,7 @@
     "progress_percent": 70,
     "step": "3/3",
     "rendering_required": false
-  }
+  },
+  "zip_structure_verified": false,
+  "correction_note": "Replaced malformed initial archive with corrected ZIP local header/central directory; remote CRC verification is required."
 }
