@@ -8,6 +8,10 @@ on:
       - "tools/ci_deploy_scope.py"
       - "tools/verify_public_m08.py"
       - "tests/test_ci_deploy_scope.py"
+      - "dist/index.html"
+      - "dist/version.json"
+      - "dist/verification.json"
+      - "tests/m08_090_release_integrity.test.cjs"
 permissions: {contents: read}
 jobs:
   validate:
