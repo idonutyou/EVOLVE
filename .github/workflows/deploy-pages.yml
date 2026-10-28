@@ -222,9 +222,10 @@ jobs:
         if: steps.scope.outputs.mode == 'full'
         timeout-minutes: 12
         run: python3 tools/wait_for_shop_publication.py --url "${{ steps.pages.outputs.page_url }}" --timeout 560
-      - name: Verify actual published mobile HOME for fast releases
+      - name: Verify the real online HOME, CHALLENGE and SHOP in one browser
         if: steps.scope.outputs.mode == 'fast'
-        run: python3 tools/retry_public_browser.py --url "${{ steps.pages.outputs.page_url }}" --script tests/home_hub_browser.cjs --report test-results/home-hub-live-browser.json
+        timeout-minutes: 5
+        run: node tests/m08_100_public_smoke.cjs
       - name: Confirm the actual published build, administrator gate and artwork
         if: steps.scope.outputs.mode == 'full'
         run: |

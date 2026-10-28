@@ -1,0 +1,39 @@
+name: EVOLVE Fast Live M08 Acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/m08_100_public_smoke.cjs"
+      - ".github/workflows/fast-public-smoke.yml"
+permissions: {contents: read}
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tests/m08_100_public_smoke.cjs
+      - name: Install browser runner only, do not download 340MB images
+        run: |
+          npm install --prefix "$RUNNER_TEMP/m08-live" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          echo "NODE_PATH=$RUNNER_TEMP/m08-live/node_modules" >> "$GITHUB_ENV"
+          chrome="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome" ]; then "$RUNNER_TEMP/m08-live/node_modules/.bin/playwright" install --with-deps chromium
+          else echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"; fi
+      - name: Check actual public version, HOME, CHALLENGE rewards and SHOP
+        timeout-minutes: 4
+        env:
+          EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+        run: node tests/m08_100_public_smoke.cjs
+      - name: Retain evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-fast-public-m08
+          path: test-results/m08-100-public-smoke.json
+          if-no-files-found: ignore
