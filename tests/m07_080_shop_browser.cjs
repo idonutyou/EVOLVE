@@ -67,6 +67,14 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    assert.ok(bad<=3,'horizontal overflow: '+bad);
    const taps=await page.locator('#evolveShopV621 button:visible').evaluateAll(nodes=>nodes.map(b=>Math.round(b.getBoundingClientRect().height)));
    assert.ok(taps.every(h=>h>=44),'button too small '+JSON.stringify(taps));
+   await page.locator('#memoryBtn').click();
+   await page.locator('#evolveResearchV621').waitFor({state:'visible'});
+   assert.match(await page.locator('#evolveResearchV621').innerText(),/연구 시즌/);
+   assert.match(await page.locator('#evolveResearchV621').innerText(),/오늘 수령 완료/);
+   assert.match(await page.locator('#evolveResearchV621').innerText(),/프리미엄 연구/);
+   assert.match(await page.locator('#evolveResearchV621').innerText(),/수령 완료/);
+   assert.equal(await page.locator('#evolveResearchV621 button:visible').evaluateAll(nodes=>nodes.every(b=>b.getBoundingClientRect().height>=44)),true);
+   await page.locator('#homeShopTabV601').click();
    await page.screenshot({path:path.join(output,'shop-v621-'+width+'x'+height+'.png'),fullPage:true});
    await page.reload({waitUntil:'domcontentloaded',timeout:180000});
    await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__&&!document.getElementById('webLoader'),null,{timeout:80000});
