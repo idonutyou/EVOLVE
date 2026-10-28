@@ -1,4 +1,4 @@
-name: M08 040-060 research rewards regression and recovery
+name: M08 070-080 research rewards acceptance
 on:
   push:
     branches: ["monetization-m08-010-*"]
@@ -11,6 +11,9 @@ on:
       - "tests/m08_040_mission_rewards_browser.cjs"
       - ".github/workflows/m08-040-rewards.yml"
       - "tests/m08_060_monthly_boundary.test.cjs"
+      - "tests/m08_070_reward_ux.test.cjs"
+      - "tests/m08_080_release_gate.test.cjs"
+      - "checkpoints/EVOLVE_M08_080_20261029.json"
       - "tools/verify_m08_060_checkpoint.py"
       - "checkpoints/EVOLVE_M08_060_20261029.*"
   workflow_dispatch:
@@ -22,12 +25,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
-      - name: V621 wallet plus M08 events unit and prior M07 economy regression
+      - name: M08 10-80 and M07 SHOP sensitive regression
         run: |
           node --check web/shop-experience-v621.js
           node --check web/m08-mission-rewards-v624.js
           node tests/m08_040_mission_rewards.test.cjs
           node tests/m08_060_monthly_boundary.test.cjs
+          node tests/m08_070_reward_ux.test.cjs
+          node tests/m08_080_release_gate.test.cjs
           node tests/m08_010_live_stage.test.cjs
           node tests/m08_020_runtime_missions.test.cjs
           node tests/m08_030_integration.test.cjs
@@ -52,7 +57,7 @@ jobs:
             echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"
           fi
           echo "NODE_PATH=$RUNNER_TEMP/m08-browser/node_modules" >> "$GITHUB_ENV"
-      - name: Existing game CHALLENGE reward and SHOP spend focused Chromium
+      - name: Browser 320 393 852 reward and CHALLENGE integration
         timeout-minutes: 8
         run: |
           node tests/m08_030_integration_browser.cjs

@@ -47,6 +47,19 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.evaluate(()=>document.getElementById('introSplash')?.click());
   await page.locator('#memoryBtn').click();
   for(const id of ['stage','run','codex'])assert.equal(await page.locator('#m08MissionRewardsV624 button[data-m08-claim="'+id+'"]').textContent(),'수령 완료');
+  // At 80% verify card touch targets fit small portrait, normal portrait and landscape.
+  for(const [width,height] of [[320,568],[393,852],[852,393]]){
+   await page.setViewportSize({width,height});
+   const layout=await page.locator('#m08MissionRewardsV624').evaluate(card=>{
+    const box=card.getBoundingClientRect(),buttons=[...card.querySelectorAll('button')].map(b=>{
+     const r=b.getBoundingClientRect();return {left:r.left,right:r.right,height:r.height};
+    });
+    return {left:box.left,right:box.right,buttons,viewport:window.innerWidth};
+   });
+   assert.ok(layout.left>=-3&&layout.right<=layout.viewport+3,'card horizontal fit '+JSON.stringify({width,layout}));
+   assert.ok(layout.buttons.every(x=>x.left>=-3&&x.right<=layout.viewport+3&&x.height>=44),'reward tap targets '+JSON.stringify({width,layout}));
+  }
+  await page.setViewportSize({width:393,height:852});
   await page.locator('#homeShopTabV601').click();
   await page.locator('#evolveShopV621').waitFor({state:'visible'});
   assert.equal(await page.locator('#evolveShopV621 .eStoreWalletV621 strong').textContent(),'25');

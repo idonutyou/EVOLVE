@@ -1,0 +1,25 @@
+{
+  "schema": "EVOLVE_M08_080_ACCEPTANCE_CHECKPOINT_V1",
+  "progress_percent": 80,
+  "kst_date": "2026-10-29",
+  "phase": "STEP 3/3 - regression and pre-release",
+  "base_commit": "68ebac23aa314b610808383153faaafe361ffcbf",
+  "feature_branch": "monetization-m08-010-game-events-20261028",
+  "backup_branch": "backup/monetization-m08-080-20261029",
+  "scope": "M08 70% UX accessibility/stale message and M08 80% reward/shop ownership integration acceptance, three mobile layouts and original saves",
+  "unit_tests": [
+    "tests/m08_070_reward_ux.test.cjs",
+    "tests/m08_080_release_gate.test.cjs"
+  ],
+  "browser_tests": [
+    "tests/m08_030_integration_browser.cjs",
+    "tests/m08_040_mission_rewards_browser.cjs"
+  ],
+  "protected_game_files_modified": false,
+  "images_rendered": false,
+  "real_billing_connected": false,
+  "server_verified": false,
+  "main_deployed": false,
+  "zip_next_percent": 90,
+  "next": "M08 90% regression, ZIP backup and release gate; M08 100% deployment"
+}
