@@ -1,0 +1,122 @@
+{
+  "schema_version": "EVOLVE_M07_050_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "module": "M07",
+  "progress_percent": 50,
+  "step": "2/3",
+  "status": "TEST_ONLY_JOURNAL_REPLAY_NO_LIVE_GRANTS",
+  "main_baseline_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "work_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup_branch": "backup/monetization-m07-050-20261028",
+  "older_40_backup": "backup/monetization-m07-040-20261028",
+  "prior_art_branch_preserved": "monetization-m06-premium-art-20261028",
+  "zip_path": "checkpoints/EVOLVE_M07_050_20261028.zip",
+  "zip_bytes": 103575,
+  "zip_crc32": "c3065ae7",
+  "zip_blob_sha": "aaa80c4715c6c5c54d891c8df5caf61a0092aa89",
+  "zip_commit_sha": "858f6d88d0ac5691145e166fb066bde1c07d8879",
+  "archive_type": "INCREMENTAL_TEST_AND_DOCS_ONLY",
+  "files": [
+    {
+      "path": "monetization/m07/mission-journal-050.cjs",
+      "bytes": 5192,
+      "crc32": "cd7e9456",
+      "git_blob_sha": "01b37a5e53467e778aa1c35643f16aabe15c21a8"
+    },
+    {
+      "path": "tests/m07_050_journal_restore.test.cjs",
+      "bytes": 8941,
+      "crc32": "5f178a04",
+      "git_blob_sha": "36d18e2a3b441920117c90ba9feb4b8feb60414a"
+    },
+    {
+      "path": "monetization/m07/event-source-audit-050.v1.json",
+      "bytes": 2713,
+      "crc32": "33dc8aca",
+      "git_blob_sha": "69691fdc99bc4ad10f27134822d43cf284bf21de"
+    },
+    {
+      "path": "docs/monetization/M07_050_JOURNAL_RESTORE_QA_KO.md",
+      "bytes": 4746,
+      "crc32": "a6ead7ae",
+      "git_blob_sha": "e6793ad179c23513bcf2645645890f5802d98eeb"
+    },
+    {
+      "path": ".github/workflows/m07-050-journal.yml",
+      "bytes": 1240,
+      "crc32": "a1271a16",
+      "git_blob_sha": "937ffc016b513d4b669fdf3fbc0dae72a7ec0df4"
+    },
+    {
+      "path": "monetization/m07/mission-harness-040.cjs",
+      "bytes": 5827,
+      "crc32": "ed1dbbe3",
+      "git_blob_sha": "8d151638bd5072f6cfcb674f52ac2602726d5116"
+    },
+    {
+      "path": "monetization/m07/paid-month-calendar-v1.cjs",
+      "bytes": 1795,
+      "crc32": "de56e31d",
+      "git_blob_sha": "f6fb0a430bae5064c857a66e4fd184196d96bd0f"
+    },
+    {
+      "path": "monetization/m07/utc-period-planner-v1.cjs",
+      "bytes": 2868,
+      "crc32": "3159af6c",
+      "git_blob_sha": "adc2217f01db1afbf80bd52e5e3682925320038e"
+    },
+    {
+      "path": "monetization/m07/monthly-calendar-policy.v1.json",
+      "bytes": 4455,
+      "crc32": "cd2d5f86",
+      "git_blob_sha": "fdf90fafd9abaa427915d85be96a78a57b1d6be0"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 25728,
+      "crc32": "c351f7fb",
+      "git_blob_sha": "c591ec14df4fec53303f71502a18f463a6c5f94a"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 37951,
+      "crc32": "bd18da74",
+      "git_blob_sha": "9bdbd34511942e7268521fee0bd36cce88314507"
+    },
+    {
+      "path": "CHECKPOINT_M07_050.txt",
+      "bytes": 277,
+      "crc32": "015f2b6d",
+      "git_blob_sha": null
+    }
+  ],
+  "CI": {
+    "name": "M07 050 journal and restore safety",
+    "run_id": 40683756226,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40683756226"
+  },
+  "safety": {
+    "new_images_generated": false,
+    "original_game_modified": false,
+    "original_images_preserved": 1021,
+    "main_untouched": true,
+    "shop_untouched": true,
+    "client_grants": false,
+    "checkout": false,
+    "real_entitlement_grants": 0,
+    "source_verified_events_available": false,
+    "hash_not_authoritative": true,
+    "operational_database_connected": false,
+    "paid_pass_calendar": "FIRST_TO_LAST_DAY_KST",
+    "optional_free_event_28_days": true,
+    "old_backups_deleted": false
+  },
+  "next": {
+    "module": "M07",
+    "progress_percent": 60,
+    "step": "2/3",
+    "work": "additional replay and period-race validation, actual event-source audit and integration prerequisites",
+    "image_rendering_required": false
+  }
+}
