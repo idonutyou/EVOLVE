@@ -18,7 +18,12 @@
     "weeklies_can_span_season_edge": true,
     "claim_only_within_season": true,
     "period_ttl_after_end": "M08_POLICY_UNDECIDED",
-    "offline_queued_progress": "PENDING_UNVERIFIED_NO_REWARD"
+    "offline_queued_progress": "PENDING_UNVERIFIED_NO_REWARD",
+    "scope": "FREE_NON_PAID_MISSIONS_ONLY_OPTIONAL_28_DAY_CYCLE",
+    "paid_calendar_policy": "monetization/m07/monthly-calendar-policy.v1.json",
+    "paid_season_start": "FIRST_DAY_OF_EACH_CALENDAR_MONTH_00_KST",
+    "paid_season_end": "LAST_DAY_OF_SAME_CALENDAR_MONTH_23_59_59_KST",
+    "paid_month_28_days_fixed": false
   },
   "candidate_missions": [
     {
@@ -59,7 +64,8 @@
     "real_reward_claims_enabled": false,
     "premium_reward_claims_enabled": false,
     "gameplay_power_reward": false,
-    "free_track_not_paywalled": true
+    "free_track_not_paywalled": true,
+    "cap_is_free_nonpaid_28day_example_only": true
   },
   "future_server_event_contract": {
     "required": [
@@ -114,12 +120,16 @@
     "unrendered_premium_replacement_not_allowed": true,
     "testing_crystals_not_real_money": true,
     "game_save_preserved": true,
-    "all_original_images_preserved": 1021
+    "all_original_images_preserved": 1021,
+    "paid_month_entitlement": "CALENDAR_MONTH_KST_ONLY_NEVER_28DAY_ROLLING",
+    "free_28day_cycle_may_continue": true,
+    "paid_purchase_late_month_copy_required": true
   },
   "next": {
     "progress_percent": 30,
     "step": "1/3",
     "image_rendering_required": false,
     "work": "Season and mission data API shapes, release blocker matrix, no-art M07 STEP 1/3 freeze"
-  }
+  },
+  "user_policy_corrected_at": "2026-10-28 KST, paid season 1st-last day; free may use 28 days"
 }
