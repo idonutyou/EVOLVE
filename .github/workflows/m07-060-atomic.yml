@@ -1,0 +1,32 @@
+name: M07 060 atomic batch safety
+on:
+  push:
+    branches: ["monetization-m07-retention-*"]
+    paths:
+      - "monetization/m07/**"
+      - "tests/m07_060_atomic_batch.test.cjs"
+      - ".github/workflows/m07-060-atomic.yml"
+  workflow_dispatch:
+jobs:
+  atomic-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Test M07 10 through 60 percent
+        run: |
+          node tests/m07_010_nonrender_design.test.cjs
+          node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
+          node tests/m07_030_api_release_freeze.test.cjs
+          node tests/m07_040_mission_harness.test.cjs
+          node tests/m07_050_journal_restore.test.cjs
+          node tests/m07_060_atomic_batch.test.cjs
+      - name: Protect original game and premium art
+        run: |
+          if git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD | grep -E '^(dist/|web/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)'; then
+            exit 1
+          fi
