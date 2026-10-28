@@ -1,0 +1,158 @@
+{
+  "schema_version": "EVOLVE_M07_100_FINAL_RELEASE_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "stage": "M07",
+  "progress_percent": 100,
+  "step": "3/3",
+  "scope": "IN_GAME_OFFLINE_BILLLESS_COMMERCE_UI_COMPLETE_NOT_ACTUAL_PAYMENT_OR_SERVER",
+  "work_branch": "monetization-m07-100-final-20261028",
+  "full_tree_backup_branch": "backup/monetization-m07-100-20261028",
+  "previous_main_backup": "backup/monetization-m07-100-pre-20261028",
+  "main_release_backup": "backup/monetization-m07-100-live-20261028",
+  "main_90_backup": "backup/monetization-m07-090-live-shop-20261028",
+  "main_release_sha": "55cc3054e07c5545ba7d3e12e64cadad75f6c34e",
+  "archive_path": "checkpoints/EVOLVE_M07_100_20261028.zip",
+  "archive_kind": "INCREMENTAL_SOURCE_ONLY_NOT_FULL_1021_IMAGES",
+  "archive_size_bytes": 427412,
+  "archive_crc32": "2b0f3327",
+  "archive_blob_sha": "cbc4055a969bf605f6812e83e659dc0172138411",
+  "archive_commit_sha": "a3deeab86425046a93fc0bce87c298c22f67e43e",
+  "entries": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "bytes": 7095,
+      "crc32": "4a5221e4",
+      "git_blob_sha": "852c3f3f6a7340d0e59916d8ff9e11e31aae027b"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "bytes": 23978,
+      "crc32": "641ad108",
+      "git_blob_sha": "60f1349d81fa213da89805bf00ca0e64c3ba8f36"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "bytes": 7095,
+      "crc32": "4a5221e4",
+      "git_blob_sha": "852c3f3f6a7340d0e59916d8ff9e11e31aae027b"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "bytes": 23978,
+      "crc32": "641ad108",
+      "git_blob_sha": "60f1349d81fa213da89805bf00ca0e64c3ba8f36"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 260653,
+      "crc32": "4b564108",
+      "git_blob_sha": "ba50c3056d6123540b598366436203f3614edc81"
+    },
+    {
+      "path": "tests/m07_090_crimson_pass.test.cjs",
+      "bytes": 5228,
+      "crc32": "deb1d6d9",
+      "git_blob_sha": "b69b0303dcddb45c71753d5c91953ee580a1f543"
+    },
+    {
+      "path": "tests/m07_100_final_contract.test.cjs",
+      "bytes": 6207,
+      "crc32": "b0fa68e1",
+      "git_blob_sha": "697438dfba40f62f677238bfcae7a2870788fe8a"
+    },
+    {
+      "path": "tools/wait_for_shop_publication.py",
+      "bytes": 2548,
+      "crc32": "34da4542",
+      "git_blob_sha": "54b8bf32bf2993ec1519597e67716f9bfa719e68"
+    },
+    {
+      "path": ".github/workflows/m07-100-final.yml",
+      "bytes": 1921,
+      "crc32": "ac94964e",
+      "git_blob_sha": "9b7ba933f10bb56ab94ed2370c8189a2d57b1192"
+    },
+    {
+      "path": ".github/workflows/m07-100-browser.yml",
+      "bytes": 1537,
+      "crc32": "75fb7bf8",
+      "git_blob_sha": "54065c11476de91efa22bd0ecf7bd45f9d94c01d"
+    },
+    {
+      "path": "docs/monetization/M07_100_FINAL_AUDIT_HANDOFF_KO.md",
+      "bytes": 7146,
+      "crc32": "086aa3d1",
+      "git_blob_sha": "dc4179835365ff956f34a0066fc9cdce7b9c61e6"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 22756,
+      "crc32": "8225eff7",
+      "git_blob_sha": "ee937f3c550244e15197176aedeba3b27e964091"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 35228,
+      "crc32": "66feaff0",
+      "git_blob_sha": "516fc75b7a8c21d0231f2bff7ad7571b84c223c2"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 19686,
+      "crc32": "6d8db9f4",
+      "git_blob_sha": "3955386505b0955f12e411a57030d544b5931168"
+    },
+    {
+      "path": "CHECKPOINT_M07_100.txt",
+      "bytes": 358,
+      "crc32": "6fce2568",
+      "git_blob_sha": null
+    }
+  ],
+  "ci": {
+    "unit": {
+      "id": 40697729991,
+      "conclusion": "success"
+    },
+    "full_game_3_viewport": {
+      "id": 40697855008,
+      "conclusion": "success"
+    },
+    "previous_live_90": {
+      "id": 40695778120,
+      "conclusion": "success"
+    },
+    "current_live_100": {
+      "id": 40698498864,
+      "conclusion": "CHECK_SEPARATELY_UNTIL_SUCCESS"
+    },
+    "prior_retention_010_070": "PRESERVED_ON_SEPARATE_M07_RETENTION_BRANCH"
+  },
+  "safety": {
+    "no_real_payment": true,
+    "no_external_checkout": true,
+    "no_real_receipt": true,
+    "server_authority_connected": false,
+    "existing_home_shop_only": true,
+    "challenge_real_local_rewards": true,
+    "owned_cosmetics_persist": true,
+    "paid_month_calendar_kst_first_to_last": true,
+    "free_event_28_days_optional": true,
+    "cross_month_old_order_id_no_double_grant": true,
+    "price_approval_required": true,
+    "month_end_warning": true,
+    "store_ui_no_mock_words": true,
+    "explicit_no_charge_disclosure": true,
+    "original_monster_combat_player_unchanged": true,
+    "original_image_count_unchanged": 1021,
+    "existing_game_saves_unchanged": true,
+    "older_branches_preserved": true
+  },
+  "next": {
+    "stage": "M08",
+    "progress": 10,
+    "step": "1/3",
+    "work": "Use authentic local gameplay events in user-facing research missions, enrich currency sinks; keep real billing excluded, plan server ownership",
+    "image_rendering": "Shop promo may be made; character/monster/combat images deferred"
+  }
+}
