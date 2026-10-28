@@ -1,0 +1,48 @@
+name: M07 080 in-game SHOP experience
+on:
+  push:
+    branches: ["monetization-m07-retention-*"]
+    paths:
+      - "web/shop-experience-v621.js"
+      - "web/shop-front-v621.js"
+      - "dist/shop-experience-v621.js"
+      - "dist/shop-front-v621.js"
+      - "dist/index.html"
+      - "tests/m07_080_shop_experience.test.cjs"
+      - ".github/workflows/m07-080-shop-experience.yml"
+  workflow_dispatch:
+jobs:
+  shop-experience:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Syntax and all earlier M07 regression tests
+        run: |
+          node --check web/shop-experience-v621.js
+          node --check web/shop-front-v621.js
+          node --check dist/shop-experience-v621.js
+          node --check dist/shop-front-v621.js
+          node tests/m07_010_nonrender_design.test.cjs
+          node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
+          node tests/m07_030_api_release_freeze.test.cjs
+          node tests/m07_040_mission_harness.test.cjs
+          node tests/m07_050_journal_restore.test.cjs
+          node tests/m07_060_atomic_batch.test.cjs
+          node tests/m07_070_text_preview.test.cjs
+          node tests/m07_080_shop_experience.test.cjs
+      - name: Allowlist exactly the V621 existing SHOP integration
+        run: |
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07_080_changes.txt
+          cat /tmp/m07_080_changes.txt
+          if grep -E '^(web/|dist/|art/|assets/|monetization/catalog/|monetization/economy/|monetization/m06/)' /tmp/m07_080_changes.txt | grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$'; then
+            echo 'Failed SHOP allowlist: combat, images, catalog, or other game code changed.'
+            exit 1
+          fi
+          if grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$' /tmp/m07_080_changes.txt | grep -E '^\.(git|github)/'; then
+            echo 'Review workflows separately.'
+          fi
