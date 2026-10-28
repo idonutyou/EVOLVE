@@ -12,7 +12,7 @@
  const theme={starter:['✦','starter'],crystal100:['◇','crystal'],crystal300:['✧','crystal'],resonance:['◈','cosmetic'],crimson:['✹','cosmetic'],researchpass:['☷','pass']};
  const categories=['추천','재화','외형','시즌','패키지'];
  const PROFILE='dev_local_profile_01';
- let store=null,legacy=null,root=null,content=null,busy=false,pending=null,category='추천',message='';
+ let store=null,legacy=null,root=null,content=null,challengeRoot=null,busy=false,pending=null,category='추천',message='';
  const style=`
  #homeShopViewV601 #nativeShopV620,#homeShopViewV601 #homeShopHintV601{display:none!important}
  #homeShopViewV601 .evolveStoreV621{--glow:#f6b572;font-family:system-ui,-apple-system,sans-serif;max-width:490px;margin:0 auto;color:#f8ebe0;padding:8px 0 24px}
@@ -50,6 +50,16 @@
  #homeShopViewV601 .eStorePassProgressV621{display:flex;gap:6px;margin:10px 0}
  #homeShopViewV601 .eStorePassProgressV621 span{flex:1;text-align:center;border:1px solid #776063;border-radius:7px;padding:6px 0;font-size:12px;color:#d5c2be}
  #homeShopViewV601 .eStorePassProgressV621 span[data-done="true"]{background:#6c423b;color:#ffdab6}
+ #homeChallengeViewV601 .eStoreResearchV621{margin:14px 0 24px;padding:13px 12px;border:1px solid #9b6d59;border-radius:12px;background:linear-gradient(155deg,#31242a,#151b26);color:#f5e0ce;font-family:system-ui}
+ #homeChallengeViewV601 .eStoreResearchV621 *{box-sizing:border-box}
+ #homeChallengeViewV601 .eStoreResearchV621 h3{font-size:16px;margin:0 0 9px;color:#ffe3be}
+ #homeChallengeViewV601 .eStoreResearchV621 p{font-size:12px;line-height:1.5;color:#e1c5b6}
+ #homeChallengeViewV601 .eStoreResearchV621 .eStoreMissionRowV621{padding:11px 0;border-top:1px solid #61494e}
+ #homeChallengeViewV601 .eStoreResearchV621 strong{display:block;font-size:13px;color:#ffdfc3;margin-bottom:7px}
+ #homeChallengeViewV601 .eStoreResearchV621 button{min-height:44px;padding:9px 12px;border-radius:9px;border:1px solid #be8263;background:#67413b;color:#fff0e4;font-weight:900;touch-action:manipulation}
+ #homeChallengeViewV601 .eStoreResearchV621 button:disabled{background:#29232a;opacity:.62;color:#d5bec1}
+ #homeChallengeViewV601 .eStoreResearchV621 button:focus-visible{outline:3px solid #ffd1a2;outline-offset:2px}
+ #homeChallengeViewV601 .eStoreResearchV621 small{display:block;font-size:11px;color:#ccb2ad;line-height:1.5;margin:6px 0}
  #homeShopViewV601 .eStoreCollectionV621{margin:14px 0;border:1px solid #6a5055;border-radius:12px;padding:13px;background:linear-gradient(130deg,#27212b,#161923)}
  #homeShopViewV601 .eStoreCollectionV621 h3{font-size:15px;color:#ffe0b7;margin:0 0 6px}
  #homeShopViewV601 .eStoreCoreRowV621{display:flex;align-items:center;gap:9px;padding:11px 0;border-top:1px solid #574148}
@@ -133,6 +143,39 @@
   }catch(e){fail(e);return}
   busy=false;draw();
  }
+ function drawChallenge(){
+  const host=document.getElementById('homeChallengeViewV601');
+  if(!host||!store)return;
+  if(!challengeRoot){
+   challengeRoot=make('section','eStoreResearchV621');challengeRoot.id='evolveResearchV621';
+   challengeRoot.setAttribute('aria-label','연구 시즌 진행 및 보상');host.append(challengeRoot);
+  }
+  let s;
+  try{s=store.snapshot()}catch(_){challengeRoot.replaceChildren(make('p','','연구 기록을 읽지 못했습니다. 기존 저장 데이터는 보존됩니다.'));return;}
+  const frag=document.createDocumentFragment();
+  add(frag,'h3','','연구 시즌');
+  add(frag,'p','','현재 월간 연구 패스 · '+s.month+' · 유효 기간 '+s.paidWindow.days+'일 말일 23:59 KST까지');
+  add(frag,'small','','무료 출석 보상은 유료 시즌과 독립적으로 제공됩니다. 28일 무료 이벤트는 별도 운영할 수 있습니다.');
+  const daily=add(frag,'div','eStoreMissionRowV621');add(daily,'strong','','일일 연구 보급');add(daily,'small','','변이 결정 20개 · 매일 1회');
+  button(daily,s.mayClaimDaily?'무료 보상 받기':'오늘 수령 완료',()=>{try{store.claimDaily();message='연구 보급을 받았습니다.';draw()}catch(e){fail(e)}},!s.mayClaimDaily);
+  const pass=add(frag,'div','eStoreMissionRowV621');add(pass,'strong','','프리미엄 연구');
+  if(!s.passActive){
+   add(pass,'small','','월간 패스가 활성화되면 누적 출석일에 따라 보상을 수령할 수 있습니다.');
+   button(pass,'월간 패스 보기',()=>{category='시즌';document.getElementById('homeShopTabV601')?.click();draw()});
+  }else{
+   const progress=Object.keys(s.dailyClaims).filter(day=>day.startsWith(s.month+'-')).length;
+   add(pass,'small','','패스 활성화 · 누적 출석 '+progress+'일 · 월말 종료');
+   for(let tier=1;tier<=5;tier++){
+    const claimKey=s.month+':'+tier,claimed=!!s.rewardClaims[claimKey],ready=progress>=tier;
+    const row=add(pass,'div','eStoreMissionRowV621');
+    add(row,'strong','','연구 단계 '+tier+' / 5');
+    button(row,claimed?'수령 완료':ready?'결정 35개 수령':'출석 '+progress+'/'+tier,
+     ()=>{try{store.claimPremium(tier);message='프리미엄 연구 보상을 받았습니다.';draw()}catch(e){fail(e)}},claimed||!ready);
+   }
+  }
+  add(frag,'p','','결제 연결 전 체험 중 · 실제 금액 청구 없음 · 보상/재화는 현재 브라우저에만 보관됩니다.');
+  challengeRoot.replaceChildren(frag);
+ }
  function draw(err=false){
   if(!root||!content)return;
   let s;try{s=store.snapshot()}catch(e){content.replaceChildren(make('p','eStoreMessageV621','상점 기록을 읽을 수 없어 변경을 중단했습니다. 기록은 삭제되지 않습니다.'));return}
@@ -203,6 +246,7 @@
   }
   add(frag,'p','eStoreFineV621','상품 획득과 연구 보상은 현재 브라우저에 저장됩니다. 실제 결제, 영수증, 서버 권리 지급은 연결되지 않았으며 별도 계정으로 이전되지 않습니다.');
   content.replaceChildren(frag);
+  drawChallenge();
  }
  function mount(){
   const view=document.getElementById('homeShopViewV601');
@@ -213,6 +257,8 @@
   root=make('section','evolveStoreV621');root.id='evolveShopV621';root.setAttribute('aria-label','변이 상점');
   content=make('div');root.append(content);view.append(root);
   draw();
+  const challengeTab=document.getElementById('memoryBtn');
+  challengeTab?.addEventListener('click',()=>drawChallenge());
   const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{pending=null;draw()});
   const observer=new MutationObserver(()=>{if(atShop()){pending=null;draw()}});
   observer.observe(view,{attributes:true,attributeFilter:['class']});
