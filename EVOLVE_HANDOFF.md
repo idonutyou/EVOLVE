@@ -1,3 +1,14 @@
+# EVOLVE — M07 60% STEP 2/3 완료 (2026-10-28 KST)
+
+- 실제 구현: 독립 테스트용 `monetization/m07/mission-batch-gate-060.cjs` — 미션 이벤트 최대 32개 묶음의 **전부 성공/전부 롤백** 테스트 처리, 요청 ID 재전송 중복 차단, 과거 리비전/다른 계정·무료 시즌 스냅샷 적용 거부. 실지급 0, 운영 권위/서버 연결 **없음**.
+- 검사: `tests/m07_060_atomic_batch.test.cjs`, GitHub Actions run `40684783502` **success**. 10~60% Node 회귀 검사·원본 파일 보호.
+- 핵심 소스 감사 추가 발견: `web/admin-mode-v585.js`에서 `grantStageClearReward` 래퍼와 `startHomeBattleV522` 확인, `web/admin-state-v585.js`에 `EVOLVE_V575_TEST_NORMAL_PROGRESS_V585` 일반 진행도 localStorage 저장 확인. **클라이언트의 로컬 진행·관리자 모드(도감 버튼 5회)는 유료 보상 검증 원천으로 사용 금지.** `monetization/m07/event-source-audit-060.v1.json` 참고.
+- 확정 유지: 기간제 **유료 시즌은 매월 1일~해당월 말일 KST**, 무료 이벤트만 28일 주기 가능. SHOP 하나 및 M06 시안/모든 예전 백업 보호, 원본 게임·이미지 1,021개·세이브·카탈로그 변경 없음. 가격 null, 결제/클라이언트 지급 OFF.
+- 상세 `docs/monetization/M07_060_ATOMIC_BATCH_EVENT_HOOK_AUDIT_KO.md`. 전체 소스 복구 `backup/monetization-m07-060-20261028`, 증분 `checkpoints/EVOLVE_M07_060_20261028.zip` + JSON 영수증.
+- 다음 `고`: **M07 70% STEP 3/3** — 비이미지 시즌 텍스트 UI 계획/신뢰 이벤트 소스 감사·중복경계 테스트. **이미지 렌더링 불필요**.
+
+---
+
 # EVOLVE M07 50% 인수인계 (2026-10-28 KST)
 - 10~30% 설계, 40% 독립 미션 시뮬레이터, **50%** 시뮬레이터 JSON 테스트 기록·리플레이 복원과 재검증·변조 실패 차단. 게임/서버/정식 지급엔 미연결.
 - `monetization/m07/mission-journal-050.cjs`, `tests/m07_050_journal_restore.test.cjs`, `event-source-audit-050.v1.json`, `docs/monetization/M07_050_JOURNAL_RESTORE_QA_KO.md`. SHA-256은 테스트용 손상 검출이며 운영 권위 아님.
