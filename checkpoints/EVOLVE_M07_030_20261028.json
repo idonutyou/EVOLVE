@@ -1,0 +1,125 @@
+{
+  "schema_version": "EVOLVE_M07_030_CHECKPOINT_V1",
+  "stage": "M07",
+  "progress_percent": 30,
+  "step": "1/3",
+  "date_kst": "2026-10-28",
+  "status": "FREEZE_DESIGN_ONLY_NO_RENDERING",
+  "baseline_main_sha": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "previous_M07_20_backup": "backup/monetization-m07-020-20261028",
+  "previous_M07_policy_backup": "backup/monetization-m07-paid-month-policy-20261028",
+  "work_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup_branch": "backup/monetization-m07-030-20261028",
+  "zip_path": "checkpoints/EVOLVE_M07_030_20261028.zip",
+  "zip_bytes": 111399,
+  "zip_crc32": "bdd5adc1",
+  "zip_git_blob_sha": "275a4c896c056b243eb1d1c950d246b9987e1810",
+  "zip_archive_commit": "795b03607dcb3488c24a1c9fb8493b8a182341bb",
+  "zip_type": "INCREMENTAL_SPEC_AND_QA_SOURCE_NOT_WHOLE_GAME",
+  "entries": [
+    {
+      "path": "monetization/m07/season-api-contract-030.v1.json",
+      "bytes": 5082,
+      "crc32": "643f9738",
+      "git_blob_sha": "ab3fc6b9391e0f11d72c8de9600e991acbc8c5a0"
+    },
+    {
+      "path": "monetization/m07/season-states-release-gates-030.v1.json",
+      "bytes": 3374,
+      "crc32": "ffcef905",
+      "git_blob_sha": "2f3d34fd474d9e70fc8364234ea90ccb7fb43d53"
+    },
+    {
+      "path": "monetization/m07/season-state-transitions-030.v1.json",
+      "bytes": 3023,
+      "crc32": "bf59d88c",
+      "git_blob_sha": "38e96e66d35ac59037d814c5edc18f85238c0eab"
+    },
+    {
+      "path": "monetization/m07/monthly-calendar-policy.v1.json",
+      "bytes": 4455,
+      "crc32": "cd2d5f86",
+      "git_blob_sha": "fdf90fafd9abaa427915d85be96a78a57b1d6be0"
+    },
+    {
+      "path": "monetization/m07/paid-month-calendar-v1.cjs",
+      "bytes": 1795,
+      "crc32": "de56e31d",
+      "git_blob_sha": "f6fb0a430bae5064c857a66e4fd184196d96bd0f"
+    },
+    {
+      "path": "monetization/m07/utc-period-planner-v1.cjs",
+      "bytes": 2868,
+      "crc32": "3159af6c",
+      "git_blob_sha": "adc2217f01db1afbf80bd52e5e3682925320038e"
+    },
+    {
+      "path": "docs/monetization/M07_030_API_RELEASE_FREEZE_KO.md",
+      "bytes": 5622,
+      "crc32": "9cfd7bd9",
+      "git_blob_sha": "8cda8a59b5a5d21a5da8a324d64c44097fe8ccd2"
+    },
+    {
+      "path": "tests/m07_030_api_release_freeze.test.cjs",
+      "bytes": 4404,
+      "crc32": "4a634ab9",
+      "git_blob_sha": "b0d656a715fcdee21a0a847fbba95d9be1c670b4"
+    },
+    {
+      "path": ".github/workflows/m07-030-design.yml",
+      "bytes": 629,
+      "crc32": "27405702",
+      "git_blob_sha": "001f7df112a1845dd2a1886a2e1f1dae71fd4f1e"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 23167,
+      "crc32": "1878893b",
+      "git_blob_sha": "022bf87887a6ba8bbf77286352a05b8c39f1ac0c"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 35419,
+      "crc32": "3b99b8da",
+      "git_blob_sha": "0cc371e51d5967ed7e1f205d8a2feadb0774152a"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 19237,
+      "crc32": "1f143683",
+      "git_blob_sha": "2e8e670090b4f2261ca7df73a5b13b5a517ad13f"
+    },
+    {
+      "path": "CHECKPOINT_M07_030.txt",
+      "bytes": 306,
+      "crc32": "d24612b9",
+      "git_blob_sha": null
+    }
+  ],
+  "CI": {
+    "run_id": 40681995733,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40681995733"
+  },
+  "invariants": {
+    "new_images": false,
+    "runtime_game_code_changed": false,
+    "original_image_count": 1021,
+    "only_native_home_shop": true,
+    "price_minor": null,
+    "checkout": false,
+    "client_grants": false,
+    "real_rewards_granted": false,
+    "season_pass_status": "draft_disabled",
+    "paid_period": "FIRST_TO_LAST_DAY_OF_MONTH_KST",
+    "free_28_days_optional": true,
+    "old_backups_preserved": true
+  },
+  "next": {
+    "stage": "M07",
+    "progress_percent": 40,
+    "step": "2/3",
+    "image_rendering_required": false,
+    "work": "Non-rendering pure mission state engine mock, local tests and fail-closed cases"
+  }
+}
