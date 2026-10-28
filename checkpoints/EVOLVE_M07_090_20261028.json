@@ -1,0 +1,177 @@
+{
+  "schema_version": "EVOLVE_M07_090_CHECKPOINT_V1",
+  "stage": "M07",
+  "progress_percent": 90,
+  "step": "3/3",
+  "date_kst": "2026-10-28",
+  "work_branch": "monetization-m07-090-store-20261028",
+  "full_tree_backup": "backup/monetization-m07-090-20261028",
+  "main_live_release_sha": "a8d595f81673546ddefe31612792fde0f93d05fe",
+  "full_live_backup": "backup/m07-090-live-shop-20261028",
+  "main_pre_090_backup": "backup/pre-m07-090-live-20261028",
+  "preserve_all_prior_backups": true,
+  "archive_path": "checkpoints/EVOLVE_M07_090_20261028.zip",
+  "archive_type": "INCREMENTAL_FULL_CHANGED_SOURCE_AND_HTML_NOT_FULL_GAME_ASSETS",
+  "archive_bytes": 446047,
+  "archive_crc32": "c7babaf8",
+  "archive_blob_sha": "b273efe8a64bd1519d85a2cc8f8a89d88ed20142",
+  "archive_commit": "1d2341c7f651bf0b033f6b4e01eefc2658604af7",
+  "entries": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "bytes": 7118,
+      "crc32": "ffdf9277",
+      "sourceBlob": "b8f80196bbd0e4f46fcd394f9f0b48dde7900608"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "bytes": 23342,
+      "crc32": "3d6d2ae9",
+      "sourceBlob": "e4d4ce21a7168e81dfb573a649174e51d2f3ce7c"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "bytes": 7118,
+      "crc32": "ffdf9277",
+      "sourceBlob": "b8f80196bbd0e4f46fcd394f9f0b48dde7900608"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "bytes": 23342,
+      "crc32": "3d6d2ae9",
+      "sourceBlob": "e4d4ce21a7168e81dfb573a649174e51d2f3ce7c"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 260651,
+      "crc32": "0938dae4",
+      "sourceBlob": "d69f2a9595c24d85a9e3a9e1a7385d222721ba2f"
+    },
+    {
+      "path": "tests/m07_080_shop_browser.cjs",
+      "bytes": 8826,
+      "crc32": "a11b9e4b",
+      "sourceBlob": "19934d90d83f70deedca41504ad08d192549bdbc"
+    },
+    {
+      "path": "tests/m07_080_shop_experience.test.cjs",
+      "bytes": 6363,
+      "crc32": "0232f5d1",
+      "sourceBlob": "2842a5167870ef3f63f1ffe955aa0400da28daea"
+    },
+    {
+      "path": "tests/m07_090_crimson_pass.test.cjs",
+      "bytes": 5226,
+      "crc32": "0f067744",
+      "sourceBlob": "f26a1eed9c0792fda2b4746bc999cc3092c113b0"
+    },
+    {
+      "path": "tests/home_hub_browser.cjs",
+      "bytes": 8276,
+      "crc32": "cc6350df",
+      "sourceBlob": "a6b5902bc84f66b76cedf040df9621be6e87da1b"
+    },
+    {
+      "path": "tools/wait_for_shop_publication.py",
+      "bytes": 2546,
+      "crc32": "6380da50",
+      "sourceBlob": "516abd11429d52eaee0e4523118844bcb9fda487"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "bytes": 11913,
+      "crc32": "ff8be81b",
+      "sourceBlob": "3e1ab90295a8157b379fd42cadcc5464fb321c70"
+    },
+    {
+      "path": ".github/workflows/m07-090-browser.yml",
+      "bytes": 1513,
+      "crc32": "7f59728b",
+      "sourceBlob": "a694d2a3ea02f2cb80a45b2e70bcb4801b965872"
+    },
+    {
+      "path": ".github/workflows/m07-090-shop.yml",
+      "bytes": 1468,
+      "crc32": "10e4f614",
+      "sourceBlob": "8e5202b34f60b6feedb64ae3b0b27dce2f547be4"
+    },
+    {
+      "path": "docs/monetization/M07_090_SHOP_CHALLENGE_CORE_QA_KO.md",
+      "bytes": 6185,
+      "crc32": "67bb6eb4",
+      "sourceBlob": "de9adb7480a1887551a1947b4a8b5f2983620a46"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 19974,
+      "crc32": "55606a44",
+      "sourceBlob": "4c0faa8b1c7f75e62cf2f3ced6a1e8e63dd27c3f"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 32446,
+      "crc32": "59e8a9f8",
+      "sourceBlob": "f65c35196c03a87c42277c483c9e50d9ca334e85"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 16904,
+      "crc32": "954a0eb0",
+      "sourceBlob": "c213c264adcd4e804fb3da187c2ee98c7aa4a1fc"
+    },
+    {
+      "path": "CHECKPOINT_M07_090.txt",
+      "bytes": 424,
+      "crc32": "89267954",
+      "sourceBlob": null
+    }
+  ],
+  "ci": {
+    "unit": {
+      "run": 40695184690,
+      "status": "success"
+    },
+    "browser": {
+      "run": 40695151724,
+      "status": "success",
+      "viewports": [
+        "393x852",
+        "320x568",
+        "852x393"
+      ]
+    },
+    "live_deploy": {
+      "run": 40695778120,
+      "status": "CHECK_LIVE_ACTION"
+    },
+    "migration": {
+      "run": 40695777915,
+      "status": "success"
+    }
+  },
+  "user_rules": {
+    "no_checkout_provider": true,
+    "no_real_money_charged": true,
+    "product_button_regular_purchase_terms": true,
+    "clear_no_charge_disclosure": true,
+    "existing_shop_not_dev_overlay": true,
+    "game_and_monsters_unchanged": true,
+    "original_images_count": 1021,
+    "paid_pass": "1ST_TO_LAST_CALENDAR_DAY_KST",
+    "free_events_may_run_28days": true,
+    "permanent_skins_retained": true,
+    "prototype_journal_not_server_verified": true
+  },
+  "work_done": [
+    "permanent Crimson skin for 120 local crystals",
+    "collect/equip two existing V617 core cosmetics",
+    "daily and premium claims directly in existing CHALLENGE tab",
+    "CDN propagation gate on Pages deploy after previous stale V620 final QA",
+    "no-image source changes and cachebust"
+  ],
+  "next": {
+    "percent": 100,
+    "step": "M07 final QA/handoff",
+    "new_image_rendering": "none required for monster/player/combat; optional store promotional only"
+  }
+}
