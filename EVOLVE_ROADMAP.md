@@ -1,3 +1,15 @@
+# EVOLVE M07 STEP 1/3 · 30% 최종 설계 동결 (2026-10-28 KST)
+
+- M07 10%: 무료 연구 미션/선택형 유료 수집 가치 기획. 20%: 소스 이벤트 4파일 감사/UTC 무료 28일 상한·유료 KST 1일~말일 정책 정정. **30%: 미션/시즌 API·무료/유료 상태도·출시 차단 15개 게이트 설계 동결.**
+- 최우선 사용자 정책: 기간제 **유료 시즌패스는 달력 매월 1일 00시~말일 KST, 다음달 1일 00시 미포함**, 무료 이벤트는 **28일 운영 가능**. 영구 보유 유료 외형은 월말 만료 시 삭제 금지.
+- API 계약 `monetization/m07/season-api-contract-030.v1.json`, 상태 `monetization/m07/season-states-release-gates-030.v1.json`, 전이 `monetization/m07/season-state-transitions-030.v1.json`, 설명 `docs/monetization/M07_030_API_RELEASE_FREEZE_KO.md`, 검사 `tests/m07_030_api_release_freeze.test.cjs`.
+- 현재 전부 **디자인 계약**이며 실제 미션/서버/고객 보상 지급, 실결제, 실제 게임 화면 변경, 프리미엄 이미지 생성 **없음**. 카탈로그 `season_research_pass_01` draft_disabled, 가격 null, checkout/client grants OFF.
+- 기존 HOME SHOP 하나·원본 이미지 1,021개·게임 저장·M06 기존 시안/백업 보전. 모든 신규 이미지 렌더링 필요한 일은 계속 보류.
+- M07 30% 복구 `backup/monetization-m07-030-20261028` 및 `checkpoints/EVOLVE_M07_030_20261028.zip`/JSON. 원격 무결성 2회 확인, 10/20% 및 이전 수익화/게임 백업 모두 유지.
+- **다음 `고` = M07 40% STEP 2/3**, 실제 게임 연결 전 독립 메모리 전용 미션 진행·중복지급 검사 프로토타입. **이미지 렌더링 필요 없음**.
+
+---
+
 # EVOLVE — 유료 월간 / 무료 28일 허용 정책 확정 (2026-10-28 KST)
 
 - 사용자 최종 지시: **유료 아이템(시즌패스)은 매월 1일 시작해 그달 말일 종료**, 실제 기간은 28/29/30/31일 가변. **무료 미션·이벤트만 28일 주기 가능.** 유료 상품을 28일 상품으로 설계·판매하지 않는다.
