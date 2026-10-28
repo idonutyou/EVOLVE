@@ -16,6 +16,7 @@ SAFE = {
     "web/m08-runtime-missions-v623.js",
     "web/m08-mission-rewards-v624.js",
     "tests/m08_090_release_integrity.test.cjs",
+    "tests/m08_040_mission_rewards.test.cjs",
 }
 def classify(lines):
     paths = [s.strip() for s in lines if s.strip()]
