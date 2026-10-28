@@ -24,7 +24,7 @@ function assertNoGrant(session){
 }
 function corrupt(json,change){const data=JSON.parse(json);change(data);return JSON.stringify(data);}
 function rehash(json,change){
- const data=JSON.parse(json);change(data.payload);
+ const data=JSON.parse(json);change(data.payload);data.payload.revision=data.payload.acceptedTestEvents.length;
  data.sha256=crypto.createHash('sha256').update(JSON.stringify(data.payload)).digest('hex');
  return JSON.stringify(data);
 }
