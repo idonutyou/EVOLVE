@@ -1,0 +1,145 @@
+{
+  "schema_version": "EVOLVE_M07_080_RELEASE_CHECKPOINT_V1",
+  "date_kst": "2026-10-28",
+  "progress": 80,
+  "step": "3/3",
+  "work_branch": "monetization-m07-retention-20261028",
+  "full_tree_backup": "backup/monetization-m07-080-20261028",
+  "old_work_backup": "backup/monetization-m07-070-20261028",
+  "main_pre_release_backup": "backup/pre-m07-080-live-20261028",
+  "main_shop_v621_backup": "backup/m07-080-live-shop-v621-20261028",
+  "main_at_promotion": "44d3aa6d95cfcf0eeddc80fccc8a8fba90152c08",
+  "zip": "checkpoints/EVOLVE_M07_080_20261028.zip",
+  "zip_type": "INCREMENTAL_SOURCES_NOT_FULL_GAME",
+  "zip_size": 188969,
+  "zip_crc32": "2a0f920e",
+  "zip_blob": "674757ff08440bf1f53983f810e339166d50321a",
+  "zip_commit": "72f126a2149b037f4953838dafb029ddc7262c9e",
+  "complete_repo_recovery_on_branch": true,
+  "entries": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "bytes": 6727,
+      "crc32": "dd8380b9",
+      "sourceBlob": "ae05a509e76dc7f37b7ee0dd221627f9aef1ea66"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "bytes": 14900,
+      "crc32": "574c44d0",
+      "sourceBlob": "c730f2bb592a5615cb2507f0c414819897d9244a"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "bytes": 6727,
+      "crc32": "dd8380b9",
+      "sourceBlob": "ae05a509e76dc7f37b7ee0dd221627f9aef1ea66"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "bytes": 14900,
+      "crc32": "574c44d0",
+      "sourceBlob": "c730f2bb592a5615cb2507f0c414819897d9244a"
+    },
+    {
+      "path": "tests/m07_080_shop_experience.test.cjs",
+      "bytes": 6363,
+      "crc32": "90bea042",
+      "sourceBlob": "951c6f78205d5e88fd671e2f6a4ce49632828ca5"
+    },
+    {
+      "path": "tests/m07_080_shop_browser.cjs",
+      "bytes": 6943,
+      "crc32": "449d0109",
+      "sourceBlob": "b2fe392e818c6435e9221ef6d61ba84949394070"
+    },
+    {
+      "path": "tests/home_hub_browser.cjs",
+      "bytes": 8276,
+      "crc32": "8ceb505e",
+      "sourceBlob": "2fe14364b34221bd88615c60190ad6d148cc1e15"
+    },
+    {
+      "path": ".github/workflows/m07-080-shop-experience.yml",
+      "bytes": 2244,
+      "crc32": "44bda963",
+      "sourceBlob": "20b82bc1312a2dc76a163bf70ca25197174889f4"
+    },
+    {
+      "path": ".github/workflows/m07-080-browser.yml",
+      "bytes": 1523,
+      "crc32": "9d9c65e0",
+      "sourceBlob": "8e210c0285eb8f0537d3a82b7f8a3706b0c32526"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "bytes": 11659,
+      "crc32": "85b845a3",
+      "sourceBlob": "4dc246d5b5830c7a17d23e956cb1dfe1d5443d0e"
+    },
+    {
+      "path": "docs/monetization/M07_080_ACTUAL_GAME_SHOP_KO.md",
+      "bytes": 4317,
+      "crc32": "403ee36c",
+      "sourceBlob": "786ec2217bd46d70d48ea10122f3ced8f3062332"
+    },
+    {
+      "path": "EVOLVE_PROGRESS.md",
+      "bytes": 31873,
+      "crc32": "8d731560",
+      "sourceBlob": "98bdd90657594cd6d56386fc092c04f909bd967e"
+    },
+    {
+      "path": "EVOLVE_HANDOFF.md",
+      "bytes": 44096,
+      "crc32": "9c980c68",
+      "sourceBlob": "ce4135896565f08f2eb331520f4e86b84f344761"
+    },
+    {
+      "path": "EVOLVE_ROADMAP.md",
+      "bytes": 26002,
+      "crc32": "3bd49559",
+      "sourceBlob": "776653daa6830e7619cdfc72e71b016e4e3571f1"
+    },
+    {
+      "path": "CHECKPOINT_M07_080.txt",
+      "bytes": 393,
+      "crc32": "c291f1c1",
+      "sourceBlob": null
+    }
+  ],
+  "ci": {
+    "unit_run": 40688991887,
+    "unit": "success",
+    "browser_run": 40689693331,
+    "browser": "success",
+    "mobile_sizes": [
+      "393x852",
+      "320x568",
+      "852x393"
+    ],
+    "main_publish_run": 40690099454,
+    "publish_status": "CHECK_SEPARATELY"
+  },
+  "safety": {
+    "production_payment": false,
+    "money_charged": false,
+    "client_only_purchase_preview": true,
+    "no_unverified_real_receipt_grants": true,
+    "local_save_separate": "EVOLVE_SHOP_EXPERIENCE_V621_V1",
+    "core_theme_bridged_to_original_v617": true,
+    "paid_calendar": "KST first to last of month",
+    "free_event_28days_optional": true,
+    "shop_UI_no_mock_wording": true,
+    "discloses_no_charge": true,
+    "old_game_art_unchanged": true,
+    "original_image_count": 1021,
+    "combat_enemy_unchanged": true,
+    "previous_branch_backups_preserved": true
+  },
+  "next": {
+    "percent": 90,
+    "step": "3/3",
+    "rendering_requirement": "Only SHOP promotional images optional; no character/enemy/combat art"
+  }
+}
