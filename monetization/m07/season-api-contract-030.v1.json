@@ -1,0 +1,186 @@
+{
+  "schema_version": "EVOLVE_M07_030_SEASON_API_V1",
+  "progress_percent": 30,
+  "step": "1/3",
+  "status": "DESIGN_ONLY_NOT_DEPLOYED",
+  "authority": {
+    "server_uri": null,
+    "account_server_connected": false,
+    "verified_gameplay_events_connected": false,
+    "entitlement_server_connected": false,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "price_minor": null,
+    "season_pass_sku": "season_research_pass_01",
+    "season_pass_status": "draft_disabled"
+  },
+  "periods": [
+    {
+      "id": "paid_month",
+      "who": "paid time-limited pass",
+      "tz": "Asia/Seoul",
+      "start": "1st day 00:00 KST inclusive",
+      "end": "next month 1st day 00:00 KST exclusive",
+      "days": "calendar-based 28 29 30 or 31",
+      "identifier": "YYYY-MM@AsiaSeoul",
+      "renewal": false,
+      "rolling_28days": false,
+      "late_purchase_rule": "UNDECIDED_BLOCKED"
+    },
+    {
+      "id": "free_cycle",
+      "who": "non-paid mission and event only",
+      "tz": "UTC",
+      "start": "configured free season event UTC timestamp",
+      "end": "may be 28 days later",
+      "days": "OPTIONAL_28",
+      "identifier": "server generated FREE_CYCLE_ID",
+      "must_not_shorten_paid_month": true
+    }
+  ],
+  "read_endpoints": [
+    {
+      "method": "GET",
+      "path": "/v1/seasons/current",
+      "fields": [
+        "server_time_utc",
+        "free_cycle",
+        "paid_month",
+        "paid_month_expiry_utc",
+        "paid_month_expiry_kst",
+        "remaining_seconds",
+        "checkout_enabled"
+      ],
+      "effect": "READ_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/seasons/{periodId}/missions",
+      "fields": [
+        "mission_id",
+        "goal",
+        "verified_count",
+        "pending_unverified",
+        "claimable",
+        "period_id"
+      ],
+      "effect": "READ_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/account/season-entitlements",
+      "fields": [
+        "sku",
+        "month_id",
+        "verified_receipt",
+        "verified_at_utc",
+        "expire_at_utc",
+        "state"
+      ],
+      "effect": "READ_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/seasons/history",
+      "fields": [
+        "period_id",
+        "free_claim_history",
+        "permanent_earned_items",
+        "refund_state"
+      ],
+      "effect": "READ_ONLY"
+    }
+  ],
+  "future_write_endpoints": [
+    {
+      "method": "POST",
+      "path": "/internal/v1/verified-play-events",
+      "caller": "TRUSTED_GAME_SERVER_ONLY",
+      "required": [
+        "account_id",
+        "period_id",
+        "mission_id",
+        "event_id",
+        "run_id",
+        "source_proof_id",
+        "verified_at_utc"
+      ],
+      "event_dedupe": [
+        "period_id",
+        "account_id",
+        "mission_id",
+        "event_id"
+      ],
+      "must_verify_source": true,
+      "accepts_user_asserted_verified_flag": false
+    },
+    {
+      "method": "POST",
+      "path": "/v1/seasons/{periodId}/claims",
+      "caller": "AUTHENTICATED_USER",
+      "required": [
+        "reward_id",
+        "idempotency_key"
+      ],
+      "claim_dedupe": [
+        "period_id",
+        "account_id",
+        "reward_id"
+      ],
+      "require_verified_mission": true,
+      "require_ready_art_or_reward": true,
+      "require_server_grant": true,
+      "repeated_calls_same_result": true,
+      "claim_enabled_now": false
+    },
+    {
+      "method": "POST",
+      "path": "/internal/v1/payment-entitlement-events",
+      "caller": "TRUSTED_PAYMENT_SERVER_ONLY",
+      "required": [
+        "provider",
+        "receipt_hash",
+        "sku",
+        "month_id",
+        "provider_transaction_id",
+        "verified_event"
+      ],
+      "receipt_server_verification": true,
+      "source_aware_refunds": true,
+      "requires_M08": true,
+      "enabled_now": false
+    }
+  ],
+  "safety": {
+    "no_client_clock_authority": true,
+    "server_utc_instant_for_all_events": true,
+    "paid_kst_calendar_month_is_server_calculated": true,
+    "offline_mode": "READ_ONLY_PENDING",
+    "stale_snapshot": "REJECT",
+    "unknown_verification": "DO_NOT_GRANT",
+    "restore_server_entitlements_only": true,
+    "corrupted_local_game_data": "PRESERVE",
+    "original_game_save_key": "EVOLVE_V575_TEST_*",
+    "mock_store_key": "EVOLVE_DEV_MOCK_STORE_V1",
+    "no_m03_client_writes": true,
+    "permanent_cosmetics_survive_month_end": true,
+    "unpaid_free_progress_survives_paid_expiry": true,
+    "no_premium_power": true,
+    "free_track_not_paywalled": true
+  },
+  "policy_source": "monetization/m07/monthly-calendar-policy.v1.json",
+  "requires_prior_completion": [
+    "server verified run/stage/codex event source",
+    "season account ledger",
+    "verified receipt/restore/refund",
+    "approved premium cosmetic graphics",
+    "late-month purchase fairness policy",
+    "privacy and customer support review"
+  ],
+  "next": {
+    "progress_percent": 40,
+    "step": "2/3",
+    "image_rendering_required": false,
+    "task": "Pure non-granting test-only season state engine and replay/period tests"
+  }
+}
