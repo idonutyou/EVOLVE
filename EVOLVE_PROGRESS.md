@@ -1,3 +1,15 @@
+# EVOLVE M07 · STEP 1/3 20% | 시즌 신뢰 이벤트·UTC 보상 상한 (2026-10-28 KST)
+
+- 사용자 요청 유지: **이미지 렌더링 필요한 M06/기타 작업 보류**, 비이미지 기능 우선, 기존 M06 생성 시안/백업 보존.
+- M07 10% 무료/유료 연구 미션 방향, **20% 실제 파일 4종 감사**: `web/home-hub-v601.js`, `web/native-shop-v620.js`, `web/client.js`, `dist/index.html`에서 검증된 RUN/STAGE/CODEX 미션 이벤트를 찾지 못했다. 전체 엔진 감사/실제 이벤트 구현이 끝났다는 뜻이 아님.
+- M07 20% 추가: `monetization/m07/season-period-reward-020.v1.json`, `event-source-audit-020.v1.json`, 순수 `utc-period-planner-v1.cjs`, `tests/m07_020_period_contract.test.cjs` 및 설명 `docs/monetization/M07_020_EVENT_UTC_CAP_AUDIT_KO.md`.
+- 서버 검증 이벤트 생기기 전에는 **달성/재화 지급 없음**. 28일 가정 UTC 00시 일 경계/월요일 UTC 주 경계, 하루 2개·주 1개 완료 상한(2026-10-28 시작 예시 최대 61 '가상 연구 포인트'). 정식 결정·DNA/세이브와 무관.
+- 5탭/원본 SHOP, 기존 원본 이미지 1,021개, 본편 `web`/`dist`/카탈로그·세이브 불변. 시즌패스 `draft_disabled`, 실제 가격 null, checkout/운영 지급 OFF.
+- 20% 전체 트리 복구 `backup/monetization-m07-020-20261028`, 증분 ZIP/JSON 원격 무결성 2회 확인. 이전 백업 모두 삭제 금지.
+- **다음 '고' M07 30% STEP 1/3**: 시즌/미션 상태도와 API 계약, 출시 차단 체크리스트 최종 동결. **이미지 렌더링 불필요**.
+
+---
+
 # EVOLVE 새 작업 우선순위 — 이미지 렌더링 보류 / M07 10% 착수 (2026-10-28 KST)
 
 - **사용자 지시:** 추가 이미지 렌더링이 필요한 단계는 남겨 두고, 수익화에 도움이 되는 비이미지 단계부터 진행한다. 이미지 제작은 별도 재개 지시 전까지 보류.
