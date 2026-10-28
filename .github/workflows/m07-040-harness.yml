@@ -1,0 +1,30 @@
+name: M07 040 isolated mission harness
+on:
+  push:
+    branches: ["monetization-m07-retention-*"]
+    paths:
+      - "monetization/m07/**"
+      - "tests/m07_040_mission_harness.test.cjs"
+      - ".github/workflows/m07-040-harness.yml"
+jobs:
+  mission-prototype:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run M07 10-40 percent safety contract tests
+        run: |
+          node tests/m07_010_nonrender_design.test.cjs
+          node tests/m07_020_period_contract.test.cjs
+          node tests/m07_020_paid_month_policy.test.cjs
+          node tests/m07_030_api_release_freeze.test.cjs
+          node tests/m07_040_mission_harness.test.cjs
+      - name: Verify original game and M06 rendered art unchanged
+        run: |
+          if git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD | grep -E '^(dist/|web/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)'; then
+            echo 'M07 requires unchanged game/assets/catalog.'
+            exit 1
+          fi
