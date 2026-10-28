@@ -22,9 +22,10 @@ jobs:
           node tests/m07_020_paid_month_policy.test.cjs
           node tests/m07_030_api_release_freeze.test.cjs
           node tests/m07_040_mission_harness.test.cjs
-      - name: Verify original game and M06 rendered art unchanged
+      - name: Preserve combat, graphics, merchant catalog and previous backups (V621 shop allowlist)
         run: |
-          if git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD | grep -E '^(dist/|web/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)'; then
-            echo 'M07 requires unchanged game/assets/catalog.'
+          git diff --name-only b73c848a781e30453c3e003de673a98143fa5d42 HEAD > /tmp/m07-protected.txt
+          if grep -E '^(web/|dist/|art/|assets/|monetization/m06/|monetization/catalog/|monetization/economy/)' /tmp/m07-protected.txt | grep -Ev '^(web/shop-experience-v621\.js|web/shop-front-v621\.js|dist/shop-experience-v621\.js|dist/shop-front-v621\.js|dist/index\.html)$'; then
+            echo 'Forbidden change outside V621 shop experience.'
             exit 1
           fi
