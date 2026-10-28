@@ -1,0 +1,125 @@
+{
+  "schema_version": "EVOLVE_M07_020_PERIOD_AND_REWARD_GATES_V1",
+  "module": "M07",
+  "progress_percent": 20,
+  "step": "1/3",
+  "status": "DESIGN_WITH_PURE_TEST_HELPER_NO_RUNTIME_INTEGRATION",
+  "baseline": "b73c848a781e30453c3e003de673a98143fa5d42",
+  "core": {
+    "season_length_days_proposal": 28,
+    "season_start_source": "SERVER_SIGNED_UTC_MIDNIGHT_ONLY_AFTER_ACTIVATION",
+    "season_is_active": false,
+    "reset_timezone": "UTC",
+    "utc_day_boundary": "00:00:00Z",
+    "utc_week_start": "MONDAY_00:00:00Z",
+    "korean_local_display": "UTC boundary + 9h KST",
+    "use_client_device_clock_for_rewards": false,
+    "offline_events_authoritative": false,
+    "weeklies_can_span_season_edge": true,
+    "claim_only_within_season": true,
+    "period_ttl_after_end": "M08_POLICY_UNDECIDED",
+    "offline_queued_progress": "PENDING_UNVERIFIED_NO_REWARD"
+  },
+  "candidate_missions": [
+    {
+      "mission_id": "m07_daily_first_run",
+      "cadence": "daily",
+      "event": "RUN_COMPLETED_VERIFIED",
+      "goal": 1,
+      "points": 1,
+      "repeat_cap_per_period": 1
+    },
+    {
+      "mission_id": "m07_daily_stage_activity",
+      "cadence": "daily",
+      "event": "STAGE_ACTIVITY_VERIFIED",
+      "goal": 1,
+      "points": 1,
+      "repeat_cap_per_period": 1
+    },
+    {
+      "mission_id": "m07_weekly_codex_discovery",
+      "cadence": "weekly",
+      "event": "CODEX_DISCOVERY_VERIFIED",
+      "goal": 1,
+      "points": 1,
+      "repeat_cap_per_period": 1
+    }
+  ],
+  "limits": {
+    "daily_mission_cap": 2,
+    "weekly_mission_cap": 1,
+    "per_mission_per_utc_period_max_completion": 1,
+    "points_per_completion": 1,
+    "unbounded_farming_allowed": false,
+    "season_total_cap_formula": "2 * distinct_UTC_days_in_season + 1 * distinct_UTC_ISO_weeks_intersecting_season",
+    "season_total_cap_not_hardcoded": true,
+    "proposal_not_live_balance": true,
+    "reward_id_must_be_defined_prior_claim": true,
+    "real_reward_claims_enabled": false,
+    "premium_reward_claims_enabled": false,
+    "gameplay_power_reward": false,
+    "free_track_not_paywalled": true
+  },
+  "future_server_event_contract": {
+    "required": [
+      "season_id",
+      "account_id",
+      "event_id",
+      "mission_id",
+      "event_type",
+      "server_verified_at_utc",
+      "source_proof_id"
+    ],
+    "event_dedupe": [
+      "season_id",
+      "account_id",
+      "mission_id",
+      "event_id"
+    ],
+    "completion_dedupe": [
+      "season_id",
+      "account_id",
+      "mission_id",
+      "period_key"
+    ],
+    "claim_dedupe": [
+      "season_id",
+      "account_id",
+      "reward_id"
+    ],
+    "verify_signature_and_game_proof_before_progress": true,
+    "server_source_not_currently_available": true,
+    "pure_helper_not_server_authority": true,
+    "refuse_client_claimed_event_if_not_verified": true,
+    "invalid_event_must_not_change_any_game_save": true,
+    "ensure_gameplay_idempotency": true
+  },
+  "availability": {
+    "RUN_COMPLETED_VERIFIED": "NOT_LOCATED_IN_REVIEWED_SOURCES",
+    "STAGE_ACTIVITY_VERIFIED": "NOT_LOCATED_IN_REVIEWED_SOURCES",
+    "CODEX_DISCOVERY_VERIFIED": "NOT_LOCATED_IN_REVIEWED_SOURCES",
+    "future_integration": "SOURCE_MAPPING_AND_SERVER_VERIFICATION_REQUIRED",
+    "do_not_fake_event_producer": true
+  },
+  "monetization": {
+    "shop": "EXISTING_NATIVE_SHOP_V620_ONLY",
+    "draft_sku": "season_research_pass_01",
+    "draft_sku_status": "draft_disabled",
+    "price_minor": null,
+    "checkout_enabled": false,
+    "client_grants_enabled": false,
+    "real_rewards_enabled": false,
+    "art_rendering_required": false,
+    "unrendered_premium_replacement_not_allowed": true,
+    "testing_crystals_not_real_money": true,
+    "game_save_preserved": true,
+    "all_original_images_preserved": 1021
+  },
+  "next": {
+    "progress_percent": 30,
+    "step": "1/3",
+    "image_rendering_required": false,
+    "work": "Season and mission data API shapes, release blocker matrix, no-art M07 STEP 1/3 freeze"
+  }
+}
