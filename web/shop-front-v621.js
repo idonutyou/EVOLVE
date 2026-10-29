@@ -419,7 +419,7 @@
   const challengeTab=document.getElementById('memoryBtn');
   challengeTab?.addEventListener('click',()=>drawChallenge());
   const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{funnel('shop_open');pending=null;pendingLab=false;draw()});
-  document.getElementById('homeBattleTabV522')?.addEventListener('click',()=>{if(!atShop())return;funnel('return_home')});
+  document.getElementById('homeBattleTabV522')?.addEventListener('click',()=>{if(atShop())funnel('return_home')},true);
   const observer=new MutationObserver(()=>{if(atShop()){pending=null;pendingLab=false;draw()}});
   observer.observe(view,{attributes:true,attributeFilter:['class']});
   window.addEventListener('pageshow',()=>{pending=null;pendingLab=false;draw()});
