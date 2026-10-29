@@ -1,0 +1,66 @@
+{
+  "schema": "EVOLVE_M09_RELEASE_READINESS_V1",
+  "stage": "M09-090",
+  "percent": 90,
+  "date_kst": "2026-10-29",
+  "base_70_backup": "backup/monetization-m09-070-20261029",
+  "completed": [
+    "M09-080 six-SKU economy and save regression pass",
+    "M09-090 GitHub Actions real-Chrome lightweight mobile and landscape UI PASS",
+    "M07 outdated tier-2 test updated from day 2 to day 3",
+    "100% release checklist recorded"
+  ],
+  "remote_qa": {
+    "workflow_run_id": 40807145642,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40807145642",
+    "device_viewports": [
+      "320x568",
+      "393x852",
+      "852x393"
+    ],
+    "browser": "GitHub Actions system Chrome/Playwright",
+    "game_assets_downloaded": false
+  },
+  "verified_sources": [
+    {
+      "path": "tests/m09_080_shop_regression.test.cjs",
+      "blob_sha": "a89f2383b1fab13613b2400fb96be7c78b8f7218"
+    },
+    {
+      "path": "tests/m09_090_browser_smoke.cjs",
+      "blob_sha": "7011e6d65663226e097366cfccf00b6468a5e635"
+    },
+    {
+      "path": ".github/workflows/m09-090-light-ui.yml",
+      "blob_sha": "c8fc50be60f2f3aaf415d951f107775cf9d63d2c"
+    },
+    {
+      "path": "docs/monetization/M09_090_RELEASE_READY_KO.md",
+      "blob_sha": "8c020a9b007406d9b78425d4103e8064b87f8b3c"
+    },
+    {
+      "path": "web/shop-experience-v621.js",
+      "blob_sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "blob_sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "blob_sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "blob_sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    }
+  ],
+  "public_release": false,
+  "pages_branch": "pages-fast-evolve-20261029",
+  "images_rendered": false,
+  "real_billing": false,
+  "next": "M09-100 Pages final publish",
+  "keep_prior_backups": true
+}
