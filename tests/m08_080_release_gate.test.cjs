@@ -7,7 +7,7 @@ const makeStorage=()=>{
  const m=new Map([['EVOLVE_V575_BATTLE_SAVE','SAVE_PRESERVED'],['EVOLVE_M03_ENTITLEMENT_SAVE','ENTITLEMENT_PRESERVED']]);
  return {getItem:k=>m.has(k)?m.get(k):null,setItem:(k,v)=>m.set(k,v),read:k=>m.get(k),map:m};
 };
-const storage=makeStorage(),clock=()=>Date.parse('2026-10-29T05:30:00Z');
+const storage=makeStorage(),clock=()=>Date.parse('2026-10-01T05:30:00Z');
 const day=engine.kstDay(clock());
 const store=engine.createStore({storage,clock}),ui=rewards.createController({store});
 assert.equal(ui.balance(),0);
