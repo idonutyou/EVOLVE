@@ -1,0 +1,149 @@
+{
+  "schema": "EVOLVE_M09_030_DESIGN_FREEZE_V1",
+  "date_kst": "2026-10-29",
+  "stage": "M09-030",
+  "percent": 30,
+  "status": "DESIGN_ONLY_NOT_LIVE",
+  "image_rendering_required": false,
+  "payment_connected": false,
+  "previous": "M09-020",
+  "next": "M09-040_FIRST_COLLECTION_IMPLEMENTATION",
+  "preservation": {
+    "existing_sku_count": 6,
+    "existing_shop_key": "EVOLVE_SHOP_EXPERIENCE_V621_V1",
+    "existing_game_save_unchanged": true,
+    "existing_m08_evidence_unchanged": true,
+    "character_and_weapon_files_unchanged": true,
+    "no_public_deployment": true
+  },
+  "cosmetics": [
+    {
+      "id": "lab_nameplate",
+      "title_ko": "연구실 명패 · 변이 기록자",
+      "currency": "crystals",
+      "cost_candidate": 180,
+      "slot": "home_nameplate",
+      "screen": "HOME_LAB",
+      "presentation": "TEXT_CSS",
+      "permanent": true,
+      "rebuy": false,
+      "free_equip_unequip": true,
+      "combat_effect": false,
+      "implementation_at": "M09-040"
+    },
+    {
+      "id": "codex_frame",
+      "title_ko": "도감 프레임 · 실험체 표식",
+      "currency": "crystals",
+      "cost_candidate": 360,
+      "slot": "codex_frame",
+      "screen": "CODEX",
+      "presentation": "CSS",
+      "permanent": true,
+      "rebuy": false,
+      "free_equip_unequip": true,
+      "combat_effect": false,
+      "implementation_at": "AFTER_M09-040"
+    },
+    {
+      "id": "lab_theme",
+      "title_ko": "연구실 테마 · 심층 연구소",
+      "currency": "crystals",
+      "cost_candidate": 720,
+      "slot": "home_theme",
+      "screen": "HOME_LAB_ONLY",
+      "presentation": "CSS",
+      "permanent": true,
+      "rebuy": false,
+      "free_equip_unequip": true,
+      "combat_effect": false,
+      "implementation_at": "AFTER_M09-040"
+    }
+  ],
+  "wallet_write_design": {
+    "strategy": "SINGLE_ATOMIC_LOCALSTORAGE_WRITE_SAME_EXISTING_KEY",
+    "optional_fields_for_backward_compatibility": true,
+    "refuse_two_key_charge_then_grant": true,
+    "no_double_charge": true,
+    "recover_on_refresh": true,
+    "no_real_entitlement": true
+  },
+  "starter_experiment": {
+    "existing_crystals": 75,
+    "small_pack_crystals": 100,
+    "display_price_krw_not_approved": 1200,
+    "first_purchase_bonus_unchanged": 50,
+    "preferred": "A",
+    "variants": [
+      {
+        "id": "A",
+        "crystals": 160,
+        "first_purchase_total": 210,
+        "unique_profile_badge": "첫 실험 기록"
+      },
+      {
+        "id": "B",
+        "crystals": 125,
+        "first_purchase_total": 175,
+        "unique_profile_badge": "첫 실험 기록"
+      }
+    ],
+    "existing_starter_ownership_preserved": true,
+    "previously_owned_get_badge_without_repay_proposal": true
+  },
+  "pass": {
+    "timezone": "Asia/Seoul",
+    "term": "KST_CALENDAR_MONTH",
+    "start": "DAY_1_00:00:00.000",
+    "end_exclusive": "NEXT_MONTH_DAY_1_00:00:00.000",
+    "auto_renew": false,
+    "production_payment": false,
+    "display_price_krw_unapproved": 5900,
+    "reward_days": [
+      1,
+      3,
+      7,
+      14,
+      21
+    ],
+    "reward_crystals_each_candidate": 35,
+    "reward_crystals_total_candidate": 175,
+    "full_completion_reward": "월간 연구자 프로필 휘장",
+    "full_completion_reward_permanent": true,
+    "count_distinct_daily_supply_claim_days": true,
+    "count_before_purchase": true,
+    "retroactive_claim_allowed": true,
+    "double_claim_forbidden": true,
+    "month_end_purchase_rule": "DISABLE_NEW_PURCHASE_WHEN_MAX_REACHABLE_CLAIM_DAYS_LT_21",
+    "existing_pass_claims_continue": true,
+    "month_end_examples": [
+      {
+        "month": "2027-02",
+        "days": 28,
+        "ends_kst": "2027-02-28T23:59:59.999+09:00"
+      },
+      {
+        "month": "2028-02",
+        "days": 29,
+        "ends_kst": "2028-02-29T23:59:59.999+09:00"
+      },
+      {
+        "month": "2027-04",
+        "days": 30,
+        "ends_kst": "2027-04-30T23:59:59.999+09:00"
+      },
+      {
+        "month": "2027-05",
+        "days": 31,
+        "ends_kst": "2027-05-31T23:59:59.999+09:00"
+      }
+    ]
+  },
+  "rollout": {
+    "at_40": "first_lab_nameplate_runtime",
+    "at_50_60": "starter_and_monthly_pass",
+    "at_70": "local_metrics_and_mobile",
+    "at_80_100": "focused_regression_and_public_release"
+  },
+  "no_live_source_modified": true
+}
