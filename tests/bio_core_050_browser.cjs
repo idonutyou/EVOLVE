@@ -32,6 +32,39 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   assert.equal(report.equip.mode,'cannon');assert.equal(report.equip.worn,'arm_cannon');assert.ok(report.equip.distinct);assert.equal(report.equip.source,require('../web/bio-core-art-v625.json').gun.path);
   fs.writeFileSync(path.join(out,'biocore-bare-050.png'),Buffer.from(report.equip.body.split(',')[1],'base64'));fs.writeFileSync(path.join(out,'biocore-cannon-050.png'),Buffer.from(report.equip.gun.split(',')[1],'base64'));delete report.equip.body;delete report.equip.gun;
   report.checks.push('Existing single equipment slot produces paired compact weapons on the new core');
+  const mutantArt=require('../web/player-mutant-art-v599.json');
+  report.weaponPose=await page.evaluate(({sourceScale,displaySize,surface})=>{
+   const bio=window.__EVOLVE_BIOCORE_V625__,arms=window.__EVOLVE_ARM_ITEMS_V589__,size=384;
+   const a=bio.test.art(),unit=sourceScale*displaySize/surface;
+   const fit=Math.min(size*.75/(a.width*unit),size*.75/(a.height*unit));
+   const result={};
+   for(const mode of ['cannon','blades']){
+    const spec=arms.test.art().items[mode],images=arms.test.images()[mode],draws=[];
+    const original=CanvasRenderingContext2D.prototype.drawImage;
+    CanvasRenderingContext2D.prototype.drawImage=function(image,...args){
+     if(this.canvas.width===size&&(image===images.left||image===images.right)){
+      const side=draws.length===0?'right':'left',part=spec[side],t=this.getTransform();
+      const reflection=mode==='blades'&&side==='right'?-1:1;
+      const raw=Math.atan2(t.b,t.a)+reflection*part.native_angle;
+      draws.push({side,scale:args[2]/(part.width*spec.world_scale*fit),angle:Math.atan2(Math.sin(raw),Math.cos(raw))});
+     }
+     return original.call(this,image,...args);
+    };
+    let canvas;try{canvas=bio.test.preview(mode,size);}finally{CanvasRenderingContext2D.prototype.drawImage=original;}
+    const px=canvas.getContext('2d').getImageData(0,0,size,size).data;let edgePixels=0;
+    for(let i=0;i<size;i++)for(const [x,y] of [[i,0],[i,size-1],[0,i],[size-1,i]])if(px[(y*size+x)*4+3])edgePixels++;
+    result[mode]={draws,edgePixels,png:canvas.toDataURL()};
+   }
+   return result;
+  },mutantArt);
+  for(const mode of ['cannon','blades']){
+   const pose=report.weaponPose[mode];
+   fs.writeFileSync(path.join(out,`weapon-pose-${mode}.png`),Buffer.from(pose.png.split(',')[1],'base64'));delete pose.png;
+   assert.equal(pose.draws.length,2,`${mode} should draw a pair`);
+   for(const draw of pose.draws){assert.ok(Math.abs(draw.scale-1.5)<1e-6,`${mode} scale must be 1.5`);assert.ok(Math.abs(draw.angle+.08)<1e-6,`${mode} should tilt slightly upward`);}
+   assert.equal(pose.edgePixels,0,`${mode} preview must not be clipped`);
+  }
+  report.checks.push('Cannon and blade pairs render at 1.5 scale, raised, without preview clipping');
   await page.locator('#start').click();await require('./choose_opening_skill.cjs')(page);await page.waitForFunction(()=>window.__EVOLVE_TEST_MODULE_V575__.read().running);
   report.tail=await page.evaluate(()=>{
    const c=window.__EVOLVE_ORGAN_SKILLS_V598__.test.context(),bio=window.__EVOLVE_BIOCORE_V625__,actor=window.__EVOLVE_TEST_MODULE_V575__.test.context();

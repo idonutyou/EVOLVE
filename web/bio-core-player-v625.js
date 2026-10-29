@@ -1,6 +1,18 @@
 // Red bio-core visual replacement. Gameplay, saves and equipment ownership stay in the existing engine.
 const bioArtV625=__BIO_CORE_ART_V625__;
 const bioV625={ready:false,images:{},surface:null,previews:{},renders:0,tailVisible:false,mode:'bare'};
+// Enlarge only the visible weapons on this character; combat ranges and saves are unchanged.
+const bioWeaponVisualScaleV625=1.5,bioWeaponPreviewAngleV625=-.08;
+const bioLegacyArmSpriteV625=armItemSpriteV589;
+armItemSpriteV589=function(g,mode,side,p,angle,scale=1,alpha=1,facing=1){
+ return bioLegacyArmSpriteV625(g,mode,side,p,angle,scale*(bioV625.ready?bioWeaponVisualScaleV625:1),alpha,facing);
+};
+// Raise the idle blades without changing their actual attack arcs.
+const bioLegacyBladeRestAngleV625=armBladeRestAngleV602;
+armBladeRestAngleV602=function(side,bodyAngle){
+ const angle=bioLegacyBladeRestAngleV625(side,bodyAngle);
+ return bioV625.ready?angle-.40*(playerMotionV586.facing||1):angle;
+};
 function bioImageV625(path){
  return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=()=>reject(new Error('바이오 코어 이미지를 불러오지 못했습니다: '+path));img.src=path;});
 }
@@ -39,7 +51,9 @@ function bioTailV625(g,pose,motion){
  g.scale(scale,scale);g.drawImage(bioV625.images.tail,-1430,-650);g.restore();
 }
 function bioArmV625(side,alpha){
- const p=armItemWorldPointV589(side),angle=armItemAngleV589(side,playerBodyAngleV590());
+ const p=armItemWorldPointV589(side),aim=armItemAngleV589(side,playerBodyAngleV590());
+ // When firing, retain the exact target angle; only the relaxed pose is raised.
+ const angle=playerFacingStateV590.read().holdRemaining>1e-8?aim:aim-.08*(playerMotionV586.facing||1);
  if(armItemsV589.side===side){const recoil=Math.max(0,player.armKick||0)*9;p.x-=Math.cos(angle)*recoil;p.y-=Math.sin(angle)*recoil;}
  armItemSpriteV589(ctx,'cannon',side,p,angle,playerWorldScaleV603(),alpha,playerMotionV586.facing);
 }
@@ -63,16 +77,16 @@ function bioDrawV625(shadowOnly=false){
 }
 function bioPreviewV625(mode='bare',size=1536){
  const a=bioArtV625,c=document.createElement('canvas');c.width=c.height=size;const g=c.getContext('2d'),unit=mutantBaseScaleV599;
- const fit=Math.min(size*.75/(a.width*unit),size*.75/(a.height*unit)),s=unit*fit,ox=(size-a.width*s)/2,oy=(size-a.height*s)/2;
- if(mode==='cannon')armItemSpriteV589(g,mode,1,{x:ox+a.wrists[1][0]*s,y:oy+a.wrists[1][1]*s},a.nativeFacing,fit);
+ const fit=Math.min(size*.75/(a.width*unit),size*.75/(a.height*unit)),s=unit*fit,ox=(size-a.width*s)/2-size*.05,oy=(size-a.height*s)/2;
+ if(mode==='cannon')armItemSpriteV589(g,mode,1,{x:ox+a.wrists[1][0]*s,y:oy+a.wrists[1][1]*s},bioWeaponPreviewAngleV625,fit);
  g.drawImage(bioV625.surface,ox,oy,a.width*s,a.height*s);
- if(mode==='cannon')armItemSpriteV589(g,mode,0,{x:ox+a.wrists[0][0]*s,y:oy+a.wrists[0][1]*s},a.nativeFacing,fit);
- else if(mode==='blades')for(const side of [1,0])armItemSpriteV589(g,mode,side,{x:ox+a.wrists[side][0]*s,y:oy+a.wrists[side][1]*s},a.nativeFacing,fit);
+ if(mode==='cannon')armItemSpriteV589(g,mode,0,{x:ox+a.wrists[0][0]*s,y:oy+a.wrists[0][1]*s},bioWeaponPreviewAngleV625,fit);
+ else if(mode==='blades')for(const side of [1,0])armItemSpriteV589(g,mode,side,{x:ox+a.wrists[side][0]*s,y:oy+a.wrists[side][1]*s},bioWeaponPreviewAngleV625,fit);
  return c;
 }
 function bioPreviewPointV625(size){
  const a=bioArtV625,u=mutantBaseScaleV599,fit=Math.min(size*.75/(a.width*u),size*.75/(a.height*u)),s=u*fit;
- return {x:(size-a.width*s)/2+a.shell[0]*s,y:(size-a.height*s)/2+a.shell[1]*s,radius:110*u*fit};
+ return {x:(size-a.width*s)/2-size*.05+a.shell[0]*s,y:(size-a.height*s)/2+a.shell[1]*s,radius:110*u*fit};
 }
 function bioRefreshV625(){
  if(!bioV625.ready)return;
