@@ -33,5 +33,11 @@ Updated: 2026-10-29 KST, after verified V629 public release. Source of truth: Gi
 - Actual focused QA: GitHub Actions run `40872605406` succeeded (8 loader failures/cache cases, real Chromium character/weapon/map/save/game start). Startup gate measured 12 files, 77,761,962 bytes, with 323,292,862 bytes deferred. Native Pages run `40872793148` succeeded. Public version.json and the new web client `assets/80e69d0b91df519012e37724ef722493f475ab7457a915dfa869a7efe55a0d7d.js` were confirmed.
 - Recovery before V629 source work: `backup/pre-priority-loader629-20261029` (V628 main). Public-site rollback: `backup/pages-before-priority629-6f708e0e-20261029` (V628 Pages HEAD). Preserve all older snapshots. New image rendering not needed.
 
+## Character application FAST DELTA tooling (2026-10-29)
+- Before any character/core/weapon ZIP transfer or full browser boot, use docs/character/FAST_APPLY_KO.md and tools/character_delta_apply.py in inspect mode.
+- The new one-engine delta tool verifies immutable image references, reuses Git blob SHAs from saved branches, and stages only changed modules and small build metadata. It fails closed on module drift; it never edits current dist directly. Browser/save testing remains required for a real character release.
+- New lightweight Actions workflow performs synthetic unit tests and live baseline one-engine equivalence without checkout of 1,027 images. No character appearance, online build, original images, monetization or save keys changed.
+- Before this tooling change: backup/pre-character-fast-20261029 at c13f87d5fcd654ea04b5623f9099af61a1b923fb. Live release remains V629; no new image rendering needed.
+
 ## On subsequent work
 Update this file with the exact final git HEAD, active build, phase percent, changed files, backup branch and verified release BEFORE claiming completion. Keep it concise and preserve historical records.

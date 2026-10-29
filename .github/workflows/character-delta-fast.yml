@@ -1,0 +1,50 @@
+name: EVOLVE fast character delta (metadata-only and one engine)
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tools/character_delta_apply.py"
+      - "tests/test_character_delta_apply.py"
+      - ".github/workflows/character-delta-fast.yml"
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  one-engine-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Sparse metadata + character source checkout (no artwork)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/character_delta_apply.py
+            /tests/test_character_delta_apply.py
+            /web/bio-core-art-v625.json
+            /web/bio-core-player-v625.js
+            /dist/index.html
+            /dist/version.json
+            /dist/verification.json
+            /dist/asset-manifest.json
+      - name: Unit tests (small synthetic character and immutable image metadata)
+        run: |
+          python3 -m py_compile tools/character_delta_apply.py tests/test_character_delta_apply.py
+          python3 -m unittest discover -s tests -p test_character_delta_apply.py -v
+      - name: Read actual live manifest and image refs without game assets
+        run: python3 tools/character_delta_apply.py --mode inspect
+      - name: Exact currently embedded character matches repo sources (one game JS blob)
+        run: |
+          python3 tools/character_delta_apply.py --mode prepare \
+            --suffix CHARACTER_CHECK \
+            --output-dir "$RUNNER_TEMP/evolve-character-check" > "$RUNNER_TEMP/character-check.json"
+          python3 - <<'PY'
+          import json,os
+          s=json.load(open(os.environ["RUNNER_TEMP"]+"/character-check.json"))
+          assert s["status"]=="unchanged",s
+          assert s["known_images"]==6,s
+          assert s["live_engine_bytes"]<3*1024*1024,s
+          assert s["downloaded_large_assets"] is False
+          print("PASS: one unchanged active engine, six registered SHA images, no 382MB download")
+          PY
