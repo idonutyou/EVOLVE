@@ -1,0 +1,60 @@
+{
+  "schema": "EVOLVE_M09_RUNTIME_CHECKPOINT_V1",
+  "stage": "M09-050",
+  "percent": 50,
+  "date_kst": "2026-10-29",
+  "base_checkpoint": "backup/monetization-m09-040-20261029",
+  "scope": "starter_A_offer_and_retroactive_badge",
+  "summary": "Starter 160 crystals (from 75) + permanent first experiment profile decoration. Old starter ownership grants badge without changing historical crystal receipts.",
+  "preserves": {
+    "existing_skus": 6,
+    "local_shop_key": "EVOLVE_SHOP_EXPERIENCE_V621_V1",
+    "original_starter_ownership": true,
+    "previous_crystals_not_rewritten": true,
+    "first_purchase_bonus_only_once": true,
+    "game_and_character_assets_untouched": true,
+    "real_billing": false,
+    "public_pages_deployed": false
+  },
+  "changed": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "blob_sha": "2a381a93601cc9506474d9b22a7da95097bb86a6",
+      "characters": 11993
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "blob_sha": "ec1dd9cdd07d408bc1f598b0376c96ab16f12a87",
+      "characters": 28091
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "blob_sha": "2a381a93601cc9506474d9b22a7da95097bb86a6",
+      "characters": 11993
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "blob_sha": "ec1dd9cdd07d408bc1f598b0376c96ab16f12a87",
+      "characters": 28091
+    },
+    {
+      "path": "tests/m07_080_shop_experience.test.cjs",
+      "blob_sha": "e443b98a62fb22d9db89c0ee9feb98973e2d29a7",
+      "characters": 6309
+    },
+    {
+      "path": "tests/m07_080_shop_browser.cjs",
+      "blob_sha": "535a3c7ee2db34fe830d348590a17813f1603264",
+      "characters": 8651
+    },
+    {
+      "path": "tests/m09_020_design.test.cjs",
+      "blob_sha": "4e9e450d627c0403ad3bb978be11c901a862e1f0",
+      "characters": 2780
+    }
+  ],
+  "focused_check": "PASS: web/dist parity, JS syntax, starter 160+50, later starter 160, old-75 entitlement, replay, duplicates, reload, persistence, storage-write fail, existing 6 SKU",
+  "browser_check": "not executed until release validation",
+  "next": "M09-060 monthly pass activation and KST day milestones",
+  "backup_delete_before_100": false
+}
