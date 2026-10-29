@@ -58,12 +58,18 @@ function bioArmV625(side,alpha){
  armItemSpriteV589(ctx,'cannon',side,p,angle,playerWorldScaleV603(),alpha,playerMotionV586.facing);
 }
 function bioDrawV625(shadowOnly=false){
- if(!bioV625.ready)return bioLegacyDrawV625(shadowOnly);
+ if(!bioV625.ready){
+  if(shadowOnly)return bioLegacyDrawV625(true);
+  ctx.save();ctx.filter=ambientProfileV627().filter;
+  try{return bioLegacyDrawV625(false);}finally{ctx.restore();}
+ }
  const pose=mutantPoseV599(),motion=mutantBodyMotionV599(),m=mutantV599;playerMotionV586.facing=pose.facing;
- if(shadowOnly){ctx.save();ctx.globalAlpha=.26;ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(player.x,player.y+7*playerWorldScaleV603(),20*playerWorldScaleV603(),8*playerWorldScaleV603(),pose.rotation,0,TAU);ctx.fill();ctx.restore();return;}
+ if(shadowOnly){ambientDrawShadowV627(pose,m);return;}
  drawPlayerGroundV165(46*playerWorldScaleV603(),playerBodyAngleV590());drawEvoDominanceAura(46*playerWorldScaleV603());
  const blink=(player.hurtBlink||0)>0&&Math.floor((.5-player.hurtBlink)/.0625)%2===0?.38:1,mode=armItemModeV589();bioV625.mode=mode;
- ctx.save();ctx.globalAlpha*=blink;bioTailV625(ctx,pose,motion);
+ // Only the visible character and worn parts get the map light; attack VFX,
+ // UI, source assets and the parts preview keep their existing appearance.
+ ctx.save();ctx.filter=ambientProfileV627().filter;ctx.globalAlpha*=blink;bioTailV625(ctx,pose,motion);
  if(mode==='cannon'&&armItemsV589.ready)bioArmV625(1,1);
  const scale=mutantBaseScaleV599*playerWorldScaleV603(),a=bioArtV625.anchor;
  ctx.save();ctx.translate(player.x,player.y);ctx.rotate(pose.rotation);ctx.scale(pose.facing*scale,scale);

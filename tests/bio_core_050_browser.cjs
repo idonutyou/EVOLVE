@@ -19,6 +19,19 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push({url:r.url(),error:r.failure()?.errorText});});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
   await page.waitForFunction(()=>window.__EVOLVE_BIOCORE_V625__?.read().ready&&window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+  if(process.env.AUTO_MAP_ONLY==='1'){
+   report.maps=[];
+   for(const stage of [20,25,20,4])report.maps.push(await page.evaluate(async stage=>{
+    const ok=await window.__EVOLVE_MAPS_V567__.test.select(stage),a=window.__EVOLVE_AUTO_AMBIENT_V627__.read();
+    return {stage,ok,map:a.map,luma:a.luma,filter:a.filter,samples:a.samples,failures:a.failures};
+   },stage));
+   assert.deepEqual(report.maps.map(x=>x.map),['facility1','facility2','facility1','infected']);
+   assert.ok(report.maps.every(x=>x.ok&&x.failures===0));
+   assert.equal(report.maps[2].samples,report.maps[1].samples,'returning to an earlier map should reuse its sample');
+   assert.notEqual(report.maps[0].filter,report.maps[1].filter,'different maps should have distinct light');
+   assert.deepEqual(report.errors,[]);assert.deepEqual(report.failedRequests,[]);
+   report.checks.push('Focused rerun: real map changes, cache reuse and original-map fallback');report.success=true;return;
+  }
   report.boot=await page.evaluate(()=>({bio:window.__EVOLVE_BIOCORE_V625__.read(),save:JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_META_V1')),progress:JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_NORMAL_PROGRESS_V585')),shop:JSON.parse(localStorage.getItem('EVOLVE_SHOP_EXPERIENCE_V621_V1')),mode:window.__EVOLVE_ARM_ITEMS_V589__.read().mode}));
   assert.equal(report.boot.bio.character,'red-flesh-core');assert.equal(report.boot.bio.legs,4);assert.equal(report.boot.bio.reference,'07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d');
   assert.equal(report.boot.save.dna,417);assert.equal(report.boot.progress.unlocked,4);assert.equal(report.boot.shop.crystals,275);assert.equal(report.boot.shop.owned.resonance,true);assert.equal(report.boot.mode,'bare');
@@ -73,6 +86,55 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   });
   assert.equal(report.tail.none,false);assert.equal(report.tail.acquired,true);assert.equal(report.tail.removed,false);assert.equal(report.tail.mode,'cannon');assert.ok(report.tail.renders>=3);
   report.checks.push('Tail appears only when the existing tail skill is active');
+  report.ambient=await page.evaluate(()=>{
+   const ambient=window.__EVOLVE_AUTO_AMBIENT_V627__,scene=window.__EVOLVE_TEST_MODULE_V575__.test.context();
+   const profile=ambient.read();scene.draw();scene.draw();const again=ambient.read();
+   const warm=ambient.test.profileFromPixels(new Uint8ClampedArray([170,95,60,255,170,95,60,255]));
+   const cool=ambient.test.profileFromPixels(new Uint8ClampedArray([60,95,170,255,60,95,170,255]));
+   return {profile,again,warm,cool};
+  });
+  assert.ok(report.ambient.profile.filter.startsWith('brightness('));
+  assert.equal(report.ambient.profile.samples,report.ambient.again.samples,'same map should use cached sample');
+  assert.ok(report.ambient.again.shadowBuilds>0,'character silhouette shadow must be built');
+  assert.notEqual(report.ambient.warm.hue,report.ambient.cool.hue,'warm and cool maps produce distinct light');
+  assert.ok(report.ambient.warm.brightness>=.85&&report.ambient.warm.brightness<=.96);
+  report.checks.push('Automatic ambient sample is bounded and cached; silhouette shadow is generated');
+  report.coreLighting=await page.evaluate(()=>{
+   const api=window.__EVOLVE_DEV_MOCK_STORE_V615__,bridge=window.__EVOLVE_DEV_CORE_BRIDGE_V617__;
+   if(!api||!bridge)return {available:false};
+   const store=api.createStore({enabled:true,storage:localStorage}),id='dev_local_profile_01';
+   store.simulatePurchase('appearance_unlock_01',id,'auto_core_test_001');
+   store.simulatePurchase('mutation_crystal_mid',id,'auto_core_test_002');
+   store.redeemCosmetic(id,'dev_core_theme_02','auto_core_test_003');
+   const results=[];
+   for(const theme of ['dev_core_theme_01','dev_core_theme_02']){
+    store.equip(id,'core',theme);bridge.sync();const filters=[];
+    const old=CanvasRenderingContext2D.prototype.drawImage;
+    CanvasRenderingContext2D.prototype.drawImage=function(image,...args){
+     if(image instanceof HTMLCanvasElement&&image.width===192&&image.height===192&&this.globalCompositeOperation==='screen')filters.push(this.filter);
+     return old.call(this,image,...args);
+    };
+    try{window.__EVOLVE_TEST_MODULE_V575__.test.context().draw();}finally{CanvasRenderingContext2D.prototype.drawImage=old;}
+    results.push({theme,selected:bridge.read().theme,filters,expected:window.__EVOLVE_AUTO_AMBIENT_V627__.read().filter});
+   }
+   return {available:true,results};
+  });
+  assert.equal(report.coreLighting.available,true,'existing core renderer should be available');
+  for(const item of report.coreLighting.results){assert.equal(item.selected,item.theme);assert.ok(item.filters.includes(item.expected),`${item.theme} must inherit map light`);}
+  report.checks.push('Both equipped core themes inherit the same automatic map light');
+  report.maps=[];
+  for(const stage of [20,25,20,4]){
+   report.maps.push(await page.evaluate(async stage=>{
+    const ok=await window.__EVOLVE_MAPS_V567__.test.select(stage);
+    const a=window.__EVOLVE_AUTO_AMBIENT_V627__.read();
+    return {stage,ok,map:a.map,luma:a.luma,filter:a.filter,samples:a.samples,failures:a.failures};
+   },stage));
+  }
+  assert.deepEqual(report.maps.map(x=>x.map),['facility1','facility2','facility1','infected']);
+  assert.ok(report.maps.every(x=>x.ok&&x.failures===0));
+  assert.equal(report.maps[2].samples,report.maps[1].samples,'returning to an earlier map should reuse its sample');
+  assert.notEqual(report.maps[0].filter,report.maps[1].filter,'different maps should have distinct light');
+  report.checks.push('Two real maps and the original map select and reuse the appropriate ambient sample');
   await page.screenshot({path:path.join(out,'biocore-battle-050.png')});
   await page.setViewportSize({width:852,height:393});await page.evaluate(()=>window.__EVOLVE_TEST_MODULE_V575__.test.context().draw());await page.screenshot({path:path.join(out,'biocore-battle-landscape-050.png')});
   assert.deepEqual(report.errors,[]);assert.deepEqual(report.failedRequests,[]);report.success=true;

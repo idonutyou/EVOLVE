@@ -48,7 +48,10 @@ if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615_
   if(!shadowOnly&&mockCoreThemeV617&&mutantV599.ready&&player.hp>0){
    const p=(typeof bioV625!=='undefined'&&bioV625.ready)?bioWorldPointV625(bioArtV625.shell):mutantSourceWorldV599(mutantBodyPointV599(mutantArtV599.shell));
    const blink=player.hurtBlink>0?.4:1;
-   mockCoreRendererV617.draw(ctx,mockCoreThemeV617,p.x,p.y,110*mutantScaleV599,blink);
+   // All equipped core themes share the same active-map treatment.
+   ctx.save();
+   try{ctx.filter=ambientProfileV627().filter;mockCoreRendererV617.draw(ctx,mockCoreThemeV617,p.x,p.y,110*mutantScaleV599,blink);}
+   finally{ctx.restore();}
    mockCoreCombatDrawsV617++;
   }
   return out;
