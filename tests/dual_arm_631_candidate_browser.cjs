@@ -36,7 +36,7 @@ const replacements=new Map([['/EVOLVE/',path.join(root,'index.html')],['/EVOLVE/
     if(before.arm1!=='arm_cannon'||before.arm2!=='arm_cannon')throw Error('legacy paired-arm migration failed: '+JSON.stringify(before));
     if(before.legacyBack!=='back_neural')throw Error('hidden back equipment lost');
     if(!before.slots||before.slots.length!==6||!before.gameRendererConnected)throw Error('six slots or combat renderer missing');
-    if(!document.getElementById('partsSlot_arm1_V523')||!document.getElementById('partsSlot_arm2_V523'))throw Error('independent arm slots missing');
+    if(!document.querySelector('[data-arm-slot-v631="arm1"]')||!document.querySelector('[data-arm-slot-v631="arm2"]'))throw Error('independent arm slots missing');
     part.open('arm_blades');if(!arm.test?.applyArm?.('arm2'))throw Error('arm2 equip failure');
     const both=arm.snapshot(),saved=JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'null');
     if(both.arm1!=='arm_cannon'||both.arm2!=='arm_blades'||saved?.worn?.arm2!=='arm_blades')throw Error('mixed arms failed '+JSON.stringify({both,saved}));
