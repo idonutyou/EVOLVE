@@ -11,7 +11,7 @@
  'use strict';
  const STORAGE_KEY='EVOLVE_SHOP_EXPERIENCE_V621_V1',SCHEMA='evolve.shop.experience.v621.v1';
  const PRODUCTS=Object.freeze([
-  Object.freeze({id:'starter',title:'첫 진화 패키지',category:'추천',price:'₩1,200',kind:'starter',crystals:75,once:true,badge:'첫 구매'}),
+  Object.freeze({id:'starter',title:'첫 진화 패키지',category:'추천',price:'₩1,200',kind:'starter',crystals:160,once:true,badge:'첫 구매 · 배지 포함'}),
   Object.freeze({id:'crystal100',title:'변이 결정 ×100',category:'재화',price:'₩1,200',kind:'crystal',crystals:100,once:false,badge:'기본'}),
   Object.freeze({id:'crystal300',title:'변이 결정 ×300',category:'재화',price:'₩3,300',kind:'crystal',crystals:300,once:false,badge:'인기'}),
   Object.freeze({id:'resonance',title:'공명 코어',category:'외형',price:'₩4,900',kind:'cosmetic',crystals:0,once:true,badge:'영구 외형'}),
@@ -82,7 +82,7 @@
   const read=()=>{let data;try{data=storage.getItem(STORAGE_KEY)}catch(_){throw Error('STORAGE_UNAVAILABLE')}if(data===null)return fresh();try{return validate(JSON.parse(data))}catch(_){throw Error('STORE_DATA_INVALID')}};
   const write=(state)=>{validate(state);try{storage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(_){throw Error('STORAGE_WRITE_FAILED')}};
   const now=()=>{const t=clock();if(!Number.isFinite(t)||t<0)throw Error('INVALID_TIME');return t};
-  function snapshot(){const state=read(),ts=now(),month=kstMonth(ts),day=kstDay(ts);return Object.freeze({...copy(state),month,day,passActive:state.passMonths[month]===true,paidWindow:paidMonthWindow(month),mayClaimDaily:!state.dailyClaims[day],noBilling:true,source:'LOCAL_ONLY'});}
+  function snapshot(){const state=read(),ts=now(),month=kstMonth(ts),day=kstDay(ts);return Object.freeze({...copy(state),month,day,passActive:state.passMonths[month]===true,paidWindow:paidMonthWindow(month),mayClaimDaily:!state.dailyClaims[day],starterBadgeOwned:state.owned.starter===true,noBilling:true,source:'LOCAL_ONLY'});}
   function order(id,requestId){
    if(!own(byId,id)||typeof requestId!=='string'||!/^[A-Za-z0-9_-]{12,72}$/.test(requestId))throw Error('INVALID_ORDER');
    const s=read(),p=byId[id],month=kstMonth(now());
