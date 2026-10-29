@@ -81,6 +81,10 @@
  #homeShopViewV601 .eM09NameplateRow button{min-height:44px;min-width:82px;padding:7px;border:1px solid #c9926b;border-radius:9px;background:#61413a;color:#fff2e1;font-size:12px;font-weight:900;touch-action:manipulation}
  #homeShopViewV601 .eM09NameplateRow button:disabled{opacity:.48}
  #homePartsViewV523 .m09HomeNameplateV625{margin:4px 0 10px;border:1px solid #cd9970;border-radius:10px;padding:10px 12px;background:linear-gradient(115deg,#382823,#1c1e25);color:#ffe3bc;font-size:12px;font-weight:800;line-height:1.45;letter-spacing:.02em;text-align:center;box-shadow:inset 0 1px #ffffff18}
+ #homeShopViewV601 .eM09StarterBadgeV626{position:absolute;right:0;top:-1px;display:grid;place-items:center;width:18px;height:18px;border:1px solid #ffdc92;border-radius:50%;background:linear-gradient(130deg,#a95d34,#452b2a);color:#fff5bf;font-size:12px;font-weight:900;line-height:1;box-shadow:0 0 5px #f1ab5755;pointer-events:none}
+ #homeStatusV525 .profileInfoV525[data-m09-starter="true"]{position:relative;padding-right:21px}
+ #homeShopViewV601 .eM09ProfileBadgeRow{border-top:1px solid #574148;padding:11px 0;display:flex;align-items:center;gap:9px;color:#f8dcc5;font-size:12px;line-height:1.45}
+ #homeShopViewV601 .eM09ProfileBadgeGlyph{display:grid;place-items:center;flex:0 0 38px;height:38px;border:1px solid #ffdc92;border-radius:50%;background:linear-gradient(#b47245,#4b3238);color:#fff1ba;font-size:23px}
  #homeShopViewV601 .eStoreFineV621{font-size:11px;line-height:1.55;color:#c7b3b1;margin-top:13px}
  #homeShopViewV601 .eStoreMessageV621{font-size:12px;color:#b6eed2;min-height:18px;line-height:1.5;margin:6px 0}
  #homeShopViewV601 .eStoreMessageV621[data-error="true"]{color:#ffafa5}
@@ -132,6 +136,22 @@
   window.__EVOLVE_DEV_CORE_BRIDGE_V617__?.sync?.();
   message=current===id?'코어 장착 해제':'코어 장착 완료';
   draw();
+ }
+ // Badge is a read-only entitlement derived from starter ownership. Old 75-crystal
+ // receipts also own this decoration; never pay or migrate their balance again.
+ function drawStarterProfileBadge(s){
+  const host=document.querySelector('#homeStatusV525 .profileInfoV525');
+  if(!host)return;
+  let badge=host.querySelector('.eM09StarterBadgeV626');
+  if(!badge){
+   badge=make('span','eM09StarterBadgeV626','✦');
+   badge.setAttribute('title','첫 실험 기록 · 영구 프로필 배지');
+   badge.setAttribute('aria-label','첫 실험 기록 영구 프로필 배지');
+   host.append(badge);
+  }
+  badge.hidden=!s.starterBadgeOwned;
+  badge.style.display=s.starterBadgeOwned?'grid':'none';
+  host.dataset.m09Starter=String(s.starterBadgeOwned);
  }
  function drawHomeNameplate(s){
   const host=document.getElementById('homePartsViewV523');
@@ -217,6 +237,7 @@
   if(!root||!content)return;
   let s;try{s=store.snapshot()}catch(e){content.replaceChildren(make('p','eStoreMessageV621','상점 기록을 읽을 수 없어 변경을 중단했습니다. 기록은 삭제되지 않습니다.'));return}
   drawHomeNameplate(s);
+  drawStarterProfileBadge(s);
   const frag=document.createDocumentFragment();
   const hero=add(frag,'section','eStoreHeroV621');
   add(hero,'div','eStoreEyebrowV621','EVOLVE · GENOME MARKET');
@@ -242,7 +263,7 @@
    const p=engine.products.find(x=>x.id===pending);
    const c=add(frag,'section','eStoreConfirmV621');
    add(c,'strong','',p.title+' · '+priceDisplay(p));
-   let detail=pending==='crimson'?'변이 결정 120개를 사용하여 심홍 코어를 영구 획득합니다. 실제 금액은 청구되지 않습니다.':'구매를 확인하면 상품이 즉시 지급됩니다. 실제 금액은 청구되지 않습니다.';
+   let detail=pending==='starter'?'변이 결정 160개와 첫 실험 기록 영구 프로필 배지를 함께 획득합니다. 첫 구매 추가 보너스 50결정은 별도로 1회만 지급됩니다. 실제 금액은 청구되지 않습니다.':pending==='crimson'?'변이 결정 120개를 사용하여 심홍 코어를 영구 획득합니다. 실제 금액은 청구되지 않습니다.':'구매를 확인하면 상품이 즉시 지급됩니다. 실제 금액은 청구되지 않습니다.';
    if(pending==='researchpass'){
     const ms=Math.max(0,Date.parse(s.paidWindow.endExclusiveUtc)-Date.now());
     const hours=Math.floor(ms/3600000),minutes=Math.ceil(ms/60000);
@@ -280,7 +301,7 @@
    const art=add(card,'div','eStoreArtV621',theme[p.id][0]);art.dataset.art=theme[p.id][1];art.setAttribute('aria-hidden','true');
    add(card,'span','eStoreBadgeV621',p.badge);
    add(card,'h4','',p.title);
-   add(card,'p','',p.kind==='monthly'?'매월 1일~말일 유효 · 특별 보상 트랙':p.kind==='cosmetic'?'공명 코어 외형 영구 소장 · 능력치 변화 없음':p.kind==='redeem'?'변이 결정 120개로 영구 소장 · 능력치 변화 없음':p.kind==='starter'?'변이 결정 75개 · 최초 1회':'변이 결정 '+p.crystals+'개');
+   add(card,'p','',p.kind==='monthly'?'매월 1일~말일 유효 · 특별 보상 트랙':p.kind==='cosmetic'?'공명 코어 외형 영구 소장 · 능력치 변화 없음':p.kind==='redeem'?'변이 결정 120개로 영구 소장 · 능력치 변화 없음':p.kind==='starter'?'변이 결정 160개 + 전용 프로필 배지 · 최초 1회':'변이 결정 '+p.crystals+'개');
    button(card,own?'보유 중':p.price+' · '+(p.kind==='redeem'?'교환':'구매'),()=>begin(p.id),!!own||!!pending||(p.kind==='redeem'&&s.crystals<p.spendCrystals));
   }
   if(category==='추천'||category==='외형'){
@@ -297,6 +318,13 @@
     const action=button(row,selected?'해제':owned?'장착':'미보유',()=>{try{equipCore(id)}catch(e){fail(e)}},!owned||!!pending);
     action.dataset.core=id;action.setAttribute('aria-pressed',String(selected));
    }
+  }
+  if(category==='추천'||category==='외형'){
+   const badgeSection=add(frag,'section','eStoreCollectionV621');
+   add(badgeSection,'h3','','프로필 컬렉션');
+   const badgeRow=add(badgeSection,'div','eM09ProfileBadgeRow');
+   add(badgeRow,'span','eM09ProfileBadgeGlyph','✦').setAttribute('aria-hidden','true');
+   add(badgeRow,'span','',s.starterBadgeOwned?'첫 실험 기록 · 영구 소장 · HOME 프로필에 적용 중':'첫 실험 기록 · 첫 진화 패키지 전용 영구 배지');
   }
   if(category==='추천'||category==='외형'){
    const section=add(frag,'section','eStoreCollectionV621');
