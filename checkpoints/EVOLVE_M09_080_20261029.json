@@ -1,0 +1,42 @@
+{
+  "schema": "EVOLVE_M09_080_CHECKPOINT_V1",
+  "stage": "M09-080",
+  "percent": 80,
+  "date_kst": "2026-10-29",
+  "base": "backup/monetization-m09-070-20261029",
+  "changes": [
+    "tests/m09_080_shop_regression.test.cjs",
+    "tests/m07_080_shop_experience.test.cjs"
+  ],
+  "file_sha": [
+    {
+      "path": "tests/m09_080_shop_regression.test.cjs",
+      "sha": "a89f2383b1fab13613b2400fb96be7c78b8f7218"
+    },
+    {
+      "path": "tests/m07_080_shop_experience.test.cjs",
+      "sha": "071f5acafb15bfaa6efb9f76896028246915adfd"
+    },
+    {
+      "path": "web/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    }
+  ],
+  "test": "M09 80 targeted executed PASS: all six original SKUs, starter 160+50, 180 collectible, equip persistence, 1/3/7/14/21-day pass, 28/29/30/31 KST days, no duplicate grants, old-save read, corrupt save preserved, quota fail safe",
+  "documentation": "M07 old tier-2 regression adjusted to three days; no game art or combat change",
+  "publication": "not published; browser/game smoke deferred to 90/100",
+  "next": "M09-090",
+  "keep_all_prior_checkpoints": true
+}
