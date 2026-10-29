@@ -20,6 +20,7 @@ jobs:
           sparse-checkout: |
             /.github/workflows/dual-arm-631-candidate.yml
             /tests/dual-arm-model.test.cjs
+            /web/dual-arm-model-v631.js
             /tests/dual_arm_631_candidate_browser.cjs
             /dist/index.html
             /dist/version.json
