@@ -23,7 +23,7 @@ if '--metadata-only' in sys.argv[1:]:
   e=art[key]
   assert e['sha256'] in e['path'] and sum(x['path']==e['path'] and x['bytes']==e['bytes'] and x['sha256']==e['sha256'] for x in manifest)==1
  original_records=manifest[:1072]
- value='\\n'.join(f"{x['path']}|{x['sha256']}|{x['bytes']}|{x['kind']}" for x in original_records)
+ value='\n'.join(f"{x['path']}|{x['sha256']}|{x['bytes']}|{x['kind']}" for x in original_records)
  h=2166136261
  for char in value:h=((h^ord(char))*16777619)&0xffffffff
  assert h==1701511232
