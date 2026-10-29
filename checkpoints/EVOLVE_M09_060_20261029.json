@@ -1,0 +1,39 @@
+{
+  "schema": "EVOLVE_M09_CHECKPOINT",
+  "stage": "M09-060",
+  "percent": 60,
+  "date_kst": "2026-10-29",
+  "scope": "KST monthly pass 1/3/7/14/21",
+  "changes": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "sha": "f9fe7bc65ca82a2881907bd1f569cfa4643e834b"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "sha": "f9fe7bc65ca82a2881907bd1f569cfa4643e834b"
+    }
+  ],
+  "done": [
+    "monthly eligibility based on actual KST month dates",
+    "retroactive progress from daily claims",
+    "21-day permanent profile badge",
+    "month-end cannot-buy check",
+    "no duplicate rewards",
+    "old claims preserved"
+  ],
+  "check": "focused JS logic assertions passed",
+  "published": false,
+  "visual_rendering": false,
+  "real_billing": false,
+  "next": "M09-070",
+  "keep_all_backups": true
+}
