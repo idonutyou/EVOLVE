@@ -12,7 +12,7 @@
  const theme={starter:['✦','starter'],crystal100:['◇','crystal'],crystal300:['✧','crystal'],resonance:['◈','cosmetic'],crimson:['✹','cosmetic'],researchpass:['☷','pass']};
  const categories=['추천','재화','외형','시즌','패키지'];
  const PROFILE='dev_local_profile_01';
- let store=null,legacy=null,root=null,content=null,challengeRoot=null,busy=false,pending=null,category='추천',message='';
+ let store=null,legacy=null,root=null,content=null,challengeRoot=null,busy=false,pending=null,pendingLab=false,category='추천',message='';
  const style=`
  #homeShopViewV601 #nativeShopV620,#homeShopViewV601 #homeShopHintV601{display:none!important}
  #homeShopViewV601 .evolveStoreV621{--glow:#f6b572;font-family:system-ui,-apple-system,sans-serif;max-width:490px;margin:0 auto;color:#f8ebe0;padding:8px 0 24px}
@@ -74,6 +74,13 @@
  #homeShopViewV601 .eStoreConfirmV621 p{font-size:12px;color:#eccabc}
  #homeShopViewV601 .eStoreConfirmV621 div{display:flex;gap:8px}
  #homeShopViewV601 .eStoreConfirmV621 button{flex:1}
+ #homeShopViewV601 .eM09NameplateRow{display:flex;gap:10px;align-items:center;padding:11px 0;border-top:1px solid #574148}
+ #homeShopViewV601 .eM09NameplateIcon{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:10px;border:1px solid #c28b63;background:linear-gradient(135deg,#5d332f,#201c2a);color:#f5d1a0;font-size:25px}
+ #homeShopViewV601 .eM09NameplateText{flex:1;min-width:0;font-size:12px;line-height:1.45;color:#ffe7d2}
+ #homeShopViewV601 .eM09NameplateText small{display:block;font-size:11px;color:#d2b9a9}
+ #homeShopViewV601 .eM09NameplateRow button{min-height:44px;min-width:82px;padding:7px;border:1px solid #c9926b;border-radius:9px;background:#61413a;color:#fff2e1;font-size:12px;font-weight:900;touch-action:manipulation}
+ #homeShopViewV601 .eM09NameplateRow button:disabled{opacity:.48}
+ #homePartsViewV523 .m09HomeNameplateV625{margin:4px 0 10px;border:1px solid #cd9970;border-radius:10px;padding:10px 12px;background:linear-gradient(115deg,#382823,#1c1e25);color:#ffe3bc;font-size:12px;font-weight:800;line-height:1.45;letter-spacing:.02em;text-align:center;box-shadow:inset 0 1px #ffffff18}
  #homeShopViewV601 .eStoreFineV621{font-size:11px;line-height:1.55;color:#c7b3b1;margin-top:13px}
  #homeShopViewV601 .eStoreMessageV621{font-size:12px;color:#b6eed2;min-height:18px;line-height:1.5;margin:6px 0}
  #homeShopViewV601 .eStoreMessageV621[data-error="true"]{color:#ffafa5}
@@ -84,7 +91,11 @@
  function add(el,tag,cls,text){const n=make(tag,cls,text);el.append(n);return n}
  function button(el,text,handler,disabled=false,cls=''){const b=add(el,'button',cls,text);b.type='button';b.disabled=disabled||busy;b.addEventListener('click',handler);return b}
  const storeApi=()=>store?.snapshot();
- function fail(e){message=(e&&e.message)||'상점 데이터를 확인할 수 없습니다.';busy=false;pending=null;draw(true);}
+ function fail(e){
+  const code=e?.message||'';
+  message=({ALREADY_OWNED:'이미 영구 소장한 아이템입니다.',INSUFFICIENT_CRYSTALS:'변이 결정이 부족합니다.',STORAGE_WRITE_FAILED:'저장에 실패했습니다. 결정은 차감되지 않았습니다.',COLLECTIBLE_NOT_OWNED:'먼저 명패를 해금해 주세요.',STORE_DATA_INVALID:'기존 상점 기록이 올바르지 않아 작업을 중단했습니다.'})[code]||code||'상점 데이터를 확인할 수 없습니다.';
+  busy=false;pending=null;pendingLab=false;draw(true);
+ }
  function coreKey(item){return item==='crimson'?'dev_core_theme_02':'dev_core_theme_01'}
  function coreOwned(item,s){
   let owned=!!s.owned[item];
@@ -122,11 +133,37 @@
   message=current===id?'코어 장착 해제':'코어 장착 완료';
   draw();
  }
+ function drawHomeNameplate(s){
+  const host=document.getElementById('homePartsViewV523');
+  if(!host)return;
+  let badge=document.getElementById('m09HomeNameplateV625');
+  if(!badge){
+   badge=make('div','m09HomeNameplateV625','◇ 변이 기록자 · 연구실 명패');
+   badge.id='m09HomeNameplateV625';badge.setAttribute('aria-label','장착한 연구실 명패');
+   host.prepend(badge);
+  }
+  badge.style.display=s.uiCollectibles?.equipped?.home_nameplate==='lab_nameplate'?'block':'none';
+ }
+ function beginNameplate(){if(busy||pending||pendingLab||!atShop())return;pendingLab=true;draw();}
+ function confirmNameplate(){
+  if(busy||!pendingLab||!atShop())return;
+  busy=true;
+  try{store.redeemUiCosmetic('lab_nameplate');message='연구실 명패 영구 해금 · 변이 결정 180개 사용';}
+  catch(e){fail(e);return}
+  busy=false;pendingLab=false;draw();
+ }
+ function toggleNameplate(){
+  if(busy||pending||pendingLab||!atShop())return;
+  busy=true;
+  try{const result=store.equipUiCosmetic('lab_nameplate');message=result.equipped?'연구실 명패 장착 완료 · HOME의 PARTS에서 확인하세요.':'연구실 명패 장착 해제';}
+  catch(e){fail(e);return}
+  busy=false;draw();
+ }
  function priceDisplay(p){return p.price}
- function begin(id){if(busy||pending||!atShop())return;pending=id;draw();}
+ function begin(id){if(busy||pending||pendingLab||!atShop())return;pending=id;draw();}
  function atShop(){const view=document.getElementById('homeShopViewV601');return !!(view&&!view.classList.contains('hidden')&&window.EVOLVE_WEB_GUARD?.atHome?.())}
  function done(){
-  if(!pending||busy||!atShop())return;
+  if(!pending||pendingLab||busy||!atShop())return;
   busy=true;const id=pending;pending=null;
   try{
    const receiptId='shop621_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,14);
@@ -179,6 +216,7 @@
  function draw(err=false){
   if(!root||!content)return;
   let s;try{s=store.snapshot()}catch(e){content.replaceChildren(make('p','eStoreMessageV621','상점 기록을 읽을 수 없어 변경을 중단했습니다. 기록은 삭제되지 않습니다.'));return}
+  drawHomeNameplate(s);
   const frag=document.createDocumentFragment();
   const hero=add(frag,'section','eStoreHeroV621');
   add(hero,'div','eStoreEyebrowV621','EVOLVE · GENOME MARKET');
@@ -190,8 +228,16 @@
   const disclosure=add(frag,'p','eStoreFineV621','결제 연결 전 체험 중 · 금액 청구 없음 · 표시 가격은 확정되지 않았습니다.');
   disclosure.style.margin='0 0 11px';
   const nav=add(frag,'div','eStoreTabsV621');nav.setAttribute('role','tablist');nav.setAttribute('aria-label','상점 카테고리');
-  for(const name of categories){const b=button(nav,name,()=>{category=name;pending=null;draw();});b.setAttribute('role','tab');b.setAttribute('aria-selected',String(category===name));}
+  for(const name of categories){const b=button(nav,name,()=>{category=name;pending=null;pendingLab=false;draw();});b.setAttribute('role','tab');b.setAttribute('aria-selected',String(category===name));}
   const status=add(frag,'p','eStoreMessageV621',message||'');status.dataset.error=String(err);status.setAttribute('role','status');
+  if(pendingLab){
+   const c=add(frag,'section','eStoreConfirmV621');
+   add(c,'strong','','연구실 명패 · 변이 기록자 · ◆ 180');
+   add(c,'p','','변이 결정 180개로 비전투 HOME 명패를 영구 해금합니다. 중복 구매할 수 없으며 실제 금액은 청구되지 않습니다.');
+   const row=add(c,'div');
+   button(row,'취소',()=>{pendingLab=false;draw()});
+   button(row,'해금 확정',confirmNameplate,s.crystals<180);
+  }
   if(pending){
    const p=engine.products.find(x=>x.id===pending);
    const c=add(frag,'section','eStoreConfirmV621');
@@ -252,6 +298,19 @@
     action.dataset.core=id;action.setAttribute('aria-pressed',String(selected));
    }
   }
+  if(category==='추천'||category==='외형'){
+   const section=add(frag,'section','eStoreCollectionV621');
+   add(section,'h3','','연구실 컬렉션');
+   add(section,'p','eStoreFineV621','변이 결정으로 비전투 명패를 영구 소장합니다. 장착하면 HOME의 PARTS에 나타납니다.');
+   const owned=s.uiCollectibles?.owned?.lab_nameplate===true;
+   const selected=s.uiCollectibles?.equipped?.home_nameplate==='lab_nameplate';
+   const row=add(section,'div','eM09NameplateRow');
+   add(row,'span','eM09NameplateIcon','◇').setAttribute('aria-hidden','true');
+   const label=add(row,'div','eM09NameplateText','연구실 명패 · 변이 기록자');
+   add(label,'small','',selected?'장착 중 · PARTS 화면 표시':owned?'영구 소장 · 언제든 무료 장착/해제':'◆ 180 · 영구 해금 · 전투 능력치 변경 없음');
+   const action=button(row,selected?'해제':owned?'장착':'◆ 180 · 해금',owned?toggleNameplate:beginNameplate,!!pending||!!pendingLab||(!owned&&s.crystals<180));
+   action.dataset.m09Collectible='lab_nameplate';action.setAttribute('aria-pressed',String(selected));
+  }
   add(frag,'p','eStoreFineV621','상품 획득과 연구 보상은 현재 브라우저에 저장됩니다. 실제 결제, 영수증, 서버 권리 지급은 연결되지 않았으며 별도 계정으로 이전되지 않습니다.');
   content.replaceChildren(frag);
   drawChallenge();
@@ -267,10 +326,10 @@
   draw();
   const challengeTab=document.getElementById('memoryBtn');
   challengeTab?.addEventListener('click',()=>drawChallenge());
-  const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{pending=null;draw()});
-  const observer=new MutationObserver(()=>{if(atShop()){pending=null;draw()}});
+  const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{pending=null;pendingLab=false;draw()});
+  const observer=new MutationObserver(()=>{if(atShop()){pending=null;pendingLab=false;draw()}});
   observer.observe(view,{attributes:true,attributeFilter:['class']});
-  window.addEventListener('pageshow',()=>{pending=null;draw()});
+  window.addEventListener('pageshow',()=>{pending=null;pendingLab=false;draw()});
   window.addEventListener('storage',event=>{if(event.key===engine.storageKey||event.key===null)draw()});
   window.__EVOLVE_SHOP_V621__=Object.freeze({read:()=>store.snapshot(),open:()=>tab?.click(),mode:'NO_BILLING_PREVIEW'});
   return true;
