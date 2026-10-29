@@ -1,0 +1,36 @@
+name: EVOLVE M09 90% focused shop browser smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - "tests/m09_090_browser_smoke.cjs"
+      - ".github/workflows/m09-090-light-ui.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  m09-shop-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tests/m09_080_shop_regression.test.cjs
+            /tests/m09_090_browser_smoke.cjs
+            /web/shop-experience-v621.js
+            /web/shop-front-v621.js
+      - name: Runtime contract (no game assets)
+        run: node tests/m09_080_shop_regression.test.cjs
+      - name: Install lightweight browser driver only
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+        run: npm install --no-save --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.55.0
+      - name: Check real SHOP UI on three viewport shapes
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || true)"
+          test -n "$CHROME_BIN"
+          CHROME_BIN="$CHROME_BIN" node tests/m09_090_browser_smoke.cjs
