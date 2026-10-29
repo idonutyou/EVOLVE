@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249088424,
-  "index_bytes": 260990,
-  "build": "bde1fb8221389139a2f6eb8dfb50ae2548da2802058ec0436d72a99ee0fddebf",
+  "index_bytes": 261015,
+  "build": "a2be65cec86eb9285a86456c3fe0596c8564c96511ae2635d9ab328dd5c93878",
   "image_assets": 1027,
   "cached_files": 1079,
-  "cached_bytes": 401063422,
+  "cached_bytes": 401064545,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -2107,5 +2107,16 @@
     "game_engine_changed": false,
     "save_keys_changed": false,
     "source_file": "web/client.js"
+  },
+  "web_priority_v629": {
+    "startup_manifest_script_count": 12,
+    "startup_manifest_script_bytes": 77761962,
+    "previous_eager_manifest_bytes": 401054824,
+    "original_image_files_preloaded": 0,
+    "on_demand_images": true,
+    "unchanged_service_worker_caches_requested_assets": true,
+    "game_engine_unchanged": true,
+    "save_keys_changed": false,
+    "original_assets_changed": false
   }
 }
