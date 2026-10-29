@@ -53,3 +53,11 @@
 9. **No unrequested art changes:** reuse approved images, protect the central core and exactly four default walking legs; tell the user before a stage that truly needs image rendering. Preserve M08 shop, M09 economic docs, game saves and established character art unless explicitly changed.
 
 This policy is stored in-repository so any new EVOLVE development conversation should read this `AGENTS.md` at the start and automatically use the protocol; note that a chat which does not consult the repository may not receive these instructions. Existing 10%-checkpoint, asset-safety and final-publication conditions are not waived.
+
+## Current delivery cadence (user update: 2026-10-29)
+
+- For the current monetization stage **M09**, advance in user-requested 20-percentage-point batches: from 50% to 70%, then 90%, then the last 10% to 100%. Preserve completed M09 10%-through-50% points; do not redo them.
+- Starting with the **next monetization stage M10 and later stages**, advance per user request in four batches: **0→30%, 30→60%, 60→90%, 90→100%**. When work has an already saved starting percentage, adapt the first batch without regression.
+- **Batch size is NOT the backup interval.** Preserve GitHub remote checkpoints and verification at every 10% increment (including intermediate points inside a 20% or 30% batch); do not delete any backups until 100% completion. Report progress after each checked 10% save, and summarize the full batch when finished.
+- Existing safety rules (no unintended art/asset rewrites, targeted validation, actual Pages release after focused QA) remain effective. This cadence supersedes the previous mandatory user-turn request for each 10%/30% substep.
+
