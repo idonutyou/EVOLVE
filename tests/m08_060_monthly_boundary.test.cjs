@@ -9,7 +9,9 @@ const storage={getItem:k=>map.has(k)?map.get(k):null,setItem:(k,v)=>map.set(k,v)
 const store=shop.createStore({storage,clock:()=>clock});
 assert.equal(store.snapshot().day,'2026-10-31');
 assert.equal(shop.kstMonth(clock),'2026-10');
+clock=Date.parse('2026-10-01T14:59:59.000Z');
 store.order('researchpass','m08_060_monthly_pass_000001');
+clock=Date.parse('2026-10-31T14:59:59.000Z');
 store.claimDaily();store.claimPremium(1);
 let legacy=JSON.parse(map.get(shop.storageKey));delete legacy.missionClaims;
 map.set(shop.storageKey,JSON.stringify(legacy));
