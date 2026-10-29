@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249088424,
-  "index_bytes": 260932,
-  "build": "b20414516e19afecb1a7a1d0d67e3b98d456d26029993fd012fec043db8e89ad",
-  "image_assets": 1005,
-  "cached_files": 1072,
-  "cached_bytes": 386221027,
+  "index_bytes": 260943,
+  "build": "c30e76907b0bf8ab4e5232b944711715ed1c83c2ec1d318d014faa6434e57454",
+  "image_assets": 1027,
+  "cached_files": 1079,
+  "cached_bytes": 401054532,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -2036,5 +2036,50 @@
     "legacy_engine_untouched": true,
     "real_checkout": false,
     "original_DNA_laboratory_hidden_in_shop_only": true
+  },
+  "bio_core_v625": {
+    "baseline": "d2b1c3711a815d807c6f7697f49472e9c273e2a0",
+    "engine": "assets/9456ee1167d83869f3b5aff751cff5e5cd1797a11d4547c61eadd0f0ff6e7287.js",
+    "source": {
+      "path": "assets/07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d.png",
+      "sha256": "07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d",
+      "bytes": 3085171,
+      "kind": "image"
+    },
+    "matte": {
+      "path": "assets/4111666b74cde3bf554613391396b3597874a548de70851b11c6836af32d5d94.png",
+      "sha256": "4111666b74cde3bf554613391396b3597874a548de70851b11c6836af32d5d94",
+      "bytes": 1654292,
+      "kind": "image"
+    },
+    "four_short_legs": true,
+    "default_tail_absent": true,
+    "skill_tail": {
+      "path": "assets/2a8e2c333ac6de8b1dcd7d9832e17c1f98198b6aa63c49476952476119ce6c33.png",
+      "sha256": "2a8e2c333ac6de8b1dcd7d9832e17c1f98198b6aa63c49476952476119ce6c33",
+      "bytes": 1941443,
+      "kind": "image"
+    },
+    "cannon": {
+      "path": "assets/fc800c2c53eaabb0df05f5bdfb6133f4969e4ab1c09aecc90f51c92c0fe3cb88.png",
+      "sha256": "fc800c2c53eaabb0df05f5bdfb6133f4969e4ab1c09aecc90f51c92c0fe3cb88",
+      "bytes": 1624249,
+      "kind": "image"
+    },
+    "walk_atlas": {
+      "path": "assets/8caa7ca15beac139a6420f3151d6e6269481806e6443265b794bda86721c7b1b.png",
+      "sha256": "8caa7ca15beac139a6420f3151d6e6269481806e6443265b794bda86721c7b1b",
+      "bytes": 2435476,
+      "kind": "image"
+    },
+    "idle_atlas": {
+      "path": "assets/6addc8ec79e94d9e535601f8e82cb0d4aff93789e32ccedd1f5a827c9819ebd8.png",
+      "sha256": "6addc8ec79e94d9e535601f8e82cb0d4aff93789e32ccedd1f5a827c9819ebd8",
+      "bytes": 2394034,
+      "kind": "image"
+    },
+    "save_migration": false,
+    "physical_Galaxy_S23_plus_tested": false,
+    "load_failure_falls_back_to_legacy_renderer": true
   }
 }
