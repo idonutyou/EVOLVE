@@ -21,7 +21,7 @@ for(const [month,start,end,days] of months){
 const disk={};
 const storage={getItem:k=>Object.hasOwn(disk,k)?disk[k]:null,setItem:(k,v)=>{disk[k]=v}};
 const date=iso=>Date.parse(iso);
-let now=date('2026-10-28T11:30:00.000Z');
+let now=date('2026-10-01T11:30:00.000Z');
 const create=()=>api.createStore({storage,clock:()=>now});
 const store=create();
 const id=n=>'m07_100_receipt_'+String(n).padStart(8,'0');
@@ -100,10 +100,10 @@ for(const forbidden of ['모의 구매','TEST 상품','실제 결제 완료'])as
 assert.equal((web.match(/function drawChallenge\(/g)||[]).length,1);
 assert.equal((web.match(/function bridgeOwnedCore\(/g)||[]).length,1);
 const document=fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8');
-assert.equal((document.match(/shop-front-v621\.js\?v=100/g)||[]).length,1);
-assert.equal((document.match(/shop-experience-v621\.js\?v=100/g)||[]).length,1);
-assert.ok(document.indexOf('shop-experience-v621.js?v=100')<document.indexOf('shop-front-v621.js?v=100'));
+assert.equal((document.match(/shop-front-v621\.js\?v=120/g)||[]).length,1);
+assert.equal((document.match(/shop-experience-v621\.js\?v=120/g)||[]).length,1);
+assert.ok(document.indexOf('shop-experience-v621.js?v=120')<document.indexOf('shop-front-v621.js?v=120'));
 const publishWait=fs.readFileSync(path.join(__dirname,'../tools/wait_for_shop_publication.py'),'utf8');
-assert.ok(publishWait.includes('shop-front-v621.js?v=100'));
+assert.ok(publishWait.includes('shop-front-v621.js?v=120'));
 assert.ok(!publishWait.includes('shop-front-v621.js?v=90'));
 console.log('M07 100% PASS: KST paid month boundaries incl leap, delayed retry cannot buy next month, double claims blocked, permanent skin retained, no billing, and V100 public gate.');
