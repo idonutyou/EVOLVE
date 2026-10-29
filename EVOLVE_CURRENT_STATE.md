@@ -18,5 +18,13 @@ Updated: 2026-10-29 20:28 KST. Source of truth: GitHub `main` + `dist/version.js
 5. V627 packaging source now refreshes the V625 active-engine reference on regeneration; older already-published V627 `verification.json` still contains a historical V626 `bio_core_v625.engine` value. Use `auto_ambient_v627.engine` as the active one. Do NOT repackage the live engine solely to correct a historical QA reference; handle on the next actual engine release.
 6. Game, art, saves, prices and deployed `dist` are not changed by this handoff/QA-only maintenance; no Pages deployment is required.
 
+## FAST WORK second-stage update — source-only (2026-10-29)
+- Base main before changes: `442318044e7f71d1d595fac51e60df7a7eae3b83`.
+- Changed loader SOURCE: `web/client.js` now sets finite bounds on manifest fetch/parse, individual resource header/stream reads, Cache API operations, dynamic script tags and startup readiness. Cache failures disable repeated caching attempts instead of stalling resource preparation. Original image bytes and game logic are untouched.
+- Added isolated loader Node/VM test: `node tests/web_client_020_loader.test.cjs`. It runs 8 tiny success/error/stall scenarios without original assets, browsers or map loading.
+- Added image-only focused browser test: `node tests/bio_core_fast_visual_browser.cjs`. It only decodes six V625 images and checks animation frames in Chromium; requires local six PNGs and Playwright. Not equivalent to a full real-game smoke.
+- **NOT YET PUBLISHED:** the live version remains **V627**; unchanged `dist` contains the old content-hashed web client. Source change must first pass the real focused game boot/save check, then be repackaged and published in a later release. Do not claim runtime stall handling is live yet. No image regeneration is required.
+- Recovery branch: `backup/fast-loader-v628-pre-20261029` at `442318044e7f71d1d595fac51e60df7a7eae3b83`. Change branch: `fix/fast-loader-tests-v628-20261029`.
+
 ## On subsequent work
 Update this file with the exact final git HEAD, active build, phase percent, changed files, backup branch and verified release BEFORE claiming completion. Keep it concise and preserve historical records.

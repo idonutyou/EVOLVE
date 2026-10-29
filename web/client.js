@@ -18,34 +18,76 @@
       detail.textContent=progress.phase==='prepare'?'다운로드한 리소스로 맵과 전투를 준비하고 있어.':(progress.loaded/1048576).toFixed(1)+' / '+(progress.total/1048576).toFixed(1)+' MB · 남은 시간 '+time;
     }
   }
+  // Each network operation has a finite idle timeout. Cache API failures must not
+  // block a game launch or force the next 1,078 resources to repeat a broken write.
+  const resourceTiming={
+    idle:Math.max(100,Number(config.resourceIdleTimeoutMs)||45000),
+    cache:Math.max(100,Number(config.resourceCacheTimeoutMs)||8000)
+  };
+  function bounded(promise,ms,message){
+    let timer;
+    return Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error(message)),ms);})]).finally(()=>clearTimeout(timer));
+  }
   async function prepareResources(){
-    const response=await fetch(new URL('asset-manifest.json',location.href),{cache:'no-store'});
-    if(!response.ok)throw Error('리소스 목록을 불러오지 못했어.');
-    const assets=(await response.json()).filter(e=>e.kind!=='web-shell');
+    const manifestController=new AbortController();let assets;
+    try{
+      const response=await bounded(fetch(new URL('asset-manifest.json',location.href),{cache:'no-store',signal:manifestController.signal}),resourceTiming.idle,'리소스 목록 응답이 지연되고 있어.');
+      if(!response.ok)throw Error('리소스 목록을 불러오지 못했어.');
+      assets=(await bounded(response.json(),resourceTiming.idle,'리소스 목록 읽기가 지연되고 있어.')).filter(e=>e.kind!=='web-shell');
+    }catch(error){manifestController.abort();throw error;}
     progress.total=assets.reduce((sum,e)=>sum+e.bytes,0);progress.totalFiles=assets.length;progress.started=Date.now();showProgress(true);
-    let cache=null;try{if('caches' in window)cache=await caches.open('evolve-original-assets-v1:'+new URL('./',location.href).pathname);}catch(_){}
+    let cache=null;
+    try{if('caches' in window)cache=await bounded(caches.open('evolve-original-assets-v1:'+new URL('./',location.href).pathname),resourceTiming.cache,'캐시 열기 시간 초과');}
+    catch(_){progress.cacheErrors=(progress.cacheErrors||0)+1;}
     let next=0;
     async function download(entry){
       const url=new URL(entry.path,location.href).href;
-      if(cache&&await cache.match(url)){progress.loaded+=entry.bytes;progress.cached+=entry.bytes;progress.files++;showProgress();return;}
-      const result=await fetch(url,{cache:'force-cache'});if(!result.ok)throw Error('리소스 다운로드가 중단됐어. 연결을 확인해 줘.');
-      const storing=cache?cache.put(url,result.clone()).catch(()=>{}):null;let size=0;
-      if(result.body?.getReader){
-        const reader=result.body.getReader();while(true){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.byteLength;progress.loaded+=chunk.value.byteLength;progress.network+=chunk.value.byteLength;showProgress();}
-      }else{size=(await result.arrayBuffer()).byteLength;progress.loaded+=size;progress.network+=size;}
-      await storing;if(size!==entry.bytes){if(cache)await cache.delete(url);throw Error('일부 리소스가 완전히 다운로드되지 않았어. 다시 열어줘.');}
+      if(cache){
+        try{
+          if(await bounded(cache.match(url),resourceTiming.cache,'캐시 읽기 시간 초과')){
+            progress.loaded+=entry.bytes;progress.cached+=entry.bytes;progress.files++;showProgress();return;
+          }
+        }catch(_){progress.cacheErrors=(progress.cacheErrors||0)+1;cache=null;}
+      }
+      const controller=new AbortController();let result,size=0,storing=null;
+      try{
+        result=await bounded(fetch(url,{cache:'force-cache',signal:controller.signal}),resourceTiming.idle,'리소스 연결 시간 초과');
+        if(!result.ok)throw Error('리소스 다운로드가 중단됐어. 연결을 확인해 줘.');
+        if(cache){
+          storing=cache.put(url,result.clone()).then(()=>true,()=>{progress.cacheErrors=(progress.cacheErrors||0)+1;cache=null;return false;});
+        }
+        if(result.body?.getReader){
+          const reader=result.body.getReader();
+          while(true){
+            const chunk=await bounded(reader.read(),resourceTiming.idle,'리소스 전송 정체');
+            if(chunk.done)break;
+            size+=chunk.value.byteLength;progress.loaded+=chunk.value.byteLength;progress.network+=chunk.value.byteLength;showProgress();
+          }
+        }else{
+          size=(await bounded(result.arrayBuffer(),resourceTiming.idle,'리소스 전송 정체')).byteLength;
+          progress.loaded+=size;progress.network+=size;
+        }
+        if(size!==entry.bytes)throw Error('일부 리소스가 완전히 다운로드되지 않았어. 다시 열어줘.');
+      }catch(error){
+        controller.abort();
+        throw Error(error.message+': '+entry.path);
+      }
+      if(storing){
+        try{await bounded(storing,resourceTiming.cache,'캐시 쓰기 시간 초과');}
+        catch(_){progress.cacheErrors=(progress.cacheErrors||0)+1;cache=null;}
+      }
       progress.files++;showProgress();
     }
     await Promise.all(Array.from({length:4},async()=>{while(next<assets.length){const entry=assets[next++];await download(entry);}}));
     progress.phase='prepare';showProgress(true);
     for(const placeholder of document.querySelectorAll('script[data-evolve-src]')){
-      await new Promise((resolve,reject)=>{
+      await bounded(new Promise((resolve,reject)=>{
         const script=document.createElement('script');script.async=false;script.src=placeholder.dataset.evolveSrc;
         if(placeholder.id){script.id=placeholder.id;placeholder.removeAttribute('id');}
         script.onload=resolve;script.onerror=()=>reject(Error('게임 실행 파일을 불러오지 못했어.'));document.body.appendChild(script);
-      });
+      }),Math.max(120000,resourceTiming.idle),'게임 스크립트 로딩이 너무 오래 걸려: '+placeholder.dataset.evolveSrc);
     }
-    if(window.__EVOLVE_STARTUP_V595__)await window.__EVOLVE_STARTUP_V595__.ready;
+    if(window.__EVOLVE_STARTUP_V595__)await bounded(window.__EVOLVE_STARTUP_V595__.ready,Math.max(120000,resourceTiming.idle),'게임 초기화 대기 시간이 초과됐어.');
     if(failed)return;done=true;progress.phase='ready';$('webLoader')?.remove();paint();
   }
   function fail(message){if(done)return;failed=true;const el=$('webStatus');if(el)el.textContent=message;const retry=$('webRetry');if(retry)retry.hidden=false;}
