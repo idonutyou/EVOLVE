@@ -5,7 +5,7 @@ const api=require('../web/shop-experience-v621.js');
 const m={};
 const storage={getItem:k=>Object.hasOwn(m,k)?m[k]:null,setItem:(k,v)=>{m[k]=v}};
 const t=iso=>Date.parse(iso);
-let now=t('2026-10-28T12:00:00.000Z');
+let now=t('2026-10-01T12:00:00.000Z');
 const store=api.createStore({storage,clock:()=>now});
 const id=n=>'v621_request_'+String(n).padStart(6,'0');
 assert.equal(api.mode,'LOCAL_PREVIEW_NO_BILLING');
