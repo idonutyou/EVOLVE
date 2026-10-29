@@ -1,0 +1,19 @@
+{
+  "schema": "EVOLVE_M09_DESIGN_CHECKPOINT_V1",
+  "stage": "M09-030",
+  "percent": 30,
+  "date_kst": "2026-10-29",
+  "parent_stage": "M09-020",
+  "kind": "design_only",
+  "gameplay_changed": false,
+  "images_rendered": false,
+  "public_release": false,
+  "billing_connected": false,
+  "files": [
+    "docs/monetization/M09_030_OFFER_AND_PASS_DESIGN_KO.md",
+    "monetization/economy/m09-030-design.json",
+    "checkpoints/EVOLVE_M09_030_20261029.json"
+  ],
+  "next": "M09-040-first-ui-collection",
+  "backup_required": true
+}
