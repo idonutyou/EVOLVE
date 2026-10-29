@@ -12,7 +12,7 @@ const replacements=new Map([['/EVOLVE/',path.join(root,'index.html')],['/EVOLVE/
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_BIN||undefined,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
   context=await browser.newContext({viewport:{width:393,height:852},isMobile:true,hasTouch:true,deviceScaleFactor:1,serviceWorkers:'block'});
   await context.addInitScript(()=>{
-    localStorage.setItem('EVOLVE_V575_TEST_PARTS_UI_V523',JSON.stringify({schema:1,worn:{arm:'arm_cannon',back:'legacy-back'},filter:'all',sort:'default'}));
+    localStorage.setItem('EVOLVE_V575_TEST_PARTS_UI_V523',JSON.stringify({schema:1,worn:{arm:'arm_cannon',back:'back_neural'},filter:'all',sort:'default'}));
   });
   const page=await context.newPage();page.on('pageerror',e=>report.pageErrors.push(e.message));
   page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.requestsFailed.push(r.url().slice(0,220)+': '+r.failure()?.errorText);});
@@ -34,7 +34,7 @@ const replacements=new Map([['/EVOLVE/',path.join(root,'index.html')],['/EVOLVE/
     const part=window.__EVOLVE_PARTS_V523__,arm=window.__EVOLVE_DUAL_ARM_V631__;
     const before=arm.snapshot(),rawBefore=localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523');
     if(before.arm1!=='arm_cannon'||before.arm2!=='arm_cannon')throw Error('legacy paired-arm migration failed: '+JSON.stringify(before));
-    if(before.legacyBack!=='legacy-back')throw Error('hidden back equipment lost');
+    if(before.legacyBack!=='back_neural')throw Error('hidden back equipment lost');
     if(!before.slots||before.slots.length!==6||!before.gameRendererConnected)throw Error('six slots or combat renderer missing');
     if(!document.getElementById('partsSlot_arm1_V523')||!document.getElementById('partsSlot_arm2_V523'))throw Error('independent arm slots missing');
     part.open('arm_blades');if(!arm.test?.applyArm?.('arm2'))throw Error('arm2 equip failure');
