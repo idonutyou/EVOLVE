@@ -1,0 +1,51 @@
+name: EVOLVE V631 dual-arm prepublication browser gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/dual-arm-631-candidate.yml"
+      - "tests/dual_arm_631_candidate_browser.cjs"
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/workflows/dual-arm-631-candidate.yml
+            /tests/dual-arm-model.test.cjs
+            /tests/dual_arm_631_candidate_browser.cjs
+            /dist/index.html
+            /dist/version.json
+            /dist/asset-manifest.json
+            /dist/assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js
+      - name: Validate staged engine syntax and independent arms model
+        run: |
+          node --check dist/assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js
+          node --test tests/dual-arm-model.test.cjs
+      - name: Prepare headless browser, no original art downloads
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+          chrome="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"
+          fi
+      - name: Boot staged V631 in a real browser against unchanged published original assets
+        timeout-minutes: 10
+        run: node tests/dual_arm_631_candidate_browser.cjs
+      - name: Save focused evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-dualarm631-prepublication
+          path: test-results/dual-arm-631-candidate.json
+          if-no-files-found: ignore
