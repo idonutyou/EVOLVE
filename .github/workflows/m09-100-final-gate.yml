@@ -1,0 +1,68 @@
+name: EVOLVE M09 final shop release gate
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/m09-100-final-gate.yml"
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  shop-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /web/shop-experience-v621.js
+            /web/shop-front-v621.js
+            /web/native-shop-v620.js
+            /web/m08-mission-rewards-v624.js
+            /web/m08-stage-mission-v622.js
+            /web/m08-runtime-missions-v623.js
+            /dist/index.html
+            /dist/version.json
+            /dist/shop-experience-v621.js
+            /dist/shop-front-v621.js
+            /dist/m08-mission-rewards-v624.js
+            /tests/m07_080_shop_experience.test.cjs
+            /tests/m07_090_crimson_pass.test.cjs
+            /tests/m07_100_final_contract.test.cjs
+            /tests/m08_060_monthly_boundary.test.cjs
+            /tests/m08_080_release_gate.test.cjs
+            /tests/m09_080_shop_regression.test.cjs
+            /tests/m09_090_browser_smoke.cjs
+            /tools/wait_for_shop_publication.py
+      - name: Check final version, source-dist parity, original assets untouched
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const h=fs.readFileSync('dist/index.html','utf8');
+          const v=JSON.parse(fs.readFileSync('dist/version.json','utf8'));
+          assert(v.version.endsWith('-M09-100'));
+          assert.equal(h.includes('shop-experience-v621.js?v=120&m08=40'),true);
+          assert.equal(h.includes('shop-front-v621.js?v=120'),true);
+          assert.equal(fs.readFileSync('web/shop-experience-v621.js','utf8'),fs.readFileSync('dist/shop-experience-v621.js','utf8'));
+          assert.equal(fs.readFileSync('web/shop-front-v621.js','utf8'),fs.readFileSync('dist/shop-front-v621.js','utf8'));
+          console.log('M09 FINAL VERSION & SOURCE-DIST MIRROR PASS');
+          NODE
+      - name: Focused previous economy contracts after intentional M09 rule changes
+        run: |
+          node tests/m07_080_shop_experience.test.cjs
+          node tests/m07_090_crimson_pass.test.cjs
+          node tests/m07_100_final_contract.test.cjs
+          node tests/m08_060_monthly_boundary.test.cjs
+          node tests/m08_080_release_gate.test.cjs
+          node tests/m09_080_shop_regression.test.cjs
+      - name: Install lightweight browser driver
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+        run: npm install --no-save --no-package-lock --no-audit --no-fund --ignore-scripts playwright@1.55.0
+      - name: Browser SHOP in 320, 393, 852 viewports
+        run: |
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || true)"
+          test -n "$CHROME_BIN"
+          CHROME_BIN="$CHROME_BIN" node tests/m09_090_browser_smoke.cjs
