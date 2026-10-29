@@ -1,6 +1,13 @@
 # EVOLVE — Current Handoff (canonical short status)
 Updated: 2026-10-29 KST, after verified V629 public release. Source of truth: GitHub `main` + `dist/version.json` (recheck branch HEAD on every edit).
 
+
+## Current development/storage workflow (user decision, 2026-10-29)
+
+For character/core/weapon work and subsequent EVOLVE development, keep all unfinished changed files in ChatGPT personal Library `/EVOLVE/`. Save actual modified files and recovery details at each 10% checkpoint. The Library files `/EVOLVE/EVOLVE_CURRENT_HANDOFF.md` and `/EVOLVE/EVOLVE_LIBRARY_FIRST_WORKFLOW.md` already exist and are the starting point for new sessions. A different Work environment may need to explicitly load the Library files; old sandbox paths are not automatically reusable.
+
+**No GitHub work-file upload or online Pages deployment until the user specifically requests it.** Finishing 100% or saying `고` means continue/finish work and Library backup, not deployment. If the user asks GitHub upload only, do not deploy the public game. GitHub `main` / `dist/version.json` track the committed game baseline; the latest verified Library checkpoint tracks newer unpublished work. This is the active process even where older historical paragraphs mention remote GitHub checkpoints or automatic publication. This documentation-only commit is not a game deployment.
+
 ## Current baseline
 - Repository: `idonutyou/EVOLVE`, development branch `main`.
 - Verified base before this workflow-only fix: `7f33375e08388033f561f741de37cd55186adf31`.
@@ -40,4 +47,4 @@ Updated: 2026-10-29 KST, after verified V629 public release. Source of truth: Gi
 - Before this tooling change: backup/pre-character-fast-20261029 at c13f87d5fcd654ea04b5623f9099af61a1b923fb. Live release remains V629; no new image rendering needed.
 
 ## On subsequent work
-Update this file with the exact final git HEAD, active build, phase percent, changed files, backup branch and verified release BEFORE claiming completion. Keep it concise and preserve historical records.
+For unpublished work, update the ChatGPT Library `/EVOLVE/EVOLVE_CURRENT_HANDOFF.md` and save the real changed files there. Update this GitHub file for new publicly committed baselines only when the user requests GitHub upload/release; keep release history intact.
