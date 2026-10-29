@@ -41,6 +41,7 @@ jobs:
           node --check web/client.js
           node --test tests/web_client.test.cjs
           node tests/web_client_020_loader.test.cjs
+      # Respect CHROME_BIN when runner already contains Chrome; avoid downloading redundant Playwright Chromium.
       - name: Install one browser engine for character and real game smoke
         run: |
           npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
