@@ -1,5 +1,9 @@
 # EVOLVE online maintenance
 
+## 2026-10-29 user-approved working/storage workflow
+
+During development, save each 10% checkpoint (actual changed files plus base commit, hashes and handoff) to ChatGPT Library `/EVOLVE/`. Latest unpublished work lives in `/EVOLVE/EVOLVE_CURRENT_HANDOFF.md`; workflow details are in `/EVOLVE/EVOLVE_LIBRARY_FIRST_WORKFLOW.md`. Do not upload work to GitHub or deploy the public game unless the user explicitly requests the relevant action. Completion at 100% and messages like `고` do not imply permission to upload/deploy. The prior automatic upload and GitHub checkpoint instructions below are superseded by this user choice. GitHub remains the source for published game/version, while Library is for unpublished work. Library uploads must be confirmed; never mistake an ephemeral sandbox path for a persistent backup.
+
 > **Read this first on EVERY new EVOLVE session:** [`EVOLVE_CURRENT_STATE.md`](EVOLVE_CURRENT_STATE.md) is the short, current handoff. Confirm `main` HEAD and `dist/version.json` before editing. `EVOLVE_HANDOFF.md`, `EVOLVE_PROGRESS.md`, and `EVOLVE_ROADMAP.md` are historical records and may describe earlier M07/M08 stages; never treat their top sections as current. GitHub commits and the current live build outrank percentages or old instructions. Do not repeatedly rediscover resources already recorded in the state file.
 
 - Current baseline: V575. Never revert to V555 or historical Drive files.
@@ -17,7 +21,7 @@
 - Old `.github/workflows/deploy-pages.yml` has been converted to **manual-only full game regression with NO publication**. The new `.github/workflows/pages-release-gate.yml` performs automatic read-only Git-tree comparison on main/dist updates; when trees match it is a no-op (no Pages build). See `docs/PAGES_RELEASE_RULES_KO.md`.
 - Character/core/weapon/image release: test the changed character path and saved-game compatibility once before syncing Pages; use broader game/asset regression only for an actual engine/save-risk change or a focused-test failure. Do not run a full 28-test suite merely because images changed. Unexpected HTML/engine changes fail closed.
 - Inspect `.github/workflows/pages-release-gate.yml` only when the deployment workflow or related files change, or immediately before an actual publication—not at every development edit. The gate is read-only and does not publish. `GITHUB_TOKEN` workflow pushes will not trigger Pages builds. For actual releases, use the connected authenticated GitHub user/app to create a new Pages commit only if `main:dist` and Pages root Git trees differ.\n- After branch sync, verify the new Pages branch's root tree equals the intended `main:dist` tree and previous recovery branch is preserved. The last two branch-build timings were 142 s and 233 s (variable 89/157 s native checkout); never claim the engine assets avoid GitHub's own internal Pages checkout.
-- The user explicitly requires automatic upload and deployment of completed EVOLVE changes to the existing idonutyou/EVOLVE repository. Do not ask for confirmation again. Preserve safe in-game update timing.
+- User now requests ChatGPT Library checkpoints during development; GitHub upload and Pages deployment happen only on an explicit user instruction for each action.
 - Commit intermediate migration results on online-v575 so interrupted work remains recoverable.
 - Backups and recovery take priority over new implementation. Before rebuilding
   interrupted work, check this repository's previous scratch workspaces and
@@ -60,6 +64,6 @@ This policy is stored in-repository. Every new EVOLVE development session must e
 
 - For the current monetization stage **M09**, advance in user-requested 20-percentage-point batches: from 50% to 70%, then 90%, then the last 10% to 100%. Preserve completed M09 10%-through-50% points; do not redo them.
 - Starting with the **next monetization stage M10 and later stages**, advance per user request in four batches: **0→30%, 30→60%, 60→90%, 90→100%**. When work has an already saved starting percentage, adapt the first batch without regression.
-- **Batch size is NOT the backup interval.** Preserve GitHub remote checkpoints and verification at every 10% increment (including intermediate points inside a 20% or 30% batch); do not delete any backups until 100% completion. Report progress after each checked 10% save, and summarize the full batch when finished.
+- **Batch size is NOT the backup interval.** Preserve ChatGPT Library file checkpoints and verification at every 10% increment (including intermediate points inside a 20% or 30% batch); do not delete any backups until 100% completion. Report progress after each checked 10% save, and summarize the full batch when finished.
 - Existing safety rules (no unintended art/asset rewrites, targeted validation, actual Pages release after focused QA) remain effective. This cadence supersedes the previous mandatory user-turn request for each 10%/30% substep.
 
