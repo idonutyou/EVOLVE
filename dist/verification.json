@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249088424,
-  "index_bytes": 260980,
-  "build": "2730b71b796b18a83398da94941a029f885f70ddd52756244e4f9c00df09c38d",
+  "index_bytes": 260990,
+  "build": "bde1fb8221389139a2f6eb8dfb50ae2548da2802058ec0436d72a99ee0fddebf",
   "image_assets": 1027,
   "cached_files": 1079,
-  "cached_bytes": 401061287,
+  "cached_bytes": 401063422,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -2096,5 +2096,16 @@
     "shadow": "cached per animation silhouette",
     "image_bytes_changed": false,
     "save_keys_changed": false
+  },
+  "web_loader_v628": {
+    "resource_idle_timeout_ms": 45000,
+    "cache_timeout_ms": 8000,
+    "script_or_startup_timeout_ms": 120000,
+    "network_abort_on_stall": true,
+    "cache_failure_fallback": true,
+    "original_image_bytes_changed": false,
+    "game_engine_changed": false,
+    "save_keys_changed": false,
+    "source_file": "web/client.js"
   }
 }

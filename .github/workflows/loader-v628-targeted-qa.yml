@@ -1,0 +1,66 @@
+name: EVOLVE V628 loader one-shot focused release QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/loader-v628-targeted-qa.yml"
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  loader-character-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - name: One-time complete game checkout for critical loader-change smoke
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            dist
+            web
+            tests
+      - name: Verify active V628 shell content hash and untouched engine
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          d=pathlib.Path("dist"); v=json.loads((d/"version.json").read_text()); r=json.loads((d/"verification.json").read_text())
+          m=json.loads((d/"asset-manifest.json").read_text()); sh=[x for x in m if x["kind"]=="web-shell"]; assert len(sh)==1
+          p=d/sh[0]["path"]; b=p.read_bytes()
+          assert hashlib.sha256(b).hexdigest()==sh[0]["sha256"]==p.stem
+          assert b==(pathlib.Path("web/client.js")).read_bytes()
+          assert len(b)==sh[0]["bytes"]
+          assert v["build"]==r["build"] and v["version"]==r["version"]
+          assert r["cached_bytes"]==sum(x["bytes"] for x in m)
+          assert "LOADER628" in v["version"] and sh[0]["path"] in (d/"index.html").read_text()
+          assert r["web_loader_v628"]["game_engine_changed"] is False
+          print("V628 immutable asset/ref/build contract PASS")
+          PY
+      - name: Fast loader unit regression, 8 realistic cache/network cases
+        run: |
+          node --check web/client.js
+          node --test tests/web_client.test.cjs
+          node tests/web_client_020_loader.test.cjs
+      - name: Install one browser engine for character and real game smoke
+        run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-browser" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          chrome_path="$(command -v google-chrome || command -v chromium || true)"
+          if [ -z "$chrome_path" ]; then
+            "$RUNNER_TEMP/evolve-browser/node_modules/.bin/playwright" install --with-deps chromium
+          else
+            echo "CHROME_BIN=$chrome_path" >> "$GITHUB_ENV"
+          fi
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-browser/node_modules" >> "$GITHUB_ENV"
+      - name: Isolated six-image Chromium test (no full game boot)
+        timeout-minutes: 3
+        run: node tests/bio_core_fast_visual_browser.cjs
+      - name: Actual game on mobile viewport plus existing progress/character/save tests
+        timeout-minutes: 10
+        run: node tests/bio_core_050_browser.cjs
+      - name: Preserve focused release QA on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-loader628-targeted-qa
+          path: test-results
+          if-no-files-found: ignore
