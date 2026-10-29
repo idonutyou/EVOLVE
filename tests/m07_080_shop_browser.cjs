@@ -34,7 +34,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),0);
    await page.locator('#evolveShopV621 .eStoreCardV621').filter({hasText:'첫 진화 패키지'}).getByRole('button',{name:/구매/}).click();
    await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
-   await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__.read().crystals===125);
+   await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__.read().crystals===210);
    assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().firstPurchase),true);
    await page.locator('#evolveShopV621 .eStoreCardV621').filter({hasText:'공명 코어'}).getByRole('button',{name:/구매/}).click();
    await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
@@ -45,7 +45,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    await page.locator('#evolveShopV621 .eStoreConfirmV621 button').filter({hasText:'구매 확정'}).click();
    await page.waitForFunction(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__?.read().theme==='dev_core_theme_02',null,{timeout:30000});
    assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().owned.crimson),true);
-   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),5);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),90);
    assert.equal(await page.locator('#evolveShopV621 button[data-core="crimson"]').getAttribute('aria-pressed'),'true');
    await page.locator('#evolveShopV621 button[data-core="resonance"]').click();
    await page.waitForFunction(()=>window.__EVOLVE_DEV_CORE_BRIDGE_V617__?.read().theme==='dev_core_theme_01',null,{timeout:20000});
@@ -59,7 +59,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().mayClaimDaily),false);
    await page.locator('#evolveShopV621 .eStoreDailyV621').getByRole('button',{name:/연구 단계 1.*결정 35개 받기/}).click();
    assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().rewardClaims[window.__EVOLVE_SHOP_V621__.read().month+':1']),true);
-   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),60);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),145);
    const meta=await page.evaluate(()=>({game:localStorage.getItem('EVOLVE_V575_SHOP621_SAVE_SENTINEL'),ledger:localStorage.getItem('EVOLVE_M03_SHOP621_LEDGER_SENTINEL'),local:localStorage.getItem('EVOLVE_SHOP_EXPERIENCE_V621_V1')!==null}));
    assert.deepEqual(meta,{game:'KEEP_SAVE',ledger:'KEEP_LEDGER',local:true});
    assert.equal(await page.locator('#evolveShopV621 a').count(),0);
@@ -78,7 +78,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    await page.screenshot({path:path.join(output,'shop-v621-'+width+'x'+height+'.png'),fullPage:true});
    await page.reload({waitUntil:'domcontentloaded',timeout:180000});
    await page.waitForFunction(()=>window.__EVOLVE_SHOP_V621__&&!document.getElementById('webLoader'),null,{timeout:80000});
-   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),60);
+   assert.equal(await page.evaluate(()=>window.__EVOLVE_SHOP_V621__.read().crystals),145);
    assert.deepEqual(errors,[]);
    report.push({viewport:width+'x'+height,shopIntegrated:true,tabs:5,firstBonus:true,permanentCoreEquipped:true,monthlyPass:true,premiumReward:true,crimsonCoreRedeemedAndEquipped:true,noBilling:true,savesIntact:true,tapsAtLeast44:true});
    await context.close();
