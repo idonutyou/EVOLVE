@@ -1,5 +1,7 @@
 # EVOLVE online maintenance
 
+> **Read this first on EVERY new EVOLVE session:** [`EVOLVE_CURRENT_STATE.md`](EVOLVE_CURRENT_STATE.md) is the short, current handoff. Confirm `main` HEAD and `dist/version.json` before editing. `EVOLVE_HANDOFF.md`, `EVOLVE_PROGRESS.md`, and `EVOLVE_ROADMAP.md` are historical records and may describe earlier M07/M08 stages; never treat their top sections as current. GitHub commits and the current live build outrank percentages or old instructions. Do not repeatedly rediscover resources already recorded in the state file.
+
 - Current baseline: V575. Never revert to V555 or historical Drive files.
 - Keep image bytes exact. Do not regenerate, resize, re-encode, or reduce quality.
 - Preserve existing combat, maps, bosses, stages, rewards and save keys unless requested.
@@ -30,11 +32,7 @@
   Preserve earlier snapshots. If a remote write is blocked, save the recovery
   archive through the authorized file workflow and state which write is blocked.
 - Distinguish automated mobile viewport checks from physical Galaxy S23+ testing.
-- Split each roadmap STEP into three separately requested substeps: design
-  (10-30%), implementation and local checks (40-70%), then regression,
-  browser verification and public deployment (80-100%). Stop after the current
-  substep and save its recovery point; do not continue into the next substep
-  until the user asks. Keep every 10% remote checkpoint and verification.
+- Roadmap STAGES retain three phases: design (10-30%), implementation and focused checks (40-70%), final regression/publication (80-100%). Follow the CURRENT delivery batch cadence below, not the superseded one-user-turn-per-10% cadence. Work through the requested 20% or 30% batch while saving recoverable checkpoints at each internal 10%; stop after the batch and await the next request. Never skip the required backup or release checks.
 
 - User-approved map rules and the saved-JSON fast update procedure are in docs/MAP_UPDATE_RULES_KO.md. Read that file before map work. When a supplied save is already deployed byte-for-byte/equivalent, verify the live build and report completion without redoing the patch.
 
@@ -42,9 +40,9 @@
 
 **Default to the fastest safe workflow without requiring the user to repeat the request.** This applies to character/core/weapon changes and subsequent monetization, UI, map, and game work. Existing protection/release rules still override shortcuts when real risk exists.
 
-1. **Recover, do not repeat.** First locate the newest verified working ZIP, Git branch, or Library checkpoint; resume from its changed files instead of reconstructing finished work. Compare current main HEAD and original checkpoint. Don't confuse a reported percentage with a deployed commit.
+1. **Recover, do not repeat.** Read `EVOLVE_CURRENT_STATE.md`, check current main HEAD and `dist/version.json` once, then locate the newest verified ZIP, Git branch, or Library checkpoint. Before attempting ZIP upload, Base64 transfer or environment handoff, check whether the EXACT image/engine blob already exists in a reachable Git branch or the `dist` tree; reuse its Git SHA directly. A missing local file does NOT mean a missing GitHub file. Resume from changed files instead of reconstructing finished work. Don't confuse a reported percentage with a deployed commit.
 2. **Never re-fetch/rebuild/hash ~386MB of unchanged original assets as a routine intermediate step.** Use tracked Git blob/tree IDs, preserved baseline manifest, and the delta list; validate SHA-256 of new/modified files and checkpoint archive once. Hash all resources only for a final high-risk release or if asset integrity is genuinely suspect.
-3. **Implementation first, one minimal test at the right time.** Do not run browser or regression tests at each 10% checkpoint. For character work, complete missing image/code wiring first, then run a single existing focused smoke test and a save-compatibility check before public release. Re-run only the specific failing case after a fix. Never run the full 28-script suite or re-download 386MB unchanged assets by default. Do not build a new QA harness for already-tested behavior.
+3. **Implementation first, one minimal test at the right time.** Do not run browser or regression tests at each 10% checkpoint. For character work, complete missing image/code wiring first. Use `python3 tests/bio_core_090_static.py --metadata-only` for a fast metadata-only check when appropriate; it does NOT prove game rendering, character behavior or save safety. Run one real focused browser smoke and a save-compatibility check before public character release. Fail quickly on a known core-loader failure; do not wait a full browser timeout. Re-run only a specific failing case after a fix. Never run the full 28-script suite or re-download ~386MB unchanged assets by default. Do not build a new QA harness for already-tested behavior.
 4. **Correct stale expectations instead of treating them as game defects.** When replacing the original character image/animation, update assertions tied to the intentionally replaced PNG SHA, shape, 20 frames, or anatomy; preserve actual movement, weapon, collision, save, and shop checks. Never silently disable a genuine behavioral assertion.
 5. **Actual work before QA.** Continue the unfinished implementation immediately after locating the last checkpoint. Intermediate 10% marks require saving changed files and checking the new backup once, not another game test. At completion, perform one consolidated changed-feature smoke/save check, a changed-files integrity check, and verify actual public Pages publication. Expand checks only for a newly observed defect, change to engine/save/transactions, or an explicit user request; never repeat known PASS checks with identical inputs.
 6. **10% recovery points remain mandatory; optimize their cost.** Save only new/modified project files plus exact base commit/build, paths, hashes and restore instructions. Verify once and preserve previous checkpoints. Do not repeatedly download and re-verify the same 13MB or repack 386MB on every milestone. If remote binary upload is unavailable, preserve the actual recoverable ZIP in authorized Library/files and report GitHub publication as pending—do not claim it was pushed.
@@ -52,7 +50,7 @@
 8. **Time and credit:** never turn an implementation request into repeated audits or speculative diagnostics. One initial current-state read, direct delta edit, one checkpoint verification, then advance. No repeated repo listings/branch comparisons/large download/hash runs or extra screenshots unless new evidence calls for them. Report concise actual progress; avoid claims of measured savings without measurement.
 9. **No unrequested art changes:** reuse approved images, protect the central core and exactly four default walking legs; tell the user before a stage that truly needs image rendering. Preserve M08 shop, M09 economic docs, game saves and established character art unless explicitly changed.
 
-This policy is stored in-repository so any new EVOLVE development conversation should read this `AGENTS.md` at the start and automatically use the protocol; note that a chat which does not consult the repository may not receive these instructions. Existing 10%-checkpoint, asset-safety and final-publication conditions are not waived.
+This policy is stored in-repository. Every new EVOLVE development session must explicitly read this `AGENTS.md` and `EVOLVE_CURRENT_STATE.md`; these documents are not automatically injected into unrelated chats. Never start a lengthy audit of historical M07 handoffs after a verified current baseline has already been identified. Existing 10%-checkpoint, asset-safety and final-publication conditions are not waived.
 
 ## Current delivery cadence (user update: 2026-10-29)
 

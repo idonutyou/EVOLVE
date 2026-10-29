@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """V625 delta-only publication invariants. Avoid touching the 386 MB legacy asset payload."""
-import hashlib,json,re,subprocess
+import hashlib,json,re,subprocess,sys
 from pathlib import Path
 P=Path(__file__).resolve().parents[1]
 Dist=P/'dist'
@@ -9,8 +9,26 @@ ver=json.loads((Dist/'version.json').read_text())
 report=json.loads((Dist/'verification.json').read_text())
 html=(Dist/'index.html').read_text()
 art=json.loads((P/'web/bio-core-art-v625.json').read_text())
-engines=[e for e in manifest if e['kind']=='game-code' and e['path']==report['bio_core_v625']['engine'] and (Dist/e['path']).is_file()]
-assert len(engines)==1 and len(manifest)==1079
+# The active renderer can move to a later ambient/character build; V625's entry is historical.
+active_engine=report.get('auto_ambient_v627',{}).get('engine') or report['bio_core_v625']['engine']
+engines=[e for e in manifest if e['kind']=='game-code' and e['path']==active_engine]
+assert len(engines)==1 and len(manifest)==ver['assets']==report['cached_files']
+assert html.count(active_engine)==1
+assert ver['build']==report['build']
+assert report['cached_bytes']==sum(e['bytes'] for e in manifest)
+if '--metadata-only' in sys.argv[1:]:
+ # No dist/assets downloads: verifies build references, original manifest entries
+ # and expected character PNG metadata only. This is NOT a rendering/gameplay QA.
+ for key in ('original','matte','tail','gun','walkAtlas','idleAtlas'):
+  e=art[key]
+  assert e['sha256'] in e['path'] and sum(x['path']==e['path'] and x['bytes']==e['bytes'] and x['sha256']==e['sha256'] for x in manifest)==1
+ original_records=manifest[:1072]
+ value='\\n'.join(f"{x['path']}|{x['sha256']}|{x['bytes']}|{x['kind']}" for x in original_records)
+ h=2166136261
+ for char in value:h=((h^ord(char))*16777619)&0xffffffff
+ assert h==1701511232
+ print(json.dumps({'success':True,'mode':'metadata-only','active_engine':active_engine,'verified_character_png_metadata':6,'did_not_read_asset_bytes':True,'rendering_qa':False}))
+ raise SystemExit(0)
 engine=engines[0];data=(Dist/engine['path']).read_bytes();code=data.decode()
 assert hashlib.sha256(data).hexdigest()==engine['sha256'] and engine['bytes']==len(data)
 assert html.count(engine['path'])==1

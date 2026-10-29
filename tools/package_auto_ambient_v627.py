@@ -32,6 +32,7 @@ config={k:version[k] for k in ('version','build','scriptBytes','preloadResources
 html,count=re.subn(r'window\.EVOLVE_WEB_CONFIG=\{.*?\};',lambda _:'window.EVOLVE_WEB_CONFIG='+json.dumps(config,separators=(',',':'))+';',html,count=1);assert count==1
 (ROOT/'dist/index.html').write_text(html);(ROOT/'dist/version.json').write_text(json.dumps(version,ensure_ascii=False,indent=2)+'\n')
 report=json.loads(old('dist/verification.json'));report.update(version=version['version'],build=version['build'],index_bytes=len(html.encode()),cached_bytes=sum(e['bytes'] for e in manifest),cached_files=len(manifest))
+report['bio_core_v625']['engine']=new  # Keep the active renderer reference consistent for character QA.
 report['auto_ambient_v627']={'engine':new,'baseline':BASE,'map_sampling':'one small sample per source with reuse','core_specific_settings':False,'shadow':'cached per animation silhouette','image_bytes_changed':False,'save_keys_changed':False}
 (ROOT/'dist/verification.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'engine':new,'sha256':digest,'build':version['build'],'assets':len(manifest)}))

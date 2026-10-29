@@ -18,7 +18,16 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   });
   page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>{if(!r.url().startsWith('data:'))report.failedRequests.push({url:r.url(),error:r.failure()?.errorText});});
   await page.goto('http://127.0.0.1:'+server.address().port+'/?evolveQA=1',{waitUntil:'domcontentloaded',timeout:180000});
-  await page.waitForFunction(()=>window.__EVOLVE_BIOCORE_V625__?.read().ready&&window.__EVOLVE_TEST_MODULE_V575__?.read().ready&&!document.getElementById('start').disabled&&!document.getElementById('webLoader'),null,{timeout:180000});
+  // Stop immediately on a known asset/bootstrap failure rather than timing out for 180s.
+  await page.waitForFunction(()=>{
+   const bio=window.__EVOLVE_BIOCORE_V625__?.read();
+   const loader=window.EVOLVE_WEB_CLIENT?.read?.();
+   const retry=document.getElementById('webRetry');
+   if(bio?.loadError||loader?.failed||retry&&!retry.hidden)return true;
+   return bio?.ready&&window.__EVOLVE_TEST_MODULE_V575__?.read()?.ready&&!document.getElementById('start')?.disabled&&!document.getElementById('webLoader');
+  },null,{timeout:180000});
+  const bootFault=await page.evaluate(()=>({character:window.__EVOLVE_BIOCORE_V625__?.read().loadError||null,loaderFailed:window.EVOLVE_WEB_CLIENT?.read?.().failed||false,status:document.getElementById('webStatus')?.textContent||''}));
+  assert.ok(!bootFault.character&&!bootFault.loaderFailed,'Character bootstrap failed: '+JSON.stringify(bootFault));
   if(process.env.AUTO_MAP_ONLY==='1'){
    report.maps=[];
    for(const stage of [20,25,20,4])report.maps.push(await page.evaluate(async stage=>{
