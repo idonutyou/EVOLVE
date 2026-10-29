@@ -19,6 +19,8 @@
   Object.freeze({id:'researchpass',title:'월간 연구 패스',category:'시즌',price:'₩5,900',kind:'monthly',crystals:0,once:false,badge:'월간 전용'})
  ]);
  const byId=Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+ // M09 40%: non-combat permanent HOME nameplate; not a billing SKU.
+ const UI_COSMETICS=Object.freeze({lab_nameplate:Object.freeze({id:'lab_nameplate',title:'연구실 명패 · 변이 기록자',slot:'home_nameplate',crystals:180})});
  const fresh=()=>({schema:SCHEMA,revision:0,crystals:0,firstPurchase:false,owned:{},orders:{},passMonths:{},dailyClaims:{},rewardClaims:{},missionClaims:{}});
  const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
  const copy=x=>JSON.parse(JSON.stringify(x));
@@ -46,6 +48,13 @@
   for(const [k,v] of Object.entries(x.passMonths))if(!/^20\d\d-(0[1-9]|1[0-2])$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
   for(const [k,v] of Object.entries(x.dailyClaims))if(!/^20\d\d-\d\d-\d\d$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
   for(const [k,v] of Object.entries(x.rewardClaims))if(!/^20\d\d-(0[1-9]|1[0-2]):[1-5]$/.test(k)||v!==true)throw Error('STORE_DATA_INVALID');
+  // Optional for V621 saves created before M09. A corrupt extension must fail closed.
+  if(x.uiCollectibles!==undefined){
+   const ui=x.uiCollectibles;
+   if(!requireObject(ui)||!requireObject(ui.owned)||!requireObject(ui.equipped))throw Error('STORE_DATA_INVALID');
+   for(const [id,val] of Object.entries(ui.owned))if(!own(UI_COSMETICS,id)||val!==true)throw Error('STORE_DATA_INVALID');
+   for(const [slot,id] of Object.entries(ui.equipped))if(slot!=='home_nameplate'||id!=='lab_nameplate'||ui.owned[id]!==true)throw Error('STORE_DATA_INVALID');
+  }
   return x;
  }
  const MISSION_REWARDS=Object.freeze({stage:10,run:5,codex:10});
@@ -133,7 +142,31 @@
    next.crystals+=value;next.revision++;write(next);
    return Object.freeze({mission,day,crystals:value,charged:false,source:'LOCAL_PREVIEW_ONLY',state:snapshot()});
   }
-  return Object.freeze({snapshot,order,claimDaily,claimPremium,missionStatus,claimMission});
+  function redeemUiCosmetic(id){
+   if(!own(UI_COSMETICS,id))throw Error('COLLECTIBLE_UNKNOWN');
+   const s=read(),item=UI_COSMETICS[id],ui=s.uiCollectibles||{owned:{},equipped:{}};
+   if(ui.owned[id]===true)throw Error('ALREADY_OWNED');
+   if(s.crystals<item.crystals)throw Error('INSUFFICIENT_CRYSTALS');
+   const next=copy(s);
+   if(!next.uiCollectibles)next.uiCollectibles={owned:{},equipped:{}};
+   next.crystals-=item.crystals;
+   next.uiCollectibles.owned[id]=true;
+   next.revision++;
+   write(next); // Single V621 wallet write: never deduct without granting ownership.
+   return Object.freeze({item:id,spentCrystals:item.crystals,charged:false,state:snapshot()});
+  }
+  function equipUiCosmetic(id){
+   if(!own(UI_COSMETICS,id))throw Error('COLLECTIBLE_UNKNOWN');
+   const s=read(),ui=s.uiCollectibles;
+   if(ui?.owned?.[id]!==true)throw Error('COLLECTIBLE_NOT_OWNED');
+   const next=copy(s),slot=UI_COSMETICS[id].slot;
+   const selected=next.uiCollectibles.equipped[slot]===id;
+   if(selected)delete next.uiCollectibles.equipped[slot];
+   else next.uiCollectibles.equipped[slot]=id;
+   next.revision++;write(next);
+   return Object.freeze({item:id,equipped:!selected,charged:false,state:snapshot()});
+  }
+  return Object.freeze({snapshot,order,claimDaily,claimPremium,missionStatus,claimMission,redeemUiCosmetic,equipUiCosmetic});
  }
- return Object.freeze({createStore,kstDay,kstMonth,paidMonthWindow,products:PRODUCTS,missionRewards:MISSION_REWARDS,storageKey:STORAGE_KEY,mode:'LOCAL_PREVIEW_NO_BILLING'});
+ return Object.freeze({createStore,kstDay,kstMonth,paidMonthWindow,products:PRODUCTS,uiCosmetics:UI_COSMETICS,missionRewards:MISSION_REWARDS,storageKey:STORAGE_KEY,mode:'LOCAL_PREVIEW_NO_BILLING'});
 });
