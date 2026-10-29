@@ -12,6 +12,25 @@
  const theme={starter:['✦','starter'],crystal100:['◇','crystal'],crystal300:['✧','crystal'],resonance:['◈','cosmetic'],crimson:['✹','cosmetic'],researchpass:['☷','pass']};
  const categories=['추천','재화','외형','시즌','패키지'];
  const PROFILE='dev_local_profile_01';
+ // M09 70%: local-only QA counters, no personal info, network, or production analytics.
+ const FUNNEL_KEY='EVOLVE_M09_LOCAL_FUNNEL_V1';
+ const funnelOn=/(?:^|[?&])evolveQA=1(?:&|$)/.test(location.search||'');
+ const funnelEvents=['shop_open','product_view','purchase_confirm_local','cosmetic_redeem','cosmetic_equip','pass_claim','return_home'];
+ function readFunnel(){
+  let data={schema:'EVOLVE_M09_QA_FUNNEL_V1',counters:Object.fromEntries(funnelEvents.map(k=>[k,0]))};
+  if(!funnelOn)return data;
+  try{
+   const raw=localStorage.getItem(FUNNEL_KEY);if(!raw)return data;
+   const saved=JSON.parse(raw);if(saved?.schema!==data.schema||!saved.counters||typeof saved.counters!=='object')return data;
+   for(const k of funnelEvents)if(Number.isSafeInteger(saved.counters[k])&&saved.counters[k]>=0&&saved.counters[k]<=99999999)data.counters[k]=saved.counters[k];
+  }catch(_){}
+  return data;
+ }
+ function funnel(event){
+  if(!funnelOn||!funnelEvents.includes(event))return;
+  try{const data=readFunnel();data.counters[event]=Math.min(99999999,data.counters[event]+1);localStorage.setItem(FUNNEL_KEY,JSON.stringify(data));}catch(_){}
+ }
+ window.__EVOLVE_M09_FUNNEL_V627__=Object.freeze({read:readFunnel,enabled:funnelOn,localOnly:true,events:funnelEvents});
  let store=null,legacy=null,root=null,content=null,challengeRoot=null,busy=false,pending=null,pendingLab=false,category='추천',message='';
  const style=`
  #homeShopViewV601 #nativeShopV620,#homeShopViewV601 #homeShopHintV601{display:none!important}
@@ -90,11 +109,23 @@
  #homeStatusV525 .profileInfoV525[data-m09-pass="true"]{padding-right:21px}
  #homeStatusV525 .profileInfoV525[data-m09-pass="true"][data-m09-starter="true"]{padding-right:42px}
  #homeShopViewV601 .eM09PassBlockedV627{font-size:11px;line-height:1.5;color:#ffcfac;margin:5px 0}
+ #homeShopViewV601 .eM09QAStatsV627{border:1px solid #6b6675;padding:10px;margin:12px 0;border-radius:10px;background:#181b25;font:11px/1.5 ui-monospace,monospace;color:#e0d6ec}
+ #homeShopViewV601 .eM09QAStatsV627 p{margin:0 0 6px;color:#ffdcba}
+ #homeShopViewV601 .eM09QAStatsV627 span{display:inline-block;margin:3px 8px 3px 0;overflow-wrap:anywhere}
  #homeShopViewV601 .eStoreFineV621{font-size:11px;line-height:1.55;color:#c7b3b1;margin-top:13px}
  #homeShopViewV601 .eStoreMessageV621{font-size:12px;color:#b6eed2;min-height:18px;line-height:1.5;margin:6px 0}
  #homeShopViewV601 .eStoreMessageV621[data-error="true"]{color:#ffafa5}
  #homeShopViewV601 .evolveStoreV621 button:focus-visible{outline:3px solid #ffd7a7;outline-offset:2px}
- @media(max-width:350px){#homeShopViewV601 .eStoreGridV621{gap:6px}#homeShopViewV601 .eStoreCardV621{padding:8px}#homeShopViewV601 .eStoreTabsV621 button{padding:7px 8px}}
+ @media(max-width:350px){#homeShopViewV601 .eStoreGridV621{gap:6px}#homeShopViewV601 .eStoreCardV621{padding:8px}#homeShopViewV601 .eStoreTabsV621 button{padding:7px 8px}
+ #homeShopViewV601 .eM09NameplateRow,#homeShopViewV601 .eStoreCoreRowV621{flex-wrap:wrap}
+ #homeShopViewV601 .eM09NameplateRow button,#homeShopViewV601 .eStoreCoreRowV621 button{width:100%}
+ #homeShopViewV601 .eStoreConfirmV621 div{flex-wrap:wrap}
+ #homeShopViewV601 .eStoreConfirmV621 button{flex:1 1 100%}
+ #homeShopViewV601 .eStorePassProgressV621{gap:2px}
+ #homeShopViewV601 .eStorePassProgressV621 span{font-size:10px}
+ }
+ @media(min-width:600px) and (orientation:landscape){#homeShopViewV601 .evolveStoreV621{max-width:490px;min-width:0;margin-inline:auto}}
+ 
  @media(prefers-reduced-motion:reduce){#homeShopViewV601 .evolveStoreV621 *{transition:none!important;animation:none!important}}
  `;
  function add(el,tag,cls,text){const n=make(tag,cls,text);el.append(n);return n}
@@ -139,6 +170,7 @@
   else legacy.equip(PROFILE,'core',id);
   window.dispatchEvent(new Event('evolve:dev-mock-change'));
   window.__EVOLVE_DEV_CORE_BRIDGE_V617__?.sync?.();
+  funnel('cosmetic_equip');
   message=current===id?'코어 장착 해제':'코어 장착 완료';
   draw();
  }
@@ -171,11 +203,11 @@
   const goal=engine.passDays[tier-1],key=s.month+':'+tier,claimed=!!s.rewardClaims[key],ready=s.pass.progress>=goal;
   const label=inChallenge?'누적 '+goal+'일 · '+(claimed?'수령 완료':ready?'결정 35개 수령':'출석 '+s.pass.progress+'/'+goal):
   '연구 단계 '+tier+' ('+goal+'일) · '+(claimed?'수령 완료':ready?'결정 35개 받기':'진행 '+s.pass.progress+'/'+goal);
-  button(parent,label,()=>{try{store.claimPremium(tier);message='월간 보상 35결정 수령 완료';draw()}catch(e){fail(e)}},claimed||!ready||!!pending||pendingLab);
+  button(parent,label,()=>{try{store.claimPremium(tier);funnel('pass_claim');message='월간 보상 35결정 수령 완료';draw()}catch(e){fail(e)}},claimed||!ready||!!pending||pendingLab);
  }
  function passBadgeButton(parent,s){
   if(s.pass.passBadgeOwned){add(parent,'p','eStoreFineV621','✧ 월간 연구자 영구 프로필 휘장 소장 중');return;}
-  button(parent,s.pass.passBadgeClaimable?'21일 완주 · 영구 프로필 휘장 받기':'21일 완주 휘장 · 누적 '+s.pass.progress+'/21',()=>{try{store.claimPassBadge();message='월간 연구자 휘장 영구 획득';draw()}catch(e){fail(e)}},!s.pass.passBadgeClaimable||!!pending||pendingLab);
+  button(parent,s.pass.passBadgeClaimable?'21일 완주 · 영구 프로필 휘장 받기':'21일 완주 휘장 · 누적 '+s.pass.progress+'/21',()=>{try{store.claimPassBadge();funnel('pass_claim');message='월간 연구자 휘장 영구 획득';draw()}catch(e){fail(e)}},!s.pass.passBadgeClaimable||!!pending||pendingLab);
  }
  function drawHomeNameplate(s){
   const host=document.getElementById('homePartsViewV523');
@@ -192,19 +224,19 @@
  function confirmNameplate(){
   if(busy||!pendingLab||!atShop())return;
   busy=true;
-  try{store.redeemUiCosmetic('lab_nameplate');message='연구실 명패 영구 해금 · 변이 결정 180개 사용';}
+  try{store.redeemUiCosmetic('lab_nameplate');funnel('cosmetic_redeem');message='연구실 명패 영구 해금 · 변이 결정 180개 사용';}
   catch(e){fail(e);return}
   busy=false;pendingLab=false;draw();
  }
  function toggleNameplate(){
   if(busy||pending||pendingLab||!atShop())return;
   busy=true;
-  try{const result=store.equipUiCosmetic('lab_nameplate');message=result.equipped?'연구실 명패 장착 완료 · HOME의 PARTS에서 확인하세요.':'연구실 명패 장착 해제';}
+  try{const result=store.equipUiCosmetic('lab_nameplate');funnel('cosmetic_equip');message=result.equipped?'연구실 명패 장착 완료 · HOME의 PARTS에서 확인하세요.':'연구실 명패 장착 해제';}
   catch(e){fail(e);return}
   busy=false;draw();
  }
  function priceDisplay(p){return p.price}
- function begin(id){if(busy||pending||pendingLab||!atShop())return;pending=id;draw();}
+ function begin(id){if(busy||pending||pendingLab||!atShop())return;pending=id;funnel('product_view');draw();}
  function atShop(){const view=document.getElementById('homeShopViewV601');return !!(view&&!view.classList.contains('hidden')&&window.EVOLVE_WEB_GUARD?.atHome?.())}
  function done(){
   if(!pending||pendingLab||busy||!atShop())return;
@@ -212,6 +244,7 @@
   try{
    const receiptId='shop621_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,14);
    const result=store.order(id,receiptId);
+   funnel('purchase_confirm_local');if(id==='crimson')funnel('cosmetic_redeem');
    if(id==='resonance'||id==='crimson'){
     try{
      const entitlement=bridgeOwnedCore(id);
@@ -364,6 +397,12 @@
    const action=button(row,selected?'해제':owned?'장착':'◆ 180 · 해금',owned?toggleNameplate:beginNameplate,!!pending||!!pendingLab||(!owned&&s.crystals<180));
    action.dataset.m09Collectible='lab_nameplate';action.setAttribute('aria-pressed',String(selected));
   }
+  if(funnelOn){
+   const box=add(frag,'section','eM09QAStatsV627');
+   add(box,'p','','M09 개발용 로컬 클릭 집계 · 운영 통계 아님');
+   const counts=readFunnel().counters;
+   for(const key of funnelEvents)add(box,'span','',key+': '+counts[key]);
+  }
   add(frag,'p','eStoreFineV621','상품 획득과 연구 보상은 현재 브라우저에 저장됩니다. 실제 결제, 영수증, 서버 권리 지급은 연결되지 않았으며 별도 계정으로 이전되지 않습니다.');
   content.replaceChildren(frag);
   drawChallenge();
@@ -379,7 +418,8 @@
   draw();
   const challengeTab=document.getElementById('memoryBtn');
   challengeTab?.addEventListener('click',()=>drawChallenge());
-  const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{pending=null;pendingLab=false;draw()});
+  const tab=document.getElementById('homeShopTabV601');tab?.addEventListener('click',()=>{funnel('shop_open');pending=null;pendingLab=false;draw()});
+  document.getElementById('homeBattleTabV522')?.addEventListener('click',()=>{if(atShop())funnel('return_home')},true);
   const observer=new MutationObserver(()=>{if(atShop()){pending=null;pendingLab=false;draw()}});
   observer.observe(view,{attributes:true,attributeFilter:['class']});
   window.addEventListener('pageshow',()=>{pending=null;pendingLab=false;draw()});
