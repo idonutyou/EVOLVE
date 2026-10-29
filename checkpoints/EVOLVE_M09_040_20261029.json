@@ -1,0 +1,19 @@
+{
+  "stage": "M09-040",
+  "percent": 40,
+  "date_kst": "2026-10-29",
+  "completed": [
+    "180-crystal lab nameplate redemption",
+    "equip and unequip",
+    "HOME PARTS display"
+  ],
+  "changed": [
+    "web/shop-experience-v621.js",
+    "web/shop-front-v621.js",
+    "dist/shop-experience-v621.js",
+    "dist/shop-front-v621.js"
+  ],
+  "tested": "single focused runtime test PASS; web/dist match",
+  "release": "not published; reserved for M09 final release",
+  "next": "M09-050"
+}
