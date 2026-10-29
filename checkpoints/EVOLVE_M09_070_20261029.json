@@ -1,0 +1,43 @@
+{
+  "schema": "EVOLVE_M09_CHECKPOINT",
+  "stage": "M09-070",
+  "percent": 70,
+  "date_kst": "2026-10-29",
+  "scope": "development-only local funnel and small/mobile/landscape CSS",
+  "changes": [
+    {
+      "path": "web/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "dist/shop-experience-v621.js",
+      "sha": "7d054a6d6e1e5ade79683b77020c0579f070adb2"
+    },
+    {
+      "path": "web/shop-front-v621.js",
+      "sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    },
+    {
+      "path": "dist/shop-front-v621.js",
+      "sha": "4d45d2cc74687444aa5a54715a9aeebcd36ab6e9"
+    }
+  ],
+  "metrics": [
+    "shop_open",
+    "product_view",
+    "purchase_confirm_local",
+    "cosmetic_redeem",
+    "cosmetic_equip",
+    "pass_claim",
+    "return_home"
+  ],
+  "qa_only": "?evolveQA=1",
+  "no_personal_data": true,
+  "no_network": true,
+  "validation": "JS syntax, web/dist parity, 11 flow/style markers",
+  "not_claimed": "not physically tested on Galaxy; browser viewport QA pending for release",
+  "published": false,
+  "real_billing": false,
+  "next": "M09-080",
+  "backup_delete_before_100": false
+}
