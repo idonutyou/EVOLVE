@@ -9,8 +9,8 @@ assert.ok(index.includes('"build":"'+releaseVersion.build+'"'),'HTML embedded bu
 assert.equal(report.index_bytes,Buffer.byteLength(index),'index byte count updated for public release');
 
 const names=[
- ['shop-experience-v621.js','v=100&m08=40'],
- ['shop-front-v621.js','v=100'],
+ ['shop-experience-v621.js','v=120&m08=40'],
+ ['shop-front-v621.js','v=120'],
  ['m08-stage-mission-v622.js','v=10'],
  ['m08-runtime-missions-v623.js','v=20'],
  ['m08-mission-rewards-v624.js','v=101']
