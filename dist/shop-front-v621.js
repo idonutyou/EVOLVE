@@ -85,6 +85,11 @@
  #homeStatusV525 .profileInfoV525[data-m09-starter="true"]{position:relative;padding-right:21px}
  #homeShopViewV601 .eM09ProfileBadgeRow{border-top:1px solid #574148;padding:11px 0;display:flex;align-items:center;gap:9px;color:#f8dcc5;font-size:12px;line-height:1.45}
  #homeShopViewV601 .eM09ProfileBadgeGlyph{display:grid;place-items:center;flex:0 0 38px;height:38px;border:1px solid #ffdc92;border-radius:50%;background:linear-gradient(#b47245,#4b3238);color:#fff1ba;font-size:23px}
+ #homeStatusV525 .eM09PassBadgeV627{position:absolute;right:0;top:-1px;display:grid;place-items:center;width:18px;height:18px;border:1px solid #d9a3ee;border-radius:50%;background:linear-gradient(#55437d,#31283e);color:#f6e1ff;font-size:12px;font-weight:900}
+ #homeStatusV525 .profileInfoV525[data-m09-pass="true"][data-m09-starter="true"] .eM09StarterBadgeV626{right:20px}
+ #homeStatusV525 .profileInfoV525[data-m09-pass="true"]{padding-right:21px}
+ #homeStatusV525 .profileInfoV525[data-m09-pass="true"][data-m09-starter="true"]{padding-right:42px}
+ #homeShopViewV601 .eM09PassBlockedV627{font-size:11px;line-height:1.5;color:#ffcfac;margin:5px 0}
  #homeShopViewV601 .eStoreFineV621{font-size:11px;line-height:1.55;color:#c7b3b1;margin-top:13px}
  #homeShopViewV601 .eStoreMessageV621{font-size:12px;color:#b6eed2;min-height:18px;line-height:1.5;margin:6px 0}
  #homeShopViewV601 .eStoreMessageV621[data-error="true"]{color:#ffafa5}
@@ -97,7 +102,7 @@
  const storeApi=()=>store?.snapshot();
  function fail(e){
   const code=e?.message||'';
-  message=({ALREADY_OWNED:'이미 영구 소장한 아이템입니다.',INSUFFICIENT_CRYSTALS:'변이 결정이 부족합니다.',STORAGE_WRITE_FAILED:'저장에 실패했습니다. 결정은 차감되지 않았습니다.',COLLECTIBLE_NOT_OWNED:'먼저 명패를 해금해 주세요.',STORE_DATA_INVALID:'기존 상점 기록이 올바르지 않아 작업을 중단했습니다.'})[code]||code||'상점 데이터를 확인할 수 없습니다.';
+  message=({ALREADY_OWNED:'이미 영구 소장한 아이템입니다.',PASS_COMPLETION_UNREACHABLE:'이번 달에는 21일 완주가 불가능해 새 패스를 구매할 수 없습니다.',INSUFFICIENT_CRYSTALS:'변이 결정이 부족합니다.',STORAGE_WRITE_FAILED:'저장에 실패했습니다. 결정은 차감되지 않았습니다.',COLLECTIBLE_NOT_OWNED:'먼저 명패를 해금해 주세요.',STORE_DATA_INVALID:'기존 상점 기록이 올바르지 않아 작업을 중단했습니다.'})[code]||code||'상점 데이터를 확인할 수 없습니다.';
   busy=false;pending=null;pendingLab=false;draw(true);
  }
  function coreKey(item){return item==='crimson'?'dev_core_theme_02':'dev_core_theme_01'}
@@ -152,6 +157,25 @@
   badge.hidden=!s.starterBadgeOwned;
   badge.style.display=s.starterBadgeOwned?'grid':'none';
   host.dataset.m09Starter=String(s.starterBadgeOwned);
+ }
+ function drawPassProfileBadge(s){
+  const host=document.querySelector('#homeStatusV525 .profileInfoV525');
+  if(!host)return;
+  let badge=host.querySelector('.eM09PassBadgeV627');
+  if(!badge){badge=make('span','eM09PassBadgeV627','✧');badge.setAttribute('title','월간 연구자 · 영구 프로필 휘장');badge.setAttribute('aria-label','월간 연구자 영구 프로필 휘장');host.append(badge);}
+  badge.hidden=!s.pass.passBadgeOwned;
+  badge.style.display=s.pass.passBadgeOwned?'grid':'none';
+  host.dataset.m09Pass=String(s.pass.passBadgeOwned);
+ }
+ function passTierButton(parent,s,tier,inChallenge=false){
+  const goal=engine.passDays[tier-1],key=s.month+':'+tier,claimed=!!s.rewardClaims[key],ready=s.pass.progress>=goal;
+  const label=inChallenge?'누적 '+goal+'일 · '+(claimed?'수령 완료':ready?'결정 35개 수령':'출석 '+s.pass.progress+'/'+goal):
+  '연구 단계 '+tier+' ('+goal+'일) · '+(claimed?'수령 완료':ready?'결정 35개 받기':'진행 '+s.pass.progress+'/'+goal);
+  button(parent,label,()=>{try{store.claimPremium(tier);message='월간 보상 35결정 수령 완료';draw()}catch(e){fail(e)}},claimed||!ready||!!pending||pendingLab);
+ }
+ function passBadgeButton(parent,s){
+  if(s.pass.passBadgeOwned){add(parent,'p','eStoreFineV621','✧ 월간 연구자 영구 프로필 휘장 소장 중');return;}
+  button(parent,s.pass.passBadgeClaimable?'21일 완주 · 영구 프로필 휘장 받기':'21일 완주 휘장 · 누적 '+s.pass.progress+'/21',()=>{try{store.claimPassBadge();message='월간 연구자 휘장 영구 획득';draw()}catch(e){fail(e)}},!s.pass.passBadgeClaimable||!!pending||pendingLab);
  }
  function drawHomeNameplate(s){
   const host=document.getElementById('homePartsViewV523');
@@ -223,12 +247,11 @@
    const progress=Object.keys(s.dailyClaims).filter(day=>day.startsWith(s.month+'-')).length;
    add(pass,'small','','패스 활성화 · 누적 출석 '+progress+'일 · 월말 종료');
    for(let tier=1;tier<=5;tier++){
-    const claimKey=s.month+':'+tier,claimed=!!s.rewardClaims[claimKey],ready=progress>=tier;
     const row=add(pass,'div','eStoreMissionRowV621');
     add(row,'strong','','연구 단계 '+tier+' / 5');
-    button(row,claimed?'수령 완료':ready?'결정 35개 수령':'출석 '+progress+'/'+tier,
-     ()=>{try{store.claimPremium(tier);message='프리미엄 연구 보상을 받았습니다.';draw()}catch(e){fail(e)}},claimed||!ready);
+    passTierButton(row,s,tier,true);
    }
+   passBadgeButton(pass,s);
   }
   add(frag,'p','','결제 연결 전 체험 중 · 실제 금액 청구 없음 · 보상/재화는 현재 브라우저에만 보관됩니다.');
   challengeRoot.replaceChildren(frag);
@@ -238,6 +261,7 @@
   let s;try{s=store.snapshot()}catch(e){content.replaceChildren(make('p','eStoreMessageV621','상점 기록을 읽을 수 없어 변경을 중단했습니다. 기록은 삭제되지 않습니다.'));return}
   drawHomeNameplate(s);
   drawStarterProfileBadge(s);
+  drawPassProfileBadge(s);
   const frag=document.createDocumentFragment();
   const hero=add(frag,'section','eStoreHeroV621');
   add(hero,'div','eStoreEyebrowV621','EVOLVE · GENOME MARKET');
@@ -265,14 +289,16 @@
    add(c,'strong','',p.title+' · '+priceDisplay(p));
    let detail=pending==='starter'?'변이 결정 160개와 첫 실험 기록 영구 프로필 배지를 함께 획득합니다. 첫 구매 추가 보너스 50결정은 별도로 1회만 지급됩니다. 실제 금액은 청구되지 않습니다.':pending==='crimson'?'변이 결정 120개를 사용하여 심홍 코어를 영구 획득합니다. 실제 금액은 청구되지 않습니다.':'구매를 확인하면 상품이 즉시 지급됩니다. 실제 금액은 청구되지 않습니다.';
    if(pending==='researchpass'){
+    detail+=' 누적 무료 출석 1·3·7·14·21일에 결정 각 35개, 21일 달성 시 월간 연구자 영구 휘장. 이번 달 이전 출석도 인정합니다.';
     const ms=Math.max(0,Date.parse(s.paidWindow.endExclusiveUtc)-Date.now());
     const hours=Math.floor(ms/3600000),minutes=Math.ceil(ms/60000);
     const remaining=hours>=24?Math.floor(hours/24)+'일 '+hours%24+'시간':hours>=1?hours+'시간':Math.max(0,minutes)+'분';
     detail+=' 이 패스는 '+s.month.replace('-','년 ')+'월 마지막 날 23:59(KST)까지만 유효합니다. 현재 남은 기간 약 '+remaining+'이며, 다음 달 자동 갱신되지 않습니다.';
     if(ms<86400000)detail+=' 주의: 이번 달 종료까지 24시간 미만 남았습니다.';
+    detail+=' 현재 출석 '+s.pass.progress+'일 · 이달 최대 추가 가능일을 포함한 달성가능 총 '+s.pass.maxReachable+'일.';
    }
    add(c,'p','',detail);
-   const row=add(c,'div');button(row,'취소',()=>{pending=null;draw()});button(row,'구매 확정',done);
+   const row=add(c,'div');button(row,'취소',()=>{pending=null;draw()});button(row,'구매 확정',done,pending==='researchpass'&&!s.pass.canBuy);
   }
   if(category==='추천'||category==='시즌'){
    const box=add(frag,'section','eStoreDailyV621');
@@ -283,14 +309,13 @@
     add(box,'p','','월간 패스 활성화 · '+s.paidWindow.month+' · 매월 1일~말일');
     add(box,'span','eStoreExpiryV621',s.month+' '+s.paidWindow.days+'일 23:59 KST 종료 · 다음 달 갱신 없음');
     const bar=add(box,'div','eStorePassProgressV621');
-    for(let tier=1;tier<=5;tier++){const key=s.month+':'+tier;const b=add(bar,'span','',String(tier));b.dataset.done=String(!!s.rewardClaims[key])}
-    const days=Object.keys(s.dailyClaims).filter(x=>x.startsWith(s.month+'-')).length;
-    for(let tier=1;tier<=5;tier++){
-     const key=s.month+':'+tier,claimed=!!s.rewardClaims[key],eligible=days>=tier;
-     button(box,'연구 단계 '+tier+' · '+(claimed?'수령 완료':eligible?'결정 35개 받기':'진행 '+days+'/'+tier),
-      ()=>{try{store.claimPremium(tier);message='시즌 보상 지급 완료';draw()}catch(e){fail(e)}},claimed||!eligible||!!pending);
-    }
-   }else add(box,'p','eStoreFineV621','프리미엄 연구 보상은 월간 패스 보유 시 열립니다.');
+    for(let tier=1;tier<=5;tier++){const key=s.month+':'+tier;const b=add(bar,'span','',String(engine.passDays[tier-1])+'일');b.dataset.done=String(!!s.rewardClaims[key])}
+    for(let tier=1;tier<=5;tier++)passTierButton(box,s,tier);
+    passBadgeButton(box,s);
+   }else{
+    add(box,'p','eStoreFineV621','프리미엄 연구 보상은 월간 패스 보유 시 열립니다. · 누적 출석 1·3·7·14·21일');
+    if(!s.pass.canBuy)add(box,'p','eM09PassBlockedV627','이번 달에는 21일 완주가 불가능하여 신규 패스 구매를 마감했습니다. 다음 달 1일부터 다시 이용할 수 있습니다.');
+   }
   }
   const heading=add(frag,'div','eStoreHeadingV621');add(heading,'h3','',category==='추천'?'추천 상품':category+' 상점');add(heading,'span','','SHOP · '+category);
   const grid=add(frag,'div','eStoreGridV621');
@@ -301,8 +326,8 @@
    const art=add(card,'div','eStoreArtV621',theme[p.id][0]);art.dataset.art=theme[p.id][1];art.setAttribute('aria-hidden','true');
    add(card,'span','eStoreBadgeV621',p.badge);
    add(card,'h4','',p.title);
-   add(card,'p','',p.kind==='monthly'?'매월 1일~말일 유효 · 특별 보상 트랙':p.kind==='cosmetic'?'공명 코어 외형 영구 소장 · 능력치 변화 없음':p.kind==='redeem'?'변이 결정 120개로 영구 소장 · 능력치 변화 없음':p.kind==='starter'?'변이 결정 160개 + 전용 프로필 배지 · 최초 1회':'변이 결정 '+p.crystals+'개');
-   button(card,own?'보유 중':p.price+' · '+(p.kind==='redeem'?'교환':'구매'),()=>begin(p.id),!!own||!!pending||(p.kind==='redeem'&&s.crystals<p.spendCrystals));
+   add(card,'p','',p.kind==='monthly'?'1·3·7·14·21일 출석 · 21일 영구 휘장 · 매월 말일 종료':p.kind==='cosmetic'?'공명 코어 외형 영구 소장 · 능력치 변화 없음':p.kind==='redeem'?'변이 결정 120개로 영구 소장 · 능력치 변화 없음':p.kind==='starter'?'변이 결정 160개 + 전용 프로필 배지 · 최초 1회':'변이 결정 '+p.crystals+'개');
+   button(card,own?'보유 중':p.price+' · '+(p.kind==='redeem'?'교환':'구매'),()=>begin(p.id),!!own||!!pending||pendingLab||(p.kind==='redeem'&&s.crystals<p.spendCrystals)||(p.id==='researchpass'&&!s.pass.canBuy));
   }
   if(category==='추천'||category==='외형'){
    const collection=add(frag,'section','eStoreCollectionV621');
