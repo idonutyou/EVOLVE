@@ -1,0 +1,71 @@
+{
+  "version": 625,
+  "original": {
+    "path": "assets/07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d.png",
+    "sha256": "07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d",
+    "bytes": 3085171,
+    "kind": "image"
+  },
+  "matte": {
+    "path": "assets/4111666b74cde3bf554613391396b3597874a548de70851b11c6836af32d5d94.png",
+    "sha256": "4111666b74cde3bf554613391396b3597874a548de70851b11c6836af32d5d94",
+    "bytes": 1654292,
+    "kind": "image"
+  },
+  "tail": {
+    "path": "assets/2a8e2c333ac6de8b1dcd7d9832e17c1f98198b6aa63c49476952476119ce6c33.png",
+    "sha256": "2a8e2c333ac6de8b1dcd7d9832e17c1f98198b6aa63c49476952476119ce6c33",
+    "bytes": 1941443,
+    "kind": "image"
+  },
+  "gun": {
+    "path": "assets/fc800c2c53eaabb0df05f5bdfb6133f4969e4ab1c09aecc90f51c92c0fe3cb88.png",
+    "sha256": "fc800c2c53eaabb0df05f5bdfb6133f4969e4ab1c09aecc90f51c92c0fe3cb88",
+    "bytes": 1624249,
+    "kind": "image"
+  },
+  "walkAtlas": {
+    "path": "assets/8caa7ca15beac139a6420f3151d6e6269481806e6443265b794bda86721c7b1b.png",
+    "sha256": "8caa7ca15beac139a6420f3151d6e6269481806e6443265b794bda86721c7b1b",
+    "bytes": 2435476,
+    "kind": "image"
+  },
+  "idleAtlas": {
+    "path": "assets/6addc8ec79e94d9e535601f8e82cb0d4aff93789e32ccedd1f5a827c9819ebd8.png",
+    "sha256": "6addc8ec79e94d9e535601f8e82cb0d4aff93789e32ccedd1f5a827c9819ebd8",
+    "bytes": 2394034,
+    "kind": "image"
+  },
+  "width": 1448,
+  "height": 1086,
+  "anchor": [
+    724,
+    500
+  ],
+  "shell": [
+    724,
+    480
+  ],
+  "tailRoot": [
+    300,
+    490
+  ],
+  "wrists": [
+    [
+      810,
+      465
+    ],
+    [
+      1110,
+      395
+    ]
+  ],
+  "nativeFacing": 0.36,
+  "frames": 36,
+  "cellWidth": 256,
+  "cellHeight": 192,
+  "columns": 6,
+  "cycleSeconds": 1.44,
+  "gaitDistance": 40,
+  "referenceLegs": 4
+}

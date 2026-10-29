@@ -10,6 +10,7 @@ if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615_
  mockCoreOverlayV617.id='m04CorePartsOverlayV617';mockCoreOverlayV617.setAttribute('aria-hidden','true');
  mockCoreOverlayV617.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:3;width:100%;height:100%';
  function mockCorePreviewPointV617(size){
+  if(typeof bioV625!=='undefined'&&bioV625.ready)return bioPreviewPointV625(size);
   const a=mutantArtV599,r=a.full.rect,u=mutantBaseScaleV599;
   const f=Math.min(size*.86/(r[2]*u),size*.86/(r[3]*u),size/a.displaySize);
   const ox=size/2-(r[0]+r[2]/2)*u*f,oy=size/2-(r[1]+r[3]/2)*u*f;
@@ -45,7 +46,7 @@ if(window.__EVOLVE_DEV_CORE_VISUALS_V617__&&window.__EVOLVE_DEV_MOCK_STORE_V615_
  drawPlayer=function(shadowOnly=false){
   const out=mockCoreDrawBaseV617(shadowOnly);
   if(!shadowOnly&&mockCoreThemeV617&&mutantV599.ready&&player.hp>0){
-   const p=mutantSourceWorldV599(mutantBodyPointV599(mutantArtV599.shell));
+   const p=(typeof bioV625!=='undefined'&&bioV625.ready)?bioWorldPointV625(bioArtV625.shell):mutantSourceWorldV599(mutantBodyPointV599(mutantArtV599.shell));
    const blink=player.hurtBlink>0?.4:1;
    mockCoreRendererV617.draw(ctx,mockCoreThemeV617,p.x,p.y,110*mutantScaleV599,blink);
    mockCoreCombatDrawsV617++;
