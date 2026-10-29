@@ -36,7 +36,7 @@ Updated: 2026-10-29 KST, after verified V629 public release. Source of truth: Gi
 ## Character application FAST DELTA tooling (2026-10-29)
 - Before any character/core/weapon ZIP transfer or full browser boot, use docs/character/FAST_APPLY_KO.md and tools/character_delta_apply.py in inspect mode.
 - The new one-engine delta tool verifies immutable image references, reuses Git blob SHAs from saved branches, and stages only changed modules and small build metadata. It fails closed on module drift; it never edits current dist directly. Browser/save testing remains required for a real character release.
-- New lightweight Actions workflow performs synthetic unit tests and live baseline one-engine equivalence without checkout of 1,027 images. No character appearance, online build, original images, monetization or save keys changed.
+- **VERIFIED:** New lightweight Actions run `40874373621` succeeded: 8 pure delta tests PASS (0.002 s test time), live manifest inspection (1,079 entries; six registered immutable images), and one exact 1,705,595-byte active-engine comparison PASS without checkout of original images. Changed-path commit `4462b166434cd5bc53130c2e7b723aeaa42471ea`; recovery `backup/pre-character-fast-20261029`. No character appearance, public V629 dist, original images, monetization or save keys changed.
 - Before this tooling change: backup/pre-character-fast-20261029 at c13f87d5fcd654ea04b5623f9099af61a1b923fb. Live release remains V629; no new image rendering needed.
 
 ## On subsequent work
