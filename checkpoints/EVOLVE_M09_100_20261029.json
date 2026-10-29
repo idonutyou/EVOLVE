@@ -1,0 +1,43 @@
+{
+  "schema": "EVOLVE_M09_FINAL_CHECKPOINT_V1",
+  "stage": "M09-100",
+  "percent": 100,
+  "date_kst": "2026-10-29",
+  "main_source_sha": "8a4ca7f1bcbf2253ad178e0e1cbba3affa423985",
+  "public_pages_sha": "735aa52278b721e1778fa0bd4a04b0765c9ab82d",
+  "public_dist_tree": "313b80d3bb6ea4763f2005345382fa2e1fd06c2a",
+  "public_version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100",
+  "pages_workflow": {
+    "run_id": 40807993524,
+    "conclusion": "success",
+    "url": "https://github.com/idonutyou/EVOLVE/actions/runs/40807993524"
+  },
+  "final_QA": {
+    "run_id": 40807895773,
+    "conclusion": "success",
+    "ui_browser_viewports": [
+      "320x568",
+      "393x852",
+      "852x393"
+    ]
+  },
+  "public_http_checked": {
+    "version_json": true,
+    "shop_engine_starter160": true,
+    "shop_ui_badges": true
+  },
+  "released_files": [
+    "index.html",
+    "version.json",
+    "shop-experience-v621.js",
+    "shop-front-v621.js"
+  ],
+  "unchanged_top_level_dist_entries": 11,
+  "assets_unchanged": true,
+  "billing": "LOCAL_PREVIEW_NO_REAL_CHARGE",
+  "previous_pages_recovery": "backup/pages-before-m09-100-20261029",
+  "previous_m09_backup": "backup/monetization-m09-090-20261029",
+  "next_stage": "M10 0->30% design; 30/30/30/10 batch cadence",
+  "rendering_required_for_release": false,
+  "predecessor_backups_preserved": true
+}
