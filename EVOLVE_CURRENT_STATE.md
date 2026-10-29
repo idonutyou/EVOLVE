@@ -1,4 +1,14 @@
 # EVOLVE — Current Handoff (canonical short status)
+
+## LIVE RELEASE UPDATE — 2026-10-30 KST (V630 motion / V631 dual arm)
+
+- **Public build verified:** V629 + CHARMOTION630 + DUALARM631 + DUALARMCOMBAT631. New public game engine is `assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js`, SHA-256 matches filename. `dist/version.json` build `78c3d385f4c48b1a1d17809c9bfdaa6210eaaffc28196433ae1a68464f73e5cb`.
+- **Source release commit:** `1af17e1116721710934dae75c37eb51eab0d25a2` (later main commits only added release-gate tests and documentation). **Pages commit:** `795d0587e3b0a5fdbd3edb2e8d6e48caad78e09a`, root tree `b17fc72551e9962de8a04dbe71f10008cecbbd1f`. Native Pages run `40914908673` success; public `version.json` queried with a cache-busting parameter and confirmed new version/build.
+- **Focused prepublication real browser:** Actions run `40914610885` success; 393×852 Chromium boot with unchanged publicly hosted original assets, saved old arm-pair migration, old back item retention, six slots, mixed two-arm equip, one-arm unequip, no page/request errors. Earlier candidate gate runs failed from test harness missing sparse-checkout model / invalid fixture / wrong DOM selector; these were test-only corrections, not game code changes. Current gate passed. Physical Galaxy S23+ and longer real gameplay performance remain unverified.
+- **Preserved rollback:** `backup/main-before-dualarm631-20261030` (main `9f0973101f78e6e114124b1f6c0910f6a920f5fd`) and `backup/pages-before-dualarm631-20261030` (old live `b3c057e1fdaed3b08b9b0653c85c95103db8a3ed`). Do not delete.
+- **Not in this release:** M10/M11 demo authorization, mock billing backend or real Google/Apple auth/monetization. These remain Library-only and real platform/service integration stays deferred until game production completion. All earlier character/parts/M10/M11 Library checkpoints are retained.
+- **Next:** user physical-gameplay check, then continue remaining game content and performance. Image rendering not required for this release.
+
 Updated: 2026-10-29 KST, after verified V629 public release. Source of truth: GitHub `main` + `dist/version.json` (recheck branch HEAD on every edit).
 
 
