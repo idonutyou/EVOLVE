@@ -27,6 +27,19 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
    return bio?.ready&&window.__EVOLVE_TEST_MODULE_V575__?.read()?.ready&&!document.getElementById('start')?.disabled&&!document.getElementById('webLoader');
   },null,{timeout:180000});
   const bootFault=await page.evaluate(()=>({character:window.__EVOLVE_BIOCORE_V625__?.read().loadError||null,loaderFailed:window.EVOLVE_WEB_CLIENT?.read?.().failed||false,status:document.getElementById('webStatus')?.textContent||''}));
+  // V629: the hard startup gate covers only manifest-verified deferred JS,
+  // not every original PNG/WEBP. The real game still has to render normally.
+  report.startupGate=await page.evaluate(()=>{
+   const p=window.EVOLVE_WEB_CLIENT.read();
+   return {files:p.files,total:p.total,deferredFiles:p.deferredFiles||0,deferredBytes:p.deferredBytes||0,failed:p.failed,done:p.done};
+  });
+  assert.equal(report.startupGate.failed,false);
+  assert.equal(report.startupGate.done,true);
+  assert.ok(report.startupGate.files>0&&report.startupGate.files<=20,'priority loader must preload a small script set');
+  assert.ok(report.startupGate.total<95*1048576,'startup prefetch budget must stay below 95 MiB');
+  assert.ok(report.startupGate.deferredFiles>1000&&report.startupGate.deferredBytes>250*1048576,'original images should load on demand');
+  report.checks.push('V629 priority startup gate prefetches only essential scripts and defers >250 MiB of original assets');
+
   assert.ok(!bootFault.character&&!bootFault.loaderFailed,'Character bootstrap failed: '+JSON.stringify(bootFault));
   if(process.env.AUTO_MAP_ONLY==='1'){
    report.maps=[];

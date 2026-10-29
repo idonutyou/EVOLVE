@@ -33,9 +33,9 @@ async function run(mode){
   if(u.includes('version.json'))return {ok:true,json:async()=>({build:'test-build'})};
   if(u.includes('asset-manifest.json')){
    if(mode==='manifest-stall')return new Promise(()=>{});
-   return {ok:true,json:async()=>[{kind:'image',path:'assets/111.png',bytes:4}]};
+   return {ok:true,json:async()=>[{kind:'game-code',path:'assets/111.js',bytes:4},{kind:'image',path:'assets/deferred.png',bytes:1000}]};
   }
-  if(!u.includes('assets/111.png'))throw Error('Unexpected fixture request '+u);
+  if(!u.includes('assets/111.js'))throw Error('Unexpected fixture request '+u);
   assetFetches++;
   if(mode==='http-error')return {ok:false};
   if(mode==='network-stall')return new Promise(()=>{});
@@ -49,7 +49,13 @@ async function run(mode){
    }}}}
   };
  }
- const document={getElementById:id=>elements[id]||null,querySelectorAll:()=>[]};
+ const placeholder={dataset:{evolveSrc:'assets/111.js'}};
+ const document={
+  getElementById:id=>elements[id]||null,
+  querySelectorAll:selector=>selector==='script[data-evolve-src]'?[placeholder]:[],
+  createElement:()=>({async:false,src:'',onload:null,onerror:null}),
+  body:{appendChild(el){Promise.resolve().then(()=>el.onload?.());}}
+ };
  const sandbox={window,document,caches,fetch,location,navigator:{},URL,AbortController,Date,console,Uint8Array,
   setInterval:()=>0,setTimeout,clearTimeout,addEventListener:(k,v)=>{handlers[k]=v;}};
  vm.runInNewContext(client,sandbox,{filename:'web/client.js',timeout:1000});
@@ -69,7 +75,10 @@ async function run(mode){
   assert.ok(elements.webStatus.textContent,mode+': error surfaced');
  }else{
   assert.equal(state.loaded,4,mode+': complete asset count');
-  assert.equal(state.files,1,mode+': one asset');
+  assert.equal(state.files,1,mode+': one essential script');
+  assert.equal(state.total,4,mode+': blocks only the tiny essential script');
+  assert.equal(state.deferredBytes,1000,mode+': does not fetch deferred image');
+  assert.equal(state.deferredFiles,1,mode+': one image remains on demand');
   assert.equal(elements.webLoader,undefined,mode+': loader removed');
  }
  if(mode==='cache-hit'){assert.equal(assetFetches,0);assert.equal(state.cached,4);}

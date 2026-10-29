@@ -33,7 +33,22 @@
     try{
       const response=await bounded(fetch(new URL('asset-manifest.json',location.href),{cache:'no-store',signal:manifestController.signal}),resourceTiming.idle,'리소스 목록 응답이 지연되고 있어.');
       if(!response.ok)throw Error('리소스 목록을 불러오지 못했어.');
-      assets=(await bounded(response.json(),resourceTiming.idle,'리소스 목록 읽기가 지연되고 있어.')).filter(e=>e.kind!=='web-shell');
+      const allAssets=(await bounded(response.json(),resourceTiming.idle,'리소스 목록 읽기가 지연되고 있어.')).filter(e=>e.kind!=='web-shell');
+      // Only prefetch the 12 deferred scripts required to assemble the game.
+      // Native Image/Font requests remain on-demand and the unchanged service
+      // worker caches SHA-named assets when they are actually requested.
+      const entries=new Map(allAssets.map(e=>[new URL(e.path,location.href).href,e]));
+      const required=Array.from(document.querySelectorAll('script[data-evolve-src]'),node=>new URL(node.dataset.evolveSrc,location.href).href);
+      if(!required.length||new Set(required).size!==required.length)throw Error('필수 게임 실행 파일 목록이 올바르지 않아.');
+      assets=required.map(url=>{
+        const entry=entries.get(url);
+        if(!entry||!['game-code','map-data','map-edit-data','environment-data'].includes(entry.kind))
+          throw Error('필수 실행 파일이 검증된 리소스 목록에 없어: '+url);
+        return entry;
+      });
+      const selectedBytes=assets.reduce((sum,e)=>sum+e.bytes,0);
+      progress.deferredFiles=allAssets.length-assets.length;
+      progress.deferredBytes=allAssets.reduce((sum,e)=>sum+e.bytes,0)-selectedBytes;
     }catch(error){manifestController.abort();throw error;}
     progress.total=assets.reduce((sum,e)=>sum+e.bytes,0);progress.totalFiles=assets.length;progress.started=Date.now();showProgress(true);
     let cache=null;
