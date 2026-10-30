@@ -13761,10 +13761,34 @@ function g06InitUXV632(){
   cards.addEventListener('pointerdown',e=>{clear();const c=e.target.closest?.('.card');if(c&&cards.contains(c)&&$('levelPanel')?.dataset.g06FirstChoice==='1'&&e.isPrimary!==false)c.dataset.g06Pressed='1';});
   for(const ev of ['pointerup','pointercancel','pointerleave','click'])cards.addEventListener(ev,clear);
  }
+ const panel=$('levelPanel');
+ if(panel&&panel.dataset.g06HeadingWatchBound!=='1'){
+  panel.dataset.g06HeadingWatchBound='1';
+  const head=panel.querySelector('.levelHead');
+  if(head&&typeof MutationObserver!=='undefined')new MutationObserver(g06EnsureHeadingV632).observe(head,{subtree:true,characterData:true,childList:true});
+ }
  const overlay=$('levelOverlay');
  if(overlay&&overlay.dataset.g06ChoiceWatchBound!=='1'){
   overlay.dataset.g06ChoiceWatchBound='1';
   if(typeof MutationObserver!=='undefined')new MutationObserver(g06SyncUXV632).observe(overlay,{attributes:true,attributeFilter:['style']});
+ }
+}
+function g06EnsureHeadingV632(){
+ const p=$('levelPanel'),o=$('levelOverlay');
+ if(!p||!o||p.dataset.g06FirstChoice!=='1'||o.style.display!=='flex')return;
+ const h=p.querySelector('.levelHead'),title=h?.querySelector('h2'),help=h?.querySelector('p');
+ if(!title||!help)return;
+ const opening=!!organRunV598.opening;
+ title.setAttribute('data-i18n-ignore','');
+ help.setAttribute('data-i18n-ignore','');
+ if(opening){
+  const wantedTitle=upgradeTextV593('스킬 선택','CHOOSE SKILL');
+  const wantedHelp=upgradeTextV593('시작 스킬 하나 선택','PICK 1 STARTING SKILL');
+  if(title.textContent!==wantedTitle)title.textContent=wantedTitle;
+  if(help.textContent!==wantedHelp)help.textContent=wantedHelp;
+ }else if(player.level<=3){
+  const wantedHelp=upgradeTextV593('첫 성장 · 강화 1개 선택','FIRST GROWTH · PICK 1 UPGRADE');
+  if(help.textContent!==wantedHelp)help.textContent=wantedHelp;
  }
 }
 function g06SyncUXV632(){
@@ -13788,7 +13812,7 @@ renderLevelChoices=function(...args){
  if(title){title.id='g06ChoiceTitleV632';p.setAttribute('aria-labelledby',title.id);}
  if(help){help.id='g06ChoiceHelpV632';p.setAttribute('aria-describedby',help.id);}
  if(first&&args[0]===true)p.scrollTop=0;
- g06InitUXV632();g06SyncUXV632();return result;
+ g06InitUXV632();g06SyncUXV632();g06EnsureHeadingV632();return result;
 };
 
 const organUpgradeResetV598=upgradeResetV593;

@@ -2,7 +2,7 @@
 const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path'),http=require('http'),{Readable}=require('stream');
 const root=path.resolve(__dirname,'../dist');
-const want=new Set(['/index.html','/asset-manifest.json','/version.json','/verification.json','/assets/7cac883b4a550784880a37ad4e4dac3ef6138db74ab514a82a1591713293c755.js']);
+const want=new Set(['/index.html','/asset-manifest.json','/version.json','/verification.json','/assets/0cb56250acbed84ec8b60089e8c521350bbfebfd83089e2bd171aa614606ee92.js']);
 const mime={'.html':'text/html; charset=utf-8','.json':'application/json','.js':'text/javascript'};
 const report={candidate:'G06UX632',errors:[],consoleErrors:[],failedRequests:[],httpErrors:[],events:[],proxies:0,started:null,loader:null};
 const srv=http.createServer(async(req,res)=>{
