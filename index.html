@@ -2009,6 +2009,41 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
  else start();
 })();
 </script>
+
+<!-- Web update button: save first, then navigate with a fresh document URL. -->
+<script id="evolveUpdateApplyV1">
+(function(){
+ 'use strict';
+ document.addEventListener('click',function(event){
+  const button=event.target && event.target.closest && event.target.closest('#webApply');
+  if(!button||button.disabled)return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  const notice=document.getElementById('webUpdate'), message=document.getElementById('webUpdateText');
+  try{
+   const guard=window.EVOLVE_WEB_GUARD;
+   if(!guard||typeof guard.persist!=='function')throw Error('save unavailable');
+   guard.persist();
+   const entries={};
+   for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k&&k.startsWith('EVOLVE_')&&!k.startsWith('EVOLVE_WEB_'))entries[k]=localStorage.getItem(k);
+   }
+   localStorage.setItem('EVOLVE_WEB_UPDATE_BACKUP_V1',JSON.stringify({
+    at:new Date().toISOString(),version:window.EVOLVE_WEB_CONFIG.version,entries
+   }));
+  }catch(_){
+   if(message)message.textContent='저장 백업에 실패했어. 공간을 확인하고 다시 적용해 줘.';
+   return;
+  }
+  button.disabled=true;
+  if(notice)notice.hidden=true;
+  const url=new URL(window.location.href);
+  url.searchParams.set('evolveRefresh',String(Date.now()));
+  window.location.replace(url.toString());
+ },true);
+})();
+</script>
 </body></html>
 <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
 
