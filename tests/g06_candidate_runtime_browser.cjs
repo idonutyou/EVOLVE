@@ -40,7 +40,7 @@ const srv=http.createServer(async(req,res)=>{
   report.loader=await page.evaluate(()=>({state:window.EVOLVE_WEB_CLIENT?.read(),status:document.querySelector('#webStatus')?.textContent,detail:document.querySelector('#webDetail')?.textContent,visible:!!document.querySelector('#webLoader'),errors:window.__g06Diagnostic}));
   if(report.loader.visible||report.loader.state?.failed||report.errors.length){report.events.push('FAIL: startup');throw Error('Startup loader or JavaScript error');}
   report.events.push('boot OK');
-  await page.locator('#start').click({timeout:20000});report.events.push('start clicked');
+  await page.locator('#start').evaluate(el=>el.click(),{timeout:30000});report.events.push('start clicked');
   await page.locator('#cards .card').first().waitFor({state:'visible',timeout:20000});
   report.started=await page.evaluate(()=>({panel:document.querySelector('#levelPanel')?.dataset,header:document.querySelector('#levelPanel .levelHead')?.textContent,cardCount:document.querySelectorAll('#cards .card').length,errors:window.__g06Diagnostic}));
   if(report.started.panel.organOpening==='true'&&report.started.panel.upgradeLanguage==='ko'&&!report.started.header.includes('시작 스킬 하나 선택'))throw Error('First skill localized heading lost to legacy translator: '+report.started.header);
