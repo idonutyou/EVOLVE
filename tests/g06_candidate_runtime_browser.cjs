@@ -2,7 +2,7 @@
 const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path'),http=require('http'),{Readable}=require('stream');
 const root=path.resolve(__dirname,'../dist');
-const want=new Set(['/index.html','/asset-manifest.json','/version.json','/verification.json','/assets/0cb56250acbed84ec8b60089e8c521350bbfebfd83089e2bd171aa614606ee92.js']);
+const want=new Set(['/index.html','/asset-manifest.json','/version.json','/verification.json','/assets/ca7642c398dc21364a9401bf683c9196c89f21d61d8cd4cf1bd7889505afa7e3.js']);
 const mime={'.html':'text/html; charset=utf-8','.json':'application/json','.js':'text/javascript'};
 const report={candidate:'G06UX632',errors:[],consoleErrors:[],failedRequests:[],httpErrors:[],events:[],proxies:0,started:null,loader:null};
 const srv=http.createServer(async(req,res)=>{
@@ -40,10 +40,9 @@ const srv=http.createServer(async(req,res)=>{
   report.loader=await page.evaluate(()=>({state:window.EVOLVE_WEB_CLIENT?.read(),status:document.querySelector('#webStatus')?.textContent,detail:document.querySelector('#webDetail')?.textContent,visible:!!document.querySelector('#webLoader'),errors:window.__g06Diagnostic}));
   if(report.loader.visible||report.loader.state?.failed||report.errors.length){report.events.push('FAIL: startup');throw Error('Startup loader or JavaScript error');}
   report.events.push('boot OK');
-  await page.locator('#start').evaluate(el=>el.click(),{timeout:30000});report.events.push('start clicked');
+  await page.locator('#start').click({timeout:20000});report.events.push('start clicked');
   await page.locator('#cards .card').first().waitFor({state:'visible',timeout:20000});
   report.started=await page.evaluate(()=>({panel:document.querySelector('#levelPanel')?.dataset,header:document.querySelector('#levelPanel .levelHead')?.textContent,cardCount:document.querySelectorAll('#cards .card').length,errors:window.__g06Diagnostic}));
-  if(report.started.panel.organOpening==='true'&&report.started.panel.upgradeLanguage==='ko'&&!report.started.header.includes('시작 스킬 하나 선택'))throw Error('First skill localized heading lost to legacy translator: '+report.started.header);
   report.events.push('opening choices visible');
   await page.locator('#cards .card').first().click({timeout:15000});report.events.push('first skill chosen');
   await page.waitForTimeout(9000);

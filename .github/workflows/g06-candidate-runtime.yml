@@ -27,7 +27,7 @@ jobs:
             /dist/version.json
             /dist/verification.json
             /dist/asset-manifest.json
-            /dist/assets/0cb56250acbed84ec8b60089e8c521350bbfebfd83089e2bd171aa614606ee92.js
+            /dist/assets/ca7642c398dc21364a9401bf683c9196c89f21d61d8cd4cf1bd7889505afa7e3.js
       - run: |
           npm install --prefix "$RUNNER_TEMP/evolve-qa" --no-audit --no-fund --ignore-scripts playwright@1.62.1
           echo "NODE_PATH=$RUNNER_TEMP/evolve-qa/node_modules" >> "$GITHUB_ENV"
