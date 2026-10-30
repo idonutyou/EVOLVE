@@ -13780,6 +13780,11 @@ renderLevelChoices=function(...args){
  p.dataset.g06FirstChoice=o.dataset.g06FirstChoice=first?'1':'0';
  p.setAttribute('role','dialog');p.setAttribute('aria-modal','true');
  const title=p.querySelector('.levelHead h2'),help=p.querySelector('.levelHead p');
+ if(first&&title&&help){
+  title.setAttribute('data-i18n-ignore','');help.setAttribute('data-i18n-ignore','');
+  if(organRunV598.opening){title.textContent=upgradeTextV593('스킬 선택','CHOOSE SKILL');help.textContent=upgradeTextV593('시작 스킬 하나 선택','PICK 1 STARTING SKILL');}
+  else if(player.level<=3){help.textContent=upgradeTextV593('첫 성장 · 강화 1개 선택','FIRST GROWTH · PICK 1 UPGRADE');}
+ }else{title?.removeAttribute('data-i18n-ignore');help?.removeAttribute('data-i18n-ignore');}
  if(title){title.id='g06ChoiceTitleV632';p.setAttribute('aria-labelledby',title.id);}
  if(help){help.id='g06ChoiceHelpV632';p.setAttribute('aria-describedby',help.id);}
  if(first&&args[0]===true)p.scrollTop=0;
