@@ -1599,8 +1599,20 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(max-width:370px){#poster #homeStatusV525{gap:4px;padding-left:8px;padding-right:8px}.profileV525{gap:5px}#poster #homeStatusV525 #settingsBtn{flex-basis:36px;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important}.profileNameV525{font-size:11px;letter-spacing:.02em}.walletV525{gap:2px;padding-left:2px;padding-right:2px}.walletIconV525{flex-basis:18px;width:18px;height:23px}.walletV525 b{font-size:10px}}
 @media(min-width:460px){#poster #homeStatusV525{padding-left:16px;padding-right:16px;gap:9px;min-height:70px}.profileNameV525{font-size:14px}.profileLevelV525{font-size:9px}.profileXpV525{height:6px}.walletV525{gap:5px;min-height:40px}.walletIconV525{flex-basis:26px;width:26px;height:29px}.walletV525 b{font-size:14px}}
 @media(max-height:550px){#poster #homeStatusV525{min-height:58px;padding-top:calc(6px + var(--safeT));padding-bottom:6px}}
+
+/* DEX full silhouette / reference scale: strictly no object cropping */
+#poster #codexPanel .dex01 .dex01CardArt img{object-fit:contain!important;object-position:center center!important;width:100%;height:100%}
+#poster #codexPanel .dex01 .dex01DetailArt img{object-fit:contain!important;object-position:center center!important;width:100%!important;height:100%!important;max-height:none!important;max-width:100%!important;border-radius:0!important}
+#poster #codexPanel .dex01CardArt{height:148px;place-content:stretch;display:flex;align-items:center;justify-content:center}
+#poster #codexPanel .dex01DetailArt{height:320px;min-height:0;max-height:42dvh;display:flex;align-items:center;justify-content:center;position:relative;padding:8px;overflow:hidden}
+#poster #codexPanel .dex01DetailArt img{display:block}
+#poster #codexPanel .dex01DetailArt .dex01ScaleInset{position:absolute;bottom:10px;left:10px;width:80px;height:74px;border:1px solid #7690a1;background:#0b121bdb;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;box-shadow:0 4px 18px #0008}
+#poster #codexPanel .dex01DetailArt .dex01ScaleInset img{width:100%!important;height:52px!important;min-height:0!important;object-fit:contain!important}
+#poster #codexPanel .dex01ScaleInset small{font-size:8px;color:#e5e5e5;white-space:nowrap}
+@media(max-width:370px){#poster #codexPanel .dex01CardArt{height:120px}#poster #codexPanel .dex01DetailArt{height:275px;max-height:39dvh}}
+
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632","build":"QA-V635-1000-090-e88957f9e497","scriptBytes":81164873,"preloadResources":true};</script>
+<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57","build":"V635-DEX57-20261031","scriptBytes":81209886,"preloadResources":true,"assets":1081};</script>
 <script src="assets/80e69d0b91df519012e37724ef722493f475ab7457a915dfa869a7efe55a0d7d.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
@@ -1629,6 +1641,19 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script defer src="assets/80ffb27617fb1bce612a498929fd79d4eb91a645fe2bd9d8c09ac20aa2d227ff.js"></script>
 <link rel="stylesheet" href="assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css">
 <script defer src="assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js"></script>
+<link rel="stylesheet" href="assets/a9164453f1db7f06f3bd8dcbcd66165ed348c582d5fd17901a6e7f1ae9a0403b.css">
+<script src="assets/577f58d829599cd8a4c2c75ac95d7a07b57ce23d41170e434ffceb35dffae87a.js"></script>
+<style>
+/* DEX alpha sprite presentation — preserve full silhouette, reserve breathing room */
+#poster #codexPanel .dex01 .dex01CardArt{background:radial-gradient(ellipse at 50% 60%,#15212e,#0b121b 72%)!important;overflow:hidden!important}
+#poster #codexPanel .dex01 .dex01CardArt>img{width:70%!important;height:70%!important;max-width:70%!important;max-height:70%!important;object-fit:contain!important;object-position:center!important;display:block;margin:auto}
+#poster #codexPanel .dex01 .dex01DetailArt{background:radial-gradient(ellipse at 50% 58%,#182333,#090f18 75%)!important;overflow:hidden!important}
+#poster #codexPanel .dex01 .dex01DetailArt>img{width:69%!important;height:72%!important;max-width:69%!important;max-height:72%!important;object-fit:contain!important;object-position:center!important;margin:auto}
+#poster #codexPanel .dex01 .dex01ScaleInset{width:72px!important;height:70px!important;left:12px!important;bottom:12px!important}
+#poster #codexPanel .dex01 .dex01ScaleInset img{width:78%!important;height:46px!important;object-fit:contain!important}
+#poster #codexPanel .dex01 .dex01ScaleInset small{font-size:7px!important;white-space:normal!important;line-height:1.1}
+@media(max-width:370px){#poster #codexPanel .dex01 .dex01CardArt>img{width:71%!important;height:70%!important}}
+</style>
 </head>
 <body>
 <style>
