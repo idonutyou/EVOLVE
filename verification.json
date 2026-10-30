@@ -1,16 +1,16 @@
 {
-  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632",
+  "version": "V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631",
   "source_filename": "EVOLVE_V575_FLOOR_VISIBILITY_TEST.html",
   "source_bytes": 409975333,
   "source_sha256": "d5ea39a2fc07eab4507d7782ccfbd339ab7c6285f0c874fd061716bde2ab63ea",
   "replaced_data_uris": 1009,
   "unique_assets": 977,
   "assets_bytes": 249088424,
-  "index_bytes": 261066,
-  "build": "90c2f6ec2cc24d598f9ff2cc5f056aafb2b5eef6989a2d4930b550066110742d",
+  "index_bytes": 261057,
+  "build": "78c3d385f4c48b1a1d17809c9bfdaa6210eaaffc28196433ae1a68464f73e5cb",
   "image_assets": 1027,
   "cached_files": 1079,
-  "cached_bytes": 401097403,
+  "cached_bytes": 401092023,
   "data_extraction": [
     {
       "name": "ENV_OPT_V518",
@@ -2039,7 +2039,7 @@
   },
   "bio_core_v625": {
     "baseline": "d2b1c3711a815d807c6f7697f49472e9c273e2a0",
-    "engine": "assets/e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a.js",
+    "engine": "assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js",
     "source": {
       "path": "assets/07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d.png",
       "sha256": "07c980cb3b4476f241deb1a40bc07a1cd6be070d5cc0d3ba0c529244c26bc42d",
@@ -2089,7 +2089,7 @@
     "baseline": "c24d4f4520875fdf3dc2be3afe44a26c035c223a"
   },
   "auto_ambient_v627": {
-    "engine": "assets/e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a.js",
+    "engine": "assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js",
     "baseline": "dca540e54419393191920aab7908cc65bb609e9d",
     "map_sampling": "one small sample per source with reuse",
     "core_specific_settings": false,
@@ -2121,8 +2121,8 @@
   },
   "fast_character_delta": {
     "baseline_engine": "assets/96e3a06d9e62451bbce525069e41ee18ecb950a94c00a0fbc140f01749e2bd1e.js",
-    "active_engine": "assets/e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a.js",
-    "source_sha256": "e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a",
+    "active_engine": "assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js",
+    "source_sha256": "529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8",
     "original_images_untouched": true,
     "saves_untouched": false,
     "reused_images": 6,
@@ -2137,15 +2137,5 @@
     "lances_and_lash_attack": "existing blade behavior",
     "real_game_tested": false,
     "physical_device_tested": false
-  },
-  "g06_firstplay_v632": {
-    "baseline_engine": "assets/529c25c1d3089fb0df8cd7cf3d0892389966fa323e55b14805186ded3f9889d8.js",
-    "engine": "assets/e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a.js",
-    "source_sha256": "e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a",
-    "g06_development_baseline": "G06_100_ENGINE.js",
-    "integration": "scoped compatible delta only",
-    "preserved_current_char_dual_arm": true,
-    "actual_gameplay_tested": false,
-    "physical_S23_plus_tested": false
   }
 }
