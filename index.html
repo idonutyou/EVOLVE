@@ -1654,6 +1654,41 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 #poster #codexPanel .dex01 .dex01ScaleInset small{font-size:7px!important;white-space:normal!important;line-height:1.1}
 @media(max-width:370px){#poster #codexPanel .dex01 .dex01CardArt>img{width:71%!important;height:70%!important}}
 </style>
+
+<style id="evolveDexCardSizeFixV1">
+/* DEX57 mobile readability fix: preserve the user's original sprites and all 57 entries. */
+#poster #codexPanel .dex01 { --dexArtW:96%; --dexArtH:96%; --dexDetailW:94%; --dexDetailH:91%; }
+#poster #codexPanel .dex01[data-category="core"]{--dexArtW:94%;--dexArtH:96%;--dexDetailW:91%;--dexDetailH:91%}
+#poster #codexPanel .dex01[data-category="parts"]{--dexArtW:100%;--dexArtH:98%;--dexDetailW:97%;--dexDetailH:94%}
+#poster #codexPanel .dex01[data-category="monsters"]{--dexArtW:98%;--dexArtH:98%;--dexDetailW:96%;--dexDetailH:93%}
+#poster #codexPanel .dex01[data-category="titans"]{--dexArtW:98%;--dexArtH:98%;--dexDetailW:97%;--dexDetailH:94%}
+#poster #codexPanel .dex01 .dex01CardArt{
+ height:162px!important; min-height:162px!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:3px!important;overflow:hidden!important;
+}
+#poster #codexPanel .dex01 .dex01CardArt>img{
+ width:var(--dexArtW)!important;height:var(--dexArtH)!important;
+ max-width:var(--dexArtW)!important;max-height:var(--dexArtH)!important;
+ object-fit:contain!important;object-position:center center!important;
+ display:block!important;flex:0 1 auto!important;margin:auto!important;
+ transform:none!important;
+}
+#poster #codexPanel .dex01 .dex01DetailArt{height:320px!important;max-height:42dvh!important;padding:8px!important}
+#poster #codexPanel .dex01 .dex01DetailArt>img{
+ width:var(--dexDetailW)!important;height:var(--dexDetailH)!important;
+ max-width:var(--dexDetailW)!important;max-height:var(--dexDetailH)!important;
+ object-fit:contain!important;object-position:center center!important;
+ transform:none!important;
+}
+/* Keep the tiny reference illustration smaller than the main full-body art. */
+#poster #codexPanel .dex01 .dex01ScaleInset{width:72px!important;height:70px!important}
+#poster #codexPanel .dex01 .dex01ScaleInset img{width:78%!important;height:46px!important}
+@media(max-width:370px){
+ #poster #codexPanel .dex01 .dex01CardArt{height:142px!important;min-height:142px!important}
+ #poster #codexPanel .dex01 .dex01DetailArt{height:275px!important;max-height:39dvh!important}
+}
+</style>
 </head>
 <body>
 <style>
