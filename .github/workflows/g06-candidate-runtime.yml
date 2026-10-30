@@ -1,0 +1,41 @@
+name: G06 candidate live-game browser diagnostic (no deploy)
+on:
+  push:
+    branches:
+      - release/g06-ux-v632-20261030
+    paths:
+      - 'tests/g06_candidate_runtime_browser.cjs'
+      - '.github/workflows/g06-candidate-runtime.yml'
+      - 'dist/index.html'
+      - 'dist/version.json'
+      - 'dist/asset-manifest.json'
+      - 'dist/verification.json'
+  workflow_dispatch:
+permissions: {contents: read}
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tests/g06_candidate_runtime_browser.cjs
+            /dist/index.html
+            /dist/version.json
+            /dist/verification.json
+            /dist/asset-manifest.json
+            /dist/assets/e67689a1736e8d76708c96d608833d6710660c21534adcf2b72036db9206074a.js
+      - run: |
+          npm install --prefix "$RUNNER_TEMP/evolve-qa" --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-qa/node_modules" >> "$GITHUB_ENV"
+          echo "CHROME_BIN=$(command -v google-chrome || command -v chromium)" >> "$GITHUB_ENV"
+      - run: node tests/g06_candidate_runtime_browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: g06-runtime-diagnostic
+          path: test-results/g06-candidate-real-game-qa.json
+          if-no-files-found: warn
