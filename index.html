@@ -1611,8 +1611,33 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 #poster #codexPanel .dex01ScaleInset small{font-size:8px;color:#e5e5e5;white-space:nowrap}
 @media(max-width:370px){#poster #codexPanel .dex01CardArt{height:120px}#poster #codexPanel .dex01DetailArt{height:275px;max-height:39dvh}}
 
+/* R19 HOLD FIX: do not shrink the combat surface when the Android navigation bar transiently appears. */
+#app.combat{height:var(--r19CombatHeight,100dvh)!important;max-height:none!important;}
+body.r19CombatViewport{align-items:flex-start!important;}
+@media (min-width:650px){#app.combat{height:var(--r19CombatHeight,min(100vh,960px))!important;}}
+/* R19 stage clear: a single readable results panel, vertical weapon rows and three buttons only. */
+#stageClearPanelR19{display:none;position:absolute;inset:0;z-index:43;background:#03070bf2;
+  padding:calc(24px + var(--safeT)) 18px calc(20px + var(--safeB));align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;overflow-y:auto;color:#edf5f9;}
+#stageClearPanelR19.r19Visible{display:flex;}
+#stageClearTitleR19{font-size:clamp(26px,7vw,38px);letter-spacing:.075em;margin:0 0 4px;color:#ffd183;}
+#stageClearSubR19{font-size:14px;color:#a4bbc8;margin-bottom:20px;font-weight:850;}
+#stageClearTotalR19{width:100%;max-width:420px;font-size:15px;font-weight:900;text-align:left;margin:0 0 14px;}
+#stageClearDamageRowsR19{width:100%;max-width:420px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;padding:2px 0;max-height:48vh;}
+.r19DmgRow{display:grid;grid-template-columns:minmax(52px,90px) 1fr auto;gap:9px;align-items:center;font-size:12px;}
+.r19DmgName{text-align:left;color:#e6edf1;font-weight:850;white-space:nowrap;}
+.r19DmgTrack{height:10px;border-radius:99px;background:#17232b;overflow:hidden;}
+.r19DmgFill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#69bde1,#93e4e9);}
+.r19DmgAmount{display:block;min-width:99px;text-align:right;font-weight:850;font-variant-numeric:tabular-nums;}
+.r19DmgAmount em{font-style:normal;color:#ffd183;margin-left:5px;}
+#stageClearActionsR19{display:flex;flex-direction:column;gap:10px;max-width:420px;width:100%;margin-top:26px;}
+#stageClearActionsR19 button{min-height:51px;border:1px solid #587789;background:#10232d;color:#f4f8fb;border-radius:12px;font-size:16px;font-weight:900;}
+#stageClearActionsR19 #stageClearNextR19{background:linear-gradient(#94612a,#5d350e);border-color:#e5a95f;}
+#stageClearActionsR19 button:disabled{opacity:.42;}
+@media(max-height:600px){#stageClearDamageRowsR19{max-height:38vh;gap:8px}#stageClearActionsR19{margin-top:13px;gap:6px}#stageClearActionsR19 button{min-height:43px}}
+
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57","build":"V635-DEX57-CENTER-UPDATEFIX-20261031","scriptBytes":81209886,"preloadResources":true,"assets":1081};</script>
+<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57-CENTERUPDATEFIX-SCALEFIX-R04-R09-DEV-R18-LABELONLY-DEV-SAVE-BUNDLE-R18-DEV-R19HOLD-UIFIX01","build":"R19-HOLD-UXFIX01-NO-DEPLOY-20261101","scriptBytes":81216681,"preloadResources":true,"assets":1081};</script>
 <script src="assets/80e69d0b91df519012e37724ef722493f475ab7457a915dfa869a7efe55a0d7d.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
@@ -1642,7 +1667,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <link rel="stylesheet" href="assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css">
 <script defer src="assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js"></script>
 <link rel="stylesheet" href="assets/a9164453f1db7f06f3bd8dcbcd66165ed348c582d5fd17901a6e7f1ae9a0403b.css">
-<script src="assets/577f58d829599cd8a4c2c75ac95d7a07b57ce23d41170e434ffceb35dffae87a.js"></script>
+<script src="assets/bf0c30f19f51249760c9a3fee96e4b6de8add7ff55840a79a84882ff9460d64b.js"></script>
 <style>
 /* DEX alpha sprite presentation — preserve full silhouette, reserve breathing room */
 #poster #codexPanel .dex01 .dex01CardArt{background:radial-gradient(ellipse at 50% 60%,#15212e,#0b121b 72%)!important;overflow:hidden!important}
@@ -1687,6 +1712,17 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 @media(max-width:370px){
  #poster #codexPanel .dex01 .dex01CardArt{height:142px!important;min-height:142px!important}
  #poster #codexPanel .dex01 .dex01DetailArt{height:275px!important;max-height:39dvh!important}
+}
+</style>
+<style id="evolveDexVisualCenterV1">
+/* Position sprite by actual opaque pixels instead of the transparent PNG canvas.
+   User-provided image bytes remain untouched. The dynamic shift is constrained
+   to the existing image viewport, so contain/no-crop continues to apply. */
+#poster #codexPanel .dex01 .dex01CardArt>img,
+#poster #codexPanel .dex01 .dex01DetailArt>img,
+#poster #codexPanel .dex01 .dex01ScaleInset img{
+ transform:translate(var(--dexOpticalShiftX,0px),var(--dexOpticalShiftY,0px))!important;
+ transition:transform 100ms ease-out;
 }
 </style>
 </head>
@@ -1836,7 +1872,18 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
   <div id="masteryOverlay"><div id="masteryPanel"><div class="masteryHead"><h2>EVO</h2><p>CHOOSE 1</p></div><div id="masteryCards"></div></div></div>
   <div id="rewardOverlay"><div id="rewardPanel"><div class="rewardHead"><h2 id="rewardTitle">CORE ABSORPTION</h2><p id="rewardSource">ELITE BIO-CORE SECURED</p></div><div id="rewardCards"></div></div></div>
   <div id="endOverlay"><div class="endBox"><h1 id="endTitle" class="endTitle">EVOLVED</h1><div id="endSub" class="endSub">BIO-CONTAINMENT BREACHED.</div><div id="endGradeWrap"><div id="endGrade">A</div><div id="endScoreBox"><b id="endScore">0000</b><span>EVOLUTION SCORE</span></div></div><div id="endEvolution"><b>RUN EVOLUTION</b><div id="endEvolutionPath"></div><div id="endDamageShare"></div><div id="endBuildAnalysis"></div><div id="endAdaptation"></div><div id="endScoreBreakdown"></div></div><div id="endHighlights"></div><div id="bankGain"></div><div class="endStats"><div class="stat"><b id="endKills">0</b><span>KILLS</span></div><div class="stat"><b id="endLevel">1</b><span>LEVEL</span></div><div class="stat"><b id="endDNA">0</b><span>DNA</span></div><div class="stat"><b id="endBuild">-</b><span>DOMINANT MUTATION</span></div></div><div class="endActions"><button id="runBack" class="bigBtn" type="button">RUN IT BACK</button><button id="restart" class="bigBtn">NEW MUTATION</button><button id="labReturn" class="smallBtn labBtn" style="width:100%">GENOME LAB</button></div></div></div>
-  <div id="blueprintOverlay"><div id="blueprintPanel"><div class="blueprintHead"><h2></h2><p>CHOOSE A BUILD</p></div><div id="blueprintCards"></div></div></div>
+  <div id="stageClearPanelR19" aria-live="polite" data-i18n-ignore>
+  <h1 id="stageClearTitleR19">STAGE CLEAR</h1>
+  <div id="stageClearSubR19"></div>
+  <div id="stageClearTotalR19"></div>
+  <div id="stageClearDamageRowsR19" role="list"></div>
+  <div id="stageClearActionsR19">
+    <button id="stageClearRetryR19" type="button"></button>
+    <button id="stageClearNextR19" type="button"></button>
+    <button id="stageClearHomeR19" type="button"></button>
+  </div>
+</div>
+<div id="blueprintOverlay"><div id="blueprintPanel"><div class="blueprintHead"><h2></h2><p>CHOOSE A BUILD</p></div><div id="blueprintCards"></div></div></div>
   <div id="routeOverlay"><div id="routePanel"><div class="routeHead"><h2>STAGE CLEAR</h2><p>CHOOSE THE NEXT BIO-DOMAIN</p></div><div id="stageRewardBanner"></div><div id="routeCards"></div><div id="routeCurrent"></div></div></div>
   <div id="codexOverlay"><div id="codexPanel"><div class="codexTop"><h2>GENOME CODEX</h2><button id="codexClose" class="codexClose" type="button">×</button></div><div id="codexSummary" class="codexSummary"></div><div id="codexContent"></div></div></div>
   <div id="memoryOverlay"><div id="memoryBox"><div class="memoryTop"><h2>MEMORY ARCHIVE</h2><button id="memoryClose" class="memoryClose" type="button">×</button></div><div id="memorySummary"></div><div id="memoryGrid"></div><button id="memoryNone" class="memoryNone" type="button">UNEQUIP MEMORY</button></div></div>
@@ -1933,7 +1980,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
-<script type="application/evolve-resource" data-evolve-src="assets/e88957f9e497cfc42eaff41b0c792304b3f62ca3d2b5bfcda83aa04cb0341073.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->
@@ -1955,93 +2002,124 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script defer src="m08-stage-mission-v622.js?v=10" data-mission-live="stage"></script>
 <script defer src="m08-runtime-missions-v623.js?v=20" data-mission-live="runtime"></script>
 <script defer src="m08-mission-rewards-v624.js?v=101" data-mission-rewards="claim"></script>
-
-<!-- DEX57 art: align its visible content without editing source PNGs. -->
-<script id="evolveDexCenterV1">
-(function(){
- 'use strict';
- const selector='#poster #codexPanel .dex01CardArt img, #poster #codexPanel .dex01DetailArt img, #poster #codexPanel .dex01ScaleInset img';
- const cache=new Map(), applied=new WeakMap();
- function align(img){
-  const src=img.currentSrc||img.src;
-  if(!src||applied.get(img)===src)return;
-  if(!img.complete||!img.naturalWidth){img.addEventListener('load',()=>align(img),{once:true});return;}
-  let shift=cache.get(src);
-  if(!shift){
-   shift=[0,0];
-   try {
-    const c=document.createElement('canvas');c.width=c.height=80;
-    const ctx=c.getContext('2d',{willReadFrequently:true});
-    ctx.drawImage(img,0,0,80,80);
-    const d=ctx.getImageData(0,0,80,80).data;
-    let left=80,top=80,right=-1,bottom=-1,count=0;
-    for(let y=0;y<80;y++)for(let x=0;x<80;x++){
-     if(d[(80*y+x)*4+3]>24){
-      count++;left=Math.min(left,x);right=Math.max(right,x);
-      top=Math.min(top,y);bottom=Math.max(bottom,y);
-     }
+<script id="evolveDexVisualCenterAndUpdateV1">
+(()=>{'use strict';
+  const BUILD='R04-R09-DEV-DEX-RESEARCH-20261031-NO-DEPLOY';
+  const SELECTOR='#codexContent .dex01CardArt>img,#codexContent .dex01DetailArt>img,#codexContent .dex01ScaleInset img';
+  const cache=new Map(),pending=new WeakSet();let scheduled=false;
+  // Use a downsampled alpha channel.  No edits or files are written to disk.
+  function measure(img){
+    const key=img.currentSrc||img.src;
+    if(cache.has(key))return cache.get(key);
+    const w=img.naturalWidth,h=img.naturalHeight;
+    if(!(w>0&&h>0))return null;
+    const k=Math.min(1,260/Math.max(w,h)),cw=Math.max(1,Math.round(w*k)),ch=Math.max(1,Math.round(h*k));
+    const c=document.createElement('canvas');c.width=cw;c.height=ch;
+    const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return null;
+    try{ctx.drawImage(img,0,0,cw,ch);}catch(e){return null;}
+    let pixels;try{pixels=ctx.getImageData(0,0,cw,ch).data;}catch(e){return null;}
+    let minX=cw,maxX=-1,minY=ch,maxY=-1,sum=0,wx=0,wy=0,opaque=0;
+    for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
+      const alpha=pixels[(y*cw+x)*4+3];
+      if(alpha<28)continue;
+      opaque++;
+      minX=Math.min(minX,x);maxX=Math.max(maxX,x);
+      minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+      // Favor optically dense parts without over-weighting fully opaque background shadows.
+      const weight=Math.min(alpha,230)/230;
+      sum+=weight;wx+=x*weight;wy+=y*weight;
     }
-    if(count>0&&count<80*80*.97){
-     const clip=v=>Math.max(-22,Math.min(22,v));
-     shift=[clip((.5-(left+right+1)/160)*100),clip((.5-(top+bottom+1)/160)*100)];
+    let v=null;
+    if(sum&&maxX>=0&&opaque/(cw*ch)<.94){
+      const bboxX=(minX+maxX+1)/2,bboxY=(minY+maxY+1)/2;
+      const centroidX=(wx/sum)+.5,centroidY=(wy/sum)+.5;
+      v={w,h,cx:((.55*bboxX+.45*centroidX)/cw)*w,cy:((.55*bboxY+.45*centroidY)/ch)*h,
+        left:minX/cw*w,right:(maxX+1)/cw*w,top:minY/ch*h,bottom:(maxY+1)/ch*h};
     }
-   }catch(_){/* Keep opaque or inaccessible assets as-is. */}
-   cache.set(src,shift);
+    cache.set(key,v);return v;
   }
-  applied.set(img,src);
-  img.style.setProperty('translate',shift[0].toFixed(2)+'% '+shift[1].toFixed(2)+'%','important');
- }
- function visit(node){
-  if(!node||node.nodeType!==1)return;
-  if(node.matches&&node.matches(selector))align(node);
-  if(node.querySelectorAll)node.querySelectorAll(selector).forEach(align);
- }
- function start(){
-  visit(document.body);
-  new MutationObserver(records=>{
-   for(const record of records){
-    if(record.type==='attributes')visit(record.target);
-    else for(const node of record.addedNodes)visit(node);
-   }
-  }).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});
- else start();
+  function align(img){
+    if(!img.isConnected||!img.complete||!img.naturalWidth)return;
+    const v=measure(img);if(!v)return;
+    const box=img.getBoundingClientRect();if(!box.width||!box.height)return;
+    const scale=Math.min(box.width/v.w,box.height/v.h);
+    const xPad=(box.width-v.w*scale)/2,yPad=(box.height-v.h*scale)/2;
+    // Geometric center of the painted subject, not transparent canvas center.
+    let dx=(v.w/2-v.cx)*scale,dy=(v.h/2-v.cy)*scale;
+    // Never shift visible art outside its display box. Small guard margin remains.
+    const edgeX=box.width*.012,edgeY=box.height*.012;
+    dx=Math.min(Math.max(dx,edgeX-xPad-v.left*scale),box.width-edgeX-xPad-v.right*scale);
+    dy=Math.min(Math.max(dy,edgeY-yPad-v.top*scale),box.height-edgeY-yPad-v.bottom*scale);
+    // Respect mobile layout, even for extreme source image padding.
+    dx=Math.max(-box.width*.20,Math.min(box.width*.20,dx));
+    dy=Math.max(-box.height*.20,Math.min(box.height*.20,dy));
+    img.style.setProperty('--dexOpticalShiftX',dx.toFixed(2)+'px');
+    img.style.setProperty('--dexOpticalShiftY',dy.toFixed(2)+'px');
+    img.dataset.dexOpticallyCentered='1';
+  }
+  function scan(){scheduled=false;document.querySelectorAll(SELECTOR).forEach(img=>{
+    if(img.complete&&img.naturalWidth)align(img);
+    else if(!pending.has(img)){
+      pending.add(img);img.addEventListener('load',()=>{pending.delete(img);align(img);},{once:true});
+    }
+  });}
+  function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(scan);}}
+  function init(){
+    const root=document.getElementById('codexContent');
+    if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
+    window.addEventListener('resize',schedule,{passive:true});
+    document.addEventListener('click',e=>{if(e.target.closest?.('#codexBtn,[data-dex-tab],[data-dex-card]'))setTimeout(schedule,30);});
+    schedule();
+  }
+  // Legacy v635 web loader compares the inline config.build against version.json.
+  // Previous deployment changed only version.json; that mismatch caused an endless update prompt.
+  // Config is synchronized above.  To ensure a stale page is really refreshed on tap,
+  // preserve EVOLVE saves, then navigate to a cache-busted HTML URL once.
+  document.addEventListener('click',event=>{
+    const button=event.target.closest?.('#webApply');if(!button)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    if(button.disabled)return;
+    try{
+      if(window.EVOLVE_WEB_GUARD?.persist)window.EVOLVE_WEB_GUARD.persist();
+      const entries={};
+      for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);
+        if(key?.startsWith('EVOLVE_')&&!key.startsWith('EVOLVE_WEB_'))entries[key]=localStorage.getItem(key);
+      }
+      localStorage.setItem('EVOLVE_WEB_UPDATE_BACKUP_V1',JSON.stringify({at:new Date().toISOString(),version:window.EVOLVE_WEB_CONFIG?.version||'',entries}));
+    }catch(e){
+      const text=document.getElementById('webUpdateText');if(text)text.textContent='저장을 백업할 수 없어. 저장 공간을 확인해 줘.';
+      return;
+    }
+    button.disabled=true;button.textContent='적용 중…';
+    document.getElementById('webUpdate')?.setAttribute('hidden','');
+    const next=new URL(location.href);
+    next.searchParams.set('evolveRefresh',String(Date.now()));
+    location.replace(next.href);
+  },true);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
-
-<!-- Web update button: save first, then navigate with a fresh document URL. -->
-<script id="evolveUpdateApplyV1">
-(function(){
- 'use strict';
- document.addEventListener('click',function(event){
-  const button=event.target && event.target.closest && event.target.closest('#webApply');
-  if(!button||button.disabled)return;
-  event.preventDefault();
-  event.stopImmediatePropagation();
-  const notice=document.getElementById('webUpdate'), message=document.getElementById('webUpdateText');
-  try{
-   const guard=window.EVOLVE_WEB_GUARD;
-   if(!guard||typeof guard.persist!=='function')throw Error('save unavailable');
-   guard.persist();
-   const entries={};
-   for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    if(k&&k.startsWith('EVOLVE_')&&!k.startsWith('EVOLVE_WEB_'))entries[k]=localStorage.getItem(k);
-   }
-   localStorage.setItem('EVOLVE_WEB_UPDATE_BACKUP_V1',JSON.stringify({
-    at:new Date().toISOString(),version:window.EVOLVE_WEB_CONFIG.version,entries
-   }));
-  }catch(_){
-   if(message)message.textContent='저장 백업에 실패했어. 공간을 확인하고 다시 적용해 줘.';
-   return;
+<script id="r19ViewportLock">
+/* Web content cannot force Android system navigation overlays. Preserve the game layout during transient viewport shrink. */
+(()=>{
+  const app=document.getElementById('app');if(!app)return;
+  let height=0,orientation=screen.orientation?.type||'',isCombat=false;
+  const measure=()=>Math.max(0,window.innerHeight||0,document.documentElement.clientHeight||0);
+  function sync(){
+    const active=app.classList.contains('combat');
+    if(!active){height=0;isCombat=false;document.body.classList.remove('r19CombatViewport');app.style.removeProperty('--r19CombatHeight');return;}
+    if(!isCombat){height=measure();isCombat=true;}
+    if((screen.orientation?.type||'')!==orientation){orientation=screen.orientation?.type||'';height=measure();}
+    height=Math.max(height,measure());
+    if(height>0)app.style.setProperty('--r19CombatHeight',height+'px');
+    document.body.classList.add('r19CombatViewport');
   }
-  button.disabled=true;
-  if(notice)notice.hidden=true;
-  const url=new URL(window.location.href);
-  url.searchParams.set('evolveRefresh',String(Date.now()));
-  window.location.replace(url.toString());
- },true);
+  new MutationObserver(sync).observe(app,{attributes:true,attributeFilter:['class']});
+  addEventListener('resize',sync,{passive:true});
+  addEventListener('orientationchange',()=>{height=0;setTimeout(sync,130);},{passive:true});
+  window.visualViewport?.addEventListener('resize',sync,{passive:true});
+  sync();
 })();
 </script>
 </body></html>
