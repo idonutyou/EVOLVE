@@ -1,0 +1,39 @@
+name: EVOLVE V638 exact engine-blob assembler
+on:
+  push:
+    branches: [v638-build-stage-20261101]
+    paths:
+      - ".github/v638-engine-from-public.patch"
+      - ".github/workflows/v638-assemble-engine.yml"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout only engine and delta (not original art)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v638-engine-from-public.patch
+            /dist/assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js
+      - name: Reconstruct exact V638 engine and verify both hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          old=dist/assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js
+          new=dist/assets/d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69.js
+          echo "eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e  $old" | sha256sum -c -
+          cp "$old" /tmp/evolve-new-engine.js
+          patch -s --batch --forward /tmp/evolve-new-engine.js .github/v638-engine-from-public.patch
+          echo "d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69  /tmp/evolve-new-engine.js" | sha256sum -c -
+          node --check /tmp/evolve-new-engine.js
+          cp /tmp/evolve-new-engine.js "$new"
+          git add --sparse "$new"
+          git -c user.name='EVOLVE release builder' -c user.email='release-builder@users.noreply.github.com' commit -m 'Assemble exact V638 game engine from verified source delta'
+          git push origin HEAD:v638-build-stage-20261101
