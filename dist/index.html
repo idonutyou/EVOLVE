@@ -1599,8 +1599,45 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(max-width:370px){#poster #homeStatusV525{gap:4px;padding-left:8px;padding-right:8px}.profileV525{gap:5px}#poster #homeStatusV525 #settingsBtn{flex-basis:36px;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important}.profileNameV525{font-size:11px;letter-spacing:.02em}.walletV525{gap:2px;padding-left:2px;padding-right:2px}.walletIconV525{flex-basis:18px;width:18px;height:23px}.walletV525 b{font-size:10px}}
 @media(min-width:460px){#poster #homeStatusV525{padding-left:16px;padding-right:16px;gap:9px;min-height:70px}.profileNameV525{font-size:14px}.profileLevelV525{font-size:9px}.profileXpV525{height:6px}.walletV525{gap:5px;min-height:40px}.walletIconV525{flex-basis:26px;width:26px;height:29px}.walletV525 b{font-size:14px}}
 @media(max-height:550px){#poster #homeStatusV525{min-height:58px;padding-top:calc(6px + var(--safeT));padding-bottom:6px}}
+
+/* DEX full silhouette / reference scale: strictly no object cropping */
+#poster #codexPanel .dex01 .dex01CardArt img{object-fit:contain!important;object-position:center center!important;width:100%;height:100%}
+#poster #codexPanel .dex01 .dex01DetailArt img{object-fit:contain!important;object-position:center center!important;width:100%!important;height:100%!important;max-height:none!important;max-width:100%!important;border-radius:0!important}
+#poster #codexPanel .dex01CardArt{height:148px;place-content:stretch;display:flex;align-items:center;justify-content:center}
+#poster #codexPanel .dex01DetailArt{height:320px;min-height:0;max-height:42dvh;display:flex;align-items:center;justify-content:center;position:relative;padding:8px;overflow:hidden}
+#poster #codexPanel .dex01DetailArt img{display:block}
+#poster #codexPanel .dex01DetailArt .dex01ScaleInset{position:absolute;bottom:10px;left:10px;width:80px;height:74px;border:1px solid #7690a1;background:#0b121bdb;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;box-shadow:0 4px 18px #0008}
+#poster #codexPanel .dex01DetailArt .dex01ScaleInset img{width:100%!important;height:52px!important;min-height:0!important;object-fit:contain!important}
+#poster #codexPanel .dex01ScaleInset small{font-size:8px;color:#e5e5e5;white-space:nowrap}
+@media(max-width:370px){#poster #codexPanel .dex01CardArt{height:120px}#poster #codexPanel .dex01DetailArt{height:275px;max-height:39dvh}}
+
+/* R19 HOLD FIX: do not shrink the combat surface when the Android navigation bar transiently appears. */
+#app.combat{height:var(--r19CombatHeight,100dvh)!important;max-height:none!important;}
+body.r19CombatViewport{align-items:flex-start!important;}
+@media (min-width:650px){#app.combat{height:var(--r19CombatHeight,min(100vh,960px))!important;}}
+/* R19 stage clear: a single readable results panel, vertical weapon rows and three buttons only. */
+#stageClearPanelR19{display:none;position:absolute;inset:0;z-index:43;background:#03070bf2;
+  padding:calc(24px + var(--safeT)) 18px calc(20px + var(--safeB));align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;overflow-y:auto;color:#edf5f9;}
+#stageClearPanelR19.r19Visible{display:flex;}
+#stageClearTitleR19{font-size:clamp(26px,7vw,38px);letter-spacing:.075em;margin:0 0 4px;color:#ffd183;}
+#stageClearSubR19{font-size:14px;color:#a4bbc8;margin-bottom:20px;font-weight:850;}
+#stageClearTotalR19{width:100%;max-width:420px;font-size:15px;font-weight:900;text-align:left;margin:0 0 14px;}
+#stageClearDamageRowsR19{width:100%;max-width:420px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;padding:2px 0;max-height:48vh;}
+.r19DmgRow{display:grid;grid-template-columns:minmax(52px,90px) 1fr auto;gap:9px;align-items:center;font-size:12px;}
+.r19DmgName{text-align:left;color:#e6edf1;font-weight:850;white-space:nowrap;}
+.r19DmgTrack{height:10px;border-radius:99px;background:#17232b;overflow:hidden;}
+.r19DmgFill{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#69bde1,#93e4e9);}
+.r19DmgAmount{display:block;min-width:99px;text-align:right;font-weight:850;font-variant-numeric:tabular-nums;}
+.r19DmgAmount em{font-style:normal;color:#ffd183;margin-left:5px;}
+#stageClearActionsR19{display:flex;flex-direction:column;gap:10px;max-width:420px;width:100%;margin-top:26px;}
+#stageClearActionsR19 button{min-height:51px;border:1px solid #587789;background:#10232d;color:#f4f8fb;border-radius:12px;font-size:16px;font-weight:900;}
+#stageClearActionsR19 #stageClearNextR19{background:linear-gradient(#94612a,#5d350e);border-color:#e5a95f;}
+#stageClearActionsR19 button:disabled{opacity:.42;}
+@media(max-height:600px){#stageClearDamageRowsR19{max-height:38vh;gap:8px}#stageClearActionsR19{margin-top:13px;gap:6px}#stageClearActionsR19 button{min-height:43px}}
+
 </style>
-<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632","build":"98927c8a30985defc74fca244e330881012da3ad182022a5d44ff7bf0e039da0","scriptBytes":81158538,"preloadResources":true};</script>
+<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57-CENTERUPDATEFIX-SCALEFIX-R04-R09-DEV-R18-LABELONLY-DEV-SAVE-BUNDLE-R18-DEV-R19HOLD-UIFIX01","build":"R19-HOLD-UXFIX01-NO-DEPLOY-20261101","scriptBytes":81216681,"preloadResources":true,"assets":1081};</script>
 <script src="assets/80e69d0b91df519012e37724ef722493f475ab7457a915dfa869a7efe55a0d7d.js"></script>
 <style id="adminModeStyleV585">
 /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
@@ -1629,6 +1666,65 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script defer src="assets/80ffb27617fb1bce612a498929fd79d4eb91a645fe2bd9d8c09ac20aa2d227ff.js"></script>
 <link rel="stylesheet" href="assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css">
 <script defer src="assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js"></script>
+<link rel="stylesheet" href="assets/a9164453f1db7f06f3bd8dcbcd66165ed348c582d5fd17901a6e7f1ae9a0403b.css">
+<script src="assets/bf0c30f19f51249760c9a3fee96e4b6de8add7ff55840a79a84882ff9460d64b.js"></script>
+<style>
+/* DEX alpha sprite presentation — preserve full silhouette, reserve breathing room */
+#poster #codexPanel .dex01 .dex01CardArt{background:radial-gradient(ellipse at 50% 60%,#15212e,#0b121b 72%)!important;overflow:hidden!important}
+#poster #codexPanel .dex01 .dex01CardArt>img{width:70%!important;height:70%!important;max-width:70%!important;max-height:70%!important;object-fit:contain!important;object-position:center!important;display:block;margin:auto}
+#poster #codexPanel .dex01 .dex01DetailArt{background:radial-gradient(ellipse at 50% 58%,#182333,#090f18 75%)!important;overflow:hidden!important}
+#poster #codexPanel .dex01 .dex01DetailArt>img{width:69%!important;height:72%!important;max-width:69%!important;max-height:72%!important;object-fit:contain!important;object-position:center!important;margin:auto}
+#poster #codexPanel .dex01 .dex01ScaleInset{width:72px!important;height:70px!important;left:12px!important;bottom:12px!important}
+#poster #codexPanel .dex01 .dex01ScaleInset img{width:78%!important;height:46px!important;object-fit:contain!important}
+#poster #codexPanel .dex01 .dex01ScaleInset small{font-size:7px!important;white-space:normal!important;line-height:1.1}
+@media(max-width:370px){#poster #codexPanel .dex01 .dex01CardArt>img{width:71%!important;height:70%!important}}
+</style>
+
+<style id="evolveDexCardSizeFixV1">
+/* DEX57 mobile readability fix: preserve the user's original sprites and all 57 entries. */
+#poster #codexPanel .dex01 { --dexArtW:96%; --dexArtH:96%; --dexDetailW:94%; --dexDetailH:91%; }
+#poster #codexPanel .dex01[data-category="core"]{--dexArtW:94%;--dexArtH:96%;--dexDetailW:91%;--dexDetailH:91%}
+#poster #codexPanel .dex01[data-category="parts"]{--dexArtW:100%;--dexArtH:98%;--dexDetailW:97%;--dexDetailH:94%}
+#poster #codexPanel .dex01[data-category="monsters"]{--dexArtW:98%;--dexArtH:98%;--dexDetailW:96%;--dexDetailH:93%}
+#poster #codexPanel .dex01[data-category="titans"]{--dexArtW:98%;--dexArtH:98%;--dexDetailW:97%;--dexDetailH:94%}
+#poster #codexPanel .dex01 .dex01CardArt{
+ height:162px!important; min-height:162px!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:3px!important;overflow:hidden!important;
+}
+#poster #codexPanel .dex01 .dex01CardArt>img{
+ width:var(--dexArtW)!important;height:var(--dexArtH)!important;
+ max-width:var(--dexArtW)!important;max-height:var(--dexArtH)!important;
+ object-fit:contain!important;object-position:center center!important;
+ display:block!important;flex:0 1 auto!important;margin:auto!important;
+ transform:none!important;
+}
+#poster #codexPanel .dex01 .dex01DetailArt{height:320px!important;max-height:42dvh!important;padding:8px!important}
+#poster #codexPanel .dex01 .dex01DetailArt>img{
+ width:var(--dexDetailW)!important;height:var(--dexDetailH)!important;
+ max-width:var(--dexDetailW)!important;max-height:var(--dexDetailH)!important;
+ object-fit:contain!important;object-position:center center!important;
+ transform:none!important;
+}
+/* Keep the tiny reference illustration smaller than the main full-body art. */
+#poster #codexPanel .dex01 .dex01ScaleInset{width:72px!important;height:70px!important}
+#poster #codexPanel .dex01 .dex01ScaleInset img{width:78%!important;height:46px!important}
+@media(max-width:370px){
+ #poster #codexPanel .dex01 .dex01CardArt{height:142px!important;min-height:142px!important}
+ #poster #codexPanel .dex01 .dex01DetailArt{height:275px!important;max-height:39dvh!important}
+}
+</style>
+<style id="evolveDexVisualCenterV1">
+/* Position sprite by actual opaque pixels instead of the transparent PNG canvas.
+   User-provided image bytes remain untouched. The dynamic shift is constrained
+   to the existing image viewport, so contain/no-crop continues to apply. */
+#poster #codexPanel .dex01 .dex01CardArt>img,
+#poster #codexPanel .dex01 .dex01DetailArt>img,
+#poster #codexPanel .dex01 .dex01ScaleInset img{
+ transform:translate(var(--dexOpticalShiftX,0px),var(--dexOpticalShiftY,0px))!important;
+ transition:transform 100ms ease-out;
+}
+</style>
 </head>
 <body>
 <style>
@@ -1776,7 +1872,18 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
   <div id="masteryOverlay"><div id="masteryPanel"><div class="masteryHead"><h2>EVO</h2><p>CHOOSE 1</p></div><div id="masteryCards"></div></div></div>
   <div id="rewardOverlay"><div id="rewardPanel"><div class="rewardHead"><h2 id="rewardTitle">CORE ABSORPTION</h2><p id="rewardSource">ELITE BIO-CORE SECURED</p></div><div id="rewardCards"></div></div></div>
   <div id="endOverlay"><div class="endBox"><h1 id="endTitle" class="endTitle">EVOLVED</h1><div id="endSub" class="endSub">BIO-CONTAINMENT BREACHED.</div><div id="endGradeWrap"><div id="endGrade">A</div><div id="endScoreBox"><b id="endScore">0000</b><span>EVOLUTION SCORE</span></div></div><div id="endEvolution"><b>RUN EVOLUTION</b><div id="endEvolutionPath"></div><div id="endDamageShare"></div><div id="endBuildAnalysis"></div><div id="endAdaptation"></div><div id="endScoreBreakdown"></div></div><div id="endHighlights"></div><div id="bankGain"></div><div class="endStats"><div class="stat"><b id="endKills">0</b><span>KILLS</span></div><div class="stat"><b id="endLevel">1</b><span>LEVEL</span></div><div class="stat"><b id="endDNA">0</b><span>DNA</span></div><div class="stat"><b id="endBuild">-</b><span>DOMINANT MUTATION</span></div></div><div class="endActions"><button id="runBack" class="bigBtn" type="button">RUN IT BACK</button><button id="restart" class="bigBtn">NEW MUTATION</button><button id="labReturn" class="smallBtn labBtn" style="width:100%">GENOME LAB</button></div></div></div>
-  <div id="blueprintOverlay"><div id="blueprintPanel"><div class="blueprintHead"><h2></h2><p>CHOOSE A BUILD</p></div><div id="blueprintCards"></div></div></div>
+  <div id="stageClearPanelR19" aria-live="polite" data-i18n-ignore>
+  <h1 id="stageClearTitleR19">STAGE CLEAR</h1>
+  <div id="stageClearSubR19"></div>
+  <div id="stageClearTotalR19"></div>
+  <div id="stageClearDamageRowsR19" role="list"></div>
+  <div id="stageClearActionsR19">
+    <button id="stageClearRetryR19" type="button"></button>
+    <button id="stageClearNextR19" type="button"></button>
+    <button id="stageClearHomeR19" type="button"></button>
+  </div>
+</div>
+<div id="blueprintOverlay"><div id="blueprintPanel"><div class="blueprintHead"><h2></h2><p>CHOOSE A BUILD</p></div><div id="blueprintCards"></div></div></div>
   <div id="routeOverlay"><div id="routePanel"><div class="routeHead"><h2>STAGE CLEAR</h2><p>CHOOSE THE NEXT BIO-DOMAIN</p></div><div id="stageRewardBanner"></div><div id="routeCards"></div><div id="routeCurrent"></div></div></div>
   <div id="codexOverlay"><div id="codexPanel"><div class="codexTop"><h2>GENOME CODEX</h2><button id="codexClose" class="codexClose" type="button">×</button></div><div id="codexSummary" class="codexSummary"></div><div id="codexContent"></div></div></div>
   <div id="memoryOverlay"><div id="memoryBox"><div class="memoryTop"><h2>MEMORY ARCHIVE</h2><button id="memoryClose" class="memoryClose" type="button">×</button></div><div id="memorySummary"></div><div id="memoryGrid"></div><button id="memoryNone" class="memoryNone" type="button">UNEQUIP MEMORY</button></div></div>
@@ -1873,7 +1980,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
-<script type="application/evolve-resource" data-evolve-src="assets/ca7642c398dc21364a9401bf683c9196c89f21d61d8cd4cf1bd7889505afa7e3.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->
@@ -1895,6 +2002,126 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <script defer src="m08-stage-mission-v622.js?v=10" data-mission-live="stage"></script>
 <script defer src="m08-runtime-missions-v623.js?v=20" data-mission-live="runtime"></script>
 <script defer src="m08-mission-rewards-v624.js?v=101" data-mission-rewards="claim"></script>
+<script id="evolveDexVisualCenterAndUpdateV1">
+(()=>{'use strict';
+  const BUILD='R04-R09-DEV-DEX-RESEARCH-20261031-NO-DEPLOY';
+  const SELECTOR='#codexContent .dex01CardArt>img,#codexContent .dex01DetailArt>img,#codexContent .dex01ScaleInset img';
+  const cache=new Map(),pending=new WeakSet();let scheduled=false;
+  // Use a downsampled alpha channel.  No edits or files are written to disk.
+  function measure(img){
+    const key=img.currentSrc||img.src;
+    if(cache.has(key))return cache.get(key);
+    const w=img.naturalWidth,h=img.naturalHeight;
+    if(!(w>0&&h>0))return null;
+    const k=Math.min(1,260/Math.max(w,h)),cw=Math.max(1,Math.round(w*k)),ch=Math.max(1,Math.round(h*k));
+    const c=document.createElement('canvas');c.width=cw;c.height=ch;
+    const ctx=c.getContext('2d',{willReadFrequently:true});if(!ctx)return null;
+    try{ctx.drawImage(img,0,0,cw,ch);}catch(e){return null;}
+    let pixels;try{pixels=ctx.getImageData(0,0,cw,ch).data;}catch(e){return null;}
+    let minX=cw,maxX=-1,minY=ch,maxY=-1,sum=0,wx=0,wy=0,opaque=0;
+    for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){
+      const alpha=pixels[(y*cw+x)*4+3];
+      if(alpha<28)continue;
+      opaque++;
+      minX=Math.min(minX,x);maxX=Math.max(maxX,x);
+      minY=Math.min(minY,y);maxY=Math.max(maxY,y);
+      // Favor optically dense parts without over-weighting fully opaque background shadows.
+      const weight=Math.min(alpha,230)/230;
+      sum+=weight;wx+=x*weight;wy+=y*weight;
+    }
+    let v=null;
+    if(sum&&maxX>=0&&opaque/(cw*ch)<.94){
+      const bboxX=(minX+maxX+1)/2,bboxY=(minY+maxY+1)/2;
+      const centroidX=(wx/sum)+.5,centroidY=(wy/sum)+.5;
+      v={w,h,cx:((.55*bboxX+.45*centroidX)/cw)*w,cy:((.55*bboxY+.45*centroidY)/ch)*h,
+        left:minX/cw*w,right:(maxX+1)/cw*w,top:minY/ch*h,bottom:(maxY+1)/ch*h};
+    }
+    cache.set(key,v);return v;
+  }
+  function align(img){
+    if(!img.isConnected||!img.complete||!img.naturalWidth)return;
+    const v=measure(img);if(!v)return;
+    const box=img.getBoundingClientRect();if(!box.width||!box.height)return;
+    const scale=Math.min(box.width/v.w,box.height/v.h);
+    const xPad=(box.width-v.w*scale)/2,yPad=(box.height-v.h*scale)/2;
+    // Geometric center of the painted subject, not transparent canvas center.
+    let dx=(v.w/2-v.cx)*scale,dy=(v.h/2-v.cy)*scale;
+    // Never shift visible art outside its display box. Small guard margin remains.
+    const edgeX=box.width*.012,edgeY=box.height*.012;
+    dx=Math.min(Math.max(dx,edgeX-xPad-v.left*scale),box.width-edgeX-xPad-v.right*scale);
+    dy=Math.min(Math.max(dy,edgeY-yPad-v.top*scale),box.height-edgeY-yPad-v.bottom*scale);
+    // Respect mobile layout, even for extreme source image padding.
+    dx=Math.max(-box.width*.20,Math.min(box.width*.20,dx));
+    dy=Math.max(-box.height*.20,Math.min(box.height*.20,dy));
+    img.style.setProperty('--dexOpticalShiftX',dx.toFixed(2)+'px');
+    img.style.setProperty('--dexOpticalShiftY',dy.toFixed(2)+'px');
+    img.dataset.dexOpticallyCentered='1';
+  }
+  function scan(){scheduled=false;document.querySelectorAll(SELECTOR).forEach(img=>{
+    if(img.complete&&img.naturalWidth)align(img);
+    else if(!pending.has(img)){
+      pending.add(img);img.addEventListener('load',()=>{pending.delete(img);align(img);},{once:true});
+    }
+  });}
+  function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(scan);}}
+  function init(){
+    const root=document.getElementById('codexContent');
+    if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['src']});
+    window.addEventListener('resize',schedule,{passive:true});
+    document.addEventListener('click',e=>{if(e.target.closest?.('#codexBtn,[data-dex-tab],[data-dex-card]'))setTimeout(schedule,30);});
+    schedule();
+  }
+  // Legacy v635 web loader compares the inline config.build against version.json.
+  // Previous deployment changed only version.json; that mismatch caused an endless update prompt.
+  // Config is synchronized above.  To ensure a stale page is really refreshed on tap,
+  // preserve EVOLVE saves, then navigate to a cache-busted HTML URL once.
+  document.addEventListener('click',event=>{
+    const button=event.target.closest?.('#webApply');if(!button)return;
+    event.preventDefault();event.stopImmediatePropagation();
+    if(button.disabled)return;
+    try{
+      if(window.EVOLVE_WEB_GUARD?.persist)window.EVOLVE_WEB_GUARD.persist();
+      const entries={};
+      for(let i=0;i<localStorage.length;i++){
+        const key=localStorage.key(i);
+        if(key?.startsWith('EVOLVE_')&&!key.startsWith('EVOLVE_WEB_'))entries[key]=localStorage.getItem(key);
+      }
+      localStorage.setItem('EVOLVE_WEB_UPDATE_BACKUP_V1',JSON.stringify({at:new Date().toISOString(),version:window.EVOLVE_WEB_CONFIG?.version||'',entries}));
+    }catch(e){
+      const text=document.getElementById('webUpdateText');if(text)text.textContent='저장을 백업할 수 없어. 저장 공간을 확인해 줘.';
+      return;
+    }
+    button.disabled=true;button.textContent='적용 중…';
+    document.getElementById('webUpdate')?.setAttribute('hidden','');
+    const next=new URL(location.href);
+    next.searchParams.set('evolveRefresh',String(Date.now()));
+    location.replace(next.href);
+  },true);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+<script id="r19ViewportLock">
+/* Web content cannot force Android system navigation overlays. Preserve the game layout during transient viewport shrink. */
+(()=>{
+  const app=document.getElementById('app');if(!app)return;
+  let height=0,orientation=screen.orientation?.type||'',isCombat=false;
+  const measure=()=>Math.max(0,window.innerHeight||0,document.documentElement.clientHeight||0);
+  function sync(){
+    const active=app.classList.contains('combat');
+    if(!active){height=0;isCombat=false;document.body.classList.remove('r19CombatViewport');app.style.removeProperty('--r19CombatHeight');return;}
+    if(!isCombat){height=measure();isCombat=true;}
+    if((screen.orientation?.type||'')!==orientation){orientation=screen.orientation?.type||'';height=measure();}
+    height=Math.max(height,measure());
+    if(height>0)app.style.setProperty('--r19CombatHeight',height+'px');
+    document.body.classList.add('r19CombatViewport');
+  }
+  new MutationObserver(sync).observe(app,{attributes:true,attributeFilter:['class']});
+  addEventListener('resize',sync,{passive:true});
+  addEventListener('orientationchange',()=>{height=0;setTimeout(sync,130);},{passive:true});
+  window.visualViewport?.addEventListener('resize',sync,{passive:true});
+  sync();
+})();
+</script>
 </body></html>
 <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
 

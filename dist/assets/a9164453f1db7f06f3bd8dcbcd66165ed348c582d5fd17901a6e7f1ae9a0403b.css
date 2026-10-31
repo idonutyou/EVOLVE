@@ -1,0 +1,45 @@
+/* EVOLVE DEX01 - scoped component style, no changes to gameplay UI. */
+#poster #codexPanel .dex01{--dexAccent:#ff7363;color:#ebedef;position:relative;font-family:Inter,system-ui, sans-serif}
+#poster #codexPanel .dex01[data-category="core"]{--dexAccent:#ff7460}
+#poster #codexPanel .dex01[data-category="parts"]{--dexAccent:#87d1a2}
+#poster #codexPanel .dex01[data-category="monsters"]{--dexAccent:#74b8e7}
+#poster #codexPanel .dex01[data-category="titans"]{--dexAccent:#c395f7}
+#poster #codexPanel .dex01Intro{display:flex;flex-direction:column;gap:5px;padding:13px 12px 12px;background:linear-gradient(130deg,#27141b,#0a1015 67%);border:1px solid #583039;border-radius:12px}
+#poster #codexPanel .dex01Intro>span{color:#d48a7c;font-size:9px;letter-spacing:.17em;font-weight:900}
+#poster #codexPanel .dex01Intro>strong{font-size:22px;color:#fff;letter-spacing:.035em}
+#poster #codexPanel .dex01Intro>small{font-size:11px;color:#9baeb9}
+#poster #codexPanel .dex01Tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:13px 0 14px}
+#poster #codexPanel button.dex01Tab{min-width:0;min-height:46px;display:flex;align-items:center;justify-content:center;gap:3px;flex-wrap:wrap;border:1px solid #405060;border-radius:9px;background:#111920;color:#c6d0d8;font-size:12px;font-weight:800;padding:4px}
+#poster #codexPanel button.dex01Tab.is-active{border-color:var(--dexAccent);color:#fff;background:linear-gradient(135deg,#30313d,#1a1b28);box-shadow:inset 0 -2px 0 var(--dexAccent)}
+#poster #codexPanel .dex01Count{font-size:9px;color:#92a4ac}
+#poster #codexPanel .dex01SectionHead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #35424e;padding-bottom:8px;margin-bottom:10px}
+#poster #codexPanel .dex01SectionHead strong{font-size:16px;letter-spacing:.04em;color:var(--dexAccent)}
+#poster #codexPanel .dex01SectionHead small{font-size:10px;color:#99a9b5}
+#poster #codexPanel .dex01Grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding-bottom:22px}
+#poster #codexPanel button.dex01Card{position:relative;display:flex;flex-direction:column;gap:6px;align-items:stretch;min-width:0;min-height:184px;padding:9px;text-align:left;border-radius:12px;border:1px solid #354553;background:linear-gradient(155deg,#17212a,#0c1218 80%);color:#f8f5f4;box-shadow:0 6px 22px #0005;cursor:pointer}
+#poster #codexPanel button.dex01Card:active{transform:scale(.986);border-color:var(--dexAccent)}
+#poster #codexPanel button.dex01Card:focus-visible,#poster #codexPanel button.dex01Tab:focus-visible{outline:2px solid #f8d9bc;outline-offset:2px}
+#poster #codexPanel .dex01CardArt{width:100%;height:112px;border-radius:8px;display:grid;place-content:center;background:radial-gradient(circle at 50% 44%,#412730 0%,#111b25 45%,#070c11 90%);border:1px solid #263743;overflow:hidden}
+#poster #codexPanel .dex01CardArt.premium{background:radial-gradient(circle at 50% 44%,#76542b 0%,#241726 45%,#070b12 90%)}
+#poster #codexPanel .dex01CardArt img{width:100%;height:100%;object-fit:contain}
+#poster #codexPanel .dex01ArtPlaceholder{font-size:55px;line-height:1;color:var(--dexAccent);text-shadow:0 0 20px var(--dexAccent);opacity:.82}
+#poster #codexPanel .dex01CardNo{position:absolute;top:14px;left:15px;font-size:10px;font-weight:900;color:#d3c7c5;background:#060a0dc9;border:1px solid #47505b;border-radius:5px;padding:2px 5px}
+#poster #codexPanel .dex01CardName{font-size:12px;font-weight:900;line-height:1.4;overflow-wrap:anywhere}
+#poster #codexPanel .dex01CardGroup{font-size:10px;color:#a4b1b9}
+#poster #codexPanel .dex01Empty{font-size:12px;color:#bdc5c9;padding:26px 8px;text-align:center}
+#poster #codexPanel .dex01Detail[hidden]{display:none!important}
+#poster #codexPanel .dex01Detail{position:fixed;inset:0;z-index:140;display:flex;align-items:center;justify-content:center;background:#020306e8;padding:calc(14px + env(safe-area-inset-top,0px)) 12px calc(14px + env(safe-area-inset-bottom,0px))}
+#poster #codexPanel .dex01DetailSurface{position:relative;width:min(100%,440px);max-height:90dvh;overflow-y:auto;background:linear-gradient(150deg,#1e141c,#0b1016 54%);border:1px solid #7c5050;border-radius:16px;padding:16px;color:#f9f9f9;box-shadow:0 20px 70px #000d}
+#poster #codexPanel .dex01Close{position:absolute;right:12px;top:10px;border:1px solid #747e84;color:#fff;background:#1e2a30;font-size:22px;border-radius:8px;min-width:42px;min-height:42px;z-index:1}
+#poster #codexPanel .dex01DetailArt{min-height:175px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;margin-bottom:13px;border-radius:10px;background:radial-gradient(circle,#39242f,#090f15 70%)}
+#poster #codexPanel .dex01DetailArt img{width:90%;max-height:235px;object-fit:contain}
+#poster #codexPanel .dex01ArtSoon{font-size:10px;color:#b6aeb6}
+#poster #codexPanel .dex01Eyebrow{font-size:11px;font-weight:900;color:var(--dexAccent)}
+#poster #codexPanel .dex01DetailSurface h3{font-size:22px;margin:5px 0 12px}
+#poster #codexPanel .dex01DetailSurface p{font-size:13px;line-height:1.65;color:#e0d6d9;margin:8px 0 18px}
+#poster #codexPanel .dex01Facts{display:grid;grid-template-columns:72px 1fr;gap:9px;font-size:11px;padding:12px;background:#141d22;border-radius:9px}
+#poster #codexPanel .dex01Facts span{color:#95aab5}
+#poster #codexPanel .dex01Facts b{color:#f3f6f8;overflow-wrap:anywhere}
+#poster #codexPanel .dex01Done{margin-top:15px;min-height:46px;width:100%;border:1px solid #a36f77;color:white;background:#472029;border-radius:10px;font-size:13px;font-weight:900}
+@media(max-width:370px){#poster #codexPanel button.dex01Tab{font-size:10px;min-height:43px}#poster #codexPanel button.dex01Card{min-height:172px}#poster #codexPanel .dex01CardArt{height:99px}}
+@media(prefers-reduced-motion:reduce){#poster #codexPanel .dex01 *{transition:none!important;animation:none!important}}
