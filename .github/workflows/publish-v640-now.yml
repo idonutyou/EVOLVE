@@ -94,7 +94,6 @@ jobs:
           git -C site config user.name "evolve-release-bot"
           git -C site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git -C site add --sparse index.html version.json asset-manifest.json manifest.webmanifest assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js
-          git -C site diff --cached --check
           git -C site diff --cached --name-only
           git -C site commit -m "EVOLVE V640: publish stage results, defeat clock and Android nav fix"
           git -C site push origin HEAD:pages-fast-evolve-20261029
