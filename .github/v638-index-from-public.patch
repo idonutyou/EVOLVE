@@ -1,0 +1,47 @@
+--- old.html
++++ new.html
+@@ -1636,8 +1636,12 @@
+ #stageClearActionsR19 button:disabled{opacity:.42;}
+ @media(max-height:600px){#stageClearDamageRowsR19{max-height:38vh;gap:8px}#stageClearActionsR19{margin-top:13px;gap:6px}#stageClearActionsR19 button{min-height:43px}}
+ 
+-</style>
+-<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57-CENTERUPDATEFIX-SCALEFIX-R04-R09-DEV-R18-LABELONLY-DEV-SAVE-BUNDLE-R18-DEV-UIFIX01","build":"R19-UIFIX01-RELEASE-20261101","scriptBytes":81216681,"preloadResources":true,"assets":1081};</script>
++/* Electric gun test item: the V576 chain-lightning logic and equip ID remain unchanged. */
++.partsItemV523.electricGunTestV636,.partsSlotV523.electricGunTestV636{position:relative;isolation:isolate}
++.electricGunTestV636>img{filter:hue-rotate(155deg) saturate(1.6) drop-shadow(0 0 8px #4dbaff)!important}
++.electricGunBoltV636{position:absolute;right:3px;top:2px;z-index:4;font:900 17px/1 system-ui;color:#b0efff;text-shadow:0 0 8px #00acff;pointer-events:none}
++</style>
++<script>window.EVOLVE_WEB_CONFIG={"version":"V575-STEP07-MONSTER-FEEDBACK-V614-M04-MOCK70-M05-UX90-SHOP620-BIOCORE625-M09-100-WEAPONPOSE626-AUTOAMBIENT627-LOADER628-PRIORITY629-CHARMOTION630-DUALARM631-DUALARMCOMBAT631-G06UX632-DEX57-CENTERUPDATEFIX-SCALEFIX-R04-R09-DEV-R18-LABELONLY-DEV-SAVE-BUNDLE-R18-DEV-UIFIX01-V636-GROWTH-SHIELD-ELECTRIC-MULTISHOT-V637-SCREEN-RANGE-ARC-V638-ELECTRIC-PER-TARGET","build":"V638-INTEGRATED-RELEASE-20261101","scriptBytes":81219973,"preloadResources":true,"assets":1081};</script>
+ <script src="assets/80e69d0b91df519012e37724ef722493f475ab7457a915dfa869a7efe55a0d7d.js"></script>
+ <style id="adminModeStyleV585">
+ /* WEB-18: hide developer controls before the first frame, including saved test preferences. */
+@@ -1980,7 +1984,7 @@
+ <script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
+ <script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
+ <script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
+-<script type="application/evolve-resource" data-evolve-src="assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js"></script>
++<script type="application/evolve-resource" data-evolve-src="assets/d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69.js"></script>
+ <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
+ <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
+ <!-- V410_FARMING_RADAR_ZONE_SETS -->
+@@ -2122,6 +2126,20 @@
+   sync();
+ })();
+ </script>
++<script id="evolveAndroidImmersiveV636">
++/* Fullscreen API is a best-effort Android browser feature, not permission to control the system bar. */
++(()=>{
++ if(!window.matchMedia?.('(pointer:coarse)').matches)return;
++ const ids=new Set(['start','stageClearNextR19','stageClearRetryR19','restartRun','resume','restart']);
++ function immersive(event){
++  const b=event.target?.closest?.('button');if(!b||!ids.has(b.id)||b.disabled||document.fullscreenElement)return;
++  const root=document.documentElement,request=root.requestFullscreen||root.webkitRequestFullscreen;
++  if(!request)return;
++  try{const p=request.call(root,{navigationUI:'hide'});p?.catch?.(()=>{});}catch(_){/* Android browser may refuse; the fixed viewport is still active. */}
++ }
++ document.addEventListener('click',immersive,true);
++})();
++</script>
+ </body></html>
+ <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
+ 
