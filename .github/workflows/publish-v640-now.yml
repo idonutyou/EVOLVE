@@ -1,0 +1,94 @@
+name: EVOLVE V640 one-shot release to Pages source
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v640-now.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v640-release-once
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch only live page metadata and old engine (not unchanged images)
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /manifest.webmanifest
+            /assets/d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69.js
+      - name: Fetch only reviewed V640 patches and release metadata
+        uses: actions/checkout@v4
+        with:
+          ref: v640-release-build-20261101
+          path: release
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v640-engine.patch
+            /.github/v640-index.patch
+            /.github/v640-version.json
+            /.github/v640-manifest.webmanifest
+      - name: Apply exact verified engine and HTML patches (no fuzz)
+        shell: bash
+        run: |
+          set -euo pipefail
+          patch --batch --fuzz=0 --output "$RUNNER_TEMP/v640-engine.js" "site/assets/d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69.js" "release/.github/v640-engine.patch"
+          patch --batch --fuzz=0 --output "$RUNNER_TEMP/v640-index.html" "site/index.html" "release/.github/v640-index.patch"
+          python3 - <<'PY'
+          import hashlib,json,re,pathlib,shutil,os
+          site=pathlib.Path("site")
+          old="d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69"
+          new="04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74"
+          oldfile=site/"assets"/(old+".js")
+          fresh=pathlib.Path(os.environ["RUNNER_TEMP"])/"v640-engine.js"
+          data=fresh.read_bytes()
+          digest=hashlib.sha256(data).hexdigest()
+          assert digest==new,(digest,new)
+          delta=len(data)-oldfile.stat().st_size
+          target=site/"assets"/(new+".js")
+          shutil.copyfile(fresh,target)
+          html=(pathlib.Path(os.environ["RUNNER_TEMP"])/"v640-index.html").read_text(encoding="utf-8")
+          assert ("assets/"+new+".js") in html and "V640-DEAD-CLOCK-READY-20261101" in html
+          assert "evolveAndroidImmersiveV636" not in html
+          (site/"index.html").write_text(html,encoding="utf-8")
+          manifest=json.loads((site/"asset-manifest.json").read_text())
+          matched=[x for x in manifest if x["path"]=="assets/"+old+".js"]
+          assert len(matched)==1,len(matched)
+          matched[0].update(path="assets/"+new+".js",sha256=new,bytes=len(data))
+          (site/"asset-manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+          version=json.loads(pathlib.Path("release/.github/v640-version.json").read_text())
+          existing=json.loads((site/"version.json").read_text())
+          version["scriptBytes"]=existing["scriptBytes"]+delta
+          inline=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^<]*?\});',html).group(1))
+          assert version["scriptBytes"]==inline["scriptBytes"],(version["scriptBytes"],inline["scriptBytes"])
+          assert version["source_sha256"]==new
+          assert version["version"]==inline["version"] and version["build"]==inline["build"]
+          (site/"version.json").write_text(json.dumps(version,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          shutil.copyfile("release/.github/v640-manifest.webmanifest",site/"manifest.webmanifest")
+          print("V640 READY: sha256",new,"engine_bytes",len(data),"delta",delta,"manifest_entries",len(manifest),"build",version["build"])
+          PY
+      - name: Commit only V640 engine, index and metadata; preserve all old assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C site config user.name "evolve-release-bot"
+          git -C site config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C site add --sparse index.html version.json asset-manifest.json manifest.webmanifest assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js
+          git -C site diff --cached --check
+          git -C site diff --cached --name-only
+          git -C site commit -m "EVOLVE V640: publish stage results, defeat clock and Android nav fix"
+          git -C site push origin HEAD:pages-fast-evolve-20261029
+          echo "V640 content uploaded to Pages source. GITHUB_TOKEN push does not trigger Pages; follow with one GitHub App marker commit." >> "$GITHUB_STEP_SUMMARY"
