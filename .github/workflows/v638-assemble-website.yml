@@ -1,0 +1,64 @@
+name: EVOLVE V638 exact website-metadata assembler
+on:
+  push:
+    branches: [v638-build-stage-20261101]
+    paths:
+      - ".github/v638-index-from-public.patch"
+      - ".github/v638-build-meta.json"
+      - ".github/workflows/v638-assemble-website.yml"
+permissions:
+  contents: write
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout only index, manifest, version and the two tiny source deltas
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v638-index-from-public.patch
+            /.github/v638-build-meta.json
+            /dist/index.html
+            /dist/version.json
+            /dist/asset-manifest.json
+      - name: Rebuild exact V638 web-shell and verify immutable resource manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object dist/index.html)" = fd20aeedf15e82b5e80327278d42981cd1e8ae76
+          cp dist/index.html /tmp/new-index.html
+          patch -s --batch --forward /tmp/new-index.html .github/v638-index-from-public.patch
+          echo "84d5fbca2cd07d880a8fd73566031491850c096274fa9138a523bb574cc2cc69  /tmp/new-index.html" | sha256sum -c -
+          cp /tmp/new-index.html dist/index.html
+          python3 - <<'PY'
+          import json,hashlib,pathlib,re
+          p=pathlib.Path('dist/asset-manifest.json')
+          assets=json.loads(p.read_text(encoding='utf-8'))
+          old='eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e'
+          new='d983ed9ede2d4b0b1f43b62696204a6273a8af4792f8e82937e9953f0db10f69'
+          changed=0
+          for entry in assets:
+              if entry.get('sha256')==old and entry.get('kind')=='game-code':
+                  entry.update({'sha256':new,'path':'assets/'+new+'.js','bytes':1772544})
+                  changed+=1
+          assert len(assets)==1081 and changed==1
+          raw=json.dumps(assets,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode('utf-8')
+          assert hashlib.sha256(raw).hexdigest()=='83b2b98ef9f7354f5649d2ba39fb8cfba6fbb46993c678fd339aa1c69e1b48ab'
+          p.write_bytes(raw)
+          ver=pathlib.Path('.github/v638-build-meta.json').read_bytes()
+          v=json.loads(ver)
+          assert v['build']=='V638-INTEGRATED-RELEASE-20261101' and v['source_sha256']==new
+          pathlib.Path('dist/version.json').write_bytes(ver)
+          html=pathlib.Path('dist/index.html').read_text()
+          m=re.search(r'window.EVOLVE_WEB_CONFIG\s*=\s*(\{[^<]*?\});',html)
+          assert m and json.loads(m.group(1))['build']==v['build']
+          print('V638 shell+manifest+build parity passed')
+          PY
+          echo "84d5fbca2cd07d880a8fd73566031491850c096274fa9138a523bb574cc2cc69  dist/index.html" | sha256sum -c -
+          git add --sparse dist/index.html dist/asset-manifest.json dist/version.json
+          git -c user.name='EVOLVE release builder' -c user.email='release-builder@users.noreply.github.com' commit -m 'Assemble exact V638 website manifest and web shell'
+          git push origin HEAD:v638-build-stage-20261101
