@@ -43,6 +43,21 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p test_pages_release_gate.py -v
           python3 -m py_compile tools/pages_release_gate.py
+      - name: Fail if embedded HTML build disagrees with version.json
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, re
+          html = pathlib.Path('dist/index.html').read_text(encoding='utf-8')
+          remote = json.loads(pathlib.Path('dist/version.json').read_text(encoding='utf-8'))
+          matches = re.findall(r'window\.EVOLVE_WEB_CONFIG\s*=\s*(\{[^<]*?\});', html)
+          if len(matches) != 1:
+              raise SystemExit('EVOLVE_WEB_CONFIG was not found exactly once')
+          inline = json.loads(matches[0])
+          for key in ('version', 'build'):
+              if inline.get(key) != remote.get(key):
+                  raise SystemExit(f'Update banner loop prevention: {key} mismatch')
+          print('Embedded client version/build match dist/version.json')
+          PY
       - name: Compare current Pages root with main dist Git tree (metadata only)
         id: compare
         shell: bash
