@@ -72,14 +72,14 @@ jobs:
           version=json.loads(pathlib.Path("release/.github/v640-version.json").read_text())
           existing=json.loads((site/"version.json").read_text())
           version["scriptBytes"]=existing["scriptBytes"]+delta
-          inline=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^<]*?\});',html).group(1))
+          inline=json.loads(html.split("window.EVOLVE_WEB_CONFIG=",1)[1].split(";</script>",1)[0])
           if version["scriptBytes"]!=inline["scriptBytes"]:
               before='"scriptBytes":'+str(inline["scriptBytes"])
               after='"scriptBytes":'+str(version["scriptBytes"])
               assert html.count(before)==1,(before,html.count(before))
               html=html.replace(before,after,1)
               (site/"index.html").write_text(html,encoding="utf-8")
-              inline=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\\{[^<]*?\\});',html).group(1))
+          inline=json.loads(html.split("window.EVOLVE_WEB_CONFIG=",1)[1].split(";</script>",1)[0])
           assert version["scriptBytes"]==inline["scriptBytes"],(version["scriptBytes"],inline["scriptBytes"])
           assert version["source_sha256"]==new
           assert version["version"]==inline["version"] and version["build"]==inline["build"]
