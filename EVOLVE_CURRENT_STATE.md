@@ -1,3 +1,15 @@
+# Current live update — 2026-11-01 KST (UI fix; R19 roadmap remains paused)
+
+- **LIVE public build:** `R19-UIFIX01-RELEASE-20261101` at https://idonutyou.github.io/EVOLVE/; Pages native deployment run **41238795864 SUCCESS**. Public `version.json` and both changed JS asset URLs verified after release.
+- **main content release:** `9a151e0084833cfaca83db9cbd7386863eb0dde8` under `main:dist/`. **Pages commit:** `686cc55cd11fc628713f8f45b7e6f96e3aa9f19b`. Shared site Git tree `545e4342eeaf56887dbf26e60a8c56458e7a088b`.
+- V635 base + R18 unpublished cumulative improvements + UI hotfix for transient Android navigation bar resize, simplified clear screen with weapon damage bars/percentages and buttons (retry/next/home), and home stage selection advance after clear. R19 roadmap stage itself NOT started. Original images not modified.
+- New active engine: `assets/eb6aab3136656fffe478ce382b56f6010a68cf0a3d62990a4bfed728717d698e.js` SHA256 equal filename. Sidecar: `assets/bf0c30f19f51249760c9a3fee96e4b6de8add7ff55840a79a84882ff9460d64b.js`. 1,081 manifest assets.
+- Backups preserved: `backup/main-before-uifix-20261101`, `backup/pages-before-uifix-20261101`, earlier Git branches and all Library `/EVOLVE/EVOLVE_R18_*` / `EVOLVE_FIX_UI_*` snapshots. No backup deletion.
+- Verified locally: `node --check` and focused stage-clear Node/VM QA PASS; Git blob hashes match local exact files; remote manifest path changes scoped to two JS files. **Not verified on physical Galaxy S23+**; Android system navbar overlay is not guaranteed by web code alone.
+- Library handoff: `/EVOLVE/EVOLVE_UIFIX_RELEASE_HANDOFF_20261101.md`. Keep this section as canonical; earlier status sections below remain historical.
+
+---
+
 # EVOLVE — Current Handoff (canonical short status)
 
 ## LIVE RELEASE UPDATE — 2026-10-30 KST (V630 motion / V631 dual arm)
