@@ -1,0 +1,21 @@
+{
+  "release": "V641",
+  "build": "V641-ELECTRIC-STUN-BALANCE-20261101",
+  "engine_sha256": "f49fc97d839046341723688bba8dd62f39da4b3c687f61697120adcf2cb65169",
+  "effect": "Remove electric-only blue HP gauge, preserve standard red HP bar",
+  "knockback": "electric hit knockback removed",
+  "stun_seconds": {
+    "normal": 0.12,
+    "strong": 0.16
+  },
+  "damage_factor": 0.8,
+  "chain_target_damage_ratios": {
+    "one": 1,
+    "two": 0.7,
+    "three": 0.6,
+    "four": 0.55,
+    "five_plus": 0.5
+  },
+  "backup_prior": "backup/v640-before-electric-stun-20261101",
+  "backup_staged": "backup/v641-electric-staged-20261101"
+}
