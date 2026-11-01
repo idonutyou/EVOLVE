@@ -46,10 +46,13 @@ jobs:
             src=src.replace(a,b,1)
           # Remove only the duplicate electric HP/blue meter. Keep the standard red hit HP bar untouched.
           swap("s.age+=dt;s.wait=Math.max(0,s.wait-dt);","s.age+=dt;")
-          swap("    if(s.wait<=0){s.hp+=(e.hp/Math.max(1,e.maxHp)-s.hp)*(1-Math.exp(-dt*11));if(Math.abs(s.hp-e.hp/e.maxHp)<.003)s.hp=e.hp/e.maxHp}\n","")
-          swap("    if(s.age>=s.life&&Math.abs(s.hp-e.hp/e.maxHp)<.004)delete e.arcShockV576;","    if(s.age>=s.life)delete e.arcShockV576;")
+          wait_hp=next(l for l in src.splitlines(keepends=True) if l.lstrip().startswith("if(s.wait<=0){s.hp+="))
+          swap(wait_hp,"")
+          aged_hp=next(l for l in src.splitlines(keepends=True) if l.lstrip().startswith("if(s.age>=s.life&&Math.abs(s.hp-"))
+          swap(aged_hp,aged_hp.replace("if(s.age>=s.life&&Math.abs(s.hp-e.hp/e.maxHp)<.004)","if(s.age>=s.life)"))
           swap("const old=e.arcShockV576;e.arcShockV576={age:0,hold:q.strong?.058:.034,life:q.strong?.32:.23,a:angle,strong:q.strong,mass,hp:Math.max(old?.hp||0,e.hp/Math.max(1,e.maxHp)),wait:.13,vx:e.vx||0,vy:e.vy||0};","e.arcShockV576={age:0,hold:q.strong?.16:.12,life:q.strong?.32:.23,a:angle,strong:q.strong,mass,vx:e.vx||0,vy:e.vy||0};")
-          swap("    e.kx=(e.kx||0)+Math.cos(angle)*(q.strong?285:142)*mass;e.ky=(e.ky||0)+Math.sin(angle)*(q.strong?285:142)*mass;\n","")
+          lightning_push=next(l for l in src.splitlines(keepends=True) if l.lstrip().startswith("e.kx=(e.kx||0)+Math.cos(angle)*(q.strong?285:142)*mass;"))
+          swap(lightning_push,"")
           oldoverlay=next(l for l in src.splitlines() if l.strip().startswith("function overlay(ctx,e,size){"))
           assert "fillRect" in oldoverlay and "'#48d9ff'" in oldoverlay and "ctx.lineTo" in oldoverlay
           newoverlay=" function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=p.fade*.86;ctx.strokeStyle=p.flash>.2?'#ffffff':'#8fe7ff';ctx.lineWidth=p.strong?1.8:1.1;ctx.beginPath();ctx.moveTo(e.x-size*.28,e.y-size*.22);ctx.lineTo(e.x+size*.07,e.y-size*.10);ctx.lineTo(e.x-size*.11,e.y+size*.02);ctx.lineTo(e.x+size*.25,e.y+size*.13);ctx.stroke();ctx.restore()}"
