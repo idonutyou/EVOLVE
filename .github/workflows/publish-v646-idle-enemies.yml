@@ -1,0 +1,169 @@
+name: EVOLVE V646 recover invisible enemies after long idle
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v646-idle-enemies.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v646-idle-enemies-once
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Sparse checkout latest V645 published source and metadata
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          filter: blob:none
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/095a8b84c09e00db4489abd82a95a01a6ce35be6d41f1bd011fd11af91651ccf.js
+      - name: Patch idle GPU recovery and verify existing mechanics preserved
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re
+          site=Path("site"); vpath=site/"version.json"
+          v=json.loads(vpath.read_text());sha=v["source_sha256"]
+          assert sha=="095a8b84c09e00db4489abd82a95a01a6ce35be6d41f1bd011fd11af91651ccf",("Unexpected engine",sha)
+          assert v["build"]=="V645-DUAL-WEAPON-INDEPENDENT-20261101"
+          p=site/"assets"/(sha+".js");raw=p.read_bytes()
+          assert hashlib.sha256(raw).hexdigest()==sha
+          s=raw.decode()
+          def swap(old,new):
+           global s
+           n=s.count(old)
+           assert n==1,("Anchor mismatch",n,old[:150])
+           s=s.replace(old,new,1)
+          swap("""  if(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428){
+              prepareVisibleV428(propView);
+              compositeWorldSceneV428();
+              for(let i=0;i<visibleNormalsV428.length;i++)drawNormalEnemyOverlayV426(visibleNormalsV428[i]);""",
+          """  const gpuSceneOkV646=canCompositeEnemyWorldV646();
+            if(gpuSceneOkV646){
+              for(let i=0;i<visibleNormalsV428.length;i++)drawNormalEnemyOverlayV426(visibleNormalsV428[i]);""")
+          swap(" const elapsedMsV437=raw*1000;",
+          """ if(raw>12)recoverEnemyVisibilityV646('frame-resume');
+           const elapsedMsV437=raw*1000;""")
+          swap(""" if(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428){prepareVisibleV428(view);compositeEnemyShadowsV428();for(const e of visibleSpecialsV428)drawEnemy(e,true);drawPlayer(true);}else oldWorldShadowsV502();""",
+          """ if(gpuEnemyBatchEnabledV426&&gpuEnemyBatchReadyV426&&gpuWorldReadyV428&&!enemyIdleFallbackV646&&!gpuContextLostV428&&gpuEnemyBatchGLV426&&!gpuEnemyBatchGLV426.isContextLost?.()){
+            prepareVisibleV428(view);
+            let shadowsOk=false;try{shadowsOk=compositeEnemyShadowsV428()}catch(_){shadowsOk=false}
+            if(shadowsOk){for(const e of visibleSpecialsV428)drawEnemy(e,true);drawPlayer(true)}
+            else{recoverEnemyVisibilityV646('failed-shadows');oldWorldShadowsV502()}
+           }else oldWorldShadowsV502();""")
+          anchor="// Re-entering the same prepared map must not recompose five million collision samples."
+          helper="""// V646: mobile sleep can invalidate offscreen WebGL2 even without a contextlost event.
+          // Keep AI, HP, hitboxes and game time intact; only switch enemy/structure render to Canvas2D.
+          let enemyIdleFallbackV646=false,enemyIdleRecoveriesV646=0,enemyIdleHiddenAtV646=0;
+          function recoverEnemyVisibilityV646(reason){
+           if(enemyIdleFallbackV646)return;
+           enemyIdleFallbackV646=true;enemyIdleRecoveriesV646++;
+           gpuEnemyBatchEnabledV426=false;gpuBatchWantedV428=false;
+           frozenFrameDrawnV438=false;
+           queueViewportPaintV609(true);
+          }
+          function canCompositeEnemyWorldV646(){
+           if(enemyIdleFallbackV646||!gpuEnemyBatchEnabledV426||!gpuEnemyBatchReadyV426||!gpuWorldReadyV428)return false;
+           const gl=gpuEnemyBatchGLV426;
+           if(gpuContextLostV428||!gl||gl.isContextLost?.()){
+            recoverEnemyVisibilityV646('lost-context');return false;
+           }
+           try{if(compositeWorldSceneV428())return true;}
+           catch(err){console.warn('[EVOLVE V646] GPU enemy draw failed, using Canvas2D',err);}
+           recoverEnemyVisibilityV646('gpu-composite-failed');return false;
+          }
+          document.addEventListener('visibilitychange',()=>{
+           if(document.hidden){enemyIdleHiddenAtV646=performance.now();return;}
+           if(enemyIdleHiddenAtV646&&performance.now()-enemyIdleHiddenAtV646>12000)recoverEnemyVisibilityV646('visible-after-idle');
+           enemyIdleHiddenAtV646=0;
+          });
+          addEventListener('pageshow',event=>{if(event.persisted)recoverEnemyVisibilityV646('bfcache');});
+          window.__EVOLVE_IDLE_RECOVERY_V646__={
+           read:()=>({fallback:enemyIdleFallbackV646,recoveries:enemyIdleRecoveriesV646,gpu:gpuEnemyBatchEnabledV426,worldReady:gpuWorldReadyV428,live:enemies.filter(e=>!e.dead).length,paused,combatUnchanged:true}),
+           simulateLongIdle:()=>{recoverEnemyVisibilityV646('qa');return enemyIdleFallbackV646&&!gpuEnemyBatchEnabledV426;}
+          };
+          """
+          swap(anchor,helper+"\n"+anchor)
+          for marker in ["lightningV645.castChain(true);","hold:q.strong?.16:.12","xpAutoSweepRadiusV643=xpPickupRadiusV416;","(pullSpeed+closeBoost)*dt*.82","window.__EVOLVE_DUAL_WEAPON_V645__"]:
+           assert marker in s,("Regression",marker)
+          assert s.count("canCompositeEnemyWorldV646();")==1
+          assert s.count("function canCompositeEnemyWorldV646()")==1
+          assert s.count("function recoverEnemyVisibilityV646(")==1
+          assert "if(raw>12)recoverEnemyVisibilityV646('frame-resume');" in s
+          new=s.encode();newsha=hashlib.sha256(new).hexdigest()
+          (site/"assets"/(newsha+".js")).write_bytes(new)
+          idxpath=site/"index.html";html=idxpath.read_text()
+          oldasset="assets/"+sha+".js";newasset="assets/"+newsha+".js"
+          assert html.count(oldasset)==1
+          html=html.replace(oldasset,newasset,1)
+          m=re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',html);assert m
+          cfg=json.loads(m.group(1));assert cfg["build"]==v["build"] and cfg["version"]==v["version"]
+          assert cfg["scriptBytes"]==v["scriptBytes"]
+          delta=len(new)-len(raw);build="V646-IDLE-ENEMY-VISIBILITY-20261102";version=v["version"]+"-V646-IDLE-ENEMY"
+          cfg.update(build=build,version=version,scriptBytes=cfg["scriptBytes"]+delta)
+          v.update(build=build,version=version,source_sha256=newsha,scriptBytes=v["scriptBytes"]+delta)
+          html=html.replace(m.group(1),json.dumps(cfg,ensure_ascii=False,separators=(",",":")),1)
+          idxpath.write_text(html)
+          vpath.write_text(json.dumps(v,ensure_ascii=False,indent=2)+"\n")
+          mp=site/"asset-manifest.json"; manifest=json.loads(mp.read_text())
+          entries=[x for x in manifest if x.get("path")==oldasset]
+          assert len(entries)==1
+          entries[0].update(path=newasset,sha256=newsha,bytes=len(new))
+          assert len(manifest)==v["assets"]==1081
+          mp.write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":"))
+          Path("/tmp/evolve-v646-sha").write_text(newsha)
+          print("V646_RELEASE_READY",json.dumps({"build":build,"source_sha256":newsha,"engine_bytes":len(new),"delta":delta,"cpu_fallback_after_seconds":12,"combat_modified":False}))
+          PY
+          sha="$(cat /tmp/evolve-v646-sha)"
+          node --check "site/assets/${sha}.js"
+          python3 - <<'PY'
+          import pathlib,json,hashlib,re
+          site=pathlib.Path("site")
+          v=json.loads((site/"version.json").read_text())
+          engine=(site/"assets"/(v["source_sha256"]+".js")).read_bytes()
+          assert hashlib.sha256(engine).hexdigest()==v["source_sha256"]
+          s=engine.decode()
+          assert s.count("const gpuSceneOkV646=canCompositeEnemyWorldV646();")==1
+          assert "if(gpuSceneOkV646){" in s
+          assert "if(raw>12)recoverEnemyVisibilityV646('frame-resume')" in s
+          assert "document.addEventListener('visibilitychange',()=>{" in s
+          assert "if(event.persisted)recoverEnemyVisibilityV646('bfcache')" in s
+          assert "return false;" in s[s.index("function canCompositeEnemyWorldV646()"):s.index("document.addEventListener('visibilitychange',()=>{",s.index("function canCompositeEnemyWorldV646()"))]
+          assert s.count("lightningV645.castChain(true);")==1
+          assert s.count("addXP(d.xp)")==1
+          assert "xpMagnetModeV643=lootSweep>0" not in s
+          assert "hold:q.strong?.16:.12" in s
+          assert "gunDamage)*.80" in s
+          h=(site/"index.html").read_text()
+          c=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',h).group(1))
+          assert c["build"]==v["build"] and c["version"]==v["version"] and c["scriptBytes"]==v["scriptBytes"]
+          assert h.count("assets/"+v["source_sha256"]+".js")==1
+          m=json.loads((site/"asset-manifest.json").read_text())
+          assert len(m)==v["assets"]==1081
+          assert len([a for a in m if a["path"]=="assets/"+v["source_sha256"]+".js" and a["bytes"]==len(engine)])==1
+          print("V646_QA_PASS",v["build"],v["source_sha256"],len(engine))
+          PY
+      - name: Upload V646 source to GitHub Pages branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(cat /tmp/evolve-v646-sha)"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${sha}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V646: recover Android WebGL enemy visibility after long idle"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V646 staged on Pages branch. Marker deployment commit follows." >> "$GITHUB_STEP_SUMMARY"
