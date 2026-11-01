@@ -1,0 +1,18 @@
+{
+  "release": "V644",
+  "build": "V644-XP-BOMB-MAGNET-FIX-20261101",
+  "engine_sha256": "7f23c70839c8ba8be0a085b949b1dc826aec86823e4cda345ff1a3690d1d8ed9",
+  "base": "V643-XP-MAGNET-FOREGROUND-20261101",
+  "changes": {
+    "worldEventBombKillsDoNotActivateMagnet": true,
+    "lootSweepNoLongerExpandsXpPickupRadius": true,
+    "genuinePickupUpgradeStillWorks": true,
+    "xpCrystalSuctionSpeedFactor": 0.82,
+    "crystalsStillRenderAbovePlayer": true,
+    "experienceRewardUnchanged": true
+  },
+  "backups": [
+    "backup/v643-before-v644-bomb-magnet-20261101",
+    "backup/v644-050-integrity-20261101"
+  ]
+}
