@@ -1,0 +1,91 @@
+name: EVOLVE V644 bomb-kill accidental XP magnet fix
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v644-xp-bomb-fix.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v644-xp-bomb-magnet-fix
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout published V643 engine and web metadata only
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/35712226f4407dfa0f0f50477677ad3323fba1b00f9f63917cdebf0218efc185.js
+      - name: Checkout V644 surgical code patch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: release
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v644_xp_bomb_magnet_fix.py
+      - name: Apply fix and run static regression and executable JS syntax checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile release/.github/v644_xp_bomb_magnet_fix.py
+          python3 release/.github/v644_xp_bomb_magnet_fix.py site
+          sha="$(cat /tmp/evolve-v644-sha)"
+          node --check "site/assets/${sha}.js"
+          python3 - <<'PY'
+          import json,hashlib,re,pathlib
+          site=pathlib.Path('site')
+          version=json.loads((site/'version.json').read_text())
+          source=(site/'assets'/(version['source_sha256']+'.js')).read_bytes()
+          s=source.decode()
+          assert hashlib.sha256(source).hexdigest()==version['source_sha256']
+          # Environmental explosion, elite defeat and level-up continue to use lootSweep,
+          # but that timer must never trigger XP attraction.
+          assert 'lootSweep=Math.max(lootSweep,1.2)' in s
+          assert 'const xpMagnetModeV643=organPower' in s
+          assert 'const xpAutoSweepRadiusV643=xpPickupRadiusV416;' in s
+          assert 'xpMagnetModeV643=lootSweep>0' not in s
+          assert 'xpAutoSweepRadiusV643=lootSweep>0' not in s
+          assert s.count('const step=Math.min(dd,(pullSpeed+closeBoost)*dt*.82);')==1
+          assert s.count('addXP(d.xp)')==1
+          assert s.count('drawXPForegroundSuctionV643(xpViewV439);')==1
+          assert 'if(!d.suctionV643)drawXPV415(d,xpViewV439);' in s
+          assert 'xpAbsorbGhostsV643.length<96' in s
+          assert 'hold:q.strong?.16:.12' in s and 'gunDamage)*.80' in s
+          assert '시설 정화 · 붉은 범위에서 벗어나세요' not in s
+          index=(site/'index.html').read_text()
+          conf=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',index).group(1))
+          assert conf['build']==version['build']=='V644-XP-BOMB-MAGNET-FIX-20261101'
+          assert conf['version']==version['version'] and conf['scriptBytes']==version['scriptBytes']
+          assert index.count('assets/'+version['source_sha256']+'.js')==1
+          manifest=json.loads((site/'asset-manifest.json').read_text())
+          assert len(manifest)==version['assets']==1081
+          x=[e for e in manifest if e['path']=='assets/'+version['source_sha256']+'.js']
+          assert len(x)==1 and x[0]['bytes']==len(source)
+          print('V644_QA_PASS',version['build'],'sha256',version['source_sha256'],'speedFactor',.82,'no_unexpected_lootSweep_magnet',True)
+          PY
+      - name: Stage V644 to GitHub Pages source without deleting old engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(cat /tmp/evolve-v644-sha)"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${sha}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V644: remove bomb event XP magnet and slow crystal attraction"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V644 staged. Marker commit triggers public Pages deploy." >> "$GITHUB_STEP_SUMMARY"
