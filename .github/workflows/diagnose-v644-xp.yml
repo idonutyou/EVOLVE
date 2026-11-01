@@ -1,0 +1,33 @@
+name: EVOLVE V644 XP pickup root cause diagnosis
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-v644-xp.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /assets/35712226f4407dfa0f0f50477677ad3323fba1b00f9f63917cdebf0218efc185.js
+      - name: Print all loot sweep assignments, explosion pickup handling and V643 suction expressions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('assets/35712226f4407dfa0f0f50477677ad3323fba1b00f9f63917cdebf0218efc185.js').read_text()
+          for pattern in ['lootSweep','bomb','Bomb','explosion','Explosion','xpMagnetModeV643','xpAutoSweepRadiusV643','suctionV643','pullSpeed=','function effectivePickup','function updateDrops','magnet']:
+            found=list(re.finditer(re.escape(pattern),s))
+            print('TERM',pattern,'COUNT',len(found))
+            for m in found[:35]:
+              a=max(0,m.start()-150); b=min(len(s),m.end()+280)
+              print('OFFSET',m.start(),'LINE',s.count('\n',0,m.start())+1,'CODE',repr(s[a:b]))
+          PY
