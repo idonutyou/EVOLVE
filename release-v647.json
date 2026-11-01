@@ -1,0 +1,29 @@
+{
+  "release": "V647",
+  "build": "V647-DUAL-ELECTRIC-VISUAL-DAMAGE-20261102",
+  "engine_sha256": "1481c3f7195c9b16bdcc3b3ec7c9c524608f3ba086f64e50bc2d7431ea0d10ed",
+  "base": "V646-IDLE-ENEMY-VISIBILITY-20261102",
+  "changes": {
+    "dualElectricSeparateFirstTargetWhenTwoAvailable": true,
+    "dualElectricSeparateVisibleBeamsOnOneTarget": true,
+    "visibleBeamLaneGapWorldPixels": 30,
+    "damageByElectricArm1AndArm2": true,
+    "redPulseExplosionShownSeparately": true,
+    "otherDamageNoLongerAggregated": true,
+    "unknownFutureDamageRetainsSourceKind": true,
+    "existingV646IdleRecoveryPreserved": true
+  },
+  "tested": {
+    "engineShaVerified": true,
+    "nodeSyntax": true,
+    "twoAvailableTargetsChooseDistinctPrimary": true,
+    "singleTargetStillTwoIndependentChains": true,
+    "twoVisibleLanesVerified": true,
+    "damageLabelsMapped": true
+  },
+  "backups": [
+    "backup/v646-before-electric-visual-damage-report-v647-20261102",
+    "backup/v647-050-lightning-and-report-tests-20261102"
+  ],
+  "stageSourceCommit": "1695256e3d72b07118289eb4d7ec92de7842ab76"
+}
