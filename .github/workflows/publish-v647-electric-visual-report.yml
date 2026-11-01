@@ -134,3 +134,5 @@ jobs:
           git commit -m "EVOLVE V647: two visible separate lightning beams and per-source damage report"
           git push origin HEAD:pages-fast-evolve-20261029
           echo "V647 staged successfully; trigger public Pages build with app-signed release marker." >> "$GITHUB_STEP_SUMMARY"
+
+# Retry V647 after exact source-anchor indentation correction.
