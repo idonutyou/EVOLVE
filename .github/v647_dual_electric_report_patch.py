@@ -57,7 +57,7 @@ replace_once(" origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,1)\n});"
   try{return baseElectricDamageV647(...args)}finally{electricDamageSideV647=saved;}
  }
 });""")
-replace_once(" origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,0),", """ origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,0),
+replace_once("origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,0),", """origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,0),
  visualLane:()=>window.__EVOLVE_ELECTRIC_GUN_DUAL_V709__?.()?-1:0,
  noteFirst:e=>{firstElectricTargetV647=e;},""")
 replace_once('''const lightningV576=createCampaignLightningV576(lightningHostV645);
