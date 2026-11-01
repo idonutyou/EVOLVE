@@ -58,7 +58,9 @@ jobs:
           newoverlay=" function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=p.fade*.86;ctx.strokeStyle=p.flash>.2?'#ffffff':'#8fe7ff';ctx.lineWidth=p.strong?1.8:1.1;ctx.beginPath();ctx.moveTo(e.x-size*.28,e.y-size*.22);ctx.lineTo(e.x+size*.07,e.y-size*.10);ctx.lineTo(e.x-size*.11,e.y+size*.02);ctx.lineTo(e.x+size*.25,e.y+size*.13);ctx.stroke();ctx.restore()}"
           swap(oldoverlay,newoverlay)
           # V640 damage base and existing per-target ratio stay unchanged; apply 0.8x to the whole electric damage formula.
-          swap("*(1+upgradeRunV593.gunDamage),\n  interval:()=>.94*attackTempoMul()", "*(1+upgradeRunV593.gunDamage)*.80,\n  interval:()=>.94*attackTempoMul()")
+          damage_line=next(l for l in src.splitlines(keepends=True) if l.lstrip().startswith("damage:strong=>"))
+          assert damage_line.count("*(1+upgradeRunV593.gunDamage),")==1
+          swap(damage_line,damage_line.replace("*(1+upgradeRunV593.gunDamage),","*(1+upgradeRunV593.gunDamage)*.80,"))
           # Generic arc hit applies its own implicit 28-point knockback and occasional stagger.
           # Restore only those movement/stun fields after electric damage; short stun is controlled exclusively by holdEnemy().
           swap("const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length;","const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length,previousKnockX=e.kx||0,previousKnockY=e.ky||0,previousStun=e.stunned||0;")
