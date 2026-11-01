@@ -1,4 +1,4 @@
-name: EVOLVE V641 electric weapon diagnosis
+name: EVOLVE V641 electric targeted diagnosis
 on:
   push:
     branches: [main]
@@ -17,18 +17,15 @@ jobs:
             assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js
           sparse-checkout-cone-mode: false
           filter: blob:none
-      - name: Print V640 electric, status bar and knockback related exact code context
+      - name: Print precise lightning and enemy health drawing code
+        shell: bash
         run: |
           python3 - <<'PY'
-          import re,pathlib
+          import pathlib
           p=pathlib.Path('assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js')
-          s=p.read_text()
-          print("FILE_SIZE",len(s),"LINES",len(s.splitlines()))
-          terms=[r'electric',r'chainLightning',r'chain_lightning',r'lightning',r'knockback',r'knockBack',r'stun',r'shock',r'hpBar',r'healthBar',r'blueBar',r'arcTarget',r'electricGun',r'chainCount',r'arcChain',r'arcDamage']
-          for term in terms:
-            hits=list(re.finditer(term,s,re.I))
-            print("\n---- TERM",term,"COUNT",len(hits),"----")
-            for m in hits[:16]:
-              a=max(0,m.start()-220);b=min(len(s),m.end()+380)
-              print("OFFSET",m.start(),"LINE",s.count('\n',0,m.start())+1,repr(s[a:b]))
+          ls=p.read_text().splitlines()
+          for a,b in [(12390,12500),(13295,13345),(4330,4370),(3610,3670)]:
+            print("====== LINES",a,b,"======")
+            for n in range(a-1,b):
+              print(str(n+1).rjust(5),ls[n][:1900])
           PY
