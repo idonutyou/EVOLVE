@@ -1,0 +1,87 @@
+name: EVOLVE V643 XP crystal foreground magnet release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v643-xp-magnet.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v643-xp-magnet
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout public V642 shell and engine only
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/9b29958a507aba5f763e9e223aed721ac464ad683efa0ee17e50e4fe6f64e951.js
+      - name: Checkout V643 source patch only
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: release
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v643_xp_patch.py
+      - name: Patch V642, regression-check V641 and verify exact content hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile release/.github/v643_xp_patch.py
+          python3 release/.github/v643_xp_patch.py site
+          sha="$(cat /tmp/evolve-v643-sha)"
+          node --check "site/assets/${sha}.js"
+          python3 - <<'PY'
+          import pathlib,json,re,hashlib
+          site=pathlib.Path('site')
+          v=json.loads((site/'version.json').read_text())
+          sha=v['source_sha256']
+          data=(site/'assets'/(sha+'.js')).read_bytes()
+          assert hashlib.sha256(data).hexdigest()==sha
+          s=data.decode('utf-8')
+          assert s.count('addXP(d.xp)')==1
+          assert s.count('drawXPForegroundSuctionV643(xpViewV439);')==1
+          assert 'if(!d.suctionV643)drawXPV415(d,xpViewV439);' in s
+          assert 'if(!d.suctionV643&&distSq>=pullSqV643' in s
+          assert 'xpAbsorbGhostsV643.length<96' in s
+          assert 'hold:q.strong?.16:.12' in s
+          assert 'gunDamage)*.80' in s
+          assert 'const groundWarningBaseV595=drawAttackWarningsV582;' not in s
+          assert '시설 정화 · 붉은 범위에서 벗어나세요' not in s
+          html=(site/'index.html').read_text()
+          inline=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',html).group(1))
+          assert inline['build']==v['build'] and inline['version']==v['version']
+          assert inline['scriptBytes']==v['scriptBytes']
+          assert html.count('assets/'+sha+'.js')==1
+          manifest=json.loads((site/'asset-manifest.json').read_text())
+          assert len(manifest)==v['assets']==1081
+          entry=[x for x in manifest if x['path']=='assets/'+sha+'.js']
+          assert len(entry)==1 and entry[0]['bytes']==len(data)
+          print('V643_QA_PASS',v['build'],sha,len(data))
+          PY
+      - name: Upload staged V643 to public Pages source, keep V642 assets intact
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(cat /tmp/evolve-v643-sha)"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${sha}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V643: layered XP crystal suction with exaggerated magnet and automatic collection"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V643 staged. Marker commit required to trigger GitHub Pages deployment." >> "$GITHUB_STEP_SUMMARY"
