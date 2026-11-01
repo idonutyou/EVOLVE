@@ -1,0 +1,136 @@
+name: EVOLVE V647 dual electric visual separation and damage detail
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v647-electric-visual-report.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v647-electric-visual-damage
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout V646 public shell and hashed engine only
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/54677cc079210bc9957363778dfe53b27c0280ff0b190007af9f9f255cb2458f.js
+      - name: Checkout reviewed V647 patch only
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: release
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v647_dual_electric_report_patch.py
+      - name: Apply V647 and JS syntax + source integrity checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile release/.github/v647_dual_electric_report_patch.py
+          python3 release/.github/v647_dual_electric_report_patch.py site
+          sha="$(cat /tmp/evolve-v647-sha)"
+          node --check "site/assets/${sha}.js"
+          python3 - <<'PY'
+          import pathlib,json,hashlib,re
+          root=pathlib.Path('site')
+          v=json.loads((root/'version.json').read_text())
+          assert v['build']=='V647-DUAL-ELECTRIC-VISUAL-DAMAGE-20261102'
+          src=(root/'assets'/(v['source_sha256']+'.js')).read_bytes()
+          assert hashlib.sha256(src).hexdigest()==v['source_sha256']
+          s=src.decode()
+          for anchor in ("const lightningV645=createCampaignLightningV576(","const a=lane?{...arc,from:",
+                         "avoidFirst:()=>firstElectricTargetV647","electricDamageSideV647=1;",
+                         "kind==='fieldPulse'?'redPulse'","electricArm1:['ELECTRIC GUN · ARM 1'",
+                         "redPulse:['RED PULSE EXPLOSION'","window.__EVOLVE_ELECTRIC_VISUAL_REPORT_V647__=",
+                         "canCompositeEnemyWorldV646()","hold:q.strong?.16:.12","gunDamage)*.80",
+                         "xpAutoSweepRadiusV643=xpPickupRadiusV416;"):
+            assert anchor in s,("Missing preserved source requirement",anchor)
+          assert "names.other" not in s
+          assert s.count("const lightningV645=createCampaignLightningV576(")==1
+          assert s.count("addXP(d.xp)")==1
+          idx=(root/'index.html').read_text()
+          conf=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',idx).group(1))
+          assert conf['build']==v['build'] and conf['version']==v['version']
+          assert conf['scriptBytes']==v['scriptBytes']
+          assert idx.count('assets/'+v['source_sha256']+'.js')==1
+          manifest=json.loads((root/'asset-manifest.json').read_text())
+          entries=[x for x in manifest if x['path']=='assets/'+v['source_sha256']+'.js']
+          assert len(manifest)==v['assets']==1081
+          assert len(entries)==1 and entries[0]['bytes']==len(src)
+          print("V647_STAGING_INTEGRITY_PASS",v['source_sha256'],len(src))
+          PY
+      - name: Run executable chain targets and side-by-side rendering smoke tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - "site/assets/$(cat /tmp/evolve-v647-sha).js" <<'JS'
+          const fs=require('fs'),assert=require('assert');
+          const s=fs.readFileSync(process.argv[2],'utf8');
+          const start=s.indexOf('function createCampaignLightningV576(host){');
+          const end=s.indexOf('const lightningImageV576=new Image();',start);
+          assert(start>0&&end>start);
+          const create=Function('enemyCombatTypeV596',s.slice(start,end)+'\nreturn createCampaignLightningV576;')(()=> 'crawler');
+          const player={x:0,y:0,look:0};
+          const enemies=[{x:100,y:0,hp:100,maxHp:100},{x:108,y:38,hp:100,maxHp:100}];
+          let firstPrimary=null;
+          const host={active:()=>true,enemies:()=>enemies,player:()=>player,range:()=>260,
+            targetVisible:()=>true,canLink:()=>true,focus:()=>null,
+            hops:()=>1,damage:()=>20,face:()=>{},origin:()=>({x:0,y:0}),
+            interval:()=>2,texture:()=>null,fieldSize:()=>100,
+            damageEnemy:()=>{},kick:()=>{},visualLane:()=>-1,
+            noteFirst:e=>{firstPrimary=e;}};
+          const main=create(host);
+          const second=create({...host,visualLane:()=>1,avoidFirst:()=>firstPrimary,noteFirst:()=>{}});
+          assert(main.castChain(false));
+          assert(second.castChain(false));
+          assert.notStrictEqual(main.context().queue[0].target,second.context().queue[0].target,
+             'when two enemies are available, prefer different primary targets');
+          const sameEnemy=[{x:120,y:0,hp:100,maxHp:100}];
+          const one=create({...host,enemies:()=>sameEnemy});
+          const two=create({...host,enemies:()=>sameEnemy,visualLane:()=>1,avoidFirst:()=>sameEnemy[0]});
+          assert(one.castChain(false)&&two.castChain(false),'single enemy remains valid target for both guns');
+          function mock(){
+            let first=null;const starts=[];
+            return {starts,save(){},restore(){},beginPath(){first=null;},
+              moveTo(x,y){if(!first)first={x,y}},lineTo(){},stroke(){if(first)starts.push(first)},
+              arc(){},ellipse(){},translate(){},rotate(){},drawImage(){}};
+          }
+          const a={from:{x:0,y:0},to:{x:120,y:0},strong:false,age:0,life:.18,seed:3};
+          one.context().arcs.push({...a});two.context().arcs.push({...a});
+          const l=mock(),r=mock();one.draw(l);two.draw(r);
+          assert(l.starts.length>0&&r.starts.length>0);
+          assert(Math.abs(l.starts[0].y-r.starts[0].y)>=23,
+            'two electric visible lanes must be separated by at least 23 world pixels at muzzle');
+          assert(s.includes("kind==='fieldPulse'?'redPulse'"),'red pulse must not be recorded as miscellaneous');
+          assert(s.includes("names[key]?label(...names[key])"),'damage category text must not fall back to 기타');
+          console.log("V647_ELECTRIC_TWO_TARGETS",main.context().queue[0].target!==second.context().queue[0].target);
+          console.log("V647_ELECTRIC_SINGLE_TARGET_TWO_LANES",l.starts[0],r.starts[0]);
+          console.log("V647_DAMAGE_REPORT_DEDICATED_PULSE_AND_PER_ELECTRIC_SLOT",true);
+          JS
+      - name: Commit and push immutable active asset to Pages source
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(cat /tmp/evolve-v647-sha)"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${sha}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V647: two visible separate lightning beams and per-source damage report"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V647 staged successfully; trigger public Pages build with app-signed release marker." >> "$GITHUB_STEP_SUMMARY"
