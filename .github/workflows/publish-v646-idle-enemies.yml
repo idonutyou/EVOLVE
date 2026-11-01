@@ -121,7 +121,7 @@ jobs:
           assert len(entries)==1
           entries[0].update(path=newasset,sha256=newsha,bytes=len(new))
           assert len(manifest)==v["assets"]==1081
-          mp.write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":"))
+          mp.write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":")))
           Path("/tmp/evolve-v646-sha").write_text(newsha)
           print("V646_RELEASE_READY",json.dumps({"build":build,"source_sha256":newsha,"engine_bytes":len(new),"delta":delta,"cpu_fallback_after_seconds":12,"combat_modified":False}))
           PY
