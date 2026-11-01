@@ -1,0 +1,39 @@
+name: V647 inspect electric chains and damage-report source anchors
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-v647-electric-report.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /assets/54677cc079210bc9957363778dfe53b27c0280ff0b190007af9f9f255cb2458f.js
+      - name: Print numbered V646 snippets of actual weapon and damage code
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,collections
+          p=Path('assets/54677cc079210bc9957363778dfe53b27c0280ff0b190007af9f9f255cb2458f.js')
+          s=p.read_text()
+          ls=s.splitlines()
+          terms=['function createCampaignLightningV576','function castChain(strong=false)','const priority=host.focus()','for(const a of arcs){const p=','const lightningHostV645=','const lightningV645=','const lightningV576=','const damageTypeR19=','const names={gun:','runDamageDetailR19=','const rawTotal=','if(window.__EVOLVE_LIGHTNING_V576__)','function drawEnemy','lightningDamageBaseV576(e,amount,']
+          for term in terms:
+            hits=[i for i,l in enumerate(ls) if term in l]
+            print('TERM',repr(term),'HITS',len(hits),'LINES',[i+1 for i in hits[:20]])
+            for idx in hits[:2]:
+              a=max(0,idx-3);b=min(len(ls),idx+8)
+              for i in range(a,b):print(f'{i+1:5d} '+ls[i][:1100])
+          print('damage-kind-literals:')
+          for token in ['fieldPulse','other','redPulse','poison','shock','arc']:
+            print('WORD',token,'COUNT',s.count(token))
+          PY
