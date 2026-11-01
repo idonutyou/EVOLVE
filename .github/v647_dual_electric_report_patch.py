@@ -43,9 +43,9 @@ replace_once('''   const priority=host.focus(),first=reachable.includes(priority
 replace_once('''   for(const a of arcs){const p=1-a.age/a.life,dx=a.to.x-a.from.x,dy=a.to.y-a.from.y,d=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx);sprite(ctx,0,(a.from.x+a.to.x)/2,(a.from.y+a.to.y)/2,d+28,clamp(d*.58,a.strong?100:73,a.strong?170:120),angle,Math.pow(p,.55)*(a.strong?.92:.76));''','''   for(const arc of arcs){
     const lane=host.visualLane?.()||0,ex=arc.to.x-arc.from.x,ey=arc.to.y-arc.from.y,
       unit=Math.max(1,Math.hypot(ex,ey)),nx=-ey/unit,ny=ex/unit;
-    // A visible 22px total lane split on identical target paths.
-    const a=lane?{...arc,from:{x:arc.from.x+nx*lane*10,y:arc.from.y+ny*lane*10},to:{x:arc.to.x+nx*lane*11,y:arc.to.y+ny*lane*11}}:arc;
-    const p=1-a.age/a.life,dx=a.to.x-a.from.x,dy=a.to.y-a.from.y,d=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx);sprite(ctx,0,(a.from.x+a.to.x)/2,(a.from.y+a.to.y)/2,d+28,clamp(d*.58,a.strong?100:73,a.strong?170:120),angle,Math.pow(p,.55)*(a.strong?.92:.76));''')
+    // A visible 30px total lane split on identical target paths.
+    const a=lane?{...arc,from:{x:arc.from.x+nx*lane*12,y:arc.from.y+ny*lane*12},to:{x:arc.to.x+nx*lane*15,y:arc.to.y+ny*lane*15}}:arc;
+    const p=1-a.age/a.life,dx=a.to.x-a.from.x,dy=a.to.y-a.from.y,d=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx);sprite(ctx,0,(a.from.x+a.to.x)/2,(a.from.y+a.to.y)/2,d+28,clamp(d*.58,a.strong?100:73,a.strong?170:120),angle,Math.pow(p,.55)*(a.strong?.92:.76)*(lane?.4:1));''')
 
 # Feed the chain-specific visual lane and first target data into the existing
 # two V645 instances. Single electric gun stays on its original central path.
@@ -125,5 +125,5 @@ assert len(row)==1
 row[0].update(path=new_asset,sha256=new_sha,bytes=len(new_data))
 assert len(manifest)==version['assets']==1081
 manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
-print('V647_RELEASE_READY',json.dumps({'build':build,'engine_sha256':new_sha,'bytes':len(new_data),'delta':delta,'dual_lanes':[-1,1],'lane_gap_pixels':22,'split_red_pulse_from_other':True,'independent_electric_weapon_damage':True}))
+print('V647_RELEASE_READY',json.dumps({'build':build,'engine_sha256':new_sha,'bytes':len(new_data),'delta':delta,'dual_lanes':[-1,1],'lane_gap_pixels':30,'split_red_pulse_from_other':True,'independent_electric_weapon_damage':True}))
 Path('/tmp/evolve-v647-sha').write_text(new_sha)
