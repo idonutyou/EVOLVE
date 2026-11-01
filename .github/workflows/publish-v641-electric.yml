@@ -64,11 +64,13 @@ jobs:
           # Generic arc hit applies its own implicit 28-point knockback and occasional stagger.
           # Restore only those movement/stun fields after electric damage; short stun is controlled exclusively by holdEnemy().
           swap("const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length;","const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length,previousKnockX=e.kx||0,previousKnockY=e.ky||0,previousStun=e.stunned||0;")
-          swap("   lightningDamageBaseV576(e,damage,'arc');","   lightningDamageBaseV576(e,damage,'arc');\n   e.kx=previousKnockX;e.ky=previousKnockY;e.stunned=previousStun;")
+          damage_call=next(l for l in src.splitlines(keepends=True) if l.lstrip().startswith("lightningDamageBaseV576(e,damage,'arc');"))
+          indent=damage_call[:len(damage_call)-len(damage_call.lstrip())]
+          swap(damage_call,damage_call+indent+"e.kx=previousKnockX;e.ky=previousKnockY;e.stunned=previousStun;\n")
           # Structural regressions: all four original V638 chain ratios, hop upgrade and non-electric red HP render remain intact.
           for needle in ("if(count===2)return .70","if(count===3)return .60","if(count===4)return .55","return .50;","hops:()=>1+Math.min(7","function drawEnemyHealthBarsV592()","function holdEnemy(e)"):
             assert needle in src,("missing legacy invariant",needle)
-          assert "hold:q.strong?.16:.12" in src and "damage)*.80" in src
+          assert "hold:q.strong?.16:.12" in src and "gunDamage)*.80" in src
           assert "function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;" in src
           assert "arcShockV576;return" not in src
           data=src.encode("utf-8")
