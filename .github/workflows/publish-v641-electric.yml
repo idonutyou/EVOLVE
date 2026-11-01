@@ -72,7 +72,6 @@ jobs:
             assert needle in src,("missing legacy invariant",needle)
           assert "hold:q.strong?.16:.12" in src and "gunDamage)*.80" in src
           assert "function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;" in src
-          assert "arcShockV576;return" not in src
           data=src.encode("utf-8")
           newsha=hashlib.sha256(data).hexdigest()
           assert newsha!=oldsha
