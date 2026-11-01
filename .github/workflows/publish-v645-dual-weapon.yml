@@ -1,0 +1,92 @@
+name: EVOLVE V645 two equipped guns mean two independent attacks
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v645-dual-weapon.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v645-dual-weapon
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout only V644 public game shell and active JS
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/7f23c70839c8ba8be0a085b949b1dc826aec86823e4cda345ff1a3690d1d8ed9.js
+      - name: Checkout reviewed V645 patch only
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: release
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.github/v645_dual_weapon_patch.py
+      - name: Apply patch, check JS, verify original game balances
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile release/.github/v645_dual_weapon_patch.py
+          python3 release/.github/v645_dual_weapon_patch.py site
+          sha="$(cat /tmp/evolve-v645-sha)"
+          node --check "site/assets/${sha}.js"
+          python3 - <<'PY'
+          import json,hashlib,re,pathlib
+          site=pathlib.Path('site')
+          v=json.loads((site/'version.json').read_text())
+          sha=v['source_sha256'];data=(site/'assets'/(sha+'.js')).read_bytes()
+          assert hashlib.sha256(data).hexdigest()==sha
+          s=data.decode('utf-8')
+          assert v['build']=='V645-DUAL-WEAPON-INDEPENDENT-20261101'
+          assert s.count('const lightningV645=createCampaignLightningV576(')==1
+          assert 'if(active){lightningV576.step(dt);if(dual)lightningV645.step(dt);}' in s
+          assert 'if(!lightningV576.castChain(true))return;lightningV645.castChain(true);' in s
+          assert 'pushOneCannonProjectileV645(shot);' in s
+          assert 'pushOneCannonProjectileV645({...shot,x:shot.x+dx,y:shot.y+dy});' in s
+          assert 'if(!(state.arm>0&&typeOf(itemId(0))' in s
+          assert 'origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,1)' in s
+          assert 'origin:a=>window.__EVOLVE_ELECTRIC_GUN_ORIGIN_V708__?.(a,0)' in s
+          assert 'window.__EVOLVE_DUAL_WEAPON_V645__=' in s
+          # V641..V644 features must all remain active.
+          assert 'hold:q.strong?.16:.12' in s and 'gunDamage)*.80' in s
+          assert 'xpAutoSweepRadiusV643=xpPickupRadiusV416;' in s
+          assert 'xpMagnetModeV643=lootSweep>0' not in s
+          assert 'const step=Math.min(dd,(pullSpeed+closeBoost)*dt*.82);' in s
+          assert '시설 정화 · 붉은 범위에서 벗어나세요' not in s
+          assert s.count('addXP(d.xp)')==1
+          index=(site/'index.html').read_text()
+          conf=json.loads(re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',index).group(1))
+          assert conf['build']==v['build'] and conf['version']==v['version'] and conf['scriptBytes']==v['scriptBytes']
+          assert index.count('assets/'+sha+'.js')==1
+          manifest=json.loads((site/'asset-manifest.json').read_text())
+          match=[a for a in manifest if a['path']=='assets/'+sha+'.js']
+          assert len(match)==1 and match[0]['bytes']==len(data) and len(manifest)==v['assets']==1081
+          print('V645_QA_PASS','two_guns_two_shots','two_electric_two_chains','independent_hops',sha)
+          PY
+      - name: Push only changed V645 assets to Pages source
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(cat /tmp/evolve-v645-sha)"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${sha}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V645: two equipped cannons shoot two barrels and two electric weapons cast two chains"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V645 staged; public Pages release marker triggers actual deployment." >> "$GITHUB_STEP_SUMMARY"
