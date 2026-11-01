@@ -1,0 +1,134 @@
+name: EVOLVE V642 purge hazard circle and caption cleanup
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v642-purge-warnings.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v642-purge-warnings
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Retrieve only published V641 metadata and engine
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/f49fc97d839046341723688bba8dd62f39da4b3c687f61697120adcf2cb65169.js
+      - name: Surgical V642 purge hazard fix and release integrity assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,re
+          site=Path("site")
+          old_sha="f49fc97d839046341723688bba8dd62f39da4b3c687f61697120adcf2cb65169"
+          oldpath=site/"assets"/(old_sha+".js")
+          before=oldpath.read_bytes()
+          assert hashlib.sha256(before).hexdigest()==old_sha, "Refusing to edit non-V641 engine"
+          src=before.decode("utf-8")
+          def swap(old,new):
+              global src
+              n=src.count(old)
+              assert n==1, ("Expected one anchor, found "+str(n),old[:120])
+              src=src.replace(old,new,1)
+          # Purge event uses a quiet audio cue; never put large moving text over gameplay.
+          swap("flash(homeTextV522('CONTAINMENT PURGE · MOVE','시설 정화 · 붉은 범위에서 벗어나세요'),1300);beep(115,.18,'sawtooth',.035);", "beep(115,.18,'sawtooth',.035);")
+          # V595 was drawing labels, an extra warning arc and a persistent ring over active artwork.
+          # Active red art remains clipped to the same z.r used by the V582 prewarn telegraph.
+          start=src.index("function paintGroundFieldV595(z,purge,floor=false){")
+          finish=src.index("const groundWarningBaseV595=drawAttackWarningsV582;",start)
+          prior=src[start:finish]
+          assert "label=purge?" in prior and "ctx.fillText(text" in prior and "if(!warning)" in prior
+          cleaned="""function paintGroundFieldV595(z,purge,floor=false){
+           if(!floor||z.warn>0||!worldCircleVisibleV441(z.x,z.y,z.r,40))return;
+           const pulse=.5+.5*Math.sin(t*8);
+           ctx.save();ctx.translate(z.x,z.y);
+           ctx.beginPath();ctx.arc(0,0,z.r,0,TAU);ctx.clip();
+           ctx.globalAlpha=.78+.10*pulse;
+           // The active eruption is clipped to the same damage radius as its prewarning.
+           if(groundImageV595.complete&&groundImageV595.naturalWidth){
+             ctx.drawImage(groundImageV595,-z.r*1.03,-z.r*1.03,z.r*2.06,z.r*2.06);
+             groundStampsV595++;
+           }else{
+             ctx.fillStyle='rgba(255,37,17,.55)';
+             ctx.fillRect(-z.r,-z.r,z.r*2,z.r*2);
+           }
+           ctx.restore();
+          }
+          """
+          src=src[:start]+cleaned+src[finish:]
+          swap("""const groundWarningBaseV595=drawAttackWarningsV582;
+          drawAttackWarningsV582=function(){groundWarningBaseV595();for(const z of purges)paintGroundFieldV595(z,true);for(const z of biomeHazards)paintGroundFieldV595(z,false);};
+          """, "")
+          # Preserve generic circles only during z.warn>0; preserve full active V595 visual.
+          assert "for(const list of [purges,biomeHazards])for(const z of list)if(z.warn>0&&worldCircleVisibleV441(z.x,z.y,z.r,40))attackWarningPaintV582(attackWarningCircleV582(z.x,z.y,z.r));" in src
+          assert "for(const z of purges)if(z.warn<=0)paintGroundFieldV595(z,true,true);" in src
+          assert "for(const z of biomeHazards)if(z.warn<=0)paintGroundFieldV595(z,false,true);" in src
+          assert "시설 정화 · 붉은 범위에서 벗어나세요" not in src
+          assert "label=purge?" not in src
+          assert "const groundWarningBaseV595=" not in src
+          assert "ctx.fillText(text,0,-z.r-12.5)" not in src
+          assert src.count("function paintGroundFieldV595(")==1
+          assert "hold:q.strong?.16:.12" in src, "V641 electric stun must not regress"
+          assert "gunDamage)*.80" in src, "V641 electric damage must not regress"
+          data=src.encode("utf-8")
+          new_sha=hashlib.sha256(data).hexdigest()
+          newpath=site/"assets"/(new_sha+".js")
+          newpath.write_bytes(data)
+          (Path("/tmp")/"v642_engine_hash.txt").write_text(new_sha)
+          index=site/"index.html"
+          html=index.read_text(encoding="utf-8")
+          old_asset="assets/"+old_sha+".js"
+          new_asset="assets/"+new_sha+".js"
+          assert html.count(old_asset)==1, "Active game asset must be referenced exactly once"
+          html=html.replace(old_asset,new_asset)
+          config=re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',html)
+          assert config,"Inline loader configuration missing"
+          old_conf=config.group(1)
+          inline=json.loads(old_conf)
+          version_path=site/"version.json"
+          ver=json.loads(version_path.read_text(encoding="utf-8"))
+          assert ver["build"]==inline["build"]=="V641-ELECTRIC-STUN-BALANCE-20261101"
+          assert ver["version"]==inline["version"]
+          assert ver["source_sha256"]==old_sha
+          delta=len(data)-len(before)
+          build="V642-PURGE-WARNING-CLEAN-20261101"
+          new_ver=ver["version"]+"-V642-PURGE-WARN"
+          inline.update(build=build,version=new_ver,scriptBytes=inline["scriptBytes"]+delta)
+          ver.update(build=build,version=new_ver,source_sha256=new_sha,scriptBytes=ver["scriptBytes"]+delta)
+          assert inline["scriptBytes"]==ver["scriptBytes"],"Version mismatch would cause update loop"
+          html=html.replace(old_conf,json.dumps(inline,ensure_ascii=False,separators=(",",":")),1)
+          index.write_text(html,encoding="utf-8")
+          version_path.write_text(json.dumps(ver,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          manifest_path=site/"asset-manifest.json"
+          manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+          matching=[x for x in manifest if x.get("path")==old_asset]
+          assert len(matching)==1
+          matching[0].update(path=new_asset,sha256=new_sha,bytes=len(data))
+          assert len(manifest)==ver["assets"]==1081
+          manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+          print("V642_RELEASE_READY",json.dumps({"new_engine_sha256":new_sha,"old_engine_sha256":old_sha,"new_engine_bytes":len(data),"delta":delta,"asset_count":len(manifest),"build":build,"single_warning_radius":"z.r","active_warning_ring":False,"event_text":False,"v641_electric_preserved":True}))
+          PY
+          ENGINE_SHA="$(cat /tmp/v642_engine_hash.txt)"
+          node --check "site/assets/${ENGINE_SHA}.js"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${ENGINE_SHA}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V642: purge alert without floating text, matching warning radius, no active warning ring"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V642 staged to Pages source; app-signed marker commit required to publish GitHub Pages." >> "$GITHUB_STEP_SUMMARY"
