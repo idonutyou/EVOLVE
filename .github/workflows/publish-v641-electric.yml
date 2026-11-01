@@ -1,0 +1,116 @@
+name: EVOLVE V641 electric micro-stun public release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v641-electric.yml']
+permissions:
+  contents: write
+concurrency:
+  group: evolve-v641-electric-once
+  cancel-in-progress: false
+jobs:
+  build_and_stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout published V640 shell and electric engine only
+        uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          path: site
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /index.html
+            /version.json
+            /asset-manifest.json
+            /assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js
+      - name: Apply surgical V641 modifications, hash assets and verify unchanged chain balancing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,json,hashlib,re
+          site=pathlib.Path("site")
+          oldsha="04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74"
+          oldfile=site/"assets"/(oldsha+".js")
+          raw=oldfile.read_bytes()
+          assert hashlib.sha256(raw).hexdigest()==oldsha,"V640 engine sha mismatch; refuse to patch unexpected source"
+          src=raw.decode("utf-8")
+          before_len=len(raw)
+          def swap(a,b):
+            global src
+            n=src.count(a)
+            assert n==1,("Expected exactly one code anchor, got",n,a[:110])
+            src=src.replace(a,b,1)
+          # Remove only the duplicate electric HP/blue meter. Keep the standard red hit HP bar untouched.
+          swap("s.age+=dt;s.wait=Math.max(0,s.wait-dt);","s.age+=dt;")
+          swap("    if(s.wait<=0){s.hp+=(e.hp/Math.max(1,e.maxHp)-s.hp)*(1-Math.exp(-dt*11));if(Math.abs(s.hp-e.hp/e.maxHp)<.003)s.hp=e.hp/e.maxHp}\n","")
+          swap("    if(s.age>=s.life&&Math.abs(s.hp-e.hp/e.maxHp)<.004)delete e.arcShockV576;","    if(s.age>=s.life)delete e.arcShockV576;")
+          swap("const old=e.arcShockV576;e.arcShockV576={age:0,hold:q.strong?.058:.034,life:q.strong?.32:.23,a:angle,strong:q.strong,mass,hp:Math.max(old?.hp||0,e.hp/Math.max(1,e.maxHp)),wait:.13,vx:e.vx||0,vy:e.vy||0};","e.arcShockV576={age:0,hold:q.strong?.16:.12,life:q.strong?.32:.23,a:angle,strong:q.strong,mass,vx:e.vx||0,vy:e.vy||0};")
+          swap("    e.kx=(e.kx||0)+Math.cos(angle)*(q.strong?285:142)*mass;e.ky=(e.ky||0)+Math.sin(angle)*(q.strong?285:142)*mass;\n","")
+          oldoverlay=next(l for l in src.splitlines() if l.strip().startswith("function overlay(ctx,e,size){"))
+          assert "fillRect" in oldoverlay and "'#48d9ff'" in oldoverlay and "ctx.lineTo" in oldoverlay
+          newoverlay=" function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=p.fade*.86;ctx.strokeStyle=p.flash>.2?'#ffffff':'#8fe7ff';ctx.lineWidth=p.strong?1.8:1.1;ctx.beginPath();ctx.moveTo(e.x-size*.28,e.y-size*.22);ctx.lineTo(e.x+size*.07,e.y-size*.10);ctx.lineTo(e.x-size*.11,e.y+size*.02);ctx.lineTo(e.x+size*.25,e.y+size*.13);ctx.stroke();ctx.restore()}"
+          swap(oldoverlay,newoverlay)
+          # V640 damage base and existing per-target ratio stay unchanged; apply 0.8x to the whole electric damage formula.
+          swap("*(1+upgradeRunV593.gunDamage),\n  interval:()=>.94*attackTempoMul()", "*(1+upgradeRunV593.gunDamage)*.80,\n  interval:()=>.94*attackTempoMul()")
+          # Generic arc hit applies its own implicit 28-point knockback and occasional stagger.
+          # Restore only those movement/stun fields after electric damage; short stun is controlled exclusively by holdEnemy().
+          swap("const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length;","const stop=hitStop,shake=cameraShake,kx=cameraKickX,ky=cameraKickY,textStart=damageTexts.length,previousKnockX=e.kx||0,previousKnockY=e.ky||0,previousStun=e.stunned||0;")
+          swap("   lightningDamageBaseV576(e,damage,'arc');","   lightningDamageBaseV576(e,damage,'arc');\n   e.kx=previousKnockX;e.ky=previousKnockY;e.stunned=previousStun;")
+          # Structural regressions: all four original V638 chain ratios, hop upgrade and non-electric red HP render remain intact.
+          for needle in ("if(count===2)return .70","if(count===3)return .60","if(count===4)return .55","return .50;","hops:()=>1+Math.min(7","function drawEnemyHealthBarsV592()","function holdEnemy(e)"):
+            assert needle in src,("missing legacy invariant",needle)
+          assert "hold:q.strong?.16:.12" in src and "damage)*.80" in src
+          assert "function overlay(ctx,e,size){const p=pose(e);if(!p||e.dead)return;" in src
+          assert "arcShockV576;return" not in src
+          data=src.encode("utf-8")
+          newsha=hashlib.sha256(data).hexdigest()
+          assert newsha!=oldsha
+          target=site/"assets"/(newsha+".js")
+          target.write_bytes(data)
+          (pathlib.Path("/tmp")/"evolve-v641-sha.txt").write_text(newsha)
+          # Update only the active engine resource URL and the embedded matching web version.
+          index_file=site/"index.html"
+          html=index_file.read_text(encoding="utf-8")
+          oldasset="assets/"+oldsha+".js"
+          newasset="assets/"+newsha+".js"
+          assert html.count(oldasset)==1
+          html=html.replace(oldasset,newasset,1)
+          m=re.search(r'window.EVOLVE_WEB_CONFIG=(\{[^;]+\});',html)
+          assert m,"inline web config missing"
+          original=m.group(1);inline=json.loads(original)
+          version=json.loads((site/"version.json").read_text(encoding="utf-8"))
+          assert inline["build"]==version["build"]=="V640-DEAD-CLOCK-READY-20261101"
+          assert inline["version"]==version["version"]
+          newbuild="V641-ELECTRIC-STUN-BALANCE-20261101"
+          newver=version["version"]+"-V641-ELECTRIC-STUN-BALANCE"
+          delta=len(data)-before_len
+          inline.update(build=newbuild,version=newver,scriptBytes=inline["scriptBytes"]+delta)
+          version.update(build=newbuild,version=newver,scriptBytes=version["scriptBytes"]+delta,source_sha256=newsha)
+          assert inline["scriptBytes"]==version["scriptBytes"]
+          html=html.replace(original,json.dumps(inline,ensure_ascii=False,separators=(",",":")),1)
+          index_file.write_text(html,encoding="utf-8")
+          (site/"version.json").write_text(json.dumps(version,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          manifest_file=site/"asset-manifest.json"
+          manifest=json.loads(manifest_file.read_text(encoding="utf-8"))
+          items=[x for x in manifest if x.get("path")==oldasset]
+          assert len(items)==1,("old manifest entry",len(items))
+          items[0].update(path=newasset,sha256=newsha,bytes=len(data))
+          manifest_file.write_text(json.dumps(manifest,ensure_ascii=False,separators=(",",":")),encoding="utf-8")
+          assert len(manifest)==version["assets"]==1081
+          assert "V641-ELECTRIC-STUN-BALANCE" in html and "fillRect" not in newoverlay
+          print("V641_RELEASE_READY",json.dumps({"engine_sha":newsha,"engine_bytes":len(data),"script_byte_delta":delta,"assets":len(manifest),"build":newbuild,"stun_normal":0.12,"stun_strong":0.16,"electric_damage_factor":0.8,"removed_electric_overlay_meter":True,"restored_knockback":True}))
+          PY
+          ENGINE_SHA="$(cat /tmp/evolve-v641-sha.txt)"
+          node --check "site/assets/${ENGINE_SHA}.js"
+          cd site
+          git config user.name "evolve-release-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --sparse index.html version.json asset-manifest.json "assets/${ENGINE_SHA}.js"
+          git diff --cached --name-only
+          git commit -m "EVOLVE V641: remove electric blue bar, replace knockback with micro-stun, reduce arc damage 20 percent"
+          git push origin HEAD:pages-fast-evolve-20261029
+          echo "V641 electric micro-stun staged to the public Pages source; trigger Pages with an app-signed release marker." >> "$GITHUB_STEP_SUMMARY"
