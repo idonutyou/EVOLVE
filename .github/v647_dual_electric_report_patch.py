@@ -30,7 +30,7 @@ const lightningHostV645={''')
 
 # When there are at least two reachable monsters, the second equipped electric
 # barrel should choose a distinct first victim. A single victim is still struck twice.
-replace_once('''   const priority=host.focus(),first=reachable.includes(priority)?priority:reachable.reduce((best,e)=>{const score=q=>Math.hypot(q.x-p.x,q.y-p.y)*(q.finalBoss?.65:q.elite?.8:1);return !best||score(e)<score(best)?e:best},null);
+replace_once('''  const priority=host.focus(),first=reachable.includes(priority)?priority:reachable.reduce((best,e)=>{const score=q=>Math.hypot(q.x-p.x,q.y-p.y)*(q.finalBoss?.65:q.elite?.8:1);return !best||score(e)<score(best)?e:best},null);
 ''','''   const excluded=host.avoidFirst?.();
    const candidates=excluded&&reachable.length>1?reachable.filter(e=>e!==excluded):reachable;
    const priority=host.focus(),first=candidates.includes(priority)?priority:candidates.reduce((best,e)=>{const score=q=>Math.hypot(q.x-p.x,q.y-p.y)*(q.finalBoss?.65:q.elite?.8:1);return !best||score(e)<score(best)?e:best},null);
@@ -40,7 +40,7 @@ replace_once('''   const priority=host.focus(),first=reachable.includes(priority
 # Draw two visible lanes even for one target / the same chain path. The visual
 # positions are shifted; REAL target hit locations, damage and chain distances
 # remain identical. The primary gun is centered when only one is equipped.
-replace_once('''   for(const a of arcs){const p=1-a.age/a.life,dx=a.to.x-a.from.x,dy=a.to.y-a.from.y,d=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx);sprite(ctx,0,(a.from.x+a.to.x)/2,(a.from.y+a.to.y)/2,d+28,clamp(d*.58,a.strong?100:73,a.strong?170:120),angle,Math.pow(p,.55)*(a.strong?.92:.76));''','''   for(const arc of arcs){
+replace_once('''  for(const a of arcs){const p=1-a.age/a.life,dx=a.to.x-a.from.x,dy=a.to.y-a.from.y,d=Math.hypot(dx,dy)||1,angle=Math.atan2(dy,dx);sprite(ctx,0,(a.from.x+a.to.x)/2,(a.from.y+a.to.y)/2,d+28,clamp(d*.58,a.strong?100:73,a.strong?170:120),angle,Math.pow(p,.55)*(a.strong?.92:.76));''','''   for(const arc of arcs){
     const lane=host.visualLane?.()||0,ex=arc.to.x-arc.from.x,ey=arc.to.y-arc.from.y,
       unit=Math.max(1,Math.hypot(ex,ey)),nx=-ey/unit,ny=ex/unit;
     // A visible 30px total lane split on identical target paths.
