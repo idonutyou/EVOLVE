@@ -136,3 +136,5 @@ jobs:
           echo "V647 staged successfully; trigger public Pages build with app-signed release marker." >> "$GITHUB_STEP_SUMMARY"
 
 # Retry V647 after exact source-anchor indentation correction.
+
+# Retrigger with corrected inline electric origin patch anchor.
