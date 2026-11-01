@@ -1,0 +1,34 @@
+name: EVOLVE V641 electric weapon diagnosis
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/diagnose-v641-electric.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: pages-fast-evolve-20261029
+          sparse-checkout: |
+            assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js
+          sparse-checkout-cone-mode: false
+          filter: blob:none
+      - name: Print V640 electric, status bar and knockback related exact code context
+        run: |
+          python3 - <<'PY'
+          import re,pathlib
+          p=pathlib.Path('assets/04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74.js')
+          s=p.read_text()
+          print("FILE_SIZE",len(s),"LINES",len(s.splitlines()))
+          terms=[r'electric',r'chainLightning',r'chain_lightning',r'lightning',r'knockback',r'knockBack',r'stun',r'shock',r'hpBar',r'healthBar',r'blueBar',r'arcTarget',r'electricGun',r'chainCount',r'arcChain',r'arcDamage']
+          for term in terms:
+            hits=list(re.finditer(term,s,re.I))
+            print("\n---- TERM",term,"COUNT",len(hits),"----")
+            for m in hits[:16]:
+              a=max(0,m.start()-220);b=min(len(s),m.end()+380)
+              print("OFFSET",m.start(),"LINE",s.count('\n',0,m.start())+1,repr(s[a:b]))
+          PY
