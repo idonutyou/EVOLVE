@@ -1,0 +1,20 @@
+{
+  "release": "V643",
+  "build": "V643-XP-MAGNET-FOREGROUND-20261101",
+  "engine_sha256": "35712226f4407dfa0f0f50477677ad3323fba1b00f9f63917cdebf0218efc185",
+  "base": "V642-PURGE-WARNING-CLEAN-20261101",
+  "features": {
+    "normalExperienceCrystalsFlyOverCharacter": true,
+    "magnetAbsorptionMorePronounced": true,
+    "autoLootSweepAttractionRadiusMax": 260,
+    "crystalTraces": true,
+    "closeRangeAcceleration": true,
+    "smallAbsorptionAfterimage": true,
+    "xpGrantedOnce": true,
+    "previousWeaponTuningUnchanged": true
+  },
+  "backups": [
+    "backup/v642-before-xp-magnet-v643-20261101",
+    "backup/v643-040-staged-engine-20261101"
+  ]
+}
