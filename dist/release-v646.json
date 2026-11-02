@@ -1,0 +1,19 @@
+{
+  "release": "V646",
+  "build": "V646-IDLE-ENEMY-VISIBILITY-20261102",
+  "engine_sha256": "54677cc079210bc9957363778dfe53b27c0280ff0b190007af9f9f255cb2458f",
+  "base": "V645-DUAL-WEAPON-INDEPENDENT-20261101",
+  "bug": "Enemies still targeted after long Android/background idle while WebGL normal-enemy rendering becomes blank",
+  "fixes": {
+    "long_idle_seconds": 12,
+    "canvas2d_enemy_fallback": true,
+    "gpu_composite_failure_checked": true,
+    "shadow_renderer_fallback": true,
+    "visibility_and_frame_resume_guard": true,
+    "enemy_state_and_combat_preserved": true
+  },
+  "backups": [
+    "backup/v645-before-idle-invisible-enemies-20261102",
+    "backup/v646-50-staged-verified-20261102"
+  ]
+}

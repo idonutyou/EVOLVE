@@ -1,0 +1,16 @@
+{
+  "release": "V642",
+  "build": "V642-PURGE-WARNING-CLEAN-20261101",
+  "engine_sha256": "9b29958a507aba5f763e9e223aed721ac464ad683efa0ee17e50e4fe6f64e951",
+  "preserves": "V641-ELECTRIC-STUN-BALANCE-20261101",
+  "effects": {
+    "floatingPurgeWarningText": false,
+    "duplicateHazardCircle": false,
+    "circleAppearsOnlyDuringWarning": true,
+    "activeEffectOnly": true,
+    "sameEffectiveRadius": true
+  },
+  "backup_live_prior": "backup/v641-before-purge-warning-v642-20261101",
+  "backup_staged": "backup/v642-purge-050-integrity-ok-20261101",
+  "deploy_source_commit": "ea156bada7f6448e15d10981ca75b6fb8980ece6"
+}

@@ -1,0 +1,8 @@
+{
+  "release": "V640",
+  "build": "V640-DEAD-CLOCK-READY-20261101",
+  "engine_sha256": "04ec4ce23eaddf3917dab7c7a5357a32e7a1fc7382218e869fc8eca5c307cd74",
+  "assets": 1081,
+  "preserved_backup": "backup/v638-before-v640-public-20261101",
+  "source_commit": "5f3bc488cab3ce2316aa9234edb099da2a9644c0"
+}
