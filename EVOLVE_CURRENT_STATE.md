@@ -1,3 +1,15 @@
+# LIVE UPDATE — EVOLVE V667 / GAMEPLAY 10 (2026-11-04 KST)
+
+- **PUBLIC:** V667-GP10-RELEASE-20261104 at https://idonutyou.github.io/EVOLVE/; native GitHub Pages run **41740032421 SUCCESS**. Public `version.json` fetched fresh and confirmed build V667 and engine source SHA.
+- **main release commit:** `8b8089dbe57a4ef6b503bf77dcadd9dfa5333f35`; **Pages release commit:** `b3b8bca68c47058e6799b73cffdb9b5f2eb5648d`; **matching release tree:** `e80d1e0bfbcb6a8b004d749e8a2aaf1d771419f6`.
+- **Active engine:** `assets/61a104877228440660b2a06e1cfe165c54759aaeb15185ad2603f26fc88142e9.js`, SHA-256 `61a104877228440660b2a06e1cfe165c54759aaeb15185ad2603f26fc88142e9` (1,904,012 bytes). Manifest 1,081 entries, original 1,080 asset records exact. Existing immutable assets and save keys preserved.
+- **Cumulative unpublished stages now published:** V660–V667 (GAMEPLAY 03–10), including V665 automatic local gameplay recording, V666 hit-feedback optimizations, V667 card/ultimate selection safeguards. Development QA Node/syntax and read-only release readiness gate SUCCESS run **41739934992**.
+- **Rollback branches preserved:** `backup/pre-v667-gp10-main-20261104` at `acc6177c8b0e55979bd783efae14546e3f8bc101` and `backup/pre-v667-gp10-pages-20261104` at `66e35db4446a82f9d2f5bc56e355a03de3139efd`; earlier Library checkpoints untouched. Current live branch is still `pages-fast-evolve-20261029:/(root)`.
+- **Not yet verified:** real device gameplay, IndexedDB persistence/restart, 10-minute boss/gameplay FPS/thermals. Do not claim these passed. User plans to play later. GP11 early-stage pressure/wave flow is NEXT and NOT STARTED.
+- **Work rules:** 10% Library backups checked and preserved, 30% work batches, no future GitHub upload/Pages publish without explicit instruction. GitHub public baseline supersedes previous V659 state below.
+
+---
+
 # Current live update — 2026-11-01 KST (UI fix; R19 roadmap remains paused)
 
 - **LIVE public build:** `R19-UIFIX01-RELEASE-20261101` at https://idonutyou.github.io/EVOLVE/; Pages native deployment run **41238795864 SUCCESS**. Public `version.json` and both changed JS asset URLs verified after release.
