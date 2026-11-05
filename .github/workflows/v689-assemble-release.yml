@@ -1,0 +1,71 @@
+name: EVOLVE V689 assemble verified release (no live publish)
+on:
+  push:
+    branches: [release-v689-red25d-20261106]
+    paths:
+      - "release_payload/v689/**"
+      - ".github/workflows/v689-assemble-release.yml"
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /release_payload/v689/
+      - name: Verify immutable V689 candidate and original V673 base
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/v689"
+          cat release_payload/v689/chunk_*.b64 | base64 -d > "$RUNNER_TEMP/v689/candidate.zip"
+          echo "1fd71249998679f22a56521dc4a7175ef3ee92d8012bfbeafeaaa2ba841b4c6f  $RUNNER_TEMP/v689/candidate.zip" | sha256sum -c -
+          unzip -tq "$RUNNER_TEMP/v689/candidate.zip"
+          git fetch --no-tags --filter=blob:none --depth=1 origin refs/heads/pages-fast-evolve-20261029:refs/remotes/origin/pages-fast-evolve-20261029
+          test "$(git rev-parse refs/remotes/origin/pages-fast-evolve-20261029)" = "78c19126feeadf148807b30d00f00b59531820a5"
+          python3 - <<'PY'
+          import zipfile,io,json,hashlib,subprocess,pathlib,os
+          zpath=pathlib.Path(os.environ["RUNNER_TEMP"])/"v689/candidate.zip"
+          with zipfile.ZipFile(zpath) as z:
+              names=z.namelist()
+              assert len(names)==36,len(names)
+              assert len(set(names))==36
+              assert all(not n.startswith("/") and ".." not in pathlib.PurePosixPath(n).parts for n in names)
+              assert {"index.html","version.json","asset-manifest.json","README_CANDIDATE_KO.md"}.issubset(names)
+              version=json.loads(z.read("version.json"))
+              assert version["build"]=="V689-RED-25D-CANDIDATE-20261105",version["build"]
+              manifest=json.loads(z.read("asset-manifest.json"))
+              assert len(manifest)==1109,len(manifest)
+              base="78c19126feeadf148807b30d00f00b59531820a5"
+              existing=set(subprocess.check_output(["git","ls-tree","-r","--name-only",base],text=True).splitlines())
+              overlay=set(names)-{"README_CANDIDATE_KO.md"}
+              missing=[r["path"] for r in manifest if r["path"] not in existing|overlay]
+              assert not missing,missing[:10]
+              for n in overlay:
+                  b=z.read(n)
+                  if n.startswith("assets/"):
+                      digest=pathlib.PurePosixPath(n).stem
+                      assert hashlib.sha256(b).hexdigest()==digest, n
+                  if n.endswith(".js"):
+                      p=pathlib.Path(os.environ["RUNNER_TEMP"])/"v689"/pathlib.PurePosixPath(n).name
+                      p.write_bytes(b)
+                      subprocess.run(["node","--check",str(p)],check=True)
+              assert hashlib.sha256(z.read("assets/1d5ffd7cb612de347b6311edd1c4c2d984fae7a9c534fdb9f3f254c876f885d5.png")).hexdigest()=="1d5ffd7cb612de347b6311edd1c4c2d984fae7a9c534fdb9f3f254c876f885d5"
+              subprocess.run(["git","read-tree",base],check=True)
+              for n in sorted(overlay):
+                  b=z.read(n)
+                  sha=subprocess.check_output(["git","hash-object","-w","--stdin"],input=b).decode().strip()
+                  subprocess.run(["git","update-index","--add","--cacheinfo",f"100644,{sha},{n}"],check=True)
+              tree=subprocess.check_output(["git","write-tree"],text=True).strip()
+              env=os.environ|{"GIT_AUTHOR_NAME":"EVOLVE release","GIT_AUTHOR_EMAIL":"actions@users.noreply.github.com","GIT_COMMITTER_NAME":"EVOLVE release","GIT_COMMITTER_EMAIL":"actions@users.noreply.github.com"}
+              commit=subprocess.check_output(["git","commit-tree",tree,"-p",base,"-m","Deploy EVOLVE V689 red 2.5D core (verified V673 overlay)"],text=True,env=env).strip()
+              print("VERIFIED_CANDIDATE_COMMIT="+commit,flush=True)
+              subprocess.run(["git","push","origin",commit+":refs/heads/v689-red25d-ready-20261106"],check=True)
+              print("STAGED_RELEASE_BRANCH=v689-red25d-ready-20261106",flush=True)
+          PY
