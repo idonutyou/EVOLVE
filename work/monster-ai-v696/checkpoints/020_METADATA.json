@@ -1,0 +1,10 @@
+{
+  "stage": 20,
+  "baseCommit": "b7e8be92c1880d11f47ccb275c3e332f68ad80d8",
+  "engineBlob": "34e06491fad6f9469544bdc69c56de419fc5eb24",
+  "changes": [
+    "19 combat identities",
+    "unique custom species steering authority"
+  ],
+  "status": "candidate_not_deployed"
+}
