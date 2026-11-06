@@ -5354,13 +5354,21 @@ function update(dt){
       else if(e.burst>0){let sp=e.spd*3.25*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;if(!ordinaryEnemyV591(e)&&e.trailCd<=0){biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}}
       else{let sp=e.spd*slowMul;e.vx=aimNXV438*sp;e.vy=aimNYV438*sp;if(e.dashCd<=0&&d<230){e.chargePrep=.42;e.dashCd=2.05+Math.random()*.65;telegraphs.push({kind:'emberCharge',owner:e,x:e.x,y:e.y,a:a,len:145,life:.42,max:.42});}}
     } else if(enemyCombatTypeV596(e.type)==='runner'){
+      const ripperV696=e.type==='ripper';
       e.dashCd-=dt;e.burst=Math.max(0,(e.burst||0)-dt);
-      if(e.dashPrep>0){e.dashPrep-=dt;e.vx=e.vy=0;if(e.dashPrep<=0)e.burst=.30;}
-      else if(e.burst>0){let sp=e.spd*2.85*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;}
+      if(ripperV696&&e.ripperComboV696===1&&e.burst<=0){e.ripperWaitV696=.18;e.ripperComboV696=1.5;}
+      if(ripperV696&&(e.ripperWaitV696||0)>0){
+        e.ripperWaitV696=Math.max(0,e.ripperWaitV696-dt);e.vx=e.vy=0;
+        if(e.ripperWaitV696<=0){e.burst=.17;e.chargeA+=(e.flank||1)*.42;e.ripperComboV696=2;}
+      }else if(e.dashPrep>0){e.dashPrep-=dt;e.vx=e.vy=0;if(e.dashPrep<=0){e.burst=ripperV696?.17:.30;if(ripperV696)e.ripperComboV696=1;}}
+      else if(e.burst>0){let sp=e.spd*(ripperV696?2.65:2.85)*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;}
       else{
-        if(e.dashCd<=0&&d<190){e.dashPrep=.24;e.chargeA=a;e.dashCd=1.45+Math.random()*.85;telegraphs.push({kind:'runnerDash',owner:e,x:e.x,y:e.y,a:e.chargeA,len:112,life:.24,max:.24,locked:false});}
-        let tx=aimNXV438,ty=aimNYV438,px=-ty,py=tx,flank=e.flank||1,sp=e.spd*slowMul,side=d>82?.62:.22;
-        e.vx=tx*sp*.72+px*sp*side*flank;e.vy=ty*sp*.72+py*sp*side*flank;
+        if(e.dashCd<=0&&d<(ripperV696?165:190)){
+          e.dashPrep=ripperV696?.32:.24;e.chargeA=a;e.dashCd=ripperV696?2.30+Math.random()*.6:1.45+Math.random()*.85;
+          telegraphs.push({kind:'runnerDash',owner:e,x:e.x,y:e.y,a:e.chargeA,len:ripperV696?96:112,life:e.dashPrep,max:e.dashPrep,locked:false,ripperV696});
+        }
+        let tx=aimNXV438,ty=aimNYV438,px=-ty,py=tx,flank=e.flank||1,sp=e.spd*slowMul,side=ripperV696?.85:d>82?.62:.22;
+        e.vx=tx*sp*(ripperV696?.58:.72)+px*sp*side*flank;e.vy=ty*sp*(ripperV696?.58:.72)+py*sp*side*flank;
       }
     } else if(enemyCombatTypeV596(e.type)==='brute'){
       e.slamCd-=dt;e.burst=Math.max(0,(e.burst||0)-dt);if(e.elite)e.elitePatternCd-=dt;
