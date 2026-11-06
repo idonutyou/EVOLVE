@@ -5376,9 +5376,15 @@ function update(dt){
         e.telegraphing='alphaSlam';e.patternLock=.72;
         telegraphs.push({kind:'alphaSlam',owner:e,x:e.x,y:e.y,r:76,life:.72,max:.72});
         flash('ALPHA SLAM · GET OUT',460);e.elitePatternCd=2.7+Math.random()*.8;
-      }else if(!e.elite&&e.slamCd<=0&&d<48+player.r&&!e.telegraphing){
-        e.telegraphing='bruteSlam';e.patternLock=.48;e.slamCd=2.65+Math.random()*.75;
-        telegraphs.push({kind:'bruteSlam',owner:e,x:e.x,y:e.y,r:48,life:.48,max:.48});
+      }else if(!e.elite&&e.slamCd<=0&&d<(e.type==='mauler'?64:48)+player.r&&!e.telegraphing){
+        const maulerV696=e.type==='mauler';let activeMaulerV696=0;
+        if(maulerV696)for(const z of telegraphs){if(z.owner?.type==='mauler'&&z.life>0&&!z.done&&++activeMaulerV696>=3)break;}
+        if(maulerV696&&activeMaulerV696>=3)e.slamCd=.24;
+        else{
+          const prep=maulerV696?.64:.48;
+          e.telegraphing='bruteSlam';e.patternLock=prep;e.slamCd=maulerV696?3.20+Math.random()*.75:2.65+Math.random()*.75;
+          telegraphs.push({kind:'bruteSlam',owner:e,x:e.x,y:e.y,r:maulerV696?58:48,life:prep,max:prep,maulerV696});
+        }
       }
       let sp=e.spd*(d<58?.38:1)*slowMul;e.vx=aimNXV438*sp;e.vy=aimNYV438*sp;
       if(e.telegraphing==='alphaSlam'||e.telegraphing==='bruteSlam'){e.vx*=.12;e.vy*=.12;}
@@ -5653,6 +5659,12 @@ function update(dt){
         if(Math.hypot(player.x-e.x,player.y-e.y)<tg.r+player.r)playerDamage(16);
         for(let i=0;i<9;i++)particles.push({kind:'ember',x:e.x,y:e.y,vx:rand(-72,72),vy:rand(-72,72),r:rand(1.4,3.6),life:rand(.18,.4)});
         cameraShake=Math.max(cameraShake,4.5);
+        if(tg.maulerV696&&!e.dead)telegraphs.push({kind:'maulerEchoV696',owner:e,x:tg.x,y:tg.y,r:84,inner:58,life:.52,max:.52,locked:true});
+      }else if(tg.kind==='maulerEchoV696'){
+        const dd=Math.hypot(player.x-tg.x,player.y-tg.y);
+        if(dd>=Math.max(0,tg.inner-player.r)&&dd<=tg.r+player.r)playerDamage(12);
+        particles.push({kind:'deathRing',x:tg.x,y:tg.y,r:tg.inner,max:tg.r+8,life:.32,maxLife:.32});
+        cameraShake=Math.max(cameraShake,3);
       }else if(tg.kind==='ravagerStrike'){
         particles.push({kind:'phaseRing',x:tg.x,y:tg.y,r:5,max:tg.r+22,life:.32,maxLife:.32,color:'#ff5a4e'});
         if(Math.hypot(player.x-tg.x,player.y-tg.y)<tg.r+player.r)playerDamage(18);
@@ -5914,6 +5926,10 @@ function drawLegacyAttackWarningV582(z){
  if(z._bio489){
   if(z.done)return;
   for(const g of z.areas)if(g)attackWarningPaintV582(g.path,false,'evenodd');return;
+ }
+ if(z.kind==='maulerEchoV696'){
+  const ring=new Path2D();ring.arc(z.x,z.y,z.r,0,TAU);ring.arc(z.x,z.y,z.inner||58,0,TAU,true);
+  attackWarningPaintV582(ring,false,'evenodd');return;
  }
  if(z.kind==='bioMelee'||z.kind==='acidBurst'&&isBioTitanV435(z.owner)){
   paint(attackWarningSectorV582(z.x,z.y,z.kind==='bioMelee'?z.r:330,a,z.kind==='bioMelee'?.95:.675));return;
@@ -14518,7 +14534,7 @@ function enemyAttackRoleV591(e){
  return 'melee';
 }
 function enemyContactAllowedV591(e){return !!e&&!e.dead;}
-function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner);}
+function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner)||!!(z?.owner?.type==='mauler'&&(z.maulerV696||z.kind==='maulerEchoV696'));}
 function hordeSpawnDelayV591(delay,major){return major?delay:delay/HORDE_RULES_V591.spawnMultiplier;}
 function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(Math.round(density*1.5)*1.3));}
 
