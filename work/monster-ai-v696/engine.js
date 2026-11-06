@@ -5349,7 +5349,12 @@ function update(dt){
       let desired=205,toward=d>desired+24?1:d<desired-24?-1:0;
       e.vx=(tx*e.spd*.45*toward+px*e.spd*.72*e.strafe)*slowMul;e.vy=(ty*e.spd*.45*toward+py*e.spd*.72*e.strafe)*slowMul;
       if(Math.random()<dt*.45)e.strafe*=-1;
-      if(!ordinaryEnemyV591(e)&&e.frostSpecialCd<=0&&d<300&&!e.telegraphing){e.telegraphing='frostLine';e.patternLock=.58;e.chargeA=a;telegraphs.push({kind:'frostLine',owner:e,x:e.x,y:e.y,a:e.chargeA,len:230,w:22,life:.58,max:.58,locked:false});e.frostSpecialCd=3.4+Math.random()*1.1;}
+      if(e.frostSpecialCd<=0&&d<300&&!e.telegraphing){
+        let allowed=!ordinaryEnemyV591(e);
+        if(!allowed){let active=0;for(const z of telegraphs)if(z.kind==='frostLine'&&z.owner?.type==='froststalker'&&ordinaryEnemyV591(z.owner)&&z.life>0&&++active>=2)break;allowed=active<2;}
+        if(allowed){const prep=ordinaryEnemyV591(e)?.72:.58;e.telegraphing='frostLine';e.patternLock=prep;e.chargeA=a;telegraphs.push({kind:'frostLine',owner:e,x:e.x,y:e.y,a:e.chargeA,len:ordinaryEnemyV591(e)?205:230,w:22,life:prep,max:prep,locked:false});e.frostSpecialCd=ordinaryEnemyV591(e)?4.8+Math.random()*1.4:3.4+Math.random()*1.1;}
+        else e.frostSpecialCd=.36;
+      }
       else if(e.shot<=0&&d<310&&!e.telegraphing){eBullets.push({x:e.x,y:e.y,vx:Math.cos(a)*136,vy:Math.sin(a)*136,r:4.6,dmg:8,life:3.0,kind:'cryo'});e.shot=1.25+Math.random()*.35;for(let i=0;i<4;i++)particles.push({kind:'dash',x:e.x,y:e.y,vx:rand(-32,32),vy:rand(-32,32),r:rand(1.2,2.7),life:rand(.12,.28)});}
     } else if(e.type==='symbiote'){
       e.pulse=(e.pulse||0)+dt*2.4;e.healCd-=dt;e.healBeam=Math.max(0,(e.healBeam||0)-dt);
@@ -5358,7 +5363,13 @@ function update(dt){
     } else if(e.type==='embermaw'){
       e.dashCd-=dt;e.trailCd-=dt;e.burst=Math.max(0,(e.burst||0)-dt);
       if(e.chargePrep>0){e.chargePrep-=dt;e.vx=e.vy=0;if(e.chargePrep<=0){e.burst=.48;e.chargeA=Math.atan2(player.y-e.y,player.x-e.x);}}
-      else if(e.burst>0){let sp=e.spd*3.25*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;if(!ordinaryEnemyV591(e)&&e.trailCd<=0){biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}}
+      else if(e.burst>0){let sp=e.spd*3.25*slowMul;e.vx=Math.cos(e.chargeA)*sp;e.vy=Math.sin(e.chargeA)*sp;if(e.trailCd<=0){
+        if(ordinaryEnemyV591(e)){
+          let active=0;for(const z of biomeHazards)if(z.emberTrailV696&&z.active>0&&++active>=8)break;
+          if(active<8)biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:14,warn:0,active:.90,tick:.5,emberTrailV696:true});
+          e.trailCd=.32;
+        }else{biomeHazards.push({kind:'magma',x:e.x,y:e.y,r:20,warn:0,active:1.35,tick:.18});e.trailCd=.18;}
+      }}
       else{let sp=e.spd*slowMul;e.vx=aimNXV438*sp;e.vy=aimNYV438*sp;if(e.dashCd<=0&&d<230){e.chargePrep=.42;e.dashCd=2.05+Math.random()*.65;telegraphs.push({kind:'emberCharge',owner:e,x:e.x,y:e.y,a:a,len:145,life:.42,max:.42});}}
     } else if(enemyCombatTypeV596(e.type)==='runner'){
       const ripperV696=e.type==='ripper';
@@ -14561,7 +14572,7 @@ function enemyAttackRoleV591(e){
  return 'melee';
 }
 function enemyContactAllowedV591(e){return !!e&&!e.dead;}
-function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner)||!!(z?.owner?.type==='mauler'&&(z.maulerV696||z.kind==='maulerEchoV696'));}
+function enemyWarningAllowedV591(z){return !ordinaryEnemyV591(z?.owner)||!!(z?.owner?.type==='mauler'&&(z.maulerV696||z.kind==='maulerEchoV696'))||!!(z?.owner?.type==='froststalker'&&z.kind==='frostLine');}
 function hordeSpawnDelayV591(delay,major){return major?delay:delay/HORDE_RULES_V591.spawnMultiplier;}
 function hordeDensityV591(density,hard,major){return major?density:Math.min(hard,Math.round(Math.round(density*1.5)*1.3));}
 
