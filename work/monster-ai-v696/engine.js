@@ -723,6 +723,13 @@ const MONSTER_ATTACK_ROSTER_V696=Object.freeze({
  alpha:'crush_rush_fault',sentinel:'fan_cross_pools',hunter:'pounce_scissors_needle',
  omega:'rupture_rush_cross',nemesis_brute:'adaptive_melee',nemesis_spitter:'adaptive_ranged'
 });
+function spawnBilePoolV696(b){
+ if(!b||b.kind!=='bileGlobV696'||b._bilePoolDoneV696)return;
+ b._bilePoolDoneV696=true;
+ if(Math.abs(b.x-player.x)>W*.78||Math.abs(b.y-player.y)>H*.75)return;
+ let active=0;for(const z of telegraphs)if(z.bilePoolV696&&z.life>0&&++active>=8)return;
+ telegraphs.push({kind:'acidZone',owner:null,x:b.x,y:b.y,r:23,life:1.05,max:1.05,active:true,locked:true,tick:.62,bilePoolV696:true});
+}
 function monsterAttackIdentityV696(e){
  if(!e||e.finalBoss||e.type==='boss')return 'titan';
  if(e.nemesis)return enemyCombatTypeV596(e)==='spitter'?'nemesis_spitter':'nemesis_brute';
@@ -5407,9 +5414,17 @@ function update(dt){
       e.vx=(tx*e.spd*.42*toward + px*strafeSp*e.strafe)*slowMul; e.vy=(ty*e.spd*.42*toward + py*strafeSp*e.strafe)*slowMul;
       if(Math.random()<dt*.6)e.strafe*=-1;
       if(e.shot<=0 && e.bossName!=='TITAN SENTINEL' && d<(e.elite?340:280)){
-        e.shotCount=(e.shotCount||0)+1;let spreadCount=(e.elite?5:3)+threatMods.acidExtra, mid=(spreadCount-1)/2;for(let k=0;k<spreadCount;k++){let aa=a+(k-mid)*(e.elite?.13:.15); eBullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*(e.elite?142:122),vy:Math.sin(aa)*(e.elite?142:122),r:e.elite?5:4.3,dmg:e.midRankV596?e.dmg*.65:e.elite?12:9,life:3,...(e.venomAddV553?{venomAddV553:true,venomAddOwnerV553:e.venomAddOwnerV553}:{})});}
-        /* Ordinary spitters use their ranged volley only. */
-        e.shot=(e.elite?.92:1.65)+Math.random()*(e.elite?.22:.55); for(let i=0;i<(e.elite?8:5);i++)particles.push({kind:'acid',x:e.x,y:e.y,vx:rand(-40,40),vy:rand(-40,40),r:rand(1.6,3.6),life:rand(.14,.28)});
+        e.shotCount=(e.shotCount||0)+1;
+        if(e.type==='bileback'){
+          eBullets.push({x:e.x,y:e.y,vx:Math.cos(a)*98,vy:Math.sin(a)*98,r:6.2,dmg:e.dmg*.95,life:2.30,kind:'bileGlobV696'});
+          e.shot=2.5+Math.random()*.65;
+        }else{
+          let spreadCount=(e.elite?5:3)+threatMods.acidExtra, mid=(spreadCount-1)/2;
+          for(let k=0;k<spreadCount;k++){let aa=a+(k-mid)*(e.elite?.13:.15); eBullets.push({x:e.x,y:e.y,vx:Math.cos(aa)*(e.elite?142:122),vy:Math.sin(aa)*(e.elite?142:122),r:e.elite?5:4.3,dmg:e.midRankV596?e.dmg*.65:e.elite?12:9,life:3,...(e.venomAddV553?{venomAddV553:true,venomAddOwnerV553:e.venomAddOwnerV553}:{})});}
+          /* Ordinary spitters use their ranged volley only. */
+          e.shot=(e.elite?.92:1.65)+Math.random()*(e.elite?.22:.55);
+        }
+        for(let i=0;i<(e.elite?8:5);i++)particles.push({kind:'acid',x:e.x,y:e.y,vx:rand(-40,40),vy:rand(-40,40),r:rand(1.6,3.6),life:rand(.14,.28)});
       }
     } else if(e.type==='boss'){
       if((e.arrivalTime||0)>0){
@@ -5738,7 +5753,19 @@ function update(dt){
   compactArrayV426(telegraphs,tg=>tg.life>0&&!tg.done);
   simFrame++;rebuildEnemyGridV424();separateEnemiesSpatial();postSeparationGridV440();resolveTerrainBody(player,player.r);
   compactArrayV426(enemies,e=>!e.dead);
-  for(const b of eBullets){if(b._bio489){bioBulletTickV489(b,dt);continue;}const oldX=b.x,oldY=b.y;b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;if(terrainHitV418(oldX,oldY,b.x,b.y,b.r)){b.life=0;continue;}let rr=b.r+player.r;if((b.x-player.x)**2+(b.y-player.y)**2<rr*rr){playerDamage(b.dmg);if(b.kind==='cryo')player.envSlow=Math.max(player.envSlow||0,.9);if(b.kind==='magma')biomeHazards.push({kind:'magma',x:b.x,y:b.y,r:24,warn:0,active:1.4,tick:.18});b.life=0}}
+  for(const b of eBullets){
+    if(b._bio489){bioBulletTickV489(b,dt);continue;}
+    const oldX=b.x,oldY=b.y;b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;
+    if(terrainHitV418(oldX,oldY,b.x,b.y,b.r)){b.life=0;spawnBilePoolV696(b);continue;}
+    let rr=b.r+player.r;
+    if((b.x-player.x)**2+(b.y-player.y)**2<rr*rr){
+      playerDamage(b.dmg);
+      if(b.kind==='cryo')player.envSlow=Math.max(player.envSlow||0,.9);
+      if(b.kind==='magma')biomeHazards.push({kind:'magma',x:b.x,y:b.y,r:24,warn:0,active:1.4,tick:.18});
+      b.life=0;
+    }
+    if(b.life<=0)spawnBilePoolV696(b);
+  }
   compactArrayV426(eBullets,b=>b.life>0&&Math.abs(b.x-player.x)<W*1.8&&Math.abs(b.y-player.y)<H*1.45);
   // GP12-070: a fatal hit earlier in this tick must not mark XP as collected
   // after addXP has already rejected it. Early-stage boundary only.
