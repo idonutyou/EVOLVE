@@ -6434,10 +6434,10 @@
     "sha256": "b6c59012465d51e5be3e364e2dea2cf073820e69f4756644d38e0170d381e145"
   },
   {
-    "bytes": 2021743,
+    "bytes": 2025177,
     "kind": "game-code",
-    "path": "assets/b7ff7193798b971acd16c5af146db8ace5693a046322a265ef6558fb4ba9dd46.js",
-    "sha256": "b7ff7193798b971acd16c5af146db8ace5693a046322a265ef6558fb4ba9dd46"
+    "path": "assets/145f7904380daaaaa9a759ec98392b446850c22d46a9f90d1a9a5127df126b20.js",
+    "sha256": "145f7904380daaaaa9a759ec98392b446850c22d46a9f90d1a9a5127df126b20"
   },
   {
     "bytes": 3085171,
@@ -6478,8 +6478,8 @@
   {
     "bytes": 52286,
     "kind": "script",
-    "path": "assets/8a11b2d5d48c82c16f78ec6d53643a1922483d3a1565de1ab66cdda16c15c727.js",
-    "sha256": "8a11b2d5d48c82c16f78ec6d53643a1922483d3a1565de1ab66cdda16c15c727"
+    "path": "assets/1227d324eaf8d200a99c5d0abbea04b0c00ee53b57eb24e9f83f05dac1a9379e.js",
+    "sha256": "1227d324eaf8d200a99c5d0abbea04b0c00ee53b57eb24e9f83f05dac1a9379e"
   },
   {
     "bytes": 5856,
@@ -6654,5 +6654,17 @@
     "kind": "image",
     "path": "assets/1d5ffd7cb612de347b6311edd1c4c2d984fae7a9c534fdb9f3f254c876f885d5.png",
     "sha256": "1d5ffd7cb612de347b6311edd1c4c2d984fae7a9c534fdb9f3f254c876f885d5"
+  },
+  {
+    "bytes": 113490,
+    "kind": "image",
+    "path": "assets/6bad0efa8dd65de3b75264d4c6c2fe8ee8dd646b158fec449ccf39e1284e9e4d.png",
+    "sha256": "6bad0efa8dd65de3b75264d4c6c2fe8ee8dd646b158fec449ccf39e1284e9e4d"
+  },
+  {
+    "bytes": 964401,
+    "kind": "image",
+    "path": "assets/246552873dacf803f530a992bcfff82f64a16cff8a773cafc29723b56558f91d.png",
+    "sha256": "246552873dacf803f530a992bcfff82f64a16cff8a773cafc29723b56558f91d"
   }
 ]
