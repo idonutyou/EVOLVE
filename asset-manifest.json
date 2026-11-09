@@ -6434,10 +6434,10 @@
     "sha256": "b6c59012465d51e5be3e364e2dea2cf073820e69f4756644d38e0170d381e145"
   },
   {
-    "bytes": 2025177,
+    "bytes": 2033922,
     "kind": "game-code",
-    "path": "assets/145f7904380daaaaa9a759ec98392b446850c22d46a9f90d1a9a5127df126b20.js",
-    "sha256": "145f7904380daaaaa9a759ec98392b446850c22d46a9f90d1a9a5127df126b20"
+    "path": "assets/fd27ff38a0183f17db3e5915004b219cdfee174fc0281915d38aa70c5a7f5777.js",
+    "sha256": "fd27ff38a0183f17db3e5915004b219cdfee174fc0281915d38aa70c5a7f5777"
   },
   {
     "bytes": 3085171,
@@ -6666,5 +6666,11 @@
     "kind": "image",
     "path": "assets/246552873dacf803f530a992bcfff82f64a16cff8a773cafc29723b56558f91d.png",
     "sha256": "246552873dacf803f530a992bcfff82f64a16cff8a773cafc29723b56558f91d"
+  },
+  {
+    "bytes": 281696,
+    "kind": "image",
+    "path": "assets/0e9a0d9a8655e175a0bf89f8cb606694a77a436e279f365af5d288a75ed53f65.png",
+    "sha256": "0e9a0d9a8655e175a0bf89f8cb606694a77a436e279f365af5d288a75ed53f65"
   }
 ]
