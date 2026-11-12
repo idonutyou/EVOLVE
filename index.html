@@ -2174,6 +2174,30 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 </script>
 <!-- V639: Do not invoke the Fullscreen API when starting/retrying the game.
      Let Android keep control of system navigation; edge-to-edge is opt-in via viewport-fit=cover. -->
+<script id="evolve-dna-lab-preview-entry-v46">
+(() => {
+  'use strict';
+  const ID='evolveDnaLabPreviewLinkV46';
+  function install(){
+    const view=document.getElementById('homeShopViewV601');
+    if(!view || document.getElementById(ID))return false;
+    const link=document.createElement('a');
+    link.id=ID;
+    link.href='./dna-lab.html';
+    link.setAttribute('aria-label','DNA 진화 연구소 체험판 열기 (실제 전투 미적용)');
+    link.textContent='🧬 DNA 진화 연구소 체험하기  ›';
+    link.style.cssText='display:flex;align-items:center;justify-content:center;min-height:43px;margin:10px 8px 14px;padding:9px 12px;border:1px solid #b662c9;border-radius:10px;background:linear-gradient(130deg,#2a1237,#111626);color:#ffe1fc;font-weight:900;font-size:12px;text-decoration:none;box-shadow:0 0 15px #de4ae72b';
+    const hint=view.querySelector('.hubPageIntroV601');
+    if(hint)hint.insertAdjacentElement('afterend',link);else view.prepend(link);
+    return true;
+  }
+  if(install())return;
+  const root=document.getElementById('homeContentV522')||document.getElementById('app')||document.body;
+  if(!root)return;
+  const observer=new MutationObserver(()=>{if(install())observer.disconnect()});
+  observer.observe(root,{subtree:true,childList:true});
+})();
+</script>
 </body></html>
 <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
 
