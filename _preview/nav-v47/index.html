@@ -2227,14 +2227,14 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
     #poster #homeTabs #${NAV_ID}>svg{width:25px;height:25px;fill:none;stroke:#d6abc9;stroke-width:2;}
     #poster #homeTabs #${NAV_ID} .hubNavLabelV601{white-space:nowrap;font-size:10px;font-weight:700;line-height:1.2}
     #poster #homeTabs #${NAV_ID}:focus-visible {outline:2px solid #e0b4ff!important;outline-offset:2px}
-    #poster #homeHeaderChallengeSlotV47{display:flex;align-items:center;min-width:0}
+    #poster #homeHeaderChallengeSlotV47{display:flex;align-items:center;flex:0 0 33px;min-width:33px}
     #poster #${SHORTCUT_ID} {
       display:inline-flex;align-items:center;justify-content:center;flex-direction:column;
-      gap:1px; flex:none; min-width:61px; height:40px; padding:3px 5px;
+      gap:1px; flex:none; width:33px; min-width:33px; height:38px; padding:2px;
       border:1px solid #936d54!important; border-radius:6px!important;
       background:linear-gradient(145deg,#352923,#191a24)!important;
       color:#f7d7aa!important; box-shadow:inset 0 1px 0 #eec9961e!important;
-      font:800 9px/1.1 system-ui,sans-serif!important; cursor:pointer;touch-action:manipulation;
+      font:800 7px/1.1 system-ui,sans-serif!important; cursor:pointer;touch-action:manipulation;
     }
     #poster #${SHORTCUT_ID}>svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;}
     #poster #${SHORTCUT_ID}.active,
@@ -2242,11 +2242,12 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
     #poster #evolveDnaLabPreviewLinkV46{display:none!important}
     /* Narrow phones: preserve the existing DNA counter and settings button. */
     @media(max-width:410px){
-      #poster .homeHeaderToolsV522{gap:4px!important;flex-shrink:0}
-      #poster #homeHeaderChallengeSlotV47{flex:0 0 auto}
+      #poster #homeStatusV525 .profileV525{gap:4px!important}
+      #poster #homeHeaderChallengeSlotV47{flex:0 0 31px;min-width:31px}
     }
     @media(max-width:370px){
-      #poster #${SHORTCUT_ID}{width:39px;min-width:39px;padding:2px!important}
+      #poster #${SHORTCUT_ID}{width:28px;min-width:28px;height:34px;padding:2px!important}
+      #poster #homeHeaderChallengeSlotV47{flex-basis:28px;min-width:28px}
       #poster #${SHORTCUT_ID}>span{display:none}
     }
     @media(max-height:550px){
@@ -2266,7 +2267,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
     const poster = document.getElementById('poster');
     const nav = document.getElementById('homeTabs');
     const challenge = document.getElementById(SOURCE_ID);
-    const tools = poster && poster.querySelector('.homeHeaderToolsV522');
+    const tools = poster && poster.querySelector('#homeStatusV525 .profileV525');
     const frame = poster && poster.querySelector('.hubStartFrameV601');
     // Install after the native five-tab initialization and the V606 material pass.
     // On incompatible versions, do nothing rather than breaking the game UI.
@@ -2303,7 +2304,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
         if (challenge.isConnected) challenge.click();
       });
       slot.appendChild(button);
-      tools.prepend(slot);
+      tools.appendChild(slot);
     }
     window.__EVOLVE_DNA_NAV_V47__ = {
       version, destination: DESTINATION,
