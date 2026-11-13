@@ -2199,6 +2199,133 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
   observer.observe(root,{subtree:true,childList:true});
 })();
 </script>
+<!-- EVOLVE_V47_NAV_CHALLENGE_TO_DNA BEGIN -->
+<script id="evolve-nav-dna-challenge-v47">
+/* EVOLVE V47: DNA LAB occupies the former CHALLENGE bottom-nav slot.
+ * Existing CHALLENGE functionality is preserved through #memoryBtn.
+ * UI-only add-on: no writes to game state, storage, combat or asset files.
+ * Deployment is intentionally not performed here.
+ */
+(() => {
+  'use strict';
+  const version = 'V47-NAV-CHALLENGE-DNA';
+  const NAV_ID = 'homeDnaLabNavV47';
+  const SHORTCUT_ID = 'homeChallengeShortcutV47';
+  const SOURCE_ID = 'memoryBtn';
+  const DESTINATION = './dna-lab.html';
+  const styleId = 'homeNavDnaChallengeStyleV47';
+  const css = `
+    #poster #homeTabs #memoryBtn { display:none!important; }
+    #poster #homeTabs #${NAV_ID} {
+      display:flex!important; align-items:center; justify-content:center; flex-direction:column;
+      gap:5px; flex:1; min-width:0!important; width:auto!important;
+      text-decoration:none!important; color:#d9badf!important; cursor:pointer;
+      border:1px solid transparent!important; border-radius:6px!important;
+      padding:6px 2px!important; touch-action:manipulation;
+    }
+    #poster #homeTabs #${NAV_ID}>svg{width:25px;height:25px;fill:none;stroke:#d6abc9;stroke-width:2;}
+    #poster #homeTabs #${NAV_ID} .hubNavLabelV601{white-space:nowrap;font-size:10px;font-weight:700;line-height:1.2}
+    #poster #homeTabs #${NAV_ID}:focus-visible {outline:2px solid #e0b4ff!important;outline-offset:2px}
+    #poster #homeHeaderChallengeSlotV47{display:flex;align-items:center;flex:0 0 33px;min-width:33px}
+    #poster #${SHORTCUT_ID} {
+      display:inline-flex;align-items:center;justify-content:center;flex-direction:column;
+      gap:1px; flex:none; width:33px; min-width:33px; height:38px; padding:2px;
+      border:1px solid #936d54!important; border-radius:6px!important;
+      background:linear-gradient(145deg,#352923,#191a24)!important;
+      color:#f7d7aa!important; box-shadow:inset 0 1px 0 #eec9961e!important;
+      font:800 7px/1.1 system-ui,sans-serif!important; cursor:pointer;touch-action:manipulation;
+    }
+    #poster #${SHORTCUT_ID}>svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;}
+    #poster #${SHORTCUT_ID}.active,
+    #poster[data-home-page="challenge"] #${SHORTCUT_ID}{background:linear-gradient(150deg,#564026,#2b2021)!important;border-color:#e6bd6a!important;}
+    #poster #evolveDnaLabPreviewLinkV46{display:none!important}
+    /* Narrow phones: preserve the existing DNA counter and settings button. */
+    @media(max-width:410px){
+      #poster #homeStatusV525 .profileV525{gap:4px!important}
+      #poster #homeHeaderChallengeSlotV47{flex:0 0 31px;min-width:31px}
+    }
+    @media(max-width:370px){
+      #poster #${SHORTCUT_ID}{width:28px;min-width:28px;height:34px;padding:2px!important}
+      #poster #homeHeaderChallengeSlotV47{flex-basis:28px;min-width:28px}
+      #poster #${SHORTCUT_ID}>span{display:none}
+    }
+    @media(max-height:550px){
+      #poster #homeTabs #${NAV_ID}>svg{width:20px;height:20px}
+      #poster #homeTabs #${NAV_ID} .hubNavLabelV601{font-size:9px}
+      #poster #${SHORTCUT_ID}{height:36px}
+    }
+  `;
+  function createStyle() {
+    if (document.getElementById(styleId)) return;
+    const element = document.createElement('style');
+    element.id = styleId;
+    element.textContent = css;
+    document.head.appendChild(element);
+  }
+  function install() {
+    const poster = document.getElementById('poster');
+    const nav = document.getElementById('homeTabs');
+    const challenge = document.getElementById(SOURCE_ID);
+    const tools = poster && poster.querySelector('#homeStatusV525 .profileV525');
+    const frame = poster && poster.querySelector('.hubStartFrameV601');
+    // Install after the native five-tab initialization and the V606 material pass.
+    // On incompatible versions, do nothing rather than breaking the game UI.
+    if (!poster || !nav || !challenge || !tools || !frame || frame.dataset.materialV606 !== 'ready') return false;
+    if (challenge.parentElement !== nav || !challenge.onclick) return false;
+    if (!document.getElementById(NAV_ID)) {
+      if (nav.querySelectorAll(':scope > button').length !== 5) return false;
+      createStyle();
+      const lab = document.createElement('a');
+      lab.id = NAV_ID;
+      lab.href = DESTINATION;
+      lab.className = 'homeNavV522 dnaLabNavV47';
+      lab.setAttribute('aria-label', 'DNA 진화 연구소 체험판 열기');
+      lab.setAttribute('data-i18n-ignore', '');
+      lab.innerHTML = '<svg class="hubGlyphV601" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M18 8c34 12-6 36 28 48M46 8C12 20 52 44 18 56M19 15h26M24 25h16M25 38h14M19 49h26" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="hubNavLabelV601">DNA 연구소</span>';
+      lab.addEventListener('click', e => {
+        e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+        window.location.assign(lab.href);
+      }, true);
+      nav.insertBefore(lab, challenge);
+    }
+    if (!document.getElementById(SHORTCUT_ID)) {
+      const slot = document.createElement('div');
+      slot.id = 'homeHeaderChallengeSlotV47';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.id = SHORTCUT_ID;
+      button.setAttribute('data-i18n-ignore', '');
+      button.setAttribute('aria-label', '챌린지 열기');
+      button.setAttribute('aria-controls', 'homeChallengeViewV601');
+      button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h10v7a5 5 0 0 1-10 0V3ZM7 5H4v3c0 3 2 4 4 4m9-7h3v3c0 3-2 4-4 4M12 15v4m-5 2h10" stroke-linecap="round" stroke-linejoin="round"/></svg><span>챌린지</span>';
+      button.addEventListener('click', () => {
+        // Delegates to the exact native tab handler; does not reimplement challenges.
+        if (challenge.isConnected) challenge.click();
+      });
+      slot.appendChild(button);
+      tools.appendChild(slot);
+    }
+    window.__EVOLVE_DNA_NAV_V47__ = {
+      version, destination: DESTINATION,
+      read: () => ({version, installed: !!document.getElementById(NAV_ID),
+        challengePreserved: challenge.isConnected, nativeButtonCount:nav.querySelectorAll(':scope > button').length,
+        visibleTabIds: [...nav.children].filter(n => n.id !== SOURCE_ID).map(n => n.id),
+        gameStorageModified: false, gameEngineModified: false})
+    };
+    return true;
+  }
+  function start() {
+    if (install()) return;
+    const host = document.getElementById('poster') || document.body;
+    const observer = new MutationObserver(() => {if (install()) observer.disconnect()});
+    observer.observe(host, {subtree:true,childList:true,attributes:true,attributeFilter:['data-material-v606','class']});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
+})();
+
+</script>
+<!-- EVOLVE_V47_NAV_CHALLENGE_TO_DNA END -->
 </body></html>
 <!-- V300_TRANSCENDENCE_VISUAL_TELEMETRY -->
 
