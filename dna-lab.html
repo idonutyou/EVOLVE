@@ -208,4 +208,67 @@ function init(){ $('#enterBranch').addEventListener('click',()=>goto('branch'));
 init();
 window.EVOLVE_LAB_DEBUG={getCounts:()=>({nodes:NODES.length,ranks:NODES.reduce((s,n)=>s+n.max_rank,0),dna:NODES.reduce((s,n)=>s+n.dna_cost_by_rank.reduce((a,b)=>a+b,0),0),freeDNA:freeDNA(),owned:ownedCount()}),getNode:id=>INDEX[id],checkNode:id=>missing(INDEX[id]),reset:()=>{state.ranks={};save();renderControls();renderTree();updateMeta()},setLevel:x=>{$('#levelInput').value=x;$('#levelInput').dispatchEvent(new Event('change'))},buy:id=>{state.selected=id;return canBuy(INDEX[id])?buySelected():false}};
 })();
-</script></body></html>
+</script><script id="evolveDnaBackNavigationV1">
+/* Return one level within the DNA screen before returning to the battle home. */
+(() => {
+  'use strict';
+  if(window.parent!==window) return;
+  const guard='__evolveDnaBackGuardV1', source='EVOLVE_DNA_RETURN_V1';
+  let leaving=false,lastNativeBack=-Infinity;
+  let useCloseWatcher=typeof window.CloseWatcher==='function',activeWatcher=null,watcherQueued=false;
+  function armHistory(){
+    try {if(history.state?.[guard]!==true){const old=history.state&&typeof history.state==='object'?history.state:{};history.pushState({...old,[guard]:true},'',location.href);}}catch(_){}
+  }
+  function scheduleWatcher(){
+    if(!useCloseWatcher || watcherQueued)return;
+    watcherQueued=true;queueMicrotask(()=>{watcherQueued=false;arm();});
+  }
+  function arm(){
+    if(!useCloseWatcher){armHistory();return;}
+    if(activeWatcher || document.hidden)return;
+    try{
+      const watcher=new window.CloseWatcher();activeWatcher=watcher;
+      watcher.addEventListener('close',()=>{
+        if(activeWatcher===watcher)activeWatcher=null;
+        if(Date.now()-lastNativeBack<200){scheduleWatcher();return;}
+        const result=request(false);if(result!=='home')scheduleWatcher();
+      },{once:true});
+    }catch(_){useCloseWatcher=false;armHistory();}
+  }
+  function fromGame(){try{return sessionStorage.getItem(source)==='1';}catch(_){return false;}}
+  function clearSource(){try{sessionStorage.removeItem(source);}catch(_){}}
+  function home(fromHistory){
+    const restore=fromGame();clearSource();
+    if(!restore){location.replace(new URL('./',location.href).href);return;}
+    if(!fromHistory && history.state?.[guard]===true){leaving=true;history.back();return;}
+    history.back();
+  }
+  function request(fromHistory){
+    const options=document.querySelector('.controlpanel[open]');
+    if(options){options.open=false;return 'window';}
+    const branch=document.getElementById('branchView');
+    if(branch?.classList.contains('active')){document.getElementById('backBtn')?.click();return 'branch';}
+    home(fromHistory);return 'home';
+  }
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape' && event.key!=='BrowserBack')return;
+    event.preventDefault();event.stopImmediatePropagation();request(false);
+  },true);
+  document.addEventListener('backbutton',event=>{
+    lastNativeBack=Date.now();
+    event.preventDefault?.();event.stopImmediatePropagation?.();request(false);
+  },false);
+  window.addEventListener('popstate',event=>{
+    if(useCloseWatcher)return;
+    if(leaving){leaving=false;history.back();return;}
+    if(event.state?.[guard]===true)return;
+    if(Date.now()-lastNativeBack<200){arm();return;}
+    const result=request(true);if(result!=='home')arm();
+  });
+  document.getElementById('returnToGameV46')?.addEventListener('click',clearSource);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleWatcher();});
+  arm();
+})();
+
+</script>
+</body></html>
