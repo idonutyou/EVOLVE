@@ -6792,5 +6792,11 @@
     "kind": "image",
     "path": "assets/63516d8efd2f81a1b9617ef829967b584abc1dc78ba83b2bf1d2d3696725eddd.png",
     "sha256": "63516d8efd2f81a1b9617ef829967b584abc1dc78ba83b2bf1d2d3696725eddd"
+  },
+  {
+    "bytes": 2035252,
+    "kind": "game-code",
+    "path": "assets/634f25a66f5829ae9ccb60c58b800382466dcbadb0df8d959916b858a44b0e72.js",
+    "sha256": "634f25a66f5829ae9ccb60c58b800382466dcbadb0df8d959916b858a44b0e72"
   }
 ]
