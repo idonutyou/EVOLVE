@@ -15,11 +15,12 @@ const VIEWPORTS = [
   { width: 852, height: 393 }
 ];
 const NAV = [
-  { name: 'shop', selector: '#homeShopTabV601' },
-  { name: 'parts', selector: '#homeLabTab' },
-  { name: 'battle', selector: '#homeBattleTabV522' },
-  { name: 'challenge', selector: '#memoryBtn', optional: true },
-  { name: 'codex', selector: '#codexBtn' }
+  { name: 'shop', selector: 'button[aria-label="상점"]:visible' },
+  { name: 'parts', selector: 'button[aria-label="파츠"]:visible' },
+  { name: 'battle', selector: 'button[aria-label="전투"]:visible' },
+  { name: 'dna', selector: 'button[aria-label="DNA 연구소"]:visible' },
+  { name: 'challenge', selector: 'button[aria-label="챌린지"]:visible', optional: true },
+  { name: 'codex', selector: 'button[aria-label="도감"]:visible' }
 ];
 const report = {
   test: 'EVOLVE independently hosted read-only browser evidence',
@@ -158,6 +159,9 @@ async function openPublishedGame(page) {
 }
 
 async function captureNavigation(page) {
+  // Current V717 uses visible graphical hit targets layered over older hidden DOM buttons.
+  report.visibleNavigation = await page.locator('button[aria-label]:visible').evaluateAll(nodes =>
+    nodes.map(node => ({ label: node.getAttribute('aria-label'), className: node.className })).slice(0, 40));
   // Change pages through existing HOME controls only. No purchase or battle execution.
   for (const destination of NAV) {
     const button = page.locator(destination.selector).first();
