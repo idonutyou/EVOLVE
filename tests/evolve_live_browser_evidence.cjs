@@ -55,10 +55,31 @@ async function capture(page, label) {
 
 function environmentCategory(error) {
   const message = String(error?.stack || error);
+  const startupFailure = /EVOLVE_STARTUP_FAILED|TimeoutError|Timeout [0-9]+ms exceeded/i.test(message);
+  const decodeFailure = report.pageErrors.some(value => /Unable to decode|Critical asset preloader failure/i.test(value));
+  if (startupFailure && decodeFailure && report.httpFailures.some(value => value.status >= 500 && ['image', 'script', 'document'].includes(value.type))) return 'upstream_http_asset_failure';
+  if (startupFailure && decodeFailure) return 'asset_decode_failure';
+  if (/EVOLVE_STARTUP_FAILED/i.test(message)) return 'game_startup_error';
   if (/ERR_BLOCKED_BY_ADMINISTRATOR|ERR_TUNNEL_CONNECTION_FAILED|ERR_PROXY_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_CONNECTION_REFUSED|ERR_NETWORK_ACCESS_DENIED/i.test(message)) return 'browser_or_network_environment';
   if (/Required navigation control (missing|hidden)/i.test(message)) return 'stale_selector_or_ui_contract';
   if (/TimeoutError|Timeout [0-9]+ms exceeded/i.test(message)) return 'startup_or_navigation_timeout';
   return 'game_or_test_assertion';
+}
+
+async function waitForStartup(page, ready, label, timeout = 180000) {
+  const failure = message => new Error('EVOLVE_STARTUP_FAILED [' + label + ']: ' + message);
+  if (report.pageErrors.length) throw failure(report.pageErrors[report.pageErrors.length - 1]);
+  let onError;
+  const fatal = new Promise((resolve, reject) => {
+    onError = error => reject(failure(String(error.message || error)));
+    page.on('pageerror', onError);
+  });
+  try {
+    const handle = await Promise.race([page.waitForFunction(ready, null, { timeout }), fatal]);
+    await handle.dispose();
+  } finally {
+    page.off('pageerror', onError);
+  }
 }
 
 function attachTelemetry(page) {
@@ -146,7 +167,7 @@ async function stageCandidate(context) {
   });
 }
 async function nativeReady(page) {
-  await page.waitForFunction(()=>!document.getElementById('webLoader')&&document.getElementById('evolveHeaderUnified')&&!document.getElementById('evolveHeaderUnified').hidden&&window.__EVOLVE_DUAL_ARM_V631__?.snapshot()?.gameRendererConnected,null,{timeout:180000});
+  await waitForStartup(page,()=>!document.getElementById('webLoader')&&document.getElementById('evolveHeaderUnified')&&!document.getElementById('evolveHeaderUnified').hidden&&window.__EVOLVE_DUAL_ARM_V631__?.snapshot()?.gameRendererConnected,'native UI');
   await page.evaluate(()=>document.getElementById('introSplash')?.click());
 }
 async function goMain(page,name) {
@@ -190,6 +211,22 @@ function assertCommonLayout(actual,expected) {
   }
   if('titleBandHidden'in actual)assert.ok(actual.titleBandHidden,'Printed page title still visible');
 }
+async function equipIndependentArms(page) {
+  const before=await page.evaluate(()=>window.__EVOLVE_DUAL_ARM_V631__.snapshot());
+  assert.equal(before.arm1,'arm_cannon','Fixture/legacy main arm migration lost');
+  assert.equal(before.legacyBack,'back_neural','Legacy back must survive migration');
+  // DNA return navigation intentionally does not carry evolveQA=1. Exercise
+  // the native inventory/detail controls rather than the query-gated test API.
+  await page.locator('.partsRefOverallFilter').selectOption('arm');
+  await page.locator('#partsGridV523 button[data-part-id="arm_blades"][data-arm-variant-v656="arm2"]').click();
+  await page.locator('#partsDetail_arm2_V631').click();
+  await page.waitForFunction(()=>window.__EVOLVE_DUAL_ARM_V631__.snapshot().arm2==='arm_blades');
+  const after=await page.evaluate(()=>window.__EVOLVE_DUAL_ARM_V631__.snapshot());
+  assert.equal(after.arm1,'arm_cannon','Equipping the sub arm must preserve the main arm');
+  assert.equal(after.arm2,'arm_blades','Native sub arm equip must succeed');
+  assert.equal(after.legacyBack,'back_neural','Native arm equip must preserve legacy back');
+  return {before,after};
+}
 async function inspectCandidate(page) {
   report.candidateChecks=[];report.layouts=[];report.dnaScroll=[];
   await nativeReady(page);
@@ -203,11 +240,14 @@ async function inspectCandidate(page) {
     await page.waitForURL('**/dna-lab.html');
     await page.waitForFunction(()=>document.documentElement.classList.contains('dnaRefReady')&&document.querySelector('#dnaCommonFrame .evolveHeaderArt')?.complete);
     const layout=await commonLayout(page,'dna');report.layouts.push({size,...layout});assertCommonLayout(layout,expected);
-    report.dnaScroll.push(await page.evaluate(()=>{
+    const dnaScroll=await page.evaluate(()=>{
       const rect=e=>{if(!e)return null;const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,display:s.display,visibility:s.visibility,overflowY:s.overflowY}};
       const root=document.scrollingElement,before=scrollY;window.scrollTo(0,root.scrollHeight);const attemptedScrollY=scrollY;window.scrollTo(0,before);
       return {viewport:{width:innerWidth,height:innerHeight},scrollHeight:root.scrollHeight,clientHeight:root.clientHeight,attemptedScrollY,html:rect(document.documentElement),body:rect(document.body),legacyApp:rect(document.querySelector('body>.app')),hub:rect(document.querySelector('#hubView')),skin:rect(document.querySelector('#dnaRefSkin')),board:rect(document.querySelector('#dnaRefBoard'))};
-    }));
+    });
+    report.dnaScroll.push(dnaScroll);
+    assert.ok(dnaScroll.scrollHeight<=dnaScroll.clientHeight+1,'DNA hub must not create document overflow: '+JSON.stringify(dnaScroll));
+    assert.ok(dnaScroll.attemptedScrollY<=1,'DNA hub must not scroll into a blank lower area');
     assert.equal(await page.locator('#dnaRefOrbs button').count(),7,'All original DNA branches remain available');
     await capture(page,'candidate-dna-'+size.width+'x'+size.height);
     await page.locator('button[aria-label="전투"]:visible').click();await nativeReady(page);
@@ -224,17 +264,14 @@ async function inspectCandidate(page) {
   const sortAfter=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
   assert.notEqual(sortAfter,sortBefore,'Native sort button must still change the persisted selection');
   assert.equal(sortAfter,requestedSort,'Native sort select persists the chosen option');
-  const equipped=await page.evaluate(()=>{
-    const part=window.__EVOLVE_PARTS_V523__,arm=window.__EVOLVE_DUAL_ARM_V631__,before=arm.snapshot();
-    if(before.arm1!=='arm_cannon'||before.legacyBack!=='back_neural')throw Error('Fixture/legacy equipment migration lost');
-    part.open('arm_blades');if(!arm.test.applyArm('arm2'))throw Error('Native independent arm equip failed');
-    const after=arm.snapshot();document.getElementById('partsDetailCloseV523')?.click();return {before,after};
-  });
+  const equipped=await equipIndependentArms(page);
   assert.equal(equipped.after.arm1,'arm_cannon');assert.equal(equipped.after.arm2,'arm_blades');
   await capture(page,'candidate-native-parts-equipped');
   await page.reload({waitUntil:'domcontentloaded'});await nativeReady(page);await goMain(page,'parts');
   const restored=await page.evaluate(()=>window.__EVOLVE_DUAL_ARM_V631__.snapshot());
   assert.equal(restored.arm1,'arm_cannon');assert.equal(restored.arm2,'arm_blades');assert.equal(restored.legacyBack,'back_neural');
+  assert.equal(await page.locator('#partsSortV523').inputValue(),requestedSort,'Native sort choice must survive reload');
+  assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort),requestedSort,'Persisted sort must survive reload');
   report.equipment={equipped,restored,sortBefore,sortAfter};report.candidateChecks.push('Native filter/sort work; independent arms and hidden legacy back survive reload in isolated fixture');
   await page.locator('#evolveHeaderUnified .evolveHeaderHit.settings').click();
   await page.locator('#settingsOverlay').waitFor({state:'visible'});await capture(page,'candidate-native-settings');await page.locator('#settingsClose').click();
@@ -262,13 +299,13 @@ async function openPublishedGame(page) {
     waitUntil: 'domcontentloaded', timeout: 120000
   });
   assert.ok(response && response.ok(), 'Published HTML responded with a successful status');
-  await page.waitForFunction(() => {
+  await waitForStartup(page, () => {
     const nav = document.querySelector('#homeTabs');
     const loader = document.querySelector('#webLoader');
     const hub = window.__EVOLVE_HOME_HUB_V601__;
     const ready = !hub || hub.read?.()?.ready !== false;
     return !!nav && !loader && ready;
-  }, null, { timeout: 180000 });
+  }, 'HOME');
 
   // The initial splash is cosmetic; clicking it does not purchase or start combat.
   const intro = page.locator('#introSplash');
