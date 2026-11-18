@@ -113,4 +113,48 @@ async function measure(page) {
   });
 }
 
-// Remaining startup, navigation and artifact routines are added next.
+async function openPublishedGame(page) {
+  const target = new URL(BASE_URL);
+  assert.ok(['http:', 'https:'].includes(target.protocol), 'A browser-accessible HTTP(S) URL is required');
+  target.searchParams.set('evolveQA', '1');
+  target.searchParams.set('ciEvidence', String(Date.now()));
+  const response = await page.goto(target.toString(), {
+    waitUntil: 'domcontentloaded', timeout: 120000
+  });
+  assert.ok(response && response.ok(), 'Published HTML responded with a successful status');
+  await page.waitForFunction(() => {
+    const nav = document.querySelector('#homeTabs');
+    const loader = document.querySelector('#webLoader');
+    const hub = window.__EVOLVE_HOME_HUB_V601__;
+    const ready = !hub || hub.read?.()?.ready !== false;
+    return !!nav && !loader && ready;
+  }, null, { timeout: 180000 });
+
+  // The initial splash is cosmetic; clicking it does not purchase or start combat.
+  const intro = page.locator('#introSplash');
+  if (await intro.count()) {
+    await intro.evaluate(element => {
+      if (getComputedStyle(element).display !== 'none') element.click();
+    });
+  }
+  const release = await page.evaluate(async () => {
+    const endpoint = new URL('version.json', location.href);
+    endpoint.searchParams.set('ciEvidence', String(Date.now()));
+    const response = await fetch(endpoint, { cache: 'no-store' });
+    if (!response.ok) throw new Error('VERSION_HTTP_' + response.status);
+    const actual = await response.json();
+    return { publishedBuild: actual.build || null, htmlBuild: window.EVOLVE_WEB_CONFIG?.build || null };
+  });
+  assert.ok(release.publishedBuild, 'Public version.json must provide a build identifier');
+  if (release.htmlBuild) {
+    assert.equal(release.htmlBuild, release.publishedBuild,
+      'Public HTML and version.json disagree; cache/deployment mismatch');
+  } else {
+    report.notes.push('Inline HTML build metadata unavailable; public version.json checked independently');
+  }
+  report.release = release;
+  await capture(page, '00-initial-home-393x852');
+  return release;
+}
+
+// Navigation and reporting follow in the next checkpoint.
