@@ -188,4 +188,25 @@ async function captureNavigation(page) {
     'Expected to capture at least four main HOME destinations');
 }
 
-// Viewport checks and report persistence follow.
+async function captureViewports(page) {
+  let critical = [];
+  for (const size of VIEWPORTS) {
+    await page.setViewportSize(size);
+    await page.waitForTimeout(300);
+    const layout = await measure(page);
+    const clippedStart = layout.start && layout.start.height > 0 &&
+      (layout.start.y < -3 || layout.start.bottom > layout.viewport.height + 3);
+    const clippedNav = layout.nav && layout.nav.height > 0 &&
+      (layout.nav.y < -3 || layout.nav.bottom > layout.viewport.height + 3);
+    const overflow = layout.horizontalOverflow > 3;
+    report.viewports.push({ size, ...layout, clippedStart: !!clippedStart, clippedNav: !!clippedNav, overflow });
+    await capture(page, 'viewport-' + size.width + 'x' + size.height);
+    if (clippedStart || clippedNav || overflow) {
+      critical.push({ size, clippedStart: !!clippedStart, clippedNav: !!clippedNav, overflow });
+    }
+  }
+  await page.setViewportSize(VIEWPORTS[0]);
+  assert.deepEqual(critical, [], 'Viewport clipping or horizontal overflow detected');
+}
+
+// Final run coordinator and report persistence follow.
