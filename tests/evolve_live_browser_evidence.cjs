@@ -18,8 +18,8 @@ const NAV = [
   { name: 'shop', selector: '#homeShopTabV601' },
   { name: 'parts', selector: '#homeLabTab' },
   { name: 'battle', selector: '#homeBattleTabV522' },
-  { name: 'codex', selector: '#codexBtn' },
-  { name: 'challenge', selector: '#memoryBtn', optional: true }
+  { name: 'challenge', selector: '#memoryBtn', optional: true },
+  { name: 'codex', selector: '#codexBtn' }
 ];
 const report = {
   test: 'EVOLVE independently hosted read-only browser evidence',
@@ -157,4 +157,35 @@ async function openPublishedGame(page) {
   return release;
 }
 
-// Navigation and reporting follow in the next checkpoint.
+async function captureNavigation(page) {
+  // Change pages through existing HOME controls only. No purchase or battle execution.
+  for (const destination of NAV) {
+    const button = page.locator(destination.selector).first();
+    const exists = await button.count();
+    if (!exists) {
+      remember(report.navigation, { name: destination.name, status: 'missing', optional: !!destination.optional });
+      if (!destination.optional) throw new Error('Required navigation control missing: ' + destination.selector);
+      continue;
+    }
+    if (!await button.isVisible()) {
+      remember(report.navigation, { name: destination.name, status: 'hidden', optional: !!destination.optional });
+      if (!destination.optional) throw new Error('Required navigation control hidden: ' + destination.selector);
+      continue;
+    }
+    await button.click({ timeout: 15000 });
+    await page.waitForTimeout(350);
+    const observed = await page.evaluate(() => {
+      const hub = window.__EVOLVE_HOME_HUB_V601__;
+      return hub?.read?.()?.page || null;
+    });
+    await capture(page, 'nav-' + destination.name + '-393x852');
+    remember(report.navigation, {
+      name: destination.name, status: 'captured', observedPage: observed,
+      selector: destination.selector
+    });
+  }
+  assert.ok(report.navigation.filter(item => item.status === 'captured').length >= 4,
+    'Expected to capture at least four main HOME destinations');
+}
+
+// Viewport checks and report persistence follow.
