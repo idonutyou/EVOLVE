@@ -595,6 +595,7 @@ body{margin:0!important;min-height:100dvh!important;background:#07172c}
 #dnaCommonFrame .labChromeHit{min-width:0!important;min-height:0!important;border-radius:0!important}
 #dnaCommonFrame .evolveFooterOriginal{position:absolute!important;inset:0;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:fill!important;filter:none!important;opacity:1!important;pointer-events:none}
 body>.app{box-sizing:border-box!important;position:relative!important;width:var(--evolve-ui-width)!important;max-width:none!important;margin:var(--evolve-ui-head) auto var(--evolve-ui-foot)!important;padding:0 12px!important;min-height:0!important}
+html.dnaRefReady body:has(#hubView.active)>.app{position:fixed!important;top:var(--evolve-ui-head)!important;bottom:var(--evolve-ui-foot)!important;left:50%!important;transform:translateX(-50%);height:auto!important;margin:0!important;overflow:hidden!important}
 body>.app>.topline,body>.app>.bar>.brand{display:none!important}
 html.dnaRefReady body:has(#hubView.active) #dnaRefSkin{inset:var(--evolve-ui-head) auto var(--evolve-ui-foot) 50%!important;transform:translateX(-50%);width:var(--evolve-ui-width);height:auto!important;box-sizing:border-box!important}
 #dnaRefBoard{width:min(100%,calc((100dvh - var(--evolve-ui-head) - var(--evolve-ui-foot))*.5625))!important;flex:none}
