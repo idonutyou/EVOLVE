@@ -1,7 +1,7 @@
 name: EVOLVE Public UI Browser Evidence (read-only)
 on:
   push:
-    branches: [main, feature/browser-qa-resilience-20261118]
+    branches: [main, feature/browser-qa-resilience-20261118, qa/ui-unify-prerelease-20261118]
     paths:
       - .github/workflows/evolve-live-ui-evidence.yml
       - tests/evolve_live_browser_evidence.cjs
@@ -37,6 +37,64 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /tests/evolve_live_browser_evidence.cjs
+            /dist/index.html
+            /dist/version.json
+            /dist/asset-manifest.json
+            /dist/dna-lab.html
+            /dist/assets/0443956dd4c54812c66db98867aa3428383a8b4b743b3464d91b518406bc8ef5.png
+            /dist/assets/04b23f6a320ba16a27b60c3b956edbd144530c1a3f0a3001558c14695bd3cd3c.png
+            /dist/assets/0524af905aa90442e3607dfbe7b2c3540bf0b3d238b6da99a8a608acee07ca08.png
+            /dist/assets/08742be58856201884021322f12866cfdc5a96990331818aeb7bebd46fa70ce8.png
+            /dist/assets/08766c4476cc329924d2de97a125ce3354510f802cdf9bb48ef820a0d8dc5460.png
+            /dist/assets/09ae0c2fe654f8d1137da02ff006333d74656dd1b0ddf55d0f4308d779a697f0.png
+            /dist/assets/0b48cf954b41b09b05647913a679b2492a36bca7e0bae2de1e9c33248e81b94b.png
+            /dist/assets/1dffbccd71ffb4561c5a146597993b723a052e4109e2cb61f9f191d4e1647f99.png
+            /dist/assets/3092457bb94c969f26622d1ad79cf845288977030f2a3012f8fcaea3741adbd2.png
+            /dist/assets/32bfcc7b0cfc102ab70f6a40f82d3a1fc1caa43d231d69e675a30e8b4ace9f0d.png
+            /dist/assets/33fe5391ccee553962f455ce23265337a713416b7dce3f96526469b736892d74.png
+            /dist/assets/408d8b54ce83e96a33dc48fb8764cbaf684d0507f32b0d2dce285190de62872a.png
+            /dist/assets/422e71e8892bccaa6be984c5b019031ad93e7250f8a875878e0fabbb5cb7a02b.png
+            /dist/assets/4991d557deeaca7a0d513ded28d7db7d6e18b71f018a10a81aab75e6f8179bef.png
+            /dist/assets/529e3dd73e68e9df809ef34b016616a54e260499ff370119818aca3f73834446.png
+            /dist/assets/5441658b8dc13d9536a0a623bf63014e93323194fd9372087a33bf488331301c.png
+            /dist/assets/555c73297362bf9c286f5555a96e09d9724005478cb7f23cd1e4c8a3f94f206e.png
+            /dist/assets/558968b631dfde74da5757bd08c8cfd2f5fac616ff69c5d0bc8e374622e8cd9e.png
+            /dist/assets/56115ef04769999bb9eef6fdddaf9a39351d5413e2ffaa5a6b68774399bede0f.png
+            /dist/assets/5d0e38328f1425600b0dc2e9d657cf9f5d176628412ba11961074fa7988366ef.png
+            /dist/assets/613e10e06ef62637fbc330a52f83ff3cdfe214d1149a000f7d0bb18e36198964.png
+            /dist/assets/652d8b1995bd89b0cffe830506dc5f1033cfb80ed4418e3b14e9abb56f1fcc1b.png
+            /dist/assets/684d58b7a755ff4bc9114266694c4bcb830a77cc5d6242a07be75c3e95beebc4.png
+            /dist/assets/6af5cb135dcf1bff40401e5178196508b992579d46c16b08179034374e749a7f.png
+            /dist/assets/6bad2b224bff89221b398ae33238ea913d7de403f8fe6087700cd417b055af42.png
+            /dist/assets/6cf31b7beb9cbd22c07bb6fc0b98ba03821d45ba7bfa0a9b876b9790d3e62e22.png
+            /dist/assets/6f7e054aefaf3fb7a8a01f9cab68f56382d0a0ebb1324b16fb730f6b43b09268.png
+            /dist/assets/7a9f1ebb3c9bdf8b7ad85260880ef1c0c96bd8244e252c2ff982e45f75ad3fdd.png
+            /dist/assets/8a78ad848eba9937859a133ffa017981070f09c6098056a1d948c4e58007c954.png
+            /dist/assets/8aa240ab58861b4905ae07b049c73f09a937fb6b1e491f906be72d9f0c489a9a.png
+            /dist/assets/91b459efd1f41ec7036162fb898ea1ccca82c684a5cac09e559932c0e662ad19.png
+            /dist/assets/972e6a616635e667b125ef211e572d360dfc29ec8fc19eaaea0d98b0f732cae9.png
+            /dist/assets/a47f49aac9a8614470748f56712caeeb3d44738fb94a5436edcc287b8bb61f26.png
+            /dist/assets/a710b3114764638de15f9e48ddfbc1f59219ab63bd5a8f4be1eb439d3875e0fd.png
+            /dist/assets/abb1379b992ff461831dd871c16b81ee0d130cf27ef1d046a0e02d5b87122f1c.png
+            /dist/assets/c2c08c76898401baa30307cedd0550cd90c756e43c9b4decb578374dde15ee6c.png
+            /dist/assets/c5516327d2d098ec63ca59d82adf2c95ab125ea470a8cce2878b1bc08395e70e.png
+            /dist/assets/c8406b33a6e408a2295ec89865fa19c4b3dca72041c93930906c95b7b84b9fc5.png
+            /dist/assets/c88d21de31ad36c5ad2ba3e265f6bd0a265936f7a351480a5307181bf7c5c7e1.png
+            /dist/assets/c9bdeffb3e8127ee0e9c2bde9b682a151d56b97f0c0fc63ee68f966557e46eb9.png
+            /dist/assets/d36f2b067d82be6f37fc70888570fbb565ea0bd9fd33975163d4254cab510441.png
+            /dist/assets/d868cc778e1f8f65a2e18a3dcc15f648273841e36de9de5eae081b9a95958770.png
+            /dist/assets/ddc043d3ccb0bf2d543af849f2baccfc4dcbe1e1cfb69e70b23589e530614a80.png
+            /dist/assets/e65c8df24243d9963e6d3ab147954fadc4ca85c7f2d8ae69b0c872e2faa90ed0.png
+            /dist/assets/e760557388efb9db50933522299ded82be1eed406fc58007e002e6f8aae63c8e.png
+            /dist/assets/e771330d52f05e9dc0872c7aee4e282747524fecae3e76fa6ce4e9e654b19e16.png
+            /dist/assets/ebbe87bc97b205a64928d63e8b7eba671b88d65ee929fb511ff9dcde5a50f3d0.png
+            /dist/assets/ed5f3dbfd9f8cdb2f84f9c320b35eda8c5d5d2221404c05a12ce7e24ba0ad8f7.png
+            /dist/assets/f2e3c3febe4d468dc662c8b626e4eba81cf48da1ee7848153152ef98364e2240.png
+            /dist/assets/f5e4a49063fe798eb13e4eb958c24c0b1595136e8d1a2544a0342f5a1b275b6d.png
+            /dist/assets/f5ea1cc5c651e384842282110c2de2900d50624e7dc5f52ec78f5a9a4fa398da.png
+            /dist/assets/f822a143eee77f08a77f826628dda4ad678a45f577ef191e241320761cb9b34e.png
+            /dist/assets/f9e9fcb84bd92263bc566f6b4fd9344000c32cb5d42e83d665559eeff6efdcc9.png
+            /dist/assets/fb9d872513a43addbcf55d35f025f94fe3aa22f73c7d680e8a8ee7e19923f4ac.png
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -55,10 +113,18 @@ jobs:
           else
             "$RUNNER_TEMP/evolve-live-qa/node_modules/.bin/playwright" install --with-deps chromium
           fi
+      - name: Ensure Korean text is visible in Chromium evidence
+        run: |
+          if ! fc-list :lang=ko | head -1 | grep -q .; then
+            sudo apt-get update -qq
+            sudo apt-get install -y fonts-noto-cjk
+          fi
       - name: Inspect real public EVOLVE HOME and capture all main UI pages
         timeout-minutes: 19
         env:
           EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+          EVOLVE_CANDIDATE_DIR: ${{ startsWith(github.ref, 'refs/heads/qa/ui-unify-prerelease-') && 'dist' || '' }}
+          EVOLVE_EXPECT_PUBLIC_BUILD: V717-SHOP-ORIGINAL-TEXTURE-REVIEW-20261117
         run: node tests/evolve_live_browser_evidence.cjs
       - name: Upload screenshots and JSON failure diagnosis
         if: always()
@@ -68,3 +134,4 @@ jobs:
           path: test-results/evolve-live-evidence/
           retention-days: 14
           if-no-files-found: warn
+

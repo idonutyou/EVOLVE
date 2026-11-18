@@ -116,6 +116,135 @@ async function measure(page) {
   });
 }
 
+// Optional staged mode extends the established live evidence harness. It serves
+// only changed candidate files inside this isolated browser, never to the public.
+const CANDIDATE = process.env.EVOLVE_CANDIDATE_DIR ? path.resolve(process.env.EVOLVE_CANDIDATE_DIR) : null;
+async function stageCandidate(context) {
+  const url = new URL('version.json', BASE_URL); url.searchParams.set('ciEvidence', Date.now());
+  const response = await fetch(url, {cache:'no-store'});
+  assert.ok(response.ok(), 'Real public version.json must be accessible before staged inspection');
+  const published = await response.json();
+  const expected = process.env.EVOLVE_EXPECT_PUBLIC_BUILD;
+  if (expected) assert.equal(published.build, expected, 'Published baseline changed; integrate that version before testing');
+  const candidate = JSON.parse(fs.readFileSync(path.join(CANDIDATE,'version.json')));
+  report.staged = {publicBuild:published.build,candidateBuild:candidate.build,publicDeployment:false,routeOverrides:[],freshIsolatedStorage:true};
+  const manifest = JSON.parse(fs.readFileSync(path.join(CANDIDATE,'asset-manifest.json')));
+  const files = new Set(['index.html','version.json','asset-manifest.json','dna-lab.html',...manifest.map(x=>x.path).filter(p=>fs.existsSync(path.join(CANDIDATE,p)))]);
+  await context.route('**/*', route => {
+    const u=new URL(route.request().url()),base=new URL(BASE_URL);
+    if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname))return route.continue();
+    const relative=u.pathname.slice(base.pathname.length)||'index.html';
+    if(!files.has(relative))return route.continue();
+    if(!report.staged.routeOverrides.includes(relative))report.staged.routeOverrides.push(relative);
+    const mime=relative.endsWith('.html')?'text/html; charset=utf-8':relative.endsWith('.json')?'application/json':relative.endsWith('.png')?'image/png':'application/octet-stream';
+    return route.fulfill({status:200,contentType:mime,body:fs.readFileSync(path.join(CANDIDATE,relative))});
+  });
+  await context.addInitScript(() => {
+    // The established dual-arm regression fixture lives only in this new context.
+    const key='EVOLVE_V575_TEST_PARTS_UI_V523';
+    if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify({schema:1,worn:{arm:'arm_cannon',back:'back_neural'},filter:'all',sort:'default'}));
+  });
+}
+async function nativeReady(page) {
+  await page.waitForFunction(()=>!document.getElementById('webLoader')&&document.getElementById('evolveHeaderUnified')&&!document.getElementById('evolveHeaderUnified').hidden&&window.__EVOLVE_DUAL_ARM_V631__?.snapshot()?.gameRendererConnected,null,{timeout:180000});
+  await page.evaluate(()=>document.getElementById('introSplash')?.click());
+}
+async function goMain(page,name) {
+  await page.locator('button[aria-label="'+{shop:'상점',parts:'파츠',battle:'전투',codex:'도감'}[name]+'"]:visible').first().click();
+  await page.waitForFunction(name=>document.getElementById('poster')?.dataset.homePage===name,name);
+  await page.waitForTimeout(200);
+}
+async function commonLayout(page,name) {
+  return page.evaluate(name=>{
+    const rect=e=>{if(!e)return null;const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom}};
+    const visible=e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none'};
+    const header=document.querySelector('#evolveHeaderUnified');
+    const footer=[...document.querySelectorAll(name==='battle'?'.evolveRefTab':'.labChromeTab')].filter(visible);
+    const details=['.evolveHeaderArt','.evolveHeaderName','.evolveHeaderLevel','.evolveHeaderXp','.evolveHeaderDna','.evolveHeaderPremium','.evolveHeaderHit.avatar','.evolveHeaderHit.settings'];
+    const result={page:name,viewport:{width:innerWidth,height:innerHeight},header:rect(header),headerElements:details.map(s=>rect(header?.querySelector(s))),footer:footer.map(rect),icons:footer.map(b=>{const images=[...b.querySelectorAll('.evolveFooterOriginal')];return {count:images.length,loaded:images.every(i=>i.complete&&i.naturalWidth>0),svg:b.querySelectorAll('.evolveFooterIcon svg').length}}),horizontalOverflow:Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth)};
+    if(name==='parts'){
+      const upper=document.querySelector('.partsUpperV723'),host=document.querySelector('#homePartsViewV523');
+      result.upperRatio=upper.getBoundingClientRect().width/host.getBoundingClientRect().width;
+      result.slots=['partsLeftSlotsV523','partsRightSlotsV523'].map(id=>[...document.getElementById(id).querySelectorAll('.partsSlotV523')].map(rect));
+      result.specimenFit=getComputedStyle(document.getElementById('partsSpecimenImgV523')).objectFit;
+    }
+    if(name==='shop')result.titleBandHidden=getComputedStyle(document.querySelector('.shopRefTop')).display==='none';
+    if(name==='codex')result.titleBandHidden=getComputedStyle(document.querySelector('.codexTop')).display==='none';
+    return result;
+  },name);
+}
+function assertCommonLayout(actual,expected) {
+  assert.ok(actual.horizontalOverflow<2,'Horizontal overflow: '+JSON.stringify(actual));
+  assert.equal(actual.footer.length,5,'Exactly five shared footer buttons');
+  actual.footer.forEach(r=>assert.ok(Math.abs(r.bottom-actual.viewport.height)<1.1,'Footer must touch the bottom: '+JSON.stringify(r)));
+  assert.ok(actual.icons.every(x=>x.count===1&&x.loaded&&x.svg===0),'Original raster icon once per button');
+  if(expected)for(const key of ['header','headerElements','footer']){
+    const a=Array.isArray(actual[key])?actual[key]:[actual[key]],b=Array.isArray(expected[key])?expected[key]:[expected[key]];
+    a.forEach((r,i)=>{assert.ok(r&&b[i],'Missing common UI '+key);for(const k of ['x','y','width','height'])assert.ok(Math.abs(r[k]-b[i][k])<1.1,'Common UI differs '+actual.page+' '+key+' '+i+' '+k+': '+r[k]+' vs '+b[i][k])});
+  }
+  if(actual.page==='parts'){
+    assert.ok(Math.abs(actual.upperRatio-.8)<.003,'Parts upper group should be 80% of full width');
+    assert.equal(actual.specimenFit,'contain');
+    actual.slots.forEach(column=>{assert.equal(column.length,3);assert.ok(column.every(s=>Math.abs(s.x-column[0].x)<.2),'Three slots must form a straight column');assert.ok(Math.abs((column[1].y-column[0].y)-(column[2].y-column[1].y))<.3,'Even vertical spacing')});
+    actual.slots[0].forEach((r,i)=>assert.ok(Math.abs(r.y-actual.slots[1][i].y)<.3,'Left and right rows align'));
+  }
+  if('titleBandHidden'in actual)assert.ok(actual.titleBandHidden,'Printed page title still visible');
+}
+async function inspectCandidate(page) {
+  report.candidateChecks=[];report.layouts=[];
+  await nativeReady(page);
+  for(const size of VIEWPORTS){
+    await page.setViewportSize(size);await page.waitForTimeout(200);let expected;
+    for(const name of ['shop','parts','battle','codex']){
+      await goMain(page,name);const layout=await commonLayout(page,name);report.layouts.push({size,...layout});assertCommonLayout(layout,expected);expected=expected||layout;
+      await capture(page,'candidate-'+name+'-'+size.width+'x'+size.height);
+    }
+    await page.locator('button[aria-label="DNA 연구소"]:visible').first().click();
+    await page.waitForURL('**/dna-lab.html');
+    await page.waitForFunction(()=>document.documentElement.classList.contains('dnaRefReady')&&document.querySelector('#dnaCommonFrame .evolveHeaderArt')?.complete);
+    const layout=await commonLayout(page,'dna');report.layouts.push({size,...layout});assertCommonLayout(layout,expected);
+    assert.equal(await page.locator('#dnaRefOrbs button').count(),7,'All original DNA branches remain available');
+    await capture(page,'candidate-dna-'+size.width+'x'+size.height);
+    await page.locator('button[aria-label="전투"]:visible').click();await nativeReady(page);
+  }
+  report.candidateChecks.push('Five pages share header/footer geometry at all three viewports; bottom gap zero, original raster glyphs loaded once, parts 80% group and aligned six slots');
+  await page.setViewportSize(VIEWPORTS[0]);await goMain(page,'parts');
+  const filter=page.locator('#partsFiltersV523 [data-filter="head"]');await filter.click();
+  assert.equal(await page.locator('.partsRefOverallFilter').inputValue(),'head','Native filter and visible dropdown remain synchronized');
+  await page.locator('.partsRefOverallFilter').selectOption('all');
+  const sortBefore=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
+  await page.locator('.partsSortV523').click();
+  const sortAfter=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
+  assert.notEqual(sortAfter,sortBefore,'Native sort button must still change the persisted selection');
+  const equipped=await page.evaluate(()=>{
+    const part=window.__EVOLVE_PARTS_V523__,arm=window.__EVOLVE_DUAL_ARM_V631__,before=arm.snapshot();
+    if(before.arm1!=='arm_cannon'||before.legacyBack!=='back_neural')throw Error('Fixture/legacy equipment migration lost');
+    part.open('arm_blades');if(!arm.test.applyArm('arm2'))throw Error('Native independent arm equip failed');
+    const after=arm.snapshot();document.getElementById('partsDetailCloseV523')?.click();return {before,after};
+  });
+  assert.equal(equipped.after.arm1,'arm_cannon');assert.equal(equipped.after.arm2,'arm_blades');
+  await capture(page,'candidate-native-parts-equipped');
+  await page.reload({waitUntil:'domcontentloaded'});await nativeReady(page);await goMain(page,'parts');
+  const restored=await page.evaluate(()=>window.__EVOLVE_DUAL_ARM_V631__.snapshot());
+  assert.equal(restored.arm1,'arm_cannon');assert.equal(restored.arm2,'arm_blades');assert.equal(restored.legacyBack,'back_neural');
+  report.equipment={equipped,restored,sortBefore,sortAfter};report.candidateChecks.push('Native filter/sort work; independent arms and hidden legacy back survive reload in isolated fixture');
+  await page.locator('#evolveHeaderUnified .evolveHeaderHit.settings').click();
+  await page.locator('#settingsOverlay').waitFor({state:'visible'});await capture(page,'candidate-native-settings');await page.locator('#settingsClose').click();
+  await goMain(page,'codex');await page.locator('.dex01Grid button').first().click();
+  await page.locator('.dex01Detail').first().waitFor({state:'visible'});await capture(page,'candidate-native-codex-detail');
+  await page.locator('.dex01Close:visible,.dex01Done:visible').first().click();
+  const chromeBefore=await page.locator('#evolveHeaderUnified').innerText();
+  await page.locator('button[aria-label="DNA 연구소"]:visible').first().click();await page.waitForURL('**/dna-lab.html');
+  await page.waitForFunction(()=>document.documentElement.classList.contains('dnaRefReady'));
+  assert.equal((await page.locator('#evolveHeaderUnified').innerText()).replace(/\s/g,''),chromeBefore.replace(/\s/g,''),'DNA header must use actual game display values');
+  await page.locator('[data-ref-branch="WPN"]').click();assert.equal(await page.locator('[data-ref-branch="WPN"]').getAttribute('aria-pressed'),'true');
+  await page.locator('.dnaRefEnter').click();await page.locator('#branchView.active').waitFor({state:'visible'});await capture(page,'candidate-dna-branch');
+  await page.locator('#backBtn').click();await page.locator('#hubView.active').waitFor({state:'attached'});
+  await page.locator('#evolveHeaderUnified .evolveHeaderHit.settings').click();await nativeReady(page);await page.locator('#settingsOverlay').waitFor({state:'visible'});await page.locator('#settingsClose').click();
+  report.candidateChecks.push('Native settings and codex detail open/close; DNA actual header values, original branch selection/detail/back and settings return work');
+}
+
+
 async function openPublishedGame(page) {
   const target = new URL(BASE_URL);
   assert.ok(['http:', 'https:'].includes(target.protocol), 'A browser-accessible HTTP(S) URL is required');
@@ -238,7 +367,7 @@ function persistReport() {
     '',
     '**Physical-device testing:** not performed',
     '',
-    'Tested the hosted public game. Did not deploy, purchase, or modify player saves.',
+    CANDIDATE ? 'Staged candidate in isolated browser; original public assets reused. Test fixture only; no production deployment or user saves touched.' : 'Tested the hosted public game. Did not deploy, purchase, or modify player saves.',
     ''
   ].join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
@@ -264,11 +393,12 @@ function persistReport() {
       serviceWorkers: 'block',
       reducedMotion: 'reduce'
     });
+    if (CANDIDATE) await stageCandidate(context);
     page = await context.newPage();
     attachTelemetry(page);
     await openPublishedGame(page);
-    await captureViewports(page);
-    await captureNavigation(page);
+    if(CANDIDATE) await inspectCandidate(page);
+    else { await captureViewports(page); await captureNavigation(page); }
     assert.deepEqual(report.pageErrors, [], 'Uncaught JavaScript errors in public game');
     assert.deepEqual(report.requestFailures.filter(x => ['document', 'script'].includes(x.type) && !/ERR_ABORTED/.test(x.reason)), [],
       'Required public page or game script request failed');
@@ -290,3 +420,4 @@ function persistReport() {
     if (!report.success) process.exitCode = 1;
   }
 })();
+
