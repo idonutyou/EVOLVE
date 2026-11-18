@@ -209,4 +209,78 @@ async function captureViewports(page) {
   assert.deepEqual(critical, [], 'Viewport clipping or horizontal overflow detected');
 }
 
-// Final run coordinator and report persistence follow.
+function persistReport() {
+  report.finishedAt = new Date().toISOString();
+  const filename = path.join(OUT, 'report.json');
+  fs.writeFileSync(filename, JSON.stringify(report, null, 2) + '\n');
+  const summary = [
+    '## EVOLVE independent live browser evidence',
+    '',
+    '**Result:** ' + (report.success ? 'PASS' : 'FAIL'),
+    '',
+    '**Public target:** ' + report.target,
+    '',
+    '**Public build:** ' + (report.release?.publishedBuild || 'unavailable'),
+    '',
+    '**Screenshots:** ' + report.screenshots.length,
+    '',
+    '**Page errors:** ' + report.pageErrors.length,
+    '',
+    '**Failed requests:** ' + report.requestFailures.length,
+    '',
+    '**Failure category:** ' + (report.failureCategory || 'none'),
+    '',
+    '**Physical-device testing:** not performed',
+    '',
+    'Tested the hosted public game. Did not deploy, purchase, or modify player saves.',
+    ''
+  ].join('\n');
+  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+  console.log(summary);
+  console.log('RESULT_JSON=' + filename);
+}
+
+(async () => {
+  let browser;
+  let context;
+  let page;
+  try {
+    browser = await chromium.launch({
+      executablePath: process.env.CHROME_BIN || undefined,
+      headless: true,
+      args: ['--no-sandbox', '--disable-dev-shm-usage', '--enable-unsafe-swiftshader']
+    });
+    context = await browser.newContext({
+      viewport: VIEWPORTS[0],
+      isMobile: true,
+      hasTouch: true,
+      deviceScaleFactor: 1,
+      serviceWorkers: 'block',
+      reducedMotion: 'reduce'
+    });
+    page = await context.newPage();
+    attachTelemetry(page);
+    await openPublishedGame(page);
+    await captureViewports(page);
+    await captureNavigation(page);
+    assert.deepEqual(report.pageErrors, [], 'Uncaught JavaScript errors in public game');
+    assert.deepEqual(report.requestFailures.filter(x => ['document', 'script'].includes(x.type)), [],
+      'Required public page or game script request failed');
+    assert.deepEqual(report.httpFailures.filter(x => ['document', 'script'].includes(x.type)), [],
+      'Required public page or game script returned HTTP error');
+    report.success = true;
+  } catch (error) {
+    report.failure = String(error?.stack || error);
+    report.failureCategory = environmentCategory(error);
+    console.error(report.failure);
+    if (page) {
+      try { await capture(page, '99-failure'); }
+      catch (captureError) { report.notes.push('Failure screenshot unavailable: ' + captureError.message); }
+    }
+  } finally {
+    if (context) await context.close().catch(() => {});
+    if (browser) await browser.close().catch(() => {});
+    persistReport();
+    if (!report.success) process.exitCode = 1;
+  }
+})();
