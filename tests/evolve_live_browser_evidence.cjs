@@ -191,7 +191,7 @@ function assertCommonLayout(actual,expected) {
   if('titleBandHidden'in actual)assert.ok(actual.titleBandHidden,'Printed page title still visible');
 }
 async function inspectCandidate(page) {
-  report.candidateChecks=[];report.layouts=[];
+  report.candidateChecks=[];report.layouts=[];report.dnaScroll=[];
   await nativeReady(page);
   for(const size of VIEWPORTS){
     await page.setViewportSize(size);await page.waitForTimeout(200);let expected;
@@ -203,6 +203,11 @@ async function inspectCandidate(page) {
     await page.waitForURL('**/dna-lab.html');
     await page.waitForFunction(()=>document.documentElement.classList.contains('dnaRefReady')&&document.querySelector('#dnaCommonFrame .evolveHeaderArt')?.complete);
     const layout=await commonLayout(page,'dna');report.layouts.push({size,...layout});assertCommonLayout(layout,expected);
+    report.dnaScroll.push(await page.evaluate(()=>{
+      const rect=e=>{if(!e)return null;const r=e.getBoundingClientRect(),s=getComputedStyle(e);return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,display:s.display,visibility:s.visibility,overflowY:s.overflowY}};
+      const root=document.scrollingElement,before=scrollY;window.scrollTo(0,root.scrollHeight);const attemptedScrollY=scrollY;window.scrollTo(0,before);
+      return {viewport:{width:innerWidth,height:innerHeight},scrollHeight:root.scrollHeight,clientHeight:root.clientHeight,attemptedScrollY,html:rect(document.documentElement),body:rect(document.body),legacyApp:rect(document.querySelector('body>.app')),hub:rect(document.querySelector('#hubView')),skin:rect(document.querySelector('#dnaRefSkin')),board:rect(document.querySelector('#dnaRefBoard'))};
+    }));
     assert.equal(await page.locator('#dnaRefOrbs button').count(),7,'All original DNA branches remain available');
     await capture(page,'candidate-dna-'+size.width+'x'+size.height);
     await page.locator('button[aria-label="전투"]:visible').click();await nativeReady(page);
@@ -213,9 +218,12 @@ async function inspectCandidate(page) {
   assert.equal(await page.locator('.partsRefOverallFilter').inputValue(),'head','Native filter and visible dropdown remain synchronized');
   await page.locator('.partsRefOverallFilter').selectOption('all');
   const sortBefore=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
-  await page.locator('.partsSortV523').click();
+  const requestedSort=sortBefore==='rank'?'name':'rank';
+  await page.locator('#partsSortV523').selectOption(requestedSort);
+  await page.waitForFunction(expected=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort===expected,requestedSort);
   const sortAfter=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
   assert.notEqual(sortAfter,sortBefore,'Native sort button must still change the persisted selection');
+  assert.equal(sortAfter,requestedSort,'Native sort select persists the chosen option');
   const equipped=await page.evaluate(()=>{
     const part=window.__EVOLVE_PARTS_V523__,arm=window.__EVOLVE_DUAL_ARM_V631__,before=arm.snapshot();
     if(before.arm1!=='arm_cannon'||before.legacyBack!=='back_neural')throw Error('Fixture/legacy equipment migration lost');
