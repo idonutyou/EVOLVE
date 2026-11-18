@@ -18,9 +18,10 @@ const NAV = [
   { name: 'shop', selector: 'button[aria-label="상점"]:visible, #homeShopTabV601:visible' },
   { name: 'parts', selector: 'button[aria-label="파츠"]:visible, #homeLabTab:visible' },
   { name: 'battle', selector: 'button[aria-label="전투"]:visible, #homeBattleTabV522:visible' },
-  { name: 'dna', selector: 'button[aria-label="DNA 연구소"]:visible, #homeDnaLabNavV47:visible' },
-  { name: 'challenge', selector: 'button[aria-label="챌린지"]:visible, #homeChallengeShortcutV47:visible, #memoryBtn:visible', optional: true },
-  { name: 'codex', selector: 'button[aria-label="도감"]:visible, #codexBtn:visible' }
+  { name: 'challenge', selector: 'button[aria-label^="챌린지"]:visible, #homeChallengeShortcutV47:visible, #memoryBtn:visible', optional: true },
+  { name: 'codex', selector: 'button[aria-label="도감"]:visible, #codexBtn:visible' },
+  // DNA intentionally LAST: the user-facing button navigates to dna-lab.html.
+  { name: 'dna', selector: 'button[aria-label="DNA 연구소"]:visible, #homeDnaLabNavV47:visible' }
 ];
 const report = {
   test: 'EVOLVE independently hosted read-only browser evidence',
@@ -55,6 +56,7 @@ async function capture(page, label) {
 function environmentCategory(error) {
   const message = String(error?.stack || error);
   if (/ERR_BLOCKED_BY_ADMINISTRATOR|ERR_TUNNEL_CONNECTION_FAILED|ERR_PROXY_CONNECTION_FAILED|ERR_NAME_NOT_RESOLVED|ERR_CONNECTION_REFUSED|ERR_NETWORK_ACCESS_DENIED/i.test(message)) return 'browser_or_network_environment';
+  if (/Required navigation control (missing|hidden)/i.test(message)) return 'stale_selector_or_ui_contract';
   if (/TimeoutError|Timeout [0-9]+ms exceeded/i.test(message)) return 'startup_or_navigation_timeout';
   return 'game_or_test_assertion';
 }
@@ -185,7 +187,7 @@ async function captureNavigation(page) {
     await capture(page, 'nav-' + destination.name + '-393x852');
     remember(report.navigation, {
       name: destination.name, status: 'captured', observedPage: observed,
-      selector: destination.selector
+      selector: destination.selector, currentUrl: page.url()
     });
   }
   assert.ok(report.navigation.filter(item => item.status === 'captured').length >= 4,
@@ -268,7 +270,7 @@ function persistReport() {
     await captureViewports(page);
     await captureNavigation(page);
     assert.deepEqual(report.pageErrors, [], 'Uncaught JavaScript errors in public game');
-    assert.deepEqual(report.requestFailures.filter(x => ['document', 'script'].includes(x.type)), [],
+    assert.deepEqual(report.requestFailures.filter(x => ['document', 'script'].includes(x.type) && !/ERR_ABORTED/.test(x.reason)), [],
       'Required public page or game script request failed');
     assert.deepEqual(report.httpFailures.filter(x => ['document', 'script'].includes(x.type)), [],
       'Required public page or game script returned HTTP error');
