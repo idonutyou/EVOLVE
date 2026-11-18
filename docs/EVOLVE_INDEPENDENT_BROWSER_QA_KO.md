@@ -23,7 +23,8 @@ ChatGPT 브라우저가 차단되더라도 GitHub Actions의 격리된 Chromium�
 - 개발용 브랜치에 검사 스크립트 또는 워크플로를 푸시하면 테스트 자동 실행.
 - `main` 대상 PR에 이 파일들이 바뀌어도 자동 실행.
 - `workflow_dispatch` 수동 실행은 워크플로가 기본 브랜치에 반영된 뒤 GitHub Actions의 **Run workflow**에서 사용.
-- 공개 게임 배포 뒤에는 해당 workflow를 수동 실행해 최신 빌드의 스크린샷과 오류를 확인할 것.
+- 기본 브랜치에 병합된 뒤에는 매일 **한국시간 09:15**에 공개 페이지를 자동 검사한다. 개발 `main`의 `dist/index.html` 또는 `dist/version.json` 변경 시에도 검사한다.
+- 공개 게임 배포 직후에는 일일 예약 검사까지 기다리지 않고 해당 workflow를 수동 실행해 최신 빌드의 스크린샷과 오류를 확인할 것.
 - `main`이나 `pages-fast-evolve-20261029` 게임 파일을 수정하지 않으며, Actions `GITHUB_TOKEN`으로 Pages 배포하지 않는다.
 - 브라우저를 다시 열기 위해 같은 차단된 로컬 주소를 반복 재시도하지 않는다.
 
@@ -32,3 +33,11 @@ ChatGPT 브라우저가 차단되더라도 GitHub Actions의 격리된 Chromium�
 최초 기준 main SHA `c7e6a07f89109c75cbeaa4958552a1c4628a1c76`. 이 작업은 전체 게임 리소스를 checkout하지 않는다. 10% 단위 백업 브랜치 `backup/browser-qa-20261118-010`부터 `-100`까지 이전 체크포인트를 삭제하지 않고 유지한다. 화면 변경과 관계없는 기존 28개 전체 브라우저 회귀 검사 실행을 방지한다.
 
 검사는 라이브 사이트에서 새 익명 브라우저 컨텍스트로만 이루어지며 결제, 구매, 저장 초기화, 배포를 수행하지 않는다.
+
+## 실제 실행 검증 (2026-11-18 KST)
+
+- 성공한 Actions 실행: https://github.com/idonutyou/EVOLVE/actions/runs/44212319200
+- 실행 당시 공개 빌드: `V717-SHOP-ORIGINAL-TEXTURE-REVIEW-20261117`
+- 결과: **PASS**, 10개 실제 Chromium 스크린샷, JavaScript page errors **0**, failed requests **0**.
+- 첫 실패는 숨김 처리된 구버전 버튼 ID, 두 번째 실패는 화면마다 다른 그래픽/기존 버튼 선택 방식, 세 번째 실패는 DNA가 `dna-lab.html`로 별도 이동한다는 점을 검사기가 고려하지 않았기 때문이었다. 검사의 탐색 순서를 수정한 후 성공했다.
+- 화면 품질·터치·실기기 퍼포먼스가 모두 완벽하다고 주장하지 않는다. 별도 수동 검토가 필요하다.
