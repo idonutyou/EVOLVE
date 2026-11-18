@@ -122,7 +122,7 @@ const CANDIDATE = process.env.EVOLVE_CANDIDATE_DIR ? path.resolve(process.env.EV
 async function stageCandidate(context) {
   const url = new URL('version.json', BASE_URL); url.searchParams.set('ciEvidence', Date.now());
   const response = await fetch(url, {cache:'no-store'});
-  assert.ok(response.ok(), 'Real public version.json must be accessible before staged inspection');
+  assert.ok(response.ok, 'Real public version.json must be accessible before staged inspection');
   const published = await response.json();
   const expected = process.env.EVOLVE_EXPECT_PUBLIC_BUILD;
   if (expected) assert.equal(published.build, expected, 'Published baseline changed; integrate that version before testing');
