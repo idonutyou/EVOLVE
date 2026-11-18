@@ -58,4 +58,59 @@ function environmentCategory(error) {
   return 'game_or_test_assertion';
 }
 
-// The boot, navigation and reporting routines are added in the next checkpoints.
+function attachTelemetry(page) {
+  page.on('pageerror', error => {
+    remember(report.pageErrors, String(error.message || error));
+  });
+  page.on('console', message => {
+    if (message.type() === 'error') remember(report.consoleErrors, message.text());
+  });
+  page.on('requestfailed', request => {
+    if (!request.url().startsWith('data:')) {
+      remember(report.requestFailures, {
+        url: request.url().slice(0, 280),
+        reason: request.failure()?.errorText || 'unknown',
+        type: request.resourceType()
+      });
+    }
+  });
+  page.on('response', response => {
+    if (response.status() >= 400) {
+      remember(report.httpFailures, {
+        url: response.url().slice(0, 280),
+        status: response.status(),
+        type: response.request().resourceType()
+      });
+    }
+  });
+}
+
+async function measure(page) {
+  return page.evaluate(() => {
+    const rectOf = element => {
+      if (!element) return null;
+      const box = element.getBoundingClientRect();
+      return {
+        x: Math.round(box.x), y: Math.round(box.y),
+        width: Math.round(box.width), height: Math.round(box.height),
+        right: Math.round(box.right), bottom: Math.round(box.bottom)
+      };
+    };
+    const root = document.documentElement;
+    return {
+      viewport: { width: innerWidth, height: innerHeight },
+      documentWidth: root.scrollWidth,
+      horizontalOverflow: Math.max(0, root.scrollWidth - root.clientWidth),
+      app: rectOf(document.querySelector('#app')),
+      start: rectOf(document.querySelector('#start')),
+      nav: rectOf(document.querySelector('#homeTabs')),
+      loaderPresent: !!document.querySelector('#webLoader'),
+      visibleCanvasCount: [...document.querySelectorAll('canvas')].filter(c => {
+        const r = c.getBoundingClientRect();
+        return r.width > 0 && r.height > 0;
+      }).length
+    };
+  });
+}
+
+// Remaining startup, navigation and artifact routines are added next.
