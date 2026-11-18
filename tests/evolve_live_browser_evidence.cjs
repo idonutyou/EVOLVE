@@ -255,8 +255,10 @@ async function inspectCandidate(page) {
   report.candidateChecks.push('Five pages share header/footer geometry at all three viewports; bottom gap zero, original raster glyphs loaded once, parts 80% group and aligned six slots');
   await page.setViewportSize(VIEWPORTS[0]);await goMain(page,'parts');
   const filter=page.locator('#partsFiltersV523 [data-filter="head"]');await filter.click();
+  await page.waitForFunction(()=>document.querySelector('.partsRefOverallFilter')?.value==='head'&&document.querySelector('#partsFiltersV523 [data-filter="head"]')?.getAttribute('aria-pressed')==='true');
   assert.equal(await page.locator('.partsRefOverallFilter').inputValue(),'head','Native filter and visible dropdown remain synchronized');
   await page.locator('.partsRefOverallFilter').selectOption('all');
+  await page.waitForFunction(()=>document.querySelector('#partsFiltersV523 [data-filter="all"]')?.getAttribute('aria-pressed')==='true');
   const sortBefore=await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort);
   const requestedSort=sortBefore==='rank'?'name':'rank';
   await page.locator('#partsSortV523').selectOption(requestedSort);
