@@ -274,7 +274,15 @@ async function inspectCandidate(page) {
   assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('EVOLVE_V575_TEST_PARTS_UI_V523')||'{}').sort),requestedSort,'Persisted sort must survive reload');
   report.equipment={equipped,restored,sortBefore,sortAfter};report.candidateChecks.push('Native filter/sort work; independent arms and hidden legacy back survive reload in isolated fixture');
   await page.locator('#evolveHeaderUnified .evolveHeaderHit.settings').click();
-  await page.locator('#settingsOverlay').waitFor({state:'visible'});await capture(page,'candidate-native-settings');await page.locator('#settingsClose').click();
+  await page.locator('#settingsOverlay').waitFor({state:'visible'});
+  const recorder=page.locator('#settingsPanel > #gp05QAControlsV662');
+  await recorder.waitFor({state:'visible'});
+  assert.equal(await page.locator('#gp05QAControlsV662').count(),1,'Retain exactly one original recorder control');
+  await recorder.locator(':scope > button').click();
+  await page.getByRole('button',{name:'전체 플레이 기록 받기',exact:true}).waitFor({state:'visible'});
+  report.recorder=await page.evaluate(()=>({inSettings:document.getElementById('gp05QAControlsV662')?.parentElement?.id==='settingsPanel',recording:window.__EVOLVE_GP05_QA_V662__?.isRecording(),exportAvailable:typeof window.__EVOLVE_AUTO_RECORD_V665__?.downloadAll==='function'}));
+  assert.ok(report.recorder.inSettings&&report.recorder.recording&&report.recorder.exportAvailable,'Original recording and export must remain available');
+  await capture(page,'candidate-native-settings');await page.locator('#settingsClose').click();
   await goMain(page,'codex');await page.locator('.dex01Grid button').first().click();
   await page.locator('.dex01Detail').first().waitFor({state:'visible'});await capture(page,'candidate-native-codex-detail');
   await page.locator('.dex01Close:visible,.dex01Done:visible').first().click();
