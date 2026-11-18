@@ -623,5 +623,170 @@ function evolveFooterMarkup(index,prefix,assets,theme){
 })();
 
 </script>
+<style id="claudeUiFixV725">
+/* CLAUDE-UIFIX-20261118 — footer: same original icons re-rendered sharp (3x),
+   every icon centred on its tab, label moved up into the panel. All pages. */
+#poster .evolveFooterOriginal.claudeHD,#dnaCommonFrame .evolveFooterOriginal.claudeHD{inset:auto!important;left:26.087%!important;top:14.6%!important;width:47.826%!important;height:41.86%!important;object-fit:contain!important;image-rendering:auto}
+#poster .evolveFooterLabel,#dnaCommonFrame .evolveFooterLabel{bottom:auto!important;top:63.6%!important;font-size:2.9cqw!important;line-height:1.15!important;letter-spacing:-.01em!important}
+/* user 11-19 07:18: no edge/band above the footer buttons on any page — each page's
+   own background runs on behind the buttons. Scrolling pages get the footer height as
+   bottom padding so their last item still scrolls fully above the buttons. */
+#poster[data-lab-chrome="true"] #evolveShopReference .shopRefScroll{bottom:0!important;padding-bottom:20.2cqw!important;box-sizing:border-box!important}
+#poster[data-lab-chrome="true"]>#homeContentV522{bottom:0!important}
+#poster[data-lab-chrome="true"][data-home-page="codex"]>#homeContentV522{padding-bottom:min(20.2cqw,11.3625dvh)!important}
+/* CLAUDE-UIFIX-20261118 — shown inside the game screen (?claudeShell=1): the game
+   draws the header and footer, so the copied ones here are hidden and the lab
+   fills the space between them. Lab logic/data/save key unchanged. */
+html.claudeShell{--evolve-ui-width:100vw;--evolve-ui-head:0px;--evolve-ui-foot:0px}
+html.claudeShell #dnaCommonFrame{display:none!important}
+html.claudeShell body{min-height:100%!important}
+/* One top bar only (user 22:12): on the lab page the lab's own top row
+   (‹ back, DNA / Lv / ✧ chips) stays and the game's shared header is hidden. */
+
+/* user 23:06 (1): lab main screen content sits a little lower. The art keeps
+   its top (drawn chips, glow line and its haze) fixed down to 7.0%; the faint tail
+   below it (7.0-7.6%: a smooth vertical gradient, nothing at the edges) is stretched
+   to 3.2%, so everything from 7.6% on (title, ring, orbs, panel, button) moves down
+   2.6% of the board height. No repeated image; the bottom 2.6% (dark floor under
+   the pink lights) goes out of view. */
+html.claudeShell #dnaRefBoard>:not(.dnaRefBack):not(.dnaRefResources){translate:0 var(--cShift,4.622cqw)}
+/* taller screens (40%): the lab sits at the top; the extra height is shared between
+   the soft glow under the top line and a continuation of the dark floor at the
+   bottom (sizes computed in dna.shell.js), so no empty band appears. */
+html.claudeShell body:has(#hubView.active) #dnaRefSkin{align-content:start!important;align-items:start!important}
+html.claudeShell #dnaRefBoard{overflow:visible!important;clip-path:inset(0 0 calc(-1 * var(--cShiftPx,30px)) 0)}
+html.claudeShell #dnaRefSkin::after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:var(--cBotW,0px);top:var(--cBotTop,0px);height:var(--cBotH,0px);pointer-events:none;background-image:var(--dnaRefImage);background-repeat:no-repeat;background-size:100% var(--cBotSize,0px);background-position:0 var(--cBotPos,0px)}
+html.claudeShell #dnaRefBoard::before,#claudeBranchTop .claudeBranchTopBoard::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:var(--dnaRefImage) 0 0/100% 100% no-repeat;clip-path:inset(7.6% 0 0 0);translate:0 4.622cqw}
+html.claudeShell #dnaRefBoard::before{translate:0 var(--cShift,4.622cqw)}
+html.claudeShell #dnaRefBoard::after,#claudeBranchTop .claudeBranchTopBoard::after{content:"";position:absolute;left:0;right:0;top:7%;height:calc(5.689cqw + 1px);z-index:1;pointer-events:none;background-image:var(--dnaRefImage);background-repeat:no-repeat;background-size:100% 948.1cqw;background-position:0 -66.37cqw}
+html.claudeShell #dnaRefBoard::after{height:var(--cGapH,calc(5.689cqw + 1px));background-size:100% var(--cGapSize,948.1cqw);background-position:0 var(--cGapPos,-66.37cqw)}
+/* user 23:06 (2): the skill tree uses the same top row as the lab main screen
+   (same art band down to just under the glow line, same ‹ / chips). */
+html.claudeShell body>.app>.bar{display:none!important}
+#claudeBranchTop{display:none}
+html.claudeShell body:has(#branchView.active) #claudeBranchTop{display:block;position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:60;width:min(100vw,56.25dvh);aspect-ratio:432/79.87;overflow:hidden;background:#0a1d39;box-shadow:0 6px 14px #02071799;color:#f3fbff;font-family:system-ui,'Noto Sans KR',sans-serif}
+#claudeBranchTop .claudeBranchTopBoard{position:absolute;left:0;top:0;width:100%;aspect-ratio:432/768;container-type:inline-size;isolation:isolate;background:var(--dnaRefImage) 0 0/100% 100% no-repeat}
+#claudeBranchTop .dnaRefBack,#claudeBranchTop .dnaRefResources{z-index:5}
+#claudeBranchTop button{font-family:inherit;touch-action:manipulation;cursor:pointer}
+html.claudeShell body:has(#branchView.active) #backBtn{display:none!important}
+html.claudeShell body:has(#branchView.active) main{padding-top:calc(min(100vw,56.25dvh)*.18489)!important}
+/* the glint/sweep that run along the fixed top glow line stay on that line */
+html.claudeShell #dnaRefEffects .dnaRefGlint,html.claudeShell #dnaRefEffects .dnaRefSweep{margin-top:-4.622cqw!important}
+
+/* user 11-19: the lab frame reaches the screen bottom behind the game's footer
+   buttons; --claudeFoot (footer height, from dna.shell.js) keeps the lab's own
+   layout above them. */
+html.claudeShell #dnaRefBoard{width:min(100%,calc((100dvh - var(--claudeFoot,0px)) * .5625))!important}
+html.claudeShell body>.app{margin-bottom:var(--claudeFoot,0px)!important}
+html.claudeShell body>.toast{bottom:calc(var(--claudeFoot,0px) + 12px)!important}
+</style>
+<script id="claudeUiFixLogicV725">
+/* CLAUDE-UIFIX-20261118 — footer icons: the same five original icons, re-rendered
+   at 3x so they stay sharp on phones. Only the <img> source and box change;
+   buttons, actions, labels and game state are untouched. */
+(()=>{'use strict';
+ const HD={"battle":["assets/deeb6687c4ba2c5e8da1be4148cf2251e0e3ed219b012634c7d08a23dc4cf5fe.png","assets/1683955d592748f13e9bf1b2f59df636fb9637738f1601d7c40aa6172d5bb658.png","assets/88c71fea540f7325d5a8599f5467b26f193ca6d3d509282490431b7b22dd0d78.png","assets/cbe9c9edaa2391d8a921ff438f30baccb64448c5969b96edadc303e07d0aa2a4.png","assets/646f732af34d19a9034b6a40107b181d5428ed0955ca194db50dec7e63353fb7.png"],"lab":["assets/4e583f1e09e65199479d037d43f4934e344ce866fdda78eb81782fed51bcbf97.png","assets/90264f5befb12c795c7e7eeedc691674022b8b88be7a42d346ed00c54cc19526.png","assets/ba27900d6f9e41c530801ece90ca7c6df55d080b1801d10710e76752caaf30c6.png","assets/e81f64e39c03f7e541ac6bb5687c948a22b87f1c719ae26c525aa0d6b4911aa8.png","assets/8be5cbcdaf97c6f43281c2125d32e0f63d41389743479e521be2074441e43d6a.png"]};
+ const LABELS=['상점','파츠','전투','DNA 연구소','도감'];
+ const EXPECT=5;
+ const themeOf=node=>node&&node.closest&&node.closest('#evolveReferenceScene')?'battle':'lab';
+ const prev=typeof window.evolveFooterMarkup==='function'?window.evolveFooterMarkup:null;
+ if(prev){
+  window.evolveFooterMarkup=function(index,prefix,assets,theme){
+   const src=(HD[theme==='battle'?'battle':'lab']||[])[index];
+   if(!src)return prev.apply(this,arguments);
+   return '<span class="evolveFooterIcon"><img class="evolveFooterOriginal claudeHD" data-index="'+index+'" src="'+src+'" alt="" aria-hidden="true" decoding="async"></span><span class="evolveFooterLabel">'+LABELS[index]+'</span>';
+  };
+ }
+ let observer=null;
+ function upgrade(){
+  for(const img of document.querySelectorAll('img.evolveFooterOriginal:not(.claudeHD)')){
+   const src=(HD[themeOf(img)]||[])[Number(img.dataset.index)];
+   if(!src)continue;
+   img.classList.add('claudeHD');img.decoding='async';img.src=src;
+  }
+  // Footers are built once; stop watching when every one is sharp.
+  if(observer&&document.querySelectorAll('img.evolveFooterOriginal.claudeHD').length>=EXPECT){observer.disconnect();observer=null}
+ }
+ upgrade();
+ if(document.querySelectorAll('img.evolveFooterOriginal.claudeHD').length<EXPECT){
+  const root=document.getElementById('poster')||document.documentElement;
+  observer=new MutationObserver(list=>{for(const m of list)if(m.addedNodes.length){upgrade();break}});
+  observer.observe(root,{childList:true,subtree:true});
+ }
+ window.__CLAUDE_UIFIX__=Object.assign(window.__CLAUDE_UIFIX__||{},{footerIcons:'hd-3x',read:()=>({sharp:document.querySelectorAll('img.evolveFooterOriginal.claudeHD').length,old:document.querySelectorAll('img.evolveFooterOriginal:not(.claudeHD)').length,watching:!!observer})});
+})();
+/* CLAUDE-UIFIX-20261118 — dna-lab.html is now shown inside the game screen.
+   Opened directly (old link/bookmark), it hands over to the game, which opens the
+   lab in place; ?standalone=1 keeps the old separate page for checks. */
+(()=>{'use strict';
+ const q=new URLSearchParams(location.search);
+ const shell=q.get('claudeShell')==='1'&&window.parent!==window;
+ if(shell){
+  document.documentElement.classList.add('claudeShell');
+  // The lab's own ‹ / "게임으로" return to the game screen in place (no page load).
+  document.addEventListener('click',e=>{
+   const a=e.target&&e.target.closest&&e.target.closest('#returnToGameV46');
+   if(!a)return;
+   e.preventDefault();e.stopImmediatePropagation();
+   leave();
+  },true);
+  function leave(){try{window.parent.__CLAUDE_UIFIX__&&window.parent.__CLAUDE_UIFIX__.dnaClose&&window.parent.__CLAUDE_UIFIX__.dnaClose()}catch(_){}}
+  // System Back inside the lab: skill tree -> lab main; lab main -> close the lab.
+  function back(){const b=document.querySelector('#branchView.active #backBtn');if(b)b.click();else leave();}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'||e.key==='BrowserBack'){e.preventDefault();e.stopImmediatePropagation();back();}},true);
+  let watcher=null;
+  document.addEventListener('pointerdown',()=>{
+   if(watcher||typeof window.CloseWatcher!=='function')return;
+   try{watcher=new window.CloseWatcher();watcher.addEventListener('close',()=>{watcher=null;back();},{once:true});}catch(_){watcher=null}
+  },true);
+  // Skill tree gets the same top row as the lab main screen (‹ + DNA / Lv / ✧ on
+  // the same top art band). ‹ there goes back to the lab main screen.
+  function buildBranchTop(){
+   if(document.getElementById('claudeBranchTop'))return;
+   const top=document.createElement('div');top.id='claudeBranchTop';
+   top.innerHTML='<div class="claudeBranchTopBoard">'+
+    '<button type="button" class="dnaRefBack" aria-label="연구소로 돌아가기">‹</button>'+
+    '<div class="dnaRefResources" aria-label="연구 자원">'+
+    '<span class="dnaRefResource"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M4 2c8 3 0 13 8 16M12 2C4 5 12 15 4 18M4 5h8M5 9h6M5 13h6M4 16h8"/></svg><strong data-src="#available">—</strong></span>'+
+    '<span class="dnaRefResource"><em>Lv</em><strong data-src="#evoLevel">—</strong></span>'+
+    '<span class="dnaRefResource"><em class="dnaRefStar">✧</em><strong data-src="#collect">—</strong></span>'+
+    '</div></div>';
+   document.body.appendChild(top);
+   top.querySelector('.dnaRefBack').addEventListener('click',()=>{const b=document.getElementById('backBtn');if(b)b.click();});
+   const outs=[...top.querySelectorAll('strong[data-src]')];
+   const sync=()=>outs.forEach(o=>{const n=document.querySelector(o.dataset.src);o.textContent=(n&&n.textContent.trim())||'—';});
+   sync();
+   outs.forEach(o=>{const n=document.querySelector(o.dataset.src);if(n)new MutationObserver(sync).observe(n,{childList:true,characterData:true,subtree:true});});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildBranchTop);else buildBranchTop();
+  // Lab main screen sizing (40%): content 2.6% lower; on taller screens the lab sits
+  // at the top and the extra height goes half into the glow under the top line and
+  // half into the dark floor at the bottom.
+  function layout(){
+   const root=document.documentElement.style;
+   let foot=0;
+   try{const n=window.parent.document.querySelector('#claudeDnaView .claudeDnaNav');if(n)foot=n.getBoundingClientRect().height}catch(_){}
+   root.setProperty('--claudeFoot',foot.toFixed(2)+'px');
+   const sk=document.getElementById('dnaRefSkin'),b=document.getElementById('dnaRefBoard');
+   if(!sk||!b||!b.offsetWidth)return;
+   const W=b.offsetWidth,B=W*768/432,H=sk.clientHeight||innerHeight,I=H-foot;
+   const E=Math.max(0,I-B),d=.026*B,S=d+E/2,src=.006*B,G=src+S,F=G/src;
+   root.setProperty('--cShift',S.toFixed(2)+'px');root.setProperty('--cShiftPx',(S+2).toFixed(2)+'px');
+   root.setProperty('--cGapH',(G+1).toFixed(2)+'px');root.setProperty('--cGapSize',(B*F).toFixed(2)+'px');root.setProperty('--cGapPos',(-.07*B*F).toFixed(2)+'px');
+   const R=H-(b.offsetTop+B+S);
+   if(R>0){
+    const F2=(R+2)/src;
+    root.setProperty('--cBotW',W+'px');root.setProperty('--cBotTop',(b.offsetTop+B+S-1).toFixed(2)+'px');root.setProperty('--cBotH',(R+2).toFixed(2)+'px');
+    root.setProperty('--cBotSize',(B*F2).toFixed(2)+'px');root.setProperty('--cBotPos',(-.994*B*F2).toFixed(2)+'px');
+   }else root.setProperty('--cBotH','0px');
+  }
+  addEventListener('resize',layout);
+  const startLayout=()=>{layout();const sk=document.getElementById('dnaRefSkin');if(sk&&window.ResizeObserver)new ResizeObserver(layout).observe(sk);else setTimeout(startLayout,200);};
+  if(document.readyState==='complete')startLayout();else addEventListener('load',startLayout);
+ }else if(window.top===window&&!q.has('standalone')){
+  location.replace('./?evolveUIPage=dna');
+ }
+})();
+</script>
 </body></html>
 
