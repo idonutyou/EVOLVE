@@ -1,0 +1,70 @@
+name: EVOLVE Public UI Browser Evidence (read-only)
+on:
+  push:
+    branches: [main, feature/browser-qa-resilience-20261118]
+    paths:
+      - .github/workflows/evolve-live-ui-evidence.yml
+      - tests/evolve_live_browser_evidence.cjs
+      - dist/index.html
+      - dist/version.json
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/evolve-live-ui-evidence.yml
+      - tests/evolve_live_browser_evidence.cjs
+  schedule:
+    - cron: '15 0 * * *' # 09:15 Asia/Seoul, only after installed on default branch
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evolve-live-browser-evidence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  live-evidence:
+    name: Public game screenshot and error capture
+    runs-on: ubuntu-latest
+    timeout-minutes: 26
+    steps:
+      - name: Checkout only the browser evidence script (avoid 386 MB game assets)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tests/evolve_live_browser_evidence.cjs
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify screenshot runner syntax
+        run: node --check tests/evolve_live_browser_evidence.cjs
+      - name: Prepare isolated Playwright Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/evolve-live-qa" --no-save --no-audit --no-fund --ignore-scripts playwright@1.62.1
+          echo "NODE_PATH=$RUNNER_TEMP/evolve-live-qa/node_modules" >> "$GITHUB_ENV"
+          chrome="$(command -v google-chrome || command -v chromium || true)"
+          if [ -n "$chrome" ]; then
+            echo "CHROME_BIN=$chrome" >> "$GITHUB_ENV"
+          else
+            "$RUNNER_TEMP/evolve-live-qa/node_modules/.bin/playwright" install --with-deps chromium
+          fi
+      - name: Inspect real public EVOLVE HOME and capture all main UI pages
+        timeout-minutes: 19
+        env:
+          EVOLVE_TEST_BASE_URL: https://idonutyou.github.io/EVOLVE/
+        run: node tests/evolve_live_browser_evidence.cjs
+      - name: Upload screenshots and JSON failure diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evolve-live-ui-${{ github.run_id }}
+          path: test-results/evolve-live-evidence/
+          retention-days: 14
+          if-no-files-found: warn
