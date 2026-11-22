@@ -1,0 +1,64 @@
+name: EVOLVE V735 validate and prepare
+on:
+  push:
+    branches:
+      - backup/v735-payload-20261122
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check V730 baseline and unpack V735
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import zlib,hashlib,json
+          original={
+            'index.html':'e40ea88e8aa64054d6bff6cca98591c20cadf6b9c63a44a37bc0108e459003fa',
+            'version.json':'e0962e258ed383a0c560f7d114b230a8fd303bab79ad9b5aa6f8a2282d3b0370',
+            'asset-manifest.json':'7741fd383d215005eab6c4d467b7c0f486cc734089c3b8b0d82d254b0d4189d7',
+          }
+          for path,digest in original.items():
+              actual=hashlib.sha256(Path(path).read_bytes()).hexdigest()
+              assert actual==digest,(path,'base hash mismatch',actual)
+          records=[
+             ('index.html','index.html','90490f43274cd2ba5f8efde2512b8d76964cbd936e0eeb61c0392c4110f3e020',628271),
+             ('version.json','version.json','ee6bcedcf003e9ff4adf740c0556b03122b3b57d18c63bf48b6be0dd4c607a7e',2237),
+             ('asset-manifest.json','asset-manifest.json','640550794f3fea0f03a0625beb55e26a110990db8604e69a403678ad2389948b',275936),
+             ('new-tentacle.png','assets/002e6b9ee226a79ac960767fe118130f73374f950559d9b0a9295a6d09741ad0.png','002e6b9ee226a79ac960767fe118130f73374f950559d9b0a9295a6d09741ad0',27558),
+          ]
+          folder=Path('/tmp/evolve_v735')
+          for source,dest,expected,size in records:
+              src=Path('.v735_stage')/(source+'.deflate')
+              payload=zlib.decompress(src.read_bytes(),-15)
+              assert len(payload)==size,(dest,len(payload),size)
+              assert hashlib.sha256(payload).hexdigest()==expected,('sha mismatch',dest)
+              out=folder/dest;out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(payload)
+          version=json.loads((folder/'version.json').read_text())
+          assert version['build']=='V735-CLAUDE-UI-20261122'
+          assert version['assets']==1239
+          print('PASS: 3 baseline SHA-256 and 4 V735 SHA-256, build and asset count')
+          PY
+      - name: Prepare isolated release commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE=874762785f07c32fe80b93a436c8827ce6ae92b2
+          git fetch origin pages-fast-evolve-20261029
+          LIVE=$(git rev-parse FETCH_HEAD)
+          test "$LIVE" = "$BASE"
+          git checkout -B release/v735-ready-20261122 "$BASE"
+          cp -a /tmp/evolve_v735/. .
+          git add index.html version.json asset-manifest.json assets/002e6b9ee226a79ac960767fe118130f73374f950559d9b0a9295a6d09741ad0.png
+          test "$(git diff --cached --name-only | wc -l)" -eq 4
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "release: V735 tentacle arms hold the guns (CLAUDE-UI-20261122)"
+          git push origin HEAD:refs/heads/release/v735-ready-20261122
+          echo "READY_COMMIT=$(git rev-parse HEAD)"
