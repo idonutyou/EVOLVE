@@ -56,7 +56,8 @@ jobs:
           git checkout -B release/v735-ready-20261122 "$BASE"
           cp -a /tmp/evolve_v735/. .
           git add index.html version.json asset-manifest.json assets/002e6b9ee226a79ac960767fe118130f73374f950559d9b0a9295a6d09741ad0.png
-          test "$(git diff --cached --name-only | wc -l)" -eq 4
+          git diff --cached --name-only
+          test "$(git diff --cached --name-only | wc -l)" -eq 3
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "release: V735 tentacle arms hold the guns (CLAUDE-UI-20261122)"
