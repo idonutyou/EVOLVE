@@ -7382,6 +7382,12 @@
     "sha256": "594da9fc31a87831fdf4e47c5d9a0f18099b4473c66fcbad294a3835c9ab9010"
   },
   {
+    "bytes": 8091,
+    "kind": "image",
+    "path": "assets/614251e3e9b56ec05a192d3acdc1bca22393cbcde474d3948d4d7c205f8ca651.png",
+    "sha256": "614251e3e9b56ec05a192d3acdc1bca22393cbcde474d3948d4d7c205f8ca651"
+  },
+  {
     "bytes": 569473,
     "kind": "image",
     "path": "assets/64e7d3a56744e0acaa09d2eea6ff6e509e42f64794ab48c5d43f3c347d5bf594.png",
@@ -7410,5 +7416,11 @@
     "kind": "image",
     "path": "assets/c47f0ae495b789f2c6abde3ea143720664372026bd092281e291e5fe93c328e0.png",
     "sha256": "c47f0ae495b789f2c6abde3ea143720664372026bd092281e291e5fe93c328e0"
+  },
+  {
+    "bytes": 5086,
+    "kind": "image",
+    "path": "assets/e3a15b02c4b830aa0ec318ee2928083fe2d39e4e8f0fb84edc81ebef29bb6b12.png",
+    "sha256": "e3a15b02c4b830aa0ec318ee2928083fe2d39e4e8f0fb84edc81ebef29bb6b12"
   }
 ]
