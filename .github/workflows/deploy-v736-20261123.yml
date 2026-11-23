@@ -1,0 +1,58 @@
+name: EVOLVE V736 staged extraction
+
+on:
+  push:
+    branches:
+      - deploy-v736-20261123
+
+permissions:
+  contents: write
+
+jobs:
+  apply-package-to-staging:
+    if: github.repository == 'idonutyou/EVOLVE'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+      - name: Verify base and stage exact release
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='2e0fd92c1ec99244e0c522d22638f0bb39caf753'
+          LIVE=$(git ls-remote origin refs/heads/pages-fast-evolve-20261029 | cut -f1)
+          test "$LIVE" = "$BASE"
+          test "$(git rev-parse HEAD^)" = "$BASE"
+          ZIP="$GITHUB_WORKSPACE/EVOLVE_V736_DEPLOY_20261123.zip"
+          DEST="$RUNNER_TEMP/evolve_v736"
+          mkdir -p "$DEST"
+          unzip -q "$ZIP" -d "$DEST"
+          PACKAGE="$DEST/EVOLVE_V736_DEPLOY_20261123"
+          sha256sum -c "$PACKAGE/BASE_V735_SHA256SUMS"
+          (cd "$PACKAGE/files"; sha256sum -c "$PACKAGE/SHA256SUMS")
+          cp -a "$PACKAGE/files/." "$GITHUB_WORKSPACE/"
+          PACKAGE="$PACKAGE" python3 - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+          info=json.loads((Path(os.environ["PACKAGE"])/"release_info.json").read_text())
+          assert info["build"]=="V736-CLAUDE-CODEX-PARTS-20261123"
+          assert info["base"]["commit"]=="2e0fd92c1ec99244e0c522d22638f0bb39caf753"
+          expected_changed=set(info["changed"])
+          expected_added=set(info["added"].values())
+          def cmd(*args):
+              return set(subprocess.check_output(["git",*args],text=True).splitlines())
+          actual_changed=cmd("diff","--name-only")
+          actual_added=cmd("ls-files","--others","--exclude-standard")
+          assert actual_changed==expected_changed, (actual_changed,expected_changed)
+          assert actual_added==expected_added, (actual_added,expected_added)
+          print("V736 verified:",len(actual_changed),"modified,",len(actual_added),"added")
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html version.json asset-manifest.json assets
+          git commit -m 'stage: EVOLVE V736 parts archive verified 15/15'
+          git push origin HEAD:refs/heads/deploy-v736-20261123
