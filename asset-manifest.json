@@ -7506,5 +7506,17 @@
     "kind": "image",
     "path": "assets/4bfd61f0fa0a5175a862490cf251e7149b7c594a7cff22bed2f66b8fe23b9d37.png",
     "sha256": "4bfd61f0fa0a5175a862490cf251e7149b7c594a7cff22bed2f66b8fe23b9d37"
+  },
+  {
+    "bytes": 733582,
+    "kind": "image",
+    "path": "assets/9bcabc92308f0dd193a444f1f3ed68046c38e72e4d6e19d9d684e0dca5df8f2f.webp",
+    "sha256": "9bcabc92308f0dd193a444f1f3ed68046c38e72e4d6e19d9d684e0dca5df8f2f"
+  },
+  {
+    "bytes": 33013,
+    "kind": "image",
+    "path": "assets/13234291cd42eb78f14193e5b6355f6cafdeab868ccade27826381ad42c0f80e.png",
+    "sha256": "13234291cd42eb78f14193e5b6355f6cafdeab868ccade27826381ad42c0f80e"
   }
 ]
