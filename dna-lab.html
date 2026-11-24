@@ -421,11 +421,118 @@ for(const [x,y,color,delay] of [[216,43,'#f485ff',0],[216,474,'#ff7cf2',-2.7],[7
 }
 for(const [top,delay] of [[5.4,0],[89.1,-3.7]]){const sweep=document.createElement('span');sweep.className='dnaRefSweep';sweep.style.top=`${top}%`;sweep.style.setProperty('--sweep-delay',`${delay}s`);effects.appendChild(sweep)}
 const infoSweep=document.createElement('span');infoSweep.className='dnaRefInfoSweep';infoSweep.setAttribute('aria-hidden','true');board.appendChild(infoSweep);
+/* EVOLVE original button artwork */
+const DNA_ORB_ART={"ATK":{"asset":"assets/d8614838ab2e8c1600c7ee00576abb29bfe6496fb16c734539e42e0b711f4685.png","baked":"5/42","rect":[251,533,281,104],"centerY":585},"COR":{"asset":"assets/90a3fdf464464d0f9a03a598d6bc650cf5405ca606b4c5548db02c949e2f9443.png","baked":"0/10","rect":[244,532,299,110],"centerY":586},"WPN":{"asset":"assets/3f6bc4c4063597340041822b3d522de86206d6360abe3347c5595f5a5adff84b.png","baked":"0/48","rect":[253,538,286,109],"centerY":592},"DEF":{"asset":"assets/12379d3465965c3adb42f5b5b4995b08c8f0123523bb72d7ce7b6127590580c6.png","baked":"0/25","rect":[247,529,292,108],"centerY":583},"MOV":{"asset":"assets/15c8465faadb4b67785710b8dcd333576acc708b0c7392fca574990ec7efc0fb.png","baked":"0/18","rect":[263,548,270,96],"centerY":596},"BIO":{"asset":"assets/7c9e42cd6bdd647c91a2afa01e69d5ea298cfdc507c89a833a6627cb93548a65.png","baked":"0/18","rect":[248,526,292,110],"centerY":580},"SUP":{"asset":"assets/fe684bd25019911722e23ae87c43cbaed2220d039b277cff47d7fd4eb7f07714.png","baked":"0/18","rect":[257,529,272,106],"centerY":580}};
+const DNA_ORB_NATIVE=[780,780],DNA_ORB_VISIBLE_SIZE=[760,760],DNA_ORB_TRIM=11;
+const DNA_COUNTER_FEATHER=7;
+const DNA_INFO_SURFACE={"extent":[941,1672],"rect":[75,1047,795,278],"feather":7};
+function makeMatchedSurface(image, rect, feather) {
+ const [left,top,width,height]=rect;
+ const canvas=document.createElement('canvas');
+ canvas.width=width;
+ canvas.height=height;
+ const ctx=canvas.getContext('2d',{willReadFrequently:true});
+ if(!ctx)throw new Error('DNA artwork surface unavailable');
+ ctx.drawImage(image,left,top,width,height,0,0,width,height);
+ const source=ctx.getImageData(0,0,width,height).data;
+ const output=ctx.createImageData(width,height);
+ const dest=output.data;
+ const lastX=width-1,lastY=height-1,bottom=lastY*width*4;
+ for(let y=0;y<height;y++){
+  const v=y/lastY,row=y*width*4;
+  for(let x=0;x<width;x++){
+   const u=x/lastX,p=row+x*4,px=x*4;
+   const edge=Math.min(x,lastX-x,y,lastY-y);
+   if(!edge)continue;
+   const t=Math.min(1,edge/feather);
+   for(let c=0;c<3;c++){
+    const across=source[row+c]*(1-u)+source[row+lastX*4+c]*u;
+    const down=source[px+c]*(1-v)+source[bottom+px+c]*v;
+    const corners=(source[c]*(1-u)+source[lastX*4+c]*u)*(1-v)
+      +(source[bottom+c]*(1-u)+source[bottom+lastX*4+c]*u)*v;
+    dest[p+c]=across+down-corners;
+   }
+   dest[p+3]=Math.round(255*t*t*(3-2*t));
+  }
+ }
+ ctx.putImageData(output,0,0);
+ canvas.setAttribute('aria-hidden','true');
+ return canvas;
+}
+
+function placeMatchedSurface(canvas,rect,extent,origin=0) {
+ const [x,y,w,h]=rect;
+ const [width,height]=extent;
+ canvas.style.left=((x-origin)/width*100)+'%';
+ canvas.style.top=((y-origin)/height*100)+'%';
+ canvas.style.width=(w/width*100)+'%';
+ canvas.style.height=(h/height*100)+'%';
+}
+const dnaOriginalOrbViews=new WeakMap();
+
+function renderOriginalOrbCount(button,count){
+ const view=dnaOriginalOrbViews.get(button);
+ if(!view||!view.loaded)return;
+ const text=count.replace(/\s+/g,'');
+ if(!/^\d+\/\d+$/.test(text))return;
+ const useLive=text!==view.spec.baked;
+ if(useLive&&!view.surface){
+  try{
+   const surface=makeMatchedSurface(view.art,view.spec.rect,DNA_COUNTER_FEATHER);
+   surface.className='dnaRefOrbCounterSurface';
+   placeMatchedSurface(surface,view.spec.rect,DNA_ORB_VISIBLE_SIZE,DNA_ORB_TRIM);
+   button.appendChild(surface);
+   view.surface=surface;
+  }catch(_){
+   button.classList.remove('dnaRefOrbOriginalReady','dnaRefOrbLiveCount');
+   return;
+  }
+ }
+ button.classList.toggle('dnaRefOrbLiveCount',useLive);
+ button.classList.add('dnaRefOrbOriginalReady');
+}
+
+function mountOriginalOrb(button,id){
+ const spec=DNA_ORB_ART[id];
+ const art=document.createElement('img');
+ const count=button.querySelector('.dnaRefOrbCount');
+ art.className='dnaRefOrbOriginal';
+ art.alt='';
+ art.setAttribute('aria-hidden','true');
+ art.draggable=false;
+ art.decoding='async';
+ button.style.setProperty('--dna-count-center',((spec.centerY-DNA_ORB_TRIM)/DNA_ORB_VISIBLE_SIZE[1]*100)+'%');
+ const view={art,spec,loaded:false,surface:null};
+ dnaOriginalOrbViews.set(button,view);
+ art.addEventListener('load',()=>{
+  view.loaded=art.naturalWidth===DNA_ORB_NATIVE[0]&&art.naturalHeight===DNA_ORB_NATIVE[1];
+  renderOriginalOrbCount(button,count.textContent);
+ },{once:true});
+ button.prepend(art);
+ art.src=spec.asset;
+}
+
+function makeResearchInfoSurface(image){
+ const [width,height]=DNA_INFO_SURFACE.extent;
+ if(image.naturalWidth!==width||image.naturalHeight!==height)return;
+ const info=root.querySelector('#dnaRefInfo');
+ if(!info)return;
+ try{
+  const surface=makeMatchedSurface(image,DNA_INFO_SURFACE.rect,DNA_INFO_SURFACE.feather);
+  surface.className='dnaRefInfoSurface';
+  placeMatchedSurface(surface,DNA_INFO_SURFACE.rect,DNA_INFO_SURFACE.extent);
+  board.insertBefore(surface,info);
+  info.classList.add('dnaRefInfoUnified');
+ }catch(_){
+  // The original panel still covers the baked copy if its surface cannot be made.
+ }
+}
 for(const [orbIndex,spec] of ORBS.entries()){
  const patch=document.createElement('span');patch.className='dnaRefPatch';patch.style.left=`${spec.x/432*100}%`;patch.style.top=`${spec.y/768*100}%`;patch.style.width=`${(spec.crop[2]+24)/432*100}%`;patch.style.backgroundPosition=`${orbIndex/(ORBS.length-1)*100}% center`;patch.setAttribute('aria-hidden','true');orbLayer.appendChild(patch);
  const button=document.createElement('button');button.type='button';button.className='dnaRefOrb';button.dataset.refBranch=spec.id;button.style.left=`${spec.x/432*100}%`;button.style.top=`${spec.y/768*100}%`;button.style.setProperty('--orb-color',spec.color);button.style.setProperty('--orb-inner',spec.inner);
  button.innerHTML='<span class="dnaRefOrbArt" aria-hidden="true"></span><span class="dnaRefOrbDisk" aria-hidden="true"></span><span class="dnaRefIcon" aria-hidden="true"></span><span class="dnaRefOrbName"></span><span class="dnaRefOrbCount"></span>';
  setSprite(button.querySelector('.dnaRefIcon'),spec.icon);button.querySelector('.dnaRefOrbName').textContent=spec.name;orbLayer.appendChild(button);
+ mountOriginalOrb(button,spec.id);
 }
 function textOf(selector){return document.querySelector(selector)?.textContent?.trim()||'—'}
 function sync(){
@@ -435,6 +542,7 @@ function sync(){
   const count=(old.querySelector('.onums')?.textContent||'').replace(/^노드\s*/,'').trim()||'—';
   const symbol=button.querySelector('.dnaRefIcon'),symbolSprite=infoSprites[spec.id];if(symbolSprite&&!symbol.classList.contains('dnaRefIconReady')){symbol.style.backgroundImage=`url("${symbolSprite}")`;symbol.style.backgroundSize='contain';symbol.style.backgroundPosition='center';symbol.classList.add('dnaRefIconReady')}
   const selected=old.classList.contains('on');button.setAttribute('aria-pressed',String(selected));button.setAttribute('aria-label',`${spec.name} ${count}${selected?' 선택됨':''}`);button.querySelector('.dnaRefOrbCount').textContent=count;
+  renderOriginalOrbCount(button,count);
  }
  root.querySelector('#dnaRefDNA').textContent=textOf('#available');root.querySelector('#dnaRefLevel').textContent=textOf('#evoLevel');root.querySelector('#dnaRefCatalyst').textContent=textOf('#collect');
  root.querySelector('#dnaRefTotal').textContent=textOf('#countAll');root.querySelector('#dnaRefPercent').textContent=textOf('#progressAll');
@@ -514,6 +622,7 @@ probe.onload=()=>{
  imageReady=probe.naturalWidth===941&&probe.naturalHeight===1672;
  if(!imageReady){observer.disconnect();root.remove();document.documentElement.classList.remove('dnaRefBooting');clearTimeout(window.__dnaRefBootTimer);return}
  if(imageReady){
+  makeResearchInfoSurface(probe);
   for(const spec of ORBS){try{infoSprites[spec.id]=cleanedIconSprites[spec.id]||extractInfoIcon(probe,spec.icon)}catch(_){/* Keep the original image if extraction fails. */}}
   for(const item of [...sideSpins,...coreSpins]){try{makeMotionSurface(item,probe)}catch(_){item.spin.style.display='none';/* The original reference remains visible. */}}
   tryActivate();
@@ -742,6 +851,57 @@ html.claudeShell body>.toast{bottom:calc(var(--claudeFoot,0px) + 12px)!important
   --orb-inner: #063416;
 }
 </style>
+<style id="evolveDnaOriginalButtons">
+#dnaRefBoard .dnaRefOrbOriginal,
+#dnaRefBoard .dnaRefOrbCounterSurface {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+}
+#dnaRefBoard .dnaRefOrbOriginal {
+  left: -1.447368%;
+  top: -1.447368%;
+  width: 102.631579%;
+  height: 102.631579%;
+  max-width: none;
+  z-index: 1;
+}
+#dnaRefBoard .dnaRefOrb.dnaRefOrbOriginalReady .dnaRefOrbOriginal {
+  display: block;
+}
+#dnaRefBoard .dnaRefOrbOriginalReady .dnaRefOrbArt,
+#dnaRefBoard .dnaRefOrbOriginalReady .dnaRefOrbDisk,
+#dnaRefBoard .dnaRefOrbOriginalReady .dnaRefIcon,
+#dnaRefBoard .dnaRefOrbOriginalReady .dnaRefOrbName,
+#dnaRefBoard .dnaRefOrbOriginalReady .dnaRefOrbCount {
+  visibility: hidden;
+}
+#dnaRefBoard .dnaRefOrbOriginalReady[aria-pressed="true"] {
+  box-shadow: 0 0 1.2cqw color-mix(in srgb, var(--orb-color) 55%, transparent);
+}
+#dnaRefBoard .dnaRefOrbOriginalReady.dnaRefOrbLiveCount .dnaRefOrbCounterSurface {
+  display: block;
+  z-index: 2;
+}
+#dnaRefBoard .dnaRefOrbOriginalReady.dnaRefOrbLiveCount .dnaRefOrbCount {
+  visibility: visible;
+  top: var(--dna-count-center);
+  transform: translateY(-50%);
+  font-size: 2.04cqw;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 .12cqw .35cqw #000a;
+}
+#dnaRefBoard .dnaRefInfoSurface {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+#dnaRefBoard .dnaRefInfo.dnaRefInfoUnified {
+  background: transparent;
+}
+</style>
+
 
 <script id="claudeUiFixLogicV725">
 /* CLAUDE-UIFIX-20261118 — footer icons: the same five original icons, re-rendered
