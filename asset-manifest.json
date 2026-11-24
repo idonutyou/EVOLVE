@@ -7560,5 +7560,11 @@
     "kind": "image",
     "path": "assets/93e565c8481e1d9b5173ad0173eacdc661f65e98aae1f15852ebb86fcf38ae07.png",
     "sha256": "93e565c8481e1d9b5173ad0173eacdc661f65e98aae1f15852ebb86fcf38ae07"
+  },
+  {
+    "bytes": 124148,
+    "kind": "image",
+    "path": "assets/7ece452bc9e56e52803d02c885a7b30754d421d041ae7089713835a6ebc1266b.webp",
+    "sha256": "7ece452bc9e56e52803d02c885a7b30754d421d041ae7089713835a6ebc1266b"
   }
 ]
