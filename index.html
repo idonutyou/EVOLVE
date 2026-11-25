@@ -4376,14 +4376,12 @@ function evolveFooterMarkup(index,prefix,assets,theme){
   const s=Math.max(widthFit,Math.min(byHeight,byWidth));
   const ox=(W-941*s)/2;
   const extra=Math.max(0,avail-(1466-100)*s);
-  const pad=Math.min(extra*.22,22);
-  // Reserve enough of the row gap for the next group's heading.
+  // Use half the original row gap within a group and the full gap before group headings.
   const rowGap=Math.max(58*s,11*s+Math.min(extra*.26,14));
-  const gap=rowGap-50*s;
   const st=poster.style;
-  st.setProperty('--cxPadX',pad.toFixed(2));st.setProperty('--cxRowGap',rowGap.toFixed(3));
+  st.setProperty('--cxRowGap',(rowGap*.5).toFixed(3));
   st.setProperty('--cxS',s.toFixed(5));st.setProperty('--cxOX',ox.toFixed(2));
-  st.setProperty('--cxFoot',foot.toFixed(2));st.setProperty('--cxGroupGap',gap.toFixed(3));
+  st.setProperty('--cxFoot',foot.toFixed(2));st.setProperty('--cxGroupGap',rowGap.toFixed(3));
  }
  let raf=0;const schedule=()=>{if(raf)return;raf=requestAnimationFrame(()=>{raf=0;layout();});};
  addEventListener('resize',schedule);
@@ -5387,7 +5385,7 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Count{color:inherit;opacity:.85}
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead{border-color:#8eced6;margin-bottom:9px}
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead strong{color:#174c5b;font-size:18px}
-#poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead small{color:#4e7485}
+#poster #codexPanel .dex01SectionHead>small{display:none!important}
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Group>h3{margin:9px 0;color:#194c59;font-size:14px;border-left:3px solid #13b8bc;padding-left:6px}
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Grid{gap:8px;padding-bottom:12px}
 #poster #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) button.dexCoreRecord{display:flex;flex-direction:column;gap:0;min-width:0;min-height:0;padding:4px;
@@ -5464,7 +5462,6 @@ html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead{display:flex;justify-content:space-between;align-items:baseline;
   margin:0 4% 3px!important;padding:0 0 2px!important;border-bottom:2px solid #59c2d4!important;line-height:1.05!important;}
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead strong{font-size:clamp(18px,5.1vw,27px)!important;font-weight:900;color:#0b5365!important;letter-spacing:0!important;}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead small{color:#547184!important;font-size:clamp(8px,2.2vw,11px)}
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Group>h3{margin:4px 4% 5px!important;padding-left:7px!important;border-left:4px solid #17c6d2!important;
   color:#123f50!important;font-size:clamp(14px,4vw,20px)!important;line-height:1!important;}
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 2.3%!important;padding-bottom:12px!important;}
@@ -5662,16 +5659,17 @@ html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]
   left:calc(var(--cxOX) * 1px + 42px * var(--cxS))!important;width:calc(857px * var(--cxS))!important;
   top:calc((440px - 100px) * var(--cxS))!important;bottom:0!important;
   overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain;overflow-anchor:none;scroll-behavior:auto;scrollbar-width:none;
-  padding:calc(14px * var(--cxS) + var(--cxPadX,0) * 1px) calc(9px * var(--cxS)) calc(var(--cxFoot) * 1px + 14px) calc(13px * var(--cxS))!important;
+  --cxListLeftPadding:calc(13px * var(--cxS));
+  --cxSectionSideMargin:calc(35px * var(--cxS));
+  padding:calc(var(--cxListLeftPadding) + var(--cxSectionSideMargin)) calc(9px * var(--cxS)) calc(var(--cxFoot) * 1px + 14px) var(--cxListLeftPadding)!important;
   background:linear-gradient(180deg,#e8f0fd 0,#d8e5f8 calc(400px * var(--cxS)),#cfdff5)!important;
   border-radius:calc(10px * var(--cxS)) calc(10px * var(--cxS)) 0 0!important;
   box-shadow:0 0 0 1px #c3d4ea,0 -2px 10px #5d84a833!important;z-index:4}
 html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]:has(#codexContent .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"])) #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01List::-webkit-scrollbar{display:none}
 html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]:has(#codexContent .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"])) #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead{box-sizing:border-box!important;height:calc(51px * var(--cxS))!important;
-  margin:0 calc(35px * var(--cxS)) calc(20px * var(--cxS)) calc(35px * var(--cxS))!important;padding:0!important;
-  align-items:flex-end!important;border-bottom:calc(3px * var(--cxS)) solid #4cc3d6!important}
+  margin:0 var(--cxSectionSideMargin) calc(var(--cxGroupGap) * 1px)!important;padding:0!important;
+  align-items:flex-start!important;border-bottom:calc(3px * var(--cxS)) solid #4cc3d6!important}
 html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]:has(#codexContent .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"])) #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead strong{font-size:calc(46px * var(--cxS))!important;line-height:1.05!important;color:#0b4f62!important}
-html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]:has(#codexContent .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"])) #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01SectionHead small{font-size:calc(20px * var(--cxS))!important;line-height:1.6!important;color:#4c6b80!important}
 html.evolveReferenceListReady #poster[data-home-page="codex"][data-claude-codex]:has(#codexContent .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"])) #codexPanel .dex01:is([data-category="core"],[data-category="parts"],[data-category="monsters"]) .dex01Group>h3{box-sizing:border-box!important;height:calc(40px * var(--cxS))!important;line-height:calc(40px * var(--cxS))!important;
   margin:0 0 calc(10px * var(--cxS)) calc(33px * var(--cxS))!important;padding:0 0 0 calc(14px * var(--cxS))!important;
   border-left:calc(7px * var(--cxS)) solid #17c6d2!important;font-size:calc(32px * var(--cxS))!important}
