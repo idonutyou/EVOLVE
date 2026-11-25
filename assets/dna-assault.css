@@ -44,22 +44,16 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
  background: #150820d9;
  font: 600 max(22px, 5cqw)/.9 system-ui, sans-serif;
 }
-.assaultStat, .assaultAll { border-radius: 50%; }
 .assaultStat {
  left: var(--x);
  top: var(--y);
  width: 26%;
  aspect-ratio: 1;
+ border-radius: 50%;
  transform: translate(-50%, -50%);
 }
 .assaultStat:active, .assaultStat[aria-pressed="true"] {
  box-shadow: inset 0 0 2.4cqw #ffe1f566, 0 0 1.5cqw #ff269aa6;
-}
-.assaultAll {
- left: 41%;
- top: 35.1%;
- width: 18%;
- aspect-ratio: 1;
 }
 .assaultRankLabel {
  position: absolute;
@@ -95,7 +89,14 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
 }
 .assaultTitle { font-size: 5cqw; letter-spacing: -.09em; justify-content: flex-start; }
 .assaultTier { font-size: 2.35cqw; font-variant-numeric: tabular-nums; }
-.assaultDesc { font-size: 2.35cqw; font-weight: 650; line-height: 1.36; justify-content: flex-start; white-space: pre-line; }
+.assaultDesc {
+ justify-content: flex-start;
+ font-size: 2.3cqw;
+ font-weight: 650;
+ line-height: 1.36;
+ white-space: normal;
+ word-break: keep-all;
+}
 .assaultEffect { font-size: 3.75cqw; font-variant-numeric: tabular-nums; }
 .assaultNextTier { font-size: 2.15cqw; }
 .assaultCost { font-size: 2.65cqw; gap: .4cqw; font-variant-numeric: tabular-nums; }
@@ -124,48 +125,67 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
  text-shadow: 0 .1cqw .3cqw #130518;
 }
 .assaultStageCard {
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: flex-end;
- gap: .6cqw;
- box-sizing: border-box;
- padding-bottom: 2.6cqw;
- border-radius: 2.3cqw;
+ --card-edge: #7b7b7b;
+ --card-fill: linear-gradient(155deg, #282828, #161616);
+ --card-cut: 1.35cqw;
+ display: grid;
+ grid-template-rows: 5.8cqw auto auto 2.5cqw;
+ justify-items: center;
+ align-content: center;
+ gap: .52cqw;
+ isolation: isolate;
+ color: #eee;
+ text-shadow: 0 .1cqw .3cqw #141414;
  pointer-events: auto;
+ touch-action: pan-y;
  font-size: 2.22cqw;
  font-weight: 740;
  line-height: 1.03;
 }
-.assaultStageCard[aria-pressed="true"] { box-shadow: inset 0 0 1.5cqw #ffd2ed7d; }
-.assaultStageCard strong { font-size: 2.42cqw; }
-.assaultStageCard[data-status="locked"] { color: #ddc5d5; }
-.assaultHeroGlyph, .assaultCardGlyph {
- background: var(--assault-glyph) center / contain no-repeat;
- pointer-events: none;
+.assaultStageCard::before, .assaultStageCard::after {
+ content: "";
+ position: absolute;
+ inset: 0;
+ clip-path: polygon(var(--card-cut) 0, calc(100% - var(--card-cut)) 0, 100% var(--card-cut),
+  100% calc(100% - var(--card-cut)), calc(100% - var(--card-cut)) 100%, var(--card-cut) 100%,
+  0 calc(100% - var(--card-cut)), 0 var(--card-cut));
 }
+.assaultStageCard::before { z-index: -2; background: var(--card-edge); }
+.assaultStageCard::after { z-index: -1; inset: .19cqw; background: var(--card-fill); }
+.assaultStageCard[aria-pressed="true"] { --card-edge: #ddd; }
+.assaultStageCard[aria-pressed="true"]::after { inset: .29cqw; }
+.assaultStageCard strong { font-size: 2.42cqw; }
+.assaultStageCard[data-status="locked"] { color: #d2d2d2; }
+.assaultStageCard[data-status="locked"] .assaultCardSymbol { opacity: .78; }
+.assaultStageCard[data-status="owned"] {
+ --card-edge: #ff83c8;
+ --card-fill: radial-gradient(ellipse at 50% 84%, #8e114f, #430522 57%, #29031a 100%);
+ color: #fff1f8;
+ filter: drop-shadow(0 0 .75cqw #ff278f);
+}
+.assaultStageCard[data-status="owned"][aria-pressed="true"] { --card-edge: #ffceeb; }
+.assaultStageCard[data-status="owned"] .assaultCardIcon { filter: drop-shadow(0 0 .5cqw #ff4aa4); }
+.assaultCardSymbol { width: 5.8cqw; height: 5.8cqw; }
+.assaultCardIcon { display: block; width: 100%; height: 100%; }
+.assaultCardLock {
+ width: 2.35cqw;
+ height: 2.35cqw;
+ visibility: hidden;
+}
+.assaultCardLock[data-visible] { visibility: visible; }
 .assaultHeroGlyph {
  position: absolute;
- left: 13.5%;
- top: 65.6%;
- width: 9.3%;
- height: 4.5%;
- filter: drop-shadow(0 0 .48cqw #fb5ab0);
+ display: grid;
+ place-items: center;
+ left: 12.6%;
+ top: 64.55%;
+ width: 11.3%;
+ height: 6.45%;
+ color: #fff2f9;
+ background: radial-gradient(ellipse, #3d051f 18%, #64102d 78%, #830c3a);
+ clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
-.assaultCardGlyph {
- position: absolute;
- left: 23%;
- top: 9%;
- width: 54%;
- height: 33%;
- filter: drop-shadow(0 0 .38cqw #f33791);
-}
-.assaultStageCard { touch-action: pan-y; padding-bottom: 2.08cqw; }
-.assaultStageCard[data-status="locked"] .assaultCardGlyph { opacity: .72; filter: none; }
-.assaultStageCard[data-status="owned"] { color: #fff2f9; }
-.assaultStageCard[aria-pressed="true"] {
- box-shadow: inset 0 0 0 .2cqw #ffc5e9, inset 0 0 1.65cqw #ff83bd6f, 0 0 1cqw #ff60acaa;
-}
+.assaultHeroSymbol { width: 70%; height: 70%; filter: drop-shadow(0 0 .5cqw #fb5ab0); }
 .assaultPage {
  top: 81.15%;
  width: 4.75%;
@@ -179,12 +199,4 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
 .assaultPrev { left: 6.25%; }
 .assaultNext { right: 6.25%; }
 .assaultPage:active { background: #e7419570; }
-.assaultDesc { overflow-wrap: anywhere; font-size: 2.19cqw; }
 .assaultStatus { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.assaultCardState {
- position: absolute;
- bottom: .45cqw;
- font: 750 1.5cqw/1 system-ui, sans-serif;
-}
-
-.assaultStageCard[data-primary="true"][aria-pressed="false"] { background: #130a1b56; }
