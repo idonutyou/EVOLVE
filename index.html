@@ -1673,7 +1673,7 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 <link rel="stylesheet" href="assets/e9c4a740f801dd698f06be02d130cffa79f5d2c54bd1ede488aee691d63fb9f9.css">
 <script defer src="assets/a1e3a8a23b4f060e2f7b5e9f8eb24013eb0a9d30e17c84eb0847c888bd176892.js"></script>
 <link rel="stylesheet" href="assets/a9164453f1db7f06f3bd8dcbcd66165ed348c582d5fd17901a6e7f1ae9a0403b.css">
-<script src="assets/53f831973eb49d9b0809e6c6b7d3de1acf5d786ae5101792f5764411f7223e2f.js"></script>
+<script src="assets/d2be81c9d2a67d2643dd9aa8df3ac55a564a62903c29c8bb966b6ac3acf7dc0f.js"></script>
 <style>
 /* DEX alpha sprite presentation — preserve full silhouette, reserve breathing room */
 #poster #codexPanel .dex01 .dex01CardArt{background:radial-gradient(ellipse at 50% 60%,#15212e,#0b121b 72%)!important;overflow:hidden!important}
@@ -1810,36 +1810,181 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 #poster #codexPanel .dex01[data-category="core"] .dex01SectionHead small {color:#4e7485}
 #poster #codexPanel .dex01[data-category="core"] .dex01Group>h3 {margin:9px 0;color:#194c59;font-size:14px;border-left:3px solid #13b8bc;padding-left:6px}
 #poster #codexPanel .dex01[data-category="core"] .dex01Grid {gap:8px;padding-bottom:12px}
+/* Draw the archive frame, number tab and live labels as a single card. */
 #poster #codexPanel .dex01[data-category="core"] button.dexCoreRecord {
-  display:flex;flex-direction:column;gap:0;min-width:0;min-height:0;padding:4px;
-  border:1px solid #8db7c8;border-radius:7px;color:#173b47;
-  background:linear-gradient(145deg,#fff,#d5e6f3 72%,#b8d0df);
-  box-shadow:0 3px 5px #274b625c,inset 0 0 0 1px #ffffffa8;
+  --frame-shape:polygon(0 15%,12% 0,33% 0,41% 8%,96% 8%,100% 14%,100% 93%,96% 100%,4% 100%,0 94%);
+  position:relative;
+  display:block;
+  container-type:inline-size;
+  isolation:isolate;
+  width:100%;
+  min-width:0;
+  min-height:0;
+  aspect-ratio:408/284;
+  padding:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  clip-path:var(--frame-shape);
+  color:#173b47;
+  background:linear-gradient(149deg,#ecfdff 6%,#8aabbf 32%,#f3fcff 53%,#528195 94%);
+  box-shadow:none;
+}
+#poster #codexPanel .dex01[data-category="core"] button.dexCoreRecord::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:max(1px,.85%);
+  clip-path:var(--frame-shape);
+  background:linear-gradient(152deg,#bdcedc 0%,#8da9bd 13%,#f4faff 27%,#e6f1fa 58%,#cbdeee 93%,#effaff 100%);
+  pointer-events:none;
+}
+#poster #codexPanel .dex01[data-category="core"] button.dexCoreRecord:focus-visible::before {
+  background:linear-gradient(152deg,#a7dfe9 0%,#9fbaca 13%,#f4faff 27%,#e6f1fa 58%,#bde2ec 93%,#effaff 100%);
 }
 #poster #codexPanel .dex01[data-category="core"] .dexCoreRecordHeader {
-  display:flex;align-items:center;gap:5px;height:21px;padding-right:3px;
-  border-bottom:1px solid #9abcc7;color:#507885;font-size:6px;letter-spacing:.09em;
+  position:absolute;
+  inset:6% 3.2% 75% 2.2%;
+  display:flex;
+  align-items:center;
+  gap:4cqw;
+  height:auto;
+  padding:0;
+  border:0;
+  color:#37596d;
+  font-size:clamp(6px,4.65cqw,12px);
+  font-weight:800;
+  letter-spacing:.095em;
+  white-space:nowrap;
 }
 #poster #codexPanel .dex01[data-category="core"] .dexCoreRecordNo {
-  padding:2px 8px;color:white;font-size:11px;font-weight:900;letter-spacing:.04em;
-  background:linear-gradient(125deg,#095a6e,#14a9a8);clip-path:polygon(0 0,100% 0,86% 100%,0 100%);
+  align-self:stretch;
+  display:grid;
+  flex:0 0 32%;
+  align-items:center;
+  padding:0 4cqw 0 1cqw;
+  clip-path:polygon(0 61%,31% 0,100% 0,79% 100%,0 100%);
+  border-top:1px solid #cbfdff;
+  background:linear-gradient(148deg,#a4feff 0%,#157887 28%,#0d5267 73%,#2bafbc 100%);
+  color:#fff;
+  text-align:center;
+  text-shadow:0 1px 1px #063747;
+  font-size:clamp(11px,10cqw,23px);
+  font-weight:900;
+  font-variant-numeric:tabular-nums;
+  line-height:1;
 }
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMark {margin-left:auto;color:#0a9ca7;font-size:14px}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordBody {display:grid;grid-template-columns:47% minmax(0,1fr);gap:5px;align-items:start;padding:5px 1px 3px}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMark {
+  margin-left:auto;
+  color:#287e8c;
+  font-size:clamp(7px,6cqw,14px);
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordBody {
+  position:absolute;
+  inset:25.5% 4.5% 14.5% 4.5%;
+  display:grid;
+  grid-template-columns:47% minmax(0,1fr);
+  gap:6%;
+  align-items:stretch;
+  padding:1.2% 0 0;
+  border-top:1px solid #f7fdff;
+}
 #poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt {
-  width:100%;height:auto!important;min-height:0!important;aspect-ratio:1;
-  border:1px solid #4ac2cf;border-radius:5px;
-  background:radial-gradient(circle,#1e6171,#102d3b 72%,#0a1e2b)!important;
-  box-shadow:inset 0 0 10px #2bc8d077;
+  --well-shape:polygon(8% 0,92% 0,100% 8%,100% 92%,92% 100%,8% 100%,0 92%,0 8%);
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  height:100%!important;
+  min-width:0;
+  min-height:0!important;
+  margin:0;
+  padding:0!important;
+  aspect-ratio:auto;
+  border:0;
+  border-radius:0;
+  clip-path:var(--well-shape);
+  background:linear-gradient(140deg,#92e7ee 0%,#298392 22%,#163f51 49%,#3d9aaa 81%,#a3f5f4 100%)!important;
+  box-shadow:none;
 }
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt>img {width:94%!important;height:94%!important;max-width:94%!important;max-height:94%!important}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordInfo {display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardName {font-size:11px;line-height:1.2;color:#122f3b;word-break:keep-all}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardGroup {padding:1px 5px;border-radius:3px;background:#7196a4;color:#fff;font-size:8px}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta {display:flex;flex-direction:column;gap:2px;width:100%;color:#63818c;font-size:7px;line-height:1.25}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta span {display:flex;justify-content:space-between;gap:2px;border-bottom:1px solid #b6ccd3}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta b {color:#2c5360;font-size:7px;white-space:nowrap}
-#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordFooter {display:flex;justify-content:space-between;border-top:1px solid #adc8d1;padding:2px 3px 0;color:#678996;font-size:7px}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:2px;
+  clip-path:var(--well-shape);
+  background:radial-gradient(ellipse at 50% 42%,#285769 0%,#133c4d 58%,#0a2839 100%);
+  box-shadow:inset 0 0 7px #6cd7df4d;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt>img {
+  width:82%!important;
+  height:82%!important;
+  max-width:82%!important;
+  max-height:82%!important;
+  object-fit:contain!important;
+  transform:none!important;
+  filter:drop-shadow(0 2px 2px #07243275);
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordInfo {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:clamp(2px,1.4cqw,5px);
+  min-width:0;
+  text-align:left;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardName {
+  max-width:100%;
+  color:#153444;
+  font-size:clamp(8px,6.25cqw,16px);
+  font-weight:900;
+  line-height:1.12;
+  word-break:keep-all;
+  overflow-wrap:anywhere;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardGroup {
+  padding:1px .58em;
+  border-radius:.33em;
+  color:#fff;
+  background:#527c8d;
+  font-size:clamp(6px,4.2cqw,11px);
+  font-weight:700;
+  line-height:1.1;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  color:#4b677a;
+  font-size:clamp(5px,3.9cqw,10px);
+  line-height:1.25;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta span {
+  display:flex;
+  justify-content:space-between;
+  gap:2px;
+  border-bottom:1px solid #9fb8c9;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta b {
+  color:#193f51;
+  font-size:inherit;
+  white-space:nowrap;
+}
+#poster #codexPanel .dex01[data-category="core"] .dexCoreRecordFooter {
+  position:absolute;
+  inset:auto 4.5% 3.6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1% 0 0;
+  border-top:1px solid #acc9d8;
+  color:#406477;
+  font-size:clamp(6px,4.35cqw,11px);
+  font-weight:800;
+  letter-spacing:.07em;
+  line-height:1;
+  white-space:nowrap;
+}
 
 /* Specimen chamber: the sprite remains the existing transparent game image. */
 #poster #codexPanel .dex01[data-category="core"] .dex01CoreDetail {
@@ -1889,8 +2034,6 @@ html:not([data-evolve-admin-v585="true"]) :is(#testModuleV573,#mapControlsV562,#
 #poster #codexPanel:has(.dex01[data-category="core"]) #codexSummary {padding:4px 9px;margin:0!important;background:#d8eef6;color:#416b7a}
 @media(max-width:370px) {
   #poster #codexPanel .dex01[data-category="core"] {padding:8px}
-  #poster #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardName {font-size:10px}
-  #poster #codexPanel .dex01[data-category="core"] .dexCoreRecordBody {gap:3px}
 }
 @media(max-height:650px) {
   #poster #codexPanel .dex01[data-category="core"] .dex01CoreDetail .dex01DetailArt {height:210px!important;max-height:27dvh!important}
@@ -1987,8 +2130,7 @@ html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dex01Tabs [data-dex-tab="titans"] .dex01Count {right:19%}
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dex01Tabs button.dex01Tab:focus-visible {outline:2px solid #12546b!important;outline-offset:-2px}
 
-/* The first six cards use their own original frame and printed number.
-   Only the sample core, name and data area are covered by current game values. */
+/* Core list layout in the original archive shell. */
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dex01List {
   padding:4px 0 14px!important;background:#e0edf8!important;
 }
@@ -2007,69 +2149,6 @@ html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01
 html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dex01Grid {
   display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 2.3%!important;padding-bottom:12px!important;
 }
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] button.dexCoreRecord {
-  position:relative!important;display:block!important;width:100%!important;min-width:0!important;min-height:0!important;
-  aspect-ratio:408/284!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;
-  background-color:transparent!important;background-image:url("assets/3c8e640c2bcb81636ce7690e1c5c528a66dee56c7923aa6fe15964ac60409daa.png")!important;
-  background-repeat:no-repeat!important;background-size:230.637% 588.732%!important;
-  --ref-card-x:10.319%;--ref-card-y:41.499%;
-  background-position:var(--ref-card-x) var(--ref-card-y)!important;box-shadow:none!important;clip-path:none!important;overflow:hidden!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord:is([data-reference-card="2"],[data-reference-card="4"],[data-reference-card="6"]) {--ref-card-x:90.244%}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord:is([data-reference-card="3"],[data-reference-card="4"]) {--ref-card-y:63.040%}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord:is([data-reference-card="5"],[data-reference-card="6"]) {--ref-card-y:84.438%}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord:is([data-reference-card="1"],[data-reference-card="2"],[data-reference-card="3"],[data-reference-card="4"],[data-reference-card="5"],[data-reference-card="6"]) .dexCoreRecordNo {opacity:0!important}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordHeader {
-  position:absolute!important;inset:0!important;height:auto!important;display:block!important;
-  padding:0!important;margin:0!important;border:0!important;background:transparent!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordHeader>span:not(.dexCoreRecordNo) {visibility:hidden!important}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordNo {
-  position:absolute!important;left:3.8%;top:7.3%;width:22%;height:16%;
-  display:flex!important;align-items:center;justify-content:center;padding:0!important;
-  clip-path:polygon(10% 0,100% 0,82% 100%,0 100%,0 18%)!important;
-  background:linear-gradient(145deg,#208b97,#0a586b)!important;color:#fff!important;
-  font-size:clamp(11px,3.5vw,19px)!important;font-weight:900!important;line-height:1;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordBody {
-  position:absolute!important;inset:0!important;display:block!important;padding:0!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt {
-  position:absolute!important;left:5%;top:29.2%;width:39%!important;height:54%!important;
-  min-width:0!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;
-  display:flex!important;align-items:center;justify-content:center;overflow:hidden!important;
-  border:0!important;border-radius:0!important;box-shadow:none!important;
-  background:radial-gradient(ellipse at 50% 43%,#285565,#0a2c3b 75%,#0b3040)!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardArt>img {
-  width:96%!important;height:96%!important;max-width:96%!important;max-height:96%!important;
-  object-fit:contain!important;object-position:center!important;transform:none!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordInfo {
-  position:absolute!important;left:50.7%;top:28%;width:45%;height:56%;
-  display:flex!important;align-items:flex-start;flex-direction:column;gap:1%;
-  overflow:hidden!important;padding:0 1%!important;background:linear-gradient(150deg,#e9f2fb,#d9e8f6)!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardName {
-  display:block!important;max-width:100%;color:#122c3b!important;font-size:clamp(8px,2.65vw,13px)!important;
-  font-weight:900!important;line-height:1.15!important;word-break:keep-all;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecord .dex01CardGroup {
-  padding:1% 7%!important;border-radius:3px!important;color:white!important;background:#7295a7!important;
-  font-size:clamp(7px,1.9vw,10px)!important;line-height:1.05!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta {
-  display:flex!important;flex-direction:column;gap:0;width:100%;font-size:clamp(5px,1.6vw,8px)!important;
-  color:#507285!important;line-height:1.08!important;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta span {
-  display:flex!important;justify-content:space-between;gap:2px;width:100%;border-bottom:1px solid #a9bfce;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordMeta b {
-  color:#133d50!important;font-size:inherit!important;white-space:nowrap;
-}
-html.evolveReferenceListReady #poster[data-home-page="codex"] #codexPanel .dex01[data-category="core"] .dexCoreRecordFooter {visibility:hidden!important}
-
 /* Preserve real account values and controls; use the original artwork behind them. */
 html.evolveReferenceListReady #poster[data-home-page="codex"] #homeStatusV525 {
   display:grid!important;grid-template-columns:1.8fr 1fr .86fr 1fr!important;

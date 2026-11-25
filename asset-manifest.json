@@ -6818,10 +6818,10 @@
     "sha256": "1d7f90d6c9fa5e5993bca5b2d399b8d56338b8a0d98bf41cdcac5f2a17bca700"
   },
   {
-    "bytes": 54475,
+    "bytes": 54638,
     "kind": "script",
-    "path": "assets/53f831973eb49d9b0809e6c6b7d3de1acf5d786ae5101792f5764411f7223e2f.js",
-    "sha256": "53f831973eb49d9b0809e6c6b7d3de1acf5d786ae5101792f5764411f7223e2f"
+    "path": "assets/d2be81c9d2a67d2643dd9aa8df3ac55a564a62903c29c8bb966b6ac3acf7dc0f.js",
+    "sha256": "d2be81c9d2a67d2643dd9aa8df3ac55a564a62903c29c8bb966b6ac3acf7dc0f"
   },
   {
     "bytes": 1993778,
