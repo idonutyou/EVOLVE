@@ -3,11 +3,11 @@
 
  const extent = [864, 1536];
  const stats = [
-  { id: 'power', title: '공격력', route: '기초 공격', x: 432, y: 374, icon: [398, 298, 73, 72], desc: '주무기 직접 피해' },
-  { id: 'speed', title: '공격속도', route: '공격속도', x: 179, y: 548, icon: [118, 482, 124, 62], desc: '주무기 기본 공격속도' },
-  { id: 'range', title: '사거리', route: '사거리', x: 685, y: 548, icon: [645, 468, 80, 77], desc: '기본 공격 사거리' },
-  { id: 'rapid', title: '연사', route: '연사 최종 경로', x: 270, y: 800, icon: [231, 726, 81, 68], desc: '2연발 · 한 발당 피해' },
-  { id: 'multi', title: '멀티샷', route: '멀티샷 최종 경로', x: 594, y: 800, icon: [553, 721, 82, 70], desc: '2투사체 · 한 발당 피해' }
+  { id: 'power', title: '공격력', route: '기초 공격', x: 432, y: 374, desc: '공격력을 증가시켜 더 강한 피해를 입힙니다.' },
+  { id: 'speed', title: '공격속도', route: '공격속도', x: 179, y: 548, desc: '공격속도를 높여 더 빠르게 공격합니다.' },
+  { id: 'range', title: '사거리', route: '사거리', x: 685, y: 548, desc: '사거리를 늘려 더 먼 적을 공격합니다.' },
+  { id: 'rapid', title: '연사', route: '연사 최종 경로', x: 270, y: 800, desc: '탄환을 연속으로 발사합니다.' },
+  { id: 'multi', title: '멀티샷', route: '멀티샷 최종 경로', x: 594, y: 800, desc: '한 번에 여러 탄환을 발사합니다.' }
  ];
  const fieldRects = {
   title: [244, 991, 224, 52], tier: [253, 1053, 109, 22],
@@ -15,12 +15,30 @@
   next: [522, 1144, 139, 40], nextTier: [715, 1116, 62, 21],
   cost: [358, 1400, 121, 40]
  };
- const cardRects = [[98,1212,129,151],[247,1212,113,151],[382,1212,114,151],[517,1212,114,151],[652,1212,114,151]];
+ const cardRects = [163, 303, 439, 574, 709].map(x => [x - 57, 1212, 114, 151]);
  const speedIds = new Set(['ATK-B04', 'ATK-B09', 'ATK-B15']);
+ const symbols = {
+  power: '<path d="m23 33 24-24 12-4-4 12-24 24-3-3 23-23 1-3-3 1-23 23zM18 32l15 15-3 3-6-6-13 13-5-5 13-13-4-4z" fill="currentColor"/>',
+  speed: '<path d="M8 18h8l14 14-14 14H8l14-14z" fill="currentColor" opacity=".55"/><path d="M24 18h8l14 14-14 14h-8l14-14zm16 0h8l14 14-14 14h-8l14-14z" fill="currentColor"/><path d="M2 25h13l4 4H0zm0 14h13l4-4H0z" fill="currentColor" opacity=".35"/>',
+  range: '<circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" stroke-width="3"/><path d="M32 5v13m0 28v13M5 32h13m28 0h13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>',
+  rapid: '<path d="m4 48 3-6 7 4-3 6zm5-9 8-15 7 4-8 15zm9-17 11-8-4 12zM20 49l3-6 8 4-4 6zm5-9 8-15 8 4-9 15zm9-17 11-8-4 12zm3 26 3-6 7 4-3 6zm5-9 8-15 7 4-8 15zm9-17 11-8-4 12z" fill="currentColor"/>',
+  multi: '<path d="m5 39 27-24 4 7zm28-27 16-5-10 14zM8 46l34-15 2 8zm35-18 17 1-15 9zM9 51l35-5-1 7zm36-7 15 7-16 4z" fill="currentColor"/>',
+  lock: '<path fill="currentColor" fill-rule="evenodd" d="M16 27v-7a16 16 0 0 1 32 0v7h3a5 5 0 0 1 5 5v23a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5V32a5 5 0 0 1 5-5zm6 0h20v-7a10 10 0 0 0-20 0zm10 10a5 5 0 0 0-2.5 9.3V52h5v-5.7A5 5 0 0 0 32 37z"/>'
+ };
+
+ function symbolMarkup(id, className) {
+  return `<svg class="${className}" viewBox="0 0 64 64" aria-hidden="true" focusable="false">${symbols[id]}</svg>`;
+ }
 
  function percent(value) {
   const sign = value < 0 ? '−' : '+';
   return sign + String(Math.round(Math.abs(value) * 100) / 100) + '%';
+ }
+
+ function stageStatus(step, rankOf, canBuy) {
+  const owned = rankOf(step.node.id);
+  if (owned >= step.rank) return 'owned';
+  return step.rank === owned + 1 && canBuy(step.node) ? 'ready' : 'locked';
  }
 
  function valueAt(node, rank) {
@@ -44,25 +62,7 @@
   return [percent(current), percent(next)];
  }
 
- function statGlyph(image, [x, y, width, height]) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  ctx.drawImage(image, x, y, width, height, 0, 0, width, height);
-  const glyph = ctx.getImageData(0, 0, width, height);
-  for (let i = 0; i < glyph.data.length; i += 4) {
-   const light = Math.min(glyph.data[i+1], glyph.data[i+2]);
-   glyph.data[i] = 255;
-   glyph.data[i+1] = 242;
-   glyph.data[i+2] = 249;
-   glyph.data[i+3] = Math.min(255, Math.max(0, (light - 74) * 1.9));
-  }
-  ctx.putImageData(glyph, 0, 0);
-  return 'url(' + canvas.toDataURL() + ')';
- }
-
- function create({ nodes, rankOf, freeDNA, canBuy, missing, canResearch, art, onBack, onTree, onUpgrade }) {
+ function create({ nodes, rankOf, freeDNA, canBuy, missing, canResearch, art, onBack, onUpgrade }) {
   const view = document.querySelector('#assaultView');
   const query = selector => view.querySelector(selector);
   const buttons = new Map();
@@ -94,11 +94,7 @@
    const holder = query('.assaultSurfaces');
    if (holder.childElementCount || detailArt.naturalWidth !== extent[0]) return;
    const areas = {
-    ...fieldRects, buyLabel: [591, 1398, 113, 37], hero: [118, 1004, 80, 74],
-    ...Object.fromEntries(cardRects.flatMap(([x,y,w], i) => [
-     [`card${i}`, [x+10,y+68,w-20,77]],
-     [`icon${i}`, [x+23,y+14,w-46,57]]
-    ]))
+    ...fieldRects, buyLabel: [591, 1398, 113, 37], cards: [75, 1197, 714, 185]
    };
    for (const [name, rect] of Object.entries(areas)) {
     const surface = art.makeMatchedSurface(detailArt, rect, 4);
@@ -113,7 +109,7 @@
    const card = document.createElement('button');
    card.type = 'button';
    card.className = 'assaultControl assaultStageCard';
-   card.innerHTML = '<span class="assaultCardGlyph" aria-hidden="true"></span><span class="assaultCardTier"></span><strong></strong><span class="assaultCardState" aria-hidden="true"></span>';
+   card.innerHTML = '<span class="assaultCardSymbol" aria-hidden="true"></span><span class="assaultCardTier"></span><strong></strong>' + symbolMarkup('lock', 'assaultCardLock');
    art.placeMatchedSurface(card, rect, extent);
    card.addEventListener('click', () => {
     if (ignoreNextCardClick) return;
@@ -154,10 +150,7 @@
    detailArt.hidden = detail.hidden = !selected;
    mapArt.hidden = !!selected;
    back.setAttribute('aria-label', selected ? '공격 계열로 돌아가기' : '연구소로 돌아가기');
-   if (selected) {
-    mountSurfaces();
-    if (!selected.glyph) loadGlyphs();
-   }
+   if (selected) mountSurfaces();
    render();
   }
 
@@ -180,26 +173,38 @@
    query(`[data-surface="${name}"]`)?.toggleAttribute('hidden', hidden);
   }
 
+  function labelForRank(nodeId, rank) {
+   for (const stat of stats) {
+    const index = stat.steps.findIndex(step => step.node.id === nodeId && step.rank === rank);
+    if (index >= 0) return `${stat.title} Lv.${index + 1}`;
+   }
+   return '공격 계열 선행 연구';
+  }
+
+  function renderSymbols(stat) {
+   if (detail.dataset.stat === stat.id) return;
+   detail.dataset.stat = stat.id;
+   hero.hidden = stat.id === 'power';
+   hero.innerHTML = hero.hidden ? '' : symbolMarkup(stat.id, 'assaultHeroSymbol');
+   for (const card of cards) {
+    card.querySelector('.assaultCardSymbol').innerHTML = symbolMarkup(stat.id, 'assaultCardIcon');
+   }
+  }
+
   function renderDetail() {
    const step = selected.steps[selectedStep];
    const { node, rank } = step;
    const owned = rankOf(node.id);
-   const done = owned >= rank;
-   const eligible = !done && rank === owned + 1 && canBuy(node);
+   const status = stageStatus(step, rankOf, canBuy);
+   const done = status === 'owned';
+   const eligible = status === 'ready';
    const isPower = selected.id === 'power';
+   renderSymbols(selected);
    fields.title.hidden = isPower;
    setSurface('title', isPower);
    fields.title.textContent = selected.title;
-   const hasGlyph = !isPower && selected.glyph;
-   setSurface('hero', !hasGlyph);
-   hero.hidden = !hasGlyph;
-   if (hasGlyph) hero.style.setProperty('--assault-glyph', selected.glyph);
    fields.tier.textContent = `Lv.${selected.nodes.reduce((n,node)=>n+rankOf(node.id),0)} / ${selected.steps.length}`;
-   const penalty = selected.id === 'range' && node.note.match(/직접 피해 (-[\d.]+)%p/);
-   const description = speedIds.has(node.id) ? '주무기 기본 공격속도' : penalty
-    ? `기본 사거리 · 피해 ${penalty[1]}%p` : selected.desc;
-   fields.desc.textContent = node.name + '\n' + description;
-   fields.desc.title = node.note || node.target;
+   fields.desc.textContent = selected.desc;
    const [current, nextEffect] = stepEffects(selected,step,rankOf,speedNodes);
    fields.current.textContent = current;
    fields.next.textContent = nextEffect;
@@ -212,23 +217,17 @@
    cards.forEach((card,i) => {
     const index = firstStep + i;
     const s = selected.steps[index];
-    const nodeRank = rankOf(s.node.id);
-    const status = nodeRank >= s.rank ? 'owned' : s.rank === nodeRank + 1 && canBuy(s.node) ? 'ready' : 'locked';
+    const status = stageStatus(s, rankOf, canBuy);
     card.dataset.status = status;
-    card.dataset.primary = String(i === 0);
     card.setAttribute('aria-pressed', String(index === selectedStep));
-    const statusText = { owned:'완료', ready:'강화 가능', locked:'잠김' }[status];
+    const statusText = { owned:'강화 완료', ready:'강화 가능', locked:'강화 조건 미달' }[status];
     const bonus = percent(valueAt(s.node,s.rank));
-    const label = `Lv.${index+1} ${s.node.name} ${bonus} · ${statusText}`;
+    const label = `${selected.title} Lv.${index+1}, ${bonus} · ${statusText}`;
     card.setAttribute('aria-label', label);
     card.title = `${label}, 진화 Lv.${s.level} 이상`;
     card.querySelector('.assaultCardTier').textContent = `Lv.${index+1}`;
     card.querySelector('strong').textContent = bonus;
-    card.querySelector('.assaultCardState').textContent = status === 'ready' ? '' : statusText;
-    const glyph = card.querySelector('.assaultCardGlyph');
-    glyph.hidden = !hasGlyph;
-    if (hasGlyph) glyph.style.setProperty('--assault-glyph', selected.glyph);
-    setSurface(`icon${i}`, !hasGlyph);
+    card.querySelector('.assaultCardLock').toggleAttribute('data-visible', status === 'locked');
    });
    prev.hidden = firstStep === 0;
    next.hidden = firstStep + cards.length === selected.steps.length;
@@ -236,7 +235,7 @@
    buy.firstElementChild.textContent = done ? '연구 완료' : eligible ? '' : canResearch() ? '조건 미달' : '저장 조회 불가';
    setSurface('buyLabel', eligible);
    query('.assaultStatus').textContent = !canResearch() ? '진화 연구 저장을 확인할 수 없습니다.' : done ? '' : rank !== owned + 1
-    ? `${node.name} Lv.${rank-1} 필요`
+    ? `${labelForRank(node.id, rank - 1)} 필요`
     : missing(node).filter(req=>!req.ok).map(req=>req.txt).join(' · ');
    query('.assaultStatus').title = query('.assaultStatus').textContent;
   }
@@ -251,11 +250,6 @@
    if (selected) renderDetail();
   }
 
-  function loadGlyphs() {
-   if (!selected || mapArt.naturalWidth !== extent[0]) return;
-   for (const stat of stats) stat.glyph = statGlyph(mapArt, stat.icon);
-   render();
-  }
   prev.addEventListener('click', () => flipPage(-1));
   next.addEventListener('click', () => flipPage(1));
   const row = query('.assaultRanks');
@@ -275,14 +269,11 @@
    event.preventDefault();
    flipPage(event.key === 'ArrowRight' ? 1 : -1);
   });
-  mapArt.addEventListener('load', loadGlyphs);
-  if (mapArt.complete) loadGlyphs();
   detailArt.addEventListener('load', () => { mountSurfaces(); render(); });
   back.addEventListener('click', () => {
    if (selected) { selected = null; showDetail(); }
    else onBack();
   });
-  query('.assaultAll').addEventListener('click', onTree);
   buy.addEventListener('click', async () => {
    if (!selected || pending || buy.disabled) return;
    const stat = selected;
@@ -303,6 +294,7 @@
   });
 
   return {
+   labelForRank,
    render,
    show() { view.hidden = false; showDetail(); },
    hide() { view.hidden = true; selected = null; }
