@@ -12,23 +12,10 @@
  const fieldRects = {
   title: [244, 991, 224, 52], tier: [253, 1053, 109, 22],
   desc: [519, 995, 255, 68], current: [181, 1144, 130, 40],
-  next: [522, 1144, 139, 40], nextTier: [715, 1116, 62, 21],
-  cost: [358, 1400, 121, 40]
+  next: [522, 1144, 139, 40], nextTier: [715, 1116, 62, 21]
  };
- const cardRects = [163, 303, 439, 574, 709].map(x => [x - 57, 1212, 114, 151]);
+ const cardRects = [163, 303, 439, 574, 709].map(x => [x - 61, 1210, 122, 158]);
  const speedIds = new Set(['ATK-B04', 'ATK-B09', 'ATK-B15']);
- const symbols = {
-  power: '<path d="m23 33 24-24 12-4-4 12-24 24-3-3 23-23 1-3-3 1-23 23zM18 32l15 15-3 3-6-6-13 13-5-5 13-13-4-4z" fill="currentColor"/>',
-  speed: '<path d="M8 18h8l14 14-14 14H8l14-14z" fill="currentColor" opacity=".55"/><path d="M24 18h8l14 14-14 14h-8l14-14zm16 0h8l14 14-14 14h-8l14-14z" fill="currentColor"/><path d="M2 25h13l4 4H0zm0 14h13l4-4H0z" fill="currentColor" opacity=".35"/>',
-  range: '<circle cx="32" cy="32" r="21" fill="none" stroke="currentColor" stroke-width="3"/><path d="M32 5v13m0 28v13M5 32h13m28 0h13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="32" r="3.5" fill="currentColor"/>',
-  rapid: '<path d="m4 48 3-6 7 4-3 6zm5-9 8-15 7 4-8 15zm9-17 11-8-4 12zM20 49l3-6 8 4-4 6zm5-9 8-15 8 4-9 15zm9-17 11-8-4 12zm3 26 3-6 7 4-3 6zm5-9 8-15 7 4-8 15zm9-17 11-8-4 12z" fill="currentColor"/>',
-  multi: '<path d="m5 39 27-24 4 7zm28-27 16-5-10 14zM8 46l34-15 2 8zm35-18 17 1-15 9zM9 51l35-5-1 7zm36-7 15 7-16 4z" fill="currentColor"/>',
-  lock: '<path fill="currentColor" fill-rule="evenodd" d="M16 27v-7a16 16 0 0 1 32 0v7h3a5 5 0 0 1 5 5v23a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5V32a5 5 0 0 1 5-5zm6 0h20v-7a10 10 0 0 0-20 0zm10 10a5 5 0 0 0-2.5 9.3V52h5v-5.7A5 5 0 0 0 32 37z"/>'
- };
-
- function symbolMarkup(id, className) {
-  return `<svg class="${className}" viewBox="0 0 64 64" aria-hidden="true" focusable="false">${symbols[id]}</svg>`;
- }
 
  function percent(value) {
   const sign = value < 0 ? '−' : '+';
@@ -69,13 +56,12 @@
   const speedNodes = nodes.filter(n => n.branch === 'ATK' &&
    (n.effect_metric === 'attack_speed_pct' || speedIds.has(n.id)));
   const detail = query('.assaultDetail');
-  const detailArt = query('.assaultDetailArt');
-  const mapArt = query('.assaultMapArt');
-  const hero = query('.assaultHeroGlyph');
   const prev = query('.assaultPrev');
   const next = query('.assaultNext');
   const back = query('.assaultBack');
   const buy = query('.assaultUpgrade');
+  const cost = query('.assaultCost');
+  const requirements = query('.assaultRequirements');
   const fields = {};
   let selected = null;
   let selectedStep = 0;
@@ -89,27 +75,11 @@
    art.placeMatchedSurface(fields[name], rect, extent);
   });
 
-  function mountSurfaces() {
-   if (!selected) return;
-   const holder = query('.assaultSurfaces');
-   if (holder.childElementCount || detailArt.naturalWidth !== extent[0]) return;
-   const areas = {
-    ...fieldRects, buyLabel: [591, 1398, 113, 37], cards: [75, 1197, 714, 185]
-   };
-   for (const [name, rect] of Object.entries(areas)) {
-    const surface = art.makeMatchedSurface(detailArt, rect, 4);
-    surface.className = 'assaultSurface';
-    surface.dataset.surface = name;
-    art.placeMatchedSurface(surface, rect, extent);
-    holder.append(surface);
-   }
-  }
-
   const cards = cardRects.map((rect, i) => {
    const card = document.createElement('button');
    card.type = 'button';
    card.className = 'assaultControl assaultStageCard';
-   card.innerHTML = '<span class="assaultCardSymbol" aria-hidden="true"></span><span class="assaultCardTier"></span><strong></strong>' + symbolMarkup('lock', 'assaultCardLock');
+   card.innerHTML = '<span class="assaultGlyph assaultCardSymbol" aria-hidden="true"></span><span class="assaultCardTier"></span><strong></strong><span class="assaultGlyph assaultCardLock" aria-hidden="true"></span>';
    art.placeMatchedSurface(card, rect, extent);
    card.addEventListener('click', () => {
     if (ignoreNextCardClick) return;
@@ -147,10 +117,8 @@
   }
 
   function showDetail() {
-   detailArt.hidden = detail.hidden = !selected;
-   mapArt.hidden = !!selected;
+   detail.hidden = !selected;
    back.setAttribute('aria-label', selected ? '공격 계열로 돌아가기' : '연구소로 돌아가기');
-   if (selected) mountSurfaces();
    render();
   }
 
@@ -169,26 +137,12 @@
    render();
   }
 
-  function setSurface(name, hidden) {
-   query(`[data-surface="${name}"]`)?.toggleAttribute('hidden', hidden);
-  }
-
   function labelForRank(nodeId, rank) {
    for (const stat of stats) {
     const index = stat.steps.findIndex(step => step.node.id === nodeId && step.rank === rank);
     if (index >= 0) return `${stat.title} Lv.${index + 1}`;
    }
    return '공격 계열 선행 연구';
-  }
-
-  function renderSymbols(stat) {
-   if (detail.dataset.stat === stat.id) return;
-   detail.dataset.stat = stat.id;
-   hero.hidden = stat.id === 'power';
-   hero.innerHTML = hero.hidden ? '' : symbolMarkup(stat.id, 'assaultHeroSymbol');
-   for (const card of cards) {
-    card.querySelector('.assaultCardSymbol').innerHTML = symbolMarkup(stat.id, 'assaultCardIcon');
-   }
   }
 
   function renderDetail() {
@@ -198,10 +152,7 @@
    const status = stageStatus(step, rankOf, canBuy);
    const done = status === 'owned';
    const eligible = status === 'ready';
-   const isPower = selected.id === 'power';
-   renderSymbols(selected);
-   fields.title.hidden = isPower;
-   setSurface('title', isPower);
+   detail.dataset.stat = selected.id;
    fields.title.textContent = selected.title;
    fields.tier.textContent = `Lv.${selected.nodes.reduce((n,node)=>n+rankOf(node.id),0)} / ${selected.steps.length}`;
    fields.desc.textContent = selected.desc;
@@ -209,10 +160,8 @@
    fields.current.textContent = current;
    fields.next.textContent = nextEffect;
    fields.nextTier.textContent = `Lv.${selectedStep + 1}`;
-   fields.cost.textContent = '';
-   const available = document.createElement('b');
-   available.textContent = canResearch() ? freeDNA().toLocaleString('ko-KR') : '—';
-   fields.cost.append(available, document.createTextNode(done ? ' / —' : ` / ${node.dna_cost_by_rank[rank-1]}`));
+   cost.firstElementChild.textContent = canResearch() ? freeDNA().toLocaleString('ko-KR') : '—';
+   cost.lastElementChild.textContent = done ? '/—' : `/${node.dna_cost_by_rank[rank - 1]}`;
 
    cards.forEach((card,i) => {
     const index = firstStep + i;
@@ -232,12 +181,17 @@
    prev.hidden = firstStep === 0;
    next.hidden = firstStep + cards.length === selected.steps.length;
    buy.disabled = pending || !eligible;
-   buy.firstElementChild.textContent = done ? '연구 완료' : eligible ? '' : canResearch() ? '조건 미달' : '저장 조회 불가';
-   setSurface('buyLabel', eligible);
-   query('.assaultStatus').textContent = !canResearch() ? '진화 연구 저장을 확인할 수 없습니다.' : done ? '' : rank !== owned + 1
-    ? `${labelForRank(node.id, rank - 1)} 필요`
-    : missing(node).filter(req=>!req.ok).map(req=>req.txt).join(' · ');
-   query('.assaultStatus').title = query('.assaultStatus').textContent;
+   buy.firstElementChild.textContent = done ? '연구 완료' : eligible ? '레벨 업' : canResearch() ? '조건 미달' : '저장 조회 불가';
+   const unmet = !canResearch() ? [{txt:'저장 조회 불가'}] : done ? [] : missing(node, rank)
+    .filter(req => !req.ok && req.kind !== 'dna');
+   if (!done && canResearch() && rank > owned + 1) unmet.push({txt:labelForRank(node.id, rank - 1)});
+   requirements.replaceChildren(...unmet.map(req => {
+    const item = document.createElement('span');
+    item.textContent = req.kind === 'evolution' ? req.txt.replace(/ 이상$/, '') : req.txt;
+    return item;
+   }));
+   requirements.hidden = unmet.length === 0;
+   requirements.title = unmet.map(req => req.txt).join(' · ');
   }
 
   function render() {
@@ -269,7 +223,6 @@
    event.preventDefault();
    flipPage(event.key === 'ArrowRight' ? 1 : -1);
   });
-  detailArt.addEventListener('load', () => { mountSurfaces(); render(); });
   back.addEventListener('click', () => {
    if (selected) { selected = null; showDetail(); }
    else onBack();

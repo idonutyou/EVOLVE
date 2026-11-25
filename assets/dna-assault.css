@@ -21,6 +21,7 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
 }
 #assaultBoard *, #assaultBoard *::before, #assaultBoard *::after { box-sizing: border-box; }
 .assaultArt { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; }
+.assaultPanelArt { position: absolute; inset: 60.416667% 0 0; width: 100%; height: 39.583333%; user-select: none; }
 .assaultControl {
  position: absolute;
  appearance: none;
@@ -53,7 +54,7 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
  transform: translate(-50%, -50%);
 }
 .assaultStat:active, .assaultStat[aria-pressed="true"] {
- box-shadow: inset 0 0 2.4cqw #ffe1f566, 0 0 1.5cqw #ff269aa6;
+ box-shadow: 0 0 1.4cqw .25cqw #ff269a80;
 }
 .assaultRankLabel {
  position: absolute;
@@ -75,9 +76,9 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
  background: radial-gradient(ellipse, #19040f 49%, #320018 77%, transparent 100%);
  text-shadow: 0 0 .4cqw #230011;
 }
-.assaultDetail, .assaultSurfaces, .assaultRanks { position: absolute; inset: 0; pointer-events: none; }
-.assaultSurface, .assaultField { position: absolute; }
+.assaultDetail, .assaultRanks { position: absolute; inset: 0; pointer-events: none; }
 .assaultField {
+ position: absolute;
  display: flex;
  align-items: center;
  justify-content: center;
@@ -99,93 +100,124 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
 }
 .assaultEffect { font-size: 3.75cqw; font-variant-numeric: tabular-nums; }
 .assaultNextTier { font-size: 2.15cqw; }
-.assaultCost { font-size: 2.65cqw; gap: .4cqw; font-variant-numeric: tabular-nums; }
-.assaultCost b { font-size: 4cqw; color: #fa65b5; }
+.assaultPurchaseInfo {
+ position: absolute;
+ inset: 90.3% 34.8% auto 29.8%;
+ height: 4.1%;
+ display: grid;
+ grid-template-columns: max-content minmax(0, 1fr);
+ grid-template-rows: minmax(0, 1fr);
+ align-items: center;
+ gap: 1.1cqw;
+}
+.assaultCost {
+ display: flex;
+ align-items: baseline;
+ gap: .23cqw;
+ margin: 0;
+ color: #fff3fb;
+ font-size: 2.55cqw;
+ font-weight: 750;
+ font-variant-numeric: tabular-nums;
+ white-space: nowrap;
+}
+.assaultCost b { font-size: 3.8cqw; color: #ff70bf; }
+.assaultRequirements {
+ display: flex;
+ align-items: baseline;
+ flex-wrap: wrap;
+ column-gap: .45cqw;
+ row-gap: .18cqw;
+ padding-inline-start: 1cqw;
+ border-inline-start: .11cqw solid #ee79be66;
+ color: #f2d7ed;
+ font-size: 2.2cqw;
+ font-weight: 660;
+ line-height: 1.2;
+ letter-spacing: -.025em;
+ max-height: 100%;
+ overflow: auto;
+ overscroll-behavior: contain;
+ scrollbar-width: thin;
+ pointer-events: auto;
+}
+.assaultRequirements span { white-space: nowrap; }
+.assaultRequirements span:not(:last-child)::after { content: ' ·'; color: #ee8fc7; }
 .assaultUpgrade {
- left: 59.82%;
+ left: 68.3%;
  top: 90.3%;
- width: 31.13%;
+ width: 22.7%;
  height: 4%;
  pointer-events: auto;
  border-radius: 2.3cqw;
  font-weight: 850;
- font-size: 3.28cqw;
+ padding-inline: 1.25cqw 4.7cqw;
+ font-size: 2.85cqw;
+ text-shadow: 0 0 .7cqw #c6217777;
 }
 .assaultUpgrade:active { box-shadow: inset 0 0 1.6cqw #ffdeef; }
-.assaultUpgrade:disabled { cursor: default; color: #ffbadf; }
-.assaultStatus {
- position: absolute;
- inset: 94.65% 10% auto;
- margin: 0;
- text-align: center;
- color: #ffc8e8;
- font-size: 1.88cqw;
- font-weight: 650;
- line-height: 1.3;
- text-shadow: 0 .1cqw .3cqw #130518;
-}
+.assaultUpgrade:disabled { cursor: default; color: #e4a7c7; }
 .assaultStageCard {
- --card-edge: #7b7b7b;
- --card-fill: linear-gradient(155deg, #282828, #161616);
- --card-cut: 1.35cqw;
+ --frame-position: 0%;
  display: grid;
- grid-template-rows: 5.8cqw auto auto 2.5cqw;
+ grid-template-rows: 6.7cqw auto auto 2.6cqw;
  justify-items: center;
  align-content: center;
- gap: .52cqw;
+ gap: .39cqw;
  isolation: isolate;
  color: #eee;
  text-shadow: 0 .1cqw .3cqw #141414;
  pointer-events: auto;
  touch-action: pan-y;
- font-size: 2.22cqw;
+ font-size: 2.26cqw;
  font-weight: 740;
  line-height: 1.03;
 }
-.assaultStageCard::before, .assaultStageCard::after {
+.assaultStageCard::before {
  content: "";
  position: absolute;
  inset: 0;
- clip-path: polygon(var(--card-cut) 0, calc(100% - var(--card-cut)) 0, 100% var(--card-cut),
-  100% calc(100% - var(--card-cut)), calc(100% - var(--card-cut)) 100%, var(--card-cut) 100%,
-  0 calc(100% - var(--card-cut)), 0 var(--card-cut));
+ z-index: -1;
+ background: url('dna-assault-rank-frames.webp') var(--frame-position) 0 / 200% 100% no-repeat;
 }
-.assaultStageCard::before { z-index: -2; background: var(--card-edge); }
-.assaultStageCard::after { z-index: -1; inset: .19cqw; background: var(--card-fill); }
-.assaultStageCard[aria-pressed="true"] { --card-edge: #ddd; }
-.assaultStageCard[aria-pressed="true"]::after { inset: .29cqw; }
+.assaultStageCard[aria-pressed="true"]::before { filter: brightness(1.24) drop-shadow(0 0 .4cqw #d1d1d165); }
 .assaultStageCard strong { font-size: 2.42cqw; }
 .assaultStageCard[data-status="locked"] { color: #d2d2d2; }
-.assaultStageCard[data-status="locked"] .assaultCardSymbol { opacity: .78; }
+.assaultStageCard[data-status="locked"] .assaultCardSymbol { opacity: .74; }
 .assaultStageCard[data-status="owned"] {
- --card-edge: #ff83c8;
- --card-fill: radial-gradient(ellipse at 50% 84%, #8e114f, #430522 57%, #29031a 100%);
+ --frame-position: 100%;
  color: #fff1f8;
- filter: drop-shadow(0 0 .75cqw #ff278f);
 }
-.assaultStageCard[data-status="owned"][aria-pressed="true"] { --card-edge: #ffceeb; }
-.assaultStageCard[data-status="owned"] .assaultCardIcon { filter: drop-shadow(0 0 .5cqw #ff4aa4); }
-.assaultCardSymbol { width: 5.8cqw; height: 5.8cqw; }
-.assaultCardIcon { display: block; width: 100%; height: 100%; }
+.assaultStageCard[data-status="owned"]::before { filter: drop-shadow(0 0 .65cqw #ff278fba); }
+.assaultStageCard[data-status="owned"][aria-pressed="true"]::before { filter: brightness(1.16) drop-shadow(0 0 .75cqw #ff278f); }
+.assaultDetail[data-stat="power"] { --symbol-position: 0%; }
+.assaultDetail[data-stat="speed"] { --symbol-position: 20%; }
+.assaultDetail[data-stat="range"] { --symbol-position: 40%; }
+.assaultDetail[data-stat="rapid"] { --symbol-position: 60%; }
+.assaultDetail[data-stat="multi"] { --symbol-position: 80%; }
+.assaultGlyph {
+ display: block;
+ background: url('dna-assault-glyphs.webp') var(--symbol-position, 0%) 0 / 600% 100% no-repeat;
+ pointer-events: none;
+}
+.assaultCardSymbol { width: 6.7cqw; height: 6.7cqw; }
+.assaultStageCard:not([data-status="owned"]) .assaultCardSymbol { filter: grayscale(1); }
 .assaultCardLock {
- width: 2.35cqw;
- height: 2.35cqw;
+ --symbol-position: 100%;
+ width: 2.6cqw;
+ height: 2.6cqw;
+ filter: grayscale(1);
  visibility: hidden;
 }
 .assaultCardLock[data-visible] { visibility: visible; }
 .assaultHeroGlyph {
  position: absolute;
- display: grid;
- place-items: center;
- left: 12.6%;
- top: 64.55%;
- width: 11.3%;
- height: 6.45%;
- color: #fff2f9;
- background: radial-gradient(ellipse, #3d051f 18%, #64102d 78%, #830c3a);
- clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+ left: 18.2%;
+ top: 67.65%;
+ width: 10.6cqw;
+ height: 10.6cqw;
+ transform: translate(-50%, -50%);
 }
-.assaultHeroSymbol { width: 70%; height: 70%; filter: drop-shadow(0 0 .5cqw #fb5ab0); }
 .assaultPage {
  top: 81.15%;
  width: 4.75%;
@@ -199,4 +231,3 @@ body:has(#assaultView:not([hidden])) > .app { display: none !important; }
 .assaultPrev { left: 6.25%; }
 .assaultNext { right: 6.25%; }
 .assaultPage:active { background: #e7419570; }
-.assaultStatus { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
