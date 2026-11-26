@@ -2488,7 +2488,7 @@ html.evolveReferenceDetailReady #poster[data-home-page="codex"] #codexPanel .dex
 <script type="application/evolve-resource" data-evolve-src="assets/a9db8a8f203817af3eceee643b5af184220656f18dfc0c79b0e74bad1749b037.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/b8b1e5adb7850ead46db0c63e3d7f4697f44e869a53b7b69782678761874c687.js"></script>
 <script type="application/evolve-resource" data-evolve-src="assets/4b9536b816420fbdab3feaebc94d657c80591ecb896c0f028596f8f1c93b76e8.js"></script>
-<script type="application/evolve-resource" data-evolve-src="assets/b00f232306842bfa9cbd29744a8d97f96be22faa1104d1b13b8050f90d03ebf9.js"></script>
+<script type="application/evolve-resource" data-evolve-src="assets/884e69710251bca5b33dc3445350672a9169e10ad70f76dac9fa83fdee2ddec6.js"></script>
 <!-- V390_ZONE_EVENTS_ELITES_REWARDS -->
 <!-- V400_REPEAT_ZONE_EVENT_TIERS -->
 <!-- V410_FARMING_RADAR_ZONE_SETS -->
@@ -4558,22 +4558,83 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
   far:{root:[1000,200],out:[.95,-.15],wr:30,hold:[1290,200],holdB:[1400,190],len:420,lenP:360,w:[42,34]},
   wB:1.4,turn:.5,maxTurn:1.1,k:75,damp:8,grav:.05,sway:.015,fade:.08,grow:.15});
  let frameN=0,bodyFrame=-1;(function tick(){frameN++;requestAnimationFrame(tick);})();   // one count per animation frame
- let tentOn=true,rope=null,camM=null,bodyW=null,bodyAt=0,bodyImg=null;const bodyV={x:0,y:0},bodySeen=new WeakSet();
+ let tentOn=true,rope=null,ropeTile=null,camM=null,bodyW=null,bodyAt=0,bodyImg=null;
+ const bodyV={x:0,y:0},bodySeen=new WeakSet(),coreRopes=new Map();
+ const activeCore=()=>window.__EVOLVE_BIOCORE_V625__?.coreId()||'basic_red';
  const tent=[0,1].map(()=>({on:false,t:0,x:0,y:0,vx:0,vy:0,face:0,kick:0,seen:0,wx:0,wy:0,dx:1,dy:0,d0:0,u:1,mx:0,my:0,mwx:0,mwy:0}));
  const canvasOf=(w,h)=>{const c=document.createElement('canvas');c.width=Math.max(1,Math.round(w));c.height=Math.max(1,Math.round(h));return c;};
+ // Swatches follow the tissue wrapping each supplied core, from crevices to wet ridges.
+ // The existing braid supplies the grooves, specular detail, alpha and seamless repeat.
+ const ropeMaterials={
+  basic_purple:{tones:['19091a','301025','55183f','7f235a','ac4b88','f2b2d5']},
+  basic_blue:{tones:['190910','321018','591824','852934','b75260','efacb2'],glints:['8ca7ca']},
+  basic_green:{tones:['180d0e','31131a','561d24','7b3035','a5554c','ddb694'],glints:['a1b24c']},
+  basic_bone:{tones:['231211','45261f','754237','a46b58','c99780','f5d6bf']},
+  basic_dark:{tones:['11060d','260b16','45101e','731829','a5374a','ec92a5']},
+  premium_gold:{tones:['211007','3b1d0b','663113','9f5519','c98434','f9cf7c']},
+  premium_abyss:{tones:['10061e','230b38','451061','6f2390','a343bd','e5a1f5']},
+  premium_pearl:{tones:['2d211e','523e34','846c5b','ae9484','cbb8aa','f1e7db'],glints:['b9d4ee']},
+  premium_emerald:{tones:['12110a','291b11','4e2921','6b5030','9b8546','dbd18b'],glints:['a9e750']},
+  premium_lava:{tones:['130909','2b100f','4f1917','772720','a74130','f08e65']},
+  premium_rainbow:{tones:['20151b','412b32','6f4a50','a57578','cb9d98','efd4ba'],glints:['b7a1e4','96d4d1','e1bd78']}
+ };
+ const ropeToneStops=[0,19,41,68,101,166];
+ const mixColor=(left,right,t)=>left.map((value,index)=>value+(right[index]-value)*t);
+ const rgb=hex=>[0,2,4].map(offset=>parseInt(hex.slice(offset,offset+2),16));
+ function ropeLevels(first){
+  // Three copies per level allow a bend to sample across the edge without seams.
+  const levels=[];let w=first.width,h=first.height,one=first;
+  for(;;){
+   const tile=canvasOf(3*w,h),g=tile.getContext('2d');
+   for(let i=0;i<3;i++)NATIVE.call(g,one,i*w,0);
+   levels.push({c:tile,w,h});
+   if(h<=4)break;
+   const smaller=canvasOf(w/2,h/2),down=smaller.getContext('2d');
+   down.imageSmoothingQuality='high';
+   NATIVE.call(down,tile,-smaller.width,0,3*smaller.width,smaller.height);
+   one=smaller;w=one.width;h=one.height;
+  }
+  return levels;
+ }
+ function makeCoreRope(material){
+  const tile=canvasOf(ropeTile.width,ropeTile.height),g=tile.getContext('2d',{willReadFrequently:true});
+  NATIVE.call(g,ropeTile,0,0);
+  const image=g.getImageData(0,0,tile.width,tile.height),pixels=image.data;
+  const tones=material.tones.map(rgb),glints=(material.glints||[]).map(rgb);
+  const shade=Array.from({length:167},(_,tone)=>{
+   let end=1;
+   while(end<ropeToneStops.length-1&&tone>ropeToneStops[end])end++;
+   const low=ropeToneStops[end-1],high=ropeToneStops[end];
+   return mixColor(tones[end-1],tones[end],(tone-low)/(high-low));
+  });
+  for(let p=0;p<pixels.length;p+=4){
+   if(!pixels[p+3])continue;
+   const [r,bg,b]=[pixels[p],pixels[p+1],pixels[p+2]];
+   const tint=shade[Math.min(166,Math.round(.28*r+.60*bg+.12*b))];
+   let color=tint;
+   if(glints.length){
+    const sheen=Math.max(0,Math.min(1,(bg+b-r*.72)/122));
+    const u=(p/4%tile.width)*glints.length/tile.width,idx=Math.floor(u);
+    const light=mixColor(glints[idx],glints[(idx+1)%glints.length],u-idx);
+    color=mixColor(tint,light,sheen*.48);
+   }
+   pixels[p]=color[0];pixels[p+1]=color[1];pixels[p+2]=color[2];
+  }
+  g.putImageData(image,0,0);
+  return ropeLevels(tile);
+ }
+ function coreRopeLevels(id=activeCore()){
+  if(!rope||!ropeMaterials[id])return rope;
+  if(!coreRopes.has(id))coreRopes.set(id,makeCoreRope(ropeMaterials[id]));
+  return coreRopes.get(id);
+ }
  (function(){
   const img=new Image();img.decoding='async';
   img.onload=()=>{try{
-   // each size is kept as three copies side by side, so a slice that runs over the tile's end has no seam
-   const lv=[];let w=ROPE.len,h=ROPE.h,one=canvasOf(w,h);NATIVE.call(one.getContext('2d'),img,0,0,w,h);
-   for(;;){
-    const t=canvasOf(3*w,h),tg=t.getContext('2d');for(let i=0;i<3;i++)NATIVE.call(tg,one,i*w,0);lv.push({c:t,w,h});
-    if(h<=4)break;
-    const nw=w/2,nh=h/2,c=canvasOf(nw,nh),cg=c.getContext('2d');cg.imageSmoothingEnabled=true;cg.imageSmoothingQuality='high';
-    NATIVE.call(cg,t,-nw,0,3*nw,nh);one=c;w=nw;h=nh;
-   }
-   rope=lv;stats.rope=true;queuePartsIdle();
-  }catch(e){note(e)}};
+   ropeTile=canvasOf(ROPE.len,ROPE.h);
+   NATIVE.call(ropeTile.getContext('2d'),img,0,0,ropeTile.width,ropeTile.height);
+   rope=ropeLevels(ropeTile);stats.rope=true;queuePartsIdle();
+  }catch(error){note(error)}};
   img.onerror=()=>note('rope art failed');img.src=ROPE.src;
  })();
  let scratch=null;
@@ -4581,7 +4642,8 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
   // pts: x,y screen px from the core to the end; wid/alp: width and opacity at each point.
   // The rope is built on a scratch canvas without a filter and put on the game in one draw:
   // a canvas filter (the map light) costs a whole layer on every single draw call.
-  const n=pts.length/2;if(!rope||n<2)return;
+  const id=activeCore(),levels=coreRopeLevels(id),n=pts.length/2;if(!levels||n<2)return;
+  stats.ropeCore=id;
   let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9,wm=0;
   for(let i=0;i<n;i++){const x=pts[2*i],y=pts[2*i+1];if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;if(wid[i]>wm)wm=wid[i];}
   const pad=Math.ceil(wm)+2,bx=Math.floor(x0)-pad,by=Math.floor(y0)-pad,bw=Math.ceil(x1)+pad-bx,bh=Math.ceil(y1)+pad-by;
@@ -4602,7 +4664,7 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
    const ax=pts[2*i]-bx,ay=pts[2*i+1]-by,ex2=pts[2*i+2]-bx,ey2=pts[2*i+3]-by,dx=ex2-ax,dy=ey2-ay,len=Math.hypot(dx,dy);if(len<1e-3)continue;
    const w=Math.max(.5,(wid[i]+wid[i+1])/2),a=(alp[i]+alp[i+1])/2,H=w*ROPE.h/(2*ROPE.half),du=len*2*ROPE.half/w;
    if(a>.004){
-    let L=rope[0];for(const l of rope){if(l.h>=H*.98)L=l;else break;}       // smallest copy still as tall as the strip
+    let L=levels[0];for(const l of levels){if(l.h>=H*.98)L=l;else break;}       // smallest copy still as tall as the strip
     let ov=.6;
     if(i<n-2){const ex=pts[2*i+4]-pts[2*i+2],ey=pts[2*i+5]-pts[2*i+3];ov+=H*.5*Math.min(1,Math.abs(Math.atan2(dx*ey-dy*ex,dx*ex+dy*ey)));}   // cover the outside of a bend
     const kx=L.w/ROPE.len,span=len+ov,src=du*span/len*kx,sx=L.w+(u%ROPE.len)*kx,sw=Math.min(src,3*L.w-sx);
@@ -4772,7 +4834,7 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
    fx.atlasOriginal++;
   }
   else if(curSide!==null)return drawImageClaude.apply(this,arguments);
-  else if(img&&(img===bodyImg||img._gaitPaddingV693||(!bodyImg&&!bodySeen.has(img)&&(bodySeen.add(img),String(img.currentSrc||img.src||'').endsWith(BODY_SRC))&&(bodyImg=img)))){try{noteBody(this)}catch(e){note(e)}}
+  else if(img&&(img===bodyImg||img._gaitPaddingV693||img._evolveCoreBodyV750||(!bodyImg&&!bodySeen.has(img)&&(bodySeen.add(img),String(img.currentSrc||img.src||'').endsWith(BODY_SRC))&&(bodyImg=img)))){try{noteBody(this)}catch(e){note(e)}}
   else if(!fx.all&&img&&typeof img==='object'&&!fx.seen.has(img)){classify(img);if(img===fx.proj||img===fx.beam||img===fx.atlas)return gameDraw.apply(this,arguments);}
   return NATIVE.apply(this,arguments);
  }
@@ -5040,7 +5102,7 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
  const idleScene=idleHero?.parentElement;
  const idleBody=$('partsIdleBodyV741'),idleNear=$('partsIdleNearV741'),idleFar=$('partsIdleFarV741');
  const idleHeart=$('partsIdleHeartV742'),idleHeartMask=$('partsIdleHeartMaskV742');
- let idleFrame=0,idlePoseKey=null,idlePose=null;
+ let idleFrame=0,idlePoseKey=null,idlePose=null,idlePoseCore=null;
 
  function hidePartsIdle(){
   idlePreview.hidden=true;
@@ -5092,10 +5154,10 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
   if(gunArt.length&&(!rope||gunArt.some(key=>!ready(key)))){
    hidePartsIdle();return;
   }
-  const key=JSON.stringify([arm1,arm2,window.__EVOLVE_DUAL_ARM_ART_V631__?.generation]);
+  const core=activeCore(),key=JSON.stringify([arm1,arm2,core,window.__EVOLVE_DUAL_ARM_ART_V631__?.generation]);
   try{
    const size=idleBody.width;
-   if(!idlePose)idlePose=preparePartsIdlePose(size);
+   if(!idlePose||idlePoseCore!==core){idlePose=preparePartsIdlePose(size);idlePoseCore=core;}
    if(!idlePose){hidePartsIdle();return;}
    if(key!==idlePoseKey){
     drawPartsIdleArm(idleFar,arm2,1,idlePose,size);
@@ -5180,9 +5242,9 @@ html body #poster #evolveReferenceScene .evolveRefFigure::before{display:none!im
  window.__CLAUDE_PARTS__=Object.freeze({
   version:'CLAUDE-PARTS-20261121',
   read:()=>({installed:stats.installed,artReady:stats.artReady,gunFound:stats.gunFound,art:Object.fromEntries(Object.entries(art).map(([k,v])=>[k,v.state])),drawn:{...stats.drawn},fallback:stats.fallback,decorate:stats.decorate,errors:[...stats.errors],arms:arms(),
-   tentacle:{rope:stats.rope,drawn:stats.tent,coreSeen:stats.bodySeen,geo:{...stats.geo},arms:tent.map(S=>({live:tentLive(tent.indexOf(S)),x:+S.x.toFixed(1),y:+S.y.toFixed(1),kick:+S.kick.toFixed(2),muzzle:[+S.mx.toFixed(1),+S.my.toFixed(1)]}))},
+   tentacle:{rope:stats.rope,coreId:stats.ropeCore||null,drawn:stats.tent,coreSeen:stats.bodySeen,geo:{...stats.geo},arms:tent.map(S=>({live:tentLive(tent.indexOf(S)),x:+S.x.toFixed(1),y:+S.y.toFixed(1),kick:+S.kick.toFixed(2),muzzle:[+S.mx.toFixed(1),+S.my.toFixed(1)]}))},
    fx:{suiteWrapped:fx.suiteWrapped,suiteSeen:!!fx.suite,shotLinesReplaced:fx.shotLines,roundBullets:fx.bullets,yellowLines:fx.strokes,amberGlows:fx.glows,legacyProjectileSeen:!!fx.proj,legacyBeamSeen:!!fx.beam,legacyLightningAtlas:!!fx.atlas,legacyLightningPicturesSkipped:fx.atlasSkipped,legacyOtherAtlasDraws:fx.atlasOriginal,chainLightning:{ready:bolt.ready,events:bolt.events,framesDrawn:bolt.frames,thinArcsHidden:bolt.suppressed,live:boltLive()}},saveKeysChanged:false}),
-  test:new URLSearchParams(location.search).get('evolveQA')==='1'?{rel:REL,art:ART,refresh,setRel:(k,v)=>{REL[k]=v;refresh()},setTentacles:on=>{tentOn=!!on}}:undefined
+  test:new URLSearchParams(location.search).get('evolveQA')==='1'?{rel:REL,art:ART,refresh,setRel:(k,v)=>{REL[k]=v;refresh()},setTentacles:on=>{tentOn=!!on},ropeTexture:id=>coreRopeLevels(id)?.[0].c}:undefined
  });
 })();
 
