@@ -7614,5 +7614,17 @@
     "kind": "font",
     "path": "assets/cdc5a1e8a801cd1ddd0a209e8e492e4714c3f21d41e99f16c07fa645a5749506.woff2",
     "sha256": "cdc5a1e8a801cd1ddd0a209e8e492e4714c3f21d41e99f16c07fa645a5749506"
+  },
+  {
+    "bytes": 298364,
+    "kind": "image",
+    "path": "assets/d574ab88c0c6b2aa55275234411aa5486cae119794cc6343ea9e391a7bb10a41.webp",
+    "sha256": "d574ab88c0c6b2aa55275234411aa5486cae119794cc6343ea9e391a7bb10a41"
+  },
+  {
+    "bytes": 1390,
+    "kind": "image",
+    "path": "assets/b6865abf98ed2ee8454915065ad998d4827eb84af3989a6ac8bce9fbde572b54.webp",
+    "sha256": "b6865abf98ed2ee8454915065ad998d4827eb84af3989a6ac8bce9fbde572b54"
   }
 ]
